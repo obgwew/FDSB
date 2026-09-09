@@ -1,0 +1,26 @@
+<dash>
+name: $emojiName
+desc: نام یک ایموجی سفارشی را از روی شناسه یا منشن آن بازگردانی می‌کند.
+category: اطلاعات
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $emojiName یک شناسه ایموجی سفارشی (یا یک منشن کامل ایموجی مانند <:name:id> یا <a:name:id>) می‌گیرد و نام ایموجی را بازگردانی می‌کند. این دستور برای نمایش نام ایموجی بدون کدنویسی سخت یا مقایسه با نام‌های شناخته‌شده مفید است.
+</block>
+
+<block type="code" title="سینتکس">
+text: $emojiName[emoji id]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $emojiName[123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: بات باید با ایموجی در یک سرور مشترک باشد، در غیر این صورت خطا بازگردانده می‌شود. ایموجی‌های داخلی یونیکد شناسه ندارند و نمی‌توان از آن‌ها در اینجا استفاده کرد.
+</block>
+</dash>
+
+<details>
+syntax: $emojiName[emoji id]
+param: emoji id|snowflake|الزامی|شناسه عددی ایموجی سفارشی، یا منشن ایموجی مانند <:name:id> / <a:name:id>
+</details>

@@ -1,0 +1,31 @@
+<dash>
+name: $removeAllComponents
+desc: Удаляет все кнопки, меню выбора и другие компоненты из сообщения или из создаваемого представления.
+category: Компоненты
+
+<block type="text" title="Как работает команда?">
+text: $removeAllComponents удаляет все интерактивные компоненты (кнопки, меню выбора и т. д.) из сообщения. Без указания Message ID она сначала очищает создаваемое представление, затем исходное сообщение взаимодействия, а затем последнее сообщение, отправленное ботом. При вызове с Message ID она очищает именно то сообщение бота.
+</block>
+
+<block type="code" title="Syntax">
+text: $removeAllComponents
+text: $removeAllComponents[(messageID)]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $removeAllComponents[123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: Это самый быстрый способ удалить сразу все компоненты, в отличие от $removeButtons или $removeComponent, которые нацелены на удаление конкретных компонентов.
+</block>
+
+<block type="callout" kind="warning">
+text: Целевое сообщение должно быть отправлено этим ботом. Если сообщение не найдено, возвращается ошибка.
+</block>
+</dash>
+
+<details>
+syntax: $removeAllComponents[(messageID)]
+param: messageID|snowflake|Optional|ID конкретного сообщения бота, из которого нужно удалить все компоненты. Если не указано, очищаются создаваемое представление, исходное сообщение взаимодействия или последнее сообщение бота.
+</details>

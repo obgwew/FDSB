@@ -1,0 +1,26 @@
+<dash>
+name: $lineCount
+desc: تعداد فاصله‌ها (اسپیس‌ها) را در متن داده‌شده بازگردانی می‌کند.
+category: ابزارهای متنی
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $lineCount یک آرگومان متنی می‌گیرد و تعداد کاراکترهای فاصله ( ) موجود در آن را بازگردانی می‌کند. متغیرها و متغیرهای جای‌گذاری (placeholders) در آرگومان قبل از شمارش ارزیابی می‌شوند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $lineCount[text]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $lineCount[one two three]
+</block>
+
+<block type="callout" kind="note">
+text: شمارش بر اساس فاصله‌ها انجام می‌شود، نه خطوط واقعی. برای تقسیم متن به بخش‌ها، از $splitIn همراه با $splitOut استفاده کنید.
+</block>
+</dash>
+
+<details>
+syntax: $lineCount[text]
+param: text|text|الزامی|متن مورد نظر برای شمارش فاصله‌ها. متغیرها و متغیرهای جای‌گذاری قبل از شمارش ارزیابی می‌شوند.
+</details>

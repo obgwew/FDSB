@@ -1,0 +1,21 @@
+<dash>
+name: $serverOwnerID
+desc: شناسه کاربر Discord مالک سرور را برمی‌گرداند.
+category: اطلاعات
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: وقتی $serverOwnerID فراخوانی می‌شود، ربات شناسه کاربری Discord یکتای مالک سرور را بازیابی کرده و آن را به صورت یک رشته عددی خام مستقیماً ارسال می‌کند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $serverOwnerID
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: Server owner ID: $serverOwnerID
+</block>
+
+<block type="callout" kind="note">
+text: این دستور فقط داخل سرور کار می‌کند (نه در پیام‌های خصوصی). مقدار برگشتی شناسه کاربری snowflake حسابی است که مالک سرور است.
+</block>
+</dash>

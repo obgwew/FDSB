@@ -1,6 +1,6 @@
 ![FDSB.png](./main_exe/icons/FDSB.png)
   <p>
-    <img src="https://img.shields.io/badge/version-2.3.2-blue.svg?cacheSeconds=2592000" alt="Version" />
+    <img src="https://img.shields.io/badge/version-2.4.1-blue.svg?cacheSeconds=2592000" alt="Version" />
   </p>
 
 # FDSB - Free Design Studio Bot's
@@ -47,8 +47,17 @@
 
 - The built-in command set is clearly designed to be deliberately simple, with FDScript handling the more complex tasks. (However, this is not related to the number of commands I plan to add later.)
 - While FDScript gen 2 offers greater command-line processing capabilities, it's important to note that some poorly planned complexities may produce undesirable results (please report any such issues).
+- FDSceipt It goes through gradual stages of change in each update, so adding/deleting/modifying commands remains guaranteed to happen in the alpha version. (Please do not build sensitive bots until a stable beta release is available.)
 
 ---
+**Project version numbering system**
+- The project's release system follows my own rules for each project update, so it differs from official numbering rules and other such matters.
+
+> Numbering:
+  - x.z.z :- This version is customized when there is a radical change in the mechanism for receiving and sending data within the application, dealing with intermediaries outside the application, customized behavior such as automation, exporting, retrieving, and other such matters. 
+  - z.x.z :- When a new addition occurs and a shortcut method of use or internal automation mechanisms depend on the UI permanently, or in a special case when adding a new command in the language requires adding a feature in the UI. 
+  - z.z.x :- Bug fixes and even the addition of FDScript commands, Fixing some UI errors, changing UI behavior, restoring correct command behavior, and other details such as stability and performance. 
+
 
 **Changelog:**
 
@@ -149,6 +158,15 @@
   - new button to edit the bot's status
   - some fixed http & some commands
   - some fixed ui in android
+  
+- **2.4.1** - fixed ui & commands & more
+  - add menu commands
+  - add 2 languages Fa-Ir(Farsi) & Ur(Urdu)
+  - fixed all views ui
+  - some fixed commands
+  - some fixed errors of andriod and notifications
+  - some fixed commands
+
 
 ---
 

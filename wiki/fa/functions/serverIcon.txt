@@ -1,0 +1,27 @@
+<dash>
+name: $serverIcon
+desc: URL مستقیم تصویر آیکون سرور فعلی (یا یک سرور) را بازگردانی یا ارسال می‌کند.
+category: سرور
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $serverIcon آدرس مستقیم تصویر آیکون یک سرور را شناسایی و بازگردانی می‌کند. بدون آرگومان از سرور فعلی استفاده می‌کند؛ با شناسه سرور از آن سرور خاص (بات باید در آن حضور داشته باشد) استفاده می‌شود. آیکون‌های متحرک سرور به‌صورت URLهای .gif بازگردانی می‌شوند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $serverIcon
+text: $serverIcon[(guildID)]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: Server icon: $serverIcon
+</block>
+
+<block type="callout" kind="note">
+text: اگر سرور داده‌شده آیکونی تنظیم نکرده باشد، خطا بازگردانده می‌شود. می‌توانید از URL در ایمبدها ($image, $thumbnail, $authorIcon, $footerIcon) استفاده کنید یا آن را به‌صورت یک پیوند ارسال کنید.
+</block>
+</dash>
+
+<details>
+syntax: $serverIcon[(guildID)]
+param: guildID|snowflake|اختیاری|شناسه سروری که می‌خواهید URL آیکون آن را بگیرید. در صورت حذف، از سرور فعلی استفاده می‌شود.
+</details>

@@ -1,0 +1,29 @@
+<dash>
+name: $editSplitOut
+desc: موجودہ سپلٹ نتیجہ ($splitIn) کے ایک عنصر کو نئی قدر سے تبدیل کرتا ہے۔
+category: متن ٹولز
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $editSplitOut $splitIn کے ذریعے محفوظ کردہ سپلٹ نتیجہ میں ترمیم کرتا ہے۔ انڈیکس 1 پر مبنی ہوتا ہے۔ منتخب عنصر کو نئی قدر سے تبدیل کیا جاتا ہے، اور باقی سب کچھ اسی طرح رہتا ہے۔ اس کمانڈ سے پہلے $splitIn کو کال کیا جانا چاہیے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $editSplitOut[index; value]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $splitIn[apple,banana,cherry; ,]
+$editSplitOut[2; mango]
+$joinSplitOut[; ]
+</block>
+
+<block type="callout" kind="note">
+text: انڈیکس موجودہ سپلٹ لمبائی کے اندر ایک مثبت عدد ہونا چاہیے (1 سے کل عناصر تک)، بصورت دیگر خرابی پیدا ہوتی ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $editSplitOut[index; value]
+param: index|number|لازمی|تبدیل کرنے کے لیے عنصر کی 1 پر مبنی پوزیشن
+param: value|text|لازمی|اس عنصر کے لیے نئی قدر
+</details>

@@ -1,0 +1,31 @@
+<dash>
+name: $removeAllComponents
+desc: کسی پیغام یا زیرِ التوا ویو سے ہر بٹن، سلیکٹ مینیو، اور کمپوننٹ حذف کرتا ہے۔
+category: کمپوننٹس
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $removeAllComponents کسی پیغام سے تمام انٹرایکٹو کمپوننٹس (بٹن، سلیکٹ مینیو، وغیرہ) صاف کر دیتا ہے۔ Message ID کے بغیر یہ پہلے زیرِ التوا ویو کو صاف کرتا ہے، پھر انٹرایکشن کے ماخذ پیغام کو، پھر آخری پیغام کو جو بوٹ نے بھیجا تھا۔ Message ID کے ساتھ استعمال کرنے پر یہ اس مخصوص بوٹ پیغام کو صاف کرتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $removeAllComponents
+text: $removeAllComponents[(messageID)]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $removeAllComponents[123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: ایک ساتھ تمام کمپوننٹس حذف کرنے کا یہ سب سے تیز طریقہ ہے، برخلاف $removeButtons یا $removeComponent جو مخصوص کمپوننٹس کو نشانہ بناتے ہیں۔
+</block>
+
+<block type="callout" kind="warning">
+text: ہدف پیغام اسی بوٹ کے ذریعے بھیجا گیا ہونا چاہیے۔ اگر کوئی پیغام نہ ملے تو ایک خرابی (error) واپس آتی ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $removeAllComponents[(messageID)]
+param: messageID|snowflake|اختیاری|کسی مخصوص بوٹ پیغام کی آئی ڈی جس سے تمام کمپوننٹس صاف کرنے ہیں۔ حذف کرنے پر زیرِ التوا ویو، انٹرایکشن کا ماخذ، یا بوٹ کا آخری پیغام صاف ہوتا ہے۔
+</details>

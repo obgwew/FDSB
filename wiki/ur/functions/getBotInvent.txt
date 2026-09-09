@@ -1,0 +1,21 @@
+<dash>
+name: $getBotInvent
+desc: بٹ کا OAuth2 انائٹ لنک تیار کرتا ہے اور بھیجتا ہے۔
+category: ٹولز
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: جب $getBotInvent کال کیا جاتا ہے، تو بٹ اپنی درخواست ID کا استعمال کرتے ہوئے مکمل اجازت (8) اور بوٹ اسکوپ کے ساتھ OAuth2 تعمیدی URL تیار کرتا ہے، پھر لنک چینل میں بھیجتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $getBotInvent
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: Invite me: $getBotInvent
+</block>
+
+<block type="callout" kind="note">
+text: تیار کیا گیا لنک تمام اجازتیں شامل کرتا ہے (permissions=8)۔ لنک فارمیٹ ہے: https://discord.com/oauth2/authorize?client_id={id}&permissions=8&scope=bot
+</block>
+</dash>

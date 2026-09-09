@@ -1,0 +1,26 @@
+<dash>
+name: $lastUserMessageID
+desc: اس صارف کے پیغام کی ID لوٹاتا ہے جس نے موجودہ اسکرپٹ کو متحرک کیا۔
+category: متغیرات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $lastUserMessageID اس پیغام کے اسنو فلیک ID کی نمائندگی کرتا ہے جس نے موجودہ اسکرپٹ شروع کیا — ہمیشہ اصل مصنف کا پیغام، وہی جس میں $ کمانڈ موجود تھی۔ یہ اسکرپٹ کی زندگی کے دوران تبدیل نہیں ہوتا۔ یہ بلٹ ان $messageID ٹوکن کی طرح کام کرتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $lastUserMessageID
+text: $lastUserMessageID[]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $sendMessage[Your message ID is $lastUserMessageID]
+</block>
+
+<block type="callout" kind="note">
+text: یہ صرف ان لائن کمانڈ ہے اور اسے اسٹینڈ اَلون سٹیٹمنٹ کے طور پر استعمال نہیں کیا جا سکتا۔ اسے کسی دوسری کمانڈ کے آرگیومنٹ بریکٹ کے اندر یا بغیر سہارے کے ان لائن ٹوکن کے طور پر استعمال کریں۔
+</block>
+</dash>
+
+<details>
+syntax: $lastUserMessageID
+</details>

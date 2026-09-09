@@ -1,0 +1,31 @@
+<dash>
+name: $removeAllComponents
+desc: Entfernt alle Buttons, Auswahlmenüs und Komponenten aus einer Nachricht oder der ausstehenden Ansicht.
+category: Komponenten
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: $removeAllComponents entfernt alle interaktiven Komponenten (Buttons, Auswahlmenüs usw.) aus einer Nachricht. Ohne Nachrichten-ID entfernt er zuerst alle Komponenten aus der ausstehenden Ansicht, danach aus der Quellnachricht der Interaktion, danach aus der letzten Nachricht, die der Bot gesendet hat. Mit einer Nachrichten-ID wird die angegebene Bot-Nachricht bereinigt.
+</block>
+
+<block type="code" title="Syntax">
+text: $removeAllComponents
+text: $removeAllComponents[(messageID)]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $removeAllComponents[123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: Dies ist der schnellste Weg, um alle Komponenten auf einmal zu entfernen, anders als $removeButtons oder $removeComponent, die auf bestimmte Komponenten abzielen.
+</block>
+
+<block type="callout" kind="warning">
+text: Die Zielnachricht muss von diesem Bot gesendet worden sein. Wenn keine Nachricht gefunden werden kann, wird ein Fehler zurückgegeben.
+</block>
+</dash>
+
+<details>
+syntax: $removeAllComponents[(messageID)]
+param: Nachrichten-ID|snowflake|Optional|ID einer bestimmten Bot-Nachricht, aus der alle Komponenten entfernt werden sollen. Wenn weggelassen, werden die Komponenten aus der ausstehenden Ansicht, der Interaktionsquelle oder der letzten Bot-Nachricht entfernt.
+</details>

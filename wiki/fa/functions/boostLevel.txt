@@ -1,0 +1,21 @@
+<dash>
+name: $boostLevel
+desc: سطح بوست فعلی سرور را از 0 تا 3 برمی‌گرداند.
+category: سرور
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $boostLevel سطح بوست سرور را به‌صورت عدد برمی‌گرداند: 0 (بدون سطح)، 1 (سطح 1)، 2 (سطح 2) یا 3 (سطح 3). سطوح به‌ترتیب با رسیدن به ۲، ۷ یا ۱۴ بوست آزاد می‌شوند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $boostLevel
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $sendMessage[Boost level: $boostLevel]
+</block>
+
+<block type="callout" kind="important">
+text: فقط می‌توان داخل یک سرور استفاده کرد - در پیام خصوصی خطای محیطی ایجاد می‌کند و اسکریپت را متوقف می‌کند.
+</block>
+</dash>

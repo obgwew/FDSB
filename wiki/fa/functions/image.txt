@@ -1,0 +1,26 @@
+<dash>
+name: $image
+desc: یک ایمبد تصویری را با استفاده از یک URL به کانال ارسال می‌کند.
+category: پیام‌ها
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $image یک URL تصویر می‌گیرد، با آن تصویر یک ایمبد می‌سازد و آن را به کانال ارسال می‌کند. URL باید با http:// یا https:// شروع شود.
+</block>
+
+<block type="code" title="سینتکس">
+text: $image[URL]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $image[https://example.com/photo.png]
+</block>
+
+<block type="callout" kind="note">
+text: تصویر به صورت یک ایمبد ارسال می‌شود که تصویر به عنوان تصویر ایمبد تنظیم شده است. ربات باید مجوز «لینک‌های ایمبد» (Embed Links) را در کانال داشته باشد.
+</block>
+</dash>
+
+<details>
+syntax: $image[URL]
+param: URL|text|الزامی|یک URL مستقیم به یک فایل تصویر. باید با http:// یا https:// شروع شود
+</details>

@@ -1,0 +1,32 @@
+<dash>
+name: $onInteraction
+desc: رویدادی که وقتی یک تعامل کامپوننت (دکمه/منوی انتخاب) رخ می‌دهد فعال می‌شود.
+category: رویداد
+
+<block type="text" title="این رویداد چگونه کار می‌کند؟">
+text: $onInteraction یک پیشوند رویداد است که وقتی یک کاربر با یک کامپوننت (کلیک روی دکمه، منوی انتخاب و غیره) تعامل می‌کند یک FDScript را فعال می‌کند. می‌توانید به صورت اختیاری یک شناسه سفارشی مشخص کنید تا فقط برای کامپوننت‌های خاص فعال شود. بدون شناسه، برای تمام تعاملات کامپوننت فعال می‌شود.
+</block>
+
+<block type="code" title="سینتکس">
+text: #PREFIX:$onInteraction
+text: #PREFIX:$onInteraction[button_custom_id]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: #PREFIX:$onInteraction[confirm_btn]
+ sendMessage[You clicked the confirm button!]
+</block>
+
+<block type="callout" kind="note">
+text: از $onInteraction بدون براکت برای مدیریت همه تعاملات استفاده کنید، یا با یک custom_id خاص برای مدیریت فقط آن کامپوننت.
+</block>
+
+<block type="callout" kind="important">
+text: این رویداد در پوشه bot_events اجرا می‌شود، نه bot_commands. فایل .fds خود را آنجا ایجاد کنید.
+</block>
+</dash>
+
+<details>
+syntax: #PREFIX:$onInteraction[(custom_id)]
+param: customID|text|Optional|custom_id یک کامپوننت خاص برای شنیدن. اگر خالی باشد، برای همه تعاملات فعال می‌شود.
+</details>

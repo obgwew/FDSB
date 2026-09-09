@@ -1,0 +1,29 @@
+<dash>
+name: $replaceText
+desc: وقوع‌های یک زیررشته را درون یک متن با متن جدید جایگزین می‌کند.
+category: ابزارهای متنی
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $replaceText یک پیام، یک متن قدیمی برای یافتن، و یک متن جدید برای جایگزینی با آن می‌گیرد. به‌صورت اختیاری، می‌توانید مشخص کنید چند وقوع باید جایگزین شود. متن اصلاح‌شده را برمی‌گرداند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $replaceText[message; old; new; (amount)]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $replaceText[Hello World; World; FDScript]
+</block>
+
+<block type="callout" kind="note">
+text: به‌طور پیش‌فرض، همه وقوع‌ها جایگزین می‌شوند. برای محدود کردن جایگزینی‌ها یک عدد به‌عنوان آرگومان چهارم ارائه دهید. برای جایگزینی همه، از -1 استفاده کنید یا آن را حذف کنید.
+</block>
+</dash>
+
+<details>
+syntax: $replaceText[message; old; new; (amount)]
+param: پیام|text|الزامی|متن اصلی که باید داخل آن جستجو شود
+param: قدیمی|text|الزامی|زیررشته‌ای که باید یافت و جایگزین شود
+param: جدید|text|الزامی|متن جایگزین
+param: تعداد|number|اختیاری|حداکثر تعداد جایگزینی. -1 یا حذف‌شده = جایگزینی همه وقوع‌ها
+</details>

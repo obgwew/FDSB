@@ -1,0 +1,26 @@
+<dash>
+name: $charCount
+desc: دیے گئے متن میں حرفی عددی حروف کی تعداد واپس کرتا ہے۔
+category: ریاضی اور اعداد
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $charCount ایک متن دلیل لیتا ہے اور صرف حرفی عددی حروف (حروف تہجی اور ہندسے) گنتا ہے، خالی جگہوں، علامتوں اور اوقاف کو نظر انداز کرتا ہے۔ یہ تعداد کو نمبر کے طور پر واپس کرتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $charCount[text]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $charCount[Hello World!]
+</block>
+
+<block type="callout" kind="note">
+text: صرف حروف (کسی بھی زبان کے) اور ہندسے (0-9) گنے جاتے ہیں۔ خالی جگہیں، اوقاف اور خاص حروف شمار سے خارج ہیں۔
+</block>
+</dash>
+
+<details>
+syntax: $charCount[text]
+param: متن|text|لازمی|وہ متن جس میں حرفی عددی حروف گننے ہیں۔ گننے سے پہلے متغیرات اور پلیس ہولڈرز حل کیے جاتے ہیں۔
+</details>

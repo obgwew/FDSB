@@ -1,0 +1,30 @@
+<dash>
+name: $untimeout
+desc: سرور ممبر سے ایک فعال ٹائم آؤٹ ہٹاتا ہے۔
+category: انتظامات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $untimeout ایک صارف ID یا مینشن لیتا ہے اور اس ممبر پر موجود کسی بھی فعال ٹائم آؤٹ کو ہٹاتا ہے، فوراً ان کی پیغام بھیجنے، رد عمل دینے اور وائس چینلز میں شامل ہونے کی اجازتیں بحال کرتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $untimeout[user]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $untimeout[@user]
+</block>
+
+<block type="callout" kind="note">
+text: اس کمانڈ کے کوئی اثر رکھنے کے لیے صارف کے پاس اس وقت ایک فعال ٹائم آؤٹ ہونا ضروری ہے۔ اگر صارف ٹائم آؤٹ شدہ نہیں ہے تو کمانڈ بغیر ایرر مکمل ہوتی ہے۔
+</block>
+
+<block type="callout" kind="warning">
+text: بوٹ کے پاس "Moderate Members" اجازت ہونی چاہیے اور اس کا سب سے اونچا رول ہدف کے سب سے اونچے رول سے اوپر ہونا چاہیے۔
+</block>
+</dash>
+
+<details>
+syntax: $untimeout[user]
+param: user|text|لازمی|اس ممبر کی صارف ID یا @مینشن جس سے ٹائم آؤٹ ہٹانا ہے
+</details>

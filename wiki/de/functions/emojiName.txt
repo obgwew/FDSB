@@ -1,0 +1,26 @@
+<dash>
+name: $emojiName
+desc: Gibt den Namen eines benutzerdefinierten Emojis anhand seiner ID oder Erwähnung zurück.
+category: Info
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: $emojiName nimmt eine benutzerdefinierte Emoji-ID (oder eine vollständige Emoji-Erwähnung wie <:name:id> oder <a:name:id>) entgegen und gibt den Namen des Emojis zurück. Dies ist nützlich, um einen Emoji-Namen anzuzeigen, ohne ihn fest im Code zu verankern, oder um ihn mit bekannten Namen zu vergleichen.
+</block>
+
+<block type="code" title="Syntax">
+text: $emojiName[emoji id]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $emojiName[123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: Der Bot muss einen Server mit dem Emoji teilen, andernfalls wird ein Fehler zurückgegeben. Integrierte Unicode-Emojis haben keine ID und können hier nicht verwendet werden.
+</block>
+</dash>
+
+<details>
+syntax: $emojiName[emoji id]
+param: Emoji-ID|snowflake|Erforderlich|Die numerische ID des benutzerdefinierten Emojis oder eine Emoji-Erwähnung wie <:name:id> / <a:name:id>
+</details>

@@ -1,0 +1,27 @@
+<dash>
+name: $getUserStatus
+desc: وضعیت آنلاین یک کاربر در سرور را برمی‌گرداند.
+category: اطلاعات
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: وقتی $getUserStatus بدون آرگومان فراخوانی می‌شود، وضعیت آنلاین نویسنده دستور را برمی‌گرداند. وقتی با شناسه کاربر یا منشن فراخوانی می‌شود، وضعیت همان کاربر را برمی‌گرداند. اگر کاربر یافت نشود یا عضو سرور نباشد، مقدار «offline» برمی‌گردد.
+</block>
+
+<block type="code" title="سینتکس">
+text: $getUserStatus
+text: $getUserStatus[(userID/mention)]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: Your status is: $getUserStatus
+</block>
+
+<block type="callout" kind="note">
+text: مقادیر بازگشتی احتمالی عبارتند از: online، idle، dnd، offline. این دستور فقط درون یک سرور کار می‌کند (نه در پیام‌های مستقیم) زیرا دیسکورد اطلاعات وضعیت را فقط برای اعضای سرور فراهم می‌کند.
+</block>
+</dash>
+
+<details>
+syntax: $getUserStatus[(userID/mention)]
+param: userID/mention|text|اختیاری|شناسه کاربر یا @منشن برای بررسی. اگر حذف شود، نویسنده دستور بررسی می‌شود.
+</details>

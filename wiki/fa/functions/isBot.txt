@@ -1,0 +1,26 @@
+<dash>
+name: $isBot
+desc: بررسی می‌کند آیا یک کاربر حساب بات است یا خیر.
+category: اطلاعات
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $isBot یک شناسه کاربر یا منشن دریافت کرده و بررسی می‌کند آیا آن کاربر یک حساب بات Discord است. "true" یا "false" برمی‌گرداند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $isBot[userID]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $isBot[$authorID]
+</block>
+
+<block type="callout" kind="note">
+text: اگر کاربر یک حساب بات باشد "true" و اگر کاربر انسانی باشد "false" برمی‌گرداند. کاربر باید عضو سرور باشد.
+</block>
+</dash>
+
+<details>
+syntax: $isBot[userID]
+param: userID|text|Required|شناسه کاربر یا @mention برای بررسی. از متغیرها و جایگذارها پشتیبانی می‌کند.
+</details>

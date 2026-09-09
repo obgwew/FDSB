@@ -1,0 +1,30 @@
+<dash>
+name: $numberAbbreviate
+desc: Konvertiert eine ganze Zahl in eine kurze, abgekürzte Form mit einem Suffix (k, m, b, ...).
+category: Mathematik & Zahlen
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: $numberAbbreviate nimmt eine ganze Zahl entgegen und rundet sie mithilfe eines Suffixes auf ihre Kurzform: k (Tausend), m (Million), b (Milliarde), t (Billion) und so weiter. Zum Beispiel wird 1500 zu 1.5k und 2500000 zu 2.5m. Negative Zahlen werden ebenfalls unterstützt.
+</block>
+
+<block type="code" title="Syntax">
+text: $numberAbbreviate[number]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $numberAbbreviate[1523487]
+</block>
+
+<block type="callout" kind="note">
+text: Unterstützte Suffixe: k, m, b, t, qa, qi, sx, sp, oc, no, dc. Zahlen kleiner als 1000 werden unverändert zurückgegeben.
+</block>
+
+<block type="callout" kind="warning">
+text: Es werden nur ganze Zahlen akzeptiert. Dezimalzahlen und nicht-numerische Zeichen führen zu einem Fehler.
+</block>
+</dash>
+
+<details>
+syntax: $numberAbbreviate[number]
+param: Zahl|number|Erforderlich|Eine ganze Zahl, die abgekürzt werden soll (darf ein vorangestelltes - enthalten)
+</details>

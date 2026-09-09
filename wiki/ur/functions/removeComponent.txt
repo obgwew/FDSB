@@ -1,0 +1,31 @@
+<dash>
+name: $removeComponent
+desc: کسی پیغام سے مخصوص بٹن کمپوننٹس کو ان کے حسبِ ضرورت ID یا URL کے ذریعے حذف کرتا ہے۔
+category: کمپوننٹس
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $removeComponent ایک یا زیادہ حسبِ ضرورت IDs (یا URLs) لیتا ہے اور کسی پیغام سے مماثل بٹن کمپوننٹس حذف کر دیتا ہے۔ یہ زیرِ التوا ویو، انٹرایکشن کے ماخذ پیغام، یا آئی ڈی کے ذریعے کسی مخصوص پیغام کو نشانہ بنا سکتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $removeComponent[customID1; customID2; ...; (messageID)]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $removeComponent[btn_cancel; btn_confirm]
+</block>
+
+<block type="callout" kind="note">
+text: جب کم از کم دو دلائل ہوں اور آخری دلیل ایک عددی سنو فلیک ہو، تو اسے پیغام آئی ڈی سمجھا جاتا ہے۔ بصورت دیگر، تمام دلائل حذف کرنے کے لیے کمپوننٹ آئی ڈیز سمجھے جاتے ہیں۔
+</block>
+
+<block type="callout" kind="warning">
+text: اگر فراہم کردہ IDs میں سے کوئی بھی ہدف پیغام پر نہ ملے تو ایک خرابی (error) واپس آتی ہے۔ ہدف پیغام اسی بوٹ کے ذریعے بھیجا گیا ہونا چاہیے۔
+</block>
+</dash>
+
+<details>
+syntax: $removeComponent[customID1; customID2; ...; (messageID)]
+param: customID|text|لازمی|حذف کرنے کے لیے بٹن کمپوننٹس کے ایک یا زیادہ حسبِ ضرورت IDs یا URLs
+param: messageID|snowflake|اختیاری|کسی مخصوص بوٹ پیغام کی آئی ڈی جس سے کمپوننٹس حذف کرنے ہیں
+</details>

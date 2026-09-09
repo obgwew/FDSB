@@ -1,0 +1,36 @@
+<dash>
+name: $numberSeparator
+desc: یک عدد کامل را با جداکننده هزارگان برای خوانایی آسان‌تر قالب‌بندی می‌کند.
+category: ریاضی و اعداد
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $numberSeparator یک عدد کامل می‌گیرد و هر سه رقم از سمت راست یک جداکننده درج می‌کند (گروه‌بندی هزارگان). به‌طور پیش‌فرض جداکننده کاما (,) است و می‌توانید یک جداکننده سفارشی را به‌عنوان آرگومان دوم ارسال کنید. برای مثال ۱۲۳۴۵۶۷ به 1,234,567 تبدیل می‌شود.
+</block>
+
+<block type="code" title="سینتکس">
+text: $numberSeparator[number]
+text: $numberSeparator[number; separator]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $numberSeparator[1234567]
+</block>
+
+<block type="code" title="مثال آماده کپی (جداکننده سفارشی)">
+text: $numberSeparator[1234567; .]
+</block>
+
+<block type="callout" kind="note">
+text: اعداد منفی علامت - خود را حفظ می‌کنند: برای مثال -۱۲۳۴۵۶۷ به -1,234,567 تبدیل می‌شود.
+</block>
+
+<block type="callout" kind="warning">
+text: فقط اعداد کامل پذیرفته می‌شوند. اعداد اعشاری و کاراکترهای غیرعددی خطا بازگردانی می‌کنند.
+</block>
+</dash>
+
+<details>
+syntax: $numberSeparator[number; (separator)]
+param: number|number|الزامی|عدد کامل برای قالب‌بندی (می‌تواند شامل علامت - در ابتدا باشد)
+param: separator|text|اختیاری|جداکننده‌ای که هر سه رقم درج می‌شود (پیش‌فرض: ,)
+</details>

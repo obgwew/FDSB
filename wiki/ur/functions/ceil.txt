@@ -1,0 +1,26 @@
+<dash>
+name: $ceil
+desc: کسی نمبر کو قریب ترین عدد تک اوپر گول کرتا ہے۔
+category: ریاضی اور اعداد
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $ceil ایک عددی ویلیو لیتا ہے اور اسے قریب ترین مکمل نمبر تک اوپر گول کرتا ہے (ceiling)۔ مثلاً 3.1، 4 بن جاتا ہے، اور 5.0، 5 ہی رہتا ہے۔ یہ الگ کمانڈ کے طور پر بھی کام کرتا ہے اور دوسری کمانڈز کے اندر inline بھی۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $ceil[number]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $sendMessage[Result is $ceil[3.2]]
+</block>
+
+<block type="callout" kind="note">
+text: $ceil[3.1]، 4 واپس کرتا ہے۔ $ceil[-2.5]، -2 واپس کرتا ہے۔ $ceil[5.0]، 5 واپس کرتا ہے۔ نتیجہ ہمیشہ ایک عدد ہوتا ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $ceil[number]
+param: نمبر|number|لازمی|وہ نمبر جو قریب ترین عدد تک گول کرنا ہے، مثلاً 3.1, -2.5, 10
+</details>

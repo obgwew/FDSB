@@ -1,0 +1,27 @@
+<dash>
+name: $lastBotMessageID
+desc: موجودہ اسکرپٹ کے دوران بوٹ کے بھیجے گئے آخری پیغام کی ID لوٹاتا ہے۔
+category: متغیرات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $lastBotMessageID موجودہ اسکرپٹ کے دوران بوٹ کے بھیجے گئے سب سے حالیہ پیغام کے اسنو فلیک ID کی نمائندگی کرتا ہے۔ اسے آؤٹ پٹ کمانڈز جیسے $sendMessage, $reply اور $sendEmbedMessage خود بخود اپ ڈیٹ کرتی ہیں۔ اگر بوٹ نے ابھی تک کوئی پیغام نہیں بھیجا تو خالی سٹرنگ لوٹائی جاتی ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $lastBotMessageID
+text: $lastBotMessageID[]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $sendMessage[Look at this!]
+$editIn[10s; The last message ID was $lastBotMessageID]
+</block>
+
+<block type="callout" kind="note">
+text: یہ صرف ان لائن کمانڈ ہے اور اسے اسٹینڈ اَلون سٹیٹمنٹ کے طور پر استعمال نہیں کیا جا سکتا۔ اسے کسی دوسری کمانڈ کے آرگیومنٹ بریکٹ کے اندر یا بغیر سہارے کے ان لائن ٹوکن کے طور پر استعمال کریں۔
+</block>
+</dash>
+
+<details>
+syntax: $lastBotMessageID
+</details>

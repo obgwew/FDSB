@@ -1,0 +1,28 @@
+<dash>
+name: $removeSplitOutElement
+desc: یک عنصر را از نتیجه جداسازی فعلی ($splitIn) با شاخص مبتنی بر 1 حذف می‌کند.
+category: ابزارهای متنی
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $removeSplitOutElement عنصر را در موقعیت داده‌شده از داده‌های ذخیره‌شده توسط $splitIn حذف می‌کند. عناصر باقی‌مانده ترتیب خود را حفظ می‌کنند. قبل از این دستور باید $splitIn فراخوانی شود.
+</block>
+
+<block type="code" title="سینتکس">
+text: $removeSplitOutElement[index]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $splitIn[apple,banana,cherry; ,]
+$removeSplitOutElement[2]
+$joinSplitOut[; ]
+</block>
+
+<block type="callout" kind="note">
+text: شاخص باید یک عدد صحیح مثبت در محدوده طول جداسازی فعلی باشد، در غیر این صورت یک خطا ایجاد می‌شود.
+</block>
+</dash>
+
+<details>
+syntax: $removeSplitOutElement[index]
+param: شاخص|number|الزامی|موقعیت مبتنی بر 1 عنصری که باید حذف شود
+</details>

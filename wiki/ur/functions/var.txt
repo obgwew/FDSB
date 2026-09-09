@@ -1,0 +1,28 @@
+<dash>
+name: $var
+desc: ایک عارضی متغیر پڑھتا یا لکھتا ہے جو صرف موجودہ سکرپٹ کے عمل کے دوران رہتا ہے۔
+category: متغیرات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $var ایک دلیل کے ساتھ متغیر کی قدر پڑھتا ہے۔ $var دو دلائل کے ساتھ متغیر کو ایک قدر لکھتا ہے۔ سکرپٹ مکمل ہونے پر عارضی متغیرات صاف کر دیے جاتے ہیں۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $var[name; value]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $var[score; 10]
+$sendMessage[Your score is $var[score]]
+</block>
+
+<block type="callout" kind="note">
+text: $setVar/$getVar (مستقل) کے برعکس، $var صرف موجودہ سکرپٹ کے دوران دستیاب ہوتا ہے۔ اسے دیگر کمانڈز کی دلائل کے اندر ان لائن استعمال کیا جا سکتا ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $var[name; (value)]
+param: name|text|لازمی|پڑھنے یا لکھنے کے لیے متغیر کا نام
+param: value|text|اختیاری|اگر فراہم کی جائے تو یہ قدر متغیر کو لکھتا ہے (2-دلیل موڈ)۔ اگر چھوڑ دی جائے تو موجودہ قدر پڑھتا اور واپس کرتا ہے (1-دلیل موڈ)۔
+</details>

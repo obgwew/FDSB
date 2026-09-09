@@ -1,0 +1,21 @@
+<dash>
+name: $uptime
+desc: بوٹ اپنے آخری آغاز کے بعد سے کتنی دیر آن لائن رہا ہے واپس کرتا ہے۔
+category: ٹولز
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: جب $uptime کو کال کیا جاتا ہے، بوٹ اپنے آخری آغاز (on_ready واقعہ) کے بعد گزرا ہوا وقت شمار کرتا ہے اور اسے پڑھنے کے قابل سٹرنگ میں فارمیٹ کرتا ہے، پھر اسے چینل کو بھیجتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $uptime
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: Bot has been up for $uptime
+</block>
+
+<block type="callout" kind="note">
+text: فارمیٹ شدہ آؤٹ پٹ میں دن، گھنٹے، منٹ اور سیکنڈ شامل ہوتے ہیں جیسا کہ قابل عمل ہو (مثلاً 2d 5h 30m 12s)۔ اس کے کام کرنے کے لیے بوٹ نے آغاز کے دوران set_bot_start_time() کال کیا ہونا ضروری ہے۔
+</block>
+</dash>

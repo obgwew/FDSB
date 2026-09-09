@@ -1,0 +1,27 @@
+<dash>
+name: $authorServerAvatar
+desc: تُرجع أو تُرسل رابط الصورة المباشر لصورة السيرفر لكاتب الأمر (أو أي مستخدم).
+category: معلومات
+
+<block type="text" title="كيف تعمل الدالة؟">
+text: تُحلّ $authorServerAvatar وتُرجع رابط الصورة المباشر لصورة السيرفر للمستخدم إذا كان قد حدد واحدة. بدون معاملات تستخدم كاتب الأمر؛ ومع معرّف مستخدم أو @mention تستخدم ذلك المستخدم. عندما لا توجد صورة سيرفر مخصصة، تُستخدم الصورة المعروضة للمستخدم. الناتج هو رابط يمكنك تضمينه في الرسائل أو الصور.
+</block>
+
+<block type="code" title="الصيغة">
+text: $authorServerAvatar
+text: $authorServerAvatar[(userID/@mention)]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: Your server avatar: $authorServerAvatar
+</block>
+
+<block type="callout" kind="note">
+text: هذه هي الصورة المعروضة للأعضاء الآخرين داخل السيرفر، وقد تختلف عن الصورة العامة للمستخدم ($authorAvatar). الصور المتحرّكة تُرجع كروابط .gif.
+</block>
+</dash>
+
+<details>
+syntax: $authorServerAvatar[(userID/@mention)]
+param: userID/@mention|text|Optional|معرّف المستخدم أو الـ @mention للحصول على رابط صورة سيرفره. إذا لم يُحدد، تستخدم كاتب الأمر.
+</details>

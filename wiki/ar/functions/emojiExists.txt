@@ -1,0 +1,32 @@
+<dash>
+name: $emojiExists
+desc: يتحقق مما إذا كان إيموجي مخصص موجودًا ويُرجع true أو false.
+category: معلومات
+
+<block type="text" title="كيف تعمل الدالة؟">
+text: تأخذ $emojiExists معرّف إيموجي مخصص (أو إيموجي ذكر كامل مثل <:name:id> أو <a:name:id>) وتُرجع true إذا كان البوت يشارك سيرفرًا يحتوي على ذلك الإيموجي، وإلا تُرجع false.
+</block>
+
+<block type="code" title="الصيغة">
+text: $emojiExists[emoji id]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $if[$emojiExists[123456789012345678]]
+ $sendMessage[That emoji exists!]
+$endif
+</block>
+
+<block type="callout" kind="note">
+text: مفيد داخل شروط $if / $onlyIf. الإيموجيات Unicode المدمجة ليس لها معرّف، لذا يمكن فقط التحقق من إيموجيات السيرفر المخصصة.
+</block>
+
+<block type="callout" kind="warning">
+text: يجب أن يكون الإيموجي متاحًا للبوت (يجب أن يشارك البوت سيرفرًا به)، وإلا قد يُرجع الفحص false.
+</block>
+</dash>
+
+<details>
+syntax: $emojiExists[emoji id]
+param: emoji id|snowflake|Required|المعرّف الرقمي للإيموجي المخصص، أو ذكر إيموجي مثل <:name:id> / <a:name:id>
+</details>

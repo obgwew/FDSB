@@ -1,0 +1,26 @@
+<dash>
+name: $emojiName
+desc: Kimliğinden veya bahsinden bir özel emojinin adını döndürür.
+category: Bilgi
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $emojiName, özel bir emoji kimliği (veya <:name:id> ya da <a:name:id> gibi tam bir emoji bahsi) alır ve emojinin adını döndürür. Bu, bir emoji adını sabit yazmadan görüntülemek veya bilinen adlarla karşılaştırmak için kullanışlıdır.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $emojiName[emoji id]
+</block>
+
+<block type="code" title="Kopyalanmaya hazır örnek">
+text: $emojiName[123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: Bot, emojiyle bir sunucuyu paylaşmalıdır, aksi takdirde bir hata döndürülür. Yerleşik Unicode emojilerinin kimliği yoktur ve burada kullanılamaz.
+</block>
+</dash>
+
+<details>
+syntax: $emojiName[emoji id]
+param: emoji kimliği|snowflake|Required|Özel emojinin sayısal kimliği veya <:name:id> / <a:name:id> gibi bir emoji bahsi
+</details>

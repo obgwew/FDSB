@@ -1,0 +1,26 @@
+<dash>
+name: $isBot
+desc: یہ چیک کرتا ہے کہ آیا کوئی صارف بوٹ اکاؤنٹ ہے۔
+category: معلومات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $isBot ایک صارف ID یا مینشن لیتا ہے اور چیک کرتا ہے کہ آیا وہ صارف ڈسکارڈ کا بوٹ اکاؤنٹ ہے۔ یہ "true" یا "false" لوٹاتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $isBot[userID]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $isBot[$authorID]
+</block>
+
+<block type="callout" kind="note">
+text: اگر صارف بوٹ اکاؤنٹ ہے تو "true" لوٹاتا ہے، اور اگر وہ ایک حقیقی صارف ہے تو "false"۔ صارف کو سرور کا رکن ہونا ضروری ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $isBot[userID]
+param: صارف ID|text|لازمی|جس صارف کو چیک کرنا ہے اس کی ID یا @مینشن۔ متغیرات اور پلیس ہولڈرز کو سپورٹ کرتا ہے۔
+</details>

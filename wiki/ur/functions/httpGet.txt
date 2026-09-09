@@ -1,0 +1,28 @@
+<dash>
+name: $httpGet
+desc: ایک URL پر HTTP GET درخواست بھیجتا ہے اور حالت کوڈ اور جواب محفوظ کرتا ہے۔
+category: HTTP
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $httpGet 10 سیکنڈ ٹائم آؤٹ کے ساتھ GET درخواست انجام دیتا ہے۔ جواب $httpResult میں محفوظ ہوتا ہے (جب ممکن ہو JSON، نہیں تو سادہ ٹیکسٹ) اور حالت کوڈ $httpStatus میں۔ $httpAddHeader سے شامل کیے گئے کوئی بھی ہیڈرز بھیجے جاتے ہیں اور پھر صاف کر دیے جاتے ہیں۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $httpGet[URL]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $httpGet[https://api.example.com/users]
+$httpStatus
+$httpResult[0; name]
+</block>
+
+<block type="callout" kind="note">
+text: ناکامی پر، حالت 500 سیٹ کی جاتی ہے اور $httpResult میں خطا کا پیغام ہوتا ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $httpGet[URL]
+param: URL|text|لازمی|GET درخواست بھیجنے کے لیے URL
+</details>

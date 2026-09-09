@@ -1,0 +1,44 @@
+<dash>
+name: $newSelectMenu
+desc: یک منوی انتخاب جدید برای یک پیام می‌سازد و ثبت می‌کند.
+category: کامپوننت‌ها
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $newSelectMenu ساخت یک منوی کشویی انتخاب را با یک شناسه منوی یکتا آغاز می‌کند. شما حداقل و حداکثر تعداد گزینه‌هایی را که کاربر باید/می‌تواند انتخاب کند مشخص می‌کنید. سپس از $addSelectMenuOption برای پر کردن منو با گزینه‌ها استفاده کنید و منو به پیامی که در حال ساخت هستید متصل خواهد شد. همچنین می‌توانید یک شناسه پیام ارسال کنید تا منو به پیام باتی که از قبل ارسال شده متصل شود.
+</block>
+
+<block type="code" title="سینتکس">
+text: $newSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+$addSelectMenuOption[color_menu; Red; red; The color red]
+$addSelectMenuOption[color_menu; Blue; blue; The color blue]
+$sendMessage[Choose your favorite color!]
+</block>
+
+<block type="options" title="جزئیات رفتار">
+option: Min|حداقل تعداد گزینه‌هایی که کاربر باید انتخاب کند (0 تا 25)
+option: Max|حداکثر تعداد گزینه‌هایی که کاربر می‌تواند انتخاب کند (1 تا 25)
+option: Placeholder|متن راهنمای خاکستری که قبل از انتخاب کاربر نمایش داده می‌شود
+option: Message ID|شناسه اختیاری پیام باتی که از قبل ارسال شده برای اتصال منو به آن
+</block>
+
+<block type="callout" kind="note">
+text: یک منو فقط پس از اینکه حداقل یک گزینه با $addSelectMenuOption اضافه کنید آماده است. برای تغییر Min/Max/Placeholder یک منوی موجود از $editSelectMenu و برای ویرایش یک گزینه خاص از $editSelectMenuOption استفاده کنید.
+</block>
+
+<block type="callout" kind="warning">
+text: Min نمی‌تواند از Max بیشتر باشد. یک پیام می‌تواند در مجموع حداکثر ۲۵ کامپوننت داشته باشد. اگر پیام داده‌شده از این بات نباشد، خطا بازگردانده می‌شود.
+</block>
+</dash>
+
+<details>
+syntax: $newSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+param: Menu ID|text|الزامی|شناسه یکتایی که برای ارجاع بعدی به این منوی انتخاب استفاده می‌شود ($addSelectMenuOption, $editSelectMenu, $editSelectMenuOption)
+param: Min|number|الزامی|حداقل تعداد گزینه‌هایی که کاربر باید انتخاب کند (0 تا 25)
+param: Max|number|الزامی|حداکثر تعداد گزینه‌هایی که کاربر می‌تواند انتخاب کند (1 تا 25)
+param: Placeholder|text|اختیاری|متن راهنمایی که قبل از انجام انتخاب در داخل منو نمایش داده می‌شود
+param: Message ID|snowflake|اختیاری|شناسه پیام باتی که از قبل ارسال شده تا این منو به‌جای پیام فعلی به آن متصل شود
+</details>

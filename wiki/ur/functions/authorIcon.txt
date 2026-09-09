@@ -1,0 +1,27 @@
+<dash>
+name: $authorIcon
+desc: یو آر ایل کے ذریعے ایمبیڈ کا مصنف آئیکن تصویر سیٹ کرتا ہے۔
+category: ایمبیڈ بنانے والا
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $authorIcon ایمبیڈ کے مصنف کے نام کے ساتھ ایک چھوٹی گول تصویر رکھتا ہے۔ اختیاری انڈیکس اس بات کا انتخاب کرتا ہے کہ کئی ایمبیڈز بناتے وقت کس ایمبیڈ میں ترمیم کرنی ہے۔ اگر ابھی تک کوئی مصنف کا نام سیٹ نہیں کیا گیا، تو ایک خالی پلیس ہولڈر نام استعمال ہوتا ہے تاکہ آئیکن پھر بھی ظاہر ہو۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $authorIcon[url;(index)]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $authorIcon[https://example.com/bot.png]
+</block>
+
+<block type="callout" kind="note">
+text: یو آر ایل کو http:// یا https:// سے شروع ہونا چاہیے۔ آئیکن کے ساتھ دکھائے جانے والا نام سیٹ کرنے کے لیے $author استعمال کریں۔
+</block>
+</dash>
+
+<details>
+syntax: $authorIcon[url;(index)]
+param: یو آر ایل|text|لازمی|براہِ راست تصویر یو آر ایل (http:// یا https://)
+param: انڈیکس|number|اختیاری|جب کئی ایمبیڈز بنائے جا رہے ہوں تو ترمیم کے لیے ایمبیڈ نمبر (معیار 1)
+</details>

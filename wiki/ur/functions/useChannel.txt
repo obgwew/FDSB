@@ -1,0 +1,33 @@
+<dash>
+name: $useChannel
+desc: اس مقام سے آگے سکرپٹ کا تمام آؤٹ پٹ کسی بھی سرور میں مخصوص چینل کو موڑ دیتا ہے۔
+category: رسائی کنٹرول
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $useChannel سکرپٹ میں لائنوں کے ظاہر ہونے کی ترتیب کے مطابق اپنی جگہ پر عمل پذیر ہوتا ہے۔ جب انٹرپریٹر اس تک پہنچتا ہے، یہ اس کے بعد آنے والی ہر چیز ($sendMessage، $sendEmbedMessage، $reply، بفر شدہ متن، وغیرہ) کا آؤٹ پٹ مخصوص چینل کو موڑ دیتا ہے۔ اس سے پہلے کی لائنوں پر کوئی اثر نہیں پڑتا۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $useChannel[guildID; channelID]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $sendMessage[This goes to the current channel]
+$useChannel[1234567890; 9876543210]
+$sendMessage[This goes to the specified channel!]
+</block>
+
+<block type="callout" kind="note">
+text: دونوں دلائل چیک کرنے سے پہلے حل کیے جاتے ہیں، لیکن ان کا عددی ہونا ضروری ہے۔ بوٹ کا مخصوص گِلڈ کا ممبر ہونا اور ہدف چینل دیکھنے کے قابل ہونا ضروری ہے۔ اگر گِلڈ یا چینل نہ ملے، یا دلائل عددی نہ ہوں، تو کمانڈ کو خاموشی سے نظر انداز کر دیا جاتا ہے اور ایک لاگ انٹری بنائی جاتی ہے۔
+</block>
+
+<block type="callout" kind="warning">
+text: ایک بار مقرر ہونے کے بعد، ری ڈائریکٹ سکرپٹ کے تمام بعد کے آؤٹ پٹ پر لاگو ہوتا ہے — اصل چینل مزید استعمال نہیں ہوتا۔ بٹن انٹریکشن میں، انٹریکشن کا جواب موخر کر دیا جاتا ہے اور بعد کے پیغامات اس کے بجائے ہدف چینل کو بھیجے جاتے ہیں۔
+</block>
+</dash>
+
+<details>
+syntax: $useChannel[guildID; channelID]
+param: guildID|number|لازمی|اس سرور (گِلڈ) کی ID جہاں ہدف چینل واقع ہے
+param: channelID|number|لازمی|اس چینل کی ID جس کو تمام آؤٹ پٹ موڑنا ہے
+</details>

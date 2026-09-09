@@ -1,0 +1,26 @@
+<dash>
+name: $description
+desc: بنائے جا رہے ایمبیڈ کا تفصیلی متن سیٹ کرتا ہے۔
+category: ایمبیڈ بنانے والا
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $description ایک متن آرگیومنٹ لیتا ہے اور اسے بنائے جا رہے موجودہ ایمبیڈ کے مرکزی حصے/تفصیل کے طور پر سیٹ کرتا ہے۔ یہ ایمبیڈ کا بنیادی مواد کا علاقہ ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $description[text]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $description[This is the embed body text]
+</block>
+
+<block type="callout" kind="note">
+text: تفصیل Discord مارک ڈاؤن فارمیٹنگ (بولڈ، اٹالک، کوڈ بلاکس، وغیرہ) کو سپورٹ کرتی ہے۔ یہ ایمبیڈ میں ٹائٹل کے نیچے ظاہر ہوتی ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $description[text]
+param: text|text|لازمی|ایمبیڈ کے لیے تفصیلی متن۔ Discord مارک ڈاؤن فارمیٹنگ کو سپورٹ کرتا ہے۔
+</details>

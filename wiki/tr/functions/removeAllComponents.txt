@@ -1,0 +1,31 @@
+<dash>
+name: $removeAllComponents
+desc: Bir mesajdan veya bekleyen görünümden tüm butonları, seçim menülerini ve bileşenleri kaldırır.
+category: Bileşenler
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $removeAllComponents, bir mesajdaki tüm etkileşimli bileşenleri (butonlar, seçim menüleri vb.) temizler. Bir Mesaj Kimliği olmadan önce bekleyen görünümü, ardından etkileşim kaynak mesajını ve son olarak botun gönderdiği son mesajı temizler. Bir Mesaj Kimliği ile çağrıldığında, o belirli bot mesajını temizler.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $removeAllComponents
+text: $removeAllComponents[(messageID)]
+</block>
+
+<block type="code" title="Kopyalanmaya hazır örnek">
+text: $removeAllComponents[123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: Bu, belirli bileşenleri hedefleyen $removeButtons veya $removeComponent'in aksine tüm bileşenleri tek seferde kaldırmanın en hızlı yoludur.
+</block>
+
+<block type="callout" kind="warning">
+text: Hedef mesaj bu bot tarafından gönderilmiş olmalıdır. Hiçbir mesaj bulunamazsa bir hata döndürülür.
+</block>
+</dash>
+
+<details>
+syntax: $removeAllComponents[(messageID)]
+param: mesaj kimliği|snowflake|Optional|Tüm bileşenlerin temizleneceği belirli bir bot mesajının kimliği. Belirtilmezse, bekleyen görünümü, etkileşim kaynağını veya son bot mesajını temizler.
+</details>

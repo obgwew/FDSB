@@ -1,0 +1,39 @@
+<dash>
+name: $returnGuildChannelsID
+desc: کسی گِلف سے چینل آئی ڈیز کو قسم کے اعتبار سے جمع کر کے بعد میں بازیافت کے لیے ذخیرہ کرتا ہے۔
+category: واپسی کمانڈز
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $returnGuildChannelsID کسی مخصوص گِلف سے مخصوص قسم کی تمام چینل آئی ڈیز جمع کرتا ہے اور انہیں ایک متغیر نام کے تحت ذخیرہ کرتا ہے۔ نتیجہ بعد میں $return[variableName] استعمال کر کے بازیافت کیا جا سکتا ہے۔ آپ چینل کی قسم جیسے text، voice، category، forum، stage کے اعتبار سے فلٹر کر سکتے ہیں، یا تمام چینلز حاصل کر سکتے ہیں۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $returnGuildChannelsID[GuildID; ChannelType; var; separator]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $returnGuildChannelsID[$guildID; text; channelIDs; ,]
+$sendMessage[Text channels: $return[channelIDs]]
+</block>
+
+<block type="options" title="چینل کی اقسام">
+option: all|تمام چینل کی اقسام
+option: text|صرف ٹیکسٹ چینلز
+option: voice|صرف وائس چینلز
+option: category|صرف کیٹیگری چینلز
+option: forum|صرف فورم چینلز
+option: stage|صرف اسٹیج چینلز
+</block>
+
+<block type="callout" kind="note">
+text: بوٹ کو ہدف گِلف کا ممبر ہونا چاہیے۔ عمل کے بعد ذخیرہ شدہ آئی ڈیز حاصل کرنے کے لیے $return[variableName] استعمال کریں۔ جدا کار طے کرتا ہے کہ متعدد آئی ڈیز کیسے جوڑی جائیں (مثلاً , یا ; یا خلا)۔
+</block>
+</dash>
+
+<details>
+syntax: $returnGuildChannelsID[GuildID; ChannelType; var; separator]
+param: GuildID|snowflake|لازمی|اس گِلف (سرور) کی آئی ڈی جس سے چینلز جمع کرنے ہیں
+param: ChannelType|text|لازمی|جمع کرنے کے لیے چینلز کی قسم: all, text, voice, category, forum, یا stage
+param: var|text|لازمی|متغیر کا نام جس میں نتیجہ ذخیرہ کرنا ہے ($return[] کے ساتھ استعمال کریں)
+param: separator|text|لازمی|متعدد آئی ڈیز کے درمیان جدا کار (مثلاً , یا ;)۔ آپ نامی جدا کار استعمال کر سکتے ہیں: dot, com, apo, sem, colon
+</details>

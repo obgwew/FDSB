@@ -1,0 +1,44 @@
+<dash>
+name: $newSelectMenu
+desc: کسی پیغام کے لیے ایک نیا سلیکٹ مینیو بناتا اور رجسٹر کرتا ہے۔
+category: کمپوننٹس
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $newSelectMenu ایک سلیکٹ ڈراپ ڈاؤن مینیو کی تعمیر شروع کرتا ہے جس کی شناخت ایک منفرد مینیو آئی ڈی سے ہوتی ہے۔ آپ تعین کرتے ہیں کہ صارف کو کم سے کم اور زیادہ سے زیادہ کتنے آپشن منتخب کرنا لازمی/اختیاری ہیں۔ بعد میں مینیو کو آپشنز سے بھرنے کے لیے $addSelectMenuOption استعمال کریں، اور یہ اس پیغام کے ساتھ منسلک ہو جائے گا جسے آپ بنا رہے ہیں۔ آپ مینیو کو پہلے سے بھیجے گئے بوٹ پیغام کے ساتھ منسلک کرنے کے لیے پیغام آئی ڈی بھی دے سکتے ہیں۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $newSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+$addSelectMenuOption[color_menu; Red; red; The color red]
+$addSelectMenuOption[color_menu; Blue; blue; The color blue]
+$sendMessage[Choose your favorite color!]
+</block>
+
+<block type="options" title="رویے کی تفصیلات">
+option: Min|آپشنز کی کم سے کم تعداد جسے صارف منتخب کرنا لازمی ہے (0 سے 25)
+option: Max|آپشنز کی زیادہ سے زیادہ تعداد جسے صارف منتخب کر سکتا ہے (1 سے 25)
+option: Placeholder|خاکستری ہنٹ متن جو صارف کے کچھ منتخب کرنے سے پہلے دکھایا جاتا ہے
+option: Message ID|پہلے سے بھیجے گئے بوٹ پیغام کا اختیاری آئی ڈی جس پر مینیو منسلک کرنا ہے
+</block>
+
+<block type="callout" kind="note">
+text: مینیو صرف اس وقت تیار ہوتا ہے جب آپ $addSelectMenuOption کے ساتھ کم از کم ایک آپشن شامل کریں۔ کسی موجودہ مینیو کے Min/Max/Placeholder تبدیل کرنے کے لیے $editSelectMenu استعمال کریں، اور کسی ایک آپشن میں ترمیم کے لیے $editSelectMenuOption۔
+</block>
+
+<block type="callout" kind="warning">
+text: Min, Max سے زیادہ نہیں ہو سکتا۔ ایک پیغام میں کل 25 کمپوننٹس رکھے جا سکتے ہیں۔ اگر دیا گیا پیغام اس بوٹ کا نہ ہو تو ایک خرابی (error) واپس آتی ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $newSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+param: Menu ID|text|لازمی|ایک منفرد آئی ڈی جو بعد میں اس سلیکٹ مینیو کا حوالہ دینے کے لیے استعمال کیا جاتا ہے ($addSelectMenuOption، $editSelectMenu، $editSelectMenuOption)
+param: Min|number|لازمی|آپشنز کی کم سے کم تعداد جسے صارف منتخب کرنا لازمی ہے (0 سے 25)
+param: Max|number|لازمی|آپشنز کی زیادہ سے زیادہ تعداد جسے صارف منتخب کر سکتا ہے (1 سے 25)
+param: Placeholder|text|اختیاری|وہ ہنٹ متن جو انتخاب سے پہلے مینیو کے اندر دکھایا جاتا ہے
+param: Message ID|snowflake|اختیاری|پہلے سے بھیجے گئے بوٹ پیغام کی آئی ڈی جس پر اس مینیو کو موجودہ پیغام کے بجائے منسلک کرنا ہے
+</details>

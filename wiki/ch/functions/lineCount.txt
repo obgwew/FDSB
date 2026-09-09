@@ -1,0 +1,26 @@
+<dash>
+name: $lineCount
+desc: 返回给定文本中空格的数量。
+category: 字符串工具
+
+<block type="text" title="命令如何工作？">
+text: $lineCount 接受一个文本参数并返回其中包含的空格字符（ ）的数量。参数中的变量和占位符会在计数前被解析。
+</block>
+
+<block type="code" title="语法">
+text: $lineCount[text]
+</block>
+
+<block type="code" title="可复制示例">
+text: $lineCount[one two three]
+</block>
+
+<block type="callout" kind="note">
+text: 计数基于空格，而不是实际的换行符。要将文本拆分为多个部分，请将 $splitIn 与 $splitOut 一起使用。
+</block>
+</dash>
+
+<details>
+syntax: $lineCount[text]
+param: text|text|Required|要计算其中空格数的文本。变量和占位符会在计数前被解析。
+</details>

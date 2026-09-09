@@ -1,0 +1,39 @@
+<dash>
+name: $editSelectMenuOption
+desc: Modifie le libellé, la valeur, la description, l'état par défaut ou l'emoji d'une option de menu de sélection existante.
+category: Composants
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: $editSelectMenuOption recherche une option dans un menu de sélection par sa valeur actuelle (Value), puis met à jour son libellé, sa description, son état par défaut et/ou son emoji. L'argument Value doit correspondre à la valeur de l'option que vous souhaitez modifier. Définir Default sur yes fait de cette option l'unique option présélectionnée.
+</block>
+
+<block type="code" title="Syntaxe">
+text: $editSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+$addSelectMenuOption[color_menu; Red; red; The color red]
+$addSelectMenuOption[color_menu; Blue; blue; The color blue]
+$editSelectMenuOption[color_menu; Crimson; red; A deep red]
+</block>
+
+<block type="callout" kind="note">
+text: Cette commande met à jour l'option en direct sur le message cible. Sans ID de message, elle recherche d'abord sur le message source de l'interaction, puis sur le dernier message envoyé par le bot.
+</block>
+
+<block type="callout" kind="warning">
+text: Si aucune option avec la valeur (Value) donnée n'existe dans le menu, une erreur est renvoyée. Le message cible doit avoir été envoyé par ce bot et doit contenir le menu de sélection avec l'ID donné.
+</block>
+</dash>
+
+<details>
+syntax: $editSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+param: Menu ID|text|Requis|L'ID du menu de sélection qui contient l'option
+param: Label|text|Requis|Le nouveau texte affiché à l'utilisateur pour cette option
+param: Value|text|Requis|La valeur actuelle de l'option à modifier (utilisée pour la trouver)
+param: Description|text|Peut être laissé vide|Nouvelle petite description affichée sous le libellé
+param: Default|yes/no|Optionnel|yes pour faire de cette option l'option présélectionnée (défaut : no)
+param: Emoji|text|Optionnel|Nouvel emoji affiché à côté du libellé de l'option
+param: Message ID|snowflake|Optionnel|ID d'un message spécifique du bot contenant le menu à modifier
+</details>

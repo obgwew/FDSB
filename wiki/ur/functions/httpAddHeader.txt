@@ -1,0 +1,28 @@
+<dash>
+name: $httpAddHeader
+desc: اگلے HTTP درخواست کے ساتھ بھیجا جانے والا حسبِ ضرورت HTTP ہیڈر شامل کرتا ہے۔
+category: HTTP
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $httpAddHeader ایک ہیڈر (نام اور قیمت) رجسٹر کرتا ہے جو $httpGet، $httpPost، $httpPut، $httpPatch یا $httpDelete سے کی جانے والی اگلی HTTP درخواست کے ساتھ منسلک کیا جائے گا۔ درخواست کے بعد ہیڈرز خود بخود صاف کر دیے جاتے ہیں۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $httpAddHeader[name; value]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $httpAddHeader[Authorization; Bearer token123]
+$httpGet[https://api.example.com/data]
+</block>
+
+<block type="callout" kind="note">
+text: ایک ہی نام دو بار شامل کرنے سے پچھلی قیمت اوپر لکھ دی جاتی ہے۔ محفوظ ہیڈرز درخواست بھیجنے کے بعد صاف کر دیے جاتے ہیں۔
+</block>
+</dash>
+
+<details>
+syntax: $httpAddHeader[name; value]
+param: name|text|لازمی|ہیڈر کا نام (مثال کے طور پر Authorization)
+param: value|text|لازمی|ہیڈر کی قیمت
+</details>

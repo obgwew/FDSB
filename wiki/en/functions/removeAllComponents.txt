@@ -1,0 +1,31 @@
+<dash>
+name: $removeAllComponents
+desc: Removes every button, select menu, and component from a message or the pending view.
+category: Components
+
+<block type="text" title="How does the command work?">
+text: $removeAllComponents clears all interactive components (buttons, select menus, etc.) from a message. Without a Message ID it first clears the pending view, then the interaction source message, then the last message the bot sent. Called with a Message ID, it clears that specific bot message.
+</block>
+
+<block type="code" title="Syntax">
+text: $removeAllComponents
+text: $removeAllComponents[(messageID)]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $removeAllComponents[123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: This is the fastest way to remove every component at once, unlike $removeButtons or $removeComponent which target specific ones.
+</block>
+
+<block type="callout" kind="warning">
+text: The target message must have been sent by this bot. If no message can be found, an error is returned.
+</block>
+</dash>
+
+<details>
+syntax: $removeAllComponents[(messageID)]
+param: messageID|snowflake|Optional|ID of a specific bot message to clear all components from. If omitted, clears the pending view, interaction source, or last bot message.
+</details>

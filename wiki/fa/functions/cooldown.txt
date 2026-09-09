@@ -1,0 +1,27 @@
+<dash>
+name: $cooldown
+desc: از اجرای مجدد اسکریپت توسط کاربر برای مدت زمان مشخصی جلوگیری می‌کند.
+category: کنترل دسترسی
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $cooldown یک محدودیت زمانی برای هر کاربر و هر اسکریپت تعیین می‌کند. اگر کاربر قبل از پایان دوره تاخیر بخواهد دوباره همان اسکریپت را اجرا کند، پیام خطای ارائه‌شده (به‌همراه زمان باقی‌مانده) نمایش داده شده و اجرا متوقف می‌شود.
+</block>
+
+<block type="code" title="سینتکس">
+text: $cooldown[time; error message]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $cooldown[10s; Please wait {time} before using this again!]
+</block>
+
+<block type="callout" kind="note">
+text: فرمت زمان از: s (ثانیه)، m (دقیقه)، h (ساعت)، d (روز) استفاده می‌کند. در پیام خطا از {time} یا %time% برای نمایش زمان باقی‌مانده تاخیر استفاده کنید.
+</block>
+</dash>
+
+<details>
+syntax: $cooldown[time; error message]
+param: زمان|text|الزامی|مدت زمانی که کاربر نمی‌تواند دوباره اسکریپت را اجرا کند. فرمت: عدد + واحد (s/m/h/d)، مثلاً 10s، 5m، 1h، 1d
+param: پیام خطا|text|الزامی|پیامی که هنگام فعال بودن تاخیر به کاربر ارسال می‌شود. برای نمایش زمان باقی‌مانده از {time} یا %time% استفاده کنید.
+</details>

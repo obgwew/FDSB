@@ -1,0 +1,30 @@
+<dash>
+name: $untimeout
+desc: تایم‌اوت فعال یک عضو سرور را حذف می‌کند.
+category: مدیریت
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $untimeout یک شناسه کاربر یا منشن دریافت می‌کند و هر تایم‌اوت فعال آن عضو را حذف می‌کند و فوراً مجوزهای ارسال پیام، واکنش و پیوستن به کانال‌های صوتی را بازمی‌گرداند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $untimeout[user]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $untimeout[@user]
+</block>
+
+<block type="callout" kind="note">
+text: کاربر باید در حال حاضر یک تایم‌اوت فعال داشته باشد تا این دستور تأثیری داشته باشد. اگر کاربر تایم‌اوت نشده باشد، دستور بدون خطا اجرا می‌شود.
+</block>
+
+<block type="callout" kind="warning">
+text: ربات باید مجوز «اعضای مدیریت» را داشته باشد و نقش بالاتر آن باید بالاتر از نقش بالای هدف باشد.
+</block>
+</dash>
+
+<details>
+syntax: $untimeout[user]
+param: user|text|Required|شناسه کاربر یا @منشن عضوی که تایم‌اوت او باید حذف شود
+</details>

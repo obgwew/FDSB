@@ -1,0 +1,27 @@
+<dash>
+name: $serverIcon
+desc: Geçerli sunucunun (veya bir sunucunun) simgesinin doğrudan görüntü URL'sini döndürür veya gönderir.
+category: Sunucu
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $serverIcon, bir sunucunun simgesinin doğrudan görüntü URL'sini çözümler ve döndürür. Argüman verilmezse geçerli sunucuyu kullanır; bir guild kimliği verilirse o belirli sunucuyu kullanır (bot bu sunucuda bulunmalıdır). Hareketli sunucu simgeleri .gif URL'si olarak döndürülür.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $serverIcon
+text: $serverIcon[(guildID)]
+</block>
+
+<block type="code" title="Kopyalanmaya hazır örnek">
+text: Server icon: $serverIcon
+</block>
+
+<block type="callout" kind="note">
+text: Verilen sunucunun simgesi ayarlanmamışsa bir hata döndürülür. URL'yi embed'lerde ($image, $thumbnail, $authorIcon, $footerIcon) kullanabilir veya bir bağlantı olarak gönderebilirsiniz.
+</block>
+</dash>
+
+<details>
+syntax: $serverIcon[(guildID)]
+param: guild kimliği|snowflake|Optional|Simge URL'si alınacak sunucunun kimliği. Belirtilmezse geçerli sunucuyu kullanır.
+</details>

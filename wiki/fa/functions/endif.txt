@@ -1,0 +1,23 @@
+<dash>
+name: $endif
+desc: پایان یک بلوک $if یا $elif را علامت می‌زند.
+category: کنترل جریان
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $endif مرز پایانی یک بلوک شرطی $if را مشخص می‌کند. تمام کدهای بین $if و $endif فقط زمانی اجرا می‌شوند که شرط برقرار باشد. هر $if باید یک $endif متناظر داشته باشد.
+</block>
+
+<block type="code" title="سینتکس">
+text: $endif
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $if[$authorID == 123456789]
+  Hello Admin!
+$endif
+</block>
+
+<block type="callout" kind="warning">
+text: هر بلوک $if باید به‌درستی با $endif بسته شود. نبود $endif باعث خطای اسکریپت می‌شود.
+</block>
+</dash>

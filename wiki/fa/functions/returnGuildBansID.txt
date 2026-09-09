@@ -1,0 +1,29 @@
+<dash>
+name: $returnGuildBansID
+desc: شناسه همه کاربران مسدودشده از یک سرور را جمع‌آوری می‌کند و آن‌ها را ذخیره می‌کند.
+category: دستورهای بازگشتی
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $returnGuildBansID فهرست مسدودی سرور مشخص‌شده را درخواست می‌کند و شناسه کاربر هر عضو مسدودشده را زیر نام متغیر داده‌شده، که با جداکننده به هم متصل شده‌اند، ذخیره می‌کند. رشته ذخیره‌شده را بعداً با $return[var] بازیابی کنید.
+</block>
+
+<block type="code" title="سینتکس">
+text: $returnGuildBansID[GuildID; var; separator]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $returnGuildBansID[$guildID; bannedIDs; ,]
+text: $sendMessage[Banned users: $return[bannedIDs]]
+</block>
+
+<block type="callout" kind="important">
+text: به مجوز Ban Members نیاز دارد — بدون آن دستور با خطای مجوز شکست می‌خورد. متغیر خالی به این معناست که هیچ‌کس مسدود نشده است.
+</block>
+</dash>
+
+<details>
+syntax: $returnGuildBansID[GuildID; var; separator]
+param: شناسه سرور|snowflake|الزامی|شناسه سروری که فهرست مسدودی آن خوانده می‌شود
+param: متغیر|text|الزامی|نام متغیری که نتیجه در آن ذخیره می‌شود (با $return[] خوانده می‌شود)
+param: جداکننده|text|الزامی|جداکننده بین شناسه‌ها (مثلاً ،). جداکننده‌های نام‌دار نیز کار می‌کنند: dot، com، apo، sem، colon
+</details>

@@ -1,0 +1,30 @@
+<dash>
+name: $alwaysReply
+desc: ہر غیر بوٹ پیغام پر متحرک ہونے والا واقعہ۔
+category: واقعہ
+
+<block type="text" title="یہ واقعہ کیسے کام کرتا ہے؟">
+text: $alwaysReply ایک ایونٹ پریفکس ہے جو ہر غیر بوٹ صارف کے بھیجے گئے پیغام کے لیے FDScript کو متحرک کرتا ہے۔ اسکرپٹ اصل پیغام کے جواب کے طور پر چلتا ہے۔ یہ خودکار جوابات یا پیغام پروسیسنگ کے لیے مفید ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: #PREFIX:$alwaysReply
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: #PREFIX:$alwaysReply
+ sendMessage[You said: $message]
+</block>
+
+<block type="callout" kind="warning">
+text: یہ ہر پیغام پر متحرک ہوتا ہے۔ ضرورت سے زیادہ بوٹ سرگرمی یا ریٹ لمٹ سے بچنے کے لیے احتیاط سے استعمال کریں۔
+</block>
+
+<block type="callout" kind="important">
+text: یہ واقعہ bot_events فولڈر میں چلتا ہے، نہ کہ bot_commands میں۔ اپنی .fds فائل وہاں بنائیں۔
+</block>
+</dash>
+
+<details>
+syntax: #PREFIX:$alwaysReply
+</details>

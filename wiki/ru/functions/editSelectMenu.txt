@@ -1,0 +1,37 @@
+<dash>
+name: $editSelectMenu
+desc: Изменяет минимальное/максимальное количество выбираемых опций и подсказку (placeholder) существующего меню выбора.
+category: Компоненты
+
+<block type="text" title="Как работает команда?">
+text: $editSelectMenu находит меню выбора по его ID меню (Menu ID) в сообщении и обновляет, сколько опций пользователь должен/может выбрать (Min/Max), а также текст подсказки, отображаемый перед выбором (Placeholder). Уже добавленные в меню опции остаются без изменений. Чтобы отредактировать отдельную опцию, используйте $editSelectMenuOption.
+</block>
+
+<block type="code" title="Syntax">
+text: $editSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+$addSelectMenuOption[color_menu; Red; red; The color red]
+$addSelectMenuOption[color_menu; Blue; blue; The color blue]
+$editSelectMenu[color_menu; 1; 2; Pick one or two colors]
+</block>
+
+<block type="callout" kind="note">
+text: Без указания Message ID бот сначала ищет меню в исходном сообщении взаимодействия, затем в последнем сообщении, отправленном ботом. Опции меню при этом сохраняются.
+</block>
+
+<block type="callout" kind="warning">
+text: Значение Min должно быть от 0 до 25, Max — от 1 до 25, причём Min не может превышать Max. Целевое сообщение должно быть отправлено этим ботом и уже содержать меню с указанным ID.
+</block>
+</dash>
+
+<details>
+syntax: $editSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+param: ID меню|text|Required|ID меню выбора, которое нужно изменить
+param: Минимум|number|Required|Новое минимальное количество опций, которое должен выбрать пользователь (от 0 до 25)
+param: Максимум|number|Required|Новое максимальное количество опций, которое может выбрать пользователь (от 1 до 25)
+param: Плейсхолдер|text|Optional|Новый текст подсказки, отображаемый до совершения выбора
+param: ID сообщения|snowflake|Optional|ID конкретного сообщения бота, содержащего меню для редактирования
+</details>

@@ -1,0 +1,36 @@
+<dash>
+name: $numberSeparator
+desc: Okunmasını kolaylaştırmak için bir tam sayıyı binler ayracıyla biçimlendirir.
+category: Matematik ve Sayılar
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $numberSeparator, bir tam sayıyı alır ve sağdan itibaren her üç basamakta bir ayraç ekler (binler gruplandırması). Varsayılan olarak ayraç virgüldür (,) ve ikinci argüman olarak özel bir ayraç da iletebilirsiniz. Örneğin 1234567, 1,234,567 olur.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $numberSeparator[number]
+text: $numberSeparator[number; separator]
+</block>
+
+<block type="code" title="Kopyalanmaya hazır örnek">
+text: $numberSeparator[1234567]
+</block>
+
+<block type="code" title="Kopyalanmaya hazır örnek (özel ayraç)">
+text: $numberSeparator[1234567; .]
+</block>
+
+<block type="callout" kind="note">
+text: Negatif sayılar - işaretini korur: örneğin -1234567, -1,234,567 olur.
+</block>
+
+<block type="callout" kind="warning">
+text: Yalnızca tam sayılar kabul edilir. Ondalıklı sayılar ve sayısal olmayan karakterler hata döndürür.
+</block>
+</dash>
+
+<details>
+syntax: $numberSeparator[number; (separator)]
+param: sayı|number|Required|Biçimlendirilecek tam sayı (başında - işareti bulunabilir)
+param: ayraç|text|Optional|Her üç basamakta bir eklenecek ayraç (varsayılan: ,)
+</details>

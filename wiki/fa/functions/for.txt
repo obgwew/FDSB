@@ -1,0 +1,28 @@
+<dash>
+name: $for
+desc: بلوک کد محصور را به تعداد مشخصی تکرار می‌کند.
+category: کنترل جریان
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $for یک آرگومان شمارش می‌گیرد و کد بین $for و $endfor را همان تعداد بار اجرا می‌کند. حلقه را می‌توان با استفاده از $break زودتر متوقف کرد.
+</block>
+
+<block type="code" title="سینتکس">
+text: $for[count]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $for[5]
+  $sendMessage[Iteration!]
+$endfor
+</block>
+
+<block type="callout" kind="note">
+text: اگر شمارش 0 یا منفی باشد، بدنه حلقه به طور کامل نادیده گرفته می‌شود. برای خروج زودهنگام از حلقه از $break درون حلقه استفاده کنید. حلقه‌های تودرتو پشتیبانی می‌شوند.
+</block>
+</dash>
+
+<details>
+syntax: $for[count]
+param: count|number|الزامی|تعداد دفعاتی که بدنه حلقه باید تکرار شود. باید یک عدد صحیح غیرمنفی باشد.
+</details>

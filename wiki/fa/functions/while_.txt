@@ -1,0 +1,30 @@
+<dash>
+name: $while
+desc: بلوک کد محصور را تا زمانی که شرط درست باشد تکرار می‌کند.
+category: کنترل جریان
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $while قبل از هر تکرار یک شرط را ارزیابی می‌کند. اگر شرط درست باشد، بدنه حلقه اجرا می‌شود. این تکرار تا زمانی ادامه دارد که شرط نادرست شود یا $break روبرو شویم.
+</block>
+
+<block type="code" title="سینتکس">
+text: $while[condition]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $setVar[i; 0]
+$while[$getVar[i] < 5]
+  $sendMessage[Count: $getVar[i]]
+  $setVar[i; $math[$getVar[i] + 1]]
+$endwhile
+</block>
+
+<block type="callout" kind="warning">
+text: مطمئن شوید حلقه شما یک شرط پایان مشخص دارد تا از حلقه‌های بی‌نهایت جلوگیری شود. یک حلقه بی‌نهایت اسکریپت را برای مدت نامحدود متوقف می‌کند. برای خروج زودتر از $break استفاده کنید.
+</block>
+</dash>
+
+<details>
+syntax: $while[condition]
+param: condition|expression|Required|شرطی که قبل از هر تکرار ارزیابی می‌شود. حلقه تا زمانی که این شرط درست باشد ادامه دارد. از همان عملگرهای $if استفاده می‌کند (==, !=, >, <, >=, <=).
+</details>

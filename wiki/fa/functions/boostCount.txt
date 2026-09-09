@@ -1,0 +1,26 @@
+<dash>
+name: $boostCount
+desc: تعداد بوست‌های فعلی سرور را برمی‌گرداند.
+category: سرور
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $boostCount تعداد فعلی بوست‌های (اشتراک‌های پرمیوم) سرور را برمی‌گرداند. بدون آرگومان، سروری را که رویداد در آن رخ داده می‌خواند. می‌توانید شناسه هر گیلدی را که ربات با آن مشترک است ارسال کنید تا تعداد سرور دیگری خوانده شود.
+</block>
+
+<block type="code" title="سینتکس">
+text: $boostCount[(guildID)]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $sendMessage[This server has $boostCount boosts!]
+</block>
+
+<block type="callout" kind="note">
+text: این تعداد بوست است، نه سطح بوست - برای آن از $boostLevel استفاده کنید.
+</block>
+</dash>
+
+<details>
+syntax: $boostCount[(guildID)]
+param: guildID|snowflake|اختیاری|شناسه سروری که تعداد بوست آن باید خوانده شود (پیش‌فرض: سرور فعلی)
+</details>

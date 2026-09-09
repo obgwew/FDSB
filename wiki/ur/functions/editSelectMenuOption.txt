@@ -1,0 +1,39 @@
+<dash>
+name: $editSelectMenuOption
+desc: کسی موجودہ سلیکٹ مینیو آپشن کے لیبل، ویلیو، تفصیل، ڈیفالٹ حالت، یا ایموجی میں ترمیم کرتا ہے۔
+category: کمپوننٹس
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $editSelectMenuOption سلیکٹ مینیو کے اندر کسی آپشن کو اس کی موجودہ ویلیو سے ڈھونڈتا ہے، پھر اس کے لیبل، تفصیل، ڈیفالٹ حالت، اور/یا ایموجی کو اپ ڈیٹ کرتا ہے۔ Value دلیل کا اس آپشن کی ویلیو سے مطابقت ہونا ضروری ہے جس میں ترمیم کرنی ہے۔ Default کو yes پر سیٹ کرنے سے یہ آپشن واحد پہلے سے منتخب شدہ بن جاتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $editSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+$addSelectMenuOption[color_menu; Red; red; The color red]
+$addSelectMenuOption[color_menu; Blue; blue; The color blue]
+$editSelectMenuOption[color_menu; Crimson; red; A deep red]
+</block>
+
+<block type="callout" kind="note">
+text: یہ کمانڈ ہدف پیغام پر آپشن کو فوری طور پر اپ ڈیٹ کرتا ہے۔ Message ID کے بغیر، یہ پہلے انٹرایکشن کے ماخذ پیغام کو ڈھونڈتا ہے، پھر آخری پیغام جو بوٹ نے بھیجا تھا۔
+</block>
+
+<block type="callout" kind="warning">
+text: اگر مینیو میں دی گئی Value والا کوئی آپشن موجود نہ ہو تو ایک خرابی (error) واپس آتی ہے۔ ہدف پیغام اسی بوٹ کے ذریعے بھیجا گیا ہونا چاہیے اور اس میں دی گئی آئی ڈی کا سلیکٹ مینیو موجود ہونا چاہیے۔
+</block>
+</dash>
+
+<details>
+syntax: $editSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+param: Menu ID|text|لازمی|سلیکٹ مینیو کی آئی ڈی جس میں آپشن موجود ہے
+param: Label|text|لازمی|صارف کو اس آپشن کے لیے دکھایا جانے والا نیا متن
+param: Value|text|لازمی|ترمیم کرنے والے آپشن کی موجودہ ویلیو (اسے ڈھونڈنے کے لیے استعمال ہوتی ہے)
+param: Description|text|خالی چھوڑا جا سکتا ہے|لیبل کے نیچے دکھائی جانے والی نئی مختصر تفصیل
+param: Default|yes/no|اختیاری|اسے پہلے سے منتخب شدہ آپشن بنانے کے لیے yes (ڈیفالٹ: no)
+param: Emoji|text|اختیاری|نیا ایموجی جو آپشن کے لیبل کے ساتھ دکھایا جاتا ہے
+param: Message ID|snowflake|اختیاری|کسی مخصوص بوٹ پیغام کی آئی ڈی جس پر مینیو موجود ہے جس میں ترمیم کرنی ہے
+</details>

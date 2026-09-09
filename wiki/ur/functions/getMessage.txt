@@ -1,0 +1,28 @@
+<dash>
+name: $getMessage
+desc: کسی بھی چینل سے ایک پیغام حاصل کرتا ہے اور اس کے بارے میں معلومات بھیجتا ہے۔
+category: ٹول
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $getMessage دیے گئے چینل سے ایک پیغام حاصل کرتا ہے اور اس سے ایک معلومات کا حصہ نکالتا ہے۔ قسم کا آرگومینٹ منتخب کرتا ہے کہ کیا بھیجا جائے: content (پیغام ٹیکسٹ)، name (launcher کا ظاہری نام)، id (launcher کی صارف ID)، یا avatar (launcher کے اوتار کا URL)۔ اگر نکالی گئی قیمت خالی ہو تو اس کی جگہ زیرو وڈتھ اسپیس بھیجا جاتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $getMessage[channelID; messageID; (type)]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $getMessage[123456789; 987654321; content]
+</block>
+
+<block type="callout" kind="note">
+text: قسم کا آرگومینٹ اختیاری ہے اور ڈیفالٹ میں content ہے۔ درست قسمیں: content، name، id، avatar۔ بٹ کو چینل دیکھنے اور Read Message History اجازت رکھنی چاہیے۔
+</block>
+</dash>
+
+<details>
+syntax: $getMessage[channelID; messageID; (type)]
+param: channelID|snowflake|لازمی|پیغام والے چینل کی ID
+param: messageID|snowflake|لازمی|حاصل کرنے کے لیے پیغام کی ID
+param: type|text|اختیاری|کیا بھیجنا ہے: content (ڈیفالٹ)، name، id، یا avatar
+</details>

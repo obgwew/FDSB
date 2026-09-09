@@ -1,0 +1,26 @@
+<dash>
+name: $title
+desc: عنوان ایمبد در حال ساخت را تنظیم می‌کند.
+category: سازنده ایمبد
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $title یک آرگومان متنی دریافت می‌کند و آن را به عنوان عنوان ایمبد در حال ساخت تنظیم می‌کند. عنوان در بالای ایمبد با متن بزرگ‌تر و بولد نمایش داده می‌شود.
+</block>
+
+<block type="code" title="سینتکس">
+text: $title[text]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $title[Server Rules]
+</block>
+
+<block type="callout" kind="note">
+text: عنوان از قالب‌بندی مارک‌داون Discord پشتیبانی می‌کند. به عنوان تیتر اصلی در بالای ایمبد نمایش داده می‌شود.
+</block>
+</dash>
+
+<details>
+syntax: $title[text]
+param: text|text|Required|متن عنوان ایمبد
+</details>

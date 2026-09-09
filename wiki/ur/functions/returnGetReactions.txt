@@ -1,0 +1,31 @@
+<dash>
+name: $returnGetReactions
+desc: کسی پیغام پر مخصوص ایموجی کے ساتھ ردِعمل دینے والے صارفین حاصل کر کے نتیجہ ذخیرہ کرتا ہے۔
+category: واپسی کمانڈز
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $returnGetReactions ایک مخصوص پیغام حاصل کرتا ہے، ان صارفین کو تلاش کرتا ہے جنہوں نے دیے گئے ایموجی کے ساتھ ردِعمل دیا، اور نتیجہ ذخیرہ کرتا ہے۔ آپ ردِعمل دینے والے صارفین کی IDs یا ردِعمل کی کل تعداد ذخیرہ کر سکتے ہیں۔ بوٹس ہمیشہ خارج رہتے ہیں — صرف انسانی صارفین پر غور کیا جاتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $returnGetReactions[channelID; messageID; type; var; separator; emoji]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $returnGetReactions[$channelID; 123456789; usersID; reactors; ,; 👍]
+</block>
+
+<block type="callout" kind="note">
+text: type پیرامیٹر "usersID" قبول کرتا ہے (ردِعمل دینے والے صارفین کی IDs ذخیرہ کرنے کے لیے، جدا کار کے ساتھ جوڑی ہوئی) یا "tr" (صرف انسانی صارفین سے ردِعمل کی کل تعداد ذخیرہ کرنے کے لیے)۔ اگر ایموجی پیغام پر نہ ملے: "tr" خاموشی سے "0" ذخیرہ کرتا ہے، جبکہ "usersID" ایک خرابی پیدا کرتا ہے۔ "usersID" موڈ میں اس وقت بھی خرابی پیدا ہوتی ہے اگر کسی انسانی صارف نے ایموجی کے ساتھ ردِعمل نہ دیا ہو۔ نتیجہ متغیر میں ذخیرہ ہوتا ہے اور بعد میں $return[var] کے ساتھ بازیافت کیا جاتا ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $returnGetReactions[channelID; messageID; type; var; separator; emoji]
+param: channelID|snowflake|لازمی|اس چینل کی آئی ڈی جس میں پیغام موجود ہے
+param: messageID|snowflake|لازمی|اس پیغام کی آئی ڈی جس پر ردِعمل چیک کرنا ہے
+param: type|text|لازمی|usersID ردِعمل دینے والے صارفین کی IDs ذخیرہ کرنے کے لیے، یا tr ردِعمل کی کل تعداد ذخیرہ کرنے کے لیے (صرف انسانی)
+param: var|text|لازمی|متغیر کا نام جس میں نتیجہ ذخیرہ کرنا ہے
+param: separator|text|لازمی|متعدد صارف IDs کے درمیان جدا کار (مثلاً , یا ;)۔ آپ نامی جدا کار استعمال کر سکتے ہیں: dot, com, apo, sem, colon
+param: emoji|text|لازمی|وہ ایموجی جس کے ردِعمل تلاش کرنے ہیں (اس کی سٹرنگ شکل یا نام سے مطابقت)
+</details>

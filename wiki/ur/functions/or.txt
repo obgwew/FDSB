@@ -1,0 +1,26 @@
+<dash>
+name: $or
+desc: متعدد شرائط کا جائزہ لیتا ہے اور اگر کوئی ایک شرط بھی درست ہو تو true لوٹاتا ہے۔
+category: بہاؤ کنٹرول
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $or متعدد شرائط کی دلائل لیتا ہے اور ہر ایک کا جائزہ لیتا ہے۔ اگر کم از کم ایک شرط درست ہو تو یہ "true" لوٹاتا ہے، اور اگر تمام شرائط غلط ہوں تو "false" لوٹاتا ہے۔ یہ متبادل مشروط جانچیں بنانے کے لیے مفید ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $or[condition1; condition2; condition3; ...]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $or[$authorID == 123; $authorID == 456]
+</block>
+
+<block type="callout" kind="note">
+text: ہر شرط $if جیسے ہی موازنہ آپریٹرز استعمال کرتی ہے (==, !=, >, <, >=, <=)۔ یہ "true" یا "false" کا سٹرنگ لوٹاتا ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $or[condition1; condition2; condition3; ...]
+param: condition|expression|لازمی|ایک یا زیادہ شرائط جن کا جائزہ لینا ہے۔ ہر شرط آپریٹرز استعمال کر سکتی ہے جیسے ==, !=, >, <, >=, <=۔ نتیجہ "true" ہونے کے لیے صرف ایک شرط کا درست ہونا کافی ہے۔
+</details>

@@ -1,0 +1,26 @@
+<dash>
+name: $lineCount
+desc: Verilen metindeki boşluk sayısını döndürür.
+category: Dize İşlemleri
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $lineCount, bir metin argümanı alır ve içinde kaç tane boşluk karakteri ( ) bulunduğunu döndürür. Argümandaki değişkenler ve yer tutucular sayımdan önce çözümlenir.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $lineCount[text]
+</block>
+
+<block type="code" title="Kopyalanmaya hazır örnek">
+text: $lineCount[one two three]
+</block>
+
+<block type="callout" kind="note">
+text: Sayım gerçek satır sonlarına değil, boşluklara dayanır. Metni parçalara bölmek için $splitIn'i $splitOut ile birlikte kullanın.
+</block>
+</dash>
+
+<details>
+syntax: $lineCount[text]
+param: metin|text|Required|Boşluk sayılacak metin. Değişkenler ve yer tutucular sayımdan önce çözümlenir.
+</details>

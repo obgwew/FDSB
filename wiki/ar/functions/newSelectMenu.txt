@@ -1,0 +1,44 @@
+<dash>
+name: $newSelectMenu
+desc: يُنشئ ويُسجّل قائمة اختيار جديدة لرسالة.
+category: المكوّنات
+
+<block type="text" title="كيف تعمل الدالة؟">
+text: تبدأ $newSelectMenu في بناء قائمة اختيار منسدلة معرّفة بمعرّف فريد (Menu ID). تُحدد الحد الأدنى والحد الأقصى لعدد الخيارات التي يجب/يمكن للمستخدم اختيارها. استخدم $addSelectMenuOption بعدها لملء القائمة بالخيارات، وسيتم إرفاقها بالرسالة التي تقوم بإنشائها. يمكنك أيضًا تمرير معرّف رسالة لإرفاق القائمة برسالة بوت مرسلة مسبقًا.
+</block>
+
+<block type="code" title="الصيغة">
+text: $newSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+$addSelectMenuOption[color_menu; Red; red; The color red]
+$addSelectMenuOption[color_menu; Blue; blue; The color blue]
+$sendMessage[Choose your favorite color!]
+</block>
+
+<block type="options" title="تفاصيل السلوك">
+option: Min|الحد الأدنى لعدد الخيارات المطلوب اختيارها من قبل المستخدم (0 إلى 25)
+option: Max|الحد الأقصى لعدد الخيارات المسموح اختيارها من قبل المستخدم (1 إلى 25)
+option: Placeholder|النص التلميحي الرمادي المعروض قبل أن يختار المستخدم أي خيار
+option: Message ID|معرّف اختياري لرسالة بوت مرسلة مسبقًا لإرفاق القائمة بها
+</block>
+
+<block type="callout" kind="note">
+text: تكون القائمة جاهزة فقط بعد إضافة خيار واحد على الأقل باستخدام $addSelectMenuOption. استخدم $editSelectMenu لتغيير Min/Max/Placeholder لقائمة موجودة، و$editSelectMenuOption لتعديل خيار محدد.
+</block>
+
+<block type="callout" kind="warning">
+text: لا يمكن أن يكون Min أكبر من Max. يمكن أن تحمل رسالة最多 25 مكوّنًا إجماليًا. إذا لم تكن الرسالة المحددة من هذا البوت، يتم إرجاع خطأ.
+</block>
+</dash>
+
+<details>
+syntax: $newSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+param: Menu ID|text|Required|معرّف فريد يُستخدم للإشارة إلى هذه القائمة لاحقًا ($addSelectMenuOption, $editSelectMenu, $editSelectMenuOption)
+param: Min|number|Required|الحد الأدنى لعدد الخيارات المطلوب اختيارها (0 إلى 25)
+param: Max|number|Required|الحد الأقصى لعدد الخيارات المسموح اختيارها (1 إلى 25)
+param: Placeholder|text|Optional|النص التلميحي المعروض داخل القائمة قبل إجراء الاختيار
+param: Message ID|snowflake|Optional|معرّف رسالة بوت مرسلة مسبقًا لإرفاق هذه القائمة بها بدلاً من الرسالة الحالية
+</details>

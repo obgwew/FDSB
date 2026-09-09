@@ -1,0 +1,31 @@
+<dash>
+name: $messageContainsAll
+desc: رویدادی که وقتی یک پیام شامل همه کلمات مشخص شده باشد فعال می‌شود.
+category: رویداد
+
+<block type="text" title="این رویداد چگونه کار می‌کند؟">
+text: $messageContainsAll یک پیشوند رویداد است که فقط وقتی یک پیام شامل همه کلمات محرک مشخص شده باشد یک FDScript را فعال می‌کند. کلمات داخل براکت با سمی‌کالن جدا می‌شوند. تطبیق به حروف بزرگ و کوچک حساس نیست.
+</block>
+
+<block type="code" title="سینتکس">
+text: #PREFIX:$messageContainsAll[word1;word2;word3]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: #PREFIX:$messageContainsAll[bot;help]
+ sendMessage[Need help with the bot? Here's how...]
+</block>
+
+<block type="callout" kind="note">
+text: برخلاف $messageContains، این رویداد نیاز دارد که همه کلمات لیست شده در پیام حاضر باشند. اگر هر کلمه‌ای وجود نداشته باشد، اسکریپت اجرا نمی‌شود.
+</block>
+
+<block type="callout" kind="important">
+text: این رویداد در پوشه bot_events اجرا می‌شود، نه bot_commands. فایل .fds خود را آنجا ایجاد کنید.
+</block>
+</dash>
+
+<details>
+syntax: #PREFIX:$messageContainsAll[word1;word2;...]
+param: words|text|Required|لیست کلمات محرک جدا شده با سمی‌کالن. همه باید مطابقت داشته باشند تا اسکریپت فعال شود.
+</details>

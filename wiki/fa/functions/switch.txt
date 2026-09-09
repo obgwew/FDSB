@@ -1,0 +1,27 @@
+<dash>
+name: $switch
+desc: یک آیتم را از یک لیست بر اساس شماره ایندکس انتخاب کرده و برمی‌گرداند.
+category: ابزارهای متنی
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $switch یک لیست از آیتم‌ها و یک شماره ایندکس (به عنوان آرگومان آخر) دریافت می‌کند. آیتم موجود در آن موقعیت (ایندکس مبتنی بر 1) را برمی‌گرداند. این برای انتخاب از گزینه‌های از پیش تعریف‌شده مفید است.
+</block>
+
+<block type="code" title="سینتکس">
+text: $switch[item1; item2; ... ; index]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $switch[Red; Green; Blue; $randomint[1; 3]]
+</block>
+
+<block type="callout" kind="note">
+text: ایندکس آرگومان آخر است و باید عددی بین 1 و تعداد کل آیتم‌ها باشد. اگر ایندکس خارج از محدوده باشد، خطا برگردانده می‌شود.
+</block>
+</dash>
+
+<details>
+syntax: $switch[item1; item2; ... ; index]
+param: item|text|Required|یک یا چند آیتم برای انتخاب
+param: index|number|Required|موقعیت مبتنی بر 1 آیتمی که باید برگردانده شود (باید آرگومان آخر باشد)
+</details>

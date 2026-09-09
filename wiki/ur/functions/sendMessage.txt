@@ -1,0 +1,26 @@
+<dash>
+name: $sendMessage
+desc: موجودہ چینل کو ایک ٹیکسٹ پیغام بھیجتا ہے۔
+category: پیغامات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $sendMessage ایک متن کی دلیل لیتا ہے، اس کے اندر موجود کسی بھی متغیر/پلیس ہولڈر کو حل کرتا ہے، اور نتیجے والا پیغام موجودہ چینل کو بھیجتا ہے۔ اگر بٹنوں والا ویو زیر التوا ہے تو اسے پیغام کے ساتھ منسلک کرتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $sendMessage[text]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $sendMessage[Hello, $authorName!]
+</block>
+
+<block type="callout" kind="note">
+text: FDScript میں پیغامات بھیجنے کا یہ بنیادی طریقہ ہے۔ متن کے اندر موجود متغیرات اور پلیس ہولڈرز بھیجنے سے پہلے خود بخود حل کر لیے جاتے ہیں۔
+</block>
+</dash>
+
+<details>
+syntax: $sendMessage[text]
+param: text|text|لازمی|بھیجنے کے لیے پیغام کا متن۔ متغیرات، پلیس ہولڈرز اور Discord مارک ڈاؤن کو سپورٹ کرتا ہے۔
+</details>

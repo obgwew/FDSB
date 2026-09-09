@@ -1,0 +1,27 @@
+<dash>
+name: $authorAvatar
+desc: کمانڈ کے مصنف (یا کسی صارف) کے عمومی اوتار کی براہِ راست تصویری یو آر ایل واپس کرتا یا بھیجتا ہے۔
+category: معلومات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $authorAvatar کسی صارف کے عمومی (پروفائل) اوتار کی براہِ راست تصویری یو آر ایل تلاش کر کے واپس کرتا ہے۔ بغیر کسی دلیل کے یہ کمانڈ کا مصنف استعمال کرتا ہے؛ صارف آئی ڈی یا @mention کے ساتھ یہ اسی صارف کو استعمال کرتا ہے۔ نتیجہ ایک یو آر ایل ہوتا ہے جسے آپ پیغامات یا تصاویر میں استعمال کر سکتے ہیں۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $authorAvatar
+text: $authorAvatar[(userID/@mention)]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: Your avatar: $authorAvatar
+</block>
+
+<block type="callout" kind="note">
+text: یہ صارف کے عمومی اوتار (ان کی پروفائل تصویر) کو استعمال کرتا ہے۔ سرور کے اندر دکھائے جانے والے اوتار (گلڈ اوتار) کے لیے $authorServerAvatar استعمال کریں۔ متحرک (انیمیٹڈ) اوتار .gif یو آر ایل کے طور پر واپس آتے ہیں۔
+</block>
+</dash>
+
+<details>
+syntax: $authorAvatar[(userID/@mention)]
+param: userID/@mention|text|اختیاری|وہ صارف آئی ڈی یا @mention جس کا عمومی اوتار یو آر ایل حاصل کرنا ہے۔ حذف کرنے پر کمانڈ کا مصنف استعمال ہوتا ہے۔
+</details>

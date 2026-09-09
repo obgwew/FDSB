@@ -1,0 +1,27 @@
+<dash>
+name: $authorServerAvatar
+desc: URL مستقیم تصویر آواتار سرور فرستنده دستور (یا یک کاربر) را بازگردانی یا ارسال می‌کند.
+category: اطلاعات
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $authorServerAvatar آدرس مستقیم تصویر آواتار سرور (guild) یک کاربر را در صورت تنظیم بودن، شناسایی و بازگردانی می‌کند. بدون آرگومان از فرستنده دستور استفاده می‌کند؛ با شناسه کاربر یا @mention از آن کاربر استفاده می‌شود. وقتی هیچ آواتار سفارشی سروری وجود نداشته باشد، آواتار نمایشی کاربر استفاده می‌شود. نتیجه یک URL است که می‌توانید آن را در پیام‌ها یا تصاویر جاسازی کنید.
+</block>
+
+<block type="code" title="سینتکس">
+text: $authorServerAvatar
+text: $authorServerAvatar[(userID/@mention)]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: Your server avatar: $authorServerAvatar
+</block>
+
+<block type="callout" kind="note">
+text: این آواتاری است که به سایر اعضا در داخل سرور نمایش داده می‌شود و ممکن است با آواتار سراسری کاربر ($authorAvatar) متفاوت باشد. آواتارهای متحرک به‌صورت URLهای .gif بازگردانی می‌شوند.
+</block>
+</dash>
+
+<details>
+syntax: $authorServerAvatar[(userID/@mention)]
+param: userID/@mention|text|اختیاری|شناسه کاربر یا @mention که می‌خواهید URL آواتار سرور او را بگیرید. در صورت حذف، از فرستنده دستور استفاده می‌شود.
+</details>

@@ -1,0 +1,36 @@
+<dash>
+name: $numberSeparator
+desc: 用千位分隔符格式化整数，便于阅读。
+category: 数学与数字
+
+<block type="text" title="命令如何工作？">
+text: $numberSeparator 接受一个整数，并从右侧每三位插入一个分隔符（千位分组）。默认分隔符是逗号（,），也可以传入自定义分隔符作为第二个参数。例如，1234567 变成 1,234,567。
+</block>
+
+<block type="code" title="语法">
+text: $numberSeparator[number]
+text: $numberSeparator[number; separator]
+</block>
+
+<block type="code" title="可复制示例">
+text: $numberSeparator[1234567]
+</block>
+
+<block type="code" title="可复制示例（自定义分隔符）">
+text: $numberSeparator[1234567; .]
+</block>
+
+<block type="callout" kind="note">
+text: 负数会保留其 - 号：例如 -1234567 变成 -1,234,567。
+</block>
+
+<block type="callout" kind="warning">
+text: 只接受整数。小数和非数字字符会返回错误。
+</block>
+</dash>
+
+<details>
+syntax: $numberSeparator[number; (separator)]
+param: number|number|Required|要格式化的整数（可以包含前导 - 号）
+param: separator|text|Optional|每三位插入的分隔符（默认：,）
+</details>

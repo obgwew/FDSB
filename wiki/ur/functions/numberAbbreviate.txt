@@ -1,0 +1,30 @@
+<dash>
+name: $numberAbbreviate
+desc: پورے عدد کو لاحقے (k, m, b, ...) کے ساتھ مختصر شکل میں تبدیل کرتا ہے۔
+category: ریاضی اور اعداد
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $numberAbbreviate ایک پورا عدد لیتا ہے اور اسے لاحقے کے ساتھ اس کی مختصر شکل میں گول کرتا ہے: k (ہزار)، m (ملین)، b (بلین)، t (ٹریلین)، وغیرہ۔ مثال کے طور پر 1500 بن جاتا ہے 1.5k اور 2500000 بن جاتا ہے 2.5m۔ منفی اعداد کا بھی خیال رکھا جاتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $numberAbbreviate[number]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $numberAbbreviate[1523487]
+</block>
+
+<block type="callout" kind="note">
+text: معاونت یافتہ لاحقے: k, m, b, t, qa, qi, sx, sp, oc, no, dc۔ 1000 سے چھوٹے اعداد بغیر تبدیلی کے واپس آتے ہیں۔
+</block>
+
+<block type="callout" kind="warning">
+text: صرف پورے اعداد قبول کیے جاتے ہیں۔ اعشاریہ اور غیر عددی حروف خرابی (error) واپس کرتے ہیں۔
+</block>
+</dash>
+
+<details>
+syntax: $numberAbbreviate[number]
+param: عدد|number|لازمی|مختصر کرنے کے لیے ایک پورا عدد (آغاز میں - کا نشان شامل ہو سکتا ہے)
+</details>

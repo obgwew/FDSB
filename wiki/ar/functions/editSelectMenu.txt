@@ -1,0 +1,37 @@
+<dash>
+name: $editSelectMenu
+desc: يُعدّل الحد الأدنى/الأقصى للاختيار والنص الافتراضي لقائمة اختيار موجودة.
+category: المكوّنات
+
+<block type="text" title="كيف تعمل الدالة؟">
+text: تجد $editSelectMenu قائمة اختيار عبر معرّفها (Menu ID) على رسالة وتُحدّث عدد الخيارات التي يجب/يمكن للمستخدم اختيارها (Min/Max) والنص التلميحي المعروض قبل الاختيار (Placeholder). الخيارات المُضافة مسبقًا تبقى دون تغيير. لتعديل خيار محدد، استخدم $editSelectMenuOption.
+</block>
+
+<block type="code" title="الصيغة">
+text: $editSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+$addSelectMenuOption[color_menu; Red; red; The color red]
+$addSelectMenuOption[color_menu; Blue; blue; The color blue]
+$editSelectMenu[color_menu; 1; 2; Pick one or two colors]
+</block>
+
+<block type="callout" kind="note">
+text: بدون Message ID، يبحث البوت أولًا عن القائمة في رسالة مصدر التفاعل، ثم في آخر رسالة أرسلها البوت. خيارات القائمة تبقى محفوظة.
+</block>
+
+<block type="callout" kind="warning">
+text: يجب أن يكون Min بين 0 و25، وMax بين 1 و25، ولا يمكن أن يتجاوز Min قيمة Max. يجب أن تكون الرسالة المستهدفة مرسلة بواسطة هذا البوت وتحتوي بالفعل على قائمة بالمعرّف المحدد.
+</block>
+</dash>
+
+<details>
+syntax: $editSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+param: Menu ID|text|Required|معرّف قائمة الاختيار المراد تعديلها
+param: Min|number|Required|الحد الأدنى الجديد لعدد الخيارات المطلوب اختيارها (0 إلى 25)
+param: Max|number|Required|الحد الأقصى الجديد لعدد الخيارات المسموح اختيارها (1 إلى 25)
+param: Placeholder|text|Optional|النص التلميحي الجديد المعروض قبل إجراء الاختيار
+param: Message ID|snowflake|Optional|معرّف رسالة بوت محددة تحتوي على القائمة المراد تعديلها
+</details>

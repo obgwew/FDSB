@@ -1,0 +1,36 @@
+<dash>
+name: $numberSeparator
+desc: Форматирует целое число с разделителем тысяч для удобства чтения.
+category: Математика и числа
+
+<block type="text" title="Как работает команда?">
+text: $numberSeparator принимает целое число и вставляет разделитель каждые три цифры справа (группировка тысяч). По умолчанию разделителем является запятая (,), а в качестве второго аргумента можно передать свой разделитель. Например, 1234567 превращается в 1,234,567.
+</block>
+
+<block type="code" title="Syntax">
+text: $numberSeparator[number]
+text: $numberSeparator[number; separator]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $numberSeparator[1234567]
+</block>
+
+<block type="code" title="Ready-to-copy Example (свой разделитель)">
+text: $numberSeparator[1234567; .]
+</block>
+
+<block type="callout" kind="note">
+text: Отрицательные числа сохраняют свой знак -: например, -1234567 превращается в -1,234,567.
+</block>
+
+<block type="callout" kind="warning">
+text: Принимаются только целые числа. Десятичные дроби и нечисловые символы приводят к ошибке.
+</block>
+</dash>
+
+<details>
+syntax: $numberSeparator[number; (separator)]
+param: number|number|Required|Целое число для форматирования (может включать ведущий знак -)
+param: separator|text|Optional|Разделитель, вставляемый каждые три цифры (по умолчанию: ,)
+</details>

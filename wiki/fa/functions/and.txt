@@ -1,0 +1,26 @@
+<dash>
+name: $and
+desc: چند شرط را ارزیابی می‌کند و فقط اگر همه شرایط درست باشند true برمی‌گرداند.
+category: کنترل جریان
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $and چند آرگومان شرط می‌گیرد و هر یک را ارزیابی می‌کند. اگر هر شرایط درست باشد «true» و اگر هر شرطی نادرست باشد «false» برمی‌گرداند. این برای ساخت بررسی‌های شرطی ترکیبی مفید است.
+</block>
+
+<block type="code" title="سینتکس">
+text: $and[condition1; condition2; condition3; ...]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $and[$authorID == 123; $guildName == MyServer]
+</block>
+
+<block type="callout" kind="note">
+text: هر شرایط از همان عملگرهای مقایسه $if استفاده می‌کند (==، !=، >، <، >=، <=). رشته «true» یا «false» برمی‌گرداند.
+</block>
+</dash>
+
+<details>
+syntax: $and[condition1; condition2; condition3; ...]
+param: شرط|expression|الزامی|یک یا چند شرایط برای ارزیابی. هر کدام می‌توانند از عملگرهایی مانند ==، !=، >، <، >=، <= استفاده کنند. همه باید درست باشند تا نتیجه «true» باشد.
+</details>

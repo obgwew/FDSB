@@ -1,0 +1,21 @@
+<dash>
+name: $boostLevel
+desc: سرور کی موجودہ بوسٹ لیول 0 سے 3 تک واپس کرتا ہے۔
+category: سرور
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $boostLevel سرور کی بوسٹ ٹیئر کو ایک نمبر کے طور پر واپس کرتا ہے: 0 (کوئی لیول نہیں)، 1 (لیول 1)، 2 (لیول 2)، یا 3 (لیول 3)۔ لیولز بالترتیب 2، 7 یا 14 بوسٹ تک پہنچ کر کھلتی ہیں۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $boostLevel
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $sendMessage[Boost level: $boostLevel]
+</block>
+
+<block type="callout" kind="important">
+text: صرف سرور کے اندر استعمال کیا جا سکتا ہے - ڈی ایمز میں یہ ماحولیاتی غلطی اٹھاتا ہے اور اسکرپٹ کو روک دیتا ہے۔
+</block>
+</dash>

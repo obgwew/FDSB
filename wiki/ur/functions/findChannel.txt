@@ -1,0 +1,26 @@
+<dash>
+name: $findChannel
+desc: نام یا ID کے ذریعے چینل تلاش کرتا ہے اور اس کا ID واپس کرتا ہے۔
+category: چینل
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $findChannel نام یا مینشن کے ذریعے سرور میں چینل تلاش کرتا ہے۔ اگر چینل مینشن فراہم کی جائے تو یہ تصدیق کرتا ہے کہ چینل موجود ہے اور اس کا ID واپس کرتا ہے۔ اگر چینل نام فراہم کیا جائے تو یہ تمام سرور چینلز میں کیس انسینسیٹو مماثلت کے لیے تلاش کرتا ہے اور پہلے مماثل چینل کا ID واپس کرتا ہے۔ اگر نہ ملے تو خالی سٹرنگ واپس کرتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $findChannel[name/mention]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $findChannel[general]
+</block>
+
+<block type="callout" kind="note">
+text: چینل نام کی مماثلت کیس انسینسیٹو ہے۔ چینل کے ناموں کو متحرک طور پر IDs میں حل کرنے کے لیے اسے ان لائن استعمال کیا جا سکتا ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $findChannel[name/mention/ID]
+param: channel|text|لازمی|تلاش کرنے کے لیے چینل کا نام یا مینشن۔
+</details>

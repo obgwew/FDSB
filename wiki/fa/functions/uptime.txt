@@ -1,0 +1,21 @@
+<dash>
+name: $uptime
+desc: مدت زمان آنلاین بودن ربات از آخرین راه‌اندازی را برمی‌گرداند.
+category: ابزارها
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: وقتی $uptime فراخوانی می‌شود، ربات زمان سپری‌شده از آخرین راه‌اندازی (رویداد on_ready) را محاسبه کرده و آن را به یک رشته خوانا تبدیل کرده و سپس آن را به کانال ارسال می‌کند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $uptime
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: Bot has been up for $uptime
+</block>
+
+<block type="callout" kind="note">
+text: خروجی قالب‌بندی‌شده شامل روزها، ساعت‌ها، دقیقه‌ها و ثانیه‌ها بر اساس لزوم است (مثلاً 2d 5h 30m 12s). ربات باید در هنگام راه‌اندازی set_bot_start_time() را فراخوانی کرده باشد تا این دستور کار کند.
+</block>
+</dash>

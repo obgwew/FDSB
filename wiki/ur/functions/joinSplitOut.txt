@@ -1,0 +1,27 @@
+<dash>
+name: $joinSplitOut
+desc: موجودہ سپلٹ کے نتیجے ($splitIn) کے تمام عناصر کو دوبارہ ایک ہی متن میں جوڑتا ہے۔
+category: متن ٹولز
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $joinSplitOut $splitIn کے ذریعے محفوظ کردہ ہر عنصر کو ایک ہی سٹرنگ میں یکجا کرتا ہے، ان کے درمیان دیا گیا الگ کرنے والا ٹوکن داخل کرتے ہوئے۔ نتیجہ چینل پر بھیجا جاتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $joinSplitOut[separator]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $splitIn[apple,banana,cherry; ,]
+$joinSplitOut[ + ]
+</block>
+
+<block type="callout" kind="note">
+text: $splitIn کو $joinSplitOut سے پہلے بلانا ضروری ہے تاکہ جوڑنے کے لیے ڈیٹا موجود ہو۔
+</block>
+</dash>
+
+<details>
+syntax: $joinSplitOut[separator]
+param: الگ کرنے والا|text|لازمی|ہر دو عناصر کے درمیان داخل کیا جانے والا متن
+</details>

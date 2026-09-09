@@ -1,0 +1,21 @@
+<dash>
+name: $botName
+desc: بوٹ کا صارف نام واپس کرتا ہے۔
+category: معلومات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: جب $botName کو پکارا جاتا ہے، بوٹ اپنا صارف نام حاصل کرتا ہے اور اسے براہِ راست چینل میں ایک سادہ متن سٹرنگ کے طور پر بھیجتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $botName
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: I am $botName!
+</block>
+
+<block type="callout" kind="note">
+text: یہ بوٹ کا موجودہ صارف نام واپس کرتا ہے۔ اگر بوٹ کا صارف نام Developer Portal کے ذریعے تبدیل کیا جائے، تو اگلی کال اپ ڈیٹ شدہ نام ظاہر کرے گی۔
+</block>
+</dash>

@@ -1,0 +1,28 @@
+<dash>
+name: $for
+desc: بند کیا گیا کوڈ بلاک مقرر تعداد میں دہراتا ہے۔
+category: بہاؤ کنٹرول
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $for ایک گنتی کا آرگومینٹ لیتا ہے اور $for اور $endfor کے درمیان کا کوڈ اتنی بار چلاتا ہے۔ لوپ کو $break کا استعمال کرکے جلدی توڑا جا سکتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $for[count]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $for[5]
+  $sendMessage[Iteration!]
+$endfor
+</block>
+
+<block type="callout" kind="note">
+text: اگر گنتی 0 یا منفی ہو تو لوپ کا مکمل بادی چھوڑ دیا جاتا ہے۔ لوپ کے اندر سے جلدی باہر نکلنے کے لیے $break استعمال کریں۔ نیسٹڈ لوپس کی اجازت ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $for[count]
+param: count|number|لازمی|لوپ بادی کو دہرانے کی تعداد۔ غیر منفی صحیح عدد ہونا چاہیے۔
+</details>

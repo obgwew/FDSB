@@ -1,0 +1,39 @@
+<dash>
+name: $editSelectMenuOption
+desc: برچسب، مقدار، توضیح، حالت پیش‌فرض یا ایموجی یک گزینه موجود در منوی انتخاب را ویرایش می‌کند.
+category: کامپوننت‌ها
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $editSelectMenuOption گزینه‌ای را در داخل منوی انتخاب با استفاده از مقدار فعلی آن (Value) پیدا می‌کند و سپس برچسب، توضیح، حالت پیش‌فرض و/یا ایموجی آن را به‌روزرسانی می‌کند. آرگومان Value باید با مقدار گزینه‌ای که می‌خواهید ویرایش کنید مطابقت داشته باشد. قرار دادن Default روی yes، این گزینه را به تنها گزینه از پیش انتخاب‌شده تبدیل می‌کند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $editSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+$addSelectMenuOption[color_menu; Red; red; The color red]
+$addSelectMenuOption[color_menu; Blue; blue; The color blue]
+$editSelectMenuOption[color_menu; Crimson; red; A deep red]
+</block>
+
+<block type="callout" kind="note">
+text: این دستور گزینه را به‌صورت زنده روی پیام هدف به‌روزرسانی می‌کند. بدون شناسه پیام، ابتدا پیام منبع تعامل و سپس آخرین پیامی که بات ارسال کرده را جست‌وجو می‌کند.
+</block>
+
+<block type="callout" kind="warning">
+text: اگر هیچ گزینه‌ای با مقدار داده‌شده در منو وجود نداشته باشد، خطا بازگردانده می‌شود. پیام هدف باید توسط همین بات ارسال شده باشد و باید منوی انتخاب با شناسه داده‌شده را در خود داشته باشد.
+</block>
+</dash>
+
+<details>
+syntax: $editSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+param: Menu ID|text|الزامی|شناسه منوی انتخاب که گزینه را در خود دارد
+param: Label|text|الزامی|متن جدیدی که برای این گزینه به کاربر نمایش داده می‌شود
+param: Value|text|الزامی|مقدار فعلی گزینه مورد ویرایش که برای پیدا کردن آن استفاده می‌شود
+param: Description|text|قابل ترک خالی|توضیح کوتاه جدیدی که زیر برچسب نمایش داده می‌شود
+param: Default|yes/no|اختیاری|yes برای تبدیل این گزینه به گزینه از پیش انتخاب‌شده (پیش‌فرض: no)
+param: Emoji|text|اختیاری|ایموجی جدیدی که در کنار برچسب گزینه نمایش داده می‌شود
+param: Message ID|snowflake|اختیاری|شناسه پیام خاص باتی که منوی مورد ویرایش را در خود دارد
+</details>

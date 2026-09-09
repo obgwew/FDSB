@@ -1,0 +1,26 @@
+<dash>
+name: $onBoostServer
+desc: رویدادی که وقتی کسی سرور را بوست می‌کند یا سطح بوست آن را افزایش می‌دهد فعال می‌شود.
+category: رویداد
+
+<block type="text" title="این رویداد چگونه کار می‌کند؟">
+text: $onBoostServer هر زمان که Discord یک پیام سیستمی درباره بوست‌های سرور ارسال کند فعال می‌شود - از جمله یک بوست جدید و رسیدن سرور به سطح 1، 2 یا 3. داخل اسکریپت رویداد می‌توانید از طریق دستوراتی مانند $authorID یا $mention به عضو بوست‌دهنده دسترسی داشته باشید و زمینه کانال به کانالی اشاره می‌کند که Discord پیام سیستمی را آنجا ارسال کرده است.
+</block>
+
+<block type="code" title="سینتکس">
+text: #PREFIX:$onBoostServer
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: #PREFIX:$onBoostServer
+text:  sendMessage[Thanks $mention for boosting! This server now has $boostCount boosts]
+</block>
+
+<block type="callout" kind="note">
+text: فقط پیام‌های سیستمی واقعی بوست این رویداد را فعال می‌کنند - چت معمولی هرگز. تشکر از بوست‌دهندگان در اینجا با $boostLevel و $boostCount ترکیب خوبی می‌شود.
+</block>
+
+<block type="callout" kind="important">
+text: این رویداد در پوشه bot_events اجرا می‌شود، نه bot_commands. فایل .fds خود را آنجا ایجاد کنید.
+</block>
+</dash>

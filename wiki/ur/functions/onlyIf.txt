@@ -1,0 +1,27 @@
+<dash>
+name: $onlyIf
+desc: شرط کا جائزہ لیتا ہے اور اگر شرط غلط ہو تو سکرپٹ روک دیتا ہے۔
+category: رسائی کنٹرول
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $onlyIf ایک شرط کا جائزہ لیتا ہے۔ اگر شرط درست ہو تو سکرپٹ معمول کے مطابق جاری رہتا ہے۔ اگر غلط ہو تو فراہم کردہ خرابی کا پیغام ظاہر ہوتا ہے اور سکرپٹ فوراً روک دیا جاتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $onlyIf[condition; error message]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $onlyIf[$authorID == 123456789; You are not authorized!]
+</block>
+
+<block type="callout" kind="note">
+text: یہ $if سے زیادہ سخت ہے — یہ صرف کوڈ کو چھوڑتا نہیں، بلکہ پورے سکرپٹ کو مکمل طور پر روک دیتا ہے۔ اسے رسائی کنٹرول کی ان جانچوں کے لیے استعمال کریں جن کا پاس ہونا سکرپٹ چلانے کے لیے ضروری ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $onlyIf[condition; error message]
+param: condition|expression|لازمی|وہ شرط جس کا جائزہ لینا ہے۔ $if جیسے ہی آپریٹرز استعمال کرتی ہے (==, !=, >, <, >=, <=).
+param: error message|text|لازمی|صارف کو دکھایا جانے والا پیغام جب شرط ناکام ہو۔ اسے بھیجنے کے بعد سکرپٹ روک دیا جاتا ہے۔
+</details>

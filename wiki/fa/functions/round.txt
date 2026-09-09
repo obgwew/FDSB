@@ -1,0 +1,26 @@
+<dash>
+name: $round
+desc: یک عدد را به نزدیک‌ترین عدد صحیح گرد می‌کند.
+category: ریاضی و اعداد
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $round یک مقدار عددی تکی دریافت می‌کند، آن را به نزدیک‌ترین عدد صحیح گرد کرده و نتیجه را ارسال می‌کند. به عنوان مثال، 1.7 تبدیل به 2 و 1.4 تبدیل به 1 می‌شود.
+</block>
+
+<block type="code" title="سینتکس">
+text: $round[number]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $round[1.7]
+</block>
+
+<block type="callout" kind="note">
+text: $round[1.7] مقدار 2 و $round[2.4] مقدار 2 برمی‌گرداند. این دستور یک آرگومان تکی می‌پذیرد؛ اگر مقدار عدد معتبری نباشد، خطا برگردانده می‌شود.
+</block>
+</dash>
+
+<details>
+syntax: $round[number]
+param: number|number|Required|عددی که باید به نزدیک‌ترین عدد صحیح گرد شود
+</details>

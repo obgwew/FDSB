@@ -1,0 +1,26 @@
+<dash>
+name: $getSplitOutLength
+desc: $splitIn کے اسپلٹ نتیجے میں عناصر کی تعداد واپس کرتا ہے۔
+category: متن ٹولز
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $getSplitOutLength واپس کرتا ہے کہ آخری $splitIn کال سے کتنے حصے تیار ہوئے۔ یہ $splitIn استعمال کرنے سے پہلے یہ چیک کرنے کے لیے مفید ہے کہ کیا کافی ڈیٹا موجود ہے۔ قیمت چینل میں بھیجی جاتی ہے یا ان لائن استعمال کی جا سکتی ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $getSplitOutLength
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $splitIn[apple,banana,cherry; ,]
+$getSplitOutLength
+</block>
+
+<block type="callout" kind="note">
+text: جب ابھی تک کوئی اسپلٹ نہ کیا گیا ہو تو "0" واپس کرتا ہے۔ وہی قیمت ان لائن استعمال کی جا سکتی ہے، مثال کے طور پر $if کے ساتھ۔
+</block>
+</dash>
+
+<details>
+syntax: $getSplitOutLength
+</details>

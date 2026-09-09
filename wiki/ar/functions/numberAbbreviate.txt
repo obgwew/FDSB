@@ -1,0 +1,30 @@
+<dash>
+name: $numberAbbreviate
+desc: يُحوّل رقمًا صحيحًا إلى صيغة مختصرة قصيرة مع لاحقة (k, m, b, ...).
+category: الرياضيات والأرقام
+
+<block type="text" title="كيف تعمل الدالة؟">
+text: تأخذ $numberAbbreviate رقمًا صحيحًا وتُقرّبه إلى صيغة مختصرة باستخدام لاحقة: k (ألف)، m (مليون)، b (مليار)، t (تريليون)، وما إلى ذلك. على سبيل المثال يصبح 1500 هو 1.5k و2500000 يصبح 2.5m. الأرقام السالبة تتم معالجتها أيضًا.
+</block>
+
+<block type="code" title="الصيغة">
+text: $numberAbbreviate[number]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $numberAbbreviate[1523487]
+</block>
+
+<block type="callout" kind="note">
+text: اللاحقات المدعومة: k, m, b, t, qa, qi, sx, sp, oc, no, dc. الأرقام الأقل من 1000 تُرجع دون تغيير.
+</block>
+
+<block type="callout" kind="warning">
+text: تُقبل الأ الصحيحة فقط. الأرقام العشرية والأحرف غير الرقمية تُرجع خطأ.
+</block>
+</dash>
+
+<details>
+syntax: $numberAbbreviate[number]
+param: number|number|Required|رقم صحيح للتقصير (يمكن أن يتضمن علامة - في البداية)
+</details>

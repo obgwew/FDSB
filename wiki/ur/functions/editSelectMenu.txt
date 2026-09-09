@@ -1,0 +1,37 @@
+<dash>
+name: $editSelectMenu
+desc: کسی موجودہ سلیکٹ مینیو کے کم/زیادہ سے زیادہ انتخاب اور پلیس ہولڈر میں ترمیم کرتا ہے۔
+category: کمپوننٹس
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $editSelectMenu کسی پیغام پر موجود سلیکٹ مینیو کو اس کی مینیو آئی ڈی سے ڈھونڈتا ہے اور اپ ڈیٹ کرتا ہے کہ صارف کو کتنے آپشن منتخب کرنا لازمی/اختیاری ہیں (Min/Max) اور انتخاب سے پہلے دکھایا جانے والا ہنٹ متن (Placeholder)۔ مینیو میں پہلے سے شامل آپشنز تبدیل نہیں ہوتے۔ کسی ایک آپشن میں ترمیم کے لیے $editSelectMenuOption استعمال کریں۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $editSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+$addSelectMenuOption[color_menu; Red; red; The color red]
+$addSelectMenuOption[color_menu; Blue; blue; The color blue]
+$editSelectMenu[color_menu; 1; 2; Pick one or two colors]
+</block>
+
+<block type="callout" kind="note">
+text: Message ID کے بغیر، بوٹ مینیو کو پہلے انٹرایکشن کے ماخذ پیغام میں ڈھونڈتا ہے، پھر آخری پیغام میں جو بوٹ نے بھیجا تھا۔ مینیو کے آپشنز محفوظ رہتے ہیں۔
+</block>
+
+<block type="callout" kind="warning">
+text: Min 0 سے 25 کے درمیان ہونا چاہیے، Max 1 سے 25 کے درمیان، اور Min Max سے زیادہ نہیں ہو سکتا۔ ہدف پیغام اسی بوٹ کے ذریعے بھیجا گیا ہونا چاہیے اور اس میں دی گئی آئی ڈی کا مینیو پہلے سے موجود ہونا چاہیے۔
+</block>
+</dash>
+
+<details>
+syntax: $editSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+param: Menu ID|text|لازمی|سلیکٹ مینیو کی آئی ڈی جس میں ترمیم کرنی ہے
+param: Min|number|لازمی|آپشنز کی نئی کم سے کم تعداد جسے صارف منتخب کرنا لازمی ہے (0 سے 25)
+param: Max|number|لازمی|آپشنز کی نئی زیادہ سے زیادہ تعداد جسے صارف منتخب کر سکتا ہے (1 سے 25)
+param: Placeholder|text|اختیاری|انتخاب سے پہلے دکھایا جانے والا نیا ہنٹ متن
+param: Message ID|snowflake|اختیاری|کسی مخصوص بوٹ پیغام کی آئی ڈی جس پر مینیو موجود ہے جس میں ترمیم کرنی ہے
+</details>

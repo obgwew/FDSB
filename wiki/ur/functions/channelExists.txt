@@ -1,0 +1,26 @@
+<dash>
+name: $channelExists
+desc: چیک کرتا ہے کہ آیا سرور میں کوئی چینل موجود ہے۔
+category: چینل
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $channelExists ایک چینل مینشن یا آئی ڈی لیتا ہے اور چیک کرتا ہے کہ آیا بوٹ اس چینل کو سرور میں ڈھونڈ سکتا ہے۔ چینل موجود ہونے پر "true" واپس کرتا ہے، بصورت دیگر "false"۔ اگر کوئی دلیل فراہم نہ کی جائے، تو معیاری طور پر "true" واپس کرتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $channelExists[channel mention/ID]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $channelExists[<#123456789012345678>]
+</block>
+
+<block type="callout" kind="note">
+text: اس چینل پر دیگر کارروائیاں کرنے سے پہلے چینل کی موجودگی چیک کرنے کے لیے اس کمانڈ کو inline استعمال کیا جا سکتا ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $channelExists[channel mention/ID]
+param: چینل|text|اختیاری|جانچنے کے لیے چینل مینشن یا عددی آئی ڈی۔ خالی ہونے پر "true" واپس کرتا ہے۔
+</details>

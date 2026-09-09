@@ -1,0 +1,32 @@
+<dash>
+name: $editChannelPerms
+desc: بازنویسی مجوزها را برای یک نقش یا عضو روی یک کانال ویرایش می‌کند.
+category: مدیریت
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $editChannelPerms بازنویسی مجوزها را برای یک نقش یا عضو خاص روی یک کانال تغییر می‌دهد. از +perm برای مجاز کردن، -perm برای رد کردن، یا /perm برای بازنشانی یک مجوز استفاده کنید. ربات باید مجوز «مدیریت کانال‌ها» را داشته باشد.
+</block>
+
+<block type="code" title="سینتکس">
+text: $editChannelPerms[channel ID; target ID; perm1; perm2; ...]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $editChannelPerms[123456789; 987654321; +send_messages; -connect]
+</block>
+
+<block type="callout" kind="warning">
+text: ربات باید مجوز «مدیریت کانال‌ها» یا «مدیریت مجوزها» را داشته باشد. هدف می‌تواند شناسه یا منشن یک نقش یا عضو باشد.
+</block>
+
+<block type="callout" kind="note">
+text: نام مجوزها از فرمت snake_case دیسکورد استفاده می‌کنند: send_messages، view_channel، connect، manage_roles و غیره. از + برای مجاز کردن، - برای رد کردن و / یا ~ برای بازنشانی استفاده کنید.
+</block>
+</dash>
+
+<details>
+syntax: $editChannelPerms[channel ID; target ID; perm1; perm2; ...]
+param: شناسه کانال|text|الزامی|شناسه یا منشن کانالی که مجوزها روی آن ویرایش می‌شوند.
+param: شناسه هدف|text|الزامی|شناسه یا منشن نقش یا عضوی که مجوزها برای آن تنظیم می‌شوند.
+param: مجوزها|text|الزامی|یک یا چند مجوز با پیشوند +/- (مثلاً +send_messages، -connect).
+</details>

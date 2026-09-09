@@ -1,0 +1,27 @@
+<dash>
+name: $getServerInvite
+desc: یک لینک دعوت برای سرور تولید و ارسال می‌کند.
+category: ابزارها
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: وقتی $getServerInvite بدون آرگومان فراخوانی می‌شود، یک لینک دعوت برای سرور فعلی تولید می‌کند. وقتی با یک شناسه سرور (guild ID) فراخوانی می‌شود، برای آن سرور خاص دعوت تولید می‌کند. ربات ابتدا بررسی می‌کند که آیا سرور URL وینیتی دارد یا نه. اگر نداشته باشد، کانالی پیدا می‌کند که ربات در آن مجوز «ساخت دعوت» (Create Invite) داشته باشد و یک لینک دعوت دائمی تولید می‌کند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $getServerInvite
+text: $getServerInvite[(guildID)]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: Join our server: $getServerInvite
+</block>
+
+<block type="callout" kind="note">
+text: ربات باید عضو سرور هدف باشد و مجوز «ساخت دعوت» (Create Invite) را داشته باشد. اگر برای سرور یک URL وینیتی تنظیم شده باشد، به جای ساخت دعوت جدید همان برگردانده می‌شود. بدون آرگومان، از سرور فعلی استفاده می‌کند.
+</block>
+</dash>
+
+<details>
+syntax: $getServerInvite[(guildID)]
+param: guildID|snowflake|اختیاری|شناسه سرور دیگری که می‌خواهید برای آن دعوت بگیرید. اگر حذف شود، از سرور فعلی استفاده می‌شود.
+</details>

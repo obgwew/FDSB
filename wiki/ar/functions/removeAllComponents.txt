@@ -1,0 +1,31 @@
+<dash>
+name: $removeAllComponents
+desc: يُزيل كل الأزرار وقوائم الاختيار والمكوّنات من رسالة أو العرض المعلّق.
+category: المكوّنات
+
+<block type="text" title="كيف تعمل الدالة؟">
+text: تُزيل $removeAllComponents جميع المكوّنات التفاعلية (الأزرار وقوائم الاختيار وما شابه) من رسالة. بدون Message ID تُزيل أولًا العرض المعلّق، ثم رسالة مصدر التفاعل، ثم آخر رسالة أرسلها البوت. عند تمرير Message ID، تُزيل تلك الرسالة المحددة للبوت.
+</block>
+
+<block type="code" title="الصيغة">
+text: $removeAllComponents
+text: $removeAllComponents[(messageID)]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $removeAllComponents[123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: هذه هي أسرع طريقة لإزالة جميع المكوّنات دفعة واحدة، على عكس $removeButtons أو $removeComponent التي تستهدف مكوّنات محددة.
+</block>
+
+<block type="callout" kind="warning">
+text: يجب أن تكون الرسالة المستهدفة مرسلة بواسطة هذا البوت. إذا لم يتم العثور على رسالة، يتم إرجاع خطأ.
+</block>
+</dash>
+
+<details>
+syntax: $removeAllComponents[(messageID)]
+param: messageID|snowflake|Optional|معرّف رسالة بوت محددة لإزالة جميع المكوّنات منها. إذا لم يُحدد، تُزيل العرض المعلّق أو مصدر التفاعل أو آخر رسالة بوت.
+</details>

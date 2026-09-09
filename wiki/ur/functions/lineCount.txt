@@ -1,0 +1,26 @@
+<dash>
+name: $lineCount
+desc: دیے گئے متن میں خالی جگہوں (spaces) کی تعداد واپس کرتا ہے۔
+category: متن ٹولز
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $lineCount ایک متن کی دلیل لیتا ہے اور واپس کرتا ہے کہ اس میں کتنے خالی حروف ( ) موجود ہیں۔ گنتی سے پہلے دلیل میں موجود متغیرات اور جگہ داروں (placeholders) کو حل کیا جاتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $lineCount[text]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $lineCount[one two three]
+</block>
+
+<block type="callout" kind="note">
+text: گنتی خالی جگہوں پر مبنی ہے، نہ کہ اصل نئی لائنوں (newlines) پر۔ متن کو حصوں میں تقسیم کرنے کے لیے $splitIn کے ساتھ $splitOut استعمال کریں۔
+</block>
+</dash>
+
+<details>
+syntax: $lineCount[text]
+param: متن|text|لازمی|وہ متن جس میں خالی جگہیں گننی ہیں۔ گنتی سے پہلے متغیرات اور جگہ داروں کو حل کیا جاتا ہے۔
+</details>

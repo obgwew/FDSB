@@ -1,0 +1,31 @@
+<dash>
+name: $messageContains
+desc: وہ واقعہ جو اس وقت متحرک ہوتا ہے جب پیغام میں مخصوص الفاظ میں سے کوئی بھی موجود ہو۔
+category: واقعہ
+
+<block type="text" title="یہ واقعہ کیسے کام کرتا ہے؟">
+text: $messageContains ایک ایونٹ پریفکس ہے جو FDScript کو اس وقت متحرک کرتا ہے جب پیغام میں مخصوص ٹرگر الفاظ میں سے کوئی بھی موجود ہو۔ الفاظ کو بریکٹ کے اندر سیمی کالن سے الگ کیا جاتا ہے۔ مماثلت حروف کی حساسیت کے بغیر ہوتی ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: #PREFIX:$messageContains[word1;word2;word3]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: #PREFIX:$messageContains[hello;hi;hey]
+ sendMessage[Hey there! How can I help?]
+</block>
+
+<block type="callout" kind="note">
+text: اسکرپٹ اس وقت چلتا ہے جب پیغام میں درج الفاظ میں سے کوئی ایک موجود ہو۔ تمام الفاظ کے موجود ہونے کے لیے اس کی بجائے $messageContainsAll استعمال کریں۔
+</block>
+
+<block type="callout" kind="important">
+text: یہ واقعہ bot_events فولڈر میں چلتا ہے، bot_commands میں نہیں۔ اپنی .fds فائل وہاں بنائیں۔
+</block>
+</dash>
+
+<details>
+syntax: #PREFIX:$messageContains[word1;word2;...]
+param: الفاظ|text|لازمی|سیمی کالن سے الگ کردہ ٹرگر الفاظ کی فہرست۔ کوئی بھی مماثلت اسکرپٹ کو متحرک کرتی ہے۔
+</details>

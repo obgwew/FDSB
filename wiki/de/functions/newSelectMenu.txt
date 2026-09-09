@@ -1,0 +1,44 @@
+<dash>
+name: $newSelectMenu
+desc: Erstellt und registriert ein neues Auswahlmenü für eine Nachricht.
+category: Komponenten
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: $newSelectMenu beginnt mit dem Aufbau eines Auswahl-Dropdown-Menüs, das über eine eindeutige Menü-ID identifiziert wird. Du legst die Mindest- und Höchstanzahl an Optionen fest, die ein Benutzer auswählen muss/darf. Verwende im Anschluss $addSelectMenuOption, um das Menü mit Optionen zu füllen; es wird an die Nachricht angehängt, die du gerade erstellst. Du kannst auch eine Nachrichten-ID übergeben, um das Menü an eine bereits gesendete Bot-Nachricht anzuhängen.
+</block>
+
+<block type="code" title="Syntax">
+text: $newSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+$addSelectMenuOption[color_menu; Red; red; The color red]
+$addSelectMenuOption[color_menu; Blue; blue; The color blue]
+$sendMessage[Choose your favorite color!]
+</block>
+
+<block type="options" title="Verhaltensdetails">
+option: Min|Die Mindestanzahl an Optionen, die der Benutzer auswählen muss (0 bis 25)
+option: Max|Die Höchstanzahl an Optionen, die der Benutzer auswählen darf (1 bis 25)
+option: Platzhalter|Der graue Hinweistext, der angezeigt wird, bevor der Benutzer etwas auswählt
+option: Nachrichten-ID|Optionale ID einer bereits gesendeten Bot-Nachricht, an die das Menü angehängt werden soll
+</block>
+
+<block type="callout" kind="note">
+text: Ein Menü ist erst vollständig, nachdem du mindestens eine Option mit $addSelectMenuOption hinzugefügt hast. Verwende $editSelectMenu, um Min/Max/Platzhalter eines vorhandenen Menüs zu ändern, und $editSelectMenuOption, um eine einzelne Option zu bearbeiten.
+</block>
+
+<block type="callout" kind="warning">
+text: Min darf nicht größer als Max sein. Eine Nachricht kann insgesamt höchstens 25 Komponenten enthalten. Wenn die angegebene Nachricht nicht von diesem Bot stammt, wird ein Fehler zurückgegeben.
+</block>
+</dash>
+
+<details>
+syntax: $newSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+param: Menü-ID|text|Erforderlich|Eine eindeutige ID, über die du später auf dieses Auswahlmenü verweist ($addSelectMenuOption, $editSelectMenu, $editSelectMenuOption)
+param: Min|number|Erforderlich|Mindestanzahl an Optionen, die der Benutzer auswählen muss (0 bis 25)
+param: Max|number|Erforderlich|Höchstanzahl an Optionen, die der Benutzer auswählen darf (1 bis 25)
+param: Platzhalter|text|Optional|Der Hinweistext, der im Menü angezeigt wird, bevor eine Auswahl getroffen wird
+param: Nachrichten-ID|snowflake|Optional|ID einer bereits gesendeten Bot-Nachricht, an die dieses Menü anstelle der aktuellen Nachricht angehängt werden soll
+</details>

@@ -1,0 +1,27 @@
+<dash>
+name: $authorAvatar
+desc: تُرجع أو تُرسل رابط الصورة المباشر لصورة الملف الشخصي العامة لكاتب الأمر (أو أي مستخدم).
+category: معلومات
+
+<block type="text" title="كيف تعمل الدالة؟">
+text: تُحلّ $authorAvatar وتُرجع رابط الصورة المباشر لصورة الملف الشخصي العامة للمستخدم. بدون معاملات تستخدم كاتب الأمر؛ ومع معرّف مستخدم أو @mention تستخدم ذلك المستخدم. الناتج هو رابط يمكنك تضمينه في الرسائل أو الصور.
+</block>
+
+<block type="code" title="الصيغة">
+text: $authorAvatar
+text: $authorAvatar[(userID/@mention)]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: Your avatar: $authorAvatar
+</block>
+
+<block type="callout" kind="note">
+text: تستخدم هذه الدالة الصورة العامة للمستخدم (صورة ملفه الشخصي). للصورة المعروضة داخل السيرفر، استخدم $authorAvatar. الصور المتحرّكة تُرجع كروابط .gif.
+</block>
+</dash>
+
+<details>
+syntax: $authorAvatar[(userID/@mention)]
+param: userID/@mention|text|Optional|معرّف المستخدم أو الـ @mention للحصول على رابط صورته العامة. إذا لم يُحدد، تستخدم كاتب الأمر.
+</details>

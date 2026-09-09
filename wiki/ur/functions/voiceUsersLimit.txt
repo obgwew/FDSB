@@ -1,0 +1,26 @@
+<dash>
+name: $voiceUsersLimit
+desc: وائس یا اسٹیج چینل کی صارف حد واپس کرتا ہے۔
+category: چینل
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $voiceUsersLimit ایک وائس یا اسٹیج چینل ID لیتا ہے اور اس کی صارف حد واپس کرتا ہے۔ ویلیو 0 کا مطلب ہے کوئی حد نہیں۔ اگر چینل وائس/اسٹیج چینل نہیں ہے تو ایک ایرر واپس کرتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $voiceUsersLimit[voice channel ID]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $voiceUsersLimit[123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: اگر چینل کے لیے کوئی صارف حد مقرر نہ ہو تو 0 واپس کرتا ہے۔ مشروط جانچ کے لیے ان لائن استعمال کیا جا سکتا ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $voiceUsersLimit[voice channel ID]
+param: channelID|text|لازمی|وائس یا اسٹیج چینل کی ID۔
+</details>

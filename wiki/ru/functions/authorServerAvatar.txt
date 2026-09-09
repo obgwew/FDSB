@@ -1,0 +1,27 @@
+<dash>
+name: $authorServerAvatar
+desc: Возвращает или отправляет прямую ссылку на серверный аватар автора команды (или указанного пользователя).
+category: Информация
+
+<block type="text" title="Как работает команда?">
+text: $authorServerAvatar находит и возвращает прямую ссылку на серверный аватар (аватар гильдии) пользователя, если он задан. Без аргумента используется автор команды; с указанием ID пользователя или @упоминания — соответствующий пользователь. Если собственный серверный аватар отсутствует, используется обычный (отображаемый) аватар пользователя. Результат — это URL-адрес, который можно встроить в сообщения или изображения.
+</block>
+
+<block type="code" title="Syntax">
+text: $authorServerAvatar
+text: $authorServerAvatar[(userID/@mention)]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: Your server avatar: $authorServerAvatar
+</block>
+
+<block type="callout" kind="note">
+text: Это аватар, который видят другие участники внутри сервера; он может отличаться от глобального аватара пользователя ($authorAvatar). Анимированные аватары возвращаются в виде .gif URL-адресов.
+</block>
+</dash>
+
+<details>
+syntax: $authorServerAvatar[(userID/@mention)]
+param: ID пользователя/упоминание|text|Optional|ID пользователя или @упоминание, чью ссылку на серверный аватар нужно получить. Если не указано, используется автор команды.
+</details>

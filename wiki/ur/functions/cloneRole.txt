@@ -1,0 +1,27 @@
+<dash>
+name: $cloneRole
+desc: کسی موجودہ رول کی نقل بناتا ہے جس میں وہی اجازتیں اور ترتیبات ہوں۔
+category: انتظامات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $cloneRole رول ID/مینشن اور اختیاری طور پر نیا نام لیتا ہے۔ بوٹ اصل رول کی خصوصیات (اجازتیں، رنگ، ہوئسٹ، مینشن ایبل) حاصل کرتا ہے اور انہی ترتیبات کے ساتھ ایک نیا رول بناتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $cloneRole[role ID or @mention; (optional new name)]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $cloneRole[&123456789; Cloned Role]
+</block>
+
+<block type="callout" kind="note">
+text: اگر کوئی نیا نام فراہم نہ کیا جائے تو کلون شدہ رول اصل رول کا نام برقرار رکھتا ہے۔ بوٹ کے پاس "مینیج رولز" کی اجازت ہونی چاہیے۔
+</block>
+</dash>
+
+<details>
+syntax: $cloneRole[role ID or @mention; (optional new name)]
+param: role ID or @mention|text|لازمی|کلون کرنے کے لیے رول کا ID یا @mention
+param: optional new name|text|اختیاری|کلون شدہ رول کے لیے حسب ضرورت نام۔ اگر چھوڑ دیا جائے تو اصل نام استعمال ہوتا ہے۔
+</details>

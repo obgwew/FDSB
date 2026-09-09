@@ -1,0 +1,26 @@
+<dash>
+name: $isOwner
+desc: بررسی می‌کند آیا یک کاربر مالک سرور است یا خیر.
+category: اطلاعات
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $isOwner یک شناسه کاربر یا منشن دریافت کرده و بررسی می‌کند آیا آن کاربر مالک سرور فعلی است. "true" یا "false" برمی‌گرداند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $isOwner[userID]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $isOwner[$authorID]
+</block>
+
+<block type="callout" kind="note">
+text: فقط اگر کاربر مالک سرور باشد "true" برمی‌گرداند. اگر کاربر مالک نباشد یا در سرور یافت نشود "false" برمی‌گرداند.
+</block>
+</dash>
+
+<details>
+syntax: $isOwner[userID]
+param: userID|text|Required|شناسه کاربر یا @mention برای بررسی. از متغیرها و جایگذارها پشتیبانی می‌کند.
+</details>

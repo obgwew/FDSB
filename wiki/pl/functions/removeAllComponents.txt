@@ -1,0 +1,31 @@
+<dash>
+name: $removeAllComponents
+desc: Usuwa wszystkie przyciski, menu wyboru i komponenty z wiadomości lub oczekującego widoku.
+category: Komponenty
+
+<block type="text" title="Jak działa ta komenda?">
+text: $removeAllComponents czyści wszystkie interaktywne komponenty (przyciski, menu wyboru itp.) z wiadomości. Bez podanego Message ID najpierw czyści oczekujący widok, następnie źródłową wiadomość interakcji, a potem ostatnią wiadomość wysłaną przez bota. Wywołana z Message ID czyści tę konkretną wiadomość bota.
+</block>
+
+<block type="code" title="Składnia">
+text: $removeAllComponents
+text: $removeAllComponents[(messageID)]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $removeAllComponents[123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: To najszybszy sposób na usunięcie wszystkich komponentów naraz, w przeciwieństwie do $removeButtons lub $removeComponent, które celują w konkretne komponenty.
+</block>
+
+<block type="callout" kind="warning">
+text: Wiadomość docelowa musi być wysłana przez tego bota. Jeśli nie można znaleźć żadnej wiadomości, zwracany jest błąd.
+</block>
+</dash>
+
+<details>
+syntax: $removeAllComponents[(messageID)]
+param: messageID|snowflake|Optional|ID konkretnej wiadomości bota, z której usunąć wszystkie komponenty. Jeśli pominięte, czyści oczekujący widok, źródło interakcji lub ostatnią wiadomość bota.
+</details>

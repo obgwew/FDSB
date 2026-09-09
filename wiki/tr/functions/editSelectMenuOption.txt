@@ -1,0 +1,39 @@
+<dash>
+name: $editSelectMenuOption
+desc: Var olan bir seçim menüsü seçeneğinin etiketini, değerini, açıklamasını, varsayılan durumunu veya emojisini düzenler.
+category: Bileşenler
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $editSelectMenuOption, bir seçim menüsündeki seçeneği mevcut Value değerine göre bulur ve ardından etiketini, açıklamasını, varsayılan durumunu ve/veya emojisini günceller. Value argümanı, düzenlemek istediğiniz seçeneğin değeriyle eşleşmelidir. Default değerini yes yapmak, bu seçeneği önceden seçilmiş tek seçenek haline getirir.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $editSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+</block>
+
+<block type="code" title="Kopyalanmaya hazır örnek">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+$addSelectMenuOption[color_menu; Red; red; The color red]
+$addSelectMenuOption[color_menu; Blue; blue; The color blue]
+$editSelectMenuOption[color_menu; Crimson; red; A deep red]
+</block>
+
+<block type="callout" kind="note">
+text: Bu komut, seçeneği hedef mesajda anında günceller. Bir Mesaj Kimliği verilmezse, önce etkileşim kaynak mesajına, ardından botun gönderdiği son mesaja bakar.
+</block>
+
+<block type="callout" kind="warning">
+text: Menüde verilen Value değerine sahip bir seçenek yoksa bir hata döndürülür. Hedef mesaj bu bot tarafından gönderilmiş olmalı ve verilen kimliğe sahip seçim menüsünü içermelidir.
+</block>
+</dash>
+
+<details>
+syntax: $editSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+param: Menü Kimliği|text|Required|Seçeneği içeren seçim menüsünün kimliği
+param: Etiket|text|Required|Bu seçenek için kullanıcıya gösterilen yeni metin
+param: Değer|text|Required|Düzenlenecek seçeneğin mevcut değeri (onu bulmak için kullanılır)
+param: Açıklama|text|Emptiable|Etiketin altında gösterilen yeni kısa açıklama
+param: Varsayılan|yes/no|Optional|bunu önceden seçilmiş seçenek yapmak için yes (varsayılan: no)
+param: Emoji|text|Optional|Seçenek etiketinin yanında gösterilen yeni emoji
+param: Mesaj Kimliği|snowflake|Optional|Düzenlenecek menüyü içeren belirli bir bot mesajının kimliği
+</details>

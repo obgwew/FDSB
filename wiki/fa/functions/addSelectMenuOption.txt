@@ -1,0 +1,44 @@
+<dash>
+name: $addSelectMenuOption
+desc: یک گزینه به یک منوی انتخاب موجود که با $newSelectMenu ساخته شده اضافه می‌کند.
+category: کامپوننت‌ها
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $addSelectMenuOption یک گزینه به یک منوی انتخاب که قبلاً با $newSelectMenu ساخته شده اضافه می‌کند و آن را با شناسه منو مطابقت می‌دهد. هر گزینه دارای یک برچسب قابل مشاهده، یک مقدار یکتا و یک توضیح اختیاری است. برای از پیش انتخاب کردن آن از آرگومان Default و برای نمایش یک ایموجی در کنار برچسب از آرگومان Emoji استفاده کنید.
+</block>
+
+<block type="code" title="سینتکس">
+text: $addSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+$addSelectMenuOption[color_menu; Red; red; The color red]
+$addSelectMenuOption[color_menu; Blue; blue; The color blue; yes]
+</block>
+
+<block type="options" title="جزئیات">
+option: Default|برای از پیش انتخاب کردن این گزینه روی yes قرار می‌گیرد (فقط یک گزینه پیش‌فرض در هر منو)
+option: Emoji|ایموجی‌ای که در کنار برچسب گزینه نمایش داده می‌شود
+option: Message ID|شناسه اختیاری پیام باتی که از قبل ارسال شده و این منو را در خود دارد
+</block>
+
+<block type="callout" kind="note">
+text: مقادیر گزینه‌ها باید در همان منو یکتا باشند. وقتی شناسه پیام داده می‌شود، منوی همان پیام به‌صورت زنده به‌روزرسانی می‌شود؛ در غیر این صورت، گزینه به منوی روی پیامی که در حال ساخت است متصل می‌شود.
+</block>
+
+<block type="callout" kind="warning">
+text: حداکثر ۲۵ گزینه برای هر منوی انتخاب. اگر در اسکریپت (از طریق $newSelectMenu) هیچ منویی با شناسه داده‌شده ساخته نشده باشد، خطا بازگردانده می‌شود.
+</block>
+</dash>
+
+<details>
+syntax: $addSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+param: Menu ID|text|الزامی|شناسه منوی انتخاب (از $newSelectMenu) که می‌خواهید این گزینه را به آن اضافه کنید
+param: Label|text|الزامی|متنی که برای این گزینه به کاربر نمایش داده می‌شود
+param: Value|text|الزامی|مقدار یکتایی که هنگام انتخاب این گزینه بازگردانده می‌شود
+param: Description|text|قابل ترک خالی|توضیح کوتاهی که زیر برچسب نمایش داده می‌شود
+param: Default|yes/no|اختیاری|yes برای از پیش انتخاب کردن این گزینه (پیش‌فرض: no)
+param: Emoji|text|اختیاری|ایموجی‌ای که در کنار برچسب گزینه نمایش داده می‌شود
+param: Message ID|snowflake|اختیاری|شناسه پیام باتی که از قبل ارسال شده و منوی آن باید به‌صورت زنده به‌روزرسانی شود
+</details>

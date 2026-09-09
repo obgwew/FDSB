@@ -1,0 +1,21 @@
+<dash>
+name: $authorID
+desc: وہ Discord صارف آئی ڈی واپس کرتا ہے جس شخص نے کمانڈ کو متحرک کیا۔
+category: معلومات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: جب $authorID کو پکارا جاتا ہے، بوٹ کمانڈ کے مصنف کا منفرد Discord صارف آئی ڈی حاصل کرتا ہے اور اسے براہِ راست چینل میں ایک خام عددی سٹرنگ کے طور پر بھیجتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $authorID
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: Your ID is $authorID
+</block>
+
+<block type="callout" kind="note">
+text: واپس کردہ ویلیو ایک snowflake آئی ڈی ہے (مثلاً 123456789012345678)، جو ہر Discord صارف کے لیے ایک منفرد عددی شناخت کنندہ ہے۔
+</block>
+</dash>

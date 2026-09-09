@@ -1,0 +1,26 @@
+<dash>
+name: $unban
+desc: سرور سے پہلے سے بلاک شدہ صارف کی پابندی ہٹاتا ہے۔
+category: انتظامات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $unban ایک صارف ID لیتا ہے، سرور کی بلاک شدہ فہرست میں صارف تلاش کرتا ہے، اور بلاک کو ہٹاتا ہے۔ یہ کمانڈ استعمال کرنے کے لیے صارف کا پہلے بلاک شدہ ہونا ضروری ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $unban[userID]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $unban[123456789]
+</block>
+
+<block type="callout" kind="warning">
+text: بوٹ کے پاس "Ban Members" اجازت ہونی چاہیے۔ صارف ID خالص عددی ID ہونی چاہیے (مینشنز اور علامتیں سپورٹ نہیں ہوتیں)۔ صارف اس وقت بلاک شدہ ہونا ضروری ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $unban[userID]
+param: userID|snowflake|لازمی|بلاک شدہ صارف کی عددی ID جس کی پابندی ہٹانی ہے
+</details>

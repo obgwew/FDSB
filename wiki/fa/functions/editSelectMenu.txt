@@ -1,0 +1,37 @@
+<dash>
+name: $editSelectMenu
+desc: حداقل/حداکثر تعداد انتخاب و متن جایگزین (placeholder) یک منوی انتخاب موجود را ویرایش می‌کند.
+category: کامپوننت‌ها
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $editSelectMenu منوی انتخاب را با شناسه آن روی یک پیام پیدا می‌کند و تعداد گزینه‌هایی که کاربر باید/می‌تواند انتخاب کند (Min/Max) و متن راهنمایی که قبل از انتخاب نمایش داده می‌شود (Placeholder) را به‌روزرسانی می‌کند. گزینه‌هایی که قبلاً به منو اضافه شده‌اند بدون تغییر می‌مانند. برای ویرایش یک گزینه خاص، از $editSelectMenuOption استفاده کنید.
+</block>
+
+<block type="code" title="سینتکس">
+text: $editSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+$addSelectMenuOption[color_menu; Red; red; The color red]
+$addSelectMenuOption[color_menu; Blue; blue; The color blue]
+$editSelectMenu[color_menu; 1; 2; Pick one or two colors]
+</block>
+
+<block type="callout" kind="note">
+text: بدون شناسه پیام، بات ابتدا پیام منبع تعامل و سپس آخرین پیامی که ارسال کرده را جست‌وجو می‌کند. گزینه‌های منو حفظ می‌شوند.
+</block>
+
+<block type="callout" kind="warning">
+text: Min باید بین 0 تا 25، Max بین 1 تا 25 باشد و Min نمی‌تواند از Max بیشتر باشد. پیام هدف باید توسط همین بات ارسال شده باشد و باید از قبل منویی با شناسه داده‌شده را در خود داشته باشد.
+</block>
+</dash>
+
+<details>
+syntax: $editSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+param: Menu ID|text|الزامی|شناسه منوی انتخاب که باید ویرایش شود
+param: Min|number|الزامی|حداقل تعداد گزینه‌های جدیدی که کاربر باید انتخاب کند (0 تا 25)
+param: Max|number|الزامی|حداکثر تعداد گزینه‌های جدیدی که کاربر می‌تواند انتخاب کند (1 تا 25)
+param: Placeholder|text|اختیاری|متن راهنمای جدیدی که قبل از انجام انتخاب نمایش داده می‌شود
+param: Message ID|snowflake|اختیاری|شناسه پیام خاص باتی که منوی مورد ویرایش را در خود دارد
+</details>

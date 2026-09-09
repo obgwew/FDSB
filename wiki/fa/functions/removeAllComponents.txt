@@ -1,0 +1,31 @@
+<dash>
+name: $removeAllComponents
+desc: همه دکمه‌ها، منوهای انتخاب و کامپوننت‌ها را از یک پیام یا نمای در انتظار حذف می‌کند.
+category: کامپوننت‌ها
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $removeAllComponents همه کامپوننت‌های تعاملی (دکمه‌ها، منوهای انتخاب و ...) را از یک پیام پاک می‌کند. بدون شناسه پیام، ابتدا نمای در انتظار، سپس پیام منبع تعامل و سپس آخرین پیامی که بات ارسال کرده را پاک می‌کند. با فراخوانی به‌همراه شناسه پیام، آن پیام خاص بات را پاک می‌کند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $removeAllComponents
+text: $removeAllComponents[(messageID)]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $removeAllComponents[123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: این سریع‌ترین راه برای حذف هم‌زمان همه کامپوننت‌هاست، برخلاف $removeButtons یا $removeComponent که کامپوننت‌های خاصی را هدف می‌گیرند.
+</block>
+
+<block type="callout" kind="warning">
+text: پیام هدف باید توسط همین بات ارسال شده باشد. اگر هیچ پیامی پیدا نشود، خطا بازگردانده می‌شود.
+</block>
+</dash>
+
+<details>
+syntax: $removeAllComponents[(messageID)]
+param: messageID|snowflake|اختیاری|شناسه پیام خاص باتی که باید همه کامپوننت‌های آن پاک شود. در صورت حذف، نمای در انتظار، منبع تعامل یا آخرین پیام بات پاک می‌شود.
+</details>

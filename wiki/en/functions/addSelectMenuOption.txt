@@ -1,0 +1,44 @@
+<dash>
+name: $addSelectMenuOption
+desc: Adds an option to an existing select menu created with $newSelectMenu.
+category: Components
+
+<block type="text" title="How does the command work?">
+text: $addSelectMenuOption adds one option to a select menu that was created earlier with $newSelectMenu, matching it by Menu ID. Each option has a visible label, a unique value, and an optional description. Use the Default argument to pre-select it, and an Emoji argument to show an emoji next to the label.
+</block>
+
+<block type="code" title="Syntax">
+text: $addSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+$addSelectMenuOption[color_menu; Red; red; The color red]
+$addSelectMenuOption[color_menu; Blue; blue; The color blue; yes]
+</block>
+
+<block type="options" title="Details">
+option: Default|set to yes to pre-select this option (only one default per menu)
+option: Emoji|an emoji displayed next to the option label
+option: Message ID|optional ID of an already-sent bot message holding this menu
+</block>
+
+<block type="callout" kind="note">
+text: Option values must be unique within the same menu. When a Message ID is given, the menu on that message is updated live; otherwise the option is attached to the menu on the message being built.
+</block>
+
+<block type="callout" kind="warning">
+text: Maximum 25 options per select menu. If no menu with the given ID was created in the script (via $newSelectMenu), an error is returned.
+</block>
+</dash>
+
+<details>
+syntax: $addSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+param: Menu ID|text|Required|The ID of the select menu (from $newSelectMenu) to add this option to
+param: Label|text|Required|The text shown to the user for this option
+param: Value|text|Required|A unique value returned when this option is selected
+param: Description|text|Emptiable|Small description shown under the label
+param: Default|yes/no|Optional|yes to pre-select this option (default: no)
+param: Emoji|text|Optional|An emoji displayed next to the option label
+param: Message ID|snowflake|Optional|ID of an already-sent bot message whose menu should be updated live
+</details>

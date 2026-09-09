@@ -1,0 +1,32 @@
+<dash>
+name: $emojiExists
+desc: چیک کرتا ہے کہ آیا کوئی کسٹم ایموجی موجود ہے اور true یا false واپس کرتا ہے۔
+category: معلومات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $emojiExists ایک کسٹم ایموجی آئی ڈی (یا مکمل ایموجی مینشن جیسے <:name:id> یا <a:name:id>) لیتا ہے اور true واپس کرتا ہے اگر بوٹ کسی ایسے سرور سے منسلک ہے جہاں یہ ایموجی موجود ہو، بصورت دیگر false۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $emojiExists[emoji id]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $if[$emojiExists[123456789012345678]]
+ $sendMessage[That emoji exists!]
+$endif
+</block>
+
+<block type="callout" kind="note">
+text: یہ $if / $onlyIf کنڈیشنز کے اندر مفید ہے۔ بلٹ ان یونیکوڈ ایموجیز کے پاس آئی ڈی نہیں ہوتا، اس لیے صرف کسٹم سرور ایموجیز کی جانچ کی جا سکتی ہے۔
+</block>
+
+<block type="callout" kind="warning">
+text: ایموجی بوٹ کی پہنچ میں ہونا چاہیے (بوٹ کو اس ایموجی والے سرور میں موجود ہونا چاہیے)، بصورت دیگر چیک ممکن ہے کہ false واپس کرے۔
+</block>
+</dash>
+
+<details>
+syntax: $emojiExists[emoji id]
+param: ایموجی آئی ڈی|snowflake|لازمی|کسٹم ایموجی کا عددی آئی ڈی، یا ایک ایموجی مینشن جیسے <:name:id> / <a:name:id>
+</details>

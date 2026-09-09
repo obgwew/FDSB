@@ -1,0 +1,28 @@
+<dash>
+name: $httpStatus
+desc: آخری درخواست کا HTTP حالت کوڈ واپس کرتا ہے۔
+category: HTTP
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $httpStatus آخری HTTP درخواست ذخیرہ کردہ حالت کوڈ واپس کرتا ہے۔ جب ابھی تک کوئی درخواست نہ کی گئی ہو تو یہ "0" واپس کرتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $httpStatus
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $httpGet[https://api.example.com/data]
+$if[$httpStatus == 200] {
+  $reply[Request succeeded]
+}
+</block>
+
+<block type="callout" kind="note">
+text: ناکام درخواست پر حالت کوڈ 500 سیٹ کیا جاتا ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $httpStatus
+</details>

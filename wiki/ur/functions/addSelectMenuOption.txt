@@ -1,0 +1,44 @@
+<dash>
+name: $addSelectMenuOption
+desc: موجودہ سلیکٹ مینیو میں ایک آپشن شامل کرتا ہے جو $newSelectMenu کے ذریعے بنایا گیا تھا۔
+category: کمپوننٹس
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $addSelectMenuOption ایک سلیکٹ مینیو میں ایک آپشن شامل کرتا ہے جو پہلے $newSelectMenu کے ذریعے بنایا گیا تھا، اور اسے مینیو آئی ڈی (Menu ID) کی بنیاد پر تلاش کرتا ہے۔ ہر آپشن میں ایک ظاہر ہونے والا لیبل، ایک منفرد ویلیو، اور ایک اختیاری تفصیل ہوتی ہے۔ اسے پہلے سے منتخب کرنے کے لیے Default دلیل استعمال کریں، اور لیبل کے ساتھ ایموجی دکھانے کے لیے Emoji دلیل استعمال کریں۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $addSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+$addSelectMenuOption[color_menu; Red; red; The color red]
+$addSelectMenuOption[color_menu; Blue; blue; The color blue; yes]
+</block>
+
+<block type="options" title="تفصیلات">
+option: Default|اسے پہلے سے منتخب کرنے کے لیے yes پر سیٹ کریں (ہر مینیو میں صرف ایک ڈیفالٹ ہو سکتا ہے)
+option: Emoji|ایک ایموجی جو آپشن کے لیبل کے ساتھ دکھایا جاتا ہے
+option: Message ID|پہلے سے بھیجے گئے بوٹ پیغام کا اختیاری آئی ڈی جس پر یہ مینیو موجود ہے
+</block>
+
+<block type="callout" kind="note">
+text: آپشن کی ویلیوز ایک ہی مینیو کے اندر منفرد ہونی چاہئیں۔ جب Message ID دیا جائے تو اس پیغام پر موجود مینیو فوری طور پر اپ ڈیٹ ہو جاتا ہے؛ بصورت دیگر آپشن اس پیغام کے مینیو کے ساتھ منسلک ہوتا ہے جو بنایا جا رہا ہو۔
+</block>
+
+<block type="callout" kind="warning">
+text: ایک سلیکٹ مینیو میں زیادہ سے زیادہ 25 آپشن ہو سکتے ہیں۔ اگر اس اسکرپٹ میں دی گئی آئی ڈی سے کوئی مینیو بنایا نہیں گیا ہو ($newSelectMenu کے ذریعے) تو ایک خرابی (error) واپس آتی ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $addSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+param: Menu ID|text|لازمی|سلیکٹ مینیو کی آئی ڈی ($newSelectMenu سے) جس میں یہ آپشن شامل کرنا ہے
+param: Label|text|لازمی|صارف کو اس آپشن کے لیے دکھایا جانے والا متن
+param: Value|text|لازمی|ایک منفرد ویلیو جو اس آپشن کے منتخب ہونے پر واپس آتی ہے
+param: Description|text|خالی چھوڑا جا سکتا ہے|لیبل کے نیچے دکھائی جانے والی مختصر تفصیل
+param: Default|yes/no|اختیاری|اس آپشن کو پہلے سے منتخب کرنے کے لیے yes (ڈیفالٹ: no)
+param: Emoji|text|اختیاری|ایک ایموجی جو آپشن کے لیبل کے ساتھ دکھایا جاتا ہے
+param: Message ID|snowflake|اختیاری|پہلے سے بھیجے گئے بوٹ پیغام کا آئی ڈی جس کا مینیو فوری طور پر اپ ڈیٹ ہونا چاہیے
+</details>

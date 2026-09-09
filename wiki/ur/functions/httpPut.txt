@@ -1,0 +1,29 @@
+<dash>
+name: $httpPut
+desc: ایک URL پر اختیاری بادی کے ساتھ HTTP PUT درخواست بھیجتا ہے۔
+category: HTTP
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $httpPut 10 سیکنڈ ٹائم آؤٹ کے ساتھ PUT درخواست بھیجتا ہے۔ بادی JSON ہونے پر JSON کے طور پر بھیجی جاتی ہے، نہیں تو خام ٹیکسٹ کے طور پر۔ جواب $httpResult میں محفوظ ہوتا ہے اور حالت کوڈ $httpStatus میں۔ $httpAddHeader سے شامل کیے گئے ہیڈرز بھیجے جاتے ہیں اور پھر صاف کر دیے جاتے ہیں۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $httpPut[URL; (Body)]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $httpAddHeader[Content-Type; application/json]
+$httpPut[https://api.example.com/users/1; {"name": "FDScript"}]
+$httpStatus
+</block>
+
+<block type="callout" kind="note">
+text: اگر بادی درست JSON ہے تو اسے JSON کے طور پر بھیجا جاتا ہے، نہیں تو خام ڈیٹا کے طور پر۔ ناکامی پر حالت 500 سیٹ کی جاتی ہے اور $httpResult میں خطا کا پیغام ہوتا ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $httpPut[URL; (Body)]
+param: URL|text|لازمی|PUT درخواست بھیجنے کے لیے URL
+param: Body|text|اختیاری|درخواست کی بادی (JSON یا خام ٹیکسٹ)
+</details>

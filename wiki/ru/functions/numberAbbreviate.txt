@@ -1,0 +1,30 @@
+<dash>
+name: $numberAbbreviate
+desc: Преобразует целое число в короткую сокращённую форму с суффиксом (k, m, b, ...).
+category: Математика и числа
+
+<block type="text" title="Как работает команда?">
+text: $numberAbbreviate принимает целое число и сокращает его до короткой формы с суффиксом: k (тысяча), m (миллион), b (миллиард), t (триллион) и так далее. Например, 1500 превращается в 1.5k, а 2500000 — в 2.5m. Отрицательные числа также поддерживаются.
+</block>
+
+<block type="code" title="Syntax">
+text: $numberAbbreviate[number]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $numberAbbreviate[1523487]
+</block>
+
+<block type="callout" kind="note">
+text: Поддерживаемые суффиксы: k, m, b, t, qa, qi, sx, sp, oc, no, dc. Числа меньше 1000 возвращаются без изменений.
+</block>
+
+<block type="callout" kind="warning">
+text: Принимаются только целые числа. Десятичные дроби и нечисловые символы приводят к ошибке.
+</block>
+</dash>
+
+<details>
+syntax: $numberAbbreviate[number]
+param: number|number|Required|Целое число для сокращения (может включать ведущий знак -)
+</details>

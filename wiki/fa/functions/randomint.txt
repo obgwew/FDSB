@@ -1,0 +1,27 @@
+<dash>
+name: $randomint
+desc: یک عدد صحیح تصادفی بین یک مقدار حداقل و حداکثر برمی‌گرداند.
+category: تصادفی
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $randomint دو عدد (حداقل و حداکثر) می‌گیرد و یک عدد صحیح تصادفی در آن بازه فراگیر تولید می‌کند، سپس آن را به کانال ارسال می‌کند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $randomint[min; max]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $randomint[1; 100]
+</block>
+
+<block type="callout" kind="note">
+text: هم حداقل و هم حداکثر فراگیر هستند. اگر حداقل بزرگ‌تر از حداکثر باشد، مقادیر به‌طور خودکار جابه‌جا می‌شوند. نتیجه یک عدد کامل بین دو مرز است.
+</block>
+</dash>
+
+<details>
+syntax: $randomint[min; max]
+param: حداقل|number|الزامی|مقدار حداقل (فراگیر)
+param: حداکثر|number|الزامی|مقدار حداکثر (فراگیر)
+</details>

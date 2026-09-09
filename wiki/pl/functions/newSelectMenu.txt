@@ -1,0 +1,44 @@
+<dash>
+name: $newSelectMenu
+desc: Tworzy i rejestruje nowe menu wyboru dla wiadomości.
+category: Komponenty
+
+<block type="text" title="Jak działa ta komenda?">
+text: $newSelectMenu rozpoczyna budowanie rozwijanego menu wyboru identyfikowanego unikalnym ID menu. Definiujesz minimalną i maksymalną liczbę opcji, którą użytkownik musi/może wybrać. Następnie użyj $addSelectMenuOption, aby wypełnić menu opcjami, a menu zostanie dołączone do budowanej wiadomości. Możesz też podać ID wiadomości, aby dołączyć menu do wcześniej wysłanej wiadomości bota.
+</block>
+
+<block type="code" title="Składnia">
+text: $newSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+$addSelectMenuOption[color_menu; Red; red; The color red]
+$addSelectMenuOption[color_menu; Blue; blue; The color blue]
+$sendMessage[Choose your favorite color!]
+</block>
+
+<block type="options" title="Szczegóły zachowania">
+option: Min|Minimalna liczba opcji, którą użytkownik musi wybrać (0 do 25)
+option: Max|Maksymalna liczba opcji, którą użytkownik może wybrać (1 do 25)
+option: Placeholder|Szary tekst podpowiedzi wyświetlany, zanim użytkownik cokolwiek wybierze
+option: Message ID|Opcjonalne ID wcześniej wysłanej wiadomości bota, do której dołączyć menu
+</block>
+
+<block type="callout" kind="note">
+text: Menu jest gotowe dopiero po dodaniu co najmniej jednej opcji za pomocą $addSelectMenuOption. Użyj $editSelectMenu, aby zmienić Min/Max/Placeholder istniejącego menu, oraz $editSelectMenuOption, aby edytować pojedynczą opcję.
+</block>
+
+<block type="callout" kind="warning">
+text: Min nie może być większe niż Max. Wiadomość może zawierać łącznie maksymalnie 25 komponentów. Jeśli podana wiadomość nie pochodzi od tego bota, zwracany jest błąd.
+</block>
+</dash>
+
+<details>
+syntax: $newSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+param: Menu ID|text|Required|Unikalne ID używane później do odwoływania się do tego menu ($addSelectMenuOption, $editSelectMenu, $editSelectMenuOption)
+param: Min|number|Required|Minimalna liczba opcji, którą użytkownik musi wybrać (0 do 25)
+param: Max|number|Required|Maksymalna liczba opcji, którą użytkownik może wybrać (1 do 25)
+param: Placeholder|text|Optional|Tekst podpowiedzi wyświetlany wewnątrz menu przed dokonaniem wyboru
+param: Message ID|snowflake|Optional|ID wcześniej wysłanej wiadomości bota, do której dołączyć to menu zamiast do bieżącej wiadomości
+</details>

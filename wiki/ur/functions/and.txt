@@ -1,0 +1,26 @@
+<dash>
+name: $and
+desc: متعدد شرائط کا جائزہ لیتا ہے اور صرف اس صورت میں true واپس کرتا ہے جب تمام شرائط درست ہوں۔
+category: بہاؤ کنٹرول
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $and متعدد شرائط کے دلائل لیتا ہے اور ہر ایک کا جائزہ لیتا ہے۔ یہ "true" واپس کرتا ہے اگر ہر ایک شرط درست ہو، اور "false" اگر کوئی بھی شرط غلط ہو۔ یہ مشترکہ مشروط جانچیں بنانے کے لیے مفید ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $and[condition1; condition2; condition3; ...]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $and[$authorID == 123; $guildName == MyServer]
+</block>
+
+<block type="callout" kind="note">
+text: ہر شرط $if جیسے ہی موازنہ آپریٹرز استعمال کرتی ہے (==, !=, >, <, >=, <=)۔ سٹرنگ "true" یا "false" واپس کرتا ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $and[condition1; condition2; condition3; ...]
+param: شرط|expression|لازمی|جانچنے کے لیے ایک یا ایک سے زیادہ شرائط۔ ہر ایک ==, !=, >, <, >=, <= جیسے آپریٹرز استعمال کر سکتی ہے۔ نتیجہ "true" ہونے کے لیے تمام شرائط درست ہونی چاہئیں۔
+</details>

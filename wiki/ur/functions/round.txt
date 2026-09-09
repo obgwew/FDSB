@@ -1,0 +1,26 @@
+<dash>
+name: $round
+desc: ایک عدد کو قریب ترین مکمل عدد تک گول کرتا ہے۔
+category: ریاضی اور اعداد
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $round ایک عددی قدر لیتا ہے، اسے قریب ترین مکمل عدد تک گول کرتا ہے، اور نتیجہ بھیجتا ہے۔ مثال کے طور پر، 1.7 بنتا ہے 2 اور 1.4 بنتا ہے 1۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $round[number]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $round[1.7]
+</block>
+
+<block type="callout" kind="note">
+text: $round[1.7] واپس کرتا ہے 2۔ $round[2.4] واپس کرتا ہے 2۔ کمانڈ صرف ایک دلیل قبول کرتی ہے؛ اگر قدر درست عدد نہیں ہے تو ایک ایرر واپس بھیجا جاتا ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $round[number]
+param: number|number|لازمی|وہ عدد جسے قریب ترین مکمل عدد تک گول کرنا ہے
+</details>

@@ -1,0 +1,27 @@
+<dash>
+name: $serverIcon
+desc: Возвращает или отправляет прямую ссылку на иконку текущего сервера (или указанного сервера).
+category: Сервер
+
+<block type="text" title="Как работает команда?">
+text: $serverIcon находит и возвращает прямую ссылку на иконку сервера. Без аргумента используется текущий сервер; с указанием ID гильдии (guild ID) — именно тот сервер (бот должен находиться на нём). Анимированные иконки сервера возвращаются в виде .gif URL-адресов.
+</block>
+
+<block type="code" title="Syntax">
+text: $serverIcon
+text: $serverIcon[(guildID)]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: Server icon: $serverIcon
+</block>
+
+<block type="callout" kind="note">
+text: Если у указанного сервера не задана иконка, возвращается ошибка. Вы можете использовать этот URL в embed-сообщениях ($image, $thumbnail, $authorIcon, $footerIcon) или отправить его как ссылку.
+</block>
+</dash>
+
+<details>
+syntax: $serverIcon[(guildID)]
+param: guildID|snowflake|Optional|ID сервера, чью ссылку на иконку нужно получить. Если не указано, используется текущий сервер.
+</details>

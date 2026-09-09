@@ -1,0 +1,28 @@
+<dash>
+name: $setVar
+desc: یک مقدار را در یک متغیر پایدار ذخیره می‌کند.
+category: متغیرها
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $setVar یک مقدار را با یک نام متغیر مشخص ذخیره می‌کند. با دو آرگومان، یک متغیر سراسری ذخیره می‌کند. با سه آرگومان (نام، مقدار، شناسه کاربر)، یک متغیر اختصاصی کاربر ذخیره می‌کند. مقادیر پس از ری‌ستارت ربات باقی می‌مانند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $setVar[name; value]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $setVar[greeting; Hello World!]
+</block>
+
+<block type="callout" kind="note">
+text: متغیرها روی دیسک ذخیره می‌شوند و پس از ری‌ستارت ربات باقی می‌مانند. از $getVar برای بازیابی مقادیر ذخیره‌شده استفاده کنید. $setVar نمی‌تواند به صورت inline (به عنوان جایگذار) استفاده شود.
+</block>
+</dash>
+
+<details>
+syntax: $setVar[name; value; (userID)]
+param: name|text|Required|نام متغیری که مقدار زیر آن ذخیره می‌شود
+param: value|text|Required|مقداری که ذخیره می‌شود
+param: userID|snowflake|Optional|اگر ارائه شود، مقدار را به جای سراسری به صورت اختصاصی کاربر ذخیره می‌کند
+</details>

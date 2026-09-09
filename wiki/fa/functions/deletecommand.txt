@@ -1,0 +1,22 @@
+<dash>
+name: $deletecommand
+desc: پیامی که دستور را راه‌اندازی کرده است حذف می‌کند.
+category: مدیریت
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: وقتی $deletecommand فراخوانی می‌شود، ربات تلاش می‌کند پیام کاربر را که اجرای اسکریپت را راه‌اندازی کرده است حذف کند. این کار معمولاً برای تمیز نگه داشتن کانال‌ها با حذف فراخوانی اصلی دستور استفاده می‌شود.
+</block>
+
+<block type="code" title="سینتکس">
+text: $deletecommand
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $deletecommand
+$sendMessage[Command received!]
+</block>
+
+<block type="callout" kind="warning">
+text: ربات باید مجوز «مدیریت پیام‌ها» را در کانال داشته باشد تا بتواند پیام‌های کاربر را حذف کند. اگر مجوز موجود نباشد، یک خطا بازگردانده می‌شود.
+</block>
+</dash>

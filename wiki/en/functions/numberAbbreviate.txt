@@ -1,0 +1,30 @@
+<dash>
+name: $numberAbbreviate
+desc: Converts a whole number into a short abbreviated form with a suffix (k, m, b, ...).
+category: Math & Numbers
+
+<block type="text" title="How does the command work?">
+text: $numberAbbreviate takes a whole number and rounds it to its short form using a suffix: k (thousand), m (million), b (billion), t (trillion), and so on. For example 1500 becomes 1.5k and 2500000 becomes 2.5m. Negative numbers are handled as well.
+</block>
+
+<block type="code" title="Syntax">
+text: $numberAbbreviate[number]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $numberAbbreviate[1523487]
+</block>
+
+<block type="callout" kind="note">
+text: Supported suffixes: k, m, b, t, qa, qi, sx, sp, oc, no, dc. Numbers smaller than 1000 are returned unchanged.
+</block>
+
+<block type="callout" kind="warning">
+text: Only whole numbers are accepted. Decimals and non-numeric characters return an error.
+</block>
+</dash>
+
+<details>
+syntax: $numberAbbreviate[number]
+param: number|number|Required|A whole number to abbreviate (may include a leading - sign)
+</details>

@@ -1,0 +1,44 @@
+<dash>
+name: $addButton
+desc: یک دکمه به پیامی که در حال ساخت است اضافه می‌کند، یا از طریق شناسه آن به پیامی که قبلاً ارسال شده است.
+category: کامپوننت‌ها
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $addButton در هر فراخوانی یک دکمه اضافه می‌کند. می‌توانید نوع دکمه (پیوندی یا تعاملی)، سبک، وضعیت (فعال/غیرفعال) و موقعیت (همان ردیف یا ردیف جدید) را کنترل کنید.
+</block>
+
+<block type="code" title="سینتکس">
+text: $addButton[newLine; ID/URL; label; style; (disabled; emoji; messageID)]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $addButton[no; btn_confirm; Confirm; success]
+</block>
+
+<block type="options" title="سبک‌های دکمه (style)">
+option: primary|دکمه آبی (رنگ پیش‌فرض)
+option: secondary|دکمه خاکستری
+option: success|دکمه سبز
+option: danger|دکمه قرمز
+option: link|دکمه پیوند خارجی (بدون custom_id، تعامل ربات را فعال نمی‌کند)
+</block>
+
+<block type="callout" kind="note">
+text: وقتی style = link باشد، آرگومان دوم (ID/URL) باید یک آدرس کامل باشد که با http:// یا https:// شروع می‌شود.
+</block>
+
+<block type="callout" kind="warning">
+text: حداکثر ۲۵ دکمه در هر پیام (۵ ردیف × ۵ دکمه در هر ردیف). وقتی ردیف فعلی پر شود، دکمه به‌طور خودکار به ردیف جدید منتقل می‌شود.
+</block>
+</dash>
+
+<details>
+syntax: $addButton[newLine; ID/URL; label; style; (disabled; emoji; messageID)]
+param: newLine|yes/no|الزامی|آیا دکمه در یک ردیف جدید شروع می‌شود؟ yes = ردیف جدید، no = همان ردیف کنار دکمه آخر
+param: ID/URL|text|الزامی|شناسه سفارشی برای دکمه تعاملی، یا یک آدرس کامل اگر style = link باشد
+param: label|text|قابل ترک خالی|متنی که روی دکمه نمایش داده می‌شود
+param: style|text|الزامی|primary / secondary / success / danger / link
+param: disabled|yes/no|اختیاری|yes برای غیرفعال کردن دکمه (پیش‌فرض: no)
+param: emoji|text|اختیاری|یک ایموجی برای نمایش داخل دکمه
+param: messageID|snowflake|اختیاری|شناسه پیام ربات قبلاً ارسال‌شده برای افزودن دکمه به آن به‌جای پیام فعلی
+</details>

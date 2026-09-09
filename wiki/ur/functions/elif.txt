@@ -1,0 +1,30 @@
+<dash>
+name: $elif
+desc: $if بلاک کے اندر ایک متبادل شرط فراہم کرتا ہے جب پچھلی شرطیں غلط ہوں۔
+category: بہاؤ کنٹرول
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $elif $if بلاک کے اندر اضافی شرائط شامل کرنے کے لیے استعمال ہوتا ہے۔ جب پہلے والی $if (یا $elif) شرط غلط ہو تو اگلی $elif شرط جانچی جاتی ہے۔ اگر یہ درست ہو تو اس کا کوڈ بلاک عمل میں آتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $elif[condition]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $if[$message == hello]
+  Hi there!
+$elif[$message == bye]
+  Goodbye!
+$endif
+</block>
+
+<block type="callout" kind="note">
+text: $elif کو $if اور $endif کے درمیان رکھا جانا چاہیے۔ متعدد $elif بلاکس زنجیر بنائے جا سکتے ہیں۔ صرف پہلی میچنگ شرط کا کوڈ بلاک عمل میں آتا ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $elif[condition]
+param: condition|expression|لازمی|جانچنے کے لیے شرط (مثلاً، $message == hello، $authorID == 123)۔ $if جیسے ہی آپریٹرز استعمال کرتا ہے۔
+</details>

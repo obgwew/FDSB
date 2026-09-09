@@ -1,0 +1,27 @@
+<dash>
+name: $serverIcon
+desc: Zwraca lub wysyła bezpośredni adres URL ikony bieżącego serwera (lub wybranego serwera).
+category: Serwer
+
+<block type="text" title="Jak działa ta komenda?">
+text: $serverIcon pobiera i zwraca bezpośredni adres URL ikony serwera. Bez argumentu używa bieżącego serwera; z ID gildii używa tego konkretnego serwera (bot musi się na nim znajdować). Animowane ikony serwera są zwracane jako adresy URL w formacie .gif.
+</block>
+
+<block type="code" title="Składnia">
+text: $serverIcon
+text: $serverIcon[(guildID)]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: Server icon: $serverIcon
+</block>
+
+<block type="callout" kind="note">
+text: Jeśli podany serwer nie ma ustawionej ikony, zwracany jest błąd. Adres URL możesz użyć w embedach ($image, $thumbnail, $authorIcon, $footerIcon) lub wysłać go jako link.
+</block>
+</dash>
+
+<details>
+syntax: $serverIcon[(guildID)]
+param: guildID|snowflake|Optional|ID serwera, dla którego pobrać URL ikony. Jeśli pominięte, użyty zostaje bieżący serwer.
+</details>

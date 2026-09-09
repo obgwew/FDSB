@@ -1,0 +1,30 @@
+<dash>
+name: $numberAbbreviate
+desc: Tam bir sayıyı, sonuna eklenen bir ek (k, m, b, ...) ile kısa kısaltılmış biçime dönüştürür.
+category: Matematik ve Sayılar
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $numberAbbreviate, bir tam sayıyı alır ve bir ek kullanarak onu kısa biçimine yuvarlar: k (bin), m (milyon), b (milyar), t (trilyon) vb. Örneğin 1500, 1.5k; 2500000 ise 2.5m olur. Negatif sayılar da desteklenir.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $numberAbbreviate[number]
+</block>
+
+<block type="code" title="Kopyalanmaya hazır örnek">
+text: $numberAbbreviate[1523487]
+</block>
+
+<block type="callout" kind="note">
+text: Desteklenen ekler: k, m, b, t, qa, qi, sx, sp, oc, no, dc. 1000'den küçük sayılar değiştirilmeden döndürülür.
+</block>
+
+<block type="callout" kind="warning">
+text: Yalnızca tam sayılar kabul edilir. Ondalıklı sayılar ve sayısal olmayan karakterler hata döndürür.
+</block>
+</dash>
+
+<details>
+syntax: $numberAbbreviate[number]
+param: sayı|number|Required|Kısaltılacak tam sayı (başında - işareti bulunabilir)
+</details>

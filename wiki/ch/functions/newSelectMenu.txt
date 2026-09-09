@@ -1,0 +1,44 @@
+<dash>
+name: $newSelectMenu
+desc: 为消息创建并注册一个新的选择菜单。
+category: 组件
+
+<block type="text" title="命令如何工作？">
+text: $newSelectMenu 开始构建一个由唯一菜单 ID 标识的选择下拉菜单。你可以定义用户必须/可以选择的选项最小和最大数量。使用 $addSelectMenuOption 填充菜单选项，菜单会附加到正在构建的消息上。你也可以传入消息 ID，将菜单附加到一条已经发送的机器人消息上。
+</block>
+
+<block type="code" title="语法">
+text: $newSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+</block>
+
+<block type="code" title="可复制示例">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+$addSelectMenuOption[color_menu; Red; red; The color red]
+$addSelectMenuOption[color_menu; Blue; blue; The color blue]
+$sendMessage[Choose your favorite color!]
+</block>
+
+<block type="options" title="行为详细信息">
+option: Min|用户必须选择的最小选项数（0 到 25）
+option: Max|用户可以选择的的最大选项数（1 到 25）
+option: Placeholder|用户在做出任何选择之前显示的灰色提示文本
+option: Message ID|可选参数，将菜单附加到的已发送机器人消息的 ID
+</block>
+
+<block type="callout" kind="note">
+text: 只有使用 $addSelectMenuOption 添加了至少一个选项后，菜单才算就绪。使用 $editSelectMenu 更改现有菜单的 Min/Max/占位符，使用 $editSelectMenuOption 编辑单个选项。
+</block>
+
+<block type="callout" kind="warning">
+text: Min 不能大于 Max。一条消息总共最多可包含 25 个组件。如果给定的消息不是来自此机器人，则会返回错误。
+</block>
+</dash>
+
+<details>
+syntax: $newSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+param: Menu ID|text|Required|用于稍后引用此选择菜单的唯一 ID（$addSelectMenuOption、$editSelectMenu、$editSelectMenuOption）
+param: Min|number|Required|用户必须选择的最小选项数（0 到 25）
+param: Max|number|Required|用户可以选择的的最大选项数（1 到 25）
+param: Placeholder|text|Optional|做出选择之前在菜单内显示的提示文本
+param: Message ID|snowflake|Optional|已发送的机器人消息的 ID，将菜单附加到该消息而不是当前消息
+</details>

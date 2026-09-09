@@ -1,0 +1,33 @@
+<dash>
+name: $useChannel
+desc: تمام خروجی اسکریپت از این به بعد را به یک کانال خاص در هر سرور هدایت می‌کند.
+category: کنترل دسترسی
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $useChannel به صورت درجا و به ترتیب ظاهر شدن خطوط در اسکریپت اجرا می‌شود. وقتی مفسر به آن می‌رسد، خروجی تمام چیزهایی که پس از آن می‌آیند (تمام $sendMessage، $sendEmbedMessage، $reply، متن‌های بافر شده و غیره) را به کانال مشخص‌شده هدایت می‌کند. خطوط قبل از آن تحت تأثیر قرار نمی‌گیرند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $useChannel[guildID; channelID]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $sendMessage[This goes to the current channel]
+$useChannel[1234567890; 9876543210]
+$sendMessage[This goes to the specified channel!]
+</block>
+
+<block type="callout" kind="note">
+text: هر دو آرگومان قبل از بررسی حل می‌شوند، اما باید عددی باشند. ربات باید عضو گیلد مشخص‌شده باشد و بتواند کانال مقصد را ببیند. اگر گیلد یا کانال یافت نشود، یا آرگومان‌ها عددی نباشند، دستور به صورت خاموش نادیده گرفته شده و یک ورودی لاگ ایجاد می‌شود.
+</block>
+
+<block type="callout" kind="warning">
+text: پس از تنظیم، هدایت به تمام خروجی‌های بعدی در اسکریپت اعمال می‌شود — کانال اصلی دیگر استفاده نمی‌شود. در تعامل دکمه، پاسخ تعامل به تعویق افتاده و پیام‌های بعدی به جای آن به کانال مقصد ارسال می‌شوند.
+</block>
+</dash>
+
+<details>
+syntax: $useChannel[guildID; channelID]
+param: guildID|number|Required|شناسه سرور (گیلد)ی که کانال مقصد در آن قرار دارد
+param: channelID|number|Required|شناسه کانالی که تمام خروجی به آن هدایت می‌شود
+</details>

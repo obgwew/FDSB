@@ -1,0 +1,25 @@
+<dash>
+name: $endwhile
+desc: پایان یک بلوک حلقه $while را علامت می‌زند.
+category: کنترل جریان
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $endwhile مرز پایانی یک حلقه $while را مشخص می‌کند. پس از هر تکرار، اجرا به شرط $while برمی‌گردد تا دوباره آن را ارزیابی کند. هر $while باید یک $endwhile متناظر داشته باشد.
+</block>
+
+<block type="code" title="سینتکس">
+text: $endwhile
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $setVar[count; 0]
+$while[$getVar[count] < 5]
+  $sendMessage[Count: $getVar[count]]
+  $setVar[count; $math[$getVar[count] + 1]]
+$endwhile
+</block>
+
+<block type="callout" kind="warning">
+text: هر بلوک $while باید به‌درستی با $endwhile بسته شود. نبود $endwhile باعث خطای اسکریپت می‌شود. مطمئن شوید حلقه شما یک شرط پایان دارد تا از ایجاد حلقه بی‌نهایت جلوگیری شود.
+</block>
+</dash>

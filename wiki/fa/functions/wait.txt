@@ -1,0 +1,28 @@
+<dash>
+name: $wait
+desc: اجرای اسکریپت را برای مدت زمان مشخصی متوقف می‌کند.
+category: زمان‌بندی و تاخیر
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $wait اجرای کل اسکریپت را برای مدت زمان مشخص‌شده متوقف می‌کند. هیچ دستور بعدی در اسکریپت تا زمان سپری شدن دوره انتظار اجرا نخواهد شد.
+</block>
+
+<block type="code" title="سینتکس">
+text: $wait[time]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $sendMessage[Starting...]
+$wait[5s]
+$sendMessage[Done after 5 seconds!]
+</block>
+
+<block type="callout" kind="note">
+text: فرمت زمان شامل: s (ثانیه)، m (دقیقه)، h (ساعت)، d (روز) است. کل اسکریپت در مدت انتظار متوقف می‌شود — اسکریپت‌های دیگر کاربران تحت تأثیر قرار نمی‌گیرند.
+</block>
+</dash>
+
+<details>
+syntax: $wait[time]
+param: time|text|Required|مدت زمان انتظار. فرمت: عدد + واحد (s/m/h/d)، مثلاً 5s، 10m، 1h، 1d
+</details>

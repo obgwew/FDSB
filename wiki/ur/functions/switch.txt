@@ -1,0 +1,27 @@
+<dash>
+name: $switch
+desc: انڈیکس نمبر کی بنیاد پر فہرست میں سے ایک آئٹم منتخب کرتا ہے اور واپس کرتا ہے۔
+category: متن ٹولز
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $switch آئٹمز کی فہرست اور ایک انڈیکس نمبر (آخری دلیل کے طور پر) لیتا ہے۔ یہ اس پوزیشن پر موجود آئٹم واپس کرتا ہے (1-based انڈیکس)۔ یہ پہلے سے طے شدہ اختیارات میں سے انتخاب کے لیے مفید ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $switch[item1; item2; ... ; index]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $switch[Red; Green; Blue; $randomint[1; 3]]
+</block>
+
+<block type="callout" kind="note">
+text: انڈیکس آخری دلیل ہے اور اس کا نمبر 1 اور آئٹمز کی کل تعداد کے درمیان ہونا ضروری ہے۔ اگر انڈیکس حد سے باہر ہے تو ایک ایرر واپس بھیجا جاتا ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $switch[item1; item2; ... ; index]
+param: item|text|لازمی|انتخاب کے لیے ایک یا ایک سے زیادہ آئٹمز
+param: index|number|لازمی|واپس کرنے کے لیے آئٹم کی 1-based پوزیشن (آخری دلیل ہونی چاہیے)
+</details>

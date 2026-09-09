@@ -1,0 +1,26 @@
+<dash>
+name: $sendMessage
+desc: یک پیام متنی به کانال فعلی ارسال می‌کند.
+category: پیام‌ها
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $sendMessage یک آرگومان متنی دریافت می‌کند، متغیرها/جایگذارها داخل آن را حل کرده و پیام حاصل را به کانال فعلی ارسال می‌کند. اگر نمایشی با دکمه‌ها در انتظار باشد، آن‌ها را به پیام پیوست می‌کند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $sendMessage[text]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $sendMessage[Hello, $authorName!]
+</block>
+
+<block type="callout" kind="note">
+text: این روش اصلی ارسال پیام در FDScript است. متغیرها و جایگذارهای داخل متن قبل از ارسال به صورت خودکار حل می‌شوند.
+</block>
+</dash>
+
+<details>
+syntax: $sendMessage[text]
+param: text|text|Required|متن پیامی که ارسال می‌شود. از متغیرها، جایگذارها و مارک‌داون Discord پشتیبانی می‌کند.
+</details>

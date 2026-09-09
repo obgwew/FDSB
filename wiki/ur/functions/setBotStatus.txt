@@ -1,0 +1,26 @@
+<dash>
+name: $setBotStatus
+desc: بوٹ کی موجودگی کی حالت (آن لائن، آئیڈل، dnd یا انویزیبل) تبدیل کرتا ہے۔
+category: سرور
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $setBotStatus بوٹ کی موجودگی کی حالت کو آن لائن، آئیڈل، dnd (پریشان نہ کریں) اور انویزیبل (آف لائن نظر آتا ہے) کے درمیان بدلتا ہے۔ حالت تبدیل ہونے تک برقرار رہتی ہے - ایپ کو دوبارہ شروع کرنے سے یہ محفوظ کردہ سیٹنگز کے مطابق ری سیٹ ہو جاتی ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $setBotStatus[online|idle|dnd|invisible]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $setBotStatus[idle]
+</block>
+
+<block type="callout" kind="important">
+text: اندرونی طور پر ریٹ لمیٹڈ ہے - ہر 12 سیکنڈ میں صرف ایک تبدیلی - اس ونڈو کے اندر اضافی کالز خاموشی سے ناکام ہوتی ہیں۔ offline کو invisible کے مترادف (عرف) کے طور پر قبول کیا جاتا ہے۔ اس کے علاوہ کچھ بھی ایرر پیدا کرتا ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $setBotStatus[online|idle|dnd|invisible]
+param: status|text|لازمی|ان میں سے ایک: online، idle، dnd، invisible (offline invisible کا مترادف کام کرتا ہے)
+</details>

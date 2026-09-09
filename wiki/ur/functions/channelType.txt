@@ -1,0 +1,26 @@
+<dash>
+name: $channelType
+desc: چینل کی قسم واپس کرتا ہے (text, voice, category, forum, stage)۔
+category: چینل
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $channelType ایک چینل مینشن یا آئی ڈی لیتا ہے اور چینل کی قسم کا نام سٹرنگ کے طور پر واپس کرتا ہے۔ درست اقسام میں شامل ہیں: text, voice, category, forum, stage۔ اگر کوئی دلیل فراہم نہ کی جائے، تو یہ موجودہ چینل کی قسم واپس کرتا ہے۔ اگر چینل نہ مل سکے، تو "unknown" واپس کرتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $channelType[channel mention/ID]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $channelType[<#123456789012345678>]
+</block>
+
+<block type="callout" kind="note">
+text: $createChannel یا $voiceUsersLimit جیسے قسم سے مخصوص عمل کرنے سے پہلے چینل کی اقسام کی تصدیق کے لیے مفید ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $channelType[channel mention/ID]
+param: چینل|text|اختیاری|چینل مینشن یا عددی آئی ڈی۔ خالی ہونے پر موجودہ چینل استعمال ہوتا ہے۔
+</details>

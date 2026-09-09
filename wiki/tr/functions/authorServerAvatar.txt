@@ -1,0 +1,27 @@
+<dash>
+name: $authorServerAvatar
+desc: Komut yazarının (veya bir kullanıcının) sunucu avatarının doğrudan görüntü URL'sini döndürür veya gönderir.
+category: Bilgi
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $authorServerAvatar, bir kullanıcının ayarlamış olması durumunda sunucu (guild) avatarının doğrudan görüntü URL'sini çözümler ve döndürür. Argüman verilmezse komut yazarını kullanır; bir kullanıcı kimliği veya @mention verilirse o kullanıcıyı kullanır. Özel bir sunucu avatarı yoksa, kullanıcının görünen avatarı kullanılır. Sonuç, mesajlara veya görsellere gömmek için kullanabileceğiniz bir URL'dir.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $authorServerAvatar
+text: $authorServerAvatar[(userID/@mention)]
+</block>
+
+<block type="code" title="Kopyalanmaya hazır örnek">
+text: Your server avatar: $authorServerAvatar
+</block>
+
+<block type="callout" kind="note">
+text: Bu, kullanıcının genel avatarından ($authorAvatar) farklı olabilen, sunucu içindeki diğer üyelere gösterilen avatardır. Hareketli avatarlar .gif URL'si olarak döndürülür.
+</block>
+</dash>
+
+<details>
+syntax: $authorServerAvatar[(userID/@mention)]
+param: kullanıcı kimliği/@mention|text|Optional|Sunucu avatarı URL'sinin alınacağı kullanıcı kimliği veya @mention. Belirtilmezse komut yazarı kullanılır.
+</details>

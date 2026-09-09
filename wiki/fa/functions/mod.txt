@@ -1,0 +1,27 @@
+<dash>
+name: $mod
+desc: باقیمانده تقسیم عدد اول بر هر یک از اعداد بعدی را برمی‌گرداند.
+category: ریاضی و اعداد
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $mod دو یا چند آرگومان عددی دریافت می‌کند. باقیمانده (modulo) تقسیم مقدار اول بر هر مقدار بعدی را به صورت ترتیبی محاسبه می‌کند. هم به عنوان دستور مستقل و هم inline کار می‌کند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $mod[a; b; ...]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $sendMessage[$mod[10; 3]]
+</block>
+
+<block type="callout" kind="warning">
+text: محاسبه باقیمانده بر صفر خطا برمی‌گرداند. $mod[10; 3] مقدار 1 را برمی‌گرداند (باقیمانده تقسیم 10 / 3).
+</block>
+</dash>
+
+<details>
+syntax: $mod[a; b; ...]
+param: a|number|Required|مقسوم (عددی که تقسیم می‌شود)
+param: b|number|Required|مقسوم‌علیه (نمی‌تواند 0 باشد). مقسوم‌علیه‌های اضافی به صورت ترتیبی اعمال می‌شوند.
+</details>

@@ -1,0 +1,36 @@
+<dash>
+name: $numberSeparator
+desc: Formats a whole number with a thousands separator for easier reading.
+category: Math & Numbers
+
+<block type="text" title="How does the command work?">
+text: $numberSeparator takes a whole number and inserts a separator every three digits from the right (thousands grouping). By default the separator is a comma (,), and you can pass a custom separator as the second argument. For example 1234567 becomes 1,234,567.
+</block>
+
+<block type="code" title="Syntax">
+text: $numberSeparator[number]
+text: $numberSeparator[number; separator]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $numberSeparator[1234567]
+</block>
+
+<block type="code" title="Ready-to-copy Example (custom separator)">
+text: $numberSeparator[1234567; .]
+</block>
+
+<block type="callout" kind="note">
+text: Negative numbers keep their - sign: for example -1234567 becomes -1,234,567.
+</block>
+
+<block type="callout" kind="warning">
+text: Only whole numbers are accepted. Decimals and non-numeric characters return an error.
+</block>
+</dash>
+
+<details>
+syntax: $numberSeparator[number; (separator)]
+param: number|number|Required|A whole number to format (may include a leading - sign)
+param: separator|text|Optional|The separator to insert every three digits (default: ,)
+</details>

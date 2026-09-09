@@ -1,0 +1,44 @@
+<dash>
+name: $addSelectMenuOption
+desc: Var olan bir seçim menüsüne ($newSelectMenu ile oluşturulmuş) bir seçenek ekler.
+category: Bileşenler
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $addSelectMenuOption, Menü Kimliği ile eşleştirerek daha önce $newSelectMenu ile oluşturulmuş bir seçim menüsüne bir seçenek ekler. Her seçeneğin görünür bir etiketi, benzersiz bir değeri ve isteğe bağlı bir açıklaması vardır. Önceden seçmek için Varsayılan argümanını, etiketin yanında bir emoji göstermek için Emoji argümanını kullanın.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $addSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+</block>
+
+<block type="code" title="Kopyalanmaya hazır örnek">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+$addSelectMenuOption[color_menu; Red; red; The color red]
+$addSelectMenuOption[color_menu; Blue; blue; The color blue; yes]
+</block>
+
+<block type="options" title="Ayrıntılar">
+option: Varsayılan|bu seçeneği önceden seçmek için yes olarak ayarlayın (menü başına yalnızca bir varsayılan)
+option: Emoji|seçenek etiketinin yanında gösterilen bir emoji
+option: Mesaj Kimliği|bu menüyü içeren, daha önce gönderilmiş bir bot mesajının isteğe bağlı kimliği
+</block>
+
+<block type="callout" kind="note">
+text: Seçenek değerleri aynı menü içinde benzersiz olmalıdır. Bir Mesaj Kimliği verildiğinde, o mesajdaki menü anında güncellenir; aksi takdirde seçenek, oluşturulmakta olan mesajdaki menüye eklenir.
+</block>
+
+<block type="callout" kind="warning">
+text: Seçim menüsü başına en fazla 25 seçenek eklenebilir. Betikte verilen kimliğe sahip bir menü oluşturulmadıysa ($newSelectMenu ile), bir hata döndürülür.
+</block>
+</dash>
+
+<details>
+syntax: $addSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+param: Menü Kimliği|text|Required|Bu seçeneğin ekleneceği seçim menüsünün kimliği ($newSelectMenu'den)
+param: Etiket|text|Required|Bu seçenek için kullanıcıya gösterilen metin
+param: Değer|text|Required|Bu seçenek seçildiğinde döndürülen benzersiz değer
+param: Açıklama|text|Emptiable|Etiketin altında gösterilen kısa açıklama
+param: Varsayılan|yes/no|Optional|bu seçeneği önceden seçmek için yes (varsayılan: no)
+param: Emoji|text|Optional|Seçenek etiketinin yanında gösterilen bir emoji
+param: Mesaj Kimliği|snowflake|Optional|Menüsü anında güncellenmesi gereken, daha önce gönderilmiş bir bot mesajının kimliği
+</details>

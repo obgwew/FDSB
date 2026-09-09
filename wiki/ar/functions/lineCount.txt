@@ -1,0 +1,26 @@
+<dash>
+name: $lineCount
+desc: تُرجع عدد المسافات في النص المعطى.
+category: أدوات النصوص
+
+<block type="text" title="كيف تعمل الدالة؟">
+text: تأخذ $lineCount نصًا وتُرجع عدد أحرف المسافة ( ) التي يحتويها. يتم حل المتغيرات والرموز النائبة في المعامل قبل العدّ.
+</block>
+
+<block type="code" title="الصيغة">
+text: $lineCount[text]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $lineCount[one two three]
+</block>
+
+<block type="callout" kind="note">
+text: العدّ مبني على المسافات وليس على أسطر جديدة فعلية. لتقسيم النص إلى أجزاء، استخدم $splitIn مع $splitOut.
+</block>
+</dash>
+
+<details>
+syntax: $lineCount[text]
+param: text|text|Required|النص المراد عدّ المسافات فيه. يتم حل المتغيرات والرموز النائبة قبل العدّ.
+</details>

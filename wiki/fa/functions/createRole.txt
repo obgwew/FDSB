@@ -1,0 +1,37 @@
+<dash>
+name: $createRole
+desc: یک نقش جدید در سرور با نام، رنگ و مجوزهای مشخص‌شده ایجاد می‌کند.
+category: مدیریت
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $createRole یک نقش جدید با نام، رنگ و مجوزهای داده‌شده ایجاد می‌کند. مجوزها را می‌توان به‌صورت یک مجموعه از پیش تعیین‌شده (cosmetic، member، mod، manager) یا یک شماره مجوز خام مشخص کرد. به‌صورت اختیاری، می‌توانید تعیین کنید که نقش به‌صورت جداگانه نمایش داده شود و قابل منشن باشد.
+</block>
+
+<block type="code" title="سینتکس">
+text: $createRole[role name; color; permissions; (display role; mention role)]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $createRole[VIP; #FFD700; member; yes; no]
+</block>
+
+<block type="options" title="مجموعه مجوزها">
+option: cosmetic|بدون مجوز خاص (نقش فقط برای نمایش)
+option: member|مجوزهای پایه عضو (ارسال پیام، واکنش، اتصال و غیره)
+option: mod / moderator|مجوزهای مدیریت (اخراج، مسدودسازی، مدیریت پیام‌ها، تایم‌اوت و غیره)
+option: manager / admin|مجوزهای مدیریت کامل (مدیریت کانال‌ها، نقش‌ها، وبهوک‌ها و غیره)
+</block>
+
+<block type="callout" kind="note">
+text: شناسه نقش ایجادشده برای استفاده بعدی در $return[createdRoleID] ذخیره می‌شود. ربات باید مجوز «مدیریت نقش‌ها» را داشته باشد.
+</block>
+</dash>
+
+<details>
+syntax: $createRole[role name; color; permissions; (display role; mention role)]
+param: نام نقش|text|الزامی|نام نقش جدید (حداکثر 100 کاراکتر)
+param: رنگ|text|الزامی|کد رنگ هگز (مثلاً #FF5733) یا خالی برای مقدار پیش‌فرض
+param: مجوزها|text|الزامی|یک مجموعه (cosmetic، member، mod/moderator، manager/admin) یا یک عدد مجوز خام
+param: نمایش نقش|yes/no|اختیاری|yes برای نمایش جداگانه نقش در لیست اعضا (پیش‌فرض: no)
+param: منشن نقش|yes/no|اختیاری|yes تا نقش برای همه قابل منشن باشد (پیش‌فرض: no)
+</details>

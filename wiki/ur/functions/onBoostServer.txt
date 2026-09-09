@@ -1,0 +1,26 @@
+<dash>
+name: $onBoostServer
+desc: وہ واقعہ جو اس وقت متحرک ہوتا ہے جب کوئی سرور کو بوسٹ کرتا ہے یا اس کا بوسٹ لیول بڑھاتا ہے۔
+category: واقعہ
+
+<block type="text" title="یہ واقعہ کیسے کام کرتا ہے؟">
+text: $onBoostServer اس وقت متحرک ہوتا ہے جب ڈسکارڈ سرور بوسٹس کے بارے میں کوئی سسٹم پیغام پوسٹ کرتا ہے — بشمول نیا بوسٹ اور سرور کا لیول 1, 2 یا 3 تک پہنچنا۔ ایونٹ اسکرپٹ کے اندر آپ $authorID یا $mention جیسی کمانڈز کے ذریعے بوسٹ کرنے والے رکن تک رسائی حاصل کر سکتے ہیں، اور چینل کا سیاق و سباق اسی چینل کی طرف اشارہ کرتا ہے جہاں ڈسکارڈ نے سسٹم پیغام پوسٹ کیا۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: #PREFIX:$onBoostServer
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: #PREFIX:$onBoostServer
+text:  sendMessage[Thanks $mention for boosting! This server now has $boostCount boosts]
+</block>
+
+<block type="callout" kind="note">
+text: صرف حقیقی بوسٹ سسٹم پیغامات ہی اس واقعے کو متحرک کرتے ہیں — عام چیٹ کبھی نہیں۔ یہاں بوسٹرز کا شکریہ ادا کرنا $boostLevel اور $boostCount کے ساتھ اچھا میل کھاتا ہے۔
+</block>
+
+<block type="callout" kind="important">
+text: یہ واقعہ bot_events فولڈر میں چلتا ہے، bot_commands میں نہیں۔ اپنی .fds فائل وہاں بنائیں۔
+</block>
+</dash>

@@ -1,0 +1,28 @@
+<dash>
+name: $splitIn
+desc: یک رشته متنی را با استفاده از یک جداکننده به بخش‌هایی تقسیم کرده و نتیجه را ذخیره می‌کند.
+category: ابزارهای متنی
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $splitIn یک رشته متنی و یک جداکننده دریافت می‌کند، متن را بر اساس آن جداکننده تقسیم کرده و بخش‌های حاصل را ذخیره می‌کند. سپس از $splitOut برای دسترسی به بخش‌های جداگانه استفاده کنید.
+</block>
+
+<block type="code" title="سینتکس">
+text: $splitIn[text; delimiter]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $splitIn[apple,banana,cherry; ,]
+$splitOut[1]
+</block>
+
+<block type="callout" kind="note">
+text: بخش‌های تقسیم‌شده در متن ذخیره می‌شوند و می‌توان با $splitOut با یک شاخص (مبتنی بر 1)، < برای اولین، یا > برای آخرین به آن‌ها دسترسی پیدا کرد.
+</block>
+</dash>
+
+<details>
+syntax: $splitIn[text; delimiter]
+param: text|text|Required|رشته متنی که باید تقسیم شود
+param: delimiter|text|Required|جداکننده/تجزیه‌کننده‌ای که بر اساس آن تقسیم می‌شود (نمی‌تواند خالی باشد)
+</details>

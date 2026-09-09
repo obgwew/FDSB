@@ -1,0 +1,44 @@
+<dash>
+name: $addSelectMenuOption
+desc: 使用 $newSelectMenu 创建的现有选择菜单添加一个选项。
+category: 组件
+
+<block type="text" title="命令如何工作？">
+text: $addSelectMenuOption 通过菜单 ID 进行匹配，向之前使用 $newSelectMenu 创建的选择菜单添加一个选项。每个选项都有一个可见的标签、一个唯一的值和一个可选的描述。使用 Default 参数进行预选，使用 Emoji 参数在标签旁显示表情符号。
+</block>
+
+<block type="code" title="语法">
+text: $addSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+</block>
+
+<block type="code" title="可复制示例">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+$addSelectMenuOption[color_menu; Red; red; The color red]
+$addSelectMenuOption[color_menu; Blue; blue; The color blue; yes]
+</block>
+
+<block type="options" title="详细信息">
+option: Default|设置为 yes 以预选此选项（每个菜单仅一个默认选项）
+option: Emoji|显示在选项标签旁的表情符号
+option: Message ID|可选参数，已发送的包含此菜单的机器人消息的 ID
+</block>
+
+<block type="callout" kind="note">
+text: 选项值在同一菜单内必须唯一。当指定 Message ID 时，该消息上的菜单会实时更新；否则，该选项会附加到正在构建的消息上的菜单。
+</block>
+
+<block type="callout" kind="warning">
+text: 每个选择菜单最多 25 个选项。如果脚本中没有通过 $newSelectMenu 创建具有给定 ID 的菜单，则会返回错误。
+</block>
+</dash>
+
+<details>
+syntax: $addSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+param: Menu ID|text|Required|要添加选项的目标选择菜单（来自 $newSelectMenu）的 ID
+param: Label|text|Required|向用户显示的此选项的文本
+param: Value|text|Required|选择此选项时返回的唯一值
+param: Description|text|Emptiable|显示在标签下方的小段描述
+param: Default|yes/no|Optional|yes 表示预选此选项（默认：no）
+param: Emoji|text|Optional|显示在选项标签旁的表情符号
+param: Message ID|snowflake|Optional|已发送的机器人消息的 ID，其菜单应被实时更新
+</details>

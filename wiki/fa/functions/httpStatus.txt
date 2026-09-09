@@ -1,0 +1,28 @@
+<dash>
+name: $httpStatus
+desc: کد وضعیت HTTP آخرین درخواست را برمی‌گرداند.
+category: HTTP
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $httpStatus کد وضعیتی را که توسط آخرین درخواست HTTP ذخیره شده برمی‌گرداند. وقتی هنوز هیچ درخواستی انجام نشده باشد مقدار «0» برمی‌گردد.
+</block>
+
+<block type="code" title="سینتکس">
+text: $httpStatus
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $httpGet[https://api.example.com/data]
+$if[$httpStatus == 200] {
+  $reply[Request succeeded]
+}
+</block>
+
+<block type="callout" kind="note">
+text: در یک درخواست ناموفق، کد وضعیت روی 500 تنظیم می‌شود.
+</block>
+</dash>
+
+<details>
+syntax: $httpStatus
+</details>

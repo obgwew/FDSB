@@ -1,0 +1,21 @@
+<dash>
+name: $botID
+desc: شناسه کاربری دیسکورد ربات را برمی‌گرداند.
+category: اطلاعات
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: وقتی $botID فراخوانی می‌شود، ربات شناسه کاربری یکتای دیسکورد خود را دریافت می‌کند و آن را مستقیماً به‌عنوان یک رشته عددی خام به کانال می‌فرستد.
+</block>
+
+<block type="code" title="سینتکس">
+text: $botID
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: My bot ID is $botID
+</block>
+
+<block type="callout" kind="note">
+text: مقدار بازگشتی یک شناسه snowflake است (مثلاً 123456789012345678)، که شناسه عددی یکتای حساب کاربری دیسکورد ربات است.
+</block>
+</dash>

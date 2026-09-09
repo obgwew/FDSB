@@ -1,0 +1,27 @@
+<dash>
+name: $log
+desc: از تمام رویدادهای اسکریپت یک تصویر تهیه کرده و آن‌ها را به یک کانال مشخص ارسال می‌کند.
+category: ابزارها
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $log تمام گزارش‌های رویدادی تولید شده در طول اجرای اسکریپت فعلی را تا آن لحظه ضبط کرده و به کانال مشخص شده ارسال می‌کند. یک کد نام اختیاری می‌تواند برای برچسب‌گذاری ورودی لاگ ارائه شود.
+</block>
+
+<block type="code" title="سینتکس">
+text: $log[channelID; name_code]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $log[123456789; myCommand]
+</block>
+
+<block type="callout" kind="note">
+text: لاگ به صورت یک پیام به کانال مشخص شده ارسال می‌شود. پارامتر name_code اختیاری است و به برچسب‌گذاری ورودی‌های مختلف لاگ کمک می‌کند.
+</block>
+</dash>
+
+<details>
+syntax: $log[channelID; name_code]
+param: channelID|snowflake|Required|شناسه کانالی که لاگ به آن ارسال می‌شود
+param: name_code|text|Optional|یک برچسب/نام برای این ورودی لاگ
+</details>

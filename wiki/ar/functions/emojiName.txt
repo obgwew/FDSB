@@ -1,0 +1,26 @@
+<dash>
+name: $emojiName
+desc: تُرجع اسم إيموجي مخصص من معرّفه أو ذكره.
+category: معلومات
+
+<block type="text" title="كيف تعمل الدالة؟">
+text: تأخذ $emojiName معرّف إيموجي مخصص (أو إيموجي ذكر كامل مثل <:name:id> أو <a:name:id>) وتُرجع اسم الإيموجي. مفيد لعرض اسم إيموجي دون كتابته مباشرةً، أو للمقارنة مع أسماء معروفة.
+</block>
+
+<block type="code" title="الصيغة">
+text: $emojiName[emoji id]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $emojiName[123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: يجب أن يشارك البوت سيرفرًا بالإيموجي، وإلا يتم إرجاع خطأ. الإيموجيات Unicode المدمجة ليس لها معرّف ولا يمكن استخدامها هنا.
+</block>
+</dash>
+
+<details>
+syntax: $emojiName[emoji id]
+param: emoji id|snowflake|Required|المعرّف الرقمي للإيموجي المخصص، أو ذكر إيموجي مثل <:name:id> / <a:name:id>
+</details>

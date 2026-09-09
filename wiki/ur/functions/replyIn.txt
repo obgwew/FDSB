@@ -1,0 +1,27 @@
+<dash>
+name: $replyIn
+desc: بوٹ کے اگلے جواب کو کسی مخصوص مدت کے لیے مؤخر کر دیتا ہے۔
+category: وقت اور تاخیر
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $replyIn سکرپٹ کے اجرا کو مخصوص مدت کے لیے روک دیتا ہے۔ تاخیر کے بعد، سکرپٹ اگلی کمانڈ کے ساتھ جاری رہتا ہے۔ یہ وقتی جوابات بنانے کے لیے مفید ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $replyIn[time]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $replyIn[5s]
+$sendMessage[This appears after 5 seconds!]
+</block>
+
+<block type="callout" kind="note">
+text: وقت کا فارمیٹ استعمال کرتا ہے: s (سیکنڈ)، m (منٹ)، h (گھنٹے)، d (دن)۔ تاخیر کے دوران سکرپٹ منجمد رہتا ہے — اس سکرپٹ کی کوئی دوسری کمانڈ اس وقت تک عمل نہیں کرے گی جب تک تاخیر مکمل نہ ہو۔
+</block>
+</dash>
+
+<details>
+syntax: $replyIn[time]
+param: time|text|لازمی|انتظار کی مدت۔ فارمیٹ: عدد + اکائی (s/m/h/d)، مثلاً 5s, 10m, 1h
+</details>

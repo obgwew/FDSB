@@ -1,0 +1,26 @@
+<dash>
+name: $isAdmin
+desc: یہ چیک کرتا ہے کہ آیا کسی صارف کے پاس سرور میں ایڈمنسٹریٹر کی اجازتیں ہیں۔
+category: معلومات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $isAdmin ایک صارف ID یا مینشن لیتا ہے اور چیک کرتا ہے کہ آیا اس صارف کے پاس ایڈمنسٹریٹر کی اجازتیں ہیں، وہ سرور کا مالک ہے، یا بوٹ اکاؤنٹ ہے۔ یہ "true" یا "false" لوٹاتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $isAdmin[userID]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $isAdmin[$authorID]
+</block>
+
+<block type="callout" kind="note">
+text: اگر صارف سرور کا مالک، بوٹ ہے، یا اس کے پاس ایڈمنسٹریٹر کی اجازت ہے تو "true" لوٹاتا ہے۔ بصورت دیگر یا اگر صارف سرور میں نہ ملے تو "false" لوٹاتا ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $isAdmin[userID]
+param: صارف ID|text|لازمی|جس صارف کو چیک کرنا ہے اس کی ID یا @مینشن۔ متغیرات اور پلیس ہولڈرز کو سپورٹ کرتا ہے۔
+</details>

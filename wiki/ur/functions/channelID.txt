@@ -1,0 +1,21 @@
+<dash>
+name: $channelID
+desc: وہ Discord چینل آئی ڈی واپس کرتا ہے جہاں کمانڈ استعمال ہوئی۔
+category: معلومات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: جب $channelID کو پکارا جاتا ہے، بوٹ اس چینل کا منفرد Discord چینل آئی ڈی حاصل کرتا ہے جہاں کمانڈ عمل میں آئی اور اسے براہِ راست ایک خام عددی سٹرنگ کے طور پر بھیجتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $channelID
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: This command was used in channel $channelID
+</block>
+
+<block type="callout" kind="note">
+text: واپس کردہ ویلیو ایک snowflake آئی ڈی ہے (مثلاً 123456789012345678)، جو اس چینل کی منفرد شناخت کرتی ہے جہاں پیغام بھیجا گیا۔
+</block>
+</dash>

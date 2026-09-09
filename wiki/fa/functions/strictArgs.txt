@@ -1,0 +1,34 @@
+<dash>
+name: $strictArgs
+desc: یک محدودیت تعداد کلمات خاص را برای آرگومان‌های دستور کاربر اعمال می‌کند.
+category: کنترل دسترسی
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $strictArgs بررسی می‌کند که آیا تعداد کلمات ارائه‌شده توسط کاربر با محدودیت مشخص‌شده مطابقت دارد یا نه. اگر بررسی ناموفق باشد، پیام خطا نمایش داده شده و اسکریپت متوقف می‌شود.
+</block>
+
+<block type="code" title="سینتکس">
+text: $strictArgs[comparison; error_message]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $strictArgs[>2; Please provide more than 2 words!]
+</block>
+
+<block type="options" title="عملگرهای مقایسه">
+option: >|بزرگ‌تر از — کاربر باید بیش از N کلمه ارائه دهد
+option: <|کوچک‌تر از — کاربر باید کمتر از N کلمه ارائه دهد
+option: (none)|برابر با (مثلاً فقط 2) — کاربر باید دقیقاً N کلمه ارائه دهد
+option: !|نابرابر با — کاربر نباید دقیقاً N کلمه ارائه دهد
+</block>
+
+<block type="callout" kind="note">
+text: تعداد کلمات شامل نام دستور نمی‌شود. به عنوان مثال، اگر کاربر «!cmd hello world» را تایپ کند، تعداد کلمات 2 است.
+</block>
+</dash>
+
+<details>
+syntax: $strictArgs[comparison; error_message]
+param: comparison|text|Required|محدودیتی مانند >2، <2، 2 یا !2 که در آن عدد، تعداد کلمات مورد نیاز است (عدد ساده 2 به معنای دقیقاً 2 است)
+param: error_message|text|Required|پیامی که اگر تعداد کلمات با محدودیت مطابقت نداشت نمایش داده می‌شود
+</details>

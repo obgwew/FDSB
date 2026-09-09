@@ -1,0 +1,27 @@
+<dash>
+name: $serverIcon
+desc: موجودہ سرور (یا کسی سرور) کے آئیکن کی براہِ راست تصویری یو آر ایل واپس کرتا یا بھیجتا ہے۔
+category: سرور
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $serverIcon کسی سرور کے آئیکن کی براہِ راست تصویری یو آر ایل تلاش کر کے واپس کرتا ہے۔ بغیر کسی دلیل کے یہ موجودہ سرور استعمال کرتا ہے؛ گلڈ آئی ڈی کے ساتھ یہ اسی مخصوص سرور کو استعمال کرتا ہے (بوٹ کو اس میں موجود ہونا چاہیے)۔ متحرک (انیمیٹڈ) سرور آئیکن .gif یو آر ایل کے طور پر واپس آتے ہیں۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $serverIcon
+text: $serverIcon[(guildID)]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: Server icon: $serverIcon
+</block>
+
+<block type="callout" kind="note">
+text: اگر دیے گئے سرور کا کوئی آئیکن مقرر نہ ہو تو ایک خرابی (error) واپس آتی ہے۔ آپ یو آر ایل کو ایمبیڈز میں استعمال کر سکتے ہیں ($image، $thumbnail، $authorIcon، $footerIcon) یا اسے لنک کے طور پر بھیج سکتے ہیں۔
+</block>
+</dash>
+
+<details>
+syntax: $serverIcon[(guildID)]
+param: guildID|snowflake|اختیاری|سرور کی آئی ڈی جس کے آئیکن کا یو آر ایل حاصل کرنا ہے۔ حذف کرنے پر موجودہ سرور استعمال ہوتا ہے۔
+</details>

@@ -1,0 +1,26 @@
+<dash>
+name: $emojiName
+desc: Возвращает название пользовательского emoji по его ID или упоминанию.
+category: Информация
+
+<block type="text" title="Как работает команда?">
+text: $emojiName принимает ID пользовательского emoji (или полное упоминание emoji вида <:name:id> или <a:name:id>) и возвращает название emoji. Это полезно для отображения названия emoji без его жёсткого прописывания в коде, а также для сравнения с известными названиями.
+</block>
+
+<block type="code" title="Syntax">
+text: $emojiName[emoji id]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $emojiName[123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: У бота и этого emoji должен быть общий сервер, иначе возвращается ошибка. Встроенные Unicode-emoji не имеют ID и не могут использоваться здесь.
+</block>
+</dash>
+
+<details>
+syntax: $emojiName[emoji id]
+param: emoji id|snowflake|Required|Числовой ID пользовательского emoji или упоминание emoji вида <:name:id> / <a:name:id>
+</details>

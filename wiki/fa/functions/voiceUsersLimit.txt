@@ -1,0 +1,26 @@
+<dash>
+name: $voiceUsersLimit
+desc: محدودیت کاربران یک کانال صوتی یا صحنه را برمی‌گرداند.
+category: کانال
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $voiceUsersLimit یک شناسه کانال صوتی یا صحنه دریافت می‌کند و محدودیت کاربران آن را برمی‌گرداند. مقدار 0 به معنای بدون محدودیت است. اگر کانال صوتی/صحنه نباشد، خطا برمی‌گرداند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $voiceUsersLimit[voice channel ID]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $voiceUsersLimit[123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: اگر کانال محدودیت کاربری تنظیم نشده داشته باشد، مقدار 0 برمی‌گرداند. می‌تواند به صورت inline برای بررسی‌های شرطی استفاده شود.
+</block>
+</dash>
+
+<details>
+syntax: $voiceUsersLimit[voice channel ID]
+param: channelID|text|Required|شناسه یک کانال صوتی یا صحنه.
+</details>

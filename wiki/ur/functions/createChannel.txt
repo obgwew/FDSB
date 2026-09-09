@@ -1,0 +1,32 @@
+<dash>
+name: $createChannel
+desc: سرور میں ایک نیا چینل بناتا ہے۔
+category: چینل انتظامات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $createChannel سرور میں مخصوص نام اور قسم کے ساتھ ایک نیا چینل بناتا ہے۔ ٹیکسٹ، وائس، کیٹیگری، فورم اور اسٹیج چینل کی اقسام کو سپورٹ کرتا ہے۔ چینل کو کسی مخصوص کیٹیگری کے تحت رکھنے کے لیے اختیاری کیٹیگری ID فراہم کی جا سکتی ہے۔ بوٹ کے پاس "مینیج چینلز" کی اجازت ہونی چاہیے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $createChannel[name; type; (category ID)]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $createChannel[my-channel; text]
+</block>
+
+<block type="callout" kind="warning">
+text: بوٹ کے پاس "مینیج چینلز" کی اجازت ہونی چاہیے۔ معاون اقسام: text، voice، category، forum، stage۔
+</block>
+
+<block type="callout" kind="note">
+text: کیٹیگری ID اختیاری ہے۔ اگر فراہم کی جائے تو نیا چینل اسی کیٹیگری کے تحت بنایا جائے گا۔
+</block>
+</dash>
+
+<details>
+syntax: $createChannel[name; type; (category ID)]
+param: name|text|لازمی|نئے چینل کا نام۔
+param: type|text|لازمی|چینل کی قسم: text، voice، category، forum یا stage۔
+param: categoryID|text|اختیاری|جس کیٹیگری کے تحت چینل رکھنا ہے اس کا ID۔
+</details>

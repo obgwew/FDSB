@@ -1,0 +1,26 @@
+<dash>
+name: $randomstr
+desc: فراہم کردہ دلائل میں سے تصادفی طور پر منتخب کردہ ایک سٹرنگ لوٹاتا ہے۔
+category: تصادفی
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $randomstr ایک یا زیادہ سٹرنگ دلائل لیتا ہے اور تصادفی طور پر ایک چنتا ہے، پھر اسے چینل میں بھیجتا ہے۔ یہ تصادفی جوابات، اقتباسات، یا پیغامات کے لیے مفید ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $randomstr[string1; string2; string3; ...]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $randomstr[Hello!; Hi there!; Hey!; What's up?]
+</block>
+
+<block type="callout" kind="note">
+text: ہر دلیل ایک ممکنہ آؤٹ پٹ ہے۔ ایک کو برابر احتمال کے ساتھ تصادفی طور پر چنا جاتا ہے۔ کم از کم ایک سٹرنگ فراہم کرنا ضروری ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $randomstr[string1; string2; string3; ...]
+param: string|text|لازمی|ایک یا زیادہ سٹرنگز جن میں سے انتخاب کرنا ہے۔ ایک کو تصادفی طور پر منتخب کر کے بھیجا جاتا ہے۔
+</details>

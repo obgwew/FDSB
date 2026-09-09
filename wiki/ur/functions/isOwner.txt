@@ -1,0 +1,26 @@
+<dash>
+name: $isOwner
+desc: یہ چیک کرتا ہے کہ آیا کوئی صارف سرور کا مالک ہے۔
+category: معلومات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $isOwner ایک صارف ID یا مینشن لیتا ہے اور چیک کرتا ہے کہ آیا وہ صارف موجودہ سرور کا مالک ہے۔ یہ "true" یا "false" لوٹاتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $isOwner[userID]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $isOwner[$authorID]
+</block>
+
+<block type="callout" kind="note">
+text: یہ صرف اس وقت "true" لوٹاتا ہے جب صارف سرور کا مالک ہو۔ اگر صارف مالک نہیں ہے یا سرور میں نہ ملے تو "false" لوٹاتا ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $isOwner[userID]
+param: صارف ID|text|لازمی|جس صارف کو چیک کرنا ہے اس کی ID یا @مینشن۔ متغیرات اور پلیس ہولڈرز کو سپورٹ کرتا ہے۔
+</details>

@@ -1,0 +1,28 @@
+<dash>
+name: $findRole
+desc: نام، ID یا منشن کے ذریعے ایک رول تلاش کرتا ہے اور اس کی رول ID واپس کرتا ہے۔
+category: ٹول
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $findRole موجودہ سرور میں رول منشن، نمری رول ID، یا رول نام کے ذریعے رول تلاش کرتا ہے (نام میں حروف کے بڑے چھوٹے ہونے کی پرواہ نہیں کی جاتی)۔ یہ رول کی ID واپس کرتا ہے۔ اکیلے استعمال کرنے پر، ID چینل میں بھیجا جاتا ہے؛ ان لائن میں استعمال کرنے پر، ID براہ راست ارد گرد کے ٹیکسٹ میں ڈال دی جاتی ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $findRole[name]
+text: $findRole[roleID]
+text: $findRole[@role]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $findRole[Moderators]
+</block>
+
+<block type="callout" kind="note">
+text: یہ کمانڈ صرف سرور کے اندر استعمال کی جا سکتی ہے۔ اگر کوئی رول نہ ملے، تو خطا واپس کی جاتی ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $findRole[query]
+param: query|text|لازمی|رول منشن، رول ID، یا تلاش کرنے کے لیے رول نام (حروف کے بڑے چھوٹے کی پرواہ نہیں)
+</details>

@@ -1,0 +1,37 @@
+<dash>
+name: $editSelectMenu
+desc: Var olan bir seçim menüsünün minimum/maksimum seçimini ve yer tutucu metnini düzenler.
+category: Bileşenler
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $editSelectMenu, bir mesajda seçim menüsünü Menü Kimliği değerine göre bulur ve kullanıcının seçmesi gereken/bilebileceği seçenek sayısını (Min/Max) ile seçimden önce gösterilen ipucu metnini (Yer tutucu) günceller. Menüye zaten eklenmiş seçenekler değişmeden kalır. Tek bir seçeneği düzenlemek için $editSelectMenuOption kullanın.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $editSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+</block>
+
+<block type="code" title="Kopyalanmaya hazır örnek">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+$addSelectMenuOption[color_menu; Red; red; The color red]
+$addSelectMenuOption[color_menu; Blue; blue; The color blue]
+$editSelectMenu[color_menu; 1; 2; Pick one or two colors]
+</block>
+
+<block type="callout" kind="note">
+text: Bir Mesaj Kimliği verilmezse, bot önce etkileşim kaynak mesajında, ardından gönderdiği son mesajda menüyü arar. Menü seçenekleri korunur.
+</block>
+
+<block type="callout" kind="warning">
+text: Min 0 ile 25 arasında, Max 1 ile 25 arasında olmalı ve Min, Max değerini aşamaz. Hedef mesaj bu bot tarafından gönderilmiş olmalı ve verilen kimliğe sahip bir menü zaten içermelidir.
+</block>
+</dash>
+
+<details>
+syntax: $editSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+param: Menü Kimliği|text|Required|Düzenlenecek seçim menüsünün kimliği
+param: Minimum|number|Required|Kullanıcının seçmesi gereken yeni minimum seçenek sayısı (0 ile 25)
+param: Maksimum|number|Required|Kullanıcının seçebileceği yeni maksimum seçenek sayısı (1 ile 25)
+param: Yer tutucu|text|Optional|Bir seçim yapılmadan önce gösterilen yeni ipucu metni
+param: Mesaj Kimliği|snowflake|Optional|Düzenlenecek menüyü içeren belirli bir bot mesajının kimliği
+</details>

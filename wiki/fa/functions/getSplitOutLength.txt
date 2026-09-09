@@ -1,0 +1,26 @@
+<dash>
+name: $getSplitOutLength
+desc: تعداد عناصر نتیجه تقسیم‌بندی $splitIn را برمی‌گرداند.
+category: ابزارهای متنی
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $getSplitOutLength تعداد بخش‌هایی را که در آخرین فراخوانی $splitIn تولید شده‌اند برمی‌گرداند. این مقدار برای بررسی اینکه آیا قبل از استفاده از $splitOut داده کافی وجود دارد مفید است. مقدار به کانال ارسال می‌شود یا می‌توان آن را به صورت درون‌متنی استفاده کرد.
+</block>
+
+<block type="code" title="سینتکس">
+text: $getSplitOutLength
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $splitIn[apple,banana,cherry; ,]
+$getSplitOutLength
+</block>
+
+<block type="callout" kind="note">
+text: وقتی هنوز هیچ تقسیم‌بندی انجام نشده باشد مقدار «0» را برمی‌گرداند. همین مقدار را می‌توان به صورت درون‌متنی استفاده کرد، برای مثال با $if.
+</block>
+</dash>
+
+<details>
+syntax: $getSplitOutLength
+</details>

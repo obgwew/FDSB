@@ -1,0 +1,26 @@
+<dash>
+name: $randomstr
+desc: یک رشته را به‌طور تصادفی از بین آرگومان‌های ارائه‌شده برمی‌گرداند.
+category: تصادفی
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $randomstr یک یا چند آرگومان رشته می‌گیرد و به‌طور تصادفی یکی را انتخاب می‌کند، سپس آن را به کانال ارسال می‌کند. این برای پاسخ‌ها، نقل‌قول‌ها یا پیام‌های تصادفی مفید است.
+</block>
+
+<block type="code" title="سینتکس">
+text: $randomstr[string1; string2; string3; ...]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $randomstr[Hello!; Hi there!; Hey!; What's up?]
+</block>
+
+<block type="callout" kind="note">
+text: هر آرگومان یک خروجی احتمالی است. یکی با احتمال برابر به‌طور تصادفی انتخاب می‌شود. حداقل باید یک رشته ارائه شود.
+</block>
+</dash>
+
+<details>
+syntax: $randomstr[string1; string2; string3; ...]
+param: رشته|text|الزامی|یک یا چند رشته برای انتخاب از بین آن‌ها. یکی به‌طور تصادفی انتخاب و ارسال می‌شود.
+</details>

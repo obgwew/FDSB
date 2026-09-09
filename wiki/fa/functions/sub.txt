@@ -1,0 +1,27 @@
+<dash>
+name: $sub
+desc: اعداد را به صورت متوالی از مقدار اول کم کرده و نتیجه را برمی‌گرداند.
+category: ریاضی و اعداد
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $sub دو یا چند آرگومان عددی دریافت می‌کند. با مقدار اول شروع کرده و هر مقدار بعدی را از آن کم می‌کند. هم به صورت دستور مستقل و هم inline کار می‌کند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $sub[a; b; ...]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $sendMessage[Result is $sub[10; 3]]
+</block>
+
+<block type="callout" kind="note">
+text: $sub[10; 3; 2] برابر با 10 - 3 - 2 = 5 محاسبه می‌شود. اگر مقدار غیرعددی ارائه شود، خطا برگردانده می‌شود.
+</block>
+</dash>
+
+<details>
+syntax: $sub[a; b; ...]
+param: a|number|Required|مقدار شروع (منحول)
+param: b|number|Required|مقداری که کم می‌شود (مقادیر اضافی نیز به صورت متوالی کم می‌شوند)
+</details>

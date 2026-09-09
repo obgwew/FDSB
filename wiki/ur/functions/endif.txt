@@ -1,0 +1,23 @@
+<dash>
+name: $endif
+desc: $if یا $elif بلاک کے اختتام کی نشاندہی کرتا ہے۔
+category: بہاؤ کنٹرول
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $endif مشروط $if بلاک کی بندش کی حد کا اشارہ دیتا ہے۔ $if اور $endif کے درمیان کا تمام کوڈ صرف اس وقت عمل میں آتا ہے جب شرط پوری ہو۔ ہر $if کے لیے ایک مماثل $endif ہونا چاہیے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $endif
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $if[$authorID == 123456789]
+  Hello Admin!
+$endif
+</block>
+
+<block type="callout" kind="warning">
+text: ہر $if بلاک کو $endif کے ساتھ صحیح طریقے سے بند کیا جانا چاہیے۔ $endif کی کمی اسکرپٹ خرابی کا باعث بنے گی۔
+</block>
+</dash>

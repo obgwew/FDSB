@@ -1,0 +1,36 @@
+<dash>
+name: $editMessage
+desc: یک پیام ربات که قبلاً ارسال شده را در هر کانالی ویرایش می‌کند و به‌صورت اختیاری آن را به ایمبد تبدیل می‌کند.
+category: پیام‌ها
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $editMessage یک پیام خاص ربات را با شناسه کانال و شناسه پیام دریافت کرده و سپس محتوای آن را ویرایش می‌کند. به‌صورت اختیاری، می‌توانید عنوان، توضیح، رنگ و پاورقی ارائه دهید تا پیام به ایمبد تبدیل شود.
+</block>
+
+<block type="code" title="سینتکس">
+text: $editMessage[channelID; messageID; content; (title; description; color; footer)]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $editMessage[$channelID; 123456789; Updated content!]
+</block>
+
+<block type="callout" kind="note">
+text: پیام هدف باید توسط همین ربات ارسال شده باشد. اگر پارامترهای ایمبد اختیاری ارائه شوند، پیام ویرایش می‌شود تا علاوه بر محتوا شامل یک ایمبد نیز باشد.
+</block>
+
+<block type="callout" kind="warning">
+text: ربات باید مجوز مشاهده و ویرایش پیام‌ها را در کانال هدف داشته باشد.
+</block>
+</dash>
+
+<details>
+syntax: $editMessage[channelID; messageID; content; (title; description; color; footer)]
+param: شناسه کانال|snowflake|الزامی|شناسه کانالی که پیام در آن قرار دارد
+param: شناسه پیام|snowflake|الزامی|شناسه پیام ربات که باید ویرایش شود
+param: محتوا|text|الزامی|متن جدید برای پیام
+param: عنوان|text|اختیاری|عنوان ایمبدی که باید به پیام پیوست شود
+param: توضیح|text|اختیاری|توضیح برای ایمبد
+param: رنگ|text|اختیاری|کد رنگ هگز برای ایمبد
+param: پاورقی|text|اختیاری|متن پاورقی برای ایمبد
+</details>

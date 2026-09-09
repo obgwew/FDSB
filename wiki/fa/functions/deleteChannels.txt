@@ -1,0 +1,26 @@
+<dash>
+name: $deleteChannels
+desc: یک یا چند کانال را از سرور حذف می‌کند.
+category: مدیریت کانال‌ها
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $deleteChannels یک یا چند شناسه یا منشن کانال را دریافت کرده و آن‌ها را از سرور حذف می‌کند. ربات باید مجوز «مدیریت کانال‌ها» را داشته باشد. اگر هر کانالی قابل حذف نباشد (مثلاً به دلیل نبود مجوز)، عملیات با خطا متوقف می‌شود.
+</block>
+
+<block type="code" title="سینتکس">
+text: $deleteChannels[channel ID/mention; ...]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $deleteChannels[<#123456789012345678>]
+</block>
+
+<block type="callout" kind="warning">
+text: این دستور کانال‌ها را به‌صورت دائمی حذف می‌کند. ربات باید مجوز «مدیریت کانال‌ها» را برای هر کانال در حال حذف داشته باشد.
+</block>
+</dash>
+
+<details>
+syntax: $deleteChannels[channel ID/mention; ...]
+param: کانال‌ها|text|الزامی|یک یا چند شناسه یا منشن کانال که با نقطه‌ویرگول جدا شده‌اند.
+</details>

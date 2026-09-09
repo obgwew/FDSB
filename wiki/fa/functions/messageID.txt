@@ -1,0 +1,21 @@
+<dash>
+name: $messageID
+desc: شناسه پیام Discord پیامی که دستور را فعال کرده است را برمی‌گرداند.
+category: اطلاعات
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: وقتی $messageID فراخوانی شود، بات شناسه Discord یکتای پیام محرک را دریافت کرده و آن را مستقیماً به عنوان یک رشته عددی خام ارسال می‌کند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $messageID
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: Your message ID is $messageID
+</block>
+
+<block type="callout" kind="note">
+text: مقدار برگشتی یک شناسه snowflake است (مانند 123456789012345678) که پیام فعال‌کننده اسکریپت را به صورت یکتا شناسایی می‌کند.
+</block>
+</dash>

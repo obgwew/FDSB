@@ -1,0 +1,44 @@
+<dash>
+name: $addSelectMenuOption
+desc: Dodaje opcję do istniejącego menu wyboru (select menu) utworzonego za pomocą $newSelectMenu.
+category: Komponenty
+
+<block type="text" title="Jak działa ta komenda?">
+text: $addSelectMenuOption dodaje jedną opcję do menu wyboru, które zostało wcześniej utworzone za pomocą $newSelectMenu, dopasowując je po ID menu. Każda opcja ma widoczną etykietę, unikalną wartość oraz opcjonalny opis. Użyj argumentu Default, aby wstępnie ją zaznaczyć, oraz argumentu Emoji, aby wyświetlić emoji obok etykiety.
+</block>
+
+<block type="code" title="Składnia">
+text: $addSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+$addSelectMenuOption[color_menu; Red; red; The color red]
+$addSelectMenuOption[color_menu; Blue; blue; The color blue; yes]
+</block>
+
+<block type="options" title="Szczegóły">
+option: Default|Ustaw na yes, aby wstępnie zaznaczyć tę opcję (tylko jedna domyślna opcja na menu)
+option: Emoji|Emoji wyświetlane obok etykiety opcji
+option: Message ID|Opcjonalne ID wcześniej wysłanej wiadomości bota zawierającej to menu
+</block>
+
+<block type="callout" kind="note">
+text: Wartości opcji muszą być unikalne w obrębie tego samego menu. Gdy podane jest Message ID, menu na tej wiadomości jest aktualizowane na żywo; w przeciwnym razie opcja jest dołączana do menu na budowanej wiadomości.
+</block>
+
+<block type="callout" kind="warning">
+text: Maksymalnie 25 opcji na jedno menu wyboru. Jeśli w skrypcie nie utworzono menu o podanym ID (za pomocą $newSelectMenu), zwracany jest błąd.
+</block>
+</dash>
+
+<details>
+syntax: $addSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+param: Menu ID|text|Required|ID menu wyboru (z $newSelectMenu), do którego ma zostać dodana ta opcja
+param: Label|text|Required|Tekst wyświetlany użytkownikowi dla tej opcji
+param: Value|text|Required|Unikalna wartość zwracana po wybraniu tej opcji
+param: Description|text|Emptiable|Krótki opis wyświetlany pod etykietą
+param: Default|yes/no|Optional|yes, aby wstępnie zaznaczyć tę opcję (domyślnie: no)
+param: Emoji|text|Optional|Emoji wyświetlane obok etykiety opcji
+param: Message ID|snowflake|Optional|ID wcześniej wysłanej wiadomości bota, której menu ma zostać zaktualizowane na żywo
+</details>

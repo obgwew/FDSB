@@ -1,0 +1,30 @@
+<dash>
+name: $onVoiceLeave
+desc: رویدادی که وقتی یک عضو یک کانال صوتی را ترک می‌کند فعال می‌شود.
+category: رویداد
+
+<block type="text" title="این رویداد چگونه کار می‌کند؟">
+text: $onVoiceLeave یک پیشوند رویداد است که هر بار که یک عضو یک کانال صوتی را ترک می‌کند یک FDScript را فعال می‌کند. اسکریپت اطلاعات عضو و کانال صوتی را دریافت می‌کند. می‌توانید به‌صورت اختیاری در خط اول یک شناسه کانال مشخص کنید تا خروجی به یک کانال متنی خاص هدایت شود.
+</block>
+
+<block type="code" title="سینتکس">
+text: #PREFIX:$onVoiceLeave
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: #PREFIX:$onVoiceLeave
+ sendMessage[$authorName left a voice channel.]
+</block>
+
+<block type="callout" kind="note">
+text: این را در خط اول فایل FDScript خود قرار دهید. اسکریپت به‌طور خودکار وقتی هر عضو یک کانال صوتی را ترک کند اجرا می‌شود.
+</block>
+
+<block type="callout" kind="important">
+text: این رویداد در پوشه bot_events اجرا می‌شود، نه bot_commands. فایل .fds خود را آنجا ایجاد کنید.
+</block>
+</dash>
+
+<details>
+syntax: #PREFIX:$onVoiceLeave
+</details>

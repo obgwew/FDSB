@@ -1,0 +1,40 @@
+<dash>
+name: $isNumber
+desc: بررسی می‌کند آیا یک مقدار با یک فرمول/نوع عددی خاص مطابقت دارد یا خیر.
+category: ریاضی و اعداد
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $isNumber یک فرمول (بررسی نوع) و یک مقدار دریافت کرده و بررسی می‌کند آیا مقدار با آن نوع مطابقت دارد. "true" یا "false" برمی‌گرداند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $isNumber[formula; value]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $isNumber[int; 42]
+</block>
+
+<block type="options" title="فرمول‌های موجود">
+option: int|یک عدد صحیح است (بدون نقطه اعشار)
+option: nat|یک عدد طبیعی است (عدد صحیح مثبت، >= 1)
+option: pos|یک عدد مثبت است (> 0)
+option: neg|یک عدد منفی است (< 0)
+option: zero|صفر است
+option: even|یک عدد صحیح زوج است
+option: odd|یک عدد صحیح فرد است
+option: dec|یک عدد اعشاری است (نقطه اعشار دارد)
+option: frac|یک کسر است (فرمت: a/b)
+option: num|هر عدد معتبری است ( صحیح یا اعشاری)
+</block>
+
+<block type="callout" kind="note">
+text: اگر مقدار با فرمول داده شده مطابقت داشته باشد "true" و در غیر این صورت "false" برمی‌گرداند. ورودی‌های نامعتبر که قابل تجزیه نیستند همیشه "false" برمی‌گردانند.
+</block>
+</dash>
+
+<details>
+syntax: $isNumber[formula; value]
+param: formula|text|Required|نوع بررسی برای اجرا: int, nat, pos, neg, zero, even, odd, dec, frac, num
+param: value|text|Required|مقداری که باید با فرمول مقایسه شود
+</details>

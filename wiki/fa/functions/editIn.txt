@@ -1,0 +1,28 @@
+<dash>
+name: $editIn
+desc: آخرین پیام ارسال‌شده توسط ربات را پس از یک تاخیر مشخص ویرایش می‌کند.
+category: زمان‌بندی و تاخیر
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $editIn برای مدت زمان مشخص‌شده صبر می‌کند و سپس محتوای آخرین پیام ارسال‌شده توسط ربات را با متن جدید ارائه‌شده ویرایش می‌کند. پیام اصلی باید قبلاً در همان اجرای اسکریپت ارسال شده باشد.
+</block>
+
+<block type="code" title="سینتکس">
+text: $editIn[time; newMessage]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $sendMessage[Loading...]
+$editIn[5s; Done!]
+</block>
+
+<block type="callout" kind="note">
+text: فرمت زمان از: s (ثانیه)، m (دقیقه)، h (ساعت)، d (روز) استفاده می‌کند. فقط محتوای متنی جایگزین می‌شود — ایمبدها و کامپوننت‌ها تحت تأثیر قرار نمی‌گیرند.
+</block>
+</dash>
+
+<details>
+syntax: $editIn[time; newMessage]
+param: زمان|text|الزامی|مدت زمان انتظار قبل از ویرایش. فرمت: عدد + واحد (s/m/h/d)، مثلاً 5s، 10m
+param: پیام جدید|text|الزامی|متن جدیدی که جایگزین پیام قبلی می‌شود
+</details>

@@ -1,0 +1,44 @@
+<dash>
+name: $addSelectMenuOption
+desc: Fügt eine Option zu einem vorhandenen Auswahlmenü hinzu, das mit $newSelectMenu erstellt wurde.
+category: Komponenten
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: $addSelectMenuOption fügt einem Auswahlmenü, das zuvor mit $newSelectMenu erstellt wurde, eine Option hinzu, wobei es über die Menü-ID zugeordnet wird. Jede Option hat eine sichtbare Beschriftung, einen eindeutigen Wert und eine optionale Beschreibung. Verwende das Argument Default, um sie vorauszuwählen, und ein Emoji-Argument, um neben der Beschriftung ein Emoji anzuzeigen.
+</block>
+
+<block type="code" title="Syntax">
+text: $addSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+$addSelectMenuOption[color_menu; Red; red; The color red]
+$addSelectMenuOption[color_menu; Blue; blue; The color blue; yes]
+</block>
+
+<block type="options" title="Details">
+option: Standard|auf yes setzen, um diese Option vorauszuwählen (nur eine Standardoption pro Menü)
+option: Emoji|ein Emoji, das neben der Beschriftung der Option angezeigt wird
+option: Nachrichten-ID|optionale ID einer bereits gesendeten Bot-Nachricht, die dieses Menü enthält
+</block>
+
+<block type="callout" kind="note">
+text: Optionswerte müssen innerhalb desselben Menüs eindeutig sein. Wenn eine Nachrichten-ID angegeben wird, wird das Menü auf dieser Nachricht live aktualisiert; andernfalls wird die Option dem Menü der Nachricht hinzugefügt, die gerade erstellt wird.
+</block>
+
+<block type="callout" kind="warning">
+text: Maximal 25 Optionen pro Auswahlmenü. Wenn im Skript kein Menü mit der angegebenen ID erstellt wurde (über $newSelectMenu), wird ein Fehler zurückgegeben.
+</block>
+</dash>
+
+<details>
+syntax: $addSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+param: Menü-ID|text|Erforderlich|Die ID des Auswahlmenüs (aus $newSelectMenu), dem diese Option hinzugefügt werden soll
+param: Beschriftung|text|Erforderlich|Der Text, der dem Benutzer für diese Option angezeigt wird
+param: Wert|text|Erforderlich|Ein eindeutiger Wert, der zurückgegeben wird, wenn diese Option ausgewählt wird
+param: Beschreibung|text|Darf leer gelassen werden|Kurze Beschreibung, die unter der Beschriftung angezeigt wird
+param: Standard|yes/no|Optional|yes, um diese Option vorauszuwählen (Standard: no)
+param: Emoji|text|Optional|Ein Emoji, das neben der Beschriftung der Option angezeigt wird
+param: Nachrichten-ID|snowflake|Optional|ID einer bereits gesendeten Bot-Nachricht, deren Menü live aktualisiert werden soll
+</details>

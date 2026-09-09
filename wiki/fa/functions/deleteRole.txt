@@ -1,0 +1,26 @@
+<dash>
+name: $deleteRole
+desc: یک نقش را از سرور حذف می‌کند.
+category: مدیریت
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $deleteRole یک شناسه یا @منشن نقش را دریافت می‌کند، آن را در سرور پیدا کرده و به‌صورت دائمی حذف می‌کند. این عمل قابل بازگشت نیست.
+</block>
+
+<block type="code" title="سینتکس">
+text: $deleteRole[role ID or @mention]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $deleteRole[&123456789]
+</block>
+
+<block type="callout" kind="warning">
+text: ربات باید مجوز «مدیریت نقش‌ها» را داشته باشد و بالاترین نقش آن باید بالاتر از نقش هدف باشد. حذف یک نقش دائمی است و قابل بازگشت نیست.
+</block>
+</dash>
+
+<details>
+syntax: $deleteRole[role ID or @mention]
+param: شناسه یا منشن نقش|text|الزامی|شناسه یا @منشن نقشی که باید حذف شود
+</details>

@@ -1,0 +1,32 @@
+<dash>
+name: $createChannel
+desc: یک کانال جدید در سرور ایجاد می‌کند.
+category: مدیریت کانال‌ها
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $createChannel یک کانال جدید در سرور با نام و نوع مشخص‌شده ایجاد می‌کند. از انواع کانال متنی، صوتی، دسته‌بندی، انجمن و صحنه پشتیبانی می‌کند. می‌توان یک شناسه دسته‌بندی اختیاری ارائه داد تا کانال زیر یک دسته‌بندی خاص قرار گیرد. ربات باید مجوز «مدیریت کانال‌ها» را داشته باشد.
+</block>
+
+<block type="code" title="سینتکس">
+text: $createChannel[name; type; (category ID)]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $createChannel[my-channel; text]
+</block>
+
+<block type="callout" kind="warning">
+text: ربات باید مجوز «مدیریت کانال‌ها» را داشته باشد. انواع پشتیبانی‌شده: text، voice، category، forum، stage.
+</block>
+
+<block type="callout" kind="note">
+text: شناسه دسته‌بندی اختیاری است. اگر ارائه شود، کانال جدید زیر آن دسته‌بندی ایجاد خواهد شد.
+</block>
+</dash>
+
+<details>
+syntax: $createChannel[name; type; (category ID)]
+param: نام|text|الزامی|نام کانال جدید.
+param: نوع|text|الزامی|نوع کانال: text، voice، category، forum یا stage.
+param: شناسه دسته‌بندی|text|اختیاری|شناسه دسته‌بندی که کانال زیر آن قرار می‌گیرد.
+</details>

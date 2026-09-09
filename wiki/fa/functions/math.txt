@@ -1,0 +1,46 @@
+<dash>
+name: $math
+desc: یک عبارت ریاضی را ارزیابی کرده و نتیجه را برمی‌گرداند.
+category: ریاضی و اعداد
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $math یک عبارت ریاضی دریافت کرده، آن را با استفاده از پارسر AST پایتون به صورت امن ارزیابی کرده و نتیجه را ارسال می‌کند. از حساب پایه، توان‌ها و توابع رایج ریاضی پشتیبانی می‌کند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $math[expression]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $math[2 + 2 * 3]
+</block>
+
+<block type="options" title="عملگرهای پشتیبانی شده">
+option: +|جمع
+option: -|تفریق
+option: *|ضرب
+option: /|تقسیم
+option: //|تقسیم کفی
+option: %|باقیمانده
+option: **|توان
+</block>
+
+<block type="options" title="توابع پشتیبانی شده">
+option: sqrt|جذر
+option: abs|مقدار مطلق
+option: ceil|گرد کردن به بالا
+option: floor|گرد کردن به پایین
+option: round|گرد کردن به نزدیک‌ترین عدد
+option: log/log2/log10|لگاریتم
+option: sin/cos/tan|توابع مثلثاتی
+</block>
+
+<block type="callout" kind="note">
+text: ثابت‌های pi، e و inf در دسترس هستند. عبارت به صورت امن ارزیابی می‌شود — اجرای کد دلخواه امکان‌پذیر نیست. تقسیم بر صفر خطا برمی‌گرداند.
+</block>
+</dash>
+
+<details>
+syntax: $math[expression]
+param: expression|text|Required|عبارت ریاضی برای ارزیابی، مانند: 2 + 2, sqrt(16), pi * 2
+</details>

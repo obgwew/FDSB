@@ -1,0 +1,25 @@
+<dash>
+name: $customID
+desc: مقدار custom_id دکمه یا تعامل کامپوننتی که اسکریپت را راه‌اندازی کرده برمی‌گرداند.
+category: اطلاعات
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: وقتی کاربر دکمه‌ای را کلیک می‌کند یا با یک کامپوننت تعامل می‌کند، $customID رشته custom_id اختصاص‌داده‌شده به آن کامپوننت را برمی‌گرداند. این برای شناسایی اینکه کدام دکمه در یک رویداد onInteraction فشرده شده است مفید است.
+</block>
+
+<block type="code" title="سینتکس">
+text: $customID
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $if[$customID == btn_confirm]
+  You confirmed!
+$elif[$customID == btn_cancel]
+  You cancelled!
+$endif
+</block>
+
+<block type="callout" kind="note">
+text: این متغیر فقط در اسکریپت‌های مبتنی بر تعامل (مثلاً onInteraction) معنادار است. وقتی در یک بافت پیام معمولی استفاده شود، یک رشته خالی برمی‌گرداند.
+</block>
+</dash>

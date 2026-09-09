@@ -1,0 +1,26 @@
+<dash>
+name: $image
+desc: URL کا استعمال کرکے چینل کو ایک تصویر ایمبیڈ بھیجتا ہے۔
+category: پیغامات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $image ایک تصویر URL لیتا ہے، اس تصویر کے ساتھ ایک ایمبیڈ بناتا ہے، اور اسے چینل میں بھیجتا ہے۔ URL http:// یا https:// سے شروع ہونا چاہیے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $image[URL]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $image[https://example.com/photo.png]
+</block>
+
+<block type="callout" kind="note">
+text: تصویر ایک ایمبیڈ کے طور پر بھیجی جاتی ہے جس میں تصویر ایمبیڈ تصویر کے طور پر سیٹ ہوتی ہے۔ بٹ کے پاس چینل میں "Embed Links" اجازت ہونی چاہیے۔
+</block>
+</dash>
+
+<details>
+syntax: $image[URL]
+param: URL|text|لازمی|تصویر فائل کا براہ راست URL۔ http:// یا https:// سے شروع ہونا چاہیے
+</details>

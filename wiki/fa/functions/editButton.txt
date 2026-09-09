@@ -1,0 +1,35 @@
+<dash>
+name: $editButton
+desc: ویژگی‌های یک دکمه موجود روی یک پیام را ویرایش می‌کند.
+category: کامپوننت‌ها
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $editButton یک دکمه را با شناسه یا URL آن روی یک پیام پیدا کرده و برچسب، سبک، حالت غیرفعال و/یا ایموجی آن را به‌روزرسانی می‌کند. می‌تواند دکمه‌های یک نمای در انتظار، پیام منبع تعامل یا یک پیام خاص با شناسه را هدف بگیرد.
+</block>
+
+<block type="code" title="سینتکس">
+text: $editButton[ID/URL; label; style; (disabled; emoji; messageID)]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $editButton[btn_confirm; Confirmed; success]
+</block>
+
+<block type="callout" kind="note">
+text: اگر messageID ارائه شود، ربات آن پیام خاص را دریافت کرده و دکمه را روی آن ویرایش می‌کند. در غیر این صورت، ابتدا نمای در انتظار، سپس پیام منبع تعامل و سپس آخرین پیام ارسال‌شده توسط ربات را جستجو می‌کند.
+</block>
+
+<block type="callout" kind="warning">
+text: پیام هدف باید توسط همین ربات ارسال شده باشد. دکمه باید از قبل با شناسه یا URL داده‌شده روی پیام وجود داشته باشد.
+</block>
+</dash>
+
+<details>
+syntax: $editButton[ID/URL; label; style; (disabled; emoji; messageID)]
+param: شناسه/URL|text|الزامی|شناسه سفارشی یا URL دکمه‌ای که باید ویرایش شود
+param: برچسب|text|الزامی|متن جدیدی که روی دکمه نمایش داده می‌شود
+param: سبک|text|الزامی|primary / secondary / success / danger / link
+param: غیرفعال|yes/no|اختیاری|yes برای غیرفعال کردن دکمه، no برای فعال کردن آن
+param: ایموجی|text|اختیاری|ایموجی جدیدی که داخل دکمه نمایش داده می‌شود
+param: شناسه پیام|snowflake|اختیاری|شناسه یک پیام خاص ربات که دکمه باید روی آن ویرایش شود
+</details>

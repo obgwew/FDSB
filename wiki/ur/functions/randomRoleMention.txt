@@ -1,0 +1,21 @@
+<dash>
+name: $randomRoleMention
+desc: سرور سے ایک تصادفی رول کا مینشن لوٹاتا ہے۔
+category: تصادفی
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: جب $randomRoleMention کہا جاتا ہے، بوٹ موجودہ سرور کے تمام رولز جمع کرتا ہے (ڈیفالٹ @everyone رول کو چھوڑ کر)، تصادفی طور پر ایک چنتا ہے، اور اس کا مینشن فارمیٹ چینل میں بھیجتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $randomRoleMention
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: Congrats $randomRoleMention!
+</block>
+
+<block type="callout" kind="note">
+text: لوٹائی گئی قدر ایک Discord رول مینشن ہے (مثلاً <@&123456789>)، جو چیٹ میں کلک کرنے کے قابل رنگین مینشن کی طرح ظاہر ہوتا ہے۔ @everyone رول ہمیشہ خارج رہتا ہے۔
+</block>
+</dash>

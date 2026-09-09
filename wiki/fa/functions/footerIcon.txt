@@ -1,0 +1,28 @@
+<dash>
+name: $footerIcon
+desc: تصویر آیکون پاورقی ایمبد را با استفاده از یک URL تنظیم می‌کند.
+category: سازنده ایمبد
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $footerIcon یک تصویر گرد کوچک در کنار متن پاورقی ایمبد هدف قرار می‌دهد. هر آرگومانی که حاوی یک آدرس وب معتبر باشد کار می‌کند — این دستور اولین URL یافت‌شده را استخراج می‌کند. آرگومان عددی اختیاری آخر مشخص می‌کند که کدام ایمبد ویرایش شود.
+</block>
+
+<block type="code" title="سینتکس">
+text: $footerIcon[url;(index)]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $footer[(c) My Community]
+text: $footerIcon[https://example.com/logo.png]
+</block>
+
+<block type="callout" kind="note">
+text: URL باید با http:// یا https:// شروع شود. علائم نگارشی انتهایی بعد از URL (مانند . یا )) به صورت خودکار حذف می‌شوند. اگر هیچ URL معتبری یافت نشود، یک خطا ایجاد می‌شود.
+</block>
+</dash>
+
+<details>
+syntax: $footerIcon[url;(index)]
+param: url|text|الزامی|متنی حاوی URL تصویر (http:// یا https://)
+param: index|number|اختیاری|شماره ایمبد برای ویرایش هنگامی که چند ایمبد در حال ساخت است (پیش‌فرض 1)
+</details>

@@ -1,0 +1,25 @@
+<dash>
+name: $customID
+desc: اس بٹن یا کمپوننٹ انٹرایکشن کا custom_id واپس کرتا ہے جس نے اسکرپٹ کو متحرک کیا۔
+category: معلومات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: جب صارف کسی بٹن پر کلک کرتا ہے یا کسی کمپوننٹ کے ساتھ انٹرایکٹ کرتا ہے تو $customID اس کمپوننٹ کو تفویض کردہ custom_id سٹرنگ واپس کرتا ہے۔ یہ onInteraction ایونٹ میں شناخت کرنے کے لیے مفید ہے کہ کون سا بٹن دبایا گیا تھا۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $customID
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $if[$customID == btn_confirm]
+  You confirmed!
+$elif[$customID == btn_cancel]
+  You cancelled!
+$endif
+</block>
+
+<block type="callout" kind="note">
+text: یہ متغیر صرف انٹرایکشن سے متحرک اسکرپٹس (مثلاً onInteraction) کے اندر معنوی ہے۔ جب باقاعدہ میسج تناظر میں استعمال کیا جائے تو یہ خالی سٹرنگ واپس کرتا ہے۔
+</block>
+</dash>

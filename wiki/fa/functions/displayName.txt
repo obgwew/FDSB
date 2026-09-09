@@ -1,0 +1,26 @@
+<dash>
+name: $displayName
+desc: نام نمایشی یک کاربر را برمی‌گرداند.
+category: کاربر
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $displayName نام نمایشی (نام مستعار سرور یا نام کاربری) یک کاربر را برمی‌گرداند. اگر آرگومانی ارائه نشود، نام نمایشی نویسنده دستور را برمی‌گرداند. وقتی شناسه یا منشن کاربر ارائه می‌شود، نام نمایشی آن کاربر را برمی‌گرداند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $displayName[(user mention/ID)]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: Hello, $displayName!
+</block>
+
+<block type="callout" kind="note">
+text: نام نمایشی، نام مستعار مخصوص سرور است اگر تنظیم شده باشد، در غیر این صورت نام کاربری سراسری است. می‌توان از آن به‌صورت درون‌خطی استفاده کرد.
+</block>
+</dash>
+
+<details>
+syntax: $displayName[(user mention/ID)]
+param: کاربر|text|اختیاری|یک منشن کاربر یا شناسه عددی. اگر خالی باشد، از نویسنده دستور استفاده می‌کند.
+</details>

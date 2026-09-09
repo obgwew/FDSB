@@ -1,0 +1,29 @@
+<dash>
+name: $editSplitOut
+desc: یکی از عناصر نتیجه تقسیم فعلی ($splitIn) را با یک مقدار جدید جایگزین می‌کند.
+category: ابزارهای متنی
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $editSplitOut نتیجه تقسیمی را که توسط $splitIn ذخیره شده است تغییر می‌دهد. شاخص بر پایه 1 است. عنصر انتخاب‌شده با مقدار جدید جایگزین می‌شود و بقیه بدون تغییر باقی می‌مانند. $splitIn باید قبل از این دستور فراخوانی شود.
+</block>
+
+<block type="code" title="سینتکس">
+text: $editSplitOut[index; value]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $splitIn[apple,banana,cherry; ,]
+$editSplitOut[2; mango]
+$joinSplitOut[; ]
+</block>
+
+<block type="callout" kind="note">
+text: شاخص باید یک عدد صحیح مثبت در محدوده طول تقسیم فعلی (از 1 تا تعداد کل عناصر) باشد، در غیر این صورت یک خطا ایجاد می‌شود.
+</block>
+</dash>
+
+<details>
+syntax: $editSplitOut[index; value]
+param: شاخص|number|الزامی|موقعیت عنصری که باید جایگزین شود (بر پایه 1)
+param: مقدار|text|الزامی|مقدار جدید برای آن عنصر
+</details>

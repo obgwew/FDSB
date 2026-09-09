@@ -1,0 +1,27 @@
+<dash>
+name: $changeUsername
+desc: سرور ممبر کے عرفی نام (نک نیم) کو تبدیل کرتا ہے۔
+category: انتظامات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $changeUsername ایک صارف آئی ڈی/مینشن اور ایک نیا نام لیتا ہے۔ بوٹ سرور میں ممبر تلاش کرتا ہے اور Discord API کے ذریعے ان کے عرفی نام کو فراہم کردہ نام میں تبدیل کر دیتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $changeUsername[user ID/mention; new name]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $changeUsername[123456789; NewNickname]
+</block>
+
+<block type="callout" kind="warning">
+text: بوٹ کے پاس "Manage Nicknames" کی اجازت ہونی چاہیے اور اس کا سب سے اونچا رول ہدف کے سب سے اونچے رول سے اوپر ہونا چاہیے۔ بوٹ اپنا عرفی نام یا سرور مالک کا عرفی نام تبدیل نہیں کر سکتا۔
+</block>
+</dash>
+
+<details>
+syntax: $changeUsername[user ID/mention; new name]
+param: صارف آئی ڈی/مینشن|text|لازمی|ہدف ممبر کا Discord صارف آئی ڈی یا @mention
+param: نیا نام|text|لازمی|تفویض کرنے کے لیے نیا عرفی نام۔ معیاری پر ری سیٹ کرنے کے لیے خالی چھوڑیں۔
+</details>

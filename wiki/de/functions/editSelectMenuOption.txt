@@ -1,0 +1,39 @@
+<dash>
+name: $editSelectMenuOption
+desc: Bearbeitet die Beschriftung, den Wert, die Beschreibung, den Standardzustand oder das Emoji einer vorhandenen Auswahlmenü-Option.
+category: Komponenten
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: $editSelectMenuOption findet eine Option innerhalb eines Auswahlmenüs über ihren aktuellen Wert und aktualisiert anschließend ihre Beschriftung, Beschreibung, ihren Standardzustand und/oder ihr Emoji. Das Argument Value muss mit dem Wert der Option übereinstimmen, die du bearbeiten möchtest. Wird Default auf yes gesetzt, wird diese Option zur einzigen vorausgewählten.
+</block>
+
+<block type="code" title="Syntax">
+text: $editSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+$addSelectMenuOption[color_menu; Red; red; The color red]
+$addSelectMenuOption[color_menu; Blue; blue; The color blue]
+$editSelectMenuOption[color_menu; Crimson; red; A deep red]
+</block>
+
+<block type="callout" kind="note">
+text: Dieser Befehl aktualisiert die Option live auf der Zielnachricht. Ohne Nachrichten-ID sucht er zuerst auf der Quellnachricht der Interaktion, danach auf der letzten Nachricht, die der Bot gesendet hat.
+</block>
+
+<block type="callout" kind="warning">
+text: Wenn im Menü keine Option mit dem angegebenen Wert existiert, wird ein Fehler zurückgegeben. Die Zielnachricht muss von diesem Bot gesendet worden sein und das Auswahlmenü mit der angegebenen ID enthalten.
+</block>
+</dash>
+
+<details>
+syntax: $editSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+param: Menü-ID|text|Erforderlich|Die ID des Auswahlmenüs, das die Option enthält
+param: Beschriftung|text|Erforderlich|Der neue Text, der dem Benutzer für diese Option angezeigt wird
+param: Wert|text|Erforderlich|Der aktuelle Wert der zu bearbeitenden Option (wird zum Auffinden verwendet)
+param: Beschreibung|text|Darf leer gelassen werden|Neue kurze Beschreibung, die unter der Beschriftung angezeigt wird
+param: Standard|yes/no|Optional|yes, um diese Option zur vorausgewählten zu machen (Standard: no)
+param: Emoji|text|Optional|Neues Emoji, das neben der Beschriftung der Option angezeigt wird
+param: Nachrichten-ID|snowflake|Optional|ID einer bestimmten Bot-Nachricht, die das zu bearbeitende Menü enthält
+</details>

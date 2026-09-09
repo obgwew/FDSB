@@ -1,0 +1,32 @@
+<dash>
+name: $emojiExists
+desc: Sprawdza, czy istnieje niestandardowe emoji, i zwraca true lub false.
+category: Informacje
+
+<block type="text" title="Jak działa ta komenda?">
+text: $emojiExists przyjmuje ID niestandardowego emoji (lub pełną wzmiankę emoji, np. <:name:id> lub <a:name:id>) i zwraca true, jeśli bot współdzieli serwer, na którym to emoji istnieje, w przeciwnym razie false.
+</block>
+
+<block type="code" title="Składnia">
+text: $emojiExists[emoji id]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $if[$emojiExists[123456789012345678]]
+ $sendMessage[That emoji exists!]
+$endif
+</block>
+
+<block type="callout" kind="note">
+text: Jest to przydatne w warunkach $if / $onlyIf. Wbudowane emoji Unicode nie mają ID, więc można sprawdzać wyłącznie niestandardowe emoji serwerowe.
+</block>
+
+<block type="callout" kind="warning">
+text: Emoji musi być osiągalne przez bota (bot musi współdzielić z nim serwer), w przeciwnym razie sprawdzenie może zwrócić false.
+</block>
+</dash>
+
+<details>
+syntax: $emojiExists[emoji id]
+param: emoji id|snowflake|Required|Numeryczne ID niestandardowego emoji albo wzmianka emoji, np. <:name:id> / <a:name:id>
+</details>

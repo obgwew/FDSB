@@ -1,0 +1,29 @@
+<dash>
+name: $returnGuildBansID
+desc: کسی گِلف کے تمام پابند صارفین کی IDs جمع کر کے ذخیرہ کرتا ہے۔
+category: واپسی کمانڈز
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $returnGuildBansID مخصوص گِلف کی پابندی کی فہرست طلب کرتا ہے اور ہر پابند ممبر کی صارف آئی ڈی کو دیے گئے متغیر نام کے تحت ذخیرہ کرتا ہے، جدا کار کے ساتھ جوڑ کر۔ ذخیرہ شدہ سٹرنگ کو بعد میں $return[var] کے ساتھ بازیافت کریں۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $returnGuildBansID[GuildID; var; separator]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $returnGuildBansID[$guildID; bannedIDs; ,]
+text: $sendMessage[Banned users: $return[bannedIDs]]
+</block>
+
+<block type="callout" kind="important">
+text: اس کے لیے ممبرز پر پابندی (Ban Members) کا اجازت درکار ہے — اس کے بغیر کمانڈ اجازت کی خرابی کے ساتھ ناکام ہو جاتی ہے۔ خالی متغیر کا مطلب ہے کہ کوئی پابند نہیں ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $returnGuildBansID[GuildID; var; separator]
+param: GuildID|snowflake|لازمی|اس گِلف کی آئی ڈی جس کی پابندی کی فہرست پڑھی جاتی ہے
+param: var|text|لازمی|متغیر کا نام جس میں نتیجہ ذخیرہ کرنا ہے ($return[] کے ساتھ واپس پڑھیں)
+param: separator|text|لازمی|آئی ڈیز کے درمیان جدا کار (مثلاً ,)۔ نامی جدا کار بھی کام کرتے ہیں: dot, com, apo, sem, colon
+</details>

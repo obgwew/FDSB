@@ -1,0 +1,26 @@
+<dash>
+name: $lineCount
+desc: Returns the number of spaces in the given text.
+category: String Utilities
+
+<block type="text" title="How does the command work?">
+text: $lineCount takes a text argument and returns how many space characters ( ) it contains. Variables and placeholders in the argument are resolved before counting.
+</block>
+
+<block type="code" title="Syntax">
+text: $lineCount[text]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $lineCount[one two three]
+</block>
+
+<block type="callout" kind="note">
+text: The count is based on spaces, not on actual newlines. To split text into parts, use $splitIn together with $splitOut.
+</block>
+</dash>
+
+<details>
+syntax: $lineCount[text]
+param: text|text|Required|The text to count spaces in. Variables and placeholders are resolved before counting.
+</details>

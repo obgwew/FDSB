@@ -1,0 +1,31 @@
+<dash>
+name: $timeout
+desc: یک تایم‌اوت (بی‌صدا کردن) را برای مدت زمان مشخصی به یک عضو سرور اعمال می‌کند.
+category: مدیریت
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $timeout یک مدت زمان و یک شناسه کاربر/منشن دریافت می‌کند و سپس یک تایم‌اوت را به آن عضو اعمال می‌کند. عضو تایم‌اوت شده نمی‌تواند در مدت زمان مشخص‌شده پیام ارسال کند، واکنش نشان دهد یا به کانال‌های صوتی بپیوندد.
+</block>
+
+<block type="code" title="سینتکس">
+text: $timeout[time; user]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $timeout[1h; @user]
+</block>
+
+<block type="callout" kind="note">
+text: فرمت زمان شامل: s (ثانیه)، m (دقیقه)، h (ساعت)، d (روز) است. حداکثر مدت زمان تایم‌اوت 28 روز است. برای حذف زودتر تایم‌اوت از $untimeout استفاده کنید.
+</block>
+
+<block type="callout" kind="warning">
+text: ربات باید مجوز «اعضای مدیریت» را داشته باشد و نقش بالاتر آن باید بالاتر از نقش بالای هدف باشد.
+</block>
+</dash>
+
+<details>
+syntax: $timeout[time; user]
+param: time|text|Required|مدت زمان تایم‌اوت. فرمت: عدد + واحد (s/m/h/d)، مثلاً 1h، 30m، 7d
+param: user|text|Required|شناسه کاربر یا @منشن عضوی که تایم‌اوت می‌شود
+</details>

@@ -1,0 +1,23 @@
+<dash>
+name: $endfor
+desc: پایان یک بلوک حلقه $for را علامت می‌زند.
+category: کنترل جریان
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $endfor مرز پایانی یک حلقه $for را مشخص می‌کند. پس از هر تکرار، اجرا به ابتدای بدنه حلقه برمی‌گردد. هر $for باید یک $endfor متناظر داشته باشد.
+</block>
+
+<block type="code" title="سینتکس">
+text: $endfor
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $for[5]
+  $sendMessage[Iteration!]
+$endfor
+</block>
+
+<block type="callout" kind="warning">
+text: هر بلوک $for باید به‌درستی با $endfor بسته شود. نبود $endfor باعث خطای اسکریپت می‌شود.
+</block>
+</dash>

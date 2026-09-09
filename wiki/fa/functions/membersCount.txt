@@ -1,0 +1,28 @@
+<dash>
+name: $membersCount
+desc: تعداد اعضای یک سرور را برمی‌گرداند.
+category: اطلاعات
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: وقتی $membersCount بدون آرگومان فراخوانی شود، بات تمام اعضای انسانی غیربات در سرور فعلی را شمرده و تعداد را ارسال می‌کند. وقتی با شناسه گیلد و پرچم yes/no فراخوانی شود، اعضای آن سرور مشخص را شمرده و به صورت اختیاری بات‌ها را شامل می‌شود.
+</block>
+
+<block type="code" title="سینتکس">
+text: $membersCount
+text: $membersCount[guildID; includeBots]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: We have $membersCount members!
+</block>
+
+<block type="callout" kind="note">
+text: به صورت پیش‌فرض، بات‌ها از شمارش حذف می‌شوند. برای شامل کردن بات‌ها از $membersCount[guildID; yes] استفاده کنید. بدون آرگومان، این دستور فقط داخل سرور کار می‌کند. هنگام ارائه شناسه گیلد، بات باید عضو آن گیلد باشد.
+</block>
+</dash>
+
+<details>
+syntax: $membersCount[(guildID; includeBots)]
+param: guildID|snowflake|Optional|شناسه سرور دیگری برای شمارش اعضا. اگر حذف شود، از سرور فعلی استفاده می‌کند.
+param: includeBots|yes/no|Optional|برای شامل کردن حساب‌های بات در شمارش "yes" تنظیم کنید. اگر حذف شود، فقط اعضای انسانی شمرده می‌شوند.
+</details>

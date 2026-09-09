@@ -1,0 +1,27 @@
+<dash>
+name: $authorAvatar
+desc: Renvoie ou envoie l'URL d'image directe de l'avatar global de l'auteur de la commande (ou d'un utilisateur).
+category: Info
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: $authorAvatar résout et renvoie l'URL d'image directe de l'avatar global (de profil) d'un utilisateur. Sans argument, il utilise l'auteur de la commande ; avec un ID utilisateur ou une @mention, il utilise cet utilisateur. Le résultat est une URL que vous pouvez intégrer dans des messages ou des images.
+</block>
+
+<block type="code" title="Syntaxe">
+text: $authorAvatar
+text: $authorAvatar[(userID/@mention)]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: Your avatar: $authorAvatar
+</block>
+
+<block type="callout" kind="note">
+text: Ceci utilise l'avatar global de l'utilisateur (sa photo de profil). Pour l'avatar affiché à l'intérieur d'un serveur (avatar de serveur), utilisez $authorServerAvatar. Les avatars animés sont renvoyés sous forme d'URL .gif.
+</block>
+</dash>
+
+<details>
+syntax: $authorAvatar[(userID/@mention)]
+param: userID/@mention|text|Optionnel|L'ID utilisateur ou la @mention dont il faut obtenir l'URL de l'avatar global. S'il est omis, utilise l'auteur de la commande.
+</details>

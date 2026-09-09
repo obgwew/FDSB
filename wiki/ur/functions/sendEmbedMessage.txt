@@ -1,0 +1,30 @@
+<dash>
+name: $sendEmbedMessage
+desc: عنوان، تفصیل، رنگ اور فوٹر کے ساتھ مخصوص چینل کو ایک ایمبیڈ پیغام بھیجتا ہے۔
+category: پیغامات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $sendEmbedMessage فراہم کردہ عنوان، تفصیل، رنگ اور فوٹر کے ساتھ ایک ایمبیڈ بناتا ہے، پھر اسے مخصوص چینل کو بھیجتا ہے۔ تمام پانچ دلائلیں لازمی ہیں۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $sendEmbedMessage[channelID; title; description; color; footer]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $sendEmbedMessage[$channelID; Welcome!; Thanks for joining; #00FF00; Enjoy your stay]
+</block>
+
+<block type="callout" kind="note">
+text: رنگ دلیل ہیکس ویلیوز قبول کرتی ہے (مثلاً #FF5733)۔ بوٹ کے پاس ہدف چینل میں "Send Messages" اور "Embed Links" اجازتیں ہونی چاہئیں۔
+</block>
+</dash>
+
+<details>
+syntax: $sendEmbedMessage[channelID; title; description; color; footer]
+param: channelID|snowflake|لازمی|اس چینل کی ID جس میں ایمبیڈ بھیجنا ہے
+param: title|text|لازمی|ایمبیڈ کا عنوان
+param: description|text|لازمی|ایمبیڈ کی تفصیل/باڈی متن
+param: color|text|لازمی|ایمبیڈ کی ایکسنٹ بار کے لیے ہیکس رنگ کوڈ (مثلاً #FF5733)
+param: footer|text|لازمی|ایمبیڈ کے نیچے دکھایا جانے والا فوٹر متن
+</details>

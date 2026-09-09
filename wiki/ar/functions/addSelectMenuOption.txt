@@ -1,0 +1,44 @@
+<dash>
+name: $addSelectMenuOption
+desc: يضيف خيارًا إلى قائمة اختيار موجودة تم إنشاؤها باستخدام $newSelectMenu.
+category: المكوّنات
+
+<block type="text" title="كيف تعمل الدالة؟">
+text: تضيف $addSelectMenuOption خيارًا واحدًا إلى قائمة اختيار تم إنشاؤها مسبقًا باستخدام $newSelectMenu، وذلك عبر مطابقة معرّف القائمة (Menu ID). لكل خيار название ظاهر وقيمة فريدة ووصف اختياري. استخدم المعامل Default لتحديد هذا الخيار بشكل افتراضي، والمعامل Emoji لعرض إيموجي بجانب النص.
+</block>
+
+<block type="code" title="الصيغة">
+text: $addSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+$addSelectMenuOption[color_menu; Red; red; The color red]
+$addSelectMenuOption[color_menu; Blue; blue; The color blue; yes]
+</block>
+
+<block type="options" title="التفاصيل">
+option: Default|عيّنه بـ yes لتحديد هذا الخيار بشكل افتراضي (خيار واحد فقط كافتراضي لكل قائمة)
+option: Emoji|إيموجي يظهر بجانب نص الخيار
+option: Message ID|معرّف اختياري لرسالة بوت مرسلة مسبقًا تحتوي على هذه القائمة
+</block>
+
+<block type="callout" kind="note">
+text: يجب أن تكون قيم الخيارات فريدة داخل نفس القائمة. عند تحديد Message ID، يتم تحديث القائمة في تلك الرسالة مباشرةً؛ وإلا يتم إرفاق الخيار بالقائمة في الرسالة التي يتم إنشاؤها.
+</block>
+
+<block type="callout" kind="warning">
+text: الحد الأقصى 25 خيارًا لكل قائمة اختيار. إذا لم يتم إنشاء قائمة بالمعرّف المحدد في السكريبت (عبر $newSelectMenu)، يتم إرجاع خطأ.
+</block>
+</dash>
+
+<details>
+syntax: $addSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+param: Menu ID|text|Required|معرّف قائمة الاختيار (من $newSelectMenu) لإضافת هذا الخيار إليها
+param: Label|text|Required|النص المعروض للمستخدم لهذا الخيار
+param: Value|text|Required|قيمة فريدة تُرجع عند اختيار هذا الخيار
+param: Description|text|Emptiable|وصف قصير يظهر تحت النص
+param: Default|yes/no|Optional|yes لتحديد هذا الخيار بشكل افتراضي (الافتراضي: no)
+param: Emoji|text|Optional|إيموجي يظهر بجانب نص الخيار
+param: Message ID|snowflake|Optional|معرّف رسالة بوت مرسلة مسبقًا يجب تحديث قائمتها مباشرةً
+</details>

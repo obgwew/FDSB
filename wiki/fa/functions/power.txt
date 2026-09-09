@@ -1,0 +1,31 @@
+<dash>
+name: $power
+desc: یک عدد را به توان عدد دیگری می‌رساند.
+category: ریاضی و اعداد
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $power دو آرگومان عددی می‌گیرد — یک مبنا و یک توان — و مبنای عدد را به توان می‌رساند. هم به‌صورت یک دستور مستقل و هم به‌صورت درون‌خطی داخل سایر دستورها کار می‌کند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $power[base; exponent]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $sendMessage[$power[2; 10]]
+</block>
+
+<block type="callout" kind="note">
+text: $power[2; 10] برابر 1024 برمی‌گرداند. $power[3; 3] برابر 27 برمی‌گرداند. $power[5; 0] برابر 1 برمی‌گرداند. اگر نتیجه جزء اعشاری نداشته باشد، نتیجه یک عدد صحیح است.
+</block>
+
+<block type="callout" kind="warning">
+text: مبنای منفی با توان کسری منجر به یک عدد مختلط می‌شود که خطا برمی‌گرداند. نتایج بسیار بزرگ نیز ممکن است خطای سرریز ایجاد کنند.
+</block>
+</dash>
+
+<details>
+syntax: $power[base; exponent]
+param: مبنا|number|الزامی|عدد مبنایی که باید به توان برسد، مثلاً 2، 10، 3.5
+param: توان|number|الزامی|توان، مثلاً 3، 10، 0.5
+</details>

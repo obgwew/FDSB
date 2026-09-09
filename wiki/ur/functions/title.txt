@@ -1,0 +1,26 @@
+<dash>
+name: $title
+desc: بنائے جا رہے ایمبیڈ کا عنوان مقرر کرتا ہے۔
+category: ایمبیڈ بنانے والا
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $title ایک متن کی دلیل لیتا ہے اور اسے بنائے جا رہے موجودہ ایمبیڈ کے عنوان کے طور پر مقرر کرتا ہے۔ عنوان ایمبیڈ کے اوپری حصے میں بڑے، بولڈ متن میں ظاہر ہوتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $title[text]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $title[Server Rules]
+</block>
+
+<block type="callout" kind="note">
+text: عنوان Discord مارک ڈاؤن فارمیٹنگ کو سپورٹ کرتا ہے۔ یہ ایمبیڈ کے اوپری حصے میں مرکزی سرخی کے طور پر ظاہر ہوتا ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $title[text]
+param: text|text|لازمی|ایمبیڈ کے لیے عنوان متن
+</details>

@@ -1,0 +1,27 @@
+<dash>
+name: $author
+desc: نام نویسنده را در بالای یک ایمبد تنظیم یا به‌روزرسانی می‌کند.
+category: سازنده ایمبد
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $author نام نویسنده‌ای را که در بالای یک ایمبد و کنار آیکن آن نشان داده می‌شود تنظیم می‌کند. ایندکس اختیاری انتخاب می‌کند کدام ایمبد هنگام ساخت چند ایمبد در یک پیام ویرایش شود. آیکن و پیوند نویسنده موجود حفظ می‌شوند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $author[name;(index)]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $author[Server Staff Team]
+</block>
+
+<block type="callout" kind="note">
+text: آن را با $authorIcon برای افزودن تصویر و $authorURL برای کلیک‌پذیر کردن نام ترکیب کنید.
+</block>
+</dash>
+
+<details>
+syntax: $author[name;(index)]
+param: name|text|الزامی|نام نویسنده نمایش داده‌شده در بالای ایمبد
+param: index|number|اختیاری|شماره ایمبدی که هنگام ساخت چند ایمبد ویرایش شود (پیش‌فرض 1)
+</details>

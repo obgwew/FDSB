@@ -1,0 +1,44 @@
+<dash>
+name: $addButton
+desc: بنائے جا رہے پیغام میں، یا اس کی آئی ڈی کے ذریعے پہلے بھیجے گئے پیغام میں ایک بٹن (Button) کا اضافہ کرتا ہے۔
+category: کمپوننٹس
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $addButton ہر کال پر ایک بٹن شامل کرتا ہے۔ آپ بٹن کی قسم (لنک یا انٹرایکٹو)، اسٹائل، حالت (فعال/غیر فعال)، اور پوزیشن (ایک ہی قطار یا نئی قطار) کو کنٹرول کر سکتے ہیں۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $addButton[newLine; ID/URL; label; style; (disabled; emoji; messageID)]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $addButton[no; btn_confirm; Confirm; success]
+</block>
+
+<block type="options" title="بٹن اسٹائل (style)">
+option: primary|نیلا بٹن (معیاری رنگ)
+option: secondary|سرمئی بٹن
+option: success|سبز بٹن
+option: danger|سرخ بٹن
+option: link|بیرونی لنک بٹن (کوئی custom_id نہیں، بوٹ تعامل کو متحرک نہیں کرتا)
+</block>
+
+<block type="callout" kind="note">
+text: جب style = link ہو، تو دوسری دلیل (ID/URL) ایک مکمل یو آر ایل ہونی چاہیے جو http:// یا https:// سے شروع ہو۔
+</block>
+
+<block type="callout" kind="warning">
+text: فی پیغام زیادہ سے زیادہ 25 بٹن (5 قطاریں × 5 بٹن فی قطار)۔ جب موجودہ قطار بھر جائے تو بٹن خودکار طور پر نئی قطار میں منتقل ہو جاتا ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $addButton[newLine; ID/URL; label; style; (disabled; emoji; messageID)]
+param: نئی لائن|yes/no|لازمی|کیا بٹن نئی قطار پر شروع ہوتا ہے؟ yes = نئی قطار، no = آخری بٹن کے ساتھ ایک ہی قطار
+param: ID/URL|text|لازمی|انٹرایکٹو بٹن کے لیے کسٹم آئی ڈی، یا اگر style = link ہو تو مکمل یو آر ایل
+param: لیبل|text|خالی چھوڑا جا سکتا ہے|بٹن پر دکھایا جانے والا متن
+param: اسٹائل|text|لازمی|primary / secondary / success / danger / link
+param: غیر فعال|yes/no|اختیاری|بٹن کو غیر فعال کرنے کے لیے yes (معیار: no)
+param: ایموجی|text|اختیاری|بٹن کے اندر دکھانے کے لیے ایک ایموجی
+param: messageID|snowflake|اختیاری|پہلے بھیجے گئے بوٹ پیغام کی آئی ڈی جس میں موجودہ پیغام کی بجائے بٹن شامل کرنا ہے
+</details>

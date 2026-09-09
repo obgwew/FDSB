@@ -1,0 +1,30 @@
+<dash>
+name: $elif
+desc: یک شرط جایگزین در داخل یک بلوک $if فراهم می‌کند وقتی شرایط قبلی نادرست بودند.
+category: کنترل جریان
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $elif در داخل یک بلوک $if برای افزودن شرایط اضافی استفاده می‌شود. وقتی شرط $if قبلی (یا $elif) نادرست باشد، شرط $elif بعدی بررسی می‌شود. اگر درست باشد، بلوک کد آن اجرا می‌شود.
+</block>
+
+<block type="code" title="سینتکس">
+text: $elif[condition]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $if[$message == hello]
+  Hi there!
+$elif[$message == bye]
+  Goodbye!
+$endif
+</block>
+
+<block type="callout" kind="note">
+text: $elif باید بین یک $if و یک $endif قرار گیرد. می‌توان چند بلوک $elif را به‌صورت زنجیره‌ای قرار داد. فقط بلوک کد اولین شرط منطبق اجرا می‌شود.
+</block>
+</dash>
+
+<details>
+syntax: $elif[condition]
+param: شرط|expression|الزامی|شرطی که باید ارزیابی شود (مثلاً $message == hello، $authorID == 123). از همان عملگرهای $if استفاده می‌کند.
+</details>

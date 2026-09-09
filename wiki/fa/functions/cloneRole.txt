@@ -1,0 +1,27 @@
+<dash>
+name: $cloneRole
+desc: یک کپی از یک نقش موجود با همان مجوزها و تنظیمات ایجاد می‌کند.
+category: مدیریت
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $cloneRole شناسه/منشن یک نقش و به‌صورت اختیاری یک نام جدید دریافت می‌کند. ربات ویژگی‌های نقش اصلی (مجوزها، رنگ، نمایش جداگانه، قابل منشن بودن) را دریافت کرده و یک نقش جدید با همان تنظیمات ایجاد می‌کند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $cloneRole[role ID or @mention; (optional new name)]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $cloneRole[&123456789; Cloned Role]
+</block>
+
+<block type="callout" kind="note">
+text: اگر نام جدیدی ارائه نشود، نقش کپی‌شده نام نقش اصلی را حفظ می‌کند. ربات باید مجوز «مدیریت نقش‌ها» را داشته باشد.
+</block>
+</dash>
+
+<details>
+syntax: $cloneRole[role ID or @mention; (optional new name)]
+param: شناسه یا منشن نقش|text|الزامی|شناسه یا @منشن نقشی که باید کپی شود
+param: نام جدید اختیاری|text|اختیاری|یک نام سفارشی برای نقش کپی‌شده. اگر حذف شود، از نام اصلی استفاده می‌شود.
+</details>

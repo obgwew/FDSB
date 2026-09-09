@@ -1,0 +1,27 @@
+<dash>
+name: $changeUsername
+desc: نام مستعار یک عضو سرور را تغییر می‌دهد.
+category: مدیریت
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $changeUsername یک شناسه/منشن کاربر و یک نام جدید می‌گیرد. ربات عضو را در سرور جستجو می‌کند و با استفاده از API دیسکورد نام مستعار او را به نام ارائه‌شده تغییر می‌دهد.
+</block>
+
+<block type="code" title="سینتکس">
+text: $changeUsername[user ID/mention; new name]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $changeUsername[123456789; NewNickname]
+</block>
+
+<block type="callout" kind="warning">
+text: ربات باید مجوز «مدیریت نام‌های مستعار» را داشته باشد و بالاترین نقش آن باید بالاتر از بالاترین نقش هدف باشد. ربات نمی‌تواند نام مستعار خود یا نام مستعار مالک سرور را تغییر دهد.
+</block>
+</dash>
+
+<details>
+syntax: $changeUsername[user ID/mention; new name]
+param: شناسه/منشن کاربر|text|الزامی|شناسه کاربری دیسکورد عضو هدف یا @منشن
+param: نام جدید|text|الزامی|نام مستعار جدیدی که باید اختصاص داده شود. برای بازنشانی به حالت پیش‌فرض خالی بگذارید.
+</details>

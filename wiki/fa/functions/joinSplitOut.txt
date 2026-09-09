@@ -1,0 +1,27 @@
+<dash>
+name: $joinSplitOut
+desc: تمام عناصر نتیجه split فعلی ($splitIn) را به یک متن واحد ترکیب می‌کند.
+category: ابزارهای متنی
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $joinSplitOut تمام عناصر ذخیره شده توسط $splitIn را در یک رشته ترکیب کرده و جداکننده داده شده را بین آن‌ها درج می‌کند. نتیجه به کانال ارسال می‌شود.
+</block>
+
+<block type="code" title="سینتکس">
+text: $joinSplitOut[separator]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $splitIn[apple,banana,cherry; ,]
+$joinSplitOut[ + ]
+</block>
+
+<block type="callout" kind="note">
+text: $splitIn باید قبل از $joinSplitOut فراخوانی شود تا داده‌ای برای ترکیب وجود داشته باشد.
+</block>
+</dash>
+
+<details>
+syntax: $joinSplitOut[separator]
+param: separator|text|Required|متنی که بین هر دو عنصر درج می‌شود
+</details>

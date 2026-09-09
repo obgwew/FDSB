@@ -1,0 +1,28 @@
+<dash>
+name: $getMessage
+desc: یک پیام را از هر کانال دریافت کرده و اطلاعاتی درباره آن ارسال می‌کند.
+category: ابزار
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $getMessage یک پیام را از کانال داده‌شده دریافت کرده و یک قطعه اطلاعات از آن استخراج می‌کند. آرگومان نوع تعیین می‌کند که چه چیزی ارسال شود: content (متن پیام)، name (نام نمایشی نویسنده)، id (شناسه کاربر نویسنده) یا avatar (URL آواتار نویسنده). اگر مقدار استخراج‌شده خالی باشد، به جای آن یک فاصله با عرض صفر ارسال می‌شود.
+</block>
+
+<block type="code" title="سینتکس">
+text: $getMessage[channelID; messageID; (type)]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $getMessage[123456789; 987654321; content]
+</block>
+
+<block type="callout" kind="note">
+text: آرگومان نوع اختیاری است و پیش‌فرض آن content است. انواع معتبر: content، name، id، avatar. ربات باید بتواند کانال را ببیند و مجوز «خواندن تاریخچه پیام» (Read Message History) را داشته باشد.
+</block>
+</dash>
+
+<details>
+syntax: $getMessage[channelID; messageID; (type)]
+param: channelID|snowflake|الزامی|شناسه کانالی که پیام در آن قرار دارد
+param: messageID|snowflake|الزامی|شناسه پیامی که باید دریافت شود
+param: type|text|اختیاری|چه چیزی ارسال شود: content (پیش‌فرض)، name، id یا avatar
+</details>

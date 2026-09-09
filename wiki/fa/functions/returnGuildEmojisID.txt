@@ -1,0 +1,30 @@
+<dash>
+name: $returnGuildEmojisID
+desc: شناسه‌های ایموجی را از یک سرور، فیلترشده بر اساس نوع، جمع‌آوری می‌کند و آن‌ها را ذخیره می‌کند.
+category: دستورهای بازگشتی
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $returnGuildEmojisID شناسه‌های ایموجی‌های سفارشی را از سرور مشخص‌شده جمع‌آوری می‌کند و آن‌ها را زیر یک نام متغیر، که با جداکننده به هم متصل شده‌اند، ذخیره می‌کند. فیلتر نوع بین همه ایموجی‌ها، ایموجی‌های ثابت (png) و ایموجی‌های متحرک (gif) انتخاب می‌کند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $returnGuildEmojisID[GuildID; type; var; separator]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $returnGuildEmojisID[$guildID; animated; animEmojis; ,]
+text: $sendMessage[Animated emojis: $return[animEmojis]]
+</block>
+
+<block type="callout" kind="note">
+text: نوع می‌پذیرد: all، static، animated. ربات باید عضو سرور هدف باشد. ترتیب ذخیره‌شده تضمین نمی‌شود که با فهرست ایموجی سرور مطابقت داشته باشد.
+</block>
+</dash>
+
+<details>
+syntax: $returnGuildEmojisID[GuildID; type; var; separator]
+param: شناسه سرور|snowflake|الزامی|شناسه سروری که ایموجی‌های آن جمع‌آوری می‌شوند
+param: نوع|text|الزامی|فیلتر: all، static یا animated
+param: متغیر|text|الزامی|نام متغیری که نتیجه در آن ذخیره می‌شود (با $return[] خوانده می‌شود)
+param: جداکننده|text|الزامی|جداکننده بین شناسه‌ها (مثلاً ،). جداکننده‌های نام‌دار نیز کار می‌کنند: dot، com، apo، sem، colon
+</details>

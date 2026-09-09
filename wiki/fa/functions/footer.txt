@@ -1,0 +1,26 @@
+<dash>
+name: $footer
+desc: متن پاورقی ایمبد در حال ساخت را تنظیم می‌کند.
+category: سازنده ایمبد
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $footer یک آرگومان متنی می‌گیرد و آن را به عنوان پاورقی ایمبد جاری در حال ساخت تنظیم می‌کند. پاورقی در پایین‌ترین قسمت ایمبد با متن کوچک‌تر و روشن‌تر نمایش داده می‌شود.
+</block>
+
+<block type="code" title="سینتکس">
+text: $footer[text]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $footer[Requested by $authorName]
+</block>
+
+<block type="callout" kind="note">
+text: پاورقی برای ذکر منبع، زمان‌ها یا اطلاعات تکمیلی مفید است. این بخش با متن خاکستری کوچک در پایین ایمبد نمایش داده می‌شود.
+</block>
+</dash>
+
+<details>
+syntax: $footer[text]
+param: text|text|الزامی|متن پاورقی ایمبد
+</details>

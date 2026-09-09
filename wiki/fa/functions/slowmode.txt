@@ -1,0 +1,31 @@
+<dash>
+name: $slowmode
+desc: تاخیر حالت آهسته را برای یک کانال مشخص‌شده تنظیم می‌کند.
+category: مدیریت
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $slowmode یک شناسه کانال و یک مدت زمان دریافت می‌کند و سپس تاخیر حالت آهسته را برای آن کانال تنظیم می‌کند. حالت آهسته محدود می‌کند که کاربران چند وقت یک‌بار می‌توانند پیام ارسال کنند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $slowmode[channelID; time]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $slowmode[$channelID; 10s]
+</block>
+
+<block type="callout" kind="note">
+text: فرمت زمان شامل: s (ثانیه)، m (دقیقه)، h (ساعت) است. حداکثر حالت آهسته 6 ساعت (21600 ثانیه) است. برای غیرفعال کردن از 0s استفاده کنید.
+</block>
+
+<block type="callout" kind="warning">
+text: ربات باید مجوز «مدیریت کانال‌ها» را در کانال مقصد داشته باشد.
+</block>
+</dash>
+
+<details>
+syntax: $slowmode[channelID; time]
+param: channelID|snowflake|Required|شناسه کانالی که حالت آهسته برای آن تنظیم می‌شود
+param: time|text|Required|مدت زمان حالت آهسته. فرمت: عدد + واحد (s/m/h)، مثلاً 10s، 5m، 0s برای غیرفعال کردن
+</details>

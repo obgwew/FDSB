@@ -1,0 +1,26 @@
+<dash>
+name: $deleteRole
+desc: سرور سے ایک رول حذف کرتا ہے۔
+category: انتظامات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $deleteRole رول ID یا @mention لیتا ہے، اسے سرور میں تلاش کرتا ہے اور اسے مستقل طور پر حذف کر دیتا ہے۔ یہ عمل واپس نہیں کیا جا سکتا۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $deleteRole[role ID or @mention]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $deleteRole[&123456789]
+</block>
+
+<block type="callout" kind="warning">
+text: بوٹ کے پاس "مینیج رولز" کی اجازت ہونی چاہیے اور اس کا سب سے اعلی رول ہدف رول کے اوپر ہونا چاہیے۔ رول حذف کرنا مستقل ہے اور اسے واپس نہیں کیا جا سکتا۔
+</block>
+</dash>
+
+<details>
+syntax: $deleteRole[role ID or @mention]
+param: role ID or @mention|text|لازمی|حذف کرنے کے لیے رول کا ID یا @mention
+</details>

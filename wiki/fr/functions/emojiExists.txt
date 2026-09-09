@@ -1,0 +1,32 @@
+<dash>
+name: $emojiExists
+desc: Vérifie si un emoji personnalisé existe et renvoie true ou false.
+category: Info
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: $emojiExists prend un ID d'emoji personnalisé (ou une mention d'emoji complète comme <:name:id> ou <a:name:id>) et renvoie true si le bot partage un serveur où cet emoji existe, sinon false.
+</block>
+
+<block type="code" title="Syntaxe">
+text: $emojiExists[emoji id]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $if[$emojiExists[123456789012345678]]
+ $sendMessage[That emoji exists!]
+$endif
+</block>
+
+<block type="callout" kind="note">
+text: Ceci est utile dans les conditions $if / $onlyIf. Les emojis Unicode intégrés n'ont pas d'ID, donc seuls les emojis personnalisés de serveur peuvent être vérifiés.
+</block>
+
+<block type="callout" kind="warning">
+text: L'emoji doit être accessible par le bot (le bot doit partager un serveur avec lui), sinon la vérification peut renvoyer false.
+</block>
+</dash>
+
+<details>
+syntax: $emojiExists[emoji id]
+param: emoji id|snowflake|Requis|L'ID numérique de l'emoji personnalisé, ou une mention d'emoji comme <:name:id> / <a:name:id>
+</details>

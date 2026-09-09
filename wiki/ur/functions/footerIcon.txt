@@ -1,0 +1,28 @@
+<dash>
+name: $footerIcon
+desc: URL کا استعمال کرتے ہوئے ایمبیڈ کا فوٹر آئیکن تصویر سیٹ کرتا ہے۔
+category: ایمبیڈ بنانے والا
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $footerIcon ٹارگٹ ایمبیڈ کے فوٹر ٹیکسٹ کے ساتھ ایک چھوٹی گول تصویر رکھتا ہے۔ کوئی بھی آرگومینٹ جس میں درست ویب ایڈریس ہو کام کرتا ہے - کمانڈ پہلی URL تلاش کرکے نکال لیتا ہے۔ اختیاری آخری عددی آرگومینٹ منتخب کرتا ہے کہ کون سا ایمبیڈ ترمیم کیا جائے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $footerIcon[url;(index)]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $footer[(c) My Community]
+text: $footerIcon[https://example.com/logo.png]
+</block>
+
+<block type="callout" kind="note">
+text: URL http:// یا https:// سے شروع ہونا چاہیے۔ URL کے بعد آنے والا رموز علامت (جیسے . یا )) خود بخود کاٹ دیے جاتے ہیں۔ اگر کوئی درست URL نہ ملے تو خطا اٹھائی جاتی ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $footerIcon[url;(index)]
+param: url|text|لازمی|تصویر URL والا ٹیکسٹ (http:// یا https://)
+param: index|number|اختیاری|جب کئی ایمبیڈز تیار کیے جا رہے ہوں تو ترمیم کے لیے ایمبیڈ نمبر (ڈیفالٹ 1)
+</details>

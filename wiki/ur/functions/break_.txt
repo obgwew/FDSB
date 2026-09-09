@@ -1,0 +1,25 @@
+<dash>
+name: $break
+desc: قریب ترین شامل $for یا $while لوپ سے فوراً خارج ہو جاتا ہے۔
+category: بہاؤ کنٹرول
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: جب لوپ کے اندر ($for یا $while) $break کا سامنا ہوتا ہے، بوٹ فوراً تکرر روک دیتا ہے اور مطابق $endfor یا $endwhile کے بعد عمل جاری رکھتا ہے۔ موجودہ لوپ میں باقی تمام تکرارات چھوڑ دی جاتی ہیں۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $break
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $for[10]
+  $if[$message == stop]
+    $break
+  $endif
+$endfor
+</block>
+
+<block type="callout" kind="note">
+text: $break صرف اس سب سے اندرونی لوپ سے خارج ہوتا ہے جس میں یہ اس وقت موجود ہے۔ اگر لوپس نیسٹڈ ہوں، تو بیرونی لوپس معمول کے مطابق چلتے رہتے ہیں۔
+</block>
+</dash>

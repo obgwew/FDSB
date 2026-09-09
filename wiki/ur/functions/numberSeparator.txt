@@ -1,0 +1,36 @@
+<dash>
+name: $numberSeparator
+desc: پورے عدد کو آسان پڑھنے کے لیے ہزاروں کا جدا کار شامل کر کے فارمیٹ کرتا ہے۔
+category: ریاضی اور اعداد
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $numberSeparator ایک پورا عدد لیتا ہے اور دائیں طرف سے ہر تین ہندسوں کے بعد ایک جدا کار داخل کرتا ہے (ہزاروں کی گروہ بندی)۔ ڈیفالٹ کے طور پر جدا کار کوما (,) ہے، اور آپ دوسری دلیل کے طور پر اپنا مخصوص جدا کار دے سکتے ہیں۔ مثال کے طور پر 1234567 بن جاتا ہے 1,234,567۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $numberSeparator[number]
+text: $numberSeparator[number; separator]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $numberSeparator[1234567]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال (مخصوص جدا کار)">
+text: $numberSeparator[1234567; .]
+</block>
+
+<block type="callout" kind="note">
+text: منفی اعداد اپنے - نشان کو برقرار رکھتے ہیں: مثال کے طور پر -1234567 بن جاتا ہے -1,234,567۔
+</block>
+
+<block type="callout" kind="warning">
+text: صرف پورے اعداد قبول کیے جاتے ہیں۔ اعشاریہ اور غیر عددی حروف خرابی (error) واپس کرتے ہیں۔
+</block>
+</dash>
+
+<details>
+syntax: $numberSeparator[number; (separator)]
+param: عدد|number|لازمی|فارمیٹ کرنے کے لیے ایک پورا عدد (آغاز میں - کا نشان شامل ہو سکتا ہے)
+param: جدا کار|text|اختیاری|وہ جدا کار جو ہر تین ہندسوں کے بعد داخل کیا جاتا ہے (ڈیفالٹ: ,)
+</details>

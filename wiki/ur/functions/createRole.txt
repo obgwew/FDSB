@@ -1,0 +1,37 @@
+<dash>
+name: $createRole
+desc: مخصوص نام، رنگ اور اجازتوں کے ساتھ سرور میں ایک نیا رول بناتا ہے۔
+category: انتظامات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $createRole دیے گئے نام، رنگ اور اجازتوں کے ساتھ ایک نیا رول بناتا ہے۔ اجازتیں کسی پری سیٹ (کاسمیٹک، ممبر، موڈ، منیجر) یا خام اجازت نمبر کے طور پر مخصوص کی جا سکتی ہیں۔ اختیاری طور پر، آپ کنٹرول کر سکتے ہیں کہ رول الگ سے دکھایا جائے اور آیا اسے مینشن کیا جا سکتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $createRole[role name; color; permissions; (display role; mention role)]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $createRole[VIP; #FFD700; member; yes; no]
+</block>
+
+<block type="options" title="اجازت کے پری سیٹ">
+option: cosmetic|کوئی خاص اجازتیں نہیں (صرف ڈسپلے والا رول)
+option: member|بنیادی ممبر اجازتیں (پیغام بھیجنا، رد عمل، کنیکٹ، وغیرہ)
+option: mod / moderator|انتظامی اجازتیں (کک، بین، میسجز مینیج، ٹائم آؤٹ، وغیرہ)
+option: manager / admin|مکمل انتظامی اجازتیں (چینلز، رولز، ویب ہکس، وغیرہ مینیج کریں)
+</block>
+
+<block type="callout" kind="note">
+text: بنائے گئے رول کا ID بعد میں استعمال کے لیے $return[createdRoleID] میں محفوظ کیا جاتا ہے۔ بوٹ کے پاس "مینیج رولز" کی اجازت ہونی چاہیے۔
+</block>
+</dash>
+
+<details>
+syntax: $createRole[role name; color; permissions; (display role; mention role)]
+param: role name|text|لازمی|نئے رول کا نام (زیادہ سے زیادہ 100 حروف)
+param: color|text|لازمی|ہیکس رنگ کوڈ (مثلاً، #FF5733) یا ڈیفالٹ کے لیے خالی
+param: permissions|text|لازمی|ایک پری سیٹ (cosmetic، member، mod/moderator، manager/admin) یا خام اجازت عدد
+param: display role|yes/no|اختیاری|رول کو ممبر لسٹ میں الگ سے دکھانے کے لیے yes (ڈیفالٹ: no)
+param: mention role|yes/no|اختیاری|رول کو ہر کسی کے لیے مینشن ایبل بنانے کے لیے yes (ڈیفالٹ: no)
+</details>

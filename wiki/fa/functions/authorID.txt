@@ -1,0 +1,21 @@
+<dash>
+name: $authorID
+desc: شناسه کاربری دیسکورد شخصی را که دستور را فعال کرده برمی‌گرداند.
+category: اطلاعات
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: وقتی $authorID فراخوانی می‌شود، ربات شناسه کاربری یکتای دیسکورد نویسنده دستور را دریافت می‌کند و آن را مستقیماً به‌عنوان یک رشته عددی خام به کانال می‌فرستد.
+</block>
+
+<block type="code" title="سینتکس">
+text: $authorID
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: Your ID is $authorID
+</block>
+
+<block type="callout" kind="note">
+text: مقدار بازگشتی یک شناسه snowflake است (مثلاً 123456789012345678)، که شناسه عددی یکتایی برای هر کاربر دیسکورد است.
+</block>
+</dash>

@@ -1,0 +1,36 @@
+<dash>
+name: $numberSeparator
+desc: Formatiert eine ganze Zahl mit einem Tausendertrennzeichen für eine bessere Lesbarkeit.
+category: Mathematik & Zahlen
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: $numberSeparator nimmt eine ganze Zahl entgegen und fügt von rechts alle drei Ziffern ein Trennzeichen ein (Tausender-Gruppierung). Standardmäßig ist das Trennzeichen ein Komma (,); als zweites Argument kannst du ein benutzerdefiniertes Trennzeichen übergeben. Zum Beispiel wird 1234567 zu 1,234,567.
+</block>
+
+<block type="code" title="Syntax">
+text: $numberSeparator[number]
+text: $numberSeparator[number; separator]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $numberSeparator[1234567]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel (benutzerdefiniertes Trennzeichen)">
+text: $numberSeparator[1234567; .]
+</block>
+
+<block type="callout" kind="note">
+text: Negative Zahlen behalten ihr - Zeichen: Zum Beispiel wird -1234567 zu -1,234,567.
+</block>
+
+<block type="callout" kind="warning">
+text: Es werden nur ganze Zahlen akzeptiert. Dezimalzahlen und nicht-numerische Zeichen führen zu einem Fehler.
+</block>
+</dash>
+
+<details>
+syntax: $numberSeparator[number; (separator)]
+param: Zahl|number|Erforderlich|Eine ganze Zahl, die formatiert werden soll (darf ein vorangestelltes - enthalten)
+param: Trennzeichen|text|Optional|Das Trennzeichen, das alle drei Ziffern eingefügt wird (Standard: ,)
+</details>

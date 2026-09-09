@@ -1,0 +1,29 @@
+<dash>
+name: $replaceText
+desc: متن کے اندر کسی ذیلی سٹرنگ کے وقوعات کو نئے متن سے بدل دیتا ہے۔
+category: متن ٹولز
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $replaceText ایک پیغام، ایک پرانا متن جو تلاش کرنا ہے، اور ایک نیا متن لیتا ہے جس سے اسے بدلنا ہے۔ اختیاری طور پر، آپ بتا سکتے ہیں کہ کتنے وقوعات بدلنے ہیں۔ تبدیل شدہ متن لوٹاتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $replaceText[message; old; new; (amount)]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $replaceText[Hello World; World; FDScript]
+</block>
+
+<block type="callout" kind="note">
+text: ڈیفالٹ طور پر، تمام وقوعات بدل دیے جاتے ہیں۔ تبدیلیوں کو محدود کرنے کے لیے چوتھی دلیل کے طور پر ایک عدد دیں۔ تمام بدلنے کے لیے -1 استعمال کریں یا چھوڑ دیں۔
+</block>
+</dash>
+
+<details>
+syntax: $replaceText[message; old; new; (amount)]
+param: message|text|لازمی|وہ اصل متن جس کے اندر تلاش کرنا ہے
+param: old|text|لازمی|وہ ذیلی سٹرنگ جسے تلاش کر کے بدلنا ہے
+param: new|text|لازمی|بدلنے والا متن
+param: amount|number|اختیاری|تبدیلیوں کی زیادہ سے زیادہ تعداد۔ -1 یا چھوڑنا = تمام وقوعات بدلنا
+</details>

@@ -1,0 +1,21 @@
+<dash>
+name: $guildVerificationLvl
+desc: سرور کی تصدیقی سطح کی ترتیب واپس کرتا ہے۔
+category: سرور
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $guildVerificationLvl وہ سیکیورٹی سطح واپس کرتا ہے جو نئے ممبران کو بات کرنے سے پہلے پاس کرنی ہوتی ہے، اس کی اندرونی قیمت NONE (0) سے VERY_HIGH (4) تک: 0 = None، 1 = Low، 2 = Medium، 3 = High، 4 = Highest۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $guildVerificationLvl
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $sendMessage[Verification level here: $guildVerificationLvl]
+</block>
+
+<block type="callout" kind="important">
+text: صرف سرور کے اندر استعمال کی جا سکتی ہے - ڈی ایم میں یہ ماحولیاتی خطا اٹھاتا ہے اور اسکرپٹ کو روک دیتا ہے۔
+</block>
+</dash>

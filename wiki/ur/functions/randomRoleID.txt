@@ -1,0 +1,21 @@
+<dash>
+name: $randomRoleID
+desc: سرور سے ایک تصادفی رول کی آئی ڈی لوٹاتا ہے۔
+category: تصادفی
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: جب $randomRoleID کہا جاتا ہے، بوٹ موجودہ سرور کے تمام رولز جمع کرتا ہے (ڈیفالٹ @everyone رول کو چھوڑ کر)، تصادفی طور پر ایک چنتا ہے، اور اس کی رول آئی ڈی خام عددی سٹرنگ کے طور پر بھیجتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $randomRoleID
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: Random role ID: $randomRoleID
+</block>
+
+<block type="callout" kind="note">
+text: یہ کمانڈ صرف سرور کے اندر کام کرتی ہے (ڈی ایمز میں نہیں)۔ @everyone رول ہمیشہ خارج رہتا ہے۔ اگر سرور میں کوئی حسبِ ضرورت رول نہ ہوں تو کمانڈ خرابی (error) کے ساتھ ناکام ہو جائے گی۔
+</block>
+</dash>

@@ -1,0 +1,28 @@
+<dash>
+name: $cropText
+desc: کسی متن کو زیادہ سے زیادہ حروف تک کاٹتا ہے، اختیاری طور پر "..." جیسا اختتام شامل کرتا ہے۔
+category: متن ٹولز
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $cropText متن کو زیادہ سے زیادہ دیے گئے حروف تک مختصر کرتا ہے۔ اگر متن لمبا ہے تو اسے کاٹ کر اختیاری اختتام (مثال کے طور پر "..." یا "... [more]") منسلک کیا جاتا ہے۔ اگر متن پہلے سے کافی چھوٹا ہے تو اسے بغیر تبدیلی کے واپس کر دیا جاتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $cropText[text; max characters; (ending)]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $cropText[This is a very long message; 10; ...]
+</block>
+
+<block type="callout" kind="note">
+text: حروف کی زیادہ سے زیادہ تعداد کا آرگیومنٹ ایک غیر منفی عدد ہونا چاہیے۔ جب کوئی اختتام نہ دیا جائے تو متن کو صرف حد پر کاٹ دیا جاتا ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $cropText[text; max characters; (ending)]
+param: text|text|لازمی|کاٹنے کے لیے متن
+param: max characters|number|لازمی|رکھنے کے لیے زیادہ سے زیادہ حروف کی تعداد (ایک غیر منفی عدد ہونا چاہیے)
+param: ending|text|اختیاری|جب ان پٹ حد سے لمبا ہو تو منسلک ہونے والا متن (مثلاً "...")
+</details>

@@ -1,0 +1,34 @@
+<dash>
+name: $returnGuildRolesID
+desc: کسی گِلف سے رول آئی ڈیز جمع کرتا ہے، اختیاری طور پر اجازت کے اعتبار سے فلٹر کر کے، اور ذخیرہ کرتا ہے۔
+category: واپسی کمانڈز
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $returnGuildRolesID مخصوص گِلف سے رول آئی ڈیز جمع کرتا ہے، اختیاری طور پر کسی مطلوبہ اجازت کے اعتبار سے فلٹر کر کے۔ نتیجہ ایک متغیر نام کے تحت ذخیرہ ہوتا ہے اور بعد میں $return[variableName] استعمال کر کے بازیافت کیا جا سکتا ہے۔ اگر کوئی اجازت کا فلٹر مخصوص نہ کیا جائے تو تمام رولز (@everyone کے سوا) جمع کیے جاتے ہیں۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $returnGuildRolesID[GuildID; permission; var; separator]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $returnGuildRolesID[$guildID; all; roleIDs; ,]
+$sendMessage[Roles: $return[roleIDs]]
+</block>
+
+<block type="callout" kind="note">
+text: اجازت کے پیرامیٹر کے لیے: تمام رولز حاصل کرنے کے لیے خالی چھوڑیں یا "all" استعمال کریں۔ آپ ایک نامی اجازت (مثلاً kick_members, manage_messages) یا خام اجازت کا عدد بھی مخصوص کر سکتے ہیں۔ صرف وہی رولز شامل ہوں گے جن کے پاس مخصوص اجازت (یا اس سے اعلیٰ) ہے۔
+</block>
+
+<block type="callout" kind="warning">
+text: بوٹ کو ہدف گِلف کا ممبر ہونا چاہیے۔ @everyone رول ہمیشہ نتائج سے خارج رہتا ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $returnGuildRolesID[GuildID; permission; var; separator]
+param: GuildID|snowflake|لازمی|اس گِلف (سرور) کی آئی ڈی جس سے رولز جمع کرنے ہیں
+param: permission|text|لازمی|اجازت کا فلٹر: تمام رولز کے لیے خالی یا "all"، ایک نامی اجازت (مثلاً kick_members)، یا خام اجازت کا عدد
+param: var|text|لازمی|متغیر کا نام جس میں نتیجہ ذخیرہ کرنا ہے ($return[] کے ساتھ استعمال کریں)
+param: separator|text|لازمی|متعدد آئی ڈیز کے درمیان جدا کار (مثلاً , یا ;)۔ آپ نامی جدا کار استعمال کر سکتے ہیں: dot, com, apo, sem, colon
+</details>

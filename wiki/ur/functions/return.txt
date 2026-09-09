@@ -1,0 +1,27 @@
+<dash>
+name: $return
+desc: کسی $returnXxx کمانڈ کے ذخیرہ کردہ قدر کو بازیافت کر کے چینل میں بھیجتا ہے۔
+category: متغیرات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $return ایک متغیر کا نام لیتا ہے اور واپسی متغیرات کے ذخیرے میں اس کی قدر تلاش کرتا ہے۔ یہ ذخیرہ کمانڈز جیسے $returnGuildUsersID، $returnGuildChannelsID وغیرہ سے بھرا جاتا ہے۔ اکیلا استعمال کرنے پر بازیافت شدہ قدر چینل میں بھیجی جاتی ہے؛ کسی دوسری کمانڈ کے دلائل کے اندر داخل استعمال کرنے پر قدر براہِ راست متن میں بدل دی جاتی ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $return[var]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $returnGuildUsersID[$guildID; cache; userIDs; ,]
+$sendMessage[User IDs: $return[userIDs]]
+</block>
+
+<block type="callout" kind="note">
+text: اگر متغیر کا نام واپسی کے ذخیرے میں موجود نہ ہو تو ایک خرابی (error) واپس آتی ہے۔ $return استعمال کرنے سے پہلے مناسب $returnXxx کمانڈ ضرور کہیں۔
+</block>
+</dash>
+
+<details>
+syntax: $return[var]
+param: var|text|لازمی|بازیافت کرنے والے واپسی متغیر کا نام (مثلاً userIDs, channelIDs, roleIDs)
+</details>

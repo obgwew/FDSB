@@ -1,0 +1,31 @@
+<dash>
+name: $removeComponent
+desc: اجزای دکمه خاص را از یک پیام با شناسه سفارشی یا URL آن‌ها حذف می‌کند.
+category: کامپوننت‌ها
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $removeComponent یک یا چند شناسه سفارشی (یا URL) می‌گیرد و اجزای دکمه مطابق را از یک پیام حذف می‌کند. می‌تواند نمایش در حال انتظار، پیام منبع تعامل، یا یک پیام خاص با شناسه را هدف قرار دهد.
+</block>
+
+<block type="code" title="سینتکس">
+text: $removeComponent[customID1; customID2; ...; (messageID)]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $removeComponent[btn_cancel; btn_confirm]
+</block>
+
+<block type="callout" kind="note">
+text: وقتی حداقل دو آرگومان وجود داشته باشد و آخرین آن‌ها یک snowflake عددی باشد، به‌عنوان شناسه پیام در نظر گرفته می‌شود. در غیر این صورت، همه آرگومان‌ها به‌عنوان شناسه اجزایی که باید حذف شوند در نظر گرفته می‌شوند.
+</block>
+
+<block type="callout" kind="warning">
+text: اگر هیچ‌کدام از شناسه‌های ارائه‌شده روی پیام هدف یافت نشود، یک خطا برمی‌گردد. پیام هدف باید توسط این ربات ارسال شده باشد.
+</block>
+</dash>
+
+<details>
+syntax: $removeComponent[customID1; customID2; ...; (messageID)]
+param: شناسه سفارشی|text|الزامی|یک یا چند شناسه سفارشی یا URL از اجزای دکمه‌ای که باید حذف شوند
+param: شناسه پیام|snowflake|اختیاری|شناسه یک پیام خاص ربات برای حذف اجزا از آن
+</details>

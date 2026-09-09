@@ -1,0 +1,26 @@
+<dash>
+name: $unban
+desc: یک کاربر قبلاً بن‌شده را از سرور بن‌زدایی می‌کند.
+category: مدیریت
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $unban یک شناسه کاربر دریافت می‌کند، کاربر را در لیست بن سرور جست‌وجو کرده و بن را حذف می‌کند. کاربر باید قبلاً بن شده باشد تا بتوان از این دستور استفاده کرد.
+</block>
+
+<block type="code" title="سینتکس">
+text: $unban[userID]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $unban[123456789]
+</block>
+
+<block type="callout" kind="warning">
+text: ربات باید مجوز «بن اعضا» را داشته باشد. شناسه کاربر باید یک شناسه عددی خام باشد (منشن‌ها و نمادها پشتیبانی نمی‌شوند). کاربر باید در حال حاضر بن شده باشد.
+</block>
+</dash>
+
+<details>
+syntax: $unban[userID]
+param: userID|snowflake|Required|شناسه عددی کاربر بن‌شده‌ای که باید بن‌زدایی شود
+</details>

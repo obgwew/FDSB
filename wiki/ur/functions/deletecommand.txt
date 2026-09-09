@@ -1,0 +1,22 @@
+<dash>
+name: $deletecommand
+desc: اس پیغام کو حذف کرتا ہے جس نے کمانڈ کو متحرک کیا۔
+category: انتظامات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: جب $deletecommand کو کال کیا جاتا ہے تو بوٹ اس صارف کے پیغام کو حذف کرنے کی کوشش کرتا ہے جس نے اسکرپٹ کے عمل کو متحرک کیا۔ یہ عام طور پر اصل کمانڈ کی درخواست کو ہٹا کر چینلز کو صاف رکھنے کے لیے استعمال ہوتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $deletecommand
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $deletecommand
+$sendMessage[Command received!]
+</block>
+
+<block type="callout" kind="warning">
+text: صارف کے پیغامات حذف کرنے کے لیے بوٹ کے پاس چینل میں "مینیج میسجز" کی اجازت ہونی چاہیے۔ اگر اجازت غائب ہو تو خرابی واپس کی جاتی ہے۔
+</block>
+</dash>

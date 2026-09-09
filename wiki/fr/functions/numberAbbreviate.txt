@@ -1,0 +1,30 @@
+<dash>
+name: $numberAbbreviate
+desc: Convertit un nombre entier en une forme abrégée courte avec un suffixe (k, m, b, ...).
+category: Mathématiques & Nombres
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: $numberAbbreviate prend un nombre entier et l'arrondit à sa forme courte en utilisant un suffixe : k (mille), m (million), b (milliard), t (billion), etc. Par exemple, 1500 devient 1.5k et 2500000 devient 2.5m. Les nombres négatifs sont également pris en charge.
+</block>
+
+<block type="code" title="Syntaxe">
+text: $numberAbbreviate[number]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $numberAbbreviate[1523487]
+</block>
+
+<block type="callout" kind="note">
+text: Suffixes pris en charge : k, m, b, t, qa, qi, sx, sp, oc, no, dc. Les nombres inférieurs à 1000 sont renvoyés inchangés.
+</block>
+
+<block type="callout" kind="warning">
+text: Seuls les nombres entiers sont acceptés. Les décimales et les caractères non numériques renvoient une erreur.
+</block>
+</dash>
+
+<details>
+syntax: $numberAbbreviate[number]
+param: number|number|Requis|Un nombre entier à abréger (peut inclure un signe - initial)
+</details>

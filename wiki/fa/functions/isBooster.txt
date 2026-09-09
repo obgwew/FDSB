@@ -1,0 +1,26 @@
+<dash>
+name: $isBooster
+desc: بررسی می‌کند آیا یک کاربر بوستر سرور است ( Nitro boost فعال دارد) یا خیر.
+category: اطلاعات
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $isBooster یک شناسه کاربر یا منشن دریافت کرده و بررسی می‌کند آیا آن کاربر در حال حاضر سرور را بوست می‌کند (اشتراک پریمیوم فعال دارد). "true" یا "false" برمی‌گرداند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $isBooster[userID]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $isBooster[$authorID]
+</block>
+
+<block type="callout" kind="note">
+text: اگر کاربر Nitro boost فعال برای سرور داشته باشد "true" و در غیر این صورت "false" برمی‌گرداند. کاربر باید عضو سرور باشد.
+</block>
+</dash>
+
+<details>
+syntax: $isBooster[userID]
+param: userID|text|Required|شناسه کاربر یا @mention برای بررسی. از متغیرها و جایگذارها پشتیبانی می‌کند.
+</details>

@@ -1,0 +1,25 @@
+<dash>
+name: $break
+desc: بلافاصله از نزدیک‌ترین حلقه $for یا $while محصور خارج می‌شود.
+category: کنترل جریان
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: وقتی $break داخل یک حلقه ($for یا $while) روبرو شود، ربات بلافاصله تکرار را متوقف می‌کند و اجرا را بعد از $endfor یا $endwhile متناظر ادامه می‌دهد. هر تکرار باقیمانده در حلقه فعلی نادیده گرفته می‌شود.
+</block>
+
+<block type="code" title="سینتکس">
+text: $break
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $for[10]
+  $if[$message == stop]
+    $break
+  $endif
+$endfor
+</block>
+
+<block type="callout" kind="note">
+text: $break فقط از درونی‌ترین حلقه‌ای که در آن قرار دارد خارج می‌شود. اگر حلقه‌ها تودرتو باشند، حلقه‌های بیرونی به‌طور عادی به اجرا ادامه می‌دهند.
+</block>
+</dash>

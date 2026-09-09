@@ -1,0 +1,31 @@
+<dash>
+name: $slowmode
+desc: مخصوص چینل کے لیے سلو موڈ تاخیر مقرر کرتا ہے۔
+category: انتظامات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $slowmode ایک چینل ID اور وقت کی مدت لیتا ہے، پھر اس چینل کے لیے سلو موڈ تاخیر مقرر کرتا ہے۔ سلو موڈ محدود کرتا ہے کہ صارف کتنی بار پیغام بھیج سکتے ہیں۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $slowmode[channelID; time]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $slowmode[$channelID; 10s]
+</block>
+
+<block type="callout" kind="note">
+text: وقت کی شکل استعمال ہوتی ہے: s (سیکنڈ)، m (منٹ)، h (گھنٹے)۔ زیادہ سے زیادہ سلو موڈ 6 گھنٹے (21600 سیکنڈ) ہے۔ سلو موڈ غیر فعال کرنے کے لیے 0s استعمال کریں۔
+</block>
+
+<block type="callout" kind="warning">
+text: بوٹ کے پاس ہدف چینل میں "Manage Channels" اجازت ہونی چاہیے۔
+</block>
+</dash>
+
+<details>
+syntax: $slowmode[channelID; time]
+param: channelID|snowflake|لازمی|اس چینل کی ID جس کے لیے سلو موڈ مقرر کرنا ہے
+param: time|text|لازمی|سلو موڈ کی مدت۔ شکل: نمبر + اکائی (s/m/h)، مثلاً 10s، 5m، غیر فعال کرنے کے لیے 0s
+</details>

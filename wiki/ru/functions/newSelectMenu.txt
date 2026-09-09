@@ -1,0 +1,44 @@
+<dash>
+name: $newSelectMenu
+desc: Создаёт и регистрирует новое меню выбора (select menu) для сообщения.
+category: Компоненты
+
+<block type="text" title="Как работает команда?">
+text: $newSelectMenu начинает создание выпадающего меню выбора, идентифицируемого уникальным ID меню (Menu ID). Вы задаёте минимальное и максимальное количество опций, которые пользователь должен/может выбрать. Затем используйте $addSelectMenuOption, чтобы заполнить меню опциями, — оно будет прикреплено к создаваемому вами сообщению. Также можно передать ID сообщения, чтобы прикрепить меню к уже отправленному сообщению бота.
+</block>
+
+<block type="code" title="Syntax">
+text: $newSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+$addSelectMenuOption[color_menu; Red; red; The color red]
+$addSelectMenuOption[color_menu; Blue; blue; The color blue]
+$sendMessage[Choose your favorite color!]
+</block>
+
+<block type="options" title="Особенности поведения">
+option: Минимум|Минимальное количество опций, которое должен выбрать пользователь (от 0 до 25)
+option: Максимум|Максимальное количество опций, которое может выбрать пользователь (от 1 до 25)
+option: Плейсхолдер|Серый текст подсказки, отображаемый до того, как пользователь что-либо выберет
+option: ID сообщения|Необязательный ID уже отправленного сообщения бота, к которому нужно прикрепить меню
+</block>
+
+<block type="callout" kind="note">
+text: Меню становится готовым только после добавления хотя бы одной опции с помощью $addSelectMenuOption. Используйте $editSelectMenu, чтобы изменить параметры Min/Max/Placeholder существующего меню, и $editSelectMenuOption — для редактирования отдельной опции.
+</block>
+
+<block type="callout" kind="warning">
+text: Min не может быть больше Max. Сообщение может содержать не более 25 компонентов в сумме. Если указанное сообщение отправлено не этим ботом, возвращается ошибка.
+</block>
+</dash>
+
+<details>
+syntax: $newSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+param: ID меню|text|Required|Уникальный ID для обращения к этому меню выбора в дальнейшем ($addSelectMenuOption, $editSelectMenu, $editSelectMenuOption)
+param: Минимум|number|Required|Минимальное количество опций, которое должен выбрать пользователь (от 0 до 25)
+param: Максимум|number|Required|Максимальное количество опций, которое может выбрать пользователь (от 1 до 25)
+param: Плейсхолдер|text|Optional|Текст подсказки, отображаемый внутри меню до совершения выбора
+param: ID сообщения|snowflake|Optional|ID уже отправленного сообщения бота, к которому нужно прикрепить это меню, вместо текущего сообщения
+</details>

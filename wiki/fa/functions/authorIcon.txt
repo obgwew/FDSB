@@ -1,0 +1,27 @@
+<dash>
+name: $authorIcon
+desc: تصویر آیکن نویسنده یک ایمبد را با استفاده از یک آدرس تنظیم می‌کند.
+category: سازنده ایمبد
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $authorIcon یک تصویر گرد کوچک کنار نام نویسنده ایمبد قرار می‌دهد. ایندکس اختیاری انتخاب می‌کند کدام ایمبد هنگام ساخت چند ایمبد ویرایش شود. اگر هنوز نام نویسنده‌ای تنظیم نشده باشد، یک نام جایگزین خالی استفاده می‌شود تا آیکن همچنان ظاهر شود.
+</block>
+
+<block type="code" title="سینتکس">
+text: $authorIcon[url;(index)]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $authorIcon[https://example.com/bot.png]
+</block>
+
+<block type="callout" kind="note">
+text: آدرس باید با http:// یا https:// شروع شود. برای تنظیم نام نمایش داده‌شده کنار آیکن از $author استفاده کنید.
+</block>
+</dash>
+
+<details>
+syntax: $authorIcon[url;(index)]
+param: url|text|الزامی|آدرس مستقیم تصویر (http:// یا https://)
+param: index|number|اختیاری|شماره ایمبدی که هنگام ساخت چند ایمبد ویرایش شود (پیش‌فرض 1)
+</details>

@@ -1,0 +1,27 @@
+<dash>
+name: $lastBotMessageID
+desc: شناسه آخرین پیامی که بات در طول اسکریپت فعلی ارسال کرده است را برمی‌گرداند.
+category: متغیرها
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $lastBotMessageID به شناسه snowflake آخرین پیامی تبدیل می‌شود که بات در طول اجرای اسکریپت فعلی ارسال کرده است. توسط دستورات خروجی مانند $sendMessage، $reply و $sendEmbedMessage به صورت خودکار به‌روز می‌شود. اگر بات هنوز هیچ پیامی ارسال نکرده باشد، یک رشته خالی برمی‌گرداند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $lastBotMessageID
+text: $lastBotMessageID[]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $sendMessage[Look at this!]
+$editIn[10s; The last message ID was $lastBotMessageID]
+</block>
+
+<block type="callout" kind="note">
+text: این یک دستور فقط inline است و نمی‌تواند به عنوان یک دستور مستقل استفاده شود. آن را داخل براکت آرگومان یک دستور دیگر یا به عنوان یک توکن inline خالص استفاده کنید.
+</block>
+</dash>
+
+<details>
+syntax: $lastBotMessageID
+</details>

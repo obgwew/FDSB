@@ -1,0 +1,31 @@
+<dash>
+name: $onBotMessage
+desc: ہر بوٹ (بشمول دوسرے بوٹس) کے بھیجے گئے پیغام پر متحرک ہونے والا واقعہ۔
+category: واقعہ
+
+<block type="text" title="یہ واقعہ کیسے کام کرتا ہے؟">
+text: $onBotMessage ایک ایونٹ پریفکس ہے جو FDScript کو اس وقت متحرک کرتا ہے جب کوئی بوٹ پیغام بھیجتا ہے۔ بطور ڈیفالٹ اسکرپٹ خود بوٹ کے بھیجے گئے پیغامات کو نظر انداز کر کے صرف دوسرے بوٹس پر رد عمل دکھاتا ہے۔ آرگیومنٹ کو yes پر مقرر کریں تاکہ یہ بوٹ کے اپنے پیغامات پر بھی چلے، یا no پر تاکہ وہ اپنے پیغامات چھوڑ دے (آرگیومنٹ خالی ہونے پر یہی ڈیفالٹ ہے)۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: #PREFIX:$onBotMessage[yes/no]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: #PREFIX:$onBotMessage[no]
+$sendMessage[Another bot said: $message]
+</block>
+
+<block type="callout" kind="note">
+text: بوٹ کے اپنے پیغامات پر عمل کرنے کے لیے yes استعمال کریں، یا صرف دوسرے بوٹس پر رد عمل دکھانے کے لیے no۔ اوپر والی مثال بوٹ کے پیغام کا مواد پڑھنے کے لیے $message استعمال کرتی ہے۔
+</block>
+
+<block type="callout" kind="important">
+text: یہ واقعہ bot_events فولڈر میں چلتا ہے، bot_commands میں نہیں۔ اپنی .fds فائل وہاں بنائیں۔
+</block>
+</dash>
+
+<details>
+syntax: #PREFIX:$onBotMessage[(yes/no)]
+param: yes/no|text|اختیاری|بوٹ کے اپنے پیغامات پر بھی چلانے کے لیے yes، صرف دوسرے بوٹس پر رد عمل دکھانے کے لیے no (ڈیفالٹ)
+</details>

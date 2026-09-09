@@ -1,0 +1,26 @@
+<dash>
+name: $getCreationDateTimestamp
+desc: کسی بھی ID کو اس کی تاریخِ تخلیق کے طور پر یونکس ٹائم اسٹیمپ میں تبدیل کرتا ہے۔
+category: وقت اور تاخیر
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: ہر ڈسکارڈ آبجیکٹ (صارف، چینل، رول، پیغام...) اپنے سنوفلیکس ID کے اندر اپنا تخلیق کا وقت رکھتا ہے۔ $getCreationDateTimestamp اسے ڈی کوڈ کرتا ہے اور تخلیق کے لمحے کو یونکس ٹائم اسٹیمپ کے طور پر واپس کرتا ہے (1 جنوری 1970 سے سیکنڈز)۔ منشنز قبول کیے جاتے ہیں اور خود بخود صاف کیے جاتے ہیں۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $getCreationDateTimestamp[idOrMention]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $sendMessage[Your account was created on <t:$getCreationDateTimestamp[$authorID]>]
+</block>
+
+<block type="callout" kind="note">
+text: کسی بھی سنوفلیکس ID کے ساتھ کام کرتا ہے: صارفین، ممبران، چینلز، رولز، سرورز اور پیغامات۔ پڑھنے والے کے لیے قابلِ پڑھ تاریخ ظاہر کرنے کے لیے ڈسکارڈ کے <t:TIMESTAMP> فارمیٹ کے ساتھ ملا کر استعمال کریں۔
+</block>
+</dash>
+
+<details>
+syntax: $getCreationDateTimestamp[idOrMention]
+param: idOrMention|text|لازمی|کسی بھی ڈسکارڈ آبجیکٹ کی سنوفلیکس ID یا منشن (<@id>، <#id>، <@&id>)
+</details>

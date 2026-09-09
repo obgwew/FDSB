@@ -1,0 +1,27 @@
+<dash>
+name: $getServerInvite
+desc: ایک سرور کے لیے انائٹ لنک تیار کرتا ہے اور بھیجتا ہے۔
+category: ٹولز
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: جب $getServerInvite بغیر آرگومینٹس کال کیا جاتا ہے، تو یہ موجودہ سرور کے لیے انائٹ لنک تیار کرتا ہے۔ جب گِلڈ ID کے ساتھ کال کیا جاتا ہے، تو یہ اس مخصوص سرور کے لیے انائٹ تیار کرتا ہے۔ بٹ پہلے چیک کرتا ہے کہ کیا سرور کا وینٹی URL ہے۔ اگر نہیں، تو وہ ایک چینل تلاش کرتا ہے جہاں بٹ کے پاس "Create Invite" اجازت ہے اور ایک مستقل انائٹ لنک تیار کرتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $getServerInvite
+text: $getServerInvite[(guildID)]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: Join our server: $getServerInvite
+</block>
+
+<block type="callout" kind="note">
+text: بٹ کو ٹارگٹ سرور کا ممبر ہونا چاہیے اور "Create Invite" اجازت رکھنی چاہیے۔ اگر سرور کا وینٹی URL سیٹ ہے تو نئی انائٹ بنانے کی بجائے وہ واپس کیا جائے گا۔ بغیر آرگومینٹس، موجودہ سرور استعمال کرتا ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $getServerInvite[(guildID)]
+param: guildID|snowflake|اختیاری|انائٹ حاصل کرنے کے لیے مختلف سرور کی ID۔ اگر چھوڑ دیا جائے تو موجودہ سرور استعمال ہوتا ہے۔
+</details>

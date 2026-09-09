@@ -1,0 +1,28 @@
+<dash>
+name: $authorURL
+desc: نام نویسنده ایمبد را به یک پیوند قابل کلیک تبدیل می‌کند.
+category: سازنده ایمبد
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $authorURL یک پیوند به نام نویسنده ایمبد می‌چسباند، به‌طوری که با کلیک روی آن آدرس داده‌شده باز می‌شود. ایندکس اختیاری انتخاب می‌کند کدام ایمبد هنگام ساخت چند ایمبد ویرایش شود. اگر هنوز نام نویسنده‌ای تنظیم نشده باشد، یک نام جایگزین خالی استفاده می‌شود تا پیوند همچنان کار کند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $authorURL[url;(index)]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $author[Visit our site]
+text: $authorURL[https://example.com]
+</block>
+
+<block type="callout" kind="note">
+text: آدرس باید با http:// یا https:// شروع شود. دیسکورد هیچ نشانه بصری از قابل کلیک بودن نام نشان نمی‌دهد، پس بهتر است در متن به آن اشاره کنید.
+</block>
+</dash>
+
+<details>
+syntax: $authorURL[url;(index)]
+param: url|text|الزامی|پیوند مقصد (http:// یا https://)
+param: index|number|اختیاری|شماره ایمبدی که هنگام ساخت چند ایمبد ویرایش شود (پیش‌فرض 1)
+</details>

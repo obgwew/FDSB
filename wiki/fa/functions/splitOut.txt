@@ -1,0 +1,27 @@
+<dash>
+name: $splitOut
+desc: یک بخش خاص از متن تقسیم‌شده قبلی (با استفاده از $splitIn) را بازیابی می‌کند.
+category: ابزارهای متنی
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $splitOut به یک بخش خاص از نتیجه تقسیم‌شده $splitIn دسترسی پیدا می‌کند. از شاخص مبتنی بر 1، < برای اولین بخش، یا > برای آخرین بخش استفاده کنید. مقدار بازیابی‌شده به کانال ارسال می‌شود.
+</block>
+
+<block type="code" title="سینتکس">
+text: $splitOut[index]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $splitIn[apple,banana,cherry; ,]
+$splitOut[2]
+</block>
+
+<block type="callout" kind="note">
+text: مقادیر شاخص معتبر: یک عدد (مبتنی بر 1)، < (اولین عنصر)، > (آخرین عنصر). $splitIn باید قبل از $splitOut فراخوانی شده باشد.
+</block>
+</dash>
+
+<details>
+syntax: $splitOut[index]
+param: index|text|Required|شاخص بخشی که بازیابی می‌شود: یک عدد (مبتنی بر 1)، < برای اولین، یا > برای آخرین
+</details>

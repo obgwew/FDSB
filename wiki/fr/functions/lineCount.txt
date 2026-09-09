@@ -1,0 +1,26 @@
+<dash>
+name: $lineCount
+desc: Renvoie le nombre d'espaces dans le texte donné.
+category: Utilitaires de texte
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: $lineCount prend un argument texte et renvoie combien de caractères d'espace ( ) il contient. Les variables et les espaces réservés (placeholders) dans l'argument sont résolus avant le décompte.
+</block>
+
+<block type="code" title="Syntaxe">
+text: $lineCount[text]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $lineCount[one two three]
+</block>
+
+<block type="callout" kind="note">
+text: Le décompte est basé sur les espaces, pas sur les sauts de ligne réels. Pour diviser un texte en parties, utilisez $splitIn avec $splitOut.
+</block>
+</dash>
+
+<details>
+syntax: $lineCount[text]
+param: text|text|Requis|Le texte dans lequel compter les espaces. Les variables et les espaces réservés sont résolus avant le décompte.
+</details>

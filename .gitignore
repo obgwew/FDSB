@@ -5,6 +5,6 @@ app_data/
 functions_ar/
 storage/
 requirements.txt
-build_app.ps1
+build_apk.ps1
 pyproject.toml
 __pycache__/

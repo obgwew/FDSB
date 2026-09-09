@@ -1,0 +1,36 @@
+<dash>
+name: $numberSeparator
+desc: Formatuje liczbę całkowitą z separatorem tysięcy, aby łatwiej było ją odczytać.
+category: Matematyka i liczby
+
+<block type="text" title="Jak działa ta komenda?">
+text: $numberSeparator przyjmuje liczbę całkowitą i wstawia separator co trzy cyfry od prawej (grupowanie tysięcy). Domyślnie separatorem jest przecinek (,), a jako drugi argument możesz podać własny separator. Na przykład 1234567 staje się 1,234,567.
+</block>
+
+<block type="code" title="Składnia">
+text: $numberSeparator[number]
+text: $numberSeparator[number; separator]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $numberSeparator[1234567]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania (własny separator)">
+text: $numberSeparator[1234567; .]
+</block>
+
+<block type="callout" kind="note">
+text: Liczby ujemne zachowują swój znak -: na przykład -1234567 staje się -1,234,567.
+</block>
+
+<block type="callout" kind="warning">
+text: Akceptowane są wyłącznie liczby całkowite. Ułamki dziesiętne i znaki nieliczbowe zwracają błąd.
+</block>
+</dash>
+
+<details>
+syntax: $numberSeparator[number; (separator)]
+param: number|number|Required|Liczba całkowita do sformatowania (może zawierać znak - na początku)
+param: separator|text|Optional|Separator wstawiany co trzy cyfry (domyślnie: ,)
+</details>

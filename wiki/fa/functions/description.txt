@@ -1,0 +1,26 @@
+<dash>
+name: $description
+desc: متن توضیح ایمبد در حال ساخت را تنظیم می‌کند.
+category: سازنده ایمبد
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $description یک آرگومان متنی دریافت کرده و آن را به‌عنوان بدنه/توضیح اصلی ایمبد فعلی در حال ساخت تنظیم می‌کند. این ناحیه محتوای اصلی ایمبد است.
+</block>
+
+<block type="code" title="سینتکس">
+text: $description[text]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $description[This is the embed body text]
+</block>
+
+<block type="callout" kind="note">
+text: توضیح از قالب‌بندی مارک‌داون دیسکورد (پررنگ، ایتالیک، بلوک کد و غیره) پشتیبانی می‌کند. در ایمبد زیر عنوان ظاهر می‌شود.
+</block>
+</dash>
+
+<details>
+syntax: $description[text]
+param: متن|text|الزامی|متن توضیح ایمبد. از قالب‌بندی مارک‌داون دیسکورد پشتیبانی می‌کند.
+</details>

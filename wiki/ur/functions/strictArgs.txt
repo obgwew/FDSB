@@ -1,0 +1,34 @@
+<dash>
+name: $strictArgs
+desc: صارف کی کمانڈ دلائل پر الفاظ کی مخصوص تعداد کی پابندی لگاتا ہے۔
+category: رسائی کنٹرول
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $strictArgs چیک کرتا ہے کہ آیا صارف نے فراہم کردہ الفاظ کی تعداد مخصوص پابندی سے مطابقت رکھتی ہے۔ اگر چیک ناکام ہوتا ہے تو ایرر پیغام دکھایا جاتا ہے اور سکرپٹ روک دیا جاتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $strictArgs[comparison; error_message]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $strictArgs[>2; Please provide more than 2 words!]
+</block>
+
+<block type="options" title="موازنہ آپریٹرز">
+option: >|بڑا ہے — صارف کو N سے زیادہ الفاظ فراہم کرنے ہوں گے
+option: <|چھوٹا ہے — صارف کو N سے کم الفاظ فراہم کرنے ہوں گے
+option: (none)|کے برابر (مثلاً صرف 2) — صارف کو بالکل N الفاظ فراہم کرنے ہوں گے
+option: !|کے برابر نہیں — صارف کو بالکل N الفاظ فراہم نہیں کرنے چاہئیں
+</block>
+
+<block type="callout" kind="note">
+text: الفاظ کی تعداد میں خود کمانڈ کا نام شامل نہیں ہے۔ مثال کے طور پر، اگر صارف "!cmd hello world" لکھتا ہے تو الفاظ کی تعداد 2 ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $strictArgs[comparison; error_message]
+param: comparison|text|لازمی|ایک پابندی جیسے >2، <2، 2، یا !2 جہاں نمبر درکار الفاظ کی تعداد ہے (سادہ 2 کا مطلب ہے بالکل 2)
+param: error_message|text|لازمی|وہ پیغام جو دکھایا جائے اگر الفاظ کی تعداد پابندی سے مطابقت نہ رکھے
+</details>

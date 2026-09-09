@@ -1,0 +1,46 @@
+<dash>
+name: $math
+desc: ریاضی کے اظہار کا اندازہ لگا کر نتیجہ لوٹاتا ہے۔
+category: ریاضی اور اعداد
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $math ایک ریاضی کا اظہار لیتا ہے، پائتھن کے AST پارسر کا استعمال کرتے ہوئے اسے محفوظ طریقے سے جانچتا ہے اور نتیجہ بھیجتا ہے۔ بنیادی ریاضی، قوت نماؤں اور عام ریاضیاتی فنکشنز کو سپورٹ کرتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $math[expression]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $math[2 + 2 * 3]
+</block>
+
+<block type="options" title="معاون آپریٹرز">
+option: +|جمع
+option: -|تفریق
+option: *|ضرب
+option: /|تقسیم
+option: //|فلور تقسیم
+option: %|ماڈیولو
+option: **|قوت نمائی
+</block>
+
+<block type="options" title="معاون فنکشنز">
+option: sqrt|مربع جذر
+option: abs|مطلق قدر
+option: ceil|اوپر گرد کریں
+option: floor|نیچے گرد کریں
+option: round|قریب ترین قدر پر گرد کریں
+option: log/log2/log10|لاگاردم
+option: sin/cos/tan|مثلثیاتی افعال
+</block>
+
+<block type="callout" kind="note">
+text: مستقل pi, e اور inf دستیاب ہیں۔ اظہار کا محفوظ طریقے سے اندازہ لگایا جاتا ہے — کوئی صوابدیدی کوڈ چلانا ممکن نہیں۔ صفر سے تقسیم ایک خرابی لوٹاتی ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $math[expression]
+param: اظہار|text|لازمی|جانچنے کے لیے ایک ریاضی کا اظہار، مثلاً 2 + 2, sqrt(16), pi * 2
+</details>

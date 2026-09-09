@@ -1,0 +1,31 @@
+<dash>
+name: $removeAllComponents
+desc: 从消息或待处理视图中移除所有按钮、选择菜单和组件。
+category: 组件
+
+<block type="text" title="命令如何工作？">
+text: $removeAllComponents 清除消息中的所有交互组件（按钮、选择菜单等）。如果不指定 Message ID，它会先清除待处理视图，然后是交互来源消息，最后是机器人发送的最后一条消息。指定 Message ID 时，它会清除该特定机器人消息。
+</block>
+
+<block type="code" title="语法">
+text: $removeAllComponents
+text: $removeAllComponents[(messageID)]
+</block>
+
+<block type="code" title="可复制示例">
+text: $removeAllComponents[123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: 这是同时移除所有组件的最快方式，与针对特定组件的 $removeButtons 或 $removeComponent 不同。
+</block>
+
+<block type="callout" kind="warning">
+text: 目标消息必须是由该机器人发送的。如果找不到消息，则会返回错误。
+</block>
+</dash>
+
+<details>
+syntax: $removeAllComponents[(messageID)]
+param: messageID|snowflake|Optional|要清除所有组件的特定机器人消息的 ID。如果省略，则清除待处理视图、交互来源消息或机器人发送的最后一条消息。
+</details>

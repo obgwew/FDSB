@@ -1,0 +1,35 @@
+<dash>
+name: $returnGuildUsersID
+desc: کسی گِلف سے انسانی (غیر بوٹ) ممبرز کی آئی ڈیز جمع کر کے ذخیرہ کرتا ہے۔
+category: واپسی کمانڈز
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $returnGuildUsersID مخصوص گِلف کے تمام انسانی (غیر بوٹ) ممبرز کی آئی ڈیز جمع کرتا ہے اور انہیں ایک متغیر نام کے تحت ذخیرہ کرتا ہے۔ آپ "cache" موڈ (پہلے سے کیش شدہ ممبرز استعمال کرتا ہے) یا "chunk" موڈ (مکمل ڈیٹا کے لیے پہلے گِلف کے ممبرز کی مکمل بازیافت پر مجبور کرتا ہے) میں انتخاب کر سکتے ہیں۔ نتیجہ بعد میں $return[variableName] استعمال کر کے بازیافت کیا جا سکتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $returnGuildUsersID[guildID; cache/chunk; var; separator]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $returnGuildUsersID[$guildID; cache; userIDs; ,]
+$sendMessage[Users: $return[userIDs]]
+</block>
+
+<block type="options" title="حاصل کرنے کے موڈز">
+option: cache|بوٹ کی کیش شدہ ممبر فہرست استعمال کرتا ہے (تیز، لیکن بڑے سرورز کے لیے نامکمل ہو سکتی ہے)
+option: chunk|پہلے Discord سے ممبرز کی مکمل فہرست حاصل کرنے پر مجبور کرتا ہے (سست، لیکن مکمل)
+</block>
+
+<block type="callout" kind="note">
+text: صرف انسانی (غیر بوٹ) ممبرز شامل کیے جاتے ہیں۔ بوٹ کو ہدف گِلف کا ممبر ہونا چاہیے۔ بڑے سرورز کے لیے "chunk" موڈ استعمال کریں جہاں کیش شدہ ممبر فہرست نامکمل ہو سکتی ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $returnGuildUsersID[guildID; cache/chunk; var; separator]
+param: guildID|snowflake|لازمی|اس گِلف (سرور) کی آئی ڈی جس سے ممبر آئی ڈیز جمع کرنے ہیں
+param: cache/chunk|text|لازمی|حاصل کرنے کا موڈ: کیش شدہ ممبرز کے لیے "cache" (تیز)، مکمل بازیافت کے لیے "chunk" (مکمل)
+param: var|text|لازمی|متغیر کا نام جس میں نتیجہ ذخیرہ کرنا ہے ($return[] کے ساتھ استعمال کریں)
+param: separator|text|لازمی|متعدد آئی ڈیز کے درمیان جدا کار (مثلاً , یا ;)۔ آپ نامی جدا کار استعمال کر سکتے ہیں: dot, com, apo, sem, colon
+</details>

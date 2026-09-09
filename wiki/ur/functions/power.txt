@@ -1,0 +1,31 @@
+<dash>
+name: $power
+desc: ایک عدد کو دوسرے عدد کی قوت پر چڑھاتا ہے۔
+category: ریاضی اور اعداد
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $power دو عددی دلائل لیتا ہے — ایک اساس اور ایک قوت نما — اور اساس کو قوت نما کی قوت پر چڑھاتا ہے۔ یہ اسٹینڈ اکیلی کمانڈ کے طور پر اور دوسری کمانڈز کے اندر بھی کام کرتی ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $power[base; exponent]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $sendMessage[$power[2; 10]]
+</block>
+
+<block type="callout" kind="note">
+text: $power[2; 10] 1024 لوٹاتا ہے۔ $power[3; 3] 27 لوٹاتا ہے۔ $power[5; 0] 1 لوٹاتا ہے۔ اگر نتیجے میں اعشاریہ کا کوئی حصہ نہ ہو تو نتیجہ ایک پورا عدد ہوتا ہے۔
+</block>
+
+<block type="callout" kind="warning">
+text: منفی اساس جس کے ساتھ جزوی قوت نما ہو ایک مختلط عدد پیدا کرتا ہے، جس پر خرابی (error) واپس آتی ہے۔ بہت بڑے نتائج بھی اوور فلو کی خرابی پیدا کر سکتے ہیں۔
+</block>
+</dash>
+
+<details>
+syntax: $power[base; exponent]
+param: base|number|لازمی|وہ اساس عدد جسے چڑھانا ہے، مثلاً 2, 10, 3.5
+param: exponent|number|لازمی|قوت نما (طاقت)، مثلاً 3, 10, 0.5
+</details>

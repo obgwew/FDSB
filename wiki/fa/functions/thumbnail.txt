@@ -1,0 +1,28 @@
+<dash>
+name: $thumbnail
+desc: تصویر بندانگشتی یک ایمبد را با استفاده از یک URL تنظیم می‌کند.
+category: سازنده ایمبد
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $thumbnail یک تصویر بزرگ در گوشه بالا سمت راست ایمبد مقصد قرار می‌دهد. هر آرگومانی که شامل یک آدرس وب معتبر باشد کار می‌کند — دستور اولین URL یافت‌شده را استخراج می‌کند. آرگومان اختیاری عددی آخر مشخص می‌کند که کدام ایمبد ویرایش شود.
+</block>
+
+<block type="code" title="سینتکس">
+text: $thumbnail[url;(index)]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $title[Server stats]
+text: $thumbnail[https://example.com/chart.png]
+</block>
+
+<block type="callout" kind="note">
+text: URL باید با http:// یا https:// شروع شود. نشانه‌گذاری انتهایی پس از URL به صورت خودکار حذف می‌شود. اگر URL معتبری یافت نشود، خطا ایجاد می‌شود.
+</block>
+</dash>
+
+<details>
+syntax: $thumbnail[url;(index)]
+param: url|text|Required|متن حاوی URL تصویر (http:// یا https://)
+param: index|number|Optional|شماره ایمبدی که هنگام ساخت چند ایمبد ویرایش می‌شود (پیش‌فرض 1)
+</details>

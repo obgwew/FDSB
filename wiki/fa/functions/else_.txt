@@ -1,0 +1,25 @@
+<dash>
+name: $else
+desc: یک بلوک کد جایگزین فراهم می‌کند وقتی شرط $if قبلی نادرست است.
+category: کنترل جریان
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: وقتی در داخل یک بلوک $if استفاده شود، $else یک مسیر کد جایگزین تعریف می‌کند. اگر شرط $if نادرست ارزیابی شود، کد بعد از $else (و قبل از $endif) به‌جای آن اجرا می‌شود.
+</block>
+
+<block type="code" title="سینتکس">
+text: $else
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $if[$authorID == 123456789]
+  Hello Admin!
+$else
+  You are not an admin.
+$endif
+</block>
+
+<block type="callout" kind="note">
+text: $else باید بین یک $if و یک $endif قرار گیرد. استفاده از $else خارج از بلوک $if منجر به خطا خواهد شد.
+</block>
+</dash>

@@ -1,0 +1,26 @@
+<dash>
+name: $displayName
+desc: صارف کا ڈسپلے نام واپس کرتا ہے۔
+category: صارف
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $displayName کسی صارف کا ڈسپلے نام (سرور کا عرفی نام یا یوزر نیم) واپس کرتا ہے۔ اگر کوئی آرگیومنٹ فراہم نہ کیا جائے تو یہ کمانڈ لکھنے والے کا ڈسپلے نام واپس کرتا ہے۔ جب صارف ID یا مینشن فراہم کی جائے تو یہ اسی صارف کا ڈسپلے نام واپس کرتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $displayName[(user mention/ID)]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: Hello, $displayName!
+</block>
+
+<block type="callout" kind="note">
+text: ڈسپلے نام سرور کے لیے مخصوص عرفی نام ہے اگر سیٹ کیا گیا ہو، بصورت دیگر عالمی یوزر نیم۔ اسے ان لائن استعمال کیا جا سکتا ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $displayName[(user mention/ID)]
+param: user|text|اختیاری|صارف مینشن یا عددی ID۔ اگر خالی ہو تو کمانڈ لکھنے والے کو استعمال کرتا ہے۔
+</details>

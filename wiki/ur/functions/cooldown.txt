@@ -1,0 +1,27 @@
+<dash>
+name: $cooldown
+desc: کسی صارف کو مخصوص مدت کے لیے اسکرپٹ دوبارہ چلانے سے روکتا ہے۔
+category: رسائی کنٹرول
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $cooldown فی صارف فی اسکرپٹ وقت پر مبنی پابندی مقرر کرتا ہے۔ اگر صارف کولڈاؤن ختم ہونے سے پہلے اسی اسکرپٹ کو دوبارہ چلانے کی کوشش کرتا ہے تو فراہم کردہ خرابی کا پیغام (باقی وقت کے ساتھ) دکھایا جاتا ہے اور عمل روک دیا جاتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $cooldown[time; error message]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $cooldown[10s; Please wait {time} before using this again!]
+</block>
+
+<block type="callout" kind="note">
+text: وقت کی شکل استعمال کرتی ہے: s (سیکنڈز)، m (منٹس)، h (گھنٹے)، d (دن)۔ خرابی کے پیغام میں باقی کولڈاؤن وقت دکھانے کے لیے {time} یا %time% استعمال کریں۔
+</block>
+</dash>
+
+<details>
+syntax: $cooldown[time; error message]
+param: time|text|لازمی|صارف کے اسکرپٹ دوبارہ چلانے سے پہلے کی مدت۔ شکل: نمبر + اکائی (s/m/h/d)، مثلاً 10s، 5m، 1h، 1d
+param: error message|text|لازمی|جب کولڈاؤن فعال ہو تو صارف کو بھیجا جانے والا پیغام۔ باقی وقت دکھانے کے لیے {time} یا %time% استعمال کریں۔
+</details>

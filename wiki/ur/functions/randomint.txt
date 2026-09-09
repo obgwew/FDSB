@@ -1,0 +1,27 @@
+<dash>
+name: $randomint
+desc: کم سے کم اور زیادہ سے زیادہ قدر کے درمیان ایک تصادفی پورا عدد لوٹاتا ہے۔
+category: تصادفی
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $randomint دو اعداد (min اور max) لیتا ہے اور اس جامع حد کے اندر ایک تصادفی پورا عدد پیدا کرتا ہے، پھر اسے چینل میں بھیجتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $randomint[min; max]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $randomint[1; 100]
+</block>
+
+<block type="callout" kind="note">
+text: min اور max دونوں جامع ہیں۔ اگر min، max سے بڑا ہو تو اقدار خود بخود آپس میں بدل جاتی ہیں۔ نتیجہ ان دونوں حدود کے درمیان ایک مکمل عدد ہوتا ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $randomint[min; max]
+param: min|number|لازمی|کم سے کم قدر (جامع)
+param: max|number|لازمی|زیادہ سے زیادہ قدر (جامع)
+</details>

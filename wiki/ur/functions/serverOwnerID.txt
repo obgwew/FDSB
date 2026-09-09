@@ -1,0 +1,21 @@
+<dash>
+name: $serverOwnerID
+desc: سرور کے مالک کی Discord صارف ID واپس کرتا ہے۔
+category: معلومات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: جب $serverOwnerID کو کال کیا جاتا ہے، بوٹ سرور کے مالک کی منفرد Discord صارف ID حاصل کرتا ہے اور اسے براہِ راست خالص عددی سٹرنگ کے طور پر بھیجتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $serverOwnerID
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: Server owner ID: $serverOwnerID
+</block>
+
+<block type="callout" kind="note">
+text: یہ کمانڈ صرف سرور کے اندر کام کرتی ہے (ڈائریکٹ پیغامات میں نہیں)۔ واپس کردہ ویلیو اس اکاؤنٹ کی snowflake صارف ID ہے جس کا سرور ہے۔
+</block>
+</dash>

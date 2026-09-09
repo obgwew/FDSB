@@ -1,0 +1,37 @@
+<dash>
+name: $editSelectMenu
+desc: Modifie le nombre de sélections minimum/maximum et le texte indicatif (placeholder) d'un menu de sélection existant.
+category: Composants
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: $editSelectMenu recherche un menu de sélection par son ID de menu (Menu ID) dans un message et met à jour le nombre d'options que l'utilisateur doit/peut choisir (Min/Max) ainsi que le texte indicatif affiché avant le choix (Placeholder). Les options déjà ajoutées au menu restent inchangées. Pour modifier une option individuelle, utilisez $editSelectMenuOption.
+</block>
+
+<block type="code" title="Syntaxe">
+text: $editSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+$addSelectMenuOption[color_menu; Red; red; The color red]
+$addSelectMenuOption[color_menu; Blue; blue; The color blue]
+$editSelectMenu[color_menu; 1; 2; Pick one or two colors]
+</block>
+
+<block type="callout" kind="note">
+text: Sans ID de message, le bot recherche le menu d'abord sur le message source de l'interaction, puis sur le dernier message envoyé par le bot. Les options du menu sont conservées.
+</block>
+
+<block type="callout" kind="warning">
+text: Min doit être compris entre 0 et 25, Max entre 1 et 25, et Min ne peut pas dépasser Max. Le message cible doit avoir été envoyé par ce bot et doit déjà contenir un menu avec l'ID donné.
+</block>
+</dash>
+
+<details>
+syntax: $editSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+param: Menu ID|text|Requis|L'ID du menu de sélection à modifier
+param: Min|number|Requis|Nouveau nombre minimum d'options que l'utilisateur doit sélectionner (0 à 25)
+param: Max|number|Requis|Nouveau nombre maximum d'options que l'utilisateur peut sélectionner (1 à 25)
+param: Placeholder|text|Optionnel|Nouveau texte indicatif affiché avant qu'un choix ne soit fait
+param: Message ID|snowflake|Optionnel|ID d'un message spécifique du bot contenant le menu à modifier
+</details>

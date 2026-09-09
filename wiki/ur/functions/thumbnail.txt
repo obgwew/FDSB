@@ -1,0 +1,28 @@
+<dash>
+name: $thumbnail
+desc: URL استعمال کرتے ہوئے ایک ایمبیڈ کی تھمب نیل تصویر مقرر کرتا ہے۔
+category: ایمبیڈ بنانے والا
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $thumbnail ہدف ایمبیڈ کے اوپری دائیں کونے میں ایک بڑی تصویر رکھتا ہے۔ کوئی بھی دلیل جس میں درست ویب ایڈریس ہو کام کرتی ہے - کمانڈ پائی جانے والا پہلا URL نکالتا ہے۔ اختیاری آخری عددی دلیل منتخب کرتی ہے کہ کس ایمبیڈ میں ترمیم کی جائے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $thumbnail[url;(index)]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $title[Server stats]
+text: $thumbnail[https://example.com/chart.png]
+</block>
+
+<block type="callout" kind="note">
+text: URL کا آغاز http:// یا https:// سے ہونا ضروری ہے۔ URL کے بعد آنے والی اوقاف خود بخود ہٹا دی جاتی ہے۔ اگر کوئی درست URL نہ پائے تو ایک ایرر پیدا ہوتا ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $thumbnail[url;(index)]
+param: url|text|لازمی|وہ متن جس میں تصویر کا URL ہے (http:// یا https://)
+param: index|number|اختیاری|ایمبیڈ نمبر جہاں ترمیم کی جائے جب کئی ایمبیڈز بن رہے ہوں (ڈیفالٹ 1)
+</details>

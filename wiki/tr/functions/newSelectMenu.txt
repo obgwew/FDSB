@@ -1,0 +1,44 @@
+<dash>
+name: $newSelectMenu
+desc: Bir mesaj için yeni bir seçim menüsü oluşturur ve kaydeder.
+category: Bileşenler
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $newSelectMenu, benzersiz bir Menü Kimliği ile tanımlanan bir seçim menüsü oluşturmaya başlar. Bir kullanıcının seçmesi gereken/bilebileceği minimum ve maksimum seçenek sayısını siz belirlersiniz. Ardından menüyü seçeneklerle doldurmak için $addSelectMenuOption kullanın; bu, oluşturmakta olduğunuz mesaja eklenir. Menüyü daha önce gönderilmiş bir bot mesajına eklemek için bir mesaj kimliği de iletebilirsiniz.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $newSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+</block>
+
+<block type="code" title="Kopyalanmaya hazır örnek">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+$addSelectMenuOption[color_menu; Red; red; The color red]
+$addSelectMenuOption[color_menu; Blue; blue; The color blue]
+$sendMessage[Choose your favorite color!]
+</block>
+
+<block type="options" title="Davranış ayrıntıları">
+option: Minimum|Kullanıcının seçmek zorunda olduğu minimum seçenek sayısı (0 ile 25)
+option: Maksimum|Kullanıcının seçebileceği maksimum seçenek sayısı (1 ile 25)
+option: Yer tutucu|Kullanıcı herhangi bir seçim yapmadan önce gösterilen gri ipucu metni
+option: Mesaj Kimliği|Menünün ekleneceği, daha önce gönderilmiş bir bot mesajının isteğe bağlı kimliği
+</block>
+
+<block type="callout" kind="note">
+text: Bir menü, $addSelectMenuOption ile en az bir seçenek ekledikten sonra kullanıma hazır olur. Var olan bir menünün Min/Max/Yer tutucu değerlerini değiştirmek için $editSelectMenu, tek bir seçeneği düzenlemek için ise $editSelectMenuOption kullanın.
+</block>
+
+<block type="callout" kind="warning">
+text: Min, Max değerinden büyük olamaz. Bir mesaj toplamda en fazla 25 bileşen içerebilir. Verilen mesaj bu bot tarafından gönderilmediyse bir hata döndürülür.
+</block>
+</dash>
+
+<details>
+syntax: $newSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+param: Menü Kimliği|text|Required|Bu seçim menüsüne daha sonra başvurmak için kullanılan benzersiz kimlik ($addSelectMenuOption, $editSelectMenu, $editSelectMenuOption)
+param: Minimum|number|Required|Kullanıcının seçmek zorunda olduğu minimum seçenek sayısı (0 ile 25)
+param: Maksimum|number|Required|Kullanıcının seçebileceği maksimum seçenek sayısı (1 ile 25)
+param: Yer tutucu|text|Optional|Bir seçim yapılmadan önce menünün içinde gösterilen ipucu metni
+param: Mesaj Kimliği|snowflake|Optional|Bu menüyü mevcut mesaj yerine eklemek için daha önce gönderilmiş bir bot mesajının kimliği
+</details>

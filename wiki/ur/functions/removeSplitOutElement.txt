@@ -1,0 +1,28 @@
+<dash>
+name: $removeSplitOutElement
+desc: موجودہ سپلٹ نتیجے ($splitIn) سے ایک عنصر کو اس کے 1-اشاریہ مقام کے حساب سے حذف کرتا ہے۔
+category: متن ٹولز
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $removeSplitOutElement $splitIn کے ذخیرہ کردہ اعداد و شمار سے دیے گئے مقام پر موجود عنصر کو حذف کر دیتا ہے۔ باقی عناصر اپنی ترتیب برقرار رکھتے ہیں۔ اس کمانڈ سے پہلے $splitIn کہا جانا ضروری ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $removeSplitOutElement[index]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $splitIn[apple,banana,cherry; ,]
+$removeSplitOutElement[2]
+$joinSplitOut[; ]
+</block>
+
+<block type="callout" kind="note">
+text: انڈیکس ایک مثبت پورا عدد ہونا چاہیے جو موجودہ سپلٹ لمبائی کے اندر ہو، ورنہ ایک خرابی (error) پیدا ہوتی ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $removeSplitOutElement[index]
+param: index|number|لازمی|حذف کرنے والے عنصر کی 1-اشاریہ پوزیشن
+</details>

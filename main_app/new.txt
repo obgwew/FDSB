@@ -1,0 +1,16 @@
+welcome to update 2.4.1
+
+# add:
+- add all avatar/icon commands 
+
+- add menu commands
+
+# ui:
+- all views modification
+
+# fixes:
+- fixed notifications on android
+
+- fixed app on 32bit of andriod version old
+
+- some fixed commands

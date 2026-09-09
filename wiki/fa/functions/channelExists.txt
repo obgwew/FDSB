@@ -1,0 +1,26 @@
+<dash>
+name: $channelExists
+desc: بررسی می‌کند که آیا کانالی در سرور وجود دارد.
+category: کانال
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $channelExists یک منشن یا شناسه کانال می‌گیرد و بررسی می‌کند که آیا ربات می‌تواند آن کانال را در سرور پیدا کند. اگر کانال وجود داشته باشد «true» و در غیر این صورت «false» برمی‌گرداند. اگر هیچ آرگومانی ارائه نشود، به‌طور پیش‌فرض «true» برمی‌گرداند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $channelExists[channel mention/ID]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $channelExists[<#123456789012345678>]
+</block>
+
+<block type="callout" kind="note">
+text: این دستور را می‌توان به‌صورت داخل خطی برای بررسی وجود کانال قبل از انجام سایر عملیات روی آن کانال استفاده کرد.
+</block>
+</dash>
+
+<details>
+syntax: $channelExists[channel mention/ID]
+param: channel|text|اختیاری|منشن کانال یا شناسه عددی که باید بررسی شود. اگر خالی باشد، «true» برمی‌گرداند.
+</details>

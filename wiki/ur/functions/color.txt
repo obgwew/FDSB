@@ -1,0 +1,26 @@
+<dash>
+name: $color
+desc: بنائے جا رہے ایمبیڈ کا رنگ سیٹ کرتا ہے۔
+category: ایمبیڈ بنانے والا
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $color ہیکس رنگ کی قدر یا نامزد رنگ لیتا ہے اور اسے بنائے جا رہے موجودہ ایمبیڈ پر لاگو کرتا ہے۔ رنگ ایمبیڈ کے بائیں جانب کی جھلک دار بار کے طور پر ظاہر ہوتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $color[hex or name]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $color[#FF5733]
+</block>
+
+<block type="callout" kind="note">
+text: آپ ہیکس کوڈز (مثلاً، #FF5733، FF5733) یا نامزد رنگ استعمال کر سکتے ہیں۔ یہ کمانڈ صرف ان ایمبیڈز کو متاثر کرتا ہے جو اسے کال کرنے کے بعد بھیجے جائیں۔
+</block>
+</dash>
+
+<details>
+syntax: $color[hex or name]
+param: hex or name|text|لازمی|ایمبیڈ کی جھلک دار بار کا رنگ سیٹ کرنے کے لیے ہیکس رنگ کوڈ (مثلاً، #FF5733) یا نامزد رنگ
+</details>

@@ -1,0 +1,32 @@
+<dash>
+name: $onInteraction
+desc: وہ واقعہ جو کمپوننٹ انٹرایکشن (بٹن/سلیکٹ) ہونے پر متحرک ہوتا ہے۔
+category: واقعہ
+
+<block type="text" title="یہ واقعہ کیسے کام کرتا ہے؟">
+text: $onInteraction ایک ایونٹ پریفکس ہے جو FDScript کو اس وقت متحرک کرتا ہے جب صارف کسی کمپوننٹ (بٹن کلک، سلیکٹ مینیو وغیرہ) کے ساتھ انٹرایکٹ کرتا ہے۔ آپ اختیاری طور پر ایک کسٹم ID بتا سکتے ہیں تاکہ صرف مخصوص کمپوننٹس کے لیے متحرک ہو۔ ID کے بغیر یہ تمام کمپوننٹ انٹرایکشنز کے لیے متحرک ہوتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: #PREFIX:$onInteraction
+text: #PREFIX:$onInteraction[button_custom_id]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: #PREFIX:$onInteraction[confirm_btn]
+ sendMessage[You clicked the confirm button!]
+</block>
+
+<block type="callout" kind="note">
+text: تمام انٹرایکشنز کو سنبھالنے کے لیے $onInteraction کو بریکٹ کے بغیر استعمال کریں، یا صرف اسی کمپوننٹ کو سنبھالنے کے لیے مخصوص custom_id کے ساتھ۔
+</block>
+
+<block type="callout" kind="important">
+text: یہ واقعہ bot_events فولڈر میں چلتا ہے، bot_commands میں نہیں۔ اپنی .fds فائل وہاں بنائیں۔
+</block>
+</dash>
+
+<details>
+syntax: #PREFIX:$onInteraction[(custom_id)]
+param: کسٹم ID|text|اختیاری|جس مخصوص کمپوننٹ کو سننا ہے اس کا custom_id۔ خالی ہونے پر تمام انٹرایکشنز کے لیے متحرک ہوتا ہے۔
+</details>

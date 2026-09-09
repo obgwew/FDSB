@@ -1,0 +1,29 @@
+<dash>
+name: $httpPatch
+desc: یک درخواست HTTP PATCH به یک URL با بدنه اختیاری ارسال می‌کند.
+category: HTTP
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $httpPatch یک درخواست PATCH با مهلت زمانی 10 ثانیه ارسال می‌کند. بدنه زمانی به صورت JSON ارسال می‌شود که JSON معتبر باشد، در غیر این صورت به صورت متن خام ارسال می‌شود. پاسخ در $httpResult و کد وضعیت در $httpStatus ذخیره می‌شود. هدرهای اضافه‌شده با $httpAddHeader ارسال و سپس پاک می‌شوند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $httpPatch[URL; (Body)]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $httpAddHeader[Content-Type; application/json]
+$httpPatch[https://api.example.com/users/1; {"name": "FDScript"}]
+$httpStatus
+</block>
+
+<block type="callout" kind="note">
+text: اگر بدنه JSON معتبر باشد به صورت JSON ارسال می‌شود، در غیر این صورت به صورت داده خام ارسال می‌شود. در صورت شکست، وضعیت روی 500 تنظیم می‌شود و $httpResult شامل پیام خطا می‌شود.
+</block>
+</dash>
+
+<details>
+syntax: $httpPatch[URL; (Body)]
+param: URL|text|الزامی|URLی که درخواست PATCH به آن ارسال می‌شود
+param: Body|text|اختیاری|بدنه درخواست (JSON یا متن خام)
+</details>

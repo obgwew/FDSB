@@ -1,0 +1,26 @@
+<dash>
+name: $or
+desc: چند شرط را ارزیابی می‌کند و اگر هر یک از شرایط درست باشند true برمی‌گرداند.
+category: کنترل جریان
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $or چند آرگومان شرط می‌گیرد و هر یک را ارزیابی می‌کند. اگر حداقل یک شرط درست باشد «true» و اگر همه شرایط نادرست باشند «false» برمی‌گرداند. این برای ساخت بررسی‌های شرطی جایگزین مفید است.
+</block>
+
+<block type="code" title="سینتکس">
+text: $or[condition1; condition2; condition3; ...]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $or[$authorID == 123; $authorID == 456]
+</block>
+
+<block type="callout" kind="note">
+text: هر شرایط از همان عملگرهای مقایسه $if استفاده می‌کند (==، !=، >، <، >=، <=). رشته «true» یا «false» برمی‌گرداند.
+</block>
+</dash>
+
+<details>
+syntax: $or[condition1; condition2; condition3; ...]
+param: شرط|expression|الزامی|یک یا چند شرایط برای ارزیابی. هر کدام می‌توانند از عملگرهایی مانند ==، !=، >، <، >=، <= استفاده کنند. فقط یکی باید درست باشد تا نتیجه «true» باشد.
+</details>

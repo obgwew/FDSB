@@ -1,0 +1,27 @@
+<dash>
+name: $authorServerAvatar
+desc: 返回或发送命令作者（或某个用户）服务器头像的直接图片 URL。
+category: 信息
+
+<block type="text" title="命令如何工作？">
+text: $authorServerAvatar 在用户设置了服务器（guild）头像的情况下，解析并返回其直接图片 URL。不带参数时使用命令作者；带用户 ID 或 @提及（@mention）时使用该用户。当不存在自定义的服务器头像时，使用用户的显示头像。结果是一个可以在消息或图片中嵌入的 URL。
+</block>
+
+<block type="code" title="语法">
+text: $authorServerAvatar
+text: $authorServerAvatar[(userID/@mention)]
+</block>
+
+<block type="code" title="可复制示例">
+text: Your server avatar: $authorServerAvatar
+</block>
+
+<block type="callout" kind="note">
+text: 这是服务器内其他成员看到的头像，可能与用户的全局头像（$authorAvatar）不同。动态头像以 .gif URL 形式返回。
+</block>
+</dash>
+
+<details>
+syntax: $authorServerAvatar[(userID/@mention)]
+param: userID/@mention|text|Optional|要获取其服务器头像 URL 的用户 ID 或 @提及。如果省略，则使用命令作者。
+</details>

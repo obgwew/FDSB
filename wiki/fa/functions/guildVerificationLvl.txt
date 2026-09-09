@@ -1,0 +1,21 @@
+<dash>
+name: $guildVerificationLvl
+desc: تنظیم سطح تأیید سرور را برمی‌گرداند.
+category: سرور
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $guildVerificationLvl سطح امنیتی را که اعضای جدید قبل از اینکه بتوانند صحبت کنند باید بگذرانند، به عنوان مقدار داخلی آن از NONE (0) تا VERY_HIGH (4) برمی‌گرداند: 0 = هیچ، 1 = کم، 2 = متوسط، 3 = زیاد، 4 = بالاترین.
+</block>
+
+<block type="code" title="سینتکس">
+text: $guildVerificationLvl
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $sendMessage[Verification level here: $guildVerificationLvl]
+</block>
+
+<block type="callout" kind="important">
+text: فقط می‌تواند درون یک سرور استفاده شود — در پیام‌های مستقیم یک خطای محیطی ایجاد کرده و اسکریپت را متوقف می‌کند.
+</block>
+</dash>

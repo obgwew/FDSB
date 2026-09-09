@@ -1,0 +1,44 @@
+<dash>
+name: $addSelectMenuOption
+desc: Ajoute une option à un menu de sélection existant créé avec $newSelectMenu.
+category: Composants
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: $addSelectMenuOption ajoute une option à un menu de sélection créé précédemment avec $newSelectMenu, en le faisant correspondre par son ID de menu. Chaque option possède un libellé visible, une valeur unique et une description facultative. Utilisez l'argument Default pour la présélectionner, et un argument Emoji pour afficher un emoji à côté du libellé.
+</block>
+
+<block type="code" title="Syntaxe">
+text: $addSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+$addSelectMenuOption[color_menu; Red; red; The color red]
+$addSelectMenuOption[color_menu; Blue; blue; The color blue; yes]
+</block>
+
+<block type="options" title="Détails">
+option: Default|Définir sur yes pour présélectionner cette option (une seule option par défaut par menu)
+option: Emoji|Un emoji affiché à côté du libellé de l'option
+option: Message ID|ID facultatif d'un message du bot déjà envoyé contenant ce menu
+</block>
+
+<block type="callout" kind="note">
+text: Les valeurs des options doivent être uniques dans un même menu. Lorsqu'un ID de message (Message ID) est fourni, le menu de ce message est mis à jour en direct ; sinon, l'option est rattachée au menu du message en cours de construction.
+</block>
+
+<block type="callout" kind="warning">
+text: Maximum 25 options par menu de sélection. Si aucun menu avec l'ID donné n'a été créé dans le script (via $newSelectMenu), une erreur est renvoyée.
+</block>
+</dash>
+
+<details>
+syntax: $addSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+param: Menu ID|text|Requis|L'ID du menu de sélection (issu de $newSelectMenu) auquel ajouter cette option
+param: Label|text|Requis|Le texte affiché à l'utilisateur pour cette option
+param: Value|text|Requis|Une valeur unique renvoyée lorsque cette option est sélectionnée
+param: Description|text|Peut être laissé vide|Petite description affichée sous le libellé
+param: Default|yes/no|Optionnel|yes pour présélectionner cette option (défaut : no)
+param: Emoji|text|Optionnel|Un emoji affiché à côté du libellé de l'option
+param: Message ID|snowflake|Optionnel|ID d'un message du bot déjà envoyé dont le menu doit être mis à jour en direct
+</details>

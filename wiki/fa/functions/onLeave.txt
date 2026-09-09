@@ -1,0 +1,30 @@
+<dash>
+name: $onLeave
+desc: رویدادی که وقتی یک عضو از سرور خارج می‌شود فعال می‌گردد.
+category: رویداد
+
+<block type="text" title="این رویداد چگونه کار می‌کند؟">
+text: $onLeave یک پیشوند رویداد است که هر زمان یک عضو از سرور خارج شود یا حذف گردد یک FDScript را فعال می‌کند. اسکریپت اطلاعات عضو در حال خروج را دریافت می‌کند. می‌توانید به صورت اختیاری یک شناسه کانال در خط اول مشخص کنید تا خروجی به کانال خاصی هدایت شود.
+</block>
+
+<block type="code" title="سینتکس">
+text: #PREFIX:$onLeave
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: #PREFIX:$onLeave
+ sendMessage[Goodbye $authorName!]
+</block>
+
+<block type="callout" kind="note">
+text: این را در خط اول فایل FDScript خود قرار دهید. اسکریپت به صورت خودکار وقتی هر عضوی خارج شود اجرا می‌شود.
+</block>
+
+<block type="callout" kind="important">
+text: این رویداد در پوشه bot_events اجرا می‌شود، نه bot_commands. فایل .fds خود را آنجا ایجاد کنید.
+</block>
+</dash>
+
+<details>
+syntax: #PREFIX:$onLeave
+</details>

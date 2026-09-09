@@ -1,0 +1,27 @@
+<dash>
+name: $mul
+desc: دو یا چند عدد را در هم ضرب کرده و نتیجه را برمی‌گرداند.
+category: ریاضی و اعداد
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $mul دو یا چند آرگومان عددی دریافت کرده و حاصل‌ضرب آن‌ها را برمی‌گرداند. هم به عنوان دستور مستقل و هم inline داخل دستورات دیگر کار می‌کند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $mul[a; b; ...]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $sendMessage[$mul[3; 4]]
+</block>
+
+<block type="callout" kind="note">
+text: از هر تعداد آرگومان پشتیبانی می‌کند. $mul[2; 3; 4] مقدار 24 را برمی‌گرداند. اگر حاصل‌ضرب بخش اعشاری نداشته باشد نتیجه یک عدد صحیح است.
+</block>
+</dash>
+
+<details>
+syntax: $mul[a; b; ...]
+param: a|number|Required|اولین عدد برای ضرب
+param: b|number|Required|دومین عدد برای ضرب (اعداد اضافی نیز پذیرفته می‌شوند)
+</details>

@@ -1,0 +1,30 @@
+<dash>
+name: $sendEmbedMessage
+desc: یک پیام ایمبد با عنوان، توضیحات، رنگ و پاورقی به کانال مشخص‌شده ارسال می‌کند.
+category: پیام‌ها
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $sendEmbedMessage یک ایمبد با عنوان، توضیحات، رنگ و پاورقی ارائه‌شده می‌سازد و سپس آن را به کانال مشخص‌شده ارسال می‌کند. تمام پنج آرگومان الزامی هستند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $sendEmbedMessage[channelID; title; description; color; footer]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $sendEmbedMessage[$channelID; Welcome!; Thanks for joining; #00FF00; Enjoy your stay]
+</block>
+
+<block type="callout" kind="note">
+text: آرگومان رنگ مقادیر هگز را می‌پذیرد (مثلاً #FF5733). ربات باید مجوزهای «ارسال پیام‌ها» و «پیوست لینک‌ها» را در کانال مقصد داشته باشد.
+</block>
+</dash>
+
+<details>
+syntax: $sendEmbedMessage[channelID; title; description; color; footer]
+param: channelID|snowflake|Required|شناسه کانالی که ایمبد به آن ارسال می‌شود
+param: title|text|Required|عنوان ایمبد
+param: description|text|Required|متن توضیحات/بدنه ایمبد
+param: color|text|Required|کد رنگ هگز برای نوار تزئینی ایمبد (مثلاً #FF5733)
+param: footer|text|Required|متن پاورقی که در پایین ایمبد نمایش داده می‌شود
+</details>

@@ -1,0 +1,21 @@
+<dash>
+name: $authorName
+desc: وہ صارف نام واپس کرتا ہے جس شخص نے کمانڈ کو متحرک کیا۔
+category: معلومات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: جب $authorName کو پکارا جاتا ہے، بوٹ کمانڈ کے مصنف کا صارف نام حاصل کرتا ہے اور اسے براہِ راست چینل میں ایک سادہ متن سٹرنگ کے طور پر بھیجتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $authorName
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: Hello, $authorName!
+</block>
+
+<block type="callout" kind="note">
+text: یہ صارف کا موجودہ صارف نام واپس کرتا ہے (ان کے ڈسپلے/عرفی نام نہیں)۔ اگر صارف اپنا صارف نام تبدیل کرتا ہے، تو اگلی کال اپ ڈیٹ شدہ نام ظاہر کرے گی۔
+</block>
+</dash>

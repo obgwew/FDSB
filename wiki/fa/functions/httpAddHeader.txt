@@ -1,0 +1,28 @@
+<dash>
+name: $httpAddHeader
+desc: یک هدر HTTP سفارشی را که با درخواست HTTP بعدی ارسال می‌شود اضافه می‌کند.
+category: HTTP
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $httpAddHeader یک هدر (نام و مقدار) ثبت می‌کند که به درخواست HTTP بعدی ساخته‌شده با $httpGet، $httpPost، $httpPut، $httpPatch یا $httpDelete پیوست می‌شود. هدرها پس از درخواست به صورت خودکار پاک می‌شوند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $httpAddHeader[name; value]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $httpAddHeader[Authorization; Bearer token123]
+$httpGet[https://api.example.com/data]
+</block>
+
+<block type="callout" kind="note">
+text: افزودن همان نام دوبار، مقدار قبلی را بازنویسی می‌کند. هدرهای ذخیره‌شده پس از ارسال درخواست پاک می‌شوند.
+</block>
+</dash>
+
+<details>
+syntax: $httpAddHeader[name; value]
+param: name|text|الزامی|نام هدر (به عنوان مثال Authorization)
+param: value|text|الزامی|مقدار هدر
+</details>

@@ -1,0 +1,44 @@
+<dash>
+name: $newSelectMenu
+desc: Crée et enregistre un nouveau menu de sélection pour un message.
+category: Composants
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: $newSelectMenu commence à construire un menu déroulant identifié par un ID de menu unique (Menu ID). Vous définissez le nombre minimum et maximum d'options qu'un utilisateur doit/peut choisir. Utilisez ensuite $addSelectMenuOption pour remplir le menu avec des options, et il sera rattaché au message que vous construisez. Vous pouvez également passer un ID de message pour rattacher le menu à un message du bot déjà envoyé.
+</block>
+
+<block type="code" title="Syntaxe">
+text: $newSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+$addSelectMenuOption[color_menu; Red; red; The color red]
+$addSelectMenuOption[color_menu; Blue; blue; The color blue]
+$sendMessage[Choose your favorite color!]
+</block>
+
+<block type="options" title="Détails du comportement">
+option: Min|Le nombre minimum d'options que l'utilisateur doit sélectionner (0 à 25)
+option: Max|Le nombre maximum d'options que l'utilisateur peut sélectionner (1 à 25)
+option: Placeholder|Le texte indicatif gris affiché avant que l'utilisateur ne fasse un choix
+option: Message ID|ID facultatif d'un message du bot déjà envoyé auquel rattacher le menu
+</block>
+
+<block type="callout" kind="note">
+text: Un menu n'est prêt qu'après avoir ajouté au moins une option avec $addSelectMenuOption. Utilisez $editSelectMenu pour modifier Min/Max/Placeholder d'un menu existant, et $editSelectMenuOption pour modifier une option individuelle.
+</block>
+
+<block type="callout" kind="warning">
+text: Min ne peut pas être supérieur à Max. Un message peut contenir au maximum 25 composants au total. Si le message donné ne provient pas de ce bot, une erreur est renvoyée.
+</block>
+</dash>
+
+<details>
+syntax: $newSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+param: Menu ID|text|Requis|Un ID unique utilisé pour référencer ce menu de sélection plus tard ($addSelectMenuOption, $editSelectMenu, $editSelectMenuOption)
+param: Min|number|Requis|Nombre minimum d'options que l'utilisateur doit sélectionner (0 à 25)
+param: Max|number|Requis|Nombre maximum d'options que l'utilisateur peut sélectionner (1 à 25)
+param: Placeholder|text|Optionnel|Le texte indicatif affiché à l'intérieur du menu avant qu'un choix ne soit fait
+param: Message ID|snowflake|Optionnel|ID d'un message du bot déjà envoyé auquel rattacher ce menu au lieu du message actuel
+</details>

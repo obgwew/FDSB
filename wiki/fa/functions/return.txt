@@ -1,0 +1,27 @@
+<dash>
+name: $return
+desc: مقداری را که توسط یک دستور $returnXxx ذخیره شده است بازیابی می‌کند و به کانال ارسال می‌کند.
+category: متغیرها
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $return یک نام متغیر می‌گیرد و مقدار آن را در حافظه متغیرهای بازگشتی جستجو می‌کند. این حافظه توسط دستورهایی مانند $returnGuildUsersID، $returnGuildChannelsID و غیره پر می‌شود. به‌کاررفته به‌تنهایی، مقدار بازیابی‌شده به کانال ارسال می‌شود؛ به‌کاررفته به‌صورت درون‌خطی داخل آرگومان‌های یک دستور دیگر، مقدار مستقیماً در متن جایگزین می‌شود.
+</block>
+
+<block type="code" title="سینتکس">
+text: $return[var]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $returnGuildUsersID[$guildID; cache; userIDs; ,]
+$sendMessage[User IDs: $return[userIDs]]
+</block>
+
+<block type="callout" kind="note">
+text: اگر نام متغیر در حافظه بازگشتی وجود نداشته باشد، یک خطا برمی‌گردد. مطمئن شوید قبل از استفاده از $return دستور $returnXxx مناسب را فراخوانی کرده باشید.
+</block>
+</dash>
+
+<details>
+syntax: $return[var]
+param: متغیر|text|الزامی|نام متغیر بازگشتی که باید بازیابی شود (مثلاً userIDs، channelIDs، roleIDs)
+</details>

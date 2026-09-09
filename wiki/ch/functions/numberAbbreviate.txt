@@ -1,0 +1,30 @@
+<dash>
+name: $numberAbbreviate
+desc: 将整数转换为带后缀（k、m、b……）的简短缩写形式。
+category: 数学与数字
+
+<block type="text" title="命令如何工作？">
+text: $numberAbbreviate 接受一个整数并将其简化为短形式，使用后缀：k（千）、m（百万）、b（十亿）、t（万亿），以此类推。例如，1500 变成 1.5k，2500000 变成 2.5m。负数同样适用。
+</block>
+
+<block type="code" title="语法">
+text: $numberAbbreviate[number]
+</block>
+
+<block type="code" title="可复制示例">
+text: $numberAbbreviate[1523487]
+</block>
+
+<block type="callout" kind="note">
+text: 支持的后缀：k、m、b、t、qa、qi、sx、sp、oc、no、dc。小于 1000 的数字会原样返回。
+</block>
+
+<block type="callout" kind="warning">
+text: 只接受整数。小数和非数字字符会返回错误。
+</block>
+</dash>
+
+<details>
+syntax: $numberAbbreviate[number]
+param: number|number|Required|要简化的整数（可以包含前导 - 号）
+</details>

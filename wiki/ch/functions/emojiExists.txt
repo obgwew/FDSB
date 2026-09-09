@@ -1,0 +1,32 @@
+<dash>
+name: $emojiExists
+desc: 检查自定义表情符号是否存在，并返回 true 或 false。
+category: 信息
+
+<block type="text" title="命令如何工作？">
+text: $emojiExists 接受一个自定义表情符号 ID（或完整的表情符号提及，如 <:name:id> 或 <a:name:id>），如果机器人所在的服务器中存在该表情符号，则返回 true，否则返回 false。
+</block>
+
+<block type="code" title="语法">
+text: $emojiExists[emoji id]
+</block>
+
+<block type="code" title="可复制示例">
+text: $if[$emojiExists[123456789012345678]]
+ $sendMessage[That emoji exists!]
+$endif
+</block>
+
+<block type="callout" kind="note">
+text: 这在 $if / $onlyIf 条件中很有用。内置的 Unicode 表情符号没有 ID，因此只能检查服务器自定义表情符号。
+</block>
+
+<block type="callout" kind="warning">
+text: 表情符号必须能被机器人访问到（机器人必须与它在同一个服务器中），否则检查可能会返回 false。
+</block>
+</dash>
+
+<details>
+syntax: $emojiExists[emoji id]
+param: emoji id|snowflake|Required|自定义表情符号的数字 ID，或 <:name:id> / <a:name:id> 之类的表情符号提及
+</details>

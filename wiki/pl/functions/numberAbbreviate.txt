@@ -1,0 +1,30 @@
+<dash>
+name: $numberAbbreviate
+desc: Zamienia liczbę całkowitą na krótką skróconą formę z sufiksem (k, m, b, ...).
+category: Matematyka i liczby
+
+<block type="text" title="Jak działa ta komenda?">
+text: $numberAbbreviate przyjmuje liczbę całkowitą i zaokrągla ją do krótkiej formy z sufiksem: k (tysiąc), m (milion), b (miliard), t (bilion) i tak dalej. Na przykład 1500 staje się 1.5k, a 2500000 staje się 2.5m. Obsługiwane są również liczby ujemne.
+</block>
+
+<block type="code" title="Składnia">
+text: $numberAbbreviate[number]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $numberAbbreviate[1523487]
+</block>
+
+<block type="callout" kind="note">
+text: Obsługiwane sufiksy: k, m, b, t, qa, qi, sx, sp, oc, no, dc. Liczby mniejsze niż 1000 są zwracane bez zmian.
+</block>
+
+<block type="callout" kind="warning">
+text: Akceptowane są wyłącznie liczby całkowite. Ułamki dziesiętne i znaki nieliczbowe zwracają błąd.
+</block>
+</dash>
+
+<details>
+syntax: $numberAbbreviate[number]
+param: number|number|Required|Liczba całkowita do skrócenia (może zawierać znak - na początku)
+</details>

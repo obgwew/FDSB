@@ -1,0 +1,39 @@
+<dash>
+name: $editSelectMenuOption
+desc: Edytuje etykietę, wartość, opis, stan domyślny lub emoji istniejącej opcji menu wyboru.
+category: Komponenty
+
+<block type="text" title="Jak działa ta komenda?">
+text: $editSelectMenuOption znajduje opcję wewnątrz menu wyboru na podstawie jej bieżącej wartości (Value), a następnie aktualizuje jej etykietę, opis, stan domyślny i/lub emoji. Argument Value musi odpowiadać wartości opcji, którą chcesz edytować. Ustawienie Default na yes czyni tę opcję jedyną wstępnie zaznaczoną.
+</block>
+
+<block type="code" title="Składnia">
+text: $editSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+$addSelectMenuOption[color_menu; Red; red; The color red]
+$addSelectMenuOption[color_menu; Blue; blue; The color blue]
+$editSelectMenuOption[color_menu; Crimson; red; A deep red]
+</block>
+
+<block type="callout" kind="note">
+text: Ta komenda aktualizuje opcję na żywo na docelowej wiadomości. Bez podanego Message ID szuka najpierw na źródłowej wiadomości interakcji, a następnie na ostatniej wiadomości wysłanej przez bota.
+</block>
+
+<block type="callout" kind="warning">
+text: Jeśli w menu nie istnieje opcja o podanej wartości (Value), zwracany jest błąd. Wiadomość docelowa musi być wysłana przez tego bota i musi zawierać menu wyboru o podanym ID.
+</block>
+</dash>
+
+<details>
+syntax: $editSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+param: Menu ID|text|Required|ID menu wyboru, które zawiera edytowaną opcję
+param: Label|text|Required|Nowy tekst wyświetlany użytkownikowi dla tej opcji
+param: Value|text|Required|Bieżąca wartość opcji do edycji (służy do jej znalezienia)
+param: Description|text|Emptiable|Nowy krótki opis wyświetlany pod etykietą
+param: Default|yes/no|Optional|yes, aby uczynić tę opcję wstępnie zaznaczoną (domyślnie: no)
+param: Emoji|text|Optional|Nowe emoji wyświetlane obok etykiety opcji
+param: Message ID|snowflake|Optional|ID konkretnej wiadomości bota zawierającej menu do edycji
+</details>

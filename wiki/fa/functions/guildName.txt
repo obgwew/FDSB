@@ -1,0 +1,21 @@
+<dash>
+name: $guildName
+desc: نام سرور (گیلد) را که دستور در آن استفاده شده برمی‌گرداند.
+category: اطلاعات
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: وقتی $guildName فراخوانی می‌شود، ربات نام سروری را که دستور در آن اجرا شده بازیابی کرده و آن را مستقیماً به عنوان یک رشته متنی ساده به کانال ارسال می‌کند. اگر در یک پیام مستقیم (DM) استفاده شود، مقدار «DM» برمی‌گردد.
+</block>
+
+<block type="code" title="سینتکس">
+text: $guildName
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: Welcome to $guildName!
+</block>
+
+<block type="callout" kind="note">
+text: وقتی خارج از سرور (در پیام‌های مستقیم) استفاده شود، دستور به جای نام سرور، رشته «DM» را برمی‌گرداند.
+</block>
+</dash>

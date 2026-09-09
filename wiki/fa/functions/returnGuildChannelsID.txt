@@ -1,0 +1,39 @@
+<dash>
+name: $returnGuildChannelsID
+desc: شناسه‌های کانال را از یک سرور بر اساس نوع جمع‌آوری می‌کند و آن‌ها را برای بازیابی بعدی ذخیره می‌کند.
+category: دستورهای بازگشتی
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $returnGuildChannelsID همه شناسه‌های کانال از یک نوع مشخص را از یک سرور معین جمع‌آوری می‌کند و آن‌ها را زیر یک نام متغیر ذخیره می‌کند. نتیجه را می‌توان بعداً با استفاده از $return[variableName] بازیابی کرد. می‌توانید بر اساس نوع کانال مانند text، voice، category، forum، stage فیلتر کنید یا همه کانال‌ها را بگیرید.
+</block>
+
+<block type="code" title="سینتکس">
+text: $returnGuildChannelsID[GuildID; ChannelType; var; separator]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $returnGuildChannelsID[$guildID; text; channelIDs; ,]
+$sendMessage[Text channels: $return[channelIDs]]
+</block>
+
+<block type="options" title="انواع کانال">
+option: all|همه انواع کانال
+option: text|فقط کانال‌های متنی
+option: voice|فقط کانال‌های صوتی
+option: category|فقط کانال‌های دسته‌بندی
+option: forum|فقط کانال‌های انجمن
+option: stage|فقط کانال‌های استیج
+</block>
+
+<block type="callout" kind="note">
+text: ربات باید عضو سرور هدف باشد. برای بازیابی شناسه‌های ذخیره‌شده پس از اجرا از $return[variableName] استفاده کنید. جداکننده نحوه اتصال چند شناسه را مشخص می‌کند (مثلاً ، یا ؛ یا فاصله).
+</block>
+</dash>
+
+<details>
+syntax: $returnGuildChannelsID[GuildID; ChannelType; var; separator]
+param: شناسه سرور|snowflake|الزامی|شناسه سروری که کانال‌ها از آن جمع‌آوری می‌شوند
+param: نوع کانال|text|الزامی|نوع کانال‌هایی که باید جمع‌آوری شوند: all، text، voice، category، forum یا stage
+param: متغیر|text|الزامی|نام متغیری که نتیجه در آن ذخیره می‌شود (با $return[] استفاده شود)
+param: جداکننده|text|الزامی|جداکننده بین چند شناسه (مثلاً ، یا ؛). می‌توانید از جداکننده‌های نام‌دار استفاده کنید: dot، com، apo، sem، colon
+</details>

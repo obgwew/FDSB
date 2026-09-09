@@ -1,0 +1,23 @@
+<dash>
+name: $endfor
+desc: $for لوپ بلاک کے اختتام کی نشاندہی کرتا ہے۔
+category: بہاؤ کنٹرول
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $endfor $for لوپ کی بندش کی حد کا اشارہ دیتا ہے۔ ہر تکرار کے بعد، عمل لوپ کے جسم کے اوپری حصے میں واپس آتا ہے۔ ہر $for کے لیے ایک مماثل $endfor ہونا چاہیے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $endfor
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $for[5]
+  $sendMessage[Iteration!]
+$endfor
+</block>
+
+<block type="callout" kind="warning">
+text: ہر $for بلاک کو $endfor کے ساتھ صحیح طریقے سے بند کیا جانا چاہیے۔ $endfor کی کمی اسکرپٹ خرابی کا باعث بنے گی۔
+</block>
+</dash>

@@ -1,0 +1,30 @@
+<dash>
+name: $numberAbbreviate
+desc: یک عدد کامل را با پسوند کوتاه (k, m, b, ...) به شکل مخفف تبدیل می‌کند.
+category: ریاضی و اعداد
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $numberAbbreviate یک عدد کامل می‌گیرد و آن را با استفاده از یک پسوند به شکل کوتاه گرد می‌کند: k (هزار)، m (میلیون)، b (میلیارد)، t (تریلیون) و غیره. برای مثال ۱۵۰۰ به 1.5k و ۲۵۰۰۰۰۰ به 2.5m تبدیل می‌شود. اعداد منفی نیز پشتیبانی می‌شوند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $numberAbbreviate[number]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $numberAbbreviate[1523487]
+</block>
+
+<block type="callout" kind="note">
+text: پسوندهای پشتیبانی‌شده: k, m, b, t, qa, qi, sx, sp, oc, no, dc. اعداد کوچک‌تر از ۱۰۰۰ بدون تغییر بازگردانی می‌شوند.
+</block>
+
+<block type="callout" kind="warning">
+text: فقط اعداد کامل پذیرفته می‌شوند. اعداد اعشاری و کاراکترهای غیرعددی خطا بازگردانی می‌کنند.
+</block>
+</dash>
+
+<details>
+syntax: $numberAbbreviate[number]
+param: number|number|الزامی|عدد کامل برای مخفف‌سازی (می‌تواند شامل علامت - در ابتدا باشد)
+</details>

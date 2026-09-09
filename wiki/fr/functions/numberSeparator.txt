@@ -1,0 +1,36 @@
+<dash>
+name: $numberSeparator
+desc: Formate un nombre entier avec un séparateur de milliers pour une lecture plus facile.
+category: Mathématiques & Nombres
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: $numberSeparator prend un nombre entier et insère un séparateur tous les trois chiffres à partir de la droite (groupement des milliers). Par défaut, le séparateur est une virgule (,), et vous pouvez passer un séparateur personnalisé en second argument. Par exemple, 1234567 devient 1,234,567.
+</block>
+
+<block type="code" title="Syntaxe">
+text: $numberSeparator[number]
+text: $numberSeparator[number; separator]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $numberSeparator[1234567]
+</block>
+
+<block type="code" title="Exemple prêt à copier (séparateur personnalisé)">
+text: $numberSeparator[1234567; .]
+</block>
+
+<block type="callout" kind="note">
+text: Les nombres négatifs conservent leur signe - : par exemple, -1234567 devient -1,234,567.
+</block>
+
+<block type="callout" kind="warning">
+text: Seuls les nombres entiers sont acceptés. Les décimales et les caractères non numériques renvoient une erreur.
+</block>
+</dash>
+
+<details>
+syntax: $numberSeparator[number; (separator)]
+param: number|number|Requis|Un nombre entier à formater (peut inclure un signe - initial)
+param: separator|text|Optionnel|Le séparateur à insérer tous les trois chiffres (défaut : ,)
+</details>

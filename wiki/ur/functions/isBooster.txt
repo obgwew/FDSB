@@ -1,0 +1,26 @@
+<dash>
+name: $isBooster
+desc: یہ چیک کرتا ہے کہ آیا کوئی صارف سرور کا بوسٹر ہے (جس کا نیٹرو بوسٹ فعال ہو)۔
+category: معلومات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $isBooster ایک صارف ID یا مینشن لیتا ہے اور چیک کرتا ہے کہ آیا وہ صارف فی الحال سرور کو بوسٹ کر رہا ہے (اس کی پریمیئم سبسکرپشن فعال ہے)۔ یہ "true" یا "false" لوٹاتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $isBooster[userID]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $isBooster[$authorID]
+</block>
+
+<block type="callout" kind="note">
+text: اگر صارف کے پاس سرور کے لیے فعال نیٹرو بوسٹ ہے تو "true" لوٹاتا ہے، بصورت دیگر "false"۔ صارف کو سرور کا رکن ہونا ضروری ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $isBooster[userID]
+param: صارف ID|text|لازمی|جس صارف کو چیک کرنا ہے اس کی ID یا @مینشن۔ متغیرات اور پلیس ہولڈرز کو سپورٹ کرتا ہے۔
+</details>

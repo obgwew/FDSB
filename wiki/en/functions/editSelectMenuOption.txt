@@ -1,0 +1,39 @@
+<dash>
+name: $editSelectMenuOption
+desc: Edits the label, value, description, default state, or emoji of an existing select menu option.
+category: Components
+
+<block type="text" title="How does the command work?">
+text: $editSelectMenuOption finds an option inside a select menu by its current Value, then updates its label, description, default state, and/or emoji. The Value argument must match the value of the option you want to edit. Setting Default to yes makes this option the single pre-selected one.
+</block>
+
+<block type="code" title="Syntax">
+text: $editSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+$addSelectMenuOption[color_menu; Red; red; The color red]
+$addSelectMenuOption[color_menu; Blue; blue; The color blue]
+$editSelectMenuOption[color_menu; Crimson; red; A deep red]
+</block>
+
+<block type="callout" kind="note">
+text: This command updates the option live on the target message. Without a Message ID, it looks on the interaction source message first, then on the last message the bot sent.
+</block>
+
+<block type="callout" kind="warning">
+text: If no option with the given Value exists in the menu, an error is returned. The target message must have been sent by this bot and must contain the select menu with the given ID.
+</block>
+</dash>
+
+<details>
+syntax: $editSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+param: Menu ID|text|Required|The ID of the select menu that contains the option
+param: Label|text|Required|The new text shown to the user for this option
+param: Value|text|Required|The current value of the option to edit (used to find it)
+param: Description|text|Emptiable|New small description shown under the label
+param: Default|yes/no|Optional|yes to make this the pre-selected option (default: no)
+param: Emoji|text|Optional|New emoji displayed next to the option label
+param: Message ID|snowflake|Optional|ID of a specific bot message that holds the menu to edit
+</details>

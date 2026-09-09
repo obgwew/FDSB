@@ -1,0 +1,21 @@
+<dash>
+name: $botID
+desc: بوٹ کا Discord صارف آئی ڈی واپس کرتا ہے۔
+category: معلومات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: جب $botID کو پکارا جاتا ہے، بوٹ اپنا منفرد Discord صارف آئی ڈی حاصل کرتا ہے اور اسے براہِ راست چینل میں ایک خام عددی سٹرنگ کے طور پر بھیجتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $botID
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: My bot ID is $botID
+</block>
+
+<block type="callout" kind="note">
+text: واپس کردہ ویلیو ایک snowflake آئی ڈی ہے (مثلاً 123456789012345678)، جو بوٹ کے Discord صارف اکاؤنٹ کے لیے منفرد عددی شناخت کنندہ ہے۔
+</block>
+</dash>

@@ -1,0 +1,32 @@
+<dash>
+name: $emojiExists
+desc: Özel bir emojinin var olup olmadığını kontrol eder ve true ya da false döndürür.
+category: Bilgi
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $emojiExists, özel bir emoji kimliği (veya <:name:id> ya da <a:name:id> gibi tam bir emoji bahsi) alır ve botun bu emojinin bulunduğu bir sunucuyu paylaşması durumunda true, aksi takdirde false döndürür.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $emojiExists[emoji id]
+</block>
+
+<block type="code" title="Kopyalanmaya hazır örnek">
+text: $if[$emojiExists[123456789012345678]]
+ $sendMessage[That emoji exists!]
+$endif
+</block>
+
+<block type="callout" kind="note">
+text: Bu, $if / $onlyIf koşulları içinde kullanışlıdır. Yerleşik Unicode emojilerinin kimliği yoktur, bu nedenle yalnızca özel sunucu emojileri kontrol edilebilir.
+</block>
+
+<block type="callout" kind="warning">
+text: Emoji, bot tarafından erişilebilir olmalıdır (bot, emojinin bulunduğu bir sunucuyu paylaşmalıdır), aksi takdirde kontrol false döndürebilir.
+</block>
+</dash>
+
+<details>
+syntax: $emojiExists[emoji id]
+param: emoji kimliği|snowflake|Required|Özel emojinin sayısal kimliği veya <:name:id> / <a:name:id> gibi bir emoji bahsi
+</details>

@@ -11,7 +11,7 @@ import json
 import shutil
 import logging
 import asyncio
-import zipfile
+import zipfile 
 
 import flet as ft
 
@@ -70,7 +70,7 @@ def _configure_window(page: ft.Page):
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-#  PERSISTENT STORAGE PATHS (writable — settings, bot configs, app_data/)
+#  PERSISTENT STORAGE PATHS
 # ══════════════════════════════════════════════════════════════════════════════
 
 def get_persistent_base_dir() -> str:
@@ -87,26 +87,23 @@ def get_app_data_dir() -> str:
     os.makedirs(path, exist_ok=True)
     return path
 
-# ══════════════════════════════════════════════════════════════════════════════
-#  BUNDLED RESOURCE PATHS (read-only — icons, fonts shipped inside the app)
-# ══════════════════════════════════════════════════════════════════════════════
 
 def get_resource_path(*parts: str) -> str:
     base = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
     return os.path.join(base, *parts)
 
 
-from main_exe.langs.translations import Translations
-from main_exe.settings import get_current_lang, get_current_theme, apply_theme_globally
-from main_exe.theme_engine import ThemeEngine
-from main_exe.main import BotDashboardScreen
-from main_exe.load.updater import check_for_updates
+from main_app.langs.translations import Translations
+from main_app.settings import get_current_lang, get_current_theme, apply_theme_globally
+from main_app.theme.theme_engine import ThemeEngine
+from main_app.main import BotDashboardScreen
+from main_app.load.updater import check_for_updates
 
 logging.getLogger('discord').setLevel(logging.INFO)
 
-from main_exe.core_fdsb import local_server
+from main_app.core_fdsb import local_server
 
-icon_path = get_resource_path('main_exe', 'icons', 'FDSB.png')
+icon_path = get_resource_path('main_app', 'icons', 'FDSB.png')
 
 # ══════════════════════════════════════════════════════════════════════════════
 #  TRANSLATION HELPER
@@ -204,16 +201,12 @@ def is_valid_discord_token(token: str) -> bool:
     return bool(DISCORD_TOKEN_RE.match(token))
 
 
-# ══════════════════════════════════════════════════════════════════════════════
-#  THEME — delegates to ThemeEngine for all theme keys
-# ══════════════════════════════════════════════════════════════════════════════
-
 def _c(key: str) -> str:
     return ThemeEngine.hex(key)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-#  BACK-BUTTON HANDLING  (Android hardware back / AppBar back / browser back)
+#  BACK-BUTTON HANDLING
 # ══════════════════════════════════════════════════════════════════════════════
 
 _NAV_STACK: list = []  
@@ -235,29 +228,6 @@ def _nav_clear():
     _NAV_STACK.clear()
 
 
-def _dashboard_has_open_subview(dashboard) -> bool:
-    active = dashboard._tab_views.get(dashboard._active)
-    cur = getattr(active, '_current_view', None)
-    if cur is not None:
-        return cur != 'list'
-    in_editor = getattr(active, '_in_editor', None)
-    if in_editor is not None:
-        return bool(in_editor)
-    return False
-
-
-def _close_dashboard_subview(dashboard):
-    active = dashboard._tab_views.get(dashboard._active)
-    guard = getattr(active, 'guard_tab_change', None)
-    if callable(guard):
-        guard(lambda: None)
-    else:
-        close_fn = getattr(active, '_close_editor', None)
-        if callable(close_fn):
-            close_fn()
-    dashboard._page.update()
-
-
 def _set_body(page: ft.Page, content: ft.Control):
     body = ft.SafeArea(content=content, expand=True) if is_mobile() else content
 
@@ -266,10 +236,10 @@ def _set_body(page: ft.Page, content: ft.Control):
 
         if _CURRENT_SCREEN['kind'] == 'dashboard':
             dashboard = _CURRENT_SCREEN['dashboard']
-            if dashboard is not None and _dashboard_has_open_subview(dashboard):
-                _close_dashboard_subview(dashboard)
-                await view.confirm_pop(False)
-                return
+            if dashboard is not None and hasattr(dashboard, 'handle_back'):
+                if dashboard.handle_back():
+                    await view.confirm_pop(False)
+                    return
 
         if _nav_pop():
             await view.confirm_pop(False)
@@ -456,8 +426,6 @@ class CreateBotDialog:
         )
 
         self._file_picker = ft.FilePicker()
-
-        # ── Restore from backup (side button, gated on name + valid token) ──
         self._import_zip_path    = ''
         self._import_file_picker = ft.FilePicker()
         self._import_status_text = ft.Text('', size=11)
@@ -640,7 +608,7 @@ class CreateBotDialog:
         if not is_valid_discord_token(token):
             self._token_field.error_text = (
                 _t('token_invalid_format')
-                or 'Invalid token format. Expected:\nXXXXXXXXXXXXXXXXXXXXXXXX.XXXXXX.XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+                or 'Invalid token format.'
             )
             self._page.update()
             return
@@ -668,6 +636,13 @@ class MainView:
         self._page              = page
         self._on_open_dashboard = on_open_dashboard
 
+        # العداد المخصص
+        self._count_label = ft.Text(
+            value="",
+            size=11,
+            color=_c('text_dim'),
+        )
+
         self._cards_col = ft.Column(spacing=10, scroll=ft.ScrollMode.AUTO, expand=True)
 
         self._empty_label = ft.Container(
@@ -682,16 +657,20 @@ class MainView:
         )
 
         self._load_saved_bots()
+        self._update_bot_count()
+
+    def _update_bot_count(self):
+        count = len(self._cards_col.controls)
+        self._count_label.value = _t('total_bots_count').format(count=count)
 
     async def _open_link(self, url: str):
         await self._page.launch_url(url)
 
-    # ── public ───────────────────────────────────────────────────────
-
     def build(self) -> ft.Control:
         header = ft.Container(
-            content=ft.Row(
+            content=ft.Column(
                 [
+                    self._count_label,
                     ft.Text(
                         _t('main_title'),
                         size=22,
@@ -699,6 +678,7 @@ class MainView:
                         color=_c('title_bcfd'),
                     ),
                 ],
+                spacing=2,
             ),
             padding=ft.Padding(left=18, top=10, right=18, bottom=10),
         )
@@ -770,8 +750,6 @@ class MainView:
             expand=True,
         )
 
-    # ── private ──────────────────────────────────────────────────────
-
     def _open_create_dialog(self, _):
         CreateBotDialog(self._page, on_create=self._add_bot).open()
 
@@ -793,6 +771,7 @@ class MainView:
 
         self._push_card(config)
         self._refresh_content_area()
+        self._update_bot_count()
         self._page.update()
 
     @staticmethod
@@ -873,7 +852,7 @@ def main(page: ft.Page):
     except Exception as e:
         print(f'[FDSB] background mode failed: {e}')
 
-    fonts_dir = get_resource_path('main_exe', 'langs', 'fonts')
+    fonts_dir = get_resource_path('main_app', 'langs', 'fonts')
     fonts = {}
     if os.path.isdir(fonts_dir):
         for file in os.listdir(fonts_dir):

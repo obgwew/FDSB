@@ -1,0 +1,21 @@
+<dash>
+name: $getBotInvent
+desc: لینک دعوت OAuth2 ربات را تولید و ارسال می‌کند.
+category: ابزارها
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: وقتی $getBotInvent فراخوانی می‌شود، ربات با استفاده از شناسه اپلیکیشن خود با تمام مجوزها (8) و اسکوپ ربات یک URL تأیید OAuth2 می‌سازد و سپس لینک را به کانال ارسال می‌کند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $getBotInvent
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: Invite me: $getBotInvent
+</block>
+
+<block type="callout" kind="note">
+text: لینک تولیدشده شامل تمام مجوزها است (permissions=8). قالب لینک این است: https://discord.com/oauth2/authorize?client_id={id}&permissions=8&scope=bot
+</block>
+</dash>

@@ -1,0 +1,27 @@
+<dash>
+name: $getUserStatus
+desc: سرور میں کسی صارف کی آن لائن حیثیت واپس کرتا ہے۔
+category: معلومات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: جب $getUserStatus بغیر آرگومینٹس کال کیا جاتا ہے، تو یہ کمانڈ کے مصنف کی آن لائن حیثیت واپس کرتا ہے۔ جب صارف ID یا منشن کے ساتھ کال کیا جاتا ہے، تو یہ اس صارف کی حیثیت واپس کرتا ہے۔ اگر صارف نہ ملا یا سرور کا ممبر نہیں ہے تو "offline" واپس کرتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $getUserStatus
+text: $getUserStatus[(userID/mention)]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: Your status is: $getUserStatus
+</block>
+
+<block type="callout" kind="note">
+text: ممکنہ واپسی قیمتیں ہیں: online، idle، dnd، offline۔ یہ کمانڈ صرف سرور کے اندر کام کرتی ہے (ڈی ایم میں نہیں) کیونکہ ڈسکارڈ صرف گِلڈ ممبران کے لیے حیثیت کی معلومات فراہم کرتا ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $getUserStatus[(userID/mention)]
+param: userID/mention|text|اختیاری|چیک کرنے کے لیے صارف ID یا @mention۔ اگر چھوڑ دیا جائے تو کمانڈ کے مصنف کو چیک کرتا ہے۔
+</details>

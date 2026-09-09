@@ -1,0 +1,36 @@
+<dash>
+name: $numberSeparator
+desc: يُنسّق رقمًا صحيحًا بفاصل للآلاف لتسهيل القراءة.
+category: الرياضيات والأرقام
+
+<block type="text" title="كيف تعمل الدالة؟">
+text: تأخذ $numberSeparator رقمًا صحيحًا وتُدرج فاصلًا كل ثلاثة أرقام من اليمين (تفريق الآلاف). الافتراضي هو فاصلة (,)، ويمكنك تمرير فاصل مخصص كمعامل ثاني. على سبيل المثال يصبح 1234567 هو 1,234,567.
+</block>
+
+<block type="code" title="الصيغة">
+text: $numberSeparator[number]
+text: $numberSeparator[number; separator]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $numberSeparator[1234567]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ (فاصل مخصص)">
+text: $numberSeparator[1234567; .]
+</block>
+
+<block type="callout" kind="note">
+text: الأرقام السالبة تحتفظ بعلامتها -: على سبيل المثال يصبح -1234567 هو -1,234,567.
+</block>
+
+<block type="callout" kind="warning">
+text: تُقبل الأ الصحيحة فقط. الأرقام العشرية والأحرف غير الرقمية تُرجع خطأ.
+</block>
+</dash>
+
+<details>
+syntax: $numberSeparator[number; (separator)]
+param: number|number|Required|رقم صحيح للتنسيق (يمكن أن يتضمن علامة - في البداية)
+param: separator|text|Optional|الفاصل المُدرج كل ثلاثة أرقام (الافتراضي: ,)
+</details>

@@ -1,0 +1,44 @@
+<dash>
+name: $addSelectMenuOption
+desc: Добавляет опцию в существующее меню выбора (select menu), созданное с помощью $newSelectMenu.
+category: Компоненты
+
+<block type="text" title="Как работает команда?">
+text: $addSelectMenuOption добавляет одну опцию в меню выбора, созданное ранее с помощью $newSelectMenu, сопоставляя его по ID меню (Menu ID). Каждая опция имеет видимое название, уникальное значение и необязательное описание. Используйте аргумент Default, чтобы предварительно выбрать эту опцию, и аргумент Emoji, чтобы показать emoji рядом с названием.
+</block>
+
+<block type="code" title="Syntax">
+text: $addSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+$addSelectMenuOption[color_menu; Red; red; The color red]
+$addSelectMenuOption[color_menu; Blue; blue; The color blue; yes]
+</block>
+
+<block type="options" title="Подробности">
+option: По умолчанию|установите yes, чтобы предварительно выбрать эту опцию (не более одной такой опции на меню)
+option: Emoji|emoji, отображаемый рядом с названием опции
+option: ID сообщения|необязательный ID уже отправленного сообщения бота, содержащего это меню
+</block>
+
+<block type="callout" kind="note">
+text: Значения опций должны быть уникальными в пределах одного меню. Когда указан Message ID, меню в этом сообщении обновляется мгновенно; в противном случае опция прикрепляется к меню на создаваемом сообщении.
+</block>
+
+<block type="callout" kind="warning">
+text: Максимум 25 опций в одном меню выбора. Если меню с указанным ID не было создано в скрипте (с помощью $newSelectMenu), возвращается ошибка.
+</block>
+</dash>
+
+<details>
+syntax: $addSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+param: ID меню|text|Required|ID меню выбора (из $newSelectMenu), в которое нужно добавить эту опцию
+param: Название|text|Required|Текст, отображаемый для пользователя у этой опции
+param: Значение|text|Required|Уникальное значение, возвращаемое при выборе этой опции
+param: Описание|text|Emptiable|Небольшое описание, отображаемое под названием
+param: По умолчанию|yes/no|Optional|yes для предварительного выбора этой опции (по умолчанию: no)
+param: Emoji|text|Optional|Emoji, отображаемый рядом с названием опции
+param: ID сообщения|snowflake|Optional|ID уже отправленного сообщения бота, меню которого нужно обновить мгновенно
+</details>

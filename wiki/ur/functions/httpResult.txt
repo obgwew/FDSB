@@ -1,0 +1,27 @@
+<dash>
+name: $httpResult
+desc: آخری HTTP درخواست کا جواب واپس کرتا ہے، اختیاری طور پر نیسٹڈ JSON قیمتیں نکالتا ہے۔
+category: HTTP
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $httpResult آخری HTTP درخواست ($httpGet، $httpPost، $httpPut، $httpPatch یا $httpGet) ذخیرہ کردہ نتیجہ واپس کرتا ہے۔ بغیر آرگومینٹس یہ مکمل جواب واپس کرتا ہے (جب آبجیکٹ یا ایرے ہو تو JSON ٹیکسٹ کے طور پر)۔ آرگومینٹس کے ساتھ یہ نتیجے میں قدم بہ قدم نیویگیٹ کرتا ہے، آبجیکٹ کیز اور نمری ایرے انڈیکسز کی حمایت کرتا ہے۔ جب کوئی کیز موجود نہ ہو تو خالی ٹیکسٹ واپس کرتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $httpResult[(key1; key2; ...)]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $httpGet[https://api.example.com/users]
+$httpResult[0; username]
+</block>
+
+<block type="callout" kind="note">
+text: فہرست کا عنصر منتخب کرنے کے لیے نمبر استعمال کریں۔ اگر کوئی کیز غائب ہو تو خالی ٹیکسٹ واپس کیا جاتا ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $httpResult[(key1; key2; ...)]
+param: key|text|اختیاری|JSON نتیجے میں نیویگیٹ کرنے کے لیے کیز یا نمری انڈیکس (نیسٹڈ قیمتوں کے لیے دہرائیں)
+</details>

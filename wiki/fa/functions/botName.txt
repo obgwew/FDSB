@@ -1,0 +1,21 @@
+<dash>
+name: $botName
+desc: نام کاربری ربات را برمی‌گرداند.
+category: اطلاعات
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: وقتی $botName فراخوانی می‌شود، ربات نام کاربری خود را دریافت می‌کند و آن را مستقیماً به‌عنوان یک رشته متنی ساده به کانال می‌فرستد.
+</block>
+
+<block type="code" title="سینتکس">
+text: $botName
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: I am $botName!
+</block>
+
+<block type="callout" kind="note">
+text: این نام کاربری فعلی ربات را برمی‌گرداند. اگر نام کاربری ربات از طریق Developer Portal تغییر کند، فراخوانی بعدی نام به‌روزشده را نشان می‌دهد.
+</block>
+</dash>

@@ -1,0 +1,28 @@
+<dash>
+name: $authorURL
+desc: ایمبیڈ کے مصنف کے نام کو کلک ایبل لنک بناتا ہے۔
+category: ایمبیڈ بنانے والا
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $authorURL ایمبیڈ کے مصنف کے نام کے ساتھ ایک لنک منسلک کرتا ہے، تاکہ اس پر کلک کرنے سے دیا گیا ایڈریس کھلے۔ اختیاری انڈیکس اس بات کا انتخاب کرتا ہے کہ کئی ایمبیڈز بناتے وقت کس ایمبیڈ میں ترمیم کرنی ہے۔ اگر ابھی تک کوئی مصنف کا نام سیٹ نہیں کیا گیا، تو ایک خالی پلیس ہولڈر نام استعمال ہوتا ہے تاکہ لنک پھر بھی کام کرے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $authorURL[url;(index)]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $author[Visit our site]
+text: $authorURL[https://example.com]
+</block>
+
+<block type="callout" kind="note">
+text: یو آر ایل کو http:// یا https:// سے شروع ہونا چاہیے۔ Discord نام کے کلک ایبل ہونے کا کوئی بصری اشارہ نہیں دکھاتا، اس لیے اس کا ذکر متن میں کرنا بہتر ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $authorURL[url;(index)]
+param: یو آر ایل|text|لازمی|منزل کا لنک (http:// یا https://)
+param: انڈیکس|number|اختیاری|جب کئی ایمبیڈز بنائے جا رہے ہوں تو ترمیم کے لیے ایمبیڈ نمبر (معیار 1)
+</details>

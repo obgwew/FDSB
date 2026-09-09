@@ -1,0 +1,26 @@
+<dash>
+name: $lineCount
+desc: Gibt die Anzahl der Leerzeichen im angegebenen Text zurück.
+category: Textwerkzeuge
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: $lineCount nimmt ein Textargument entgegen und gibt zurück, wie viele Leerzeichen ( ) es enthält. Variablen und Platzhalter im Argument werden vor dem Zählen aufgelöst.
+</block>
+
+<block type="code" title="Syntax">
+text: $lineCount[text]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $lineCount[one two three]
+</block>
+
+<block type="callout" kind="note">
+text: Die Zählung basiert auf Leerzeichen, nicht auf tatsächlichen Zeilenumbrüchen. Um Text in Teile zu zerlegen, verwende $splitIn zusammen mit $splitOut.
+</block>
+</dash>
+
+<details>
+syntax: $lineCount[text]
+param: Text|text|Erforderlich|Der Text, in dem Leerzeichen gezählt werden sollen. Variablen und Platzhalter werden vor dem Zählen aufgelöst.
+</details>

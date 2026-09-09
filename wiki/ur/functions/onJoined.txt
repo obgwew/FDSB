@@ -1,0 +1,30 @@
+<dash>
+name: $onJoined
+desc: وہ واقعہ جو کسی رکن کے سرور میں شامل ہونے پر متحرک ہوتا ہے۔
+category: واقعہ
+
+<block type="text" title="یہ واقعہ کیسے کام کرتا ہے؟">
+text: $onJoined ایک ایونٹ پریفکس ہے جو FDScript کو اس وقت متحرک کرتا ہے جب کوئی نیا رکن سرور میں شامل ہوتا ہے۔ اسکرپٹ شامل ہونے والے رکن کی معلومات حاصل کرتا ہے۔ آپ اختیاری طور پر پہلی لائن میں چینل ID بتا سکتے ہیں تاکہ آؤٹ پٹ کسی مخصوص چینل پر بھیجا جائے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: #PREFIX:$onJoined
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: #PREFIX:$onJoined
+ sendMessage[Welcome $mention to the server!]
+</block>
+
+<block type="callout" kind="note">
+text: اسے اپنی FDScript فائل کی پہلی لائن میں رکھیں۔ جب بھی کوئی رکن شامل ہوگا تو اسکرپٹ خود بخود چلے گا۔ نئے رکن کو ٹیگ کرنے کے لیے $mention استعمال کریں۔
+</block>
+
+<block type="callout" kind="important">
+text: یہ واقعہ bot_events فولڈر میں چلتا ہے، bot_commands میں نہیں۔ اپنی .fds فائل وہاں بنائیں۔
+</block>
+</dash>
+
+<details>
+syntax: #PREFIX:$onJoined
+</details>

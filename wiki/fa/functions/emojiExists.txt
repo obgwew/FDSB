@@ -1,0 +1,32 @@
+<dash>
+name: $emojiExists
+desc: بررسی می‌کند که آیا یک ایموجی سفارشی وجود دارد و true یا false بازگردانی می‌کند.
+category: اطلاعات
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $emojiExists یک شناسه ایموجی سفارشی (یا یک منشن کامل ایموجی مانند <:name:id> یا <a:name:id>) می‌گیرد و در صورت وجود آن ایموجی در سروری که بات با آن مشترک است، true و در غیر این صورت false بازگردانی می‌کند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $emojiExists[emoji id]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $if[$emojiExists[123456789012345678]]
+ $sendMessage[That emoji exists!]
+$endif
+</block>
+
+<block type="callout" kind="note">
+text: این دستور در شرط‌های $if / $onlyIf مفید است. ایموجی‌های داخلی یونیکد شناسه ندارند، بنابراین فقط ایموجی‌های سفارشی سرور قابل بررسی هستند.
+</block>
+
+<block type="callout" kind="warning">
+text: ایموجی باید برای بات قابل دسترسی باشد (بات باید با آن در یک سرور مشترک باشد)، در غیر این صورت ممکن است بررسی false بازگردانی کند.
+</block>
+</dash>
+
+<details>
+syntax: $emojiExists[emoji id]
+param: emoji id|snowflake|الزامی|شناسه عددی ایموجی سفارشی، یا منشن ایموجی مانند <:name:id> / <a:name:id>
+</details>

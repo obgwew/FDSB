@@ -1,0 +1,35 @@
+<dash>
+name: $returnGuildUsersID
+desc: شناسه اعضای انسانی (غیرربات) را از یک سرور جمع‌آوری می‌کند و آن‌ها را ذخیره می‌کند.
+category: دستورهای بازگشتی
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $returnGuildUsersID همه شناسه اعضای انسانی (غیرربات) را از یک سرور مشخص جمع‌آوری می‌کند و آن‌ها را زیر یک نام متغیر ذخیره می‌کند. می‌توانید بین حالت «cache» (استفاده از اعضای از پیش کش‌شده) یا حالت «chunk» (اجبار به دریافت کامل اعضای سرور ابتدا برای داده کامل) انتخاب کنید. نتیجه را می‌توان بعداً با استفاده از $return[variableName] بازیابی کرد.
+</block>
+
+<block type="code" title="سینتکس">
+text: $returnGuildUsersID[guildID; cache/chunk; var; separator]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $returnGuildUsersID[$guildID; cache; userIDs; ,]
+$sendMessage[Users: $return[userIDs]]
+</block>
+
+<block type="options" title="حالت‌های دریافت">
+option: cache|از فهرست اعضای کش‌شده ربات استفاده می‌کند (سریع، اما ممکن است برای سرورهای بزرگ ناقص باشد)
+option: chunk|ابتدا دریافت کامل فهرست اعضا را از Discord اجباری می‌کند (کندتر، اما کامل)
+</block>
+
+<block type="callout" kind="note">
+text: فقط اعضای انسانی (غیرربات) لحاظ می‌شوند. ربات باید عضو سرور هدف باشد. برای سرورهای بزرگ که ممکن است فهرست اعضای کش‌شده ناقص باشد از حالت «chunk» استفاده کنید.
+</block>
+</dash>
+
+<details>
+syntax: $returnGuildUsersID[guildID; cache/chunk; var; separator]
+param: شناسه سرور|snowflake|الزامی|شناسه سروری که شناسه اعضا از آن جمع‌آوری می‌شود
+param: cache/chunk|text|الزامی|حالت دریافت: «cache» برای اعضای کش‌شده (سریع)، «chunk» برای دریافت کامل (کامل)
+param: متغیر|text|الزامی|نام متغیری که نتیجه در آن ذخیره می‌شود (با $return[] استفاده شود)
+param: جداکننده|text|الزامی|جداکننده بین چند شناسه (مثلاً ، یا ؛). می‌توانید از جداکننده‌های نام‌دار استفاده کنید: dot، com، apo، sem، colon
+</details>

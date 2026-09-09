@@ -1,0 +1,39 @@
+<dash>
+name: $editSelectMenuOption
+desc: Изменяет название, значение, описание, состояние по умолчанию или emoji существующей опции меню выбора.
+category: Компоненты
+
+<block type="text" title="Как работает команда?">
+text: $editSelectMenuOption находит опцию внутри меню выбора по её текущему значению (Value), а затем обновляет её название, описание, состояние по умолчанию и/или emoji. Аргумент Value должен совпадать со значением опции, которую вы хотите изменить. Установка Default в yes сделает эту опцию единственной предварительно выбранной.
+</block>
+
+<block type="code" title="Syntax">
+text: $editSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+$addSelectMenuOption[color_menu; Red; red; The color red]
+$addSelectMenuOption[color_menu; Blue; blue; The color blue]
+$editSelectMenuOption[color_menu; Crimson; red; A deep red]
+</block>
+
+<block type="callout" kind="note">
+text: Эта команда обновляет опцию мгновенно на целевом сообщении. Без указания Message ID она сначала ищет её в исходном сообщении взаимодействия, затем в последнем сообщении, отправленном ботом.
+</block>
+
+<block type="callout" kind="warning">
+text: Если в меню нет опции с указанным значением (Value), возвращается ошибка. Целевое сообщение должно быть отправлено этим ботом и содержать меню выбора с указанным ID.
+</block>
+</dash>
+
+<details>
+syntax: $editSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+param: ID меню|text|Required|ID меню выбора, содержащего эту опцию
+param: Название|text|Required|Новый текст, отображаемый для пользователя у этой опции
+param: Значение|text|Required|Текущее значение опции, которую нужно изменить (используется для её поиска)
+param: Описание|text|Emptiable|Новое небольшое описание, отображаемое под названием
+param: По умолчанию|yes/no|Optional|yes, чтобы сделать эту опцию предварительно выбранной (по умолчанию: no)
+param: Emoji|text|Optional|Новый emoji, отображаемый рядом с названием опции
+param: ID сообщения|snowflake|Optional|ID конкретного сообщения бота, содержащего меню для редактирования
+</details>

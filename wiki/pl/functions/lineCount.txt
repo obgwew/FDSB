@@ -1,0 +1,26 @@
+<dash>
+name: $lineCount
+desc: Zwraca liczbę spacji w podanym tekście.
+category: Narzędzia tekstowe
+
+<block type="text" title="Jak działa ta komenda?">
+text: $lineCount przyjmuje argument tekstowy i zwraca, ile znaków spacji ( ) zawiera. Zmienne i placeholdery w argumencie są rozwiązywane przed zliczaniem.
+</block>
+
+<block type="code" title="Składnia">
+text: $lineCount[text]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $lineCount[one two three]
+</block>
+
+<block type="callout" kind="note">
+text: Liczenie opiera się na spacjach, a nie na rzeczywistych znakach nowej linii. Aby podzielić tekst na części, użyj $splitIn wraz z $splitOut.
+</block>
+</dash>
+
+<details>
+syntax: $lineCount[text]
+param: text|text|Required|Tekst, w którym należy policzyć spacje. Zmienne i placeholdery są rozwiązywane przed zliczaniem.
+</details>

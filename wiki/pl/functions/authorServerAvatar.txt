@@ -1,0 +1,27 @@
+<dash>
+name: $authorServerAvatar
+desc: Zwraca lub wysyła bezpośredni adres URL serwerowego awatara autora komendy (lub wybranego użytkownika).
+category: Informacje
+
+<block type="text" title="Jak działa ta komenda?">
+text: $authorServerAvatar pobiera i zwraca bezpośredni adres URL serwerowego (gildiowego) awatara użytkownika, jeśli ten ustawił własny. Bez argumentu używa autora komendy; z ID użytkownika lub @wzmianką używa tego konkretnego użytkownika. Gdy nie istnieje niestandardowy awatar serwerowy, używany jest awatar wyświetlany użytkownika. Wynikiem jest URL, który możesz osadzić w wiadomościach lub obrazach.
+</block>
+
+<block type="code" title="Składnia">
+text: $authorServerAvatar
+text: $authorServerAvatar[(userID/@mention)]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: Your server avatar: $authorServerAvatar
+</block>
+
+<block type="callout" kind="note">
+text: To awatar widoczny dla innych członków wewnątrz serwera, który może różnić się od globalnego awatara użytkownika ($authorAvatar). Animowane awatary są zwracane jako adresy URL w formacie .gif.
+</block>
+</dash>
+
+<details>
+syntax: $authorServerAvatar[(userID/@mention)]
+param: userID/@mention|text|Optional|ID użytkownika lub @wzmianka, dla którego pobrać URL serwerowego awatara. Jeśli pominięte, użyty zostaje autor komendy.
+</details>

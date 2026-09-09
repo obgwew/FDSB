@@ -1,0 +1,26 @@
+<dash>
+name: $lastUserMessageID
+desc: شناسه پیام کاربری که اسکریپت فعلی را فعال کرده است را برمی‌گرداند.
+category: متغیرها
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $lastUserMessageID به شناسه snowflake پیامی تبدیل می‌شود که اجرای اسکریپت فعلی را آغاز کرده است — همیشه پیام نویسنده اصلی، همان پیامی که حاوی دستور $ بود. در طول عمر اسکریپت تغییر نمی‌کند. رفتاری مشابه توکن داخلی $messageID دارد.
+</block>
+
+<block type="code" title="سینتکس">
+text: $lastUserMessageID
+text: $lastUserMessageID[]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $sendMessage[Your message ID is $lastUserMessageID]
+</block>
+
+<block type="callout" kind="note">
+text: این یک دستور فقط inline است و نمی‌تواند به عنوان یک دستور مستقل استفاده شود. آن را داخل براکت آرگومان یک دستور دیگر یا به عنوان یک توکن inline خالص استفاده کنید.
+</block>
+</dash>
+
+<details>
+syntax: $lastUserMessageID
+</details>

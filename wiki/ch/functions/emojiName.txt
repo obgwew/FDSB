@@ -1,0 +1,26 @@
+<dash>
+name: $emojiName
+desc: 从自定义表情符号的 ID 或提及返回其名称。
+category: 信息
+
+<block type="text" title="命令如何工作？">
+text: $emojiName 接受一个自定义表情符号 ID（或完整的表情符号提及，如 <:name:id> 或 <a:name:id>）并返回表情符号的名称。这在显示表情符号名称而不硬编码时很有用，也可以用来与已知名称进行比较。
+</block>
+
+<block type="code" title="语法">
+text: $emojiName[emoji id]
+</block>
+
+<block type="code" title="可复制示例">
+text: $emojiName[123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: 机器人必须与表情符号在同一个服务器中，否则会返回错误。内置的 Unicode 表情符号没有 ID，不能在此使用。
+</block>
+</dash>
+
+<details>
+syntax: $emojiName[emoji id]
+param: emoji id|snowflake|Required|自定义表情符号的数字 ID，或 <:name:id> / <a:name:id> 之类的表情符号提及
+</details>

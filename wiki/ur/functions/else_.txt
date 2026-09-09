@@ -1,0 +1,25 @@
+<dash>
+name: $else
+desc: جب پہلے والی $if شرط غلط ہو تو ایک متبادل کوڈ بلاک فراہم کرتا ہے۔
+category: بہاؤ کنٹرول
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: جب $if بلاک کے اندر استعمال کیا جائے تو $else ایک فال بیک کوڈ راستہ طے کرتا ہے۔ اگر $if شرط غلط قرار پائے تو $else کے بعد (اور $endif سے پہلے) کا کوڈ اس کے بجائے عمل میں آتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $else
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $if[$authorID == 123456789]
+  Hello Admin!
+$else
+  You are not an admin.
+$endif
+</block>
+
+<block type="callout" kind="note">
+text: $else کو $if اور $endif کے درمیان رکھا جانا چاہیے۔ $if بلاک کے باہر $else استعمال کرنا خرابی کا باعث بنے گا۔
+</block>
+</dash>

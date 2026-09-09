@@ -1,0 +1,21 @@
+<dash>
+name: $randomRoleID
+desc: شناسه یک نقش تصادفی از سرور را برمی‌گرداند.
+category: تصادفی
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: وقتی $randomRoleID فراخوانی می‌شود، ربات همه نقش‌های سرور فعلی را جمع‌آوری می‌کند (به‌جز نقش پیش‌فرض @everyone)، یک نقش را به‌طور تصادفی انتخاب می‌کند و شناسه نقش آن را به‌صورت یک رشته عددی خام ارسال می‌کند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $randomRoleID
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: Random role ID: $randomRoleID
+</block>
+
+<block type="callout" kind="note">
+text: این دستور فقط در داخل یک سرور کار می‌کند (نه در پیام خصوصی). نقش @everyone همیشه حذف می‌شود. اگر سرور هیچ نقش سفارشی نداشته باشد، دستور با خطا شکست می‌خورد.
+</block>
+</dash>

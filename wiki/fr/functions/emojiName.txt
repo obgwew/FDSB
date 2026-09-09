@@ -1,0 +1,26 @@
+<dash>
+name: $emojiName
+desc: Renvoie le nom d'un emoji personnalisé à partir de son ID ou de sa mention.
+category: Info
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: $emojiName prend un ID d'emoji personnalisé (ou une mention d'emoji complète comme <:name:id> ou <a:name:id>) et renvoie le nom de l'emoji. Ceci est utile pour afficher un nom d'emoji sans le coder en dur, ou pour le comparer à des noms connus.
+</block>
+
+<block type="code" title="Syntaxe">
+text: $emojiName[emoji id]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $emojiName[123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: Le bot doit partager un serveur avec l'emoji, sinon une erreur est renvoyée. Les emojis Unicode intégrés n'ont pas d'ID et ne peuvent pas être utilisés ici.
+</block>
+</dash>
+
+<details>
+syntax: $emojiName[emoji id]
+param: emoji id|snowflake|Requis|L'ID numérique de l'emoji personnalisé, ou une mention d'emoji comme <:name:id> / <a:name:id>
+</details>

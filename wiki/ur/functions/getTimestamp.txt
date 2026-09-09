@@ -1,0 +1,21 @@
+<dash>
+name: $getTimestamp
+desc: موجودہ وقت کو یونکس ٹائم اسٹیمپ کے طور پر واپس کرتا ہے۔
+category: وقت اور تاخیر
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $getTimestamp 1 جنوری 1970 (UTC) سے گزرتے سیکنڈز کی تعداد واپس کرتا ہے سادہ ہندسوں کے طور پر - کلاسیکی یونکس ایپوک وقت۔ یہ ہر بار اسکرپٹ چلنے پر ریفریش ہوتا ہے، اس لیے یہ ہمیشہ عملِ اجرا کے بالکل لمحے کی عکاسی کرتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $getTimestamp
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $sendMessage[Now in Unix time: $getTimestamp]
+</block>
+
+<block type="callout" kind="note">
+text: اسے اپنے پیغام ٹیکسٹ میں <t:$getTimestamp> کے ساتھ ملا کر استعمال کریں تاکہ ڈسکارڈ ہر پڑھنے والے کے لیے زندہ مقامی تاریخ اور وقت دکھائے۔
+</block>
+</dash>

@@ -1,0 +1,27 @@
+<dash>
+name: $author
+desc: ایمبیڈ کے اوپری حصے میں مصنف کا نام سیٹ یا اپ ڈیٹ کرتا ہے۔
+category: ایمبیڈ بنانے والا
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $author ایمبیڈ کے اوپری حصے میں، اس کے آئیکن کے ساتھ دکھائے جانے والے مصنف کا نام سیٹ کرتا ہے۔ اختیاری انڈیکس اس بات کا انتخاب کرتا ہے کہ ایک پیغام میں کئی ایمبیڈز بناتے وقت کس ایمبیڈ میں ترمیم کرنی ہے۔ موجودہ مصنف آئیکن اور لنک محفوظ رہتے ہیں۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $author[name;(index)]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $author[Server Staff Team]
+</block>
+
+<block type="callout" kind="note">
+text: اسے $authorIcon کے ساتھ ملا کر تصویر شامل کریں اور $authorURL کے ساتھ نام کو کلک ایبل بنائیں۔
+</block>
+</dash>
+
+<details>
+syntax: $author[name;(index)]
+param: نام|text|لازمی|مصنف کا نام جو ایمبیڈ کے اوپری حصے میں دکھایا جاتا ہے
+param: انڈیکس|number|اختیاری|جب کئی ایمبیڈز بنائے جا رہے ہوں تو ترمیم کے لیے ایمبیڈ کا نمبر (معیار 1)
+</details>

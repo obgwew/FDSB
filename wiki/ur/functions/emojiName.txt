@@ -1,0 +1,26 @@
+<dash>
+name: $emojiName
+desc: کسٹم ایموجی کا نام اس کی آئی ڈی یا مینشن سے واپس کرتا ہے۔
+category: معلومات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $emojiName ایک کسٹم ایموجی آئی ڈی (یا مکمل ایموجی مینشن جیسے <:name:id> یا <a:name:id>) لیتا ہے اور ایموجی کا نام واپس کرتا ہے۔ یہ کسی ایموجی کا نام بغیر ہارڈ کوڈنگ کے دکھانے، یا معلوم ناموں سے موازنہ کرنے کے لیے مفید ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $emojiName[emoji id]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $emojiName[123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: بوٹ کو ایموجی کے ساتھ سرور مشترک ہونا چاہیے، بصورت دیگر ایک خرابی (error) واپس آتی ہے۔ بلٹ ان یونیکوڈ ایموجیز کے پاس آئی ڈی نہیں ہوتا اور یہاں استعمال نہیں کی جا سکتیں۔
+</block>
+</dash>
+
+<details>
+syntax: $emojiName[emoji id]
+param: ایموجی آئی ڈی|snowflake|لازمی|کسٹم ایموجی کا عددی آئی ڈی، یا ایک ایموجی مینشن جیسے <:name:id> / <a:name:id>
+</details>

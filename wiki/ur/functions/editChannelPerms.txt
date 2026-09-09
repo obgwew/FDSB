@@ -1,0 +1,32 @@
+<dash>
+name: $editChannelPerms
+desc: چینل پر کسی رول یا ممبر کے لیے اجازت کے اوور رائٹس میں ترمیم کرتا ہے۔
+category: انتظامات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $editChannelPerms کسی چینل پر کسی مخصوص رول یا ممبر کے لیے اجازت کے اوور رائٹس کو تبدیل کرتا ہے۔ اجازت دینے کے لیے +perm، منع کرنے کے لیے -perm، یا اجازت ری سیٹ کرنے کے لیے /perm استعمال کریں۔ بوٹ کے پاس "مینیج چینلز" کی اجازت ہونی چاہیے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $editChannelPerms[channel ID; target ID; perm1; perm2; ...]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $editChannelPerms[123456789; 987654321; +send_messages; -connect]
+</block>
+
+<block type="callout" kind="warning">
+text: بوٹ کے پاس "مینیج چینلز" یا "مینیج پرمیشنز" کی اجازت ہونی چاہیے۔ ہدف رول یا ممبر ID/مینشن ہو سکتا ہے۔
+</block>
+
+<block type="callout" kind="note">
+text: اجازت کے نام Discord کی snake_case شکل استعمال کرتے ہیں: send_messages، view_channel، connect، manage_roles، وغیرہ۔ اجازت دینے کے لیے +، منع کرنے کے لیے -، ری سیٹ کرنے کے لیے / یا ~ استعمال کریں۔
+</block>
+</dash>
+
+<details>
+syntax: $editChannelPerms[channel ID; target ID; perm1; perm2; ...]
+param: channelID|text|لازمی|جس چینل پر اجازتیں مرتب کرنی ہیں اس کا ID یا مینشن۔
+param: targetID|text|لازمی|جس رول یا ممبر کے لیے اجازتیں ترتیب دینی ہیں اس کا ID/مینشن۔
+param: permissions|text|لازمی|ایک یا زیادہ اجازتیں +/- سابقے کے ساتھ (مثلاً، +send_messages، -connect)۔
+</details>

@@ -1,0 +1,30 @@
+<dash>
+name: $onBotOnline
+desc: رویدادی که یک بار وقتی بات آنلاین می‌شود فعال می‌گردد.
+category: رویداد
+
+<block type="text" title="این رویداد چگونه کار می‌کند؟">
+text: $onBotOnline یک پیشوند رویداد است که یک بار، درست بعد از ورود موفق بات، یک FDScript را فعال می‌کند. بدون هیچ پیام کاربری اجرا می‌شود، بنابراین هیچ نویسنده، محتوای پیام یا زمینه کانالی در دسترس نیست. از آن برای تنظیمات یک‌باره مانند ذخیره متغیرها یا ثبت اینکه بات شروع به کار کرده است استفاده کنید.
+</block>
+
+<block type="code" title="سینتکس">
+text: #PREFIX:$onBotOnline
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: #PREFIX:$onBotOnline
+$setVar[botStartupTime; $addTimestamp]
+</block>
+
+<block type="callout" kind="note">
+text: چون هیچ پیام محرکی وجود ندارد، ارسال خروجی با دستوراتی مانند $sendMessage مستلزم انتخاب کانال هدف با $useChannel است؛ توکن‌های مبتنی بر نویسنده/کانال مانند $channelID یا $message در دسترس نیستند.
+</block>
+
+<block type="callout" kind="important">
+text: این رویداد در پوشه bot_events اجرا می‌شود، نه bot_commands. فایل .fds خود را آنجا ایجاد کنید.
+</block>
+</dash>
+
+<details>
+syntax: #PREFIX:$onBotOnline
+</details>

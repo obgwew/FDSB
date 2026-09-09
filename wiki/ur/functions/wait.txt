@@ -1,0 +1,28 @@
+<dash>
+name: $wait
+desc: مخصوص مدت کے لیے سکرپٹ کے عمل کو روکتا ہے۔
+category: وقت اور تاخیر
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $wait مخصوص مدت کے لیے پورے سکرپٹ کے عمل کو منجمد کرتا ہے۔ جب تک انتظار کی مدت گزر نہ جائے سکرپٹ میں کوئی بعد کی کمانڈ عمل نہیں ہوگی۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $wait[time]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $sendMessage[Starting...]
+$wait[5s]
+$sendMessage[Done after 5 seconds!]
+</block>
+
+<block type="callout" kind="note">
+text: وقت کی شکل استعمال ہوتی ہے: s (سیکنڈ)، m (منٹ)، h (گھنٹے)، d (دن)۔ انتظار کے دوران پورا سکرپٹ منجمد ہوتا ہے — دوسرے صارفین کے دیگر سکرپٹ متاثر نہیں ہوتے۔
+</block>
+</dash>
+
+<details>
+syntax: $wait[time]
+param: time|text|لازمی|انتظار کی مدت۔ شکل: نمبر + اکائی (s/m/h/d)، مثلاً 5s، 10m، 1h، 1d
+</details>

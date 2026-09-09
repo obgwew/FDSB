@@ -1,0 +1,27 @@
+<dash>
+name: $serverIcon
+desc: Renvoie ou envoie l'URL d'image directe de l'icône du serveur actuel (ou d'un serveur).
+category: Serveur
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: $serverIcon résout et renvoie l'URL d'image directe de l'icône d'un serveur. Sans argument, il utilise le serveur actuel ; avec un ID de serveur (guildID), il utilise ce serveur spécifique (le bot doit y être présent). Les icônes de serveur animées sont renvoyées sous forme d'URL .gif.
+</block>
+
+<block type="code" title="Syntaxe">
+text: $serverIcon
+text: $serverIcon[(guildID)]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: Server icon: $serverIcon
+</block>
+
+<block type="callout" kind="note">
+text: Si le serveur donné n'a pas d'icône définie, une erreur est renvoyée. Vous pouvez utiliser l'URL dans des embeds ($image, $thumbnail, $authorIcon, $footerIcon) ou l'envoyer sous forme de lien.
+</block>
+</dash>
+
+<details>
+syntax: $serverIcon[(guildID)]
+param: guildID|snowflake|Optionnel|L'ID du serveur dont il faut obtenir l'URL de l'icône. S'il est omis, utilise le serveur actuel.
+</details>

@@ -1,0 +1,27 @@
+<dash>
+name: $httpResult
+desc: پاسخ آخرین درخواست HTTP را برمی‌گرداند و به صورت اختیاری مقادیر JSON تودرتو را استخراج می‌کند.
+category: HTTP
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $httpResult نتیجه ذخیره‌شده توسط آخرین درخواست HTTP ($httpGet، $httpPost، $httpPut، $httpPatch یا $httpDelete) را برمی‌گرداند. بدون آرگومان، کل پاسخ را برمی‌گرداند (به صورت متن JSON وقتی یک شیء یا آرایه باشد). با آرگومان، گام به گام در نتیجه حرکت می‌کند و از کلیدهای شیء و شاخص‌های عددی آرایه پشتیبانی می‌کند. وقتی یک کلید وجود نداشته باشد، یک متن خالی برمی‌گرداند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $httpResult[(key1; key2; ...)]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $httpGet[https://api.example.com/users]
+$httpResult[0; username]
+</block>
+
+<block type="callout" kind="note">
+text: برای انتخاب یک عنصر فهرست از یک عدد استفاده کنید. اگر هر کلیدی وجود نداشته باشد، یک متن خالی برگردانده می‌شود.
+</block>
+</dash>
+
+<details>
+syntax: $httpResult[(key1; key2; ...)]
+param: key|text|اختیاری|کلید یا شاخص عددی برای حرکت در نتیجه JSON (برای مقادیر تودرتو تکرار کنید)
+</details>

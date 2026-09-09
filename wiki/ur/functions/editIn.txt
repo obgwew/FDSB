@@ -1,0 +1,28 @@
+<dash>
+name: $editIn
+desc: مخصوص تاخیر کے بعد بوٹ کا آخری بھیجا گیا پیغام ترمیم کرتا ہے۔
+category: وقت اور تاخیر
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $editIn مخصوص مدت کا انتظار کرتا ہے، پھر بوٹ کے سب سے حالیہ بھیجے گئے پیغام کے مواد کو نئے فراہم کردہ متن سے ترمیم کرتا ہے۔ اصل پیغام اسی اسکرپٹ کے عمل میں پہلے بھیجا گیا ہونا چاہیے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $editIn[time; newMessage]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $sendMessage[Loading...]
+$editIn[5s; Done!]
+</block>
+
+<block type="callout" kind="note">
+text: وقت کی شکل استعمال کرتی ہے: s (سیکنڈز)، m (منٹس)، h (گھنٹے)، d (دن)۔ صرف متنی مواد تبدیل ہوتا ہے — ایمبیڈز اور کمپوننٹس متاثر نہیں ہوتے۔
+</block>
+</dash>
+
+<details>
+syntax: $editIn[time; newMessage]
+param: time|text|لازمی|ترمیم سے پہلے انتظار کی مدت۔ شکل: نمبر + اکائی (s/m/h/d)، مثلاً 5s، 10m
+param: newMessage|text|لازمی|پرانے پیغام کی جگہ لینے والا نیا متنی مواد
+</details>

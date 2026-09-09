@@ -1,0 +1,36 @@
+<dash>
+name: $editMessage
+desc: کسی بھی چینل میں پہلے بھیجے گئے بوٹ پیغام میں ترمیم کرتا ہے، اختیاری طور پر اسے ایمبیڈ میں تبدیل کرتا ہے۔
+category: پیغامات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $editMessage چینل ID اور میسج ID کے ذریعے ایک مخصوص بوٹ پیغام حاصل کرتا ہے، پھر اس کے مواد میں ترمیم کرتا ہے۔ اختیاری طور پر، آپ پیغام کو ایمبیڈ میں تبدیل کرنے کے لیے ٹائٹل، تفصیل، رنگ اور فوٹر فراہم کر سکتے ہیں۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $editMessage[channelID; messageID; content; (title; description; color; footer)]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $editMessage[$channelID; 123456789; Updated content!]
+</block>
+
+<block type="callout" kind="note">
+text: ہدف پیغام اس بوٹ نے بھیجا ہونا چاہیے۔ اگر اختیاری ایمبیڈ پیرامیٹرز فراہم کیے جائیں تو پیغام کو مواد کے ساتھ ایمبیڈ شامل کرنے کے لیے ترمیم کیا جاتا ہے۔
+</block>
+
+<block type="callout" kind="warning">
+text: بوٹ کے پاس ہدف چینل میں پیغامات دیکھنے اور ترمیم کرنے کی اجازت ہونی چاہیے۔
+</block>
+</dash>
+
+<details>
+syntax: $editMessage[channelID; messageID; content; (title; description; color; footer)]
+param: channelID|snowflake|لازمی|جس چینل میں پیغام ہے اس کا ID
+param: messageID|snowflake|لازمی|ترمیم کرنے کے لیے بوٹ پیغام کا ID
+param: content|text|لازمی|پیغام کے لیے نیا متنی مواد
+param: title|text|اختیاری|پیغام سے منسلک ایمبیڈ کے لیے ٹائٹل
+param: description|text|اختیاری|ایمبیڈ کے لیے تفصیل
+param: color|text|اختیاری|ایمبیڈ کے لیے ہیکس رنگ
+param: footer|text|اختیاری|ایمبیڈ کے لیے فوٹر متن
+</details>

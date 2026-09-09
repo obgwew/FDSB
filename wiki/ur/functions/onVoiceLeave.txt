@@ -1,0 +1,30 @@
+<dash>
+name: $onVoiceLeave
+desc: وہ واقعہ جو اس وقت متحرک ہوتا ہے جب کوئی ممبر وائس چینل چھوڑتا ہے۔
+category: واقعہ
+
+<block type="text" title="یہ واقعہ کیسے کام کرتا ہے؟">
+text: $onVoiceLeave ایک واقعہ سابقہ (prefix) ہے جو جب بھی کوئی ممبر وائس چینل چھوڑتا ہے ایک FDScript کو متحرک کرتا ہے۔ سکرپٹ کو ممبر اور وائس چینل کی معلومات ملتی ہیں۔ آپ اختیاری طور پر پہلی سطر میں چینل آئی ڈی بتا سکتے ہیں تاکہ آؤٹ پٹ کسی مخصوص ٹیکسٹ چینل میں جائے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: #PREFIX:$onVoiceLeave
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: #PREFIX:$onVoiceLeave
+ sendMessage[$authorName left a voice channel.]
+</block>
+
+<block type="callout" kind="note">
+text: اسے اپنی FDScript فائل کی پہلی سطر میں رکھیں۔ جب کوئی ممبر وائس چینل چھوڑے گا تو سکرپٹ خود بخود چل جائے گا۔
+</block>
+
+<block type="callout" kind="important">
+text: یہ واقعہ bot_events فولڈر میں چلتا ہے، bot_commands میں نہیں۔ اپنی .fds فائل وہاں بنائیں۔
+</block>
+</dash>
+
+<details>
+syntax: #PREFIX:$onVoiceLeave
+</details>

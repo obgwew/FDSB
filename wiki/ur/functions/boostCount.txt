@@ -1,0 +1,26 @@
+<dash>
+name: $boostCount
+desc: سرور کے پاس اس وقت کتنے بوسٹ شراکتیں ہیں واپس کرتا ہے۔
+category: سرور
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $boostCount سرور کی موجودہ تعدادِ بوسٹ (پریمیم سبسکرپشنز) واپس کرتا ہے۔ بغیر دلائل کے یہ اس سرور کو پڑھتا ہے جہاں واقعہ پیش آیا۔ بوٹ کے ساتھ مشترکہ کسی بھی گلڈ آئی ڈی کو منتقل کر کے آپ دوسرے سرور کی تعداد پڑھ سکتے ہیں۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $boostCount[(guildID)]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $sendMessage[This server has $boostCount boosts!]
+</block>
+
+<block type="callout" kind="note">
+text: یہ بوسٹوں کی تعداد ہے، بوسٹ لیول نہیں — اس کے لیے $boostLevel استعمال کریں۔
+</block>
+</dash>
+
+<details>
+syntax: $boostCount[(guildID)]
+param: گلڈ آئی ڈی|snowflake|اختیاری|اس سرور کی آئی ڈی جس کی بوسٹ تعداد پڑھی جانی چاہیے (معیار: موجودہ سرور)
+</details>

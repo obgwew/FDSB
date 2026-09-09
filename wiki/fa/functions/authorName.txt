@@ -1,0 +1,21 @@
+<dash>
+name: $authorName
+desc: نام کاربری شخصی را که دستور را فعال کرده برمی‌گرداند.
+category: اطلاعات
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: وقتی $authorName فراخوانی می‌شود، ربات نام کاربری نویسنده دستور را دریافت می‌کند و آن را مستقیماً به‌عنوان یک رشته متنی ساده به کانال می‌فرستد.
+</block>
+
+<block type="code" title="سینتکس">
+text: $authorName
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: Hello, $authorName!
+</block>
+
+<block type="callout" kind="note">
+text: این نام کاربری فعلی کاربر را برمی‌گرداند (نه نام نمایشی/مستعار او). اگر کاربر نام کاربری خود را تغییر دهد، فراخوانی بعدی نام به‌روزشده را نشان می‌دهد.
+</block>
+</dash>

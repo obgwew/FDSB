@@ -1,0 +1,27 @@
+<dash>
+name: $replyIn
+desc: پاسخ بعدی ربات را برای یک بازه زمانی مشخص به تاخیر می‌اندازد.
+category: زمان‌بندی و تاخیر
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $replyIn اجرای اسکریپت را برای بازه زمانی مشخص مکث می‌کند. پس از تاخیر، اسکریپت با دستور بعدی ادامه می‌یابد. این برای ایجاد پاسخ‌های زمان‌بندی‌شده مفید است.
+</block>
+
+<block type="code" title="سینتکس">
+text: $replyIn[time]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $replyIn[5s]
+$sendMessage[This appears after 5 seconds!]
+</block>
+
+<block type="callout" kind="note">
+text: قالب زمان از این موارد استفاده می‌کند: s (ثانیه)، m (دقیقه)، h (ساعت)، d (روز). اسکریپت در طول تاخیر منجمد می‌شود — هیچ دستور دیگری در این اسکریپت تا تکمیل تاخیر اجرا نمی‌شود.
+</block>
+</dash>
+
+<details>
+syntax: $replyIn[time]
+param: زمان|text|الزامی|مدت انتظار. قالب: عدد + واحد (s/m/h/d)، مثلاً 5s، 10m، 1h
+</details>

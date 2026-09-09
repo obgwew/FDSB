@@ -1,0 +1,21 @@
+<dash>
+name: $getTimestamp
+desc: زمان فعلی را به صورت time Unix برمی‌گرداند.
+category: زمان‌بندی و تاخیر
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $getTimestamp تعداد ثانیه‌های سپری‌شده از 1 ژانویه 1970 (UTC) را به صورت ارقام ساده برمی‌گرداند — همان زمان epoch کلاسیک Unix. این مقدار هر بار که اسکریپت اجرا می‌شود تازه می‌شود، بنابراین همیشه لحظه دقیق اجرا را نشان می‌دهد.
+</block>
+
+<block type="code" title="سینتکس">
+text: $getTimestamp
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $sendMessage[Now in Unix time: $getTimestamp]
+</block>
+
+<block type="callout" kind="note">
+text: آن را با <t:$getTimestamp> در متن پیام خود ترکیب کنید تا دیسکورد یک تاریخ و ساعت محلی زنده برای هر خواننده نمایش دهد.
+</block>
+</dash>

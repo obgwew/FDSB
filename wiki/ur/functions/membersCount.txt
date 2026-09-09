@@ -1,0 +1,28 @@
+<dash>
+name: $membersCount
+desc: سرور میں اراکین کی تعداد لوٹاتا ہے۔
+category: معلومات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: جب $membersCount بغیر آرگیومنٹس کے بلایا جاتا ہے تو بوٹ موجودہ سرور میں تمام غیر بوٹ انسانی اراکین کو شمار کر کے تعداد بھیجتا ہے۔ جب اسے گلڈ ID اور ہاں/نہیں فلیگ کے ساتھ بلایا جاتا ہے تو یہ اسی مخصوص سرور میں اراکین گنتا ہے اور اختیاری طور پر بوٹس کو بھی شامل کرتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $membersCount
+text: $membersCount[guildID; includeBots]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: We have $membersCount members!
+</block>
+
+<block type="callout" kind="note">
+text: بطور ڈیفالٹ بوٹس کو شمار میں شامل نہیں کیا جاتا۔ بوٹس شامل کرنے کے لیے $membersCount[guildID; yes] استعمال کریں۔ آرگیومنٹس کے بغیر یہ کمانڈ صرف سرور کے اندر کام کرتی ہے۔ گلڈ ID فراہم کرتے وقت بوٹ کو اس گلڈ کا رکن ہونا چاہیے۔
+</block>
+</dash>
+
+<details>
+syntax: $membersCount[(guildID; includeBots)]
+param: گلڈ ID|snowflake|اختیاری|جس سرور سے اراکین گننے ہیں اس کی ID۔ اگر چھوڑ دیا جائے تو موجودہ سرور استعمال ہوتا ہے۔
+param: بوٹس شامل کریں|yes/no|اختیاری|بوٹ اکاؤنٹس کو شمار میں شامل کرنے کے لیے "yes" مقرر کریں۔ اگر چھوڑ دیا جائے تو صرف انسانی اراکین گنے جاتے ہیں۔
+</details>

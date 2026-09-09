@@ -1,0 +1,32 @@
+<dash>
+name: $emojiExists
+desc: Проверяет, существует ли пользовательское emoji, и возвращает true или false.
+category: Информация
+
+<block type="text" title="Как работает команда?">
+text: $emojiExists принимает ID пользовательского emoji (или полное упоминание emoji вида <:name:id> или <a:name:id>) и возвращает true, если у бота есть общий сервер с этим emoji, иначе false.
+</block>
+
+<block type="code" title="Syntax">
+text: $emojiExists[emoji id]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $if[$emojiExists[123456789012345678]]
+ $sendMessage[That emoji exists!]
+$endif
+</block>
+
+<block type="callout" kind="note">
+text: Это полезно внутри условий $if / $onlyIf. Встроенные Unicode-emoji не имеют ID, поэтому проверяться могут только пользовательские серверные emoji.
+</block>
+
+<block type="callout" kind="warning">
+text: Emoji должно быть доступно боту (у бота и этого emoji должен быть общий сервер), иначе проверка может вернуть false.
+</block>
+</dash>
+
+<details>
+syntax: $emojiExists[emoji id]
+param: emoji id|snowflake|Required|Числовой ID пользовательского emoji или упоминание emoji вида <:name:id> / <a:name:id>
+</details>

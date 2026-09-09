@@ -1,0 +1,30 @@
+<dash>
+name: $onBotOnline
+desc: وہ واقعہ جو بوٹ کے آن لائن آنے پر ایک بار متحرک ہوتا ہے۔
+category: واقعہ
+
+<block type="text" title="یہ واقعہ کیسے کام کرتا ہے؟">
+text: $onBotOnline ایک ایونٹ پریفکس ہے جو FDScript کو بوٹ کے کامیاب لاگ اِن ہونے کے فوراً بعد ایک بار متحرک کرتا ہے۔ یہ بغیر کسی صارف پیغام کے چلتا ہے، اس لیے کوئی مصنف، پیغام کا مواد یا چینل سیاق و سبق دستیاب نہیں ہوتا۔ اسے ایک بار ہونے والی سیٹنگ کے لیے استعمال کریں جیسے متغیرات ذخیرہ کرنا یا بوٹ کے شروع ہونے کی لاگ ریکارڈ کرنا۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: #PREFIX:$onBotOnline
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: #PREFIX:$onBotOnline
+$setVar[botStartupTime; $addTimestamp]
+</block>
+
+<block type="callout" kind="note">
+text: چونکہ کوئی محرک کنندہ پیغام نہیں ہوتا، اس لیے $sendMessage جیسی کمانڈز سے آؤٹ پٹ بھیجنے کے لیے پہلے $useChannel کی ضرورت ہوتی ہے تاکہ ہدف چینل منتخب کیا جا سکے؛ مصنف/چینل پر مبنی ٹوکن جیسے $channelID یا $message دستیاب نہیں ہوتے۔
+</block>
+
+<block type="callout" kind="important">
+text: یہ واقعہ bot_events فولڈر میں چلتا ہے، bot_commands میں نہیں۔ اپنی .fds فائل وہاں بنائیں۔
+</block>
+</dash>
+
+<details>
+syntax: #PREFIX:$onBotOnline
+</details>

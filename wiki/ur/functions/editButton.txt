@@ -1,0 +1,35 @@
+<dash>
+name: $editButton
+desc: پیغام پر موجود کسی بٹن کی خصوصیات میں ترمیم کرتا ہے۔
+category: کمپوننٹس
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $editButton کسی پیغام پر بٹن کو اس کے ID یا URL سے تلاش کرتا ہے اور اس کی لیبل، سٹائل، ڈس ایبلڈ حالت اور/یا ایموجی کو اپ ڈیٹ کرتا ہے۔ یہ زیر التواء ویو، انٹرایکشن ماخذ پیغام، یا ID کے ذریعے کسی مخصوص پیغام پر بٹن کو ہدف بنا سکتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $editButton[ID/URL; label; style; (disabled; emoji; messageID)]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $editButton[btn_confirm; Confirmed; success]
+</block>
+
+<block type="callout" kind="note">
+text: اگر messageID فراہم کیا جائے تو بوٹ اس مخصوص پیغام کو حاصل کرتا ہے اور اس پر بٹن میں ترمیم کرتا ہے۔ بصورت دیگر یہ زیر التواء ویو، پھر انٹرایکشن ماخذ پیغام، پھر آخری پیغام تلاش کرتا ہے جو بوٹ نے بھیجا۔
+</block>
+
+<block type="callout" kind="warning">
+text: ہدف پیغام اس بوٹ نے بھیجا ہو۔ بٹن دیے گئے ID یا URL کے ساتھ پیغام پر پہلے سے موجود ہونا چاہیے۔
+</block>
+</dash>
+
+<details>
+syntax: $editButton[ID/URL; label; style; (disabled; emoji; messageID)]
+param: ID/URL|text|لازمی|ترمیم کرنے کے لیے بٹن کا حسب ضرورت ID یا URL
+param: label|text|لازمی|بٹن پر دکھانے کے لیے نیا متن
+param: style|text|لازمی|primary / secondary / success / danger / link
+param: disabled|yes/no|اختیاری|بٹن کو غیر فعال کرنے کے لیے yes، فعال کرنے کے لیے no
+param: emoji|text|اختیاری|بٹن کے اندر دکھانے کے لیے نیا ایموجی
+param: messageID|snowflake|اختیاری|جس مخصوص بوٹ پیغام پر بٹن میں ترمیم کرنی ہے اس کا ID
+</details>

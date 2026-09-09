@@ -1,0 +1,30 @@
+<dash>
+name: $returnGuildEmojisID
+desc: کسی گِلف سے ایموجی آئی ڈیز کو قسم کے اعتبار سے فلٹر کر کے ذخیرہ کرتا ہے۔
+category: واپسی کمانڈز
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $returnGuildEmojisID مخصوص گِلف کے حسبِ ضرورت ایموجیز کی آئی ڈیز اکٹھی کرتا ہے اور انہیں ایک متغیر نام کے تحت ذخیرہ کرتا ہے، جدا کار کے ساتھ جوڑ کر۔ قسم کا فلٹر تمام ایموجیز، سٹیٹک (png) اور اینی میٹڈ (gif) کے درمیان انتخاب کرتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $returnGuildEmojisID[GuildID; type; var; separator]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $returnGuildEmojisID[$guildID; animated; animEmojis; ,]
+text: $sendMessage[Animated emojis: $return[animEmojis]]
+</block>
+
+<block type="callout" kind="note">
+text: Type قبول کرتا ہے: all, static, animated۔ بوٹ کو ہدف گِلف کا ممبر ہونا چاہیے۔ ذخیرہ شدہ ترتیب سرور کی ایموجی فہرست سے مماثل ہونے کی ضمانت نہیں دیتی۔
+</block>
+</dash>
+
+<details>
+syntax: $returnGuildEmojisID[GuildID; type; var; separator]
+param: GuildID|snowflake|لازمی|اس گِلف کی آئی ڈی جس کے ایموجیز جمع کیے جاتے ہیں
+param: type|text|لازمی|فلٹر: all, static یا animated
+param: var|text|لازمی|متغیر کا نام جس میں نتیجہ ذخیرہ کرنا ہے ($return[] کے ساتھ واپس پڑھیں)
+param: separator|text|لازمی|آئی ڈیز کے درمیان جدا کار (مثلاً ,)۔ نامی جدا کار بھی کام کرتے ہیں: dot, com, apo, sem, colon
+</details>

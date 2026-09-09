@@ -1,0 +1,26 @@
+<dash>
+name: $deleteChannels
+desc: سرور سے ایک یا زیادہ چینلز حذف کرتا ہے۔
+category: چینل انتظامات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $deleteChannels ایک یا زیادہ چینل IDs یا مینشنز لیتا ہے اور انہیں سرور سے حذف کر دیتا ہے۔ بوٹ کے پاس "مینیج چینلز" کی اجازت ہونی چاہیے۔ اگر کوئی چینل حذف نہ ہو سکے (مثلاً اجازتیں غائب ہوں) تو عمل خرابی کے ساتھ رک جاتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $deleteChannels[channel ID/mention; ...]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $deleteChannels[<#123456789012345678>]
+</block>
+
+<block type="callout" kind="warning">
+text: یہ کمانڈ چینلز کو مستقل طور پر حذف کر دیتا ہے۔ حذف کیے جانے والے ہر چینل کے لیے بوٹ کے پاس "مینیج چینلز" کی اجازت ہونی چاہیے۔
+</block>
+</dash>
+
+<details>
+syntax: $deleteChannels[channel ID/mention; ...]
+param: channels|text|لازمی|ایک یا زیادہ چینل IDs یا مینشنز جو سیمیکولن سے الگ کیے گئے ہوں۔
+</details>

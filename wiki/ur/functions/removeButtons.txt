@@ -1,0 +1,27 @@
+<dash>
+name: $removeButtons
+desc: کسی پیغام یا زیرِ التوا ویو سے تمام بٹن حذف کر دیتا ہے۔
+category: کمپوننٹس
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: جب $removeButtons بغیر دلائل کے کہا جاتا ہے، تو یہ زیرِ التوا ویو یا انٹرایکشن کے ماخذ پیغام سے تمام بٹن صاف کر دیتا ہے۔ جب پیغام آئی ڈی کے ساتھ کہا جاتا ہے، تو یہ اس مخصوص بوٹ پیغام سے تمام بٹن حذف کر دیتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $removeButtons
+text: $removeButtons[(messageID)]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $removeButtons[123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: پیغام آئی ڈی اسی بوٹ کے بھیجے گئے پیغام کی طرف اشارہ کرنا چاہیے۔ اگر بغیر دلائل کے کہا جائے، تو یہ پہلے زیرِ التوا ویو کو چیک کرتا ہے، پھر انٹرایکشن کے ماخذ پیغام کی طرف رجوع کرتا ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $removeButtons[(messageID)]
+param: messageID|snowflake|اختیاری|ایک بوٹ پیغام کی آئی ڈی جس سے تمام بٹن حذف کرنے ہیں۔ چھوڑنے پر زیرِ التوا ویو یا انٹرایکشن کے ماخذ سے بٹن صاف ہوتے ہیں۔
+</details>

@@ -1,0 +1,30 @@
+<dash>
+name: $while
+desc: جب تک شرط درست رہتی ہے منسلک کوڈ بلاک دہراتا ہے۔
+category: بہاؤ کنٹرول
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $while ہر تکرار سے پہلے شرط کا جائزہ لیتا ہے۔ اگر شرط درست ہے تو لوپ کا باڈی عمل ہوتا ہے۔ یہ اس وقت تک دہرایا جاتا ہے جب تک شرط غیر درست نہ ہو یا $break سامنے نہ آئے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $while[condition]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $setVar[i; 0]
+$while[$getVar[i] < 5]
+  $sendMessage[Count: $getVar[i]]
+  $setVar[i; $math[$getVar[i] + 1]]
+$endwhile
+</block>
+
+<block type="callout" kind="warning">
+text: لامحدود لوپس سے بچنے کے لیے یقینی بنائیں کہ آپ کے لوپ میں ختم ہونے کی واضح شرط ہو۔ ایک لامحدود لوپ سکرپٹ کو ہمیشہ کے لیے روک دے گا۔ جلد باہر نکلنے کے لیے $break استعمال کریں۔
+</block>
+</dash>
+
+<details>
+syntax: $while[condition]
+param: condition|expression|لازمی|وہ شرط جس کا ہر تکرار سے پہلے جائزہ لیا جائے۔ لوپ اس وقت تک جاری رہتا ہے جب تک یہ درست ہے۔ وہی آپریٹرز استعمال کرتا ہے جو $if (==، !=، >، <، >=، <=)۔
+</details>

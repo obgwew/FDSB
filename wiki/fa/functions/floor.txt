@@ -1,0 +1,26 @@
+<dash>
+name: $floor
+desc: یک عدد را به نزدیک‌ترین عدد صحیح پایین گرد می‌کند.
+category: ریاضی و اعداد
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $floor یک مقدار عددی واحد می‌گیرد و آن را به نزدیک‌ترین عدد صحیح پایین (گرد کردن پایین) گرد می‌کند. برای مثال، 3.9 به 3 و -2.1 به -3 تبدیل می‌شود. هم به عنوان یک دستور مستقل و هم درون سایر دستورها کار می‌کند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $floor[number]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $sendMessage[Result is $floor[3.9]]
+</block>
+
+<block type="callout" kind="note">
+text: $floor[3.9] مقدار 3 را برمی‌گرداند. $floor[-2.1] مقدار -3 را برمی‌گرداند. $floor[5.0] مقدار 5 را برمی‌گرداند. نتیجه همیشه یک عدد صحیح است.
+</block>
+</dash>
+
+<details>
+syntax: $floor[number]
+param: number|number|الزامی|عددی که باید به نزدیک‌ترین عدد صحیح پایین گرد شود، به عنوان مثال 3.9، -2.1، 10
+</details>

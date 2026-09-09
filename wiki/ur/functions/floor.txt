@@ -1,0 +1,26 @@
+<dash>
+name: $floor
+desc: ایک نمبر کو قریب ترین صحیح عدد تک گھٹاتا ہے۔
+category: ریاضی اور اعداد
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $floor ایک منفرد عددی قیمت لیتا ہے اور اسے قریب ترین صحیح عدد تک گھٹاتا ہے (فلور)۔ مثال کے طور پر، 3.9 کو 3 میں تبدیل کیا جاتا ہے، اور -2.1 کو -3 میں۔ یہ ایک خود مختار کمانڈ کے طور پر اور دوسری کمانڈوں کے اندر ان لائن دونوں طرح کام کرتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $floor[number]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $sendMessage[Result is $floor[3.9]]
+</block>
+
+<block type="callout" kind="note">
+text: $floor[3.9] واپس کرتا ہے 3۔ $floor[-2.1] واپس کرتا ہے -3۔ $floor[5.0] واپس کرتا ہے 5۔ نتیجہ ہمیشہ ایک صحیح عدد ہوتا ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $floor[number]
+param: number|number|لازمی|نمبر جسے قریب ترین صحیح عدد تک گھٹایا جانا ہے، مثال کے طور پر 3.9، -2.1، 10
+</details>

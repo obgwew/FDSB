@@ -1,0 +1,21 @@
+<dash>
+name: $channelName
+desc: نام کانالی را که دستور در آن استفاده شده برمی‌گرداند.
+category: اطلاعات
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: وقتی $channelName فراخوانی می‌شود، ربات نام کانال فعلی را دریافت می‌کند و آن را مستقیماً به‌عنوان یک رشته متنی ساده به کانال می‌فرستد.
+</block>
+
+<block type="code" title="سینتکس">
+text: $channelName
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: You are chatting in #$channelName
+</block>
+
+<block type="callout" kind="note">
+text: این نام فعلی کانال را بدون پیشوند # برمی‌گرداند. اگر کانال تغییر نام دهد، فراخوانی بعدی نام به‌روزشده را نشان می‌دهد.
+</block>
+</dash>

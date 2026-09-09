@@ -1,0 +1,26 @@
+<dash>
+name: $ceil
+desc: یک عدد را به نزدیک‌ترین عدد صحیح بالایی گرد می‌کند.
+category: ریاضی و اعداد
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $ceil یک مقدار عددی واحد می‌گیرد و آن را به نزدیک‌ترین عدد کامل بالایی گرد می‌کند (سقف). مثلاً 3.1 به 4 تبدیل می‌شود و 5.0 همان 5 می‌ماند. هم به‌عنوان دستور مستقل و هم به‌صورت داخل خطی در داخل سایر دستورها کار می‌کند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $ceil[number]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $sendMessage[Result is $ceil[3.2]]
+</block>
+
+<block type="callout" kind="note">
+text: $ceil[3.1] مقدار 4 برمی‌گرداند. $ceil[-2.5] مقدار -2 برمی‌گرداند. $ceil[5.0] مقدار 5 برمی‌گرداند. نتیجه همیشه یک عدد صحیح است.
+</block>
+</dash>
+
+<details>
+syntax: $ceil[number]
+param: number|number|الزامی|عددی که باید به نزدیک‌ترین عدد صحیح بالایی گرد شود، مثلاً 3.1، -2.5، 10
+</details>

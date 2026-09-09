@@ -1,0 +1,26 @@
+<dash>
+name: $emojiName
+desc: Zwraca nazwę niestandardowego emoji na podstawie jego ID lub wzmianki.
+category: Informacje
+
+<block type="text" title="Jak działa ta komenda?">
+text: $emojiName przyjmuje ID niestandardowego emoji (lub pełną wzmiankę emoji, np. <:name:id> lub <a:name:id>) i zwraca nazwę tego emoji. Jest to przydatne, aby wyświetlić nazwę emoji bez twardego kodowania jej w skrypcie albo porównać ją ze znanymi nazwami.
+</block>
+
+<block type="code" title="Składnia">
+text: $emojiName[emoji id]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $emojiName[123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: Bot musi współdzielić serwer z emoji, w przeciwnym razie zwracany jest błąd. Wbudowane emoji Unicode nie mają ID i nie mogą być tutaj użyte.
+</block>
+</dash>
+
+<details>
+syntax: $emojiName[emoji id]
+param: emoji id|snowflake|Required|Numeryczne ID niestandardowego emoji albo wzmianka emoji, np. <:name:id> / <a:name:id>
+</details>

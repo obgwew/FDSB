@@ -1,0 +1,21 @@
+<dash>
+name: $messageID
+desc: اس پیغام کا ڈسکارڈ پیغام ID لوٹاتا ہے جس نے کمانڈ کو متحرک کیا۔
+category: معلومات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: جب $messageID بلایا جاتا ہے تو بوٹ محرک کنندہ پیغام کا منفرد ڈسکارڈ پیغام ID حاصل کر کے اسے براہ راست خالص عددی سٹرنگ کے طور پر بھیجتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $messageID
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: Your message ID is $messageID
+</block>
+
+<block type="callout" kind="note">
+text: لوٹائی گئی قدر ایک اسنو فلیک ID (مثلاً 123456789012345678) ہے، جو اسکرپٹ کو متحرک کرنے والے پیغام کی منفرد شناخت کرتی ہے۔
+</block>
+</dash>

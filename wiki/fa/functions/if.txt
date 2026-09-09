@@ -1,0 +1,39 @@
+<dash>
+name: $if
+desc: یک شرط را ارزیابی کرده و در صورت درست بودن شرط، بلوک کد محصور را اجرا می‌کند.
+category: کنترل جریان
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $if یک عبارت شرطی می‌گیرد و آن را ارزیابی می‌کند. اگر شرط درست باشد، کد بین $if و $elif، $else یا $endif بعدی اجرا می‌شود. اگر نادرست باشد، اجرا به شاخه منطبق بعدی می‌پرد.
+</block>
+
+<block type="code" title="سینتکس">
+text: $if[condition]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $if[$authorID == 123456789]
+  Hello Admin!
+$else
+  You are not an admin.
+$endif
+</block>
+
+<block type="options" title="عملگرهای مقایسه">
+option: ==|مساوی با (وقتی هر دو طرف عددی باشند به صورت عددی مقایسه می‌کند)
+option: !=|نابرابر با
+option: >|بزرگ‌تر از
+option: <|کوچک‌تر از
+option: >=|بزرگ‌تر از یا مساوی
+option: <=|کوچک‌تر از یا مساوی
+</block>
+
+<block type="callout" kind="note">
+text: از بلوک‌های $if تودرتو پشتیبانی می‌کند. برای شرایط اضافی می‌توانید از $elif و برای یک حالت جایگزین از $else استفاده کنید. همیشه با $endif ببندید.
+</block>
+</dash>
+
+<details>
+syntax: $if[condition]
+param: condition|expression|الزامی|شرطی برای ارزیابی، به عنوان مثال $authorID == 123، $var[score] >= 90، $isNumber[int; $message]. از عملگرهای ==، !=، >، <، >=، <= پشتیبانی می‌کند.
+</details>

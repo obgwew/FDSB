@@ -1,0 +1,27 @@
+<dash>
+name: $splitOut
+desc: پہلے تقسیم شدہ متن (استعمال $splitIn کرتے ہوئے) سے ایک مخصوص حصہ حاصل کرتا ہے۔
+category: متن ٹولز
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $splitOut $splitIn کے تقسیم شدہ نتیجے کے ایک مخصوص حصے تک رسائی حاصل کرتا ہے۔ 1-based انڈیکس استعمال کریں، < پہلے حصے کے لیے، یا > آخری حصے کے لیے۔ حاصل شدہ قدر چینل کو بھیجی جاتی ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $splitOut[index]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $splitIn[apple,banana,cherry; ,]
+$splitOut[2]
+</block>
+
+<block type="callout" kind="note">
+text: درست انڈیکس ویلیوز: ایک عدد (1-based)، < (پہلا عنصر)، > (آخری عنصر)۔ $splitIn کو $splitOut سے پہلے کال کیا جانا چاہیے۔
+</block>
+</dash>
+
+<details>
+syntax: $splitOut[index]
+param: index|text|لازمی|حاصل کرنے کے لیے حصے کا انڈیکس: ایک عدد (1-based)، < پہلے کے لیے، یا > آخری کے لیے
+</details>

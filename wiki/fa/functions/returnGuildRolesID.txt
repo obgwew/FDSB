@@ -1,0 +1,34 @@
+<dash>
+name: $returnGuildRolesID
+desc: شناسه‌های نقش را از یک سرور، به‌صورت اختیاری فیلترشده بر اساس مجوز، جمع‌آوری می‌کند و آن‌ها را ذخیره می‌کند.
+category: دستورهای بازگشتی
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $returnGuildRolesID شناسه‌های نقش را از یک سرور مشخص جمع‌آوری می‌کند و به‌صورت اختیاری بر اساس یک مجوز موردنیاز فیلتر می‌کند. نتیجه زیر یک نام متغیر ذخیره می‌شود و می‌تواند بعداً با استفاده از $return[variableName] بازیابی شود. اگر فیلتر مجوزی مشخص نشود، همه نقش‌ها (به‌جز @everyone) جمع‌آوری می‌شوند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $returnGuildRolesID[GuildID; permission; var; separator]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $returnGuildRolesID[$guildID; all; roleIDs; ,]
+$sendMessage[Roles: $return[roleIDs]]
+</block>
+
+<block type="callout" kind="note">
+text: برای پارامتر مجوز: برای گرفتن همه نقش‌ها آن را خالی بگذارید یا از «all» استفاده کنید. همچنین می‌توانید یک مجوز نام‌دار (مثلاً kick_members، manage_messages) یا یک عدد مجوز خام مشخص کنید. فقط نقش‌هایی که مجوز مشخص‌شده را دارند (یا بالاتر) لحاظ می‌شوند.
+</block>
+
+<block type="callout" kind="warning">
+text: ربات باید عضو سرور هدف باشد. نقش @everyone همیشه از نتایج حذف می‌شود.
+</block>
+</dash>
+
+<details>
+syntax: $returnGuildRolesID[GuildID; permission; var; separator]
+param: شناسه سرور|snowflake|الزامی|شناسه سروری که نقش‌ها از آن جمع‌آوری می‌شوند
+param: مجوز|text|الزامی|فیلتر مجوز: برای همه نقش‌ها خالی بگذارید یا «all»، یک مجوز نام‌دار (مثلاً kick_members)، یا یک عدد مجوز خام
+param: متغیر|text|الزامی|نام متغیری که نتیجه در آن ذخیره می‌شود (با $return[] استفاده شود)
+param: جداکننده|text|الزامی|جداکننده بین چند شناسه (مثلاً ، یا ؛). می‌توانید از جداکننده‌های نام‌دار استفاده کنید: dot، com، apo، sem، colon
+</details>

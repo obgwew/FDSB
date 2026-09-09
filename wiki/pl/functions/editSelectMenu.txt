@@ -1,0 +1,37 @@
+<dash>
+name: $editSelectMenu
+desc: Edytuje minimalną/maksymalną liczbę wyborów oraz tekst zastępczy (placeholder) istniejącego menu wyboru.
+category: Komponenty
+
+<block type="text" title="Jak działa ta komenda?">
+text: $editSelectMenu znajduje menu wyboru po jego ID menu na danej wiadomości i aktualizuje, ile opcji użytkownik musi/może wybrać (Min/Max) oraz tekst podpowiedzi wyświetlany przed dokonaniem wyboru (Placeholder). Opcje już dodane do menu pozostają bez zmian. Aby edytować pojedynczą opcję, użyj $editSelectMenuOption.
+</block>
+
+<block type="code" title="Składnia">
+text: $editSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+$addSelectMenuOption[color_menu; Red; red; The color red]
+$addSelectMenuOption[color_menu; Blue; blue; The color blue]
+$editSelectMenu[color_menu; 1; 2; Pick one or two colors]
+</block>
+
+<block type="callout" kind="note">
+text: Bez podanego Message ID bot najpierw szuka menu na źródłowej wiadomości interakcji, a następnie na ostatniej wiadomości wysłanej przez bota. Opcje menu są zachowywane.
+</block>
+
+<block type="callout" kind="warning">
+text: Min musi wynosić od 0 do 25, Max od 1 do 25, a Min nie może przekraczać Max. Wiadomość docelowa musi być wysłana przez tego bota i musi już zawierać menu o podanym ID.
+</block>
+</dash>
+
+<details>
+syntax: $editSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+param: Menu ID|text|Required|ID menu wyboru do edycji
+param: Min|number|Required|Nowa minimalna liczba opcji, którą użytkownik musi wybrać (0 do 25)
+param: Max|number|Required|Nowa maksymalna liczba opcji, którą użytkownik może wybrać (1 do 25)
+param: Placeholder|text|Optional|Nowy tekst podpowiedzi wyświetlany przed dokonaniem wyboru
+param: Message ID|snowflake|Optional|ID konkretnej wiadomości bota zawierającej menu do edycji
+</details>

@@ -1,0 +1,27 @@
+<dash>
+name: $serverIcon
+desc: 返回或发送当前服务器（或某个服务器）图标的直接图片 URL。
+category: 服务器
+
+<block type="text" title="命令如何工作？">
+text: $serverIcon 解析并返回服务器图标的直接图片 URL。不带参数时使用当前服务器；带服务器 ID（guild ID）时使用该特定服务器（机器人必须在其内）。动态服务器图标以 .gif URL 形式返回。
+</block>
+
+<block type="code" title="语法">
+text: $serverIcon
+text: $serverIcon[(guildID)]
+</block>
+
+<block type="code" title="可复制示例">
+text: Server icon: $serverIcon
+</block>
+
+<block type="callout" kind="note">
+text: 如果给定的服务器未设置图标，则会返回错误。你可以在嵌入中使用该 URL（$image、$thumbnail、$authorIcon、$footerIcon），也可以作为链接发送。
+</block>
+</dash>
+
+<details>
+syntax: $serverIcon[(guildID)]
+param: guildID|snowflake|Optional|要获取其图标 URL 的服务器 ID。如果省略，则使用当前服务器。
+</details>

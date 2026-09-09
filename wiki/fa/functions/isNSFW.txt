@@ -1,0 +1,26 @@
+<dash>
+name: $isNSFW
+desc: بررسی می‌کند آیا یک کانال به عنوان NSFW علامت‌گذاری شده است یا خیر.
+category: کانال
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $isNSFW یک منشن یا شناسه کانال دریافت کرده و بررسی می‌کند آیا کانال به عنوان NSFW (Not Safe For Work) علامت‌گذاری شده است. اگر کانال NSFW باشد "true" و در غیر این صورت "false" برمی‌گرداند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $isNSFW[channel mention/ID]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $isNSFW[<#123456789012345678>]
+</block>
+
+<block type="callout" kind="note">
+text: برای منطق شرطی جهت محدود کردن محتوا بر اساس رده سنی کانال مفید است.
+</block>
+</dash>
+
+<details>
+syntax: $isNSFW[channel mention/ID]
+param: channel|text|Required|منشن یا شناسه عددی کانال برای بررسی.
+</details>

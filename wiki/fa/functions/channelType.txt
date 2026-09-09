@@ -1,0 +1,26 @@
+<dash>
+name: $channelType
+desc: نوع یک کانال را برمی‌گرداند (متن، صدا، دسته، انجمن، استیج).
+category: کانال
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $channelType یک منشن یا شناسه کانال می‌گیرد و نام نوع کانال را به‌صورت رشته برمی‌گرداند. انواع معتبر عبارتند از: text، voice، category، forum، stage. اگر هیچ آرگومانی ارائه نشود، نوع کانال فعلی را برمی‌گرداند. اگر کانال پیدا نشود «unknown» برمی‌گرداند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $channelType[channel mention/ID]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $channelType[<#123456789012345678>]
+</block>
+
+<block type="callout" kind="note">
+text: برای اعتبارسنجی انواع کانال قبل از اجرای عملیات وابسته به نوع مانند $createChannel یا $voiceUsersLimit مفید است.
+</block>
+</dash>
+
+<details>
+syntax: $channelType[channel mention/ID]
+param: channel|text|اختیاری|منشن کانال یا شناسه عددی. اگر خالی باشد، از کانال فعلی استفاده می‌کند.
+</details>

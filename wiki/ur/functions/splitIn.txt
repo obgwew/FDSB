@@ -1,0 +1,28 @@
+<dash>
+name: $splitIn
+desc: ایک ٹیکسٹ سٹرنگ کو ڈیلیمیٹر کے ذریعے حصوں میں تقسیم کرتا ہے اور نتیجہ محفوظ کرتا ہے۔
+category: متن ٹولز
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $splitIn ایک ٹیکسٹ سٹرنگ اور ایک ڈیلیمیٹر لیتا ہے، متن کو اس ڈیلیمیٹر سے تقسیم کرتا ہے، اور نتیجے کے حصے محفوظ کرتا ہے۔ انفرادی حصوں تک رسائی کے لیے بعد میں $splitOut استعمال کریں۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $splitIn[text; delimiter]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $splitIn[apple,banana,cherry; ,]
+$splitOut[1]
+</block>
+
+<block type="callout" kind="note">
+text: تقسیم شدہ حصے کنٹیکسٹ میں محفوظ ہوتے ہیں اور $splitOut کے ذریعے انڈیکس (1-based) سے، < پہلے کے لیے، یا > آخری کے لیے استعمال کرتے ہوئے رسائی حاصل کی جا سکتی ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $splitIn[text; delimiter]
+param: text|text|لازمی|تقسیم کرنے کے لیے ٹیکسٹ سٹرنگ
+param: delimiter|text|لازمی|وہ ڈیلیمیٹر/سیپریٹر جس سے تقسیم کرنا ہے (خالی نہیں ہو سکتا)
+</details>

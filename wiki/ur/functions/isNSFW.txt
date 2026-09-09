@@ -1,0 +1,26 @@
+<dash>
+name: $isNSFW
+desc: یہ چیک کرتا ہے کہ آیا کوئی چینل NSFW کے طور پر نشان زد ہے۔
+category: چینل
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $isNSFW ایک چینل مینشن یا ID لیتا ہے اور چیک کرتا ہے کہ آیا چینل NSFW (کام کے لیے محفوظ نہیں) کے طور پر نشان زد ہے۔ اگر چینل NSFW ہے تو "true" لوٹاتا ہے، بصورت دیگر "false"۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $isNSFW[channel mention/ID]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $isNSFW[<#123456789012345678>]
+</block>
+
+<block type="callout" kind="note">
+text: مشروط منطق کے لیے مفید ہے تاکہ چینل کی عمر کی درجہ بندی کی بنیاد پر مواد کو محدود کیا جا سکے۔
+</block>
+</dash>
+
+<details>
+syntax: $isNSFW[channel mention/ID]
+param: چینل|text|لازمی|چیک کرنے کے لیے چینل کا مینشن یا عددی ID۔
+</details>

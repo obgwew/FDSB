@@ -1,0 +1,28 @@
+<dash>
+name: $var
+desc: یک متغیر موقت را می‌خواند یا می‌نویسد که فقط در مدت اجرای اسکریپت فعلی زنده است.
+category: متغیرها
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $var با یک آرگومان مقدار متغیر را می‌خواند. $var با دو آرگومان یک مقدار را در متغیر می‌نویسد. متغیرهای موقت پس از پایان اسکریپت پاک می‌شوند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $var[name; value]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $var[score; 10]
+$sendMessage[Your score is $var[score]]
+</block>
+
+<block type="callout" kind="note">
+text: برخلاف $setVar/$getVar (پایدار)، $var فقط در مدت اجرای اسکریپت فعلی در دسترس است. می‌تواند به صورت inline داخل آرگومان‌های دستورهای دیگر استفاده شود.
+</block>
+</dash>
+
+<details>
+syntax: $var[name; (value)]
+param: name|text|Required|نام متغیری که خوانده یا نوشته می‌شود
+param: value|text|Optional|اگر ارائه شود، این مقدار را در متغیر می‌نویسد (حالت ۲ آرگومانی). اگر نادیده گرفته شود، مقدار فعلی را خوانده و برمی‌گرداند (حالت ۱ آرگومانی).
+</details>

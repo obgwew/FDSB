@@ -1,0 +1,27 @@
+<dash>
+name: $authorServerAvatar
+desc: Renvoie ou envoie l'URL d'image directe de l'avatar de serveur de l'auteur de la commande (ou d'un utilisateur).
+category: Info
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: $authorServerAvatar résout et renvoie l'URL d'image directe de l'avatar de serveur (guild) d'un utilisateur s'il en a défini un. Sans argument, il utilise l'auteur de la commande ; avec un ID utilisateur ou une @mention, il utilise cet utilisateur. Lorsqu'aucun avatar de serveur personnalisé n'existe, l'avatar d'affichage de l'utilisateur est utilisé. Le résultat est une URL que vous pouvez intégrer dans des messages ou des images.
+</block>
+
+<block type="code" title="Syntaxe">
+text: $authorServerAvatar
+text: $authorServerAvatar[(userID/@mention)]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: Your server avatar: $authorServerAvatar
+</block>
+
+<block type="callout" kind="note">
+text: Il s'agit de l'avatar affiché aux autres membres à l'intérieur du serveur, qui peut différer de l'avatar global de l'utilisateur ($authorAvatar). Les avatars animés sont renvoyés sous forme d'URL .gif.
+</block>
+</dash>
+
+<details>
+syntax: $authorServerAvatar[(userID/@mention)]
+param: userID/@mention|text|Optionnel|L'ID utilisateur ou la @mention dont il faut obtenir l'URL de l'avatar de serveur. S'il est omis, utilise l'auteur de la commande.
+</details>

@@ -1,0 +1,26 @@
+<dash>
+name: $footer
+desc: بنائے جا رہے ایمبیڈ کا فوٹر ٹیکسٹ سیٹ کرتا ہے۔
+category: ایمبیڈ بنانے والا
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $footer ایک ٹیکسٹ آرگومینٹ لیتا ہے اور اسے موجودہ ایمبیڈ کے فوٹر کے طور پر سیٹ کرتا ہے جو تیار کیا جا رہا ہے۔ فوٹر ایمبیڈ کے بالکل نیچے چھوٹے، ہلکے ٹیکسٹ میں ظاہر ہوتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $footer[text]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $footer[Requested by $authorName]
+</block>
+
+<block type="callout" kind="note">
+text: فوٹر منسبت، ٹائم اسٹیمپس، یا اضافی سیاق و سباق کے لیے مفید ہے۔ یہ ایمبیڈ کے نیچے چھوٹے سرمئی ٹیکسٹ میں ظاہر ہوتا ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $footer[text]
+param: text|text|لازمی|ایمبیڈ کے لیے فوٹر ٹیکسٹ
+</details>

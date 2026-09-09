@@ -1,0 +1,31 @@
+<dash>
+name: $onBotMessage
+desc: رویدادی که با هر پیام ارسال شده توسط یک بات (از جمله سایر بات‌ها) فعال می‌شود.
+category: رویداد
+
+<block type="text" title="این رویداد چگونه کار می‌کند؟">
+text: $onBotMessage یک پیشوند رویداد است که هر زمان یک بات پیامی ارسال کند یک FDScript را فعال می‌کند. به صورت پیش‌فرض اسکریپت پیام‌های ارسال شده توسط خود بات را نادیده می‌گیرد و فقط به سایر بات‌ها واکنش نشان می‌دهد. آرگومان را روی yes تنظیم کنید تا اسکریپت روی پیام‌های خود بات نیز اجرا شود، یا روی no تنظیم کنید تا پیام‌های خودش نادیده گرفته شوند (این هم حالت پیش‌فرض وقتی آرگومان خالی است).
+</block>
+
+<block type="code" title="سینتکس">
+text: #PREFIX:$onBotMessage[yes/no]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: #PREFIX:$onBotMessage[no]
+$sendMessage[Another bot said: $message]
+</block>
+
+<block type="callout" kind="note">
+text: برای پیگیری پیام‌های خود بات از yes استفاده کنید یا برای واکنش فقط به سایر بات‌ها از no. مثال بالا از $message برای خواندن محتوای پیام بات استفاده می‌کند.
+</block>
+
+<block type="callout" kind="important">
+text: این رویداد در پوشه bot_events اجرا می‌شود، نه bot_commands. فایل .fds خود را آنجا ایجاد کنید.
+</block>
+</dash>
+
+<details>
+syntax: #PREFIX:$onBotMessage[(yes/no)]
+param: yes/no|text|Optional|yes برای اجرا روی پیام‌های خود بات، no (پیش‌فرض) برای واکنش فقط به سایر بات‌ها
+</details>

@@ -1,0 +1,28 @@
+<dash>
+name: $replaceRegex
+desc: کسی حرفی قاعدے سے مماثل متن کو نئے متن سے بدل دیتا ہے۔
+category: متن ٹولز
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $replaceRegex ان پٹ متن کو ان حروف کے سلسلوں کے لیے اسکین کرتا ہے جنہیں قاعدہ بیان کرتا ہے اور ہر مماثلت کو بدلنے والے متن سے بدل دیتا ہے۔ [abc] کے طور پر لکھا گیا قاعدہ ان حروف کو نشانہ بناتا ہے، -[abc] ان کے سوا ہر چیز کو نشانہ بناتا ہے، اور کوئی بھی دوسرا قاعدہ لفظی متن کے طور پر لیا جاتا ہے۔ ایک مماثل سلسلہ بیک وقت کئی مسلسل حروف کا احاطہ کر سکتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $replaceRegex[text; rule; replacement]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $replaceRegex[Banana; [aeiou]; *]
+</block>
+
+<block type="callout" kind="note">
+text: مماثلت طمع بخش (greedy) ہوتی ہے: مسلسل مماثل حروف ایک ہی تبدیلی میں سمٹ جاتے ہیں۔ حروف کو مکمل طور پر حذف کرنے کے لیے خالی بدلنے والا متن استعمال کریں۔
+</block>
+</dash>
+
+<details>
+syntax: $replaceRegex[text; rule; replacement]
+param: text|text|لازمی|وہ اصل متن جس پر عمل کرنا ہے
+param: rule|text|لازمی|حرفی قاعدہ: [chars] درج حروف سے مماثل ہے، -[chars] باقی ہر چیز سے مماثل ہے، ورنہ لفظی متن
+param: replacement|text|لازمی|متن جو ہر مماثلت کی جگہ داخل کیا جاتا ہے
+</details>

@@ -1,0 +1,26 @@
+<dash>
+name: $getCreationDateTimestamp
+desc: هر شناسه را به تاریخ ایجاد آن به صورت time Unix تبدیل می‌کند.
+category: زمان‌بندی و تاخیر
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: هر شیء دیسکورد (کاربر، کانال، نقش، پیام...) زمان ایجاد خود را درون شناسه snowflake خود نگه می‌دارد. $getCreationDateTimestamp آن را رمزگشایی کرده و لحظه ایجاد را به صورت time Unix (ثانیه‌ها از 1 ژانویه 1970) برمی‌گرداند. منشن‌ها پذیرفته شده و به صورت خودکار تمیز می‌شوند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $getCreationDateTimestamp[idOrMention]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $sendMessage[Your account was created on <t:$getCreationDateTimestamp[$authorID]>]
+</block>
+
+<block type="callout" kind="note">
+text: با هر شناسه snowflake کار می‌کند: کاربران، اعضا، کانال‌ها، نقش‌ها، سرورها و پیام‌ها. برای نمایش تاریخ قابل خواندن با قالب <t:TIMESTAMP> دیسکورد ترکیب کنید.
+</block>
+</dash>
+
+<details>
+syntax: $getCreationDateTimestamp[idOrMention]
+param: idOrMention|text|الزامی|یک شناسه snowflake یا منشن (<@id>، <#id>، <@&id>) از هر شیء دیسکورد
+</details>

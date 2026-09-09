@@ -1,0 +1,26 @@
+<dash>
+name: $lineCount
+desc: Возвращает количество пробелов в указанном тексте.
+category: Строковые утилиты
+
+<block type="text" title="Как работает команда?">
+text: $lineCount принимает текстовый аргумент и возвращает, сколько символов пробела ( ) он содержит. Переменные и плейсхолдеры в аргументе раскрываются перед подсчётом.
+</block>
+
+<block type="code" title="Syntax">
+text: $lineCount[text]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $lineCount[one two three]
+</block>
+
+<block type="callout" kind="note">
+text: Подсчёт ведётся по пробелам, а не по реальным переводам строк. Чтобы разделить текст на части, используйте $splitIn вместе с $splitOut.
+</block>
+</dash>
+
+<details>
+syntax: $lineCount[text]
+param: text|text|Required|Текст, в котором нужно подсчитать пробелы. Переменные и плейсхолдеры раскрываются перед подсчётом.
+</details>

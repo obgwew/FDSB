@@ -1,0 +1,26 @@
+<dash>
+name: $setBotStatus
+desc: وضعیت حضور ربات (آنلاین، بیکار، dnd یا نامرئی) را تغییر می‌دهد.
+category: سرور
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $setBotStatus نشانگر حضور ربات را بین آنلاین، بیکار، dnd (مزاحم نشوید) و نامرئی (به صورت آفلاین نمایش داده می‌شود) جابه‌جا می‌کند. وضعیت تا زمان تغییر مجدد باقی می‌ماند — ری‌ستارت کردن برنامه آن را بر اساس تنظیمات ذخیره‌شده بازمی‌گرداند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $setBotStatus[online|idle|dnd|invisible]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $setBotStatus[idle]
+</block>
+
+<block type="callout" kind="important">
+text: محدودیت نرخ داخلی: فقط یک تغییر هر 12 ثانیه — فراخوانی‌های اضافی در این بازه زمانی بدون خطا اجرا نمی‌شوند. offline به عنوان نام مستعار برای invisible پذیرفته می‌شود. هر مقدار دیگری خطا ایجاد می‌کند.
+</block>
+</dash>
+
+<details>
+syntax: $setBotStatus[online|idle|dnd|invisible]
+param: status|text|Required|یکی از: online, idle, dnd, invisible (offline به عنوان نام مستعار برای invisible کار می‌کند)
+</details>

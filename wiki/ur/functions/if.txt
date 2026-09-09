@@ -1,0 +1,39 @@
+<dash>
+name: $if
+desc: ایک شرط کا جائزہ لیتا ہے اور اگر شرط سچ ہو تو بند کیا گیا کوڈ بلاک چلاتا ہے۔
+category: بہاؤ کنٹرول
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $if ایک شرط کا بیان لیتا ہے اور اس کا جائزہ لیتا ہے۔ اگر شرط سچ ہے تو $if اور اگلے $elif، $else، یا $endif کے درمیان کا کوڈ چلایا جاتا ہے۔ اگر جھوٹ ہے تو نفاذ اگلی مماثل شاخ میں چلا جاتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $if[condition]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $if[$authorID == 123456789]
+  Hello Admin!
+$else
+  You are not an admin.
+$endif
+</block>
+
+<block type="options" title="مقابلہ آپریٹرز">
+option: ==|برابر (جب دونوں طرف نمبر ہوں تو عددی طور پر موازنہ کرتا ہے)
+option: !=|برابر نہیں
+option: >|سے بڑا
+option: <|سے چھوٹا
+option: >=|سے بڑا یا برابر
+option: <=|سے چھوٹا یا برابر
+</block>
+
+<block type="callout" kind="note">
+text: نیسٹڈ $if بلاکس کی حمایت کرتا ہے۔ اضافی شرائط کے لیے $elif اور فل بیک کے لیے $else استعمال کر سکتے ہیں۔ ہمیشہ $endif سے بند کریں۔
+</block>
+</dash>
+
+<details>
+syntax: $if[condition]
+param: condition|expression|لازمی|جائزہ لینے کے لیے شرط، مثال کے طور پر، $authorID == 123، $var[score] >= 90، $isNumber[int; $message]۔ ==، !=، >، <، >=، <= آپریٹرز کی حمایت کرتا ہے۔
+</details>

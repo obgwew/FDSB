@@ -1,0 +1,31 @@
+<dash>
+name: $timeout
+desc: مخصوص مدت کے لیے سرور ممبر پر ٹائم آؤٹ (میوٹ) لگاتا ہے۔
+category: انتظامات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $timeout ایک مدت اور صارف ID/مینشن لیتا ہے، پھر اس ممبر پر ٹائم آؤٹ لگاتا ہے۔ ٹائم آؤٹ شدہ ممبر مخصوص مدت کے لیے پیغام نہیں بھیج سکتا، رد عمل نہیں دے سکتا، یا وائس چینل میں شامل نہیں ہو سکتا۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $timeout[time; user]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $timeout[1h; @user]
+</block>
+
+<block type="callout" kind="note">
+text: وقت کی شکل استعمال ہوتی ہے: s (سیکنڈ)، m (منٹ)، h (گھنٹے)، d (دن)۔ ٹائم آؤٹ کی زیادہ سے زیادہ مدت 28 دن ہے۔ ٹائم آؤٹ جلد ہٹانے کے لیے $untimeout استعمال کریں۔
+</block>
+
+<block type="callout" kind="warning">
+text: بوٹ کے پاس "Moderate Members" اجازت ہونی چاہیے اور اس کا سب سے اونچا رول ہدف کے سب سے اونچے رول سے اوپر ہونا چاہیے۔
+</block>
+</dash>
+
+<details>
+syntax: $timeout[time; user]
+param: time|text|لازمی|ٹائم آؤٹ کی مدت۔ شکل: نمبر + اکائی (s/m/h/d)، مثلاً 1h، 30m، 7d
+param: user|text|لازمی|اس ممبر کی صارف ID یا @مینشن جس پر ٹائم آؤٹ لگانا ہے
+</details>

@@ -1,0 +1,30 @@
+<dash>
+name: $alwaysReply
+desc: رویدادی که روی هر پیام غیررباتی فعال می‌شود.
+category: رویداد
+
+<block type="text" title="این رویداد چگونه کار می‌کند؟">
+text: $alwaysReply یک پیشوند رویداد است که برای هر پیامی که توسط یک کاربر غیرربات ارسال می‌شود یک FDScript را فعال می‌کند. اسکریپت به‌عنوان پاسخ به پیام اصلی اجرا می‌شود. این برای پاسخ‌های خودکار یا پردازش پیام مفید است.
+</block>
+
+<block type="code" title="سینتکس">
+text: #PREFIX:$alwaysReply
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: #PREFIX:$alwaysReply
+ sendMessage[You said: $message]
+</block>
+
+<block type="callout" kind="warning">
+text: این روی هرم پیامی فعال می‌شود. با دقت استفاده کنید تا از فعالیت بیش از حد ربات یا محدودیت نرخ جلوگیری شود.
+</block>
+
+<block type="callout" kind="important">
+text: این رویداد در پوشه bot_events اجرا می‌شود، نه bot_commands. فایل .fds خود را آنجا ایجاد کنید.
+</block>
+</dash>
+
+<details>
+syntax: #PREFIX:$alwaysReply
+</details>

@@ -1,0 +1,27 @@
+<dash>
+name: $serverIcon
+desc: تُرجع أو تُرسل رابط الصورة المباشر لأيقونة السيرفر الحالي (أو سيرفر محدد).
+category: السيرفر
+
+<block type="text" title="كيف تعمل الدالة؟">
+text: تُحلّ $serverIcon وتُرجع رابط الصورة المباشر لأيقونة السيرفر. بدون معاملات تستخدم السيرفر الحالي؛ ومع معرّف سيرفر (guild ID) تستخدم ذلك السيرفر المحدد (يجب أن يكون البوت فيه). أيقونات السيرفر المتحرّكة تُرجع كروابط .gif.
+</block>
+
+<block type="code" title="الصيغة">
+text: $serverIcon
+text: $serverIcon[(guildID)]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: Server icon: $serverIcon
+</block>
+
+<block type="callout" kind="note">
+text: إذا لم تكن لسيرفر محدد أيقونة محددة، يتم إرجاع خطأ. يمكنك استخدام الرابط في الإمبادات ($image, $thumbnail, $authorIcon, $footerIcon) أو إرساله كرابط.
+</block>
+</dash>
+
+<details>
+syntax: $serverIcon[(guildID)]
+param: guildID|snowflake|Optional|معرّف السيرفر للحصول على رابط أيقونته. إذا لم يُحدد، يُستخدم السيرفر الحالي.
+</details>

@@ -1,0 +1,25 @@
+<dash>
+name: $endwhile
+desc: $while لوپ بلاک کے اختتام کی نشاندہی کرتا ہے۔
+category: بہاؤ کنٹرول
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $endwhile $while لوپ کی بندش کی حد کا اشارہ دیتا ہے۔ ہر تکرار کے بعد، عمل $while شرط پر دوبارہ جانچنے کے لیے واپس آتا ہے۔ ہر $while کے لیے ایک مماثل $endwhile ہونا چاہیے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $endwhile
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $setVar[count; 0]
+$while[$getVar[count] < 5]
+  $sendMessage[Count: $getVar[count]]
+  $setVar[count; $math[$getVar[count] + 1]]
+$endwhile
+</block>
+
+<block type="callout" kind="warning">
+text: ہر $while بلاک کو $endwhile کے ساتھ صحیح طریقے سے بند کیا جانا چاہیے۔ $endwhile کی کمی اسکرپٹ خرابی کا باعث بنے گی۔ لامتناہی لوپس سے بچنے کے لیے یقینی بنائیں کہ آپ کے لوپ میں ختم ہونے کی شرط ہے۔
+</block>
+</dash>
