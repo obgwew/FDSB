@@ -1,4 +1,4 @@
-![FDSB.png](./main_exe/icons/FDSB.png)
+![FDSB.png](./main_app/icons/FDSB.png)
   <p>
     <img src="https://img.shields.io/badge/version-2.4.1-blue.svg?cacheSeconds=2592000" alt="Version" />
   </p>
