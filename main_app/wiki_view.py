@@ -19,6 +19,7 @@ import flet as ft
 from main_app.theme.theme_engine import ThemeEngine
 from main_app.settings import get_current_lang
 from main_app.langs.translations import Translations
+from main_app.load.loading_view import LoadingScreen
 
 
 def _c(key: str) -> str:
@@ -113,6 +114,15 @@ _HL_FONT_FAMILY = 'Consolas'
 
 def _t(key: str) -> str:
     return Translations.get(key, get_current_lang() or 'en')
+
+def _t_or_fallback(key: str, fallback: str = '') -> str:
+    try:
+        val = _t(key)
+    except Exception:
+        val = None
+    if not val or val == key:
+        return fallback
+    return val
 
 @dataclass
 class WikiParam:
@@ -1072,24 +1082,114 @@ class BotWikiTab:
 
     def _set_busy(self, busy: bool, label: str = ''):
         self._busy = busy
+        self._update_btn.opacity = 0.6 if busy else 1.0
         if label: self._status_text.value = label
-        self._render()
+        if not busy:
+            self._render()
         self._page.update()
 
     async def _check_updates(self, e):
+        # حارس: يمنع تشغيل نسختين متوازيتين لو ضغط المستخدم على الزر أكثر من مرة
+        if self._busy:
+            return
         self._set_busy(True, _t('checking'))
+
+        loop = asyncio.get_event_loop()
+        lang = self._lang
+
         try:
-            remote_v = await asyncio.get_event_loop().run_in_executor(None, WikiRemote.fetch_version, self._lang)
-            if remote_v > WikiCache.get_local_version(self._lang):
-                idx = await asyncio.get_event_loop().run_in_executor(None, WikiRemote.fetch_index, self._lang)
-                for fn in idx:
-                    txt = await asyncio.get_event_loop().run_in_executor(None, WikiRemote.fetch_function, self._lang, fn)
-                    WikiCache.save_function_file_only(self._lang, fn, txt)
-                WikiCache.set_local_version(self._lang, remote_v)
-        except: pass
-        self._entries = WikiCache.load_light_entries(self._lang)
+            remote_version = await loop.run_in_executor(None, WikiRemote.fetch_version, lang)
+        except Exception as ex:
+            print(f'[Wiki] fetch_version failed: {ex}')
+            self._set_busy(False, _t_or_fallback('update_failed', 'فشل التحقق من التحديثات'))
+            return
+
+        local_version = WikiCache.get_local_version(lang)
+
+        if remote_version <= local_version:
+            self._set_busy(False, _t('up_to_date').format(v=local_version))
+            return
+
+        # طلب إذن الإشعارات على الموبايل (اختياري تمامًا، لا يوقف التحديث لو فشل)
+        try:
+            if hasattr(self._page, 'platform') and self._page.platform in [
+                'android', 'ios',
+                getattr(ft.PagePlatform, 'ANDROID', 'android'),
+                getattr(ft.PagePlatform, 'IOS', 'ios'),
+            ]:
+                if hasattr(ft, 'PermissionType'):
+                    self._page.request_permission(ft.PermissionType.NOTIFICATION)
+        except Exception as ex:
+            print(f'[Wiki] notification permission request failed: {ex}')
+
+        self._page.show_dialog(
+            ft.SnackBar(
+                content=ft.Row(
+                    [
+                        ft.Icon(ft.Icons.CLOUD_DOWNLOAD_ROUNDED, color='#FFFFFF', size=20),
+                        ft.Text(_t('downloading'), color='#FFFFFF', size=14, weight=ft.FontWeight.W_600),
+                    ],
+                    spacing=10,
+                    vertical_alignment=ft.CrossAxisAlignment.CENTER,
+                ),
+                bgcolor=_c('accent'),
+                duration=4000,
+            )
+        )
+
+        # شاشة تحميل بشريط تقدم فعلي تغطي جسم التاب أثناء التنزيل
+        loader = LoadingScreen(container=self._root, page=self._page, title=_t('downloading'))
+
+        async def _do_download(screen: LoadingScreen):
+            index = await loop.run_in_executor(None, WikiRemote.fetch_index, lang)
+            index.sort()
+
+            total = len(index) or 1
+            done_count = 0
+            screen.set_progress(0.0, f'0/{total}')
+
+            async def _fetch_one(file_name: str):
+                nonlocal done_count
+                text = await loop.run_in_executor(None, WikiRemote.fetch_function, lang, file_name)
+                # نكتب الملف فقط هنا؛ meta.json يُعاد بناؤه مرة واحدة بعد اكتمال كل الدفعات
+                # بدل قراءة/كتابة meta.json لكل ملف على حدة، لتفادي تعارض الكتابة المتزامنة
+                # وتسريع العملية عمومًا
+                await loop.run_in_executor(None, WikiCache.save_function_file_only, lang, file_name, text)
+                done_count += 1
+                screen.set_progress(done_count / total, f'{done_count}/{total}')
+
+            # تنزيل بالتوازي على دفعات بدل ملف-بملف تسلسليًا
+            chunk_size = 45
+            for i in range(0, len(index), chunk_size):
+                chunk = index[i:i + chunk_size]
+                await asyncio.gather(*[_fetch_one(fn) for fn in chunk])
+                await asyncio.sleep(0.5)
+
+            # إعادة بناء meta.json مرة واحدة فقط لكل الملفات المحلية بعد التنزيل
+            await loop.run_in_executor(None, WikiCache._rebuild_meta, lang)
+
+            WikiCache.save_index(lang, index)
+            WikiCache.set_local_version(lang, remote_version)
+
+        try:
+            await loader.run(
+                _do_download,
+                done_message=_t('up_to_date').format(v=remote_version),
+                extra_hold_max=5.0,
+            )
+        except Exception as ex:
+            print(f'[Wiki] update download failed: {ex}')
+            self._set_busy(False, _t_or_fallback('update_failed', 'فشل التحديث'))
+            return
+
+        self._entries = WikiCache.load_light_entries(lang)
         self._apply_filters()
-        self._set_busy(False, self._status_label())
+
+        self._set_busy(False, _t('up_to_date').format(v=remote_version))
+
+        self._page.show_dialog(
+            ft.SnackBar(content=ft.Text(_t('up_to_date').format(v=remote_version)), duration=2500)
+        )
 
     def load_bot(self, *_args, **_kwargs):
         self._page.run_task(self._async_load_bot_task)

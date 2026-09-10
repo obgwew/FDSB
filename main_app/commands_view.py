@@ -7,6 +7,7 @@
 import os
 import flet as ft
 import re
+import asyncio
 
 from main_app.theme.theme_engine import ThemeEngine
 from main_app.langs.translations import Translations
@@ -1161,6 +1162,7 @@ class CommandsListView:
         self._on_open  = on_open
         self._bot_dir  = ''
         self._all_cmds = []
+        self._busy     = False
 
         self._count_label = ft.Text(
             value="",
@@ -1259,9 +1261,28 @@ class CommandsListView:
 
     def load(self, bot_dir: str):
         self._bot_dir  = bot_dir
-        self._all_cmds = _list_cmd_files(bot_dir)
+        self._list_col.controls.clear()
+        self._list_col.controls.append(
+            ft.Container(
+                content=ft.ProgressRing(color=_c('accent')),
+                alignment=ft.Alignment(0, 0),
+                padding=ft.Padding(0, 40, 0, 0)
+            )
+        )
+        self._count_label.value = _t('loading')
+        if self._page:
+            self._page.update()
+
+        self._page.run_task(self._async_load_task)
+
+    async def _async_load_task(self, *args):
+        loop = asyncio.get_event_loop()
+        self._all_cmds = await loop.run_in_executor(None, _list_cmd_files, self._bot_dir)
+        
         self._update_cmds_count()
         self._render(self._all_cmds)
+        if self._page:
+            self._page.update()
 
     def _on_search(self, e):
         q        = (e.control.value or '').strip().lower()
