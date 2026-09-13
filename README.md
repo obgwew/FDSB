@@ -41,10 +41,10 @@
 6. Go to the Commands tab and click the + button to create a new command. In the editor, enter a name (required) and choose your desired prefix. Write your command's code based on wiki, then click Save when finished.
 
 7. Return to the main interface and press Start to run your bot.
-> [!CAUTION]
+> [!WARNING]
 > The application runs in the background, but with the conditions of disabling battery optimization and removing network restrictions imposed on the program.
 
-> [!WARNING]
+> [!CAUTION]
 > These settings work on Android 13 and below as shown. Regarding Android 14+ or higher, I am still working on providing that; it may be available in future updates. 
 
 ---
