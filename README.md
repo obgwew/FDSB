@@ -1,6 +1,8 @@
 ![FDSB.png](./main_app/icons/FDSB.png)
   <p>
     <img src="https://img.shields.io/badge/version-2.4.1-blue.svg?cacheSeconds=2592000" alt="Version" />
+    <img alt="License" src="https://img.shields.io/badge/Source-Apache%202.0-0877d2?style=for-the-badge" />
+    <img alt="Status" src="https://img.shields.io/badge/Status-Alpha-orange?style=for-the-badge" />
   </p>
 
 # FDSB - Free Design Studio Bot's
