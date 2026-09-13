@@ -42,7 +42,9 @@
 
 7. Return to the main interface and press Start to run your bot.
 > [!CAUTION]
-> The app does not run in the background. The user interface must remain open/visible, or you must use an external device to keep the bot online 24/7.
+> The application runs in the background, but with the conditions of disabling battery optimization and removing network restrictions imposed on the program.
+> [!CAUTION]
+> These settings work on Android 13 and below as shown. Regarding Android 14+ or higher, I am still working on providing that; it may be available in future updates. 
 
 ---
 
