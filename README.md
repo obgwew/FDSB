@@ -69,7 +69,7 @@
 
   - Alpha: 1.0.0 to 2.x.x(now)
 
-- **1.0.0** — Initial Alfa release
+- **1.0.0** — Initial Alpha release
   - New interface
   - New language (FDScript) Gen 0
   - New control mechanism
