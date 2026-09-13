@@ -1,7 +1,7 @@
 ![FDSB.png](./main_app/icons/FDSB.png)
   <p>
-  <img src="https://img.shields.io/badge/Version-2.4.1-blue?style=for-the-badge" alt="Version" />
-  <img src="https://img.shields.io/badge/Source-AGPL--3.0-blue?style=for-the-badge" alt="License" />
+         <img src="https://img.shields.io/badge/Version-2.4.1-blue?style=for-the-badge" alt="Version" />
+         <img src="https://img.shields.io/badge/Source-AGPL--3.0-blue?style=for-the-badge" alt="License" />
   <img src="https://img.shields.io/badge/Status-Alpha-orange?style=for-the-badge" alt="Status" />
 </p>
 
