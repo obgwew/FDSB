@@ -130,6 +130,7 @@
   - Some Fixed commands
   - Increased stability
   - Smooth control
+  - add more error to fix Later :)
 
 - **2.2.4** - Update Extensions
   - Added 30+ new commands to FDScript
