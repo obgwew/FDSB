@@ -8,7 +8,7 @@
 
 # FDSB - Free Design Studio Bot's
 
-> Build and run Discord bots locally using FDScript — a lightweight scripting language designed specifically for this tool.
+> Build and run Discord bots locally using FDScript — a lightweight, high-level DSL/DSLH specifically designed for this purpose.
 
 ---
 
