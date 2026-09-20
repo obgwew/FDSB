@@ -181,10 +181,8 @@
 
 ---
 
-**Donation:** 
-<p>
-<iframe src="https://github.com/sponsors/obgwew/card" title="Sponsor obgwew" height="225" width="600" style="border: 0;"></iframe>
-</p>
+**Donation:** [![Sponsor obgwew](https://img.shields.io/badge/Sponsor-obgwew-ea4aaa?style=for-the-badge&logo=github&logoColor=white)](https://github.com/sponsors/obgwew)
+
 
 ---
 
