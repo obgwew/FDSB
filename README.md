@@ -174,7 +174,7 @@
   - some fixed errors of andriod and notifications
   - some fixed commands
 
-- **2.4.2** - more fixed
+- **2.4.2** - More fixed
   - add more vars/channels commands
   - FDScript gen 2.5 development
   - add animtion ui
