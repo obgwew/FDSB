@@ -1,0 +1,35 @@
+<dash>
+name: $modifyChannel
+desc: Ändert eine oder mehrere Eigenschaften eines Serverkanals.
+category: Kanalverwaltung
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: $modifyChannel bearbeitet einen Kanal im aktuellen Server. Das erforderliche erste Argument wählt den Kanal aus; die übrigen Argumente sind positionsgebunden und können Name, Thema, NSFW-Einstellung, Position und Kategorie aktualisieren. Lasse ein optionales Argument weg oder leer, damit die entsprechende Eigenschaft unverändert bleibt.
+</block>
+
+<block type="code" title="Syntax">
+text: $modifyChannel[Channel ID; (Channel Name; Topic; Make NSFW?; Position; Category ID)]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $modifyChannel[123456789012345678; Announcements; Welcome messages; no; 2; 987654321012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: Der Befehl muss in einem Server ausgeführt werden, und der Bot benötigt die Berechtigung, den Kanal zu verwalten. Namen dürfen höchstens 100 Zeichen und Themen höchstens 1024 Zeichen lang sein. Eine Kategorie kann keiner anderen Kategorie zugeordnet werden.
+</block>
+
+<block type="callout" kind="note">
+text: Verwende für den NSFW-Wert yes, no, true oder false. Verwende im Kategoriefeld none, 0 oder null, um eine Kategorie zu entfernen. Im aktuellen Interpreter ist dies ein eigenständiger Befehl; sein Inline-Resolver führt die Nebenwirkung nicht aus.
+</block>
+</dash>
+
+<details>
+syntax: $modifyChannel[Channel ID; (Channel Name; Topic; Make NSFW?; Position; Category ID)]
+param: channelID|snowflake|Erforderlich|Die ID oder Erwähnung des zu ändernden Kanals
+param: name|text|Optional|Der neue Kanalname
+param: topic|text|Optional|Das neue Thema; none entfernt es
+param: nsfw|text|Optional|Ob der Kanal NSFW ist: yes, no, true oder false
+param: position|integer|Optional|Die neue Kanalposition
+param: categoryID|snowflake|Optional|Die ID der Zielkategorie; none, 0 oder null entfernt sie
+</details>

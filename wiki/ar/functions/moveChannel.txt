@@ -1,0 +1,31 @@
+<dash>
+name: $moveChannel
+desc: ينقل قناة إلى فئة في السيرفر.
+category: إدارة القنوات
+
+<block type="text" title="كيف تعمل الدالة؟">
+text: $moveChannel ينقل قناة عادية موجودة إلى الفئة التي يحددها الوسيط الثاني. يجب أن يكون المعرّفان بصيغة snowflake رقمية داخل السيرفر الحالي. إذا كانت القناة موجودة بالفعل في تلك الفئة، يسجل الأمر عدم حدوث تغيير ولا يرسل أي طلب إلى ديسكورد.
+</block>
+
+<block type="code" title="الصيغة">
+text: $moveChannel[channel ID; new category ID]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $moveChannel[123456789012345678; 987654321012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: يجب أن يعمل الأمر داخل سيرفر. يجب أن تكون القناة الهدف قناة عادية، وأن تكون الوجهة فئة، وأن يملك البوت صلاحية إدارة القنوات. لا تقبل إشارات المنشن في التنفيذ الحالي.
+</block>
+
+<block type="callout" kind="note">
+text: لا يمكن نقل الفئات إلى فئة أخرى. في المفسر الحالي، هذا الأمر متاح في صيغته المستقلة فقط لأن محلّله المضمّن لا ينفذ الأثر الجانبي.
+</block>
+</dash>
+
+<details>
+syntax: $moveChannel[channel ID; new category ID]
+param: channelID|snowflake|مطلوب|المعرّف الرقمي للقناة العادية المراد نقلها
+param: categoryID|snowflake|مطلوب|المعرّف الرقمي لفئة الوجهة
+</details>

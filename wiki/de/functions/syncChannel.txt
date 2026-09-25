@@ -1,0 +1,30 @@
+<dash>
+name: $syncChannel
+desc: Synchronisiert die Berechtigungen eines Kanals mit seiner Kategorie.
+category: Kanalverwaltung
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: Ohne Argument zielt $syncChannel auf den Kanal, in dem das Skript ausgelöst wurde. Mit einem Argument zielt es auf den durch die numerische ID bezeichneten Kanal. Der Kanal muss ein normaler Kanal sein, der zu einer Kategorie gehört. Sind die Berechtigungen bereits synchronisiert, protokolliert der Befehl einen No-op.
+</block>
+
+<block type="code" title="Syntax">
+text: $syncChannel[(channel ID or mention)]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $syncChannel[123456789012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: Der Befehl muss in einem Server ausgeführt werden, und der Bot benötigt die Berechtigung, Kanal- und Rollenberechtigungen zu verwalten. Kategorien können nicht direkt synchronisiert werden.
+</block>
+
+<block type="callout" kind="note">
+text: Im aktuellen Interpreter ist dies ein eigenständiger Befehl. Sein Inline-Resolver gibt einen leeren Wert zurück und führt die Synchronisierung nicht aus.
+</block>
+</dash>
+
+<details>
+syntax: $syncChannel[(channel ID or mention)]
+param: channelID|snowflake|Optional|Der zu synchronisierende Kanal; Standard ist der aktuelle Kanal
+</details>

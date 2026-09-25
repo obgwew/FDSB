@@ -1,0 +1,32 @@
+<dash>
+name: $getUserVar
+desc: Ruft eine persistente Variable mit Benutzer- und Serverbezug ab.
+category: Variablen
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: $getUserVar prüft die unter dem Schlüssel guild_id:user_id gespeicherte benutzerbezogene Überschreibung. Ist diese Überschreibung leer oder nicht vorhanden, greift der Befehl auf die globale Variable zurück. Mit einem Argument werden der auslösende Autor und der aktuelle Server verwendet; mit zwei Argumenten wird eine Benutzer-ID ausgewählt; mit drei Argumenten werden sowohl die Benutzer- als auch die Server-ID ausgewählt.
+</block>
+
+<block type="code" title="Syntax">
+text: $getUserVar[name; (user_id); (guild_id)]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $getUserVar[points; 123456789012345678]
+</block>
+
+<block type="callout" kind="important">
+text: Wenn die globale Variable nicht existiert, legt der Befehl einen Platzhaltereintrag sowie bei Bedarf den benutzerbezogenen Eintrag an und bricht das Skript dann ab. Definiere zuerst die globale Variable.
+</block>
+
+<block type="callout" kind="note">
+text: Der Getter kann inline oder als eigenständige Anweisung verwendet werden. Der Standardbenutzer ist der auslösende Autor, nicht der Bot.
+</block>
+</dash>
+
+<details>
+syntax: $getUserVar[name; (user_id); (guild_id)]
+param: name|text|Erforderlich|Der Name der abzurufenden Variable
+param: userID|text|Optional|Die Benutzer-ID, deren benutzerbezogener Wert gelesen werden soll; Standard ist der auslösende Autor
+param: guildID|text|Optional|Die Server-ID; Standard ist der aktuelle Server
+</details>

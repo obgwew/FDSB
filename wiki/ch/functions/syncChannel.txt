@@ -1,0 +1,30 @@
+<dash>
+name: $syncChannel
+desc: 同步频道的权限与其分类的权限。
+category: 频道管理
+
+<block type="text" title="命令如何工作？">
+text: 不带参数时，$syncChannel 针对脚本被触发所在的频道。带一个参数时，针对由数字 ID 标识的频道。频道必须是属于某个分类的普通频道。如果权限已经同步，命令会记录一次无操作。
+</block>
+
+<block type="code" title="语法">
+text: $syncChannel[(channel ID or mention)]
+</block>
+
+<block type="code" title="可复制示例">
+text: $syncChannel[123456789012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: 该命令必须在服务器中运行，且机器人需要拥有管理频道和角色权限的权限。分类不能直接同步。
+</block>
+
+<block type="callout" kind="note">
+text: 在当前解释器中，这是一个独立命令。其内联解析器会返回空值，不会执行同步。
+</block>
+</dash>
+
+<details>
+syntax: $syncChannel[(channel ID or mention)]
+param: channelID|snowflake|Optional|要同步的频道；默认为当前频道
+</details>

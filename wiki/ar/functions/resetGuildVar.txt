@@ -1,0 +1,27 @@
+<dash>
+name: $resetGuildVar
+desc: يزيل تجاوز متغير بنطاق السيرفر.
+category: المتغيرات
+
+<block type="text" title="كيف تعمل الدالة؟">
+text: $resetGuildVar يحذف القيمة الخاصة بالسيرفر المحفوظة لاسم متغير. لا يحذف تعريف المتغير العام ولا يغيّره. مع وسيط واحد، يُستخدم السيرفر الحالي؛ ومع وسيطين، يحدد الوسيط الثاني معرّف السيرفر.
+</block>
+
+<block type="code" title="الصيغة">
+text: $resetGuildVar[name; (guild_id)]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $resetGuildVar[welcomeMessage; 123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: إذا كان تجاوز السيرفر غير موجود بالفعل، يكون الأمر عملية بلا أثر ويسجل هذه الحالة في سجل التنفيذ.
+</block>
+</dash>
+
+<details>
+syntax: $resetGuildVar[name; (guild_id)]
+param: name|text|مطلوب|اسم المتغير الذي يجب إزالة تجاوز السيرفر الخاص به
+param: guildID|text|اختياري|معرّف السيرفر؛ إذا لم يحدد، يُستخدم السيرفر الحالي
+</details>

@@ -1,0 +1,35 @@
+<dash>
+name: $modifyChannel
+desc: 更改服务器频道的一个或多个属性。
+category: 频道管理
+
+<block type="text" title="命令如何工作？">
+text: $modifyChannel 编辑当前服务器中的频道。必需的第一个参数选择频道；其余参数按位置排列，可以更新名称、主题、NSFW 设置、位置和分类。省略可选参数或将其留空，会使该属性保持不变。
+</block>
+
+<block type="code" title="语法">
+text: $modifyChannel[Channel ID; (Channel Name; Topic; Make NSFW?; Position; Category ID)]
+</block>
+
+<block type="code" title="可复制示例">
+text: $modifyChannel[123456789012345678; Announcements; Welcome messages; no; 2; 987654321012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: 该命令必须在服务器中运行，并且机器人需要管理频道的权限。名称最多 100 个字符，主题最多 1024 个字符。分类不能分配给另一个分类。
+</block>
+
+<block type="callout" kind="note">
+text: NSFW 值请使用 yes、no、true 或 false。分类字段中使用 none、0 或 null 可移除分类。在当前解释器中，这是一个独立命令；其内联解析器不会执行副作用。
+</block>
+</dash>
+
+<details>
+syntax: $modifyChannel[Channel ID; (Channel Name; Topic; Make NSFW?; Position; Category ID)]
+param: channelID|snowflake|Required|要修改的频道 ID 或提及
+param: name|text|Optional|新的频道名称
+param: topic|text|Optional|新的主题；none 会清除主题
+param: nsfw|text|Optional|频道是否为 NSFW：yes、no、true 或 false
+param: position|integer|Optional|新的频道位置
+param: categoryID|snowflake|Optional|目标分类 ID；none、0 或 null 会清除分类
+</details>

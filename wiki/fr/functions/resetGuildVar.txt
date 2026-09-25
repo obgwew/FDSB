@@ -1,0 +1,27 @@
+<dash>
+name: $resetGuildVar
+desc: Supprime la valeur spécifique au serveur d'une variable.
+category: Variables
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: $resetGuildVar supprime la valeur spécifique au serveur stockée pour un nom de variable. Il ne supprime ni ne modifie la définition de la variable globale. Avec un argument, le serveur actuel est utilisé ; avec deux arguments, le deuxième argument sélectionne l'ID du serveur.
+</block>
+
+<block type="code" title="Syntaxe">
+text: $resetGuildVar[name; (guild_id)]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $resetGuildVar[welcomeMessage; 123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: Si la valeur spécifique au serveur est déjà absente, la commande est une opération sûre sans effet et enregistre cet état dans le journal d'exécution.
+</block>
+</dash>
+
+<details>
+syntax: $resetGuildVar[name; (guild_id)]
+param: name|text|Requis|Le nom de la variable dont la valeur spécifique au serveur doit être supprimée
+param: guildID|text|Optionnel|L'ID du serveur ; par défaut, le serveur actuel
+</details>

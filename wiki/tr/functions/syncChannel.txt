@@ -1,0 +1,30 @@
+<dash>
+name: $syncChannel
+desc: Bir kanalın izinlerini kategorisinin izinleriyle senkronize eder.
+category: Kanal Yönetimi
+
+<block type="text" title="Komut nasıl çalışır?">
+text: Argüman verilmediğinde $syncChannel, betiğin tetiklendiği kanalı hedefler. Tek argümanla sayısal kimlikle belirtilen kanalı hedefler. Kanal, bir kategoriye ait normal bir kanal olmalıdır. İzinler zaten eşitlenmişse komut, işlem yapılmadığını günlüğe kaydeder.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $syncChannel[(channel ID or mention)]
+</block>
+
+<block type="code" title="Kopyalamaya Hazır Örnek">
+text: $syncChannel[123456789012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: Komut bir sunucuda çalışmalı ve botun kanal ve rol izinlerini yönetme izni olmalıdır. Kategoriler doğrudan eşitlenemez.
+</block>
+
+<block type="callout" kind="note">
+text: Mevcut yorumlayıcıda bu, tek başına kullanılan bir komuttur. Satır içi çözümleyicisi boş bir değer döndürür ve eşitleme işlemini gerçekleştirmez.
+</block>
+</dash>
+
+<details>
+syntax: $syncChannel[(channel ID or mention)]
+param: channelID|snowflake|Optional|Eşitlenecek kanal; varsayılan olarak geçerli kanal
+</details>

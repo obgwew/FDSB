@@ -1,0 +1,33 @@
+<dash>
+name: $call
+desc: يستدعي دالة FDScript معرّفة مسبقًا.
+category: التحكم في التدفق
+
+<block type="text" title="كيف تعمل الدالة؟">
+text: $call ينفذ دالة معرّفة باستخدام $func. يتم جمع أجسام الدوال قبل التنفيذ العادي، وينفّذ الاستدعاء جسم الدالة باستخدام سياق السكربت الحالي. يتم التحقق من اسم الدالة الثابت قبل التنفيذ؛ بينما يتم التحقق من الاسم الديناميكي عند تشغيل الاستدعاء.
+</block>
+
+<block type="code" title="الصيغة">
+text: $call[name]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $func[greet]
+$sendMessage[Hello from the function]
+$endfunc
+$call[greet]
+</block>
+
+<block type="callout" kind="important">
+text: تتشارك الاستدعاءات سياق التنفيذ الحالي ولا تنشئ نطاق متغيرات محليًا. الحد الأقصى لعمق الاستدعاء هو 50؛ وتُرفض الاستدعاءات التكرارية التي تتجاوز هذا الحد.
+</block>
+
+<block type="callout" kind="note">
+text: يجب تعريف الدالة باستخدام $endfunc مطابق. يمكن أيضًا توسيع $call داخل وسائط الأوامر الأخرى عندما يكون جزءًا من تعبير FDScript أكبر.
+</block>
+</dash>
+
+<details>
+syntax: $call[name]
+param: name|text|مطلوب|اسم دالة معرّفة باستخدام $func ومغلقة باستخدام $endfunc
+</details>

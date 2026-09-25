@@ -1,0 +1,28 @@
+<dash>
+name: $resetUserVar
+desc: صارف کے لیے مخصوص متغیر کا اوور رائیڈ حذف کرتا ہے۔
+category: متغیرات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $resetUserVar `guild_id:user_id` کلید کے لیے محفوظ اوور رائیڈ حذف کرتا ہے۔ یہ عالمی متغیر کی تعریف حذف یا تبدیل نہیں کرتا۔ ایک آرگومینٹ کے ساتھ متحرک کرنے والا مصنف اور موجودہ سرور استعمال ہوتے ہیں؛ دو آرگومینٹس صارف کی ID منتخب کرتے ہیں؛ تین آرگومینٹس دونوں ID منتخب کرتے ہیں۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $resetUserVar[name; (user_id); (guild_id)]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $resetUserVar[points; 123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: اگر اوور رائیڈ پہلے سے موجود نہیں ہے تو کمانڈ محفوظ طور پر کوئی کارروائی نہیں کرتی اور یہ حالت اجرا کے لاگ میں درج کرتی ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $resetUserVar[name; (user_id); (guild_id)]
+param: name|text|لازمی|جس متغیر کا صارف اوور رائیڈ حذف کرنا ہے
+param: userID|text|اختیاری|صارف کی ID؛ ڈیفالٹ متحرک کرنے والا مصنف
+param: guildID|text|اختیاری|سرور کی ID؛ ڈیفالٹ موجودہ سرور
+</details>

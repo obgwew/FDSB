@@ -1,0 +1,31 @@
+<dash>
+name: $moveChannel
+desc: 将频道移动到服务器分类。
+category: 频道管理
+
+<block type="text" title="命令如何工作？">
+text: $moveChannel 将现有的普通频道移动到第二个参数标识的分类。两个 ID 都必须是当前服务器中的数字 snowflake。如果频道已经位于该分类中，命令会记录一次无操作，并且不会发出 Discord 请求。
+</block>
+
+<block type="code" title="语法">
+text: $moveChannel[channel ID; new category ID]
+</block>
+
+<block type="code" title="可复制示例">
+text: $moveChannel[123456789012345678; 987654321012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: 该命令必须在服务器中运行。目标必须是普通频道，目标位置必须是分类，并且机器人需要管理频道的权限。当前实现不接受提及。
+</block>
+
+<block type="callout" kind="note">
+text: 分类不能移动到另一个分类中。在当前解释器中，此命令只能独立使用，因为其内联解析器不会执行副作用。
+</block>
+</dash>
+
+<details>
+syntax: $moveChannel[channel ID; new category ID]
+param: channelID|snowflake|Required|要移动的普通频道的数字 ID
+param: categoryID|snowflake|Required|目标分类的数字 ID
+</details>

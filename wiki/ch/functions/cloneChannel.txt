@@ -1,0 +1,31 @@
+<dash>
+name: $cloneChannel
+desc: 克隆现有的服务器频道。
+category: 频道管理
+
+<block type="text" title="命令如何工作？">
+text: $cloneChannel 在当前服务器中创建频道的副本。源频道可以是文本、语音、分类、直播或论坛频道。可选的第二个参数用于指定新频道名称；否则 Discord 会保留源频道的名称。该命令会发送新创建频道的提及。
+</block>
+
+<block type="code" title="语法">
+text: $cloneChannel[channel ID or channel mention; (new name)]
+</block>
+
+<block type="code" title="可复制示例">
+text: $cloneChannel[<#123456789012345678>; Archive]
+</block>
+
+<block type="callout" kind="warning">
+text: 该命令必须在服务器中运行，并且机器人需要“Manage Channels”（管理频道）权限。源频道必须能在机器人或当前服务器的缓存中找到。
+</block>
+
+<block type="callout" kind="note">
+text: 在当前解释器中，这是一个独立命令。不应内联使用：其解析器会返回空值，而不会执行副作用。
+</block>
+</dash>
+
+<details>
+syntax: $cloneChannel[channel ID or channel mention; (new name)]
+param: channelID|text|Required|要克隆的频道的数字 ID 或频道提及
+param: newName|text|Optional|克隆频道的名称
+</details>

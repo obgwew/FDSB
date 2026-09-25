@@ -1,0 +1,27 @@
+<dash>
+name: $endfunc
+desc: 关闭 FDScript 函数块。
+category: 流程控制
+
+<block type="text" title="命令如何工作？">
+text: $endfunc 关闭最近打开的 $func 块。它标记可重用函数定义的结束，并且必须与 $func 成对出现。
+</block>
+
+<block type="code" title="语法">
+text: $endfunc
+</block>
+
+<block type="code" title="可复制示例">
+text: $func[ping]
+$sendMessage[Pong]
+$endfunc
+</block>
+
+<block type="callout" kind="warning">
+text: 如果 $endfunc 没有匹配的 $func，或两者之间存在其他不同的未闭合块，就会产生脚本错误。
+</block>
+</dash>
+
+<details>
+syntax: $endfunc
+</details>

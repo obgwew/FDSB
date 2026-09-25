@@ -1,0 +1,31 @@
+<dash>
+name: $modifyRolePerms
+desc: Включает или отключает права роли сервера.
+category: Модерация
+
+<block type="text" title="Как работает команда?">
+text: $modifyRolePerms изменяет выбранные права роли. Чтобы включить право, поставьте перед ним знак +, чтобы отключить — знак -. Знак необязателен, по умолчанию используется +. Специальный идентификатор all включает или отключает весь набор прав. Права, не перечисленные в вызове, остаются без изменений.
+</block>
+
+<block type="code" title="Синтаксис">
+text: $modifyRolePerms[role ID or role mention; permission +/-; ...]
+</block>
+
+<block type="code" title="Готовый пример для копирования">
+text: $modifyRolePerms[<@&123456789012345678>; +send_messages; -connect]
+</block>
+
+<block type="callout" kind="warning">
+text: Команду можно использовать только на сервере. У бота должно быть разрешение «Manage Roles», а целевая роль должна находиться ниже его самой высокой роли.
+</block>
+
+<block type="callout" kind="note">
+text: Для названий прав используются поддерживаемые интерпретатором имена Discord в формате snake_case. Это самостоятельная команда; её текущий встроенный обработчик возвращает пустое значение.
+</block>
+</dash>
+
+<details>
+syntax: $modifyRolePerms[role ID or role mention; permission +/-; ...]
+param: roleID|snowflake|Обязательный|Числовой ID роли или её упоминание
+param: permissions|text|Обязательный|Одно или несколько названий прав с префиксами + или -; all изменяет весь набор
+</details>

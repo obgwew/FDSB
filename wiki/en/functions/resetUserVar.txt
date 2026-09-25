@@ -1,0 +1,28 @@
+<dash>
+name: $resetUserVar
+desc: Removes a user-scoped variable override.
+category: Variables
+
+<block type="text" title="How does the command work?">
+text: $resetUserVar deletes the override stored for a guild_id:user_id key. It does not delete or change the global variable definition. With one argument, the triggering author and current server are used; two arguments select a user ID; three arguments select both IDs.
+</block>
+
+<block type="code" title="Syntax">
+text: $resetUserVar[name; (user_id); (guild_id)]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $resetUserVar[points; 123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: If the override is already absent, the command is a safe no-op and records that state in the execution log.
+</block>
+</dash>
+
+<details>
+syntax: $resetUserVar[name; (user_id); (guild_id)]
+param: name|text|Required|The variable name whose user override should be removed
+param: userID|text|Optional|The user ID; defaults to the triggering author
+param: guildID|text|Optional|The server ID; defaults to the current server
+</details>

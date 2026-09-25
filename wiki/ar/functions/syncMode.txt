@@ -1,0 +1,31 @@
+<dash>
+name: $syncMode
+desc: يضع علامة على كتلة لتنفيذ FDScript متزامن.
+category: التحكم في التدفق
+
+<block type="text" title="كيف تعمل الدالة؟">
+text: $syncMode مخصص لتشغيل الأوامر التي تليه، حتى نهاية الكتلة الحالية، كدفعة واحدة متزامنة. يعامل محرك الدفعات حدود تدفق التحكم واستدعاءات الدوال وإعادة توجيه القناة وآليات الكبح والحمايات ورموز الإغلاق كحواجز.
+</block>
+
+<block type="code" title="الصيغة">
+text: $syncMode
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $syncMode
+$sendMessage[First step]
+$sendMessage[Second step]
+</block>
+
+<block type="callout" kind="warning">
+text: في المفسر الحالي، لا يحدد $syncMode سوى علم سياق التنفيذ ولا يسجل سوى أن المزامنة فُعّلت. لم يتصل محرك الدفعات الموجود في sync_mode_ops.py بمسار التنفيذ الرئيسي بعد، لذلك لا تزال الأوامر التي تليه تعمل بالتسلسل.
+</block>
+
+<block type="callout" kind="note">
+text: اعتبر هذه الصفحة الواجهة المقصودة. لا تعتمد على التنفيذ المتزامن أو فشل الدفعة بالكامل أو لا شيء حتى يكتمل تكامل المفسر.
+</block>
+</dash>
+
+<details>
+syntax: $syncMode
+</details>

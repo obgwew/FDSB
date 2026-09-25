@@ -1,0 +1,28 @@
+<dash>
+name: $func
+desc: دوبارہ استعمال کیے جانے والی FDScript فنکشن کی تعریف شروع کرتا ہے۔
+category: بہاؤ کنٹرول
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $func نام والا فنکشن بلاک شروع کرتا ہے۔ انٹرپریٹر مرکزی اسکرپٹ چلانے سے پہلے فنکشن کا باڈی جمع کرتا ہے اور عام اجرا کے دوران تعریف والا بلاک چھوڑ دیتا ہے۔ بلاک بند کرنے کے لیے $endfunc اور بعد میں اسے چلانے کے لیے $call استعمال کریں۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $func[name]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $func[sendWelcome]
+$sendMessage[Welcome!]
+$endfunc
+</block>
+
+<block type="callout" kind="important">
+text: ایک اسکرپٹ کے اندر فنکشن کے نام یونیک ہونے چاہئیں۔ ہر $func کے لیے ملنے والا $endfunc ہونا چاہیے، اور فنکشن کو اس کی تعریف جمع ہونے کے بعد ہی کالا جا سکتا ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $func[name]
+param: name|text|لازمی|یونیک، خالی نہ ہونے والا فنکشن کا نام
+</details>

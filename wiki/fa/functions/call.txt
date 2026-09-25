@@ -1,0 +1,33 @@
+<dash>
+name: $call
+desc: تابعی از FDScript را که قبلاً تعریف شده است فراخوانی می‌کند.
+category: کنترل جریان
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $call تابعی را که با $func تعریف شده است اجرا می‌کند. بدنه توابع پیش از اجرای معمولی جمع‌آوری می‌شوند و فراخوانی، بدنه تابع را با زمینه اجرای فعلی اسکریپت اجرا می‌کند. نام تابع ثابت پیش از اجرا بررسی می‌شود؛ نام پویا هنگام اجرای فراخوانی بررسی می‌شود.
+</block>
+
+<block type="code" title="سینتکس">
+text: $call[name]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $func[greet]
+$sendMessage[Hello from the function]
+$endfunc
+$call[greet]
+</block>
+
+<block type="callout" kind="important">
+text: فراخوانی‌ها زمینه اجرای فعلی را به اشتراک می‌گذارند و دامنه متغیر محلی ایجاد نمی‌کنند. حداکثر عمق فراخوانی ۵۰ است؛ فراخوانی‌های بازگشتی فراتر از این حد رد می‌شوند.
+</block>
+
+<block type="callout" kind="note">
+text: یک تابع باید با $endfunc متناظر تعریف شود. $call همچنین می‌تواند در آرگومان‌های سایر دستورات، وقتی بخشی از یک عبارت بزرگ‌تر FDScript است، گسترش یابد.
+</block>
+</dash>
+
+<details>
+syntax: $call[name]
+param: name|text|الزامی|نام تابعی که با $func تعریف و با $endfunc بسته شده است
+</details>

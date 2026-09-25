@@ -1,0 +1,33 @@
+<dash>
+name: $call
+desc: Wywołuje wcześniej zdefiniowaną funkcję FDScript.
+category: Sterowanie przepływem
+
+<block type="text" title="Jak działa ta komenda?">
+text: $call wywołuje funkcję zdefiniowaną za pomocą $func. Ciała funkcji są zbierane przed normalnym wykonaniem, a wywołanie uruchamia ciało w bieżącym kontekście skryptu. Dosłowna nazwa funkcji jest sprawdzana przed wykonaniem; dynamiczna nazwa jest sprawdzana w momencie wywołania.
+</block>
+
+<block type="code" title="Składnia">
+text: $call[name]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $func[greet]
+$sendMessage[Hello from the function]
+$endfunc
+$call[greet]
+</block>
+
+<block type="callout" kind="important">
+text: Wywołania dzielą bieżący kontekst wykonania i nie tworzą lokalnego zakresu zmiennych. Maksymalna głębokość wywołań wynosi 50; wywołania rekurencyjne przekraczające ten limit są odrzucane.
+</block>
+
+<block type="callout" kind="note">
+text: Funkcja musi być zdefiniowana za pomocą $func i zamknięta pasującym $endfunc. $call można także rozwinąć wewnątrz innych argumentów komend, gdy jest częścią większego wyrażenia FDScript.
+</block>
+</dash>
+
+<details>
+syntax: $call[name]
+param: name|text|Required|Nazwa funkcji zdefiniowanej za pomocą $func i zamkniętej przez $endfunc
+</details>

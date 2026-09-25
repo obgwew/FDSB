@@ -1,0 +1,30 @@
+<dash>
+name: $userBanner
+desc: صارف کے پروفائل بینر کا URL واپس کرتا ہے۔
+category: معلومات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: کوئی آرگومینٹ نہ ہونے پر $userBanner بوٹ صارف کا بینر واپس کرتا ہے۔ صارف کی ID یا مینشن کے ساتھ یہ اُس صارف کا بینر واپس کرتا ہے۔ اینیمیٹڈ بنر GIF URL اور دیگر بنر PNG URL کے طور پر واپس کیے جاتے ہیں۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $userBanner[(user_id)]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $userBanner[123456789012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: صارف کے پاس پروفائل بینر ہونا چاہیے اور بوٹ اس صارف کو حاصل کر سکنا چاہیے۔ تلاش سے پہلے اختیاری ID سے غیر ہندسوں کے حروف ہٹا دیے جاتے ہیں۔
+</block>
+
+<block type="callout" kind="note">
+text: ان لائن شکل صرف کیش شدہ صارف استعمال کرتی ہے۔ اسٹینڈ اَلون شکل ایسے صارف کو بھی حاصل کر سکتی ہے جو موجودہ وقت میں کیش میں نہیں ہے۔ ڈیفالٹ ہمیشہ بوٹ صارف ہے، متحرک کرنے والا مصنف نہیں۔
+</block>
+</dash>
+
+<details>
+syntax: $userBanner[(user_id)]
+param: userID|snowflake|اختیاری|صارف کی ID یا مینشن؛ ڈیفالٹ بوٹ صارف
+</details>

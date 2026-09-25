@@ -1,0 +1,31 @@
+<dash>
+name: $moveChannel
+desc: Moves a channel into a server category.
+category: Channel Management
+
+<block type="text" title="How does the command work?">
+text: $moveChannel moves an existing regular channel into the category identified by the second argument. Both IDs must be numeric snowflakes in the current server. If the channel is already in that category, the command logs a no-op and makes no Discord request.
+</block>
+
+<block type="code" title="Syntax">
+text: $moveChannel[channel ID; new category ID]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $moveChannel[123456789012345678; 987654321012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: The command must run in a server. The target must be a regular channel, the destination must be a category, and the bot needs permission to manage channels. Mentions are not accepted by the current implementation.
+</block>
+
+<block type="callout" kind="note">
+text: Categories cannot be moved into another category. In the current interpreter this command is standalone-only because its inline resolver does not execute the side effect.
+</block>
+</dash>
+
+<details>
+syntax: $moveChannel[channel ID; new category ID]
+param: channelID|snowflake|Required|The numeric ID of the regular channel to move
+param: categoryID|snowflake|Required|The numeric ID of the destination category
+</details>

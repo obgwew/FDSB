@@ -1,0 +1,31 @@
+<dash>
+name: $modifyRolePerms
+desc: Włącza lub wyłącza uprawnienia roli na serwerze.
+category: Moderacja
+
+<block type="text" title="Jak działa ta komenda?">
+text: $modifyRolePerms zmienia wybrane uprawnienia roli. Dodaj + przed uprawnieniem, aby je włączyć, lub -, aby je wyłączyć. Znak jest opcjonalny i domyślnie wynosi +. Specjalne uprawnienie all włącza lub wyłącza cały zestaw uprawnień. Uprawnienia niewymienione w wywołaniu pozostają bez zmian.
+</block>
+
+<block type="code" title="Składnia">
+text: $modifyRolePerms[role ID or role mention; permission +/-; ...]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $modifyRolePerms[<@&123456789012345678>; +send_messages; -connect]
+</block>
+
+<block type="callout" kind="warning">
+text: Komendę można użyć tylko na serwerze. Bot musi mieć uprawnienie „Zarządzanie rolami”, a rola docelowa musi znajdować się poniżej najwyższej roli bota.
+</block>
+
+<block type="callout" kind="note">
+text: Nazwy uprawnień to obsługiwane przez interpreter nazwy Discorda w formacie snake_case. Jest to komenda samodzielna; jej bieżący resolver używany w tekście zwraca pustą wartość.
+</block>
+</dash>
+
+<details>
+syntax: $modifyRolePerms[role ID or role mention; permission +/-; ...]
+param: roleID|snowflake|Required|Numeryczne ID lub wzmianka roli
+param: permissions|text|Required|Jedna lub więcej nazw uprawnień z prefiksem + lub -; all zmienia cały zestaw
+</details>

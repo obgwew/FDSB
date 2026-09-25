@@ -1,0 +1,27 @@
+<dash>
+name: $resetGuildVar
+desc: Usuwa nadpisanie zmiennej specyficzne dla serwera.
+category: Zmienne
+
+<block type="text" title="Jak działa ta komenda?">
+text: $resetGuildVar usuwa wartość specyficzną dla serwera zapisaną pod nazwą zmiennej. Nie usuwa ani nie zmienia definicji zmiennej globalnej. Z jednym argumentem używany jest bieżący serwer; z dwoma argumentami drugi argument wybiera ID serwera.
+</block>
+
+<block type="code" title="Składnia">
+text: $resetGuildVar[name; (guild_id)]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $resetGuildVar[welcomeMessage; 123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: Jeśli nadpisanie serwera już nie istnieje, komenda bezpiecznie kończy się bez efektu i zapisuje ten stan w dzienniku wykonania.
+</block>
+</dash>
+
+<details>
+syntax: $resetGuildVar[name; (guild_id)]
+param: name|text|Required|Nazwa zmiennej, której nadpisanie dla serwera należy usunąć
+param: guildID|text|Optional|ID serwera; domyślnie używany jest bieżący serwer
+</details>

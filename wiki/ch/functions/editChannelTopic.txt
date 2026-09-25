@@ -1,0 +1,31 @@
+<dash>
+name: $editChannelTopic
+desc: 更改服务器频道的主题。
+category: 频道管理
+
+<block type="text" title="命令如何工作？">
+text: 使用一个参数时，$editChannelTopic 会更改脚本被触发所在频道的主题。使用两个参数时，它会更改由第一个参数标识的频道的主题。空白或仅包含空白字符的主题会清除当前主题。
+</block>
+
+<block type="code" title="语法">
+text: $editChannelTopic[(channel ID or mention); new topic]
+</block>
+
+<block type="code" title="可复制示例">
+text: $editChannelTopic[<#123456789012345678>; Welcome to the community!]
+</block>
+
+<block type="callout" kind="warning">
+text: 该命令只能在服务器中工作。目标必须属于当前服务器、支持主题，并且机器人必须能够编辑它。主题不能超过 1024 个字符。
+</block>
+
+<block type="callout" kind="note">
+text: 在当前解释器中，这是一个独立命令。其内联解析器会返回空值，而不会执行副作用。
+</block>
+</dash>
+
+<details>
+syntax: $editChannelTopic[(channel ID or mention); new topic]
+param: channelID|text|Optional|目标频道 ID 或提及；使用一个参数而省略时，使用当前频道
+param: newTopic|text|Required|替换后的主题，最多 1024 个字符
+</details>

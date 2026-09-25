@@ -1,0 +1,31 @@
+<dash>
+name: $editChannelTopic
+desc: Ändert das Thema eines Serverkanals.
+category: Kanalverwaltung
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: Mit einem Argument ändert $editChannelTopic das Thema des Kanals, in dem das Skript ausgelöst wurde. Mit zwei Argumenten ändert es das Thema des durch das erste Argument bezeichneten Kanals. Ein leeres oder nur aus Leerraum bestehendes Thema löscht das aktuelle Thema.
+</block>
+
+<block type="code" title="Syntax">
+text: $editChannelTopic[(channel ID or mention); new topic]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $editChannelTopic[<#123456789012345678>; Welcome to the community!]
+</block>
+
+<block type="callout" kind="warning">
+text: Der Befehl funktioniert nur innerhalb eines Servers. Das Ziel muss zum aktuellen Server gehören, Themen unterstützen und vom Bot bearbeitbar sein. Themen dürfen höchstens 1024 Zeichen lang sein.
+</block>
+
+<block type="callout" kind="note">
+text: Im aktuellen Interpreter ist dies ein eigenständiger Befehl. Sein Inline-Resolver gibt einen leeren Wert zurück und führt die Nebenwirkung nicht aus.
+</block>
+</dash>
+
+<details>
+syntax: $editChannelTopic[(channel ID or mention); new topic]
+param: channelID|text|Optional|Die ID oder Erwähnung des Zielkanals; wenn sie bei nur einem Argument weggelassen wird, wird der aktuelle Kanal verwendet
+param: newTopic|text|Erforderlich|Das neue Thema mit höchstens 1024 Zeichen
+</details>

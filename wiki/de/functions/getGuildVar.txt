@@ -1,0 +1,31 @@
+<dash>
+name: $getGuildVar
+desc: Ruft eine persistente Variable mit Serverbezug ab.
+category: Variablen
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: $getGuildVar sucht zuerst in der Guild-Variablendatei nach einer serverspezifischen Überschreibung. Gibt es keine Überschreibung, greift der Befehl auf die globale Variable mit demselben Namen zurück. Mit einem Argument wird die aktuelle Server-ID verwendet; mit zwei Argumenten wählt das zweite Argument die Server-ID aus.
+</block>
+
+<block type="code" title="Syntax">
+text: $getGuildVar[name; (guild_id)]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $getGuildVar[welcomeMessage]
+</block>
+
+<block type="callout" kind="important">
+text: Wenn die globale Variable nicht existiert, legt der Befehl einen Platzhaltereintrag sowie bei Bedarf den serverspezifischen Eintrag an und bricht das Skript dann mit einem Umgebungsfehler ab. Prüfe und definiere die Variable vor ihrer Verwendung.
+</block>
+
+<block type="callout" kind="note">
+text: Der Getter kann inline und als eigenständige Anweisung verwendet werden. Ein fehlender globaler Wert wird nicht stillschweigend als gültiger Wert behandelt.
+</block>
+</dash>
+
+<details>
+syntax: $getGuildVar[name; (guild_id)]
+param: name|text|Erforderlich|Der Name der abzurufenden Variable
+param: guildID|text|Optional|Die Server-ID, deren serverspezifischer Wert gelesen werden soll; Standard ist der aktuelle Server
+</details>

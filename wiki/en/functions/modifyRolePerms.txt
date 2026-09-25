@@ -1,0 +1,31 @@
+<dash>
+name: $modifyRolePerms
+desc: Enables or disables permissions on a server role.
+category: Moderation
+
+<block type="text" title="How does the command work?">
+text: $modifyRolePerms changes selected permissions on a role. Prefix a permission with + to enable it or - to disable it. A sign is optional and defaults to +. The special permission all enables or disables the complete permission set. Permissions not listed in the call remain unchanged.
+</block>
+
+<block type="code" title="Syntax">
+text: $modifyRolePerms[role ID or role mention; permission +/-; ...]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $modifyRolePerms[<@&123456789012345678>; +send_messages; -connect]
+</block>
+
+<block type="callout" kind="warning">
+text: The command can only be used inside a server. The bot needs Manage Roles permission, and the target role must be below the bot's highest role.
+</block>
+
+<block type="callout" kind="note">
+text: Permission names use Discord snake_case names supported by the interpreter. This is a standalone command; its current inline resolver returns an empty value.
+</block>
+</dash>
+
+<details>
+syntax: $modifyRolePerms[role ID or role mention; permission +/-; ...]
+param: roleID|snowflake|Required|The numeric role ID or role mention
+param: permissions|text|Required|One or more permission names with + or - prefixes; all changes the complete set
+</details>

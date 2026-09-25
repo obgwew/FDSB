@@ -1,0 +1,31 @@
+<dash>
+name: $editChannelTopic
+desc: Изменяет тему канала сервера.
+category: Управление каналами
+
+<block type="text" title="Как работает команда?">
+text: С одним аргументом $editChannelTopic изменяет тему канала, в котором был запущен скрипт. С двумя аргументами она изменяет тему канала, указанного первым аргументом. Пустая тема или тема, состоящая только из пробелов, очищает текущее значение.
+</block>
+
+<block type="code" title="Синтаксис">
+text: $editChannelTopic[(channel ID or mention); new topic]
+</block>
+
+<block type="code" title="Готовый пример для копирования">
+text: $editChannelTopic[<#123456789012345678>; Welcome to the community!]
+</block>
+
+<block type="callout" kind="warning">
+text: Команда работает только на сервере. Целевой канал должен принадлежать текущему серверу, поддерживать темы и быть доступным для редактирования ботом. Длина темы не может превышать 1024 символа.
+</block>
+
+<block type="callout" kind="note">
+text: В текущем интерпретаторе это самостоятельная команда. Её встроенный обработчик возвращает пустое значение и не выполняет побочное действие.
+</block>
+</dash>
+
+<details>
+syntax: $editChannelTopic[(channel ID or mention); new topic]
+param: channelID|text|Необязательный|ID или упоминание целевого канала; если аргумент не указан, используется текущий канал
+param: newTopic|text|Обязательный|Новая тема длиной не более 1024 символов
+</details>

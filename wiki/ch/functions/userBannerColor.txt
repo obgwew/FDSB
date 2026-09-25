@@ -1,0 +1,30 @@
+<dash>
+name: $userBannerColor
+desc: 以十六进制格式返回用户横幅的强调色。
+category: 信息
+
+<block type="text" title="命令如何工作？">
+text: 不带参数时，$userBannerColor 返回机器人用户的强调色。带用户 ID 或提及时，它会返回该用户的强调色，并将其格式化为大写的 #RRGGBB 值。
+</block>
+
+<block type="code" title="语法">
+text: $userBannerColor[(user_id)]
+</block>
+
+<block type="code" title="可复制示例">
+text: $userBannerColor[123456789012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: 用户必须设置横幅强调色，且机器人必须能够解析该用户。独立形式会将为空或不可用的结果报告为错误。
+</block>
+
+<block type="callout" kind="note">
+text: 内联形式仅使用缓存中的用户，目前将空值或其他 falsey 值视为不可用。默认值始终是机器人用户，而不是触发命令的作者。
+</block>
+</dash>
+
+<details>
+syntax: $userBannerColor[(user_id)]
+param: userID|snowflake|Optional|用户 ID 或提及；默认为机器人用户
+</details>

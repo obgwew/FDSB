@@ -1,0 +1,31 @@
+<dash>
+name: $moveChannel
+desc: یک کانال را به یک دسته‌بندی سرور منتقل می‌کند.
+category: مدیریت کانال‌ها
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $moveChannel یک کانال معمولی موجود را به دسته‌بندی مشخص‌شده با آرگومان دوم منتقل می‌کند. هر دو شناسه باید شناسه‌های عددی snowflake در سرور فعلی باشند. اگر کانال از قبل در آن دسته‌بندی باشد، دستور یک عملیات بی‌اثر را ثبت می‌کند و هیچ درخواستی به Discord ارسال نمی‌کند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $moveChannel[channel ID; new category ID]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $moveChannel[123456789012345678; 987654321012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: دستور باید در سرور اجرا شود. هدف باید یک کانال معمولی باشد، مقصد باید یک دسته‌بندی باشد و ربات باید مجوز مدیریت کانال‌ها را داشته باشد. پیاده‌سازی فعلی منشن‌ها را نمی‌پذیرد.
+</block>
+
+<block type="callout" kind="note">
+text: دسته‌بندی‌ها را نمی‌توان به دسته‌بندی دیگری منتقل کرد. در مفسر فعلی این دستور فقط به‌صورت مستقل اجرا می‌شود، زیرا حل‌گر درون‌خطی آن اثر جانبی را اجرا نمی‌کند.
+</block>
+</dash>
+
+<details>
+syntax: $moveChannel[channel ID; new category ID]
+param: channelID|snowflake|الزامی|شناسه عددی کانال معمولی که باید منتقل شود
+param: categoryID|snowflake|الزامی|شناسه عددی دسته‌بندی مقصد
+</details>

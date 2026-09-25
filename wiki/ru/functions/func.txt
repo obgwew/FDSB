@@ -1,0 +1,28 @@
+<dash>
+name: $func
+desc: Начинает определение повторно используемой функции FDScript.
+category: Управление потоком
+
+<block type="text" title="Как работает команда?">
+text: $func начинает именованный блок функции. Интерпретатор собирает тело функции до выполнения основного скрипта и пропускает блок определения во время обычного выполнения. Используйте $endfunc, чтобы закрыть блок, и $call, чтобы выполнить его позже.
+</block>
+
+<block type="code" title="Синтаксис">
+text: $func[name]
+</block>
+
+<block type="code" title="Готовый пример для копирования">
+text: $func[sendWelcome]
+$sendMessage[Welcome!]
+$endfunc
+</block>
+
+<block type="callout" kind="important">
+text: Имена функций должны быть уникальными в пределах скрипта. Каждой команде $func должна соответствовать команда $endfunc, а функцию можно вызвать только после сбора её определения.
+</block>
+</dash>
+
+<details>
+syntax: $func[name]
+param: name|text|Обязательный|Уникальное непустое имя функции
+</details>

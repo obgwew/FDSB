@@ -1,0 +1,31 @@
+<dash>
+name: $moveChannel
+desc: Déplace un canal dans une catégorie de serveur.
+category: Gestion des canaux
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: $moveChannel déplace un canal régulier existant dans la catégorie identifiée par le deuxième argument. Les deux ID doivent être des snowflakes numériques du serveur actuel. Si le canal se trouve déjà dans cette catégorie, la commande enregistre une opération sans effet et n'effectue aucune requête Discord.
+</block>
+
+<block type="code" title="Syntaxe">
+text: $moveChannel[channel ID; new category ID]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $moveChannel[123456789012345678; 987654321012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: La commande doit être exécutée dans un serveur. La cible doit être un canal régulier, la destination doit être une catégorie, et le bot doit disposer de la permission de gérer les canaux. L'implémentation actuelle n'accepte pas les mentions.
+</block>
+
+<block type="callout" kind="note">
+text: Les catégories ne peuvent pas être déplacées dans une autre catégorie. Dans l'interpréteur actuel, cette commande est uniquement autonome, car son résolveur en ligne n'exécute pas l'effet de bord.
+</block>
+</dash>
+
+<details>
+syntax: $moveChannel[channel ID; new category ID]
+param: channelID|snowflake|Requis|L'ID numérique du canal régulier à déplacer
+param: categoryID|snowflake|Requis|L'ID numérique de la catégorie de destination
+</details>

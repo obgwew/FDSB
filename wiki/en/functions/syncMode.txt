@@ -1,0 +1,31 @@
+<dash>
+name: $syncMode
+desc: Marks a block for synchronized FDScript execution.
+category: Flow Control
+
+<block type="text" title="How does the command work?">
+text: $syncMode is intended to run the commands below it, until the end of the current block, as one synchronized batch. The batch engine treats control-flow boundaries, function calls, channel redirects, suppressions, guards, and closing tokens as barriers.
+</block>
+
+<block type="code" title="Syntax">
+text: $syncMode
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $syncMode
+$sendMessage[First step]
+$sendMessage[Second step]
+</block>
+
+<block type="callout" kind="warning">
+text: In the current interpreter $syncMode only sets the execution context flag and logs that synchronization was enabled. The batch runner in sync_mode_ops.py is not connected to the main execution path yet, so commands below it still run sequentially.
+</block>
+
+<block type="callout" kind="note">
+text: Treat this page as the intended interface. Do not rely on concurrent execution or all-or-nothing batch failure until the interpreter integration is completed.
+</block>
+</dash>
+
+<details>
+syntax: $syncMode
+</details>

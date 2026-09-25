@@ -1,0 +1,35 @@
+<dash>
+name: $modifyChannel
+desc: یک یا چند ویژگی یک کانال سرور را تغییر می‌دهد.
+category: مدیریت کانال‌ها
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $modifyChannel یک کانال را در سرور فعلی ویرایش می‌کند. آرگومان اول الزامی، کانال را مشخص می‌کند؛ آرگومان‌های باقی‌مانده مکانی هستند و می‌توانند نام، موضوع، تنظیم NSFW، موقعیت و دسته‌بندی را به‌روزرسانی کنند. برای تغییر ندادن یک ویژگی، آرگومان اختیاری آن را حذف کنید یا خالی بگذارید.
+</block>
+
+<block type="code" title="سینتکس">
+text: $modifyChannel[Channel ID; (Channel Name; Topic; Make NSFW?; Position; Category ID)]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $modifyChannel[123456789012345678; Announcements; Welcome messages; no; 2; 987654321012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: دستور باید در سرور اجرا شود و ربات باید مجوز «مدیریت کانال‌ها» را داشته باشد. نام‌ها حداکثر ۱۰۰ کاراکتر و موضوع‌ها حداکثر ۱۰۲۴ کاراکتر هستند. یک دسته‌بندی را نمی‌توان به دسته‌بندی دیگری اختصاص داد.
+</block>
+
+<block type="callout" kind="note">
+text: برای مقدار NSFW از yes، no، true یا false استفاده کنید. برای حذف دسته‌بندی در فیلد دسته‌بندی از none، 0 یا null استفاده کنید. در مفسر فعلی این یک دستور مستقل است؛ حل‌گر درون‌خطی آن اثر جانبی را اجرا نمی‌کند.
+</block>
+</dash>
+
+<details>
+syntax: $modifyChannel[Channel ID; (Channel Name; Topic; Make NSFW?; Position; Category ID)]
+param: channelID|snowflake|الزامی|شناسه یا منشن کانالی که باید ویرایش شود
+param: name|text|اختیاری|نام جدید کانال
+param: topic|text|اختیاری|موضوع جدید؛ none آن را پاک می‌کند
+param: nsfw|text|اختیاری|آیا کانال NSFW باشد: yes، no، true یا false
+param: position|integer|اختیاری|موقعیت جدید کانال
+param: categoryID|snowflake|اختیاری|شناسه دسته‌بندی مقصد؛ none، 0 یا null آن را پاک می‌کند
+</details>

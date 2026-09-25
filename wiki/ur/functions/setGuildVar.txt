@@ -1,0 +1,28 @@
+<dash>
+name: $setGuildVar
+desc: سرور کے لیے مخصوص مستقل قدر محفوظ کرتا ہے۔
+category: متغیرات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $setGuildVar منتخب سرور کی ID کے تحت گِلڈ متغیر فائل میں قدر محفوظ کرتا ہے۔ نام اور قدر کے دو آرگومینٹس کے ساتھ موجودہ سرور استعمال ہوتا ہے؛ تیسرے آرگومینٹ کے ساتھ سرور کی ID واضح طور پر منتخب کی جاتی ہے۔ کمانڈ ان لائن استعمال نہیں ہو سکتی۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $setGuildVar[name; value; (guild_id)]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $setGuildVar[welcomeMessage; Welcome!; 123456789012345678]
+</block>
+
+<block type="callout" kind="important">
+text: اگر اس نام کا کوئی عالمی متغیر موجود نہیں ہوتا تو کمانڈ دی گئی مخصوص قدر محفوظ کرتی ہے، خالی عالمی تعریف بناتی ہے، اور پھر ماحولیاتی خرابی کے ساتھ اسکرپٹ روک دیتی ہے۔ مخصوص قدریں تفویض کرنے سے پہلے عالمی متغیر متعین کریں۔
+</block>
+</dash>
+
+<details>
+syntax: $setGuildVar[name; value; (guild_id)]
+param: name|text|لازمی|متغیر کا نام
+param: value|text|لازمی|محفوظ کرنے کے لیے قدر
+param: guildID|text|اختیاری|سرور کی ID؛ ڈیفالٹ موجودہ سرور
+</details>

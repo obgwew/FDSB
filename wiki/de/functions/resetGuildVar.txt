@@ -1,0 +1,27 @@
+<dash>
+name: $resetGuildVar
+desc: Entfernt eine serverspezifische Variablenüberschreibung.
+category: Variablen
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: $resetGuildVar löscht den für einen Variablennamen gespeicherten serverspezifischen Wert. Die globale Variablendefinition wird weder gelöscht noch geändert. Mit einem Argument wird der aktuelle Server verwendet; mit zwei Argumenten wählt das zweite Argument die Server-ID aus.
+</block>
+
+<block type="code" title="Syntax">
+text: $resetGuildVar[name; (guild_id)]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $resetGuildVar[welcomeMessage; 123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: Wenn die serverspezifische Überschreibung bereits fehlt, ist der Befehl ein sicherer No-op und vermerkt diesen Zustand im Ausführungsprotokoll.
+</block>
+</dash>
+
+<details>
+syntax: $resetGuildVar[name; (guild_id)]
+param: name|text|Erforderlich|Der Name der Variable, deren serverspezifische Überschreibung entfernt werden soll
+param: guildID|text|Optional|Die Server-ID; Standard ist der aktuelle Server
+</details>

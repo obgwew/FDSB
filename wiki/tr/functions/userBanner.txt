@@ -1,0 +1,30 @@
+<dash>
+name: $userBanner
+desc: Bir kullanıcının profil banner URL'sini döndürür.
+category: Bilgi
+
+<block type="text" title="Komut nasıl çalışır?">
+text: Argüman verilmediğinde $userBanner bot kullanıcısının bannerını döndürür. Bir kullanıcı kimliği veya bahsetmesi verildiğinde o kullanıcının bannerını döndürür. Hareketli bannerlar GIF URL'si, diğer bannerlar PNG URL'si olarak döndürülür.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $userBanner[(user_id)]
+</block>
+
+<block type="code" title="Kopyalamaya Hazır Örnek">
+text: $userBanner[123456789012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: Kullanıcının bir profil bannerı olmalı ve bot kullanıcıyı çözümleyebilmelidir. İsteğe bağlı kimlik, arama yapılmadan önce rakam olmayan karakterlerden arındırılır.
+</block>
+
+<block type="callout" kind="note">
+text: Satır içi biçim yalnızca önbelleğe alınmış kullanıcıları kullanır. Tek başına kullanılan biçim, şu anda önbellekte olmayan bir kullanıcıyı getirebilir. Varsayılan her zaman bot kullanıcısıdır; betiği tetikleyen yazar değildir.
+</block>
+</dash>
+
+<details>
+syntax: $userBanner[(user_id)]
+param: userID|snowflake|Optional|Kullanıcı kimliği veya bahsetmesi; varsayılan olarak bot kullanıcısı
+</details>

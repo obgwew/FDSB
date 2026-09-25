@@ -1,0 +1,31 @@
+<dash>
+name: $getGuildVar
+desc: Récupère une variable persistante limitée à un serveur.
+category: Variables
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: $getGuildVar recherche d'abord une valeur spécifique au serveur dans le fichier des variables de serveur. Si cette valeur n'existe pas, il utilise la variable globale portant le même nom. Avec un argument, l'ID du serveur actuel est utilisé ; avec deux arguments, le deuxième argument sélectionne l'ID du serveur.
+</block>
+
+<block type="code" title="Syntaxe">
+text: $getGuildVar[name; (guild_id)]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $getGuildVar[welcomeMessage]
+</block>
+
+<block type="callout" kind="important">
+text: Si la variable globale n'existe pas, la commande crée une entrée provisoire, crée l'entrée limitée au serveur si nécessaire, puis interrompt le script avec une erreur d'environnement. Vérifiez et définissez la variable avant de l'utiliser.
+</block>
+
+<block type="callout" kind="note">
+text: Cette commande peut être utilisée en ligne et comme instruction autonome. Une valeur globale manquante n'est pas silencieusement considérée comme une valeur valide.
+</block>
+</dash>
+
+<details>
+syntax: $getGuildVar[name; (guild_id)]
+param: name|text|Requis|Le nom de la variable à récupérer
+param: guildID|text|Optionnel|L'ID du serveur dont la valeur limitée doit être lue ; par défaut, le serveur actuel
+</details>

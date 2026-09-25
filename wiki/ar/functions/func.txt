@@ -1,0 +1,28 @@
+<dash>
+name: $func
+desc: يبدأ تعريف دالة FDScript قابلة لإعادة الاستخدام.
+category: التحكم في التدفق
+
+<block type="text" title="كيف تعمل الدالة؟">
+text: $func يبدأ كتلة دالة مسماة. يجمع المفسر جسم الدالة قبل تشغيل السكربت الرئيسي، ويتخطى كتلة التعريف أثناء التنفيذ العادي. استخدم $endfunc لإغلاق الكتلة و$call لتنفيذها لاحقًا.
+</block>
+
+<block type="code" title="الصيغة">
+text: $func[name]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $func[sendWelcome]
+$sendMessage[Welcome!]
+$endfunc
+</block>
+
+<block type="callout" kind="important">
+text: يجب أن تكون أسماء الدوال فريدة داخل السكربت. يجب أن يتطابق كل $func مع $endfunc، ولا يمكن استدعاء الدالة إلا بعد جمع تعريفها.
+</block>
+</dash>
+
+<details>
+syntax: $func[name]
+param: name|text|مطلوب|اسم دالة فريد وغير فارغ
+</details>

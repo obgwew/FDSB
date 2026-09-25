@@ -1,48 +1,33 @@
 # main_app/core_fdsb/event_FDScripts/messageContainsAll.py
-import os
 import discord
 
 from main_app.core_fdsb.FDScript import run_script
+from main_app.core_fdsb.event_FDScripts._event_scan import iter_event_files, extract_words
 
-
-def _extract_words(first_line_norm: str) -> list[str]:
-    try:
-        inside = first_line_norm.split('[', 1)[1].rsplit(']', 1)[0]
-        return [w.strip() for w in inside.split(';') if w.strip()]
-    except IndexError:
-        return []
+_PREFIX = "#prefix:$messagecontainsall"
 
 
 async def handle_event(message: discord.Message, bot: discord.Client, events_dir: str) -> None:
-    if not os.path.isdir(events_dir):
-        return
-
     content_lower = message.content.lower()
+    fgs_marked = False
 
-    for fname in os.listdir(events_dir):
-        fpath = os.path.join(events_dir, fname)
-        if not os.path.isfile(fpath):
+    for fname, script_text, first_line in iter_event_files(events_dir):
+        if not first_line.startswith(_PREFIX):
             continue
 
+        words = extract_words(first_line)
+        if not words:
+            continue
+
+        if not all(word in content_lower for word in words):
+            continue
+
+        if not fgs_marked:
+            from main_app.core_fdsb.Server import set_fgs_state, STATE_SYNCING
+            set_fgs_state(STATE_SYNCING)
+            fgs_marked = True
+
         try:
-            with open(fpath, 'r', encoding='utf-8') as f:
-                script_text = f.read()
-
-            if not script_text.strip():
-                continue
-
-            first_line = script_text.split('\n')[0].strip()
-            first_line_norm = first_line.replace(" ", "").lower()
-
-            if not first_line_norm.startswith("#prefix:$messagecontainsall"):
-                continue
-
-            words = _extract_words(first_line_norm)
-            if not words:
-                continue
-
-            if all(word in content_lower for word in words):
-                await run_script(message, bot, script_text)
-
+            await run_script(message, bot, script_text)
         except Exception as e:
             print(f"[messageContainsAll Error] Failed to execute {fname}: {e}")

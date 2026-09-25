@@ -1,0 +1,31 @@
+<dash>
+name: $editChannelTopic
+desc: يغيّر موضوع قناة في السيرفر.
+category: إدارة القنوات
+
+<block type="text" title="كيف تعمل الدالة؟">
+text: مع وسيط واحد، يغيّر $editChannelTopic موضوع القناة التي فُعّل فيها السكربت. مع وسيطين، يغيّر موضوع القناة التي يحددها الوسيط الأول. موضوع فارغ أو يتكون فقط من مسافات يُمحو الموضوع الحالي.
+</block>
+
+<block type="code" title="الصيغة">
+text: $editChannelTopic[(channel ID or mention); new topic]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $editChannelTopic[<#123456789012345678>; Welcome to the community!]
+</block>
+
+<block type="callout" kind="warning">
+text: يعمل الأمر فقط داخل السيرفر. يجب أن تنتمي القناة الهدف إلى السيرفر الحالي، وأن تدعم المواضيع، وأن يكون بإمكان البوت تعديلها. لا يمكن أن تتجاوز المواضيع 1024 حرفًا.
+</block>
+
+<block type="callout" kind="note">
+text: في المفسر الحالي، هذا أمر مستقل. يعيد محلّله المضمّن قيمة فارغة ولا ينفذ الأثر الجانبي.
+</block>
+</dash>
+
+<details>
+syntax: $editChannelTopic[(channel ID or mention); new topic]
+param: channelID|text|اختياري|معرّف القناة الهدف أو منشنها؛ عند حذفه مع استخدام وسيط واحد، تُستخدم القناة الحالية
+param: newTopic|text|مطلوب|الموضوع البديل، حتى 1024 حرف
+</details>

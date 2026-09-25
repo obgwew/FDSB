@@ -1,0 +1,28 @@
+<dash>
+name: $resetUserVar
+desc: Entfernt eine benutzerbezogene Variablenüberschreibung.
+category: Variablen
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: $resetUserVar löscht die für den Schlüssel guild_id:user_id gespeicherte Überschreibung. Die globale Variablendefinition wird weder gelöscht noch geändert. Mit einem Argument werden der auslösende Autor und der aktuelle Server verwendet; mit zwei Argumenten wird eine Benutzer-ID ausgewählt; mit drei Argumenten werden beide IDs ausgewählt.
+</block>
+
+<block type="code" title="Syntax">
+text: $resetUserVar[name; (user_id); (guild_id)]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $resetUserVar[points; 123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: Wenn die Überschreibung bereits fehlt, ist der Befehl ein sicherer No-op und vermerkt diesen Zustand im Ausführungsprotokoll.
+</block>
+</dash>
+
+<details>
+syntax: $resetUserVar[name; (user_id); (guild_id)]
+param: name|text|Erforderlich|Der Name der Variable, deren benutzerbezogene Überschreibung entfernt werden soll
+param: userID|text|Optional|Die Benutzer-ID; Standard ist der auslösende Autor
+param: guildID|text|Optional|Die Server-ID; Standard ist der aktuelle Server
+</details>

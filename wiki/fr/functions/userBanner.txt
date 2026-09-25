@@ -1,0 +1,30 @@
+<dash>
+name: $userBanner
+desc: Renvoie l'URL de la bannière de profil d'un utilisateur.
+category: Info
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: Sans argument, $userBanner renvoie la bannière de l'utilisateur bot. Avec un ID utilisateur ou une mention, il renvoie la bannière de cet utilisateur. Les bannières animées sont renvoyées sous forme d'URL GIF et les autres sous forme d'URL PNG.
+</block>
+
+<block type="code" title="Syntaxe">
+text: $userBanner[(user_id)]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $userBanner[123456789012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: L'utilisateur doit avoir une bannière de profil et le bot doit pouvoir résoudre l'utilisateur. L'ID optionnel est nettoyé de ses caractères non numériques avant la recherche.
+</block>
+
+<block type="callout" kind="note">
+text: La forme en ligne utilise uniquement les utilisateurs en cache. La forme autonome peut récupérer un utilisateur qui n'est pas actuellement en cache. La valeur par défaut est toujours l'utilisateur bot, pas l'auteur de la commande.
+</block>
+</dash>
+
+<details>
+syntax: $userBanner[(user_id)]
+param: userID|snowflake|Optionnel|L'ID utilisateur ou la mention ; par défaut, l'utilisateur bot
+</details>

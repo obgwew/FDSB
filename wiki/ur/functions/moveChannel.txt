@@ -1,0 +1,31 @@
+<dash>
+name: $moveChannel
+desc: ایک چینل کو سرور کی کیٹیگری میں منتقل کرتا ہے۔
+category: چینل انتظامات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $moveChannel موجودہ سرور میں کسی موجودہ عام چینل کو دوسرے آرگومینٹ سے متشن کیٹیگری میں منتقل کرتا ہے۔ دونوں ID موجودہ سرور کے اندر عددی snowflake ہونے چاہئیں۔ اگر چینل پہلے ہی اس کیٹیگری میں ہے تو کمانڈ کوئی کارروائی نہیں کرتا اور کوئی Discord درخواست نہیں بھیجتا۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $moveChannel[channel ID; new category ID]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $moveChannel[123456789012345678; 987654321012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: کمانڈ سرور کے اندر چلنا چاہیے۔ ہدف ایک عام چینل ہونا چاہیے، مقصد ایک کیٹیگری ہونی چاہیے، اور بوٹ کے پاس چینلز منیج کرنے کی اجازت ہونی چاہیے۔ موجودہ ایمپلیمنٹیشن مینشن قبول نہیں کرتا۔
+</block>
+
+<block type="callout" kind="note">
+text: کیٹیگری کو دوسری کیٹیگری میں منتقل نہیں کیا جا سکتا۔ موجودہ انٹرپریٹر میں یہ کمانڈ صرف اسٹینڈ اَلون ہے کیونکہ اس کا ان لائن ریزالورر سائیڈ ایفیکٹ اجرا نہیں کرتا۔
+</block>
+</dash>
+
+<details>
+syntax: $moveChannel[channel ID; new category ID]
+param: channelID|snowflake|لازمی|منتقل کیے جانے والے عام چینل کی عددی ID
+param: categoryID|snowflake|لازمی|منزل کی کیٹیگری کی عددی ID
+</details>

@@ -1,0 +1,30 @@
+<dash>
+name: $userBanner
+desc: 返回用户资料横幅 URL。
+category: 信息
+
+<block type="text" title="命令如何工作？">
+text: 不带参数时，$userBanner 返回机器人用户的横幅。带用户 ID 或提及时，它会返回该用户的横幅。动画横幅以 GIF URL 返回，其他横幅以 PNG URL 返回。
+</block>
+
+<block type="code" title="语法">
+text: $userBanner[(user_id)]
+</block>
+
+<block type="code" title="可复制示例">
+text: $userBanner[123456789012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: 用户必须设置资料横幅，且机器人必须能够解析该用户。查找前，可选 ID 中的非数字字符会被清理。
+</block>
+
+<block type="callout" kind="note">
+text: 内联形式仅使用缓存中的用户。独立形式可以获取当前未缓存的用户。默认值始终是机器人用户，而不是触发命令的作者。
+</block>
+</dash>
+
+<details>
+syntax: $userBanner[(user_id)]
+param: userID|snowflake|Optional|用户 ID 或提及；默认为机器人用户
+</details>

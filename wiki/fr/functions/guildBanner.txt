@@ -1,0 +1,30 @@
+<dash>
+name: $guildBanner
+desc: Renvoie l'URL de la bannière d'un serveur.
+category: Serveur
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: Sans argument, $guildBanner utilise le serveur où le script a été déclenché ou où l'interaction a été reçue. Avec un ID de serveur, il renvoie la bannière du serveur dont le bot est membre. Les bannières animées sont renvoyées sous forme d'URL GIF et les autres sous forme d'URL PNG.
+</block>
+
+<block type="code" title="Syntaxe">
+text: $guildBanner[(guild_id)]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $guildBanner[123456789012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: Le serveur doit avoir une bannière et le bot doit pouvoir la résoudre. Utilisez un ID de serveur numérique lorsque vous fournissez l'argument optionnel.
+</block>
+
+<block type="callout" kind="note">
+text: La forme en ligne peut utiliser uniquement les données de serveur en cache. La forme autonome peut récupérer un serveur qui n'est pas actuellement en cache, sous réserve de la disponibilité de Discord.
+</block>
+</dash>
+
+<details>
+syntax: $guildBanner[(guild_id)]
+param: guildID|snowflake|Optionnel|L'ID du serveur ; lorsqu'il est omis, le serveur actuel ou celui de l'interaction est utilisé
+</details>

@@ -1,0 +1,30 @@
+<dash>
+name: $syncChannel
+desc: مجوزهای یک کانال را با دسته‌بندی آن همگام می‌کند.
+category: مدیریت کانال‌ها
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: بدون آرگومان، $syncChannel کانالی را هدف می‌گیرد که اسکریپت در آن فعال شده است. با یک آرگومان، کانال مشخص‌شده با شناسه عددی هدف قرار می‌گیرد. کانال باید یک کانال معمولی متعلق به یک دسته‌بندی باشد. اگر مجوزها از قبل همگام باشند، دستور یک عملیات بی‌اثر را ثبت می‌کند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $syncChannel[(channel ID or mention)]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $syncChannel[123456789012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: دستور باید در سرور اجرا شود و ربات باید مجوزهای مدیریت کانال و نقش را داشته باشد. دسته‌بندی‌ها را نمی‌توان مستقیماً همگام کرد.
+</block>
+
+<block type="callout" kind="note">
+text: در مفسر فعلی، این یک دستور مستقل است. حل‌گر درون‌خطی آن مقدار خالی برمی‌گرداند و همگام‌سازی را انجام نمی‌دهد.
+</block>
+</dash>
+
+<details>
+syntax: $syncChannel[(channel ID or mention)]
+param: channelID|snowflake|اختیاری|کانالی که باید همگام شود؛ به‌صورت پیش‌فرض کانال فعلی استفاده می‌شود
+</details>

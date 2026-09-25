@@ -3,7 +3,7 @@ import json
 import discord
 import aiohttp
 from FDScript import ExecutionContext, Command, FDSyntaxError
-from func_FDScript._http_client import get_session, assert_valid_scheme, read_capped, BlockedURLError, DEFAULT_USER_AGENT
+from engine_FDScript.http_ops import get_session, assert_valid_scheme, read_capped, BlockedURLError, DEFAULT_USER_AGENT
 
 
 async def _process(args: list[str], ctx: ExecutionContext) -> str:

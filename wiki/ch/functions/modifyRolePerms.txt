@@ -1,0 +1,31 @@
+<dash>
+name: $modifyRolePerms
+desc: 启用或禁用服务器角色上的权限。
+category: 管理
+
+<block type="text" title="命令如何工作？">
+text: $modifyRolePerms 更改角色上的选定权限。在权限前加上 + 可启用，或加上 - 可禁用。符号是可选的，默认为 +。特殊权限 all 可启用或禁用完整的权限集。调用中未列出的权限保持不变。
+</block>
+
+<block type="code" title="语法">
+text: $modifyRolePerms[role ID or role mention; permission +/-; ...]
+</block>
+
+<block type="code" title="可复制示例">
+text: $modifyRolePerms[<@&123456789012345678>; +send_messages; -connect]
+</block>
+
+<block type="callout" kind="warning">
+text: 该命令只能在服务器中使用。机器人需要“Manage Roles”（管理角色）权限，并且目标角色必须低于机器人的最高角色。
+</block>
+
+<block type="callout" kind="note">
+text: 权限名称使用解释器支持的 Discord snake_case 名称。这是一个独立命令；其当前内联解析器返回空值。
+</block>
+</dash>
+
+<details>
+syntax: $modifyRolePerms[role ID or role mention; permission +/-; ...]
+param: roleID|snowflake|Required|角色的数字 ID 或角色提及
+param: permissions|text|Required|一个或多个带 + 或 - 前缀的权限名称；all 表示整个权限集
+</details>

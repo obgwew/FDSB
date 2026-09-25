@@ -1,0 +1,31 @@
+<dash>
+name: $getGuildVar
+desc: يسترجع متغيرًا دائمًا بنطاق السيرفر.
+category: المتغيرات
+
+<block type="text" title="كيف تعمل الدالة؟">
+text: $getGuildVar يبحث أولًا عن تجاوز خاص بالسيرفر في ملف متغيرات السيرفر. إذا لم يوجد تجاوز، فيرجع إلى المتغير العام بالاسم نفسه. مع وسيط واحد، يُستخدم معرّف السيرفر الحالي؛ ومع وسيطين، يحدد الوسيط الثاني معرّف السيرفر.
+</block>
+
+<block type="code" title="الصيغة">
+text: $getGuildVar[name; (guild_id)]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $getGuildVar[welcomeMessage]
+</block>
+
+<block type="callout" kind="important">
+text: إذا لم يوجد المتغير العام، ينشئ الأمر عنصرًا نائبًا، وينشئ مدخلًا بنطاق السيرفر عند الحاجة، ثم يوقف السكربت بخطأ بيئي. راجع المتغير وحدده قبل استخدامه.
+</block>
+
+<block type="callout" kind="note">
+text: يمكن استخدام دالة الجلب مضمّنة أو كعبارة مستقلة. لا تُعامل قيمة عامة مفقودة بصمت كقيمة صالحة.
+</block>
+</dash>
+
+<details>
+syntax: $getGuildVar[name; (guild_id)]
+param: name|text|مطلوب|اسم المتغير المراد استرجاعه
+param: guildID|text|اختياري|معرّف السيرفر الذي يجب قراءة القيمة المرتبطة به؛ إذا لم يحدد، يُستخدم السيرفر الحالي
+</details>

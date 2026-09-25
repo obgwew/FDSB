@@ -1,0 +1,30 @@
+<dash>
+name: $guildBanner
+desc: 返回服务器的横幅 URL。
+category: 服务器
+
+<block type="text" title="命令如何工作？">
+text: 不带参数时，$guildBanner 使用脚本被触发或收到交互所在的服务器。提供服务器 ID 时，它会返回机器人已加入的服务器的横幅。动画横幅以 GIF URL 返回，其他横幅以 PNG URL 返回。
+</block>
+
+<block type="code" title="语法">
+text: $guildBanner[(guild_id)]
+</block>
+
+<block type="code" title="可复制示例">
+text: $guildBanner[123456789012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: 服务器必须设置横幅，且机器人必须能够解析它。提供可选参数时，请使用数字服务器 ID。
+</block>
+
+<block type="callout" kind="note">
+text: 内联形式只能使用缓存的服务器数据。独立形式可以获取当前未缓存的服务器，但前提是 Discord 可用。
+</block>
+</dash>
+
+<details>
+syntax: $guildBanner[(guild_id)]
+param: guildID|snowflake|Optional|服务器 ID；省略时使用当前服务器或交互所在服务器
+</details>

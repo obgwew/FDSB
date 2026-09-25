@@ -1,0 +1,28 @@
+<dash>
+name: $setGuildVar
+desc: يخزن قيمة دائمة بنطاق السيرفر.
+category: المتغيرات
+
+<block type="text" title="كيف تعمل الدالة؟">
+text: $setGuildVar يخزن قيمة في ملف متغيرات السيرفر تحت معرّف السيرفر المحدد. مع تمرير وسيط القيمة، يُستخدم السيرفر الحالي؛ ومع الوسيط الثالث، يُحدد معرّف السيرفر صراحةً. لا يمكن استخدام الأمر مضمّنًا.
+</block>
+
+<block type="code" title="الصيغة">
+text: $setGuildVar[name; value; (guild_id)]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $setGuildVar[welcomeMessage; Welcome!; 123456789012345678]
+</block>
+
+<block type="callout" kind="important">
+text: إذا لم يوجد متغير عام بهذا الاسم، يخزن الأمر القيمة المقدمة للنطاق، وينشئ تعريفًا عامًا فارغًا، ثم يوقف السكربت بخطأ بيئي. عرّف المتغير العام قبل تعيين قيم النطاق.
+</block>
+</dash>
+
+<details>
+syntax: $setGuildVar[name; value; (guild_id)]
+param: name|text|مطلوب|اسم المتغير
+param: value|text|مطلوب|القيمة المراد تخزينها
+param: guildID|text|اختياري|معرّف السيرفر؛ إذا لم يحدد، يُستخدم السيرفر الحالي
+</details>

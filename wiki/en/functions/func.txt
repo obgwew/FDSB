@@ -1,0 +1,28 @@
+<dash>
+name: $func
+desc: Starts a reusable FDScript function definition.
+category: Flow Control
+
+<block type="text" title="How does the command work?">
+text: $func starts a named function block. The interpreter collects the function body before running the main script and skips the definition block during normal execution. Use $endfunc to close the block and $call to execute it later.
+</block>
+
+<block type="code" title="Syntax">
+text: $func[name]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $func[sendWelcome]
+$sendMessage[Welcome!]
+$endfunc
+</block>
+
+<block type="callout" kind="important">
+text: Function names must be unique within a script. Every $func must have a matching $endfunc, and a function can be called only after its definition is collected.
+</block>
+</dash>
+
+<details>
+syntax: $func[name]
+param: name|text|Required|A unique, non-empty function name
+</details>

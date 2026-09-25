@@ -1,0 +1,28 @@
+<dash>
+name: $setGuildVar
+desc: Stocke une valeur persistante limitée à un serveur.
+category: Variables
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: $setGuildVar stocke une valeur dans le fichier des variables de serveur sous l'ID de serveur sélectionné. Avec deux arguments, le serveur actuel est utilisé ; avec le troisième argument, l'ID du serveur est sélectionné explicitement. La commande ne peut pas être utilisée en ligne.
+</block>
+
+<block type="code" title="Syntaxe">
+text: $setGuildVar[name; value; (guild_id)]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $setGuildVar[welcomeMessage; Welcome!; 123456789012345678]
+</block>
+
+<block type="callout" kind="important">
+text: Si aucune variable globale portant ce nom n'existe, la commande stocke la valeur limitée fournie, crée une définition globale vide, puis arrête le script avec une erreur d'environnement. Définissez la variable globale avant d'attribuer des valeurs limitées.
+</block>
+</dash>
+
+<details>
+syntax: $setGuildVar[name; value; (guild_id)]
+param: name|text|Requis|Le nom de la variable
+param: value|text|Requis|La valeur à stocker
+param: guildID|text|Optionnel|L'ID du serveur ; par défaut, le serveur actuel
+</details>

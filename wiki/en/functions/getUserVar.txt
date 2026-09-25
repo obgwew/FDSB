@@ -1,0 +1,32 @@
+<dash>
+name: $getUserVar
+desc: Retrieves a persistent variable scoped to a user in a server.
+category: Variables
+
+<block type="text" title="How does the command work?">
+text: $getUserVar checks the user override stored under the key guild_id:user_id. If that override is empty or absent, it falls back to the global variable. With one argument, the triggering author and current server are used; two arguments select a user ID; three arguments select both the user and server IDs.
+</block>
+
+<block type="code" title="Syntax">
+text: $getUserVar[name; (user_id); (guild_id)]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $getUserVar[points; 123456789012345678]
+</block>
+
+<block type="callout" kind="important">
+text: If the global variable does not exist, the command creates a placeholder entry, creates the user-scoped entry when needed, and aborts the script. Define the global variable first.
+</block>
+
+<block type="callout" kind="note">
+text: The getter can be used inline or as a standalone statement. The default user is the triggering author, not the bot.
+</block>
+</dash>
+
+<details>
+syntax: $getUserVar[name; (user_id); (guild_id)]
+param: name|text|Required|The variable name to retrieve
+param: userID|text|Optional|The user ID whose scoped value should be read; defaults to the triggering author
+param: guildID|text|Optional|The server ID; defaults to the current server
+</details>

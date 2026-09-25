@@ -1,0 +1,35 @@
+<dash>
+name: $modifyChannel
+desc: يغيّر خاصية واحدة أو أكثر من خصائص قناة في السيرفر.
+category: إدارة القنوات
+
+<block type="text" title="كيف تعمل الدالة؟">
+text: $modifyChannel يعدّل قناة في السيرفر الحالي. يحدد الوسيط الأول المطلوب القناة؛ وتكون الوسائط التالية 위치ية، ويمكنها تحديث الاسم والموضوع وإعداد NSFW والموضع والفئة. احذف الوسيط الاختياري أو اتركه فارغًا للإبقاء على تلك الخاصية دون تغيير.
+</block>
+
+<block type="code" title="الصيغة">
+text: $modifyChannel[Channel ID; (Channel Name; Topic; Make NSFW?; Position; Category ID)]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $modifyChannel[123456789012345678; Announcements; Welcome messages; no; 2; 987654321012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: يجب أن يعمل الأمر داخل سيرفر، وأن يملك البوت إذًا لإدارة القناة. تقتصر الأسماء على 100 حرف والمواضيع على 1024 حرف. لا يمكن تعيين فئة إلى فئة أخرى.
+</block>
+
+<block type="callout" kind="note">
+text: استخدم yes أو no أو true أو false لقيمة NSFW. استخدم none أو 0 أو null في حقل الفئة لإزالة الفئة. في المفسر الحالي، هذا أمر مستقل؛ إذ لا ينفذ محلّله المضمّن التأثير الجانبي.
+</block>
+</dash>
+
+<details>
+syntax: $modifyChannel[Channel ID; (Channel Name; Topic; Make NSFW?; Position; Category ID)]
+param: channelID|snowflake|مطلوب|معرّف القناة أو منشنها المراد تعديلها
+param: name|text|اختياري|اسم القناة الجديد
+param: topic|text|اختياري|الموضوع الجديد؛ none يزيله
+param: nsfw|text|اختياري|ما إذا كانت القناة NSFW: yes أو no أو true أو false
+param: position|integer|اختياري|الموضع الجديد للقناة
+param: categoryID|snowflake|اختياري|معرّف فئة الوجهة؛ none أو 0 أو null يزيلها
+</details>

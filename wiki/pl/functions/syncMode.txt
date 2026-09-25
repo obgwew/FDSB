@@ -1,0 +1,31 @@
+<dash>
+name: $syncMode
+desc: Oznacza blok jako przeznaczony do zsynchronizowanego wykonania w FDScript.
+category: Sterowanie przepływem
+
+<block type="text" title="Jak działa ta komenda?">
+text: $syncMode ma uruchamiać komendy poniżej, aż do końca bieżącego bloku, jako jedną zsynchronizowaną partię. Silnik partii traktuje granice sterowania przepływem, wywołania funkcji, przekierowania kanałów, tłumienia błędów, warunki ochronne i tokeny zamykające jako bariery.
+</block>
+
+<block type="code" title="Składnia">
+text: $syncMode
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $syncMode
+$sendMessage[First step]
+$sendMessage[Second step]
+</block>
+
+<block type="callout" kind="warning">
+text: W bieżącym interpreterze $syncMode tylko ustawia flagę kontekstu wykonania i rejestruje, że synchronizacja została włączona. Mechanizm uruchamiania partii w sync_mode_ops.py nie jest jeszcze połączony z główną ścieżką wykonania, więc komendy poniżej nadal wykonują się sekwencyjnie.
+</block>
+
+<block type="callout" kind="note">
+text: Traktuj tę stronę jako docelowy interfejs. Do czasu zakończenia integracji interpretera nie zakładaj wykonywania równoległego ani awarii całej partii według zasady „wszystko albo nic”.
+</block>
+</dash>
+
+<details>
+syntax: $syncMode
+</details>

@@ -1,0 +1,33 @@
+<dash>
+name: $call
+desc: 调用先前定义的 FDScript 函数。
+category: 流程控制
+
+<block type="text" title="命令如何工作？">
+text: $call 执行通过 $func 定义的函数。函数体会在正常执行之前收集，$call 使用当前脚本上下文运行函数体。字面量函数名会在执行前检查；动态名称会在调用时检查。
+</block>
+
+<block type="code" title="语法">
+text: $call[name]
+</block>
+
+<block type="code" title="可复制示例">
+text: $func[greet]
+$sendMessage[Hello from the function]
+$endfunc
+$call[greet]
+</block>
+
+<block type="callout" kind="important">
+text: 调用共享当前执行上下文，不会创建局部变量作用域。最大调用深度为 50；超出此限制的递归调用会被拒绝。
+</block>
+
+<block type="callout" kind="note">
+text: 函数必须使用匹配的 $endfunc 定义。当 $call 作为更大的 FDScript 表达式的一部分时，也可以在其他命令参数中展开。
+</block>
+</dash>
+
+<details>
+syntax: $call[name]
+param: name|text|Required|使用 $func 定义并以 $endfunc 结束的函数名称
+</details>

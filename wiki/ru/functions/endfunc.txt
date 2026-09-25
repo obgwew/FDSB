@@ -1,0 +1,27 @@
+<dash>
+name: $endfunc
+desc: Закрывает блок функции FDScript.
+category: Управление потоком
+
+<block type="text" title="Как работает команда?">
+text: $endfunc закрывает последний открытый блок $func. Она обозначает конец определения повторно используемой функции и должна образовывать соответствующую пару с $func.
+</block>
+
+<block type="code" title="Синтаксис">
+text: $endfunc
+</block>
+
+<block type="code" title="Готовый пример для копирования">
+text: $func[ping]
+$sendMessage[Pong]
+$endfunc
+</block>
+
+<block type="callout" kind="warning">
+text: $endfunc без соответствующей команды $func или с другим открытым блоком между этими командами приводит к ошибке скрипта.
+</block>
+</dash>
+
+<details>
+syntax: $endfunc
+</details>

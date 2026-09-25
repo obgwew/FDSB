@@ -1,0 +1,27 @@
+<dash>
+name: $resetGuildVar
+desc: Sunucuya özel bir değişken değerini kaldırır.
+category: Değişkenler
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $resetGuildVar, bir değişken adı için saklanan sunucuya özel değeri siler. Genel değişken tanımını silmez veya değiştirmez. Tek argümanla geçerli sunucu kullanılır; iki argümanla ikinci argüman sunucu kimliğini seçer.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $resetGuildVar[name; (guild_id)]
+</block>
+
+<block type="code" title="Kopyalamaya Hazır Örnek">
+text: $resetGuildVar[welcomeMessage; 123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: Sunucuya özel değer zaten yoksa komut güvenli bir şekilde hiçbir işlem yapmaz ve bu durumu yürütme günlüğüne kaydeder.
+</block>
+</dash>
+
+<details>
+syntax: $resetGuildVar[name; (guild_id)]
+param: name|text|Required|Sunucuya özel değeri kaldırılacak değişkenin adı
+param: guildID|text|Optional|Sunucu kimliği; varsayılan olarak geçerli sunucu
+</details>

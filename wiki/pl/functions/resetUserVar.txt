@@ -1,0 +1,28 @@
+<dash>
+name: $resetUserVar
+desc: Usuwa nadpisanie zmiennej specyficzne dla użytkownika.
+category: Zmienne
+
+<block type="text" title="Jak działa ta komenda?">
+text: $resetUserVar usuwa nadpisanie zapisane dla klucza guild_id:user_id. Nie usuwa ani nie zmienia definicji zmiennej globalnej. Z jednym argumentem używany jest autor wywołujący i bieżący serwer; dwoma argumentami wybiera się ID użytkownika; trzema argumentami wybiera się oba identyfikatory.
+</block>
+
+<block type="code" title="Składnia">
+text: $resetUserVar[name; (user_id); (guild_id)]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $resetUserVar[points; 123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: Jeśli nadpisanie już nie istnieje, komenda bezpiecznie kończy się bez efektu i zapisuje ten stan w dzienniku wykonania.
+</block>
+</dash>
+
+<details>
+syntax: $resetUserVar[name; (user_id); (guild_id)]
+param: name|text|Required|Nazwa zmiennej, której nadpisanie dla użytkownika należy usunąć
+param: userID|text|Optional|ID użytkownika; domyślnie używany jest autor wywołujący
+param: guildID|text|Optional|ID serwera; domyślnie używany jest bieżący serwer
+</details>

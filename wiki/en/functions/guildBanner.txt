@@ -1,0 +1,30 @@
+<dash>
+name: $guildBanner
+desc: Returns the banner URL of a server.
+category: Server
+
+<block type="text" title="How does the command work?">
+text: With no argument, $guildBanner uses the server where the script was triggered or the interaction was received. With a server ID, it returns the banner of the server where the bot is a member. Animated banners are returned as GIF URLs and other banners as PNG URLs.
+</block>
+
+<block type="code" title="Syntax">
+text: $guildBanner[(guild_id)]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $guildBanner[123456789012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: The server must have a banner and the bot must be able to resolve it. Use a numeric server ID when supplying the optional argument.
+</block>
+
+<block type="callout" kind="note">
+text: The inline form can only use cached guild data. The standalone form can fetch a guild that is not currently cached, subject to Discord availability.
+</block>
+</dash>
+
+<details>
+syntax: $guildBanner[(guild_id)]
+param: guildID|snowflake|Optional|The server ID; when omitted, the current or interaction server is used
+</details>

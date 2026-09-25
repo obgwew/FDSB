@@ -1,0 +1,28 @@
+<dash>
+name: $setGuildVar
+desc: Stores a persistent value scoped to a server.
+category: Variables
+
+<block type="text" title="How does the command work?">
+text: $setGuildVar stores a value in the guild variable file under the selected server ID. With one value argument, the current server is used; with the third argument, the server ID is selected explicitly. The command cannot be used inline.
+</block>
+
+<block type="code" title="Syntax">
+text: $setGuildVar[name; value; (guild_id)]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $setGuildVar[welcomeMessage; Welcome!; 123456789012345678]
+</block>
+
+<block type="callout" kind="important">
+text: If no global variable with this name exists, the command stores the supplied scoped value, creates an empty global definition, and then stops the script with an environment error. Define the global variable before assigning scoped values.
+</block>
+</dash>
+
+<details>
+syntax: $setGuildVar[name; value; (guild_id)]
+param: name|text|Required|The variable name
+param: value|text|Required|The value to store
+param: guildID|text|Optional|The server ID; defaults to the current server
+</details>

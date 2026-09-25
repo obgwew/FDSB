@@ -1,0 +1,27 @@
+<dash>
+name: $endfunc
+desc: یک بلوک تابع FDScript را می‌بندد.
+category: کنترل جریان
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $endfunc آخرین بلوک $func بازشده را می‌بندد. این دستور پایان تعریف یک تابع قابل استفاده مجدد را مشخص می‌کند و باید به‌صورت جفت با $func ظاهر شود.
+</block>
+
+<block type="code" title="سینتکس">
+text: $endfunc
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $func[ping]
+$sendMessage[Pong]
+$endfunc
+</block>
+
+<block type="callout" kind="warning">
+text: یک $endfunc بدون $func متناظر، یا با بلوک باز دیگری در بین آن‌ها، خطای اسکریپت است.
+</block>
+</dash>
+
+<details>
+syntax: $endfunc
+</details>

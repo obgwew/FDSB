@@ -1,0 +1,31 @@
+<dash>
+name: $getGuildVar
+desc: Retrieves a persistent variable scoped to a server.
+category: Variables
+
+<block type="text" title="How does the command work?">
+text: $getGuildVar first looks for a server-specific override in the guild variable file. If no override exists, it falls back to the global variable with the same name. With one argument, the current server ID is used; with two arguments, the second argument selects the server ID.
+</block>
+
+<block type="code" title="Syntax">
+text: $getGuildVar[name; (guild_id)]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $getGuildVar[welcomeMessage]
+</block>
+
+<block type="callout" kind="important">
+text: If the global variable does not exist, the command creates a placeholder entry, creates the server-scoped entry when needed, and aborts the script with an environment error. Review and define the variable before using it.
+</block>
+
+<block type="callout" kind="note">
+text: The getter can be used inline and as a standalone statement. A missing global value is not silently treated as a valid value.
+</block>
+</dash>
+
+<details>
+syntax: $getGuildVar[name; (guild_id)]
+param: name|text|Required|The variable name to retrieve
+param: guildID|text|Optional|The server ID whose scoped value should be read; defaults to the current server
+</details>

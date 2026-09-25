@@ -1,0 +1,31 @@
+<dash>
+name: $editChannelTopic
+desc: موضوع یک کانال سرور را تغییر می‌دهد.
+category: مدیریت کانال‌ها
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: با یک آرگومان، $editChannelTopic موضوع کانالی را تغییر می‌دهد که اسکریپت در آن فعال شده است. با دو آرگومان، موضوع کانال مشخص‌شده با آرگومان اول تغییر می‌کند. موضوع خالی یا موضوعی که فقط شامل فاصله باشد، موضوع فعلی را پاک می‌کند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $editChannelTopic[(channel ID or mention); new topic]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $editChannelTopic[<#123456789012345678>; Welcome to the community!]
+</block>
+
+<block type="callout" kind="warning">
+text: دستور فقط در سرور کار می‌کند. کانال هدف باید متعلق به سرور فعلی باشد، از موضوع پشتیبانی کند و ربات بتواند آن را ویرایش کند. طول موضوع نمی‌تواند بیشتر از ۱۰۲۴ کاراکتر باشد.
+</block>
+
+<block type="callout" kind="note">
+text: در مفسر فعلی، این یک دستور مستقل است. حل‌گر درون‌خطی آن مقدار خالی برمی‌گرداند و اثر جانبی را اجرا نمی‌کند.
+</block>
+</dash>
+
+<details>
+syntax: $editChannelTopic[(channel ID or mention); new topic]
+param: channelID|text|اختیاری|شناسه یا منشن کانال هدف؛ اگر با یک آرگومان حذف شود، کانال فعلی استفاده می‌شود
+param: newTopic|text|الزامی|موضوع جایگزین، حداکثر ۱۰۲۴ کاراکتر
+</details>

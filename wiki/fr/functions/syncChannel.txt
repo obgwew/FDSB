@@ -1,0 +1,30 @@
+<dash>
+name: $syncChannel
+desc: Synchronise les permissions d'un canal avec celles de sa catégorie.
+category: Gestion des canaux
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: Sans argument, $syncChannel cible le canal où le script a été déclenché. Avec un argument, il cible le canal identifié par l'ID numérique. Le canal doit être un canal régulier appartenant à une catégorie. Si les permissions sont déjà synchronisées, la commande enregistre une opération sans effet.
+</block>
+
+<block type="code" title="Syntaxe">
+text: $syncChannel[(channel ID or mention)]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $syncChannel[123456789012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: La commande doit être exécutée dans un serveur, et le bot doit avoir la permission de gérer les permissions des canaux et des rôles. Les catégories ne peuvent pas être synchronisées directement.
+</block>
+
+<block type="callout" kind="note">
+text: Dans l'interpréteur actuel, il s'agit d'une commande autonome. Son résolveur en ligne renvoie une valeur vide et n'effectue pas la synchronisation.
+</block>
+</dash>
+
+<details>
+syntax: $syncChannel[(channel ID or mention)]
+param: channelID|snowflake|Optionnel|Le canal à synchroniser ; par défaut, le canal actuel
+</details>

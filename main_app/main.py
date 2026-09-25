@@ -74,7 +74,6 @@ def _get_bot_id_from_token(token: str) -> str:
 def _validate_discord_token(token: str) -> bool:
     """
     التحقق من صحة توكن ديسكورد مع مهلة محددة ودعم بيئة الجوال دون تعليق.
-    يستخدم urllib القياسية المدمجة أولاً ثم requests كبديل احتياطي.
     """
     if not token or not str(token).strip():
         return False
@@ -92,7 +91,6 @@ def _validate_discord_token(token: str) -> bool:
         "User-Agent": "DiscordBot (https://github.com/obgwew, v1.0)",
     }
 
-    # 1. المحاولة باستخدام urllib القياسية (متوفرة دائماً في بايثون على كافة المنصات بدون تبعيات)
     try:
         import urllib.request
         import urllib.error
@@ -107,18 +105,79 @@ def _validate_discord_token(token: str) -> bool:
         with urllib.request.urlopen(req, timeout=5, context=ctx) as response:
             return response.status == 200
     except urllib.error.HTTPError as e:
-        # في حال استجاب ديسكورد برمز 401 (توكن غير صحيح) فهذا رد ناجح يؤكد عدم صحة التوكن
         return e.code == 200
     except Exception:
         pass
 
-    # 2. بديل احتياطي باستخدام requests إن توفرت
     try:
         import requests
         response = requests.get(url, headers=headers, timeout=(3.5, 4.0))
         return response.status_code == 200
     except Exception:
         return False
+
+
+def _check_discord_intents(token: str) -> dict:
+    res = {
+        "checked": False,
+        "all_enabled": True,
+        "missing": [],
+    }
+
+    if not token or not str(token).strip():
+        return res
+
+    clean_token = str(token).strip().strip('"\'')
+    if clean_token.lower().startswith("bot "):
+        clean_token = clean_token[4:].strip()
+
+    url = "https://discord.com/api/v10/applications/@me"
+    headers = {
+        "Authorization": f"Bot {clean_token}",
+        "User-Agent": "DiscordBot (https://github.com/obgwew, v1.0)",
+    }
+
+    raw_data = None
+    try:
+        import urllib.request
+        import ssl
+        try:
+            ctx = ssl.create_default_context()
+        except Exception:
+            ctx = ssl._create_unverified_context()
+        req = urllib.request.Request(url, headers=headers, method="GET")
+        with urllib.request.urlopen(req, timeout=6, context=ctx) as resp:
+            if resp.status == 200:
+                raw_data = json.loads(resp.read().decode('utf-8'))
+    except Exception:
+        try:
+            import requests
+            r = requests.get(url, headers=headers, timeout=5)
+            if r.status_code == 200:
+                raw_data = r.json()
+        except Exception:
+            pass
+
+    if raw_data and isinstance(raw_data, dict):
+        flags = raw_data.get("flags") or 0
+        
+        has_presence = bool(flags & ((1 << 12) | (1 << 13)))
+        has_members  = bool(flags & ((1 << 14) | (1 << 15)))
+        has_content  = bool(flags & ((1 << 18) | (1 << 19)))
+
+        missing = []
+        if not has_presence:
+            missing.append("Presence Intent")
+        if not has_members:
+            missing.append("Server Members Intent")
+        if not has_content:
+            missing.append("Message Content Intent")
+
+        res["checked"] = True
+        res["missing"] = missing
+        res["all_enabled"] = len(missing) == 0
+
+    return res
 
 
 def _read_new_txt() -> str:
@@ -301,6 +360,72 @@ class BotMainTab:
             vertical_alignment=ft.CrossAxisAlignment.START,
         )
 
+        # ─── تحذير عدم تفعيل خيارات الـ Gateway Intents الثلاثة ───
+        self._intents_warn_text = ft.Text(
+            _t_safe(
+                'intents_warning_msg',
+                'Warning: Privileged Gateway Intents (Presence, Members, Message Content) are not enabled in Discord Developer Portal. Commands and events may not work correctly.',
+                'تنبيه: خيارات تتبع البوت (Privileged Gateway Intents) غير مفعلة في Discord Developer Portal (Presence / Members / Message Content). لن يستجيب البوت للأوامر والأحداث بشكل صحيح بدون تفعيلها.'
+            ),
+            size=12,
+            color=_c('warning'),
+            expand=True,
+        )
+
+        self._open_dev_portal_btn = ft.Container(
+            content=ft.Row(
+                [
+                    ft.Icon(ft.Icons.OPEN_IN_NEW_ROUNDED, size=14, color='#FFFFFF'),
+                    ft.Text(
+                        _t_safe('open_dev_portal', 'Enable in Portal', 'تفعيل من موقع المطورين'),
+                        size=11,
+                        color='#FFFFFF',
+                        weight=ft.FontWeight.BOLD,
+                    ),
+                ],
+                spacing=6,
+                alignment=ft.MainAxisAlignment.CENTER,
+            ),
+            bgcolor=_c('warning'),
+            border_radius=8,
+            padding=ft.Padding(left=10, top=6, right=10, bottom=6),
+            on_click=self._open_discord_dev_portal,
+            ink=True,
+        )
+
+        self._intents_warning_card = ft.Container(
+            content=ft.Column(
+                [
+                    ft.Row(
+                        [
+                            ft.Icon(ft.Icons.WARNING_AMBER_ROUNDED, size=20, color=_c('warning')),
+                            ft.Text(
+                                _t_safe('intents_warning_title', 'Privileged Intents Disabled', 'خيارات البوت الأساسية غير مفعلة!'),
+                                size=13,
+                                weight=ft.FontWeight.BOLD,
+                                color=_c('warning'),
+                            ),
+                        ],
+                        spacing=8,
+                        vertical_alignment=ft.CrossAxisAlignment.CENTER,
+                    ),
+                    self._intents_warn_text,
+                    ft.Row([self._open_dev_portal_btn], alignment=ft.MainAxisAlignment.END),
+                ],
+                spacing=8,
+            ),
+            bgcolor=ft.Colors.with_opacity(0.12, _c('warning')),
+            border=ft.Border(
+                left=ft.BorderSide(1.5, _c('warning')),
+                top=ft.BorderSide(1.5, _c('warning')),
+                right=ft.BorderSide(1.5, _c('warning')),
+                bottom=ft.BorderSide(1.5, _c('warning')),
+            ),
+            border_radius=12,
+            padding=ft.Padding(left=14, top=12, right=14, bottom=12),
+            visible=False, # مخفي بشكل افتراضي، يظهر فقط إذا لم تكن مفعلة
+        )
+
         self._toggle_icon      = ft.Icon(ft.Icons.PLAY_ARROW_ROUNDED, color='#FFFFFF', size=20)
         self._toggle_icon_slot = ft.Container(content=self._toggle_icon,
                                                alignment=ft.Alignment(0, 0))
@@ -311,8 +436,8 @@ class BotMainTab:
                            spacing=8, alignment=ft.MainAxisAlignment.CENTER),
             bgcolor=_c('success'),
             on_click=self._toggle_server,
-            width=160,
-            padding=ft.Padding(left=20, top=13, right=20, bottom=13),
+            width=260,
+            padding=ft.Padding(left=25, top=13, right=20, bottom=13),
         )
         self._toggle_container.border_radius = 12
         self._toggle_container.shadow = _soft_shadow(blur=14, dy=5, opacity=0.18)
@@ -339,9 +464,53 @@ class BotMainTab:
             local_srv.register_state_listener(self._on_server_state_changed)
 
         ThemeEngine.subscribe(self._on_theme)
-        
-    async def _open_link(self, url: str):
+
+    async def _open_discord_dev_portal(self, _):
+        bot_id = _get_bot_id_from_token(self._bot_data.get('token', ''))
+        if bot_id:
+            url = f"https://discord.com/developers/applications/{bot_id}/bot"
+        else:
+            url = "https://discord.com/developers/applications"
         await self._page.launch_url(url)
+
+    def _check_privileged_intents_bg(self):
+        token = self._bot_data.get('token', '')
+        if not token and self._bot_data.get('bot_dir'):
+            try:
+                cfg_path = os.path.join(self._bot_data['bot_dir'], 'bot_files', 'config.json')
+                if os.path.isfile(cfg_path):
+                    with open(cfg_path, 'r', encoding='utf-8') as f:
+                        disk_cfg = json.load(f)
+                    token = disk_cfg.get('token', '')
+                    if token:
+                        self._bot_data['token'] = token
+            except Exception:
+                pass
+
+        if not token:
+            self._intents_warning_card.visible = False
+            try: self._page.update()
+            except Exception: pass
+            return
+
+        def work():
+            data = _check_discord_intents(token)
+            if data.get('checked'):
+                if not data.get('all_enabled'):
+                    missing_str = ", ".join(data.get("missing", []))
+                    if get_current_lang() == 'ar':
+                        self._intents_warn_text.value = f"تنبيه: الخيارات التالية غير مفعلة في Discord Developer Portal للبوت:\n({missing_str})\nيرجى تفعيلها من قسم Bot لكي يعمل البوت والردود بشكل سليم."
+                    else:
+                        self._intents_warn_text.value = f"Warning: The following privileged intents are not enabled in Discord Developer Portal:\n({missing_str})\nPlease enable them under the Bot section."
+                    self._intents_warning_card.visible = True
+                else:
+                    self._intents_warning_card.visible = False
+                try:
+                    self._page.update()
+                except Exception:
+                    pass
+
+        _run_bg(self._page, work)
 
     def _show_mobile_warning(self, _):
         def _close(_):
@@ -438,8 +607,8 @@ class BotMainTab:
     @staticmethod
     def _bot_client():
         try:
-            from main_app.core_fdsb import local_server
-            return local_server, getattr(local_server, '_client', None)
+            from main_app.core_fdsb import Server
+            return Server, getattr(Server, '_client', None)
         except Exception:
             return None, None
 
@@ -532,7 +701,6 @@ class BotMainTab:
 
         token = self._bot_data.get('token', '')
 
-        # محاولة قراءة التوكن من config.json في حال لم يكن محملاً في الذاكرة
         if not token and self._bot_data.get('bot_dir'):
             try:
                 cfg_path = os.path.join(self._bot_data['bot_dir'], 'bot_files', 'config.json')
@@ -569,7 +737,6 @@ class BotMainTab:
                 print(f'[Dashboard] token verification error: {ex}')
                 is_valid = False
             finally:
-                # يضمن استرجاع حالة الزر دائماً وتفادي أي تعليق في الـ loop
                 self._verifying = False
                 self._verify_btn.disabled = False
                 self._verify_btn.opacity  = 1.0
@@ -579,6 +746,8 @@ class BotMainTab:
                 try:
                     if is_valid:
                         self._notify(_t('token_valid'), _c('success'))
+                        # إعادة فحص الـ Privileged Intents
+                        self._check_privileged_intents_bg()
                     else:
                         self._notify(_t('token_invalid'), _c('danger'))
                 except Exception:
@@ -640,6 +809,15 @@ class BotMainTab:
             left=ft.BorderSide(1, get('card_border')), top=ft.BorderSide(1, get('card_border')),
             right=ft.BorderSide(1, get('card_border')), bottom=ft.BorderSide(1, get('card_border')),
         )
+        self._intents_warning_card.bgcolor = ft.Colors.with_opacity(0.12, get('warning'))
+        self._intents_warning_card.border = ft.Border(
+            left=ft.BorderSide(1.5, get('warning')),
+            top=ft.BorderSide(1.5, get('warning')),
+            right=ft.BorderSide(1.5, get('warning')),
+            bottom=ft.BorderSide(1.5, get('warning')),
+        )
+        self._intents_warn_text.color = get('warning')
+        self._open_dev_portal_btn.bgcolor = get('warning')
         self._set_online_state(self._server_online)
         self._page.update()
 
@@ -661,12 +839,13 @@ class BotMainTab:
                     avatar_section,
                     ft.Row([self._name_text], alignment=ft.MainAxisAlignment.CENTER),
                     ft.Row([self._invite_btn], alignment=ft.MainAxisAlignment.CENTER),
-                    self._status_row,
                     ft.Row(
                         [self._toggle_container, self._verify_btn],
                         alignment=ft.MainAxisAlignment.CENTER,
                         spacing=10,
                     ),
+                    self._status_row,
+                    self._intents_warning_card,  # التحذير الأصفر يظهر أسفل حالة السيرفر وعدد السيرفرات
                     ft.Divider(color=_c('divider')),
                     ft.Text(_t('whats_new'), size=15,
                             weight=ft.FontWeight.BOLD, color=_c('text')),
@@ -718,6 +897,9 @@ class BotMainTab:
             self._fetch_guild_count(apply=True)
         self._news_text.value = _read_new_txt()
 
+        # فحص خيارات المطورين في الخلفية أول فتح البوت
+        self._check_privileged_intents_bg()
+
     async def _invite_bot(self, e):
         bot_id = _get_bot_id_from_token(self._bot_data.get('token', ''))
         if bot_id:
@@ -735,6 +917,7 @@ class BotDashboardScreen:
         self._on_back = on_back
         self._active  = 'main'
         self._bot_dir = bot_dir
+        self._tab_containers: dict[str, ft.Container] = {}
 
         self._title_text = ft.Text(
             '', size=16, weight=ft.FontWeight.BOLD,
@@ -773,7 +956,15 @@ class BotDashboardScreen:
         self._tab_ids = [t[0] for t in _TABS]
 
         self._tab_containers: dict[str, ft.Container] = {}
-        self._tabs_stack = ft.Stack(controls=[], expand=True)
+        self._tabs_switcher = ft.AnimatedSwitcher(
+            content=None,
+            transition=ft.AnimatedSwitcherTransition.FADE,
+            duration=240,
+            reverse_duration=180,
+            switch_in_curve=ft.AnimationCurve.EASE_OUT_CUBIC,
+            switch_out_curve=ft.AnimationCurve.EASE_IN_CUBIC,
+            expand=True,
+        )
 
         self._nav_bar = self._build_nav()
 
@@ -831,7 +1022,6 @@ class BotDashboardScreen:
         }
 
         self._tab_containers.clear()
-        self._tabs_stack.controls.clear()
 
         if self._bot_dir:
             bot_files_dir = os.path.join(self._bot_dir, 'bot_files')
@@ -883,7 +1073,7 @@ class BotDashboardScreen:
         self._switch_tab('main')
 
         return ft.Column(
-            [self._header, self._tabs_stack, self._nav_bar],
+            [self._header, self._tabs_switcher, self._nav_bar],
             spacing=0,
             expand=True,
         )
@@ -932,15 +1122,13 @@ class BotDashboardScreen:
         if tab_id not in self._tab_containers:
             view_control = self._tab_views[tab_id].build()
             container = ft.Container(
+                key=f"tab_{tab_id}",
                 content=view_control,
                 expand=True,
-                visible=True
             )
             self._tab_containers[tab_id] = container
-            self._tabs_stack.controls.append(container)
 
-        for tid, ctrl in self._tab_containers.items():
-            ctrl.visible = (tid == tab_id)
+        self._tabs_switcher.content = self._tab_containers[tab_id]
 
         self._active                 = tab_id
         self._nav_bar.selected_index = self._tab_ids.index(tab_id)

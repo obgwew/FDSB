@@ -1,0 +1,28 @@
+<dash>
+name: $func
+desc: 开始可重用的 FDScript 函数定义。
+category: 流程控制
+
+<block type="text" title="命令如何工作？">
+text: $func 启动一个命名函数块。解释器在运行主脚本之前收集函数体，并在正常执行期间跳过定义块。使用 $endfunc 关闭该块，使用 $call 在之后执行它。
+</block>
+
+<block type="code" title="语法">
+text: $func[name]
+</block>
+
+<block type="code" title="可复制示例">
+text: $func[sendWelcome]
+$sendMessage[Welcome!]
+$endfunc
+</block>
+
+<block type="callout" kind="important">
+text: 函数名称在脚本内必须唯一。每个 $func 都必须有匹配的 $endfunc，并且只有在其定义被收集后才能调用函数。
+</block>
+</dash>
+
+<details>
+syntax: $func[name]
+param: name|text|Required|唯一且非空的函数名称
+</details>

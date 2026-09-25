@@ -1,0 +1,31 @@
+<dash>
+name: $cloneChannel
+desc: موجودہ سرور چینل کی نقل بناتا ہے۔
+category: چینل انتظامات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $cloneChannel موجودہ سرور میں کسی چینل کی کاپی بناتا ہے۔ ذریعہ ٹیکسٹ، وائس، کیٹیگری، اسٹیج یا فارم چینل ہو سکتا ہے۔ دوسرا اختیاری آرگومینٹ نئے چینل کا نام فراہم کرتا ہے؛ ورنہ Discord ذریعہ چینل کا نام برقرار رکھتا ہے۔ کمانڈ نئے بنائے گئے چینل کا مینشن بھیجتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $cloneChannel[channel ID or channel mention; (new name)]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $cloneChannel[<#123456789012345678>; Archive]
+</block>
+
+<block type="callout" kind="warning">
+text: کمانڈ سرور کے اندر چلنا چاہیے اور بوٹ کے پاس Manage Channels اجازت ہونی چاہیے۔ ذریعہ چینل بوٹ یا موجودہ گِلڈ کی کیش میں موجود ہونا چاہیے۔
+</block>
+
+<block type="callout" kind="note">
+text: موجودہ انٹرپریٹر میں یہ ایک اسٹینڈ اَلون کمانڈ ہے۔ اسے ان لائن نہیں رکھنا چاہیے: اس کا ریزالورر خالی ویلیو واپس کرتا ہے اور سائیڈ ایفیکٹ چلاتا نہیں۔
+</block>
+</dash>
+
+<details>
+syntax: $cloneChannel[channel ID or channel mention; (new name)]
+param: channelID|text|لازمی|کلون کیے جانے والے چینل کی عددی ID یا چینل مینشن
+param: newName|text|اختیاری|کلون شدہ چینل کے لیے نام
+</details>

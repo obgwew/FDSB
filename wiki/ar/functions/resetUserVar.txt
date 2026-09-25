@@ -1,0 +1,28 @@
+<dash>
+name: $resetUserVar
+desc: يزيل تجاوز متغير بنطاق المستخدم.
+category: المتغيرات
+
+<block type="text" title="كيف تعمل الدالة؟">
+text: $resetUserVar يحذف التجاوز المحفوظ للمفتاح guild_id:user_id. لا يحذف تعريف المتغير العام ولا يغيّره. مع وسيط واحد، يُستخدم كاتب التشغيل والسيرفر الحالي؛ ومع وسيطين، يُحدد معرّف المستخدم؛ ومع ثلاثة وسائط، يُحدد المعرفان.
+</block>
+
+<block type="code" title="الصيغة">
+text: $resetUserVar[name; (user_id); (guild_id)]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $resetUserVar[points; 123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: إذا كان التجاوز غير موجود بالفعل، يكون الأمر عملية بلا أثر ويسجل هذه الحالة في سجل التنفيذ.
+</block>
+</dash>
+
+<details>
+syntax: $resetUserVar[name; (user_id); (guild_id)]
+param: name|text|مطلوب|اسم المتغير الذي يجب إزالة تجاوز المستخدم الخاص به
+param: userID|text|اختياري|معرّف المستخدم؛ إذا لم يحدد، يكون كاتب التشغيل
+param: guildID|text|اختياري|معرّف السيرفر؛ إذا لم يحدد، يكون السيرفر الحالي
+</details>

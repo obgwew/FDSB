@@ -1,0 +1,31 @@
+<dash>
+name: $modifyRolePerms
+desc: Bir sunucu rolünde izinleri etkinleştirir veya devre dışı bırakır.
+category: Moderasyon
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $modifyRolePerms, bir rol üzerindeki seçili izinleri değiştirir. Bir izni etkinleştirmek için önüne + ekleyin, devre dışı bırakmak için - ekleyin. İşaret kullanımı isteğe bağlıdır ve varsayılanı +'dir. Özel all izni izin kümesinin tamamını etkinleştirir veya devre dışı bırakır. Çağrıda listelenmeyen izinler değişmeden kalır.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $modifyRolePerms[role ID or role mention; permission +/-; ...]
+</block>
+
+<block type="code" title="Kopyalamaya Hazır Örnek">
+text: $modifyRolePerms[<@&123456789012345678>; +send_messages; -connect]
+</block>
+
+<block type="callout" kind="warning">
+text: Komut yalnızca bir sunucu içinde kullanılabilir. Botun "Rolleri Yönet" iznine sahip olması gerekir ve hedef rol, botun en yüksek rolünden daha aşağıda bulunmalıdır.
+</block>
+
+<block type="callout" kind="note">
+text: İzin adları, yorumlayıcının desteklediği Discord snake_case adlarını kullanır. Bu, tek başına kullanılan bir komuttur; mevcut satır içi çözümleyicisi boş bir değer döndürür.
+</block>
+</dash>
+
+<details>
+syntax: $modifyRolePerms[role ID or role mention; permission +/-; ...]
+param: roleID|snowflake|Required|Sayısal rol kimliği veya rol bahsetmesi
+param: permissions|text|Required|+ veya - önekine sahip bir veya daha fazla izin adı; all izin kümesinin tamamını değiştirir
+</details>

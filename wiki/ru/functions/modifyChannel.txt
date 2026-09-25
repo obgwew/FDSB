@@ -1,0 +1,35 @@
+<dash>
+name: $modifyChannel
+desc: Изменяет одно или несколько свойств канала сервера.
+category: Управление каналами
+
+<block type="text" title="Как работает команда?">
+text: $modifyChannel изменяет канал на текущем сервере. Обязательный первый аргумент выбирает канал; остальные аргументы задаются позиционно и могут изменять название, тему, параметр NSFW, позицию и категорию. Необязательный аргумент можно пропустить или оставить пустым, чтобы соответствующее свойство не изменилось.
+</block>
+
+<block type="code" title="Синтаксис">
+text: $modifyChannel[Channel ID; (Channel Name; Topic; Make NSFW?; Position; Category ID)]
+</block>
+
+<block type="code" title="Готовый пример для копирования">
+text: $modifyChannel[123456789012345678; Announcements; Welcome messages; no; 2; 987654321012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: Команда должна выполняться на сервере, а у бота должно быть разрешение на управление каналом. Длина названия ограничена 100 символами, а темы — 1024 символами. Категорию нельзя назначить другой категории.
+</block>
+
+<block type="callout" kind="note">
+text: Для значения NSFW используйте yes, no, true или false. Чтобы удалить категорию, укажите в соответствующем поле none, 0 или null. В текущем интерпретаторе это самостоятельная команда; её встроенный обработчик не выполняет побочное действие.
+</block>
+</dash>
+
+<details>
+syntax: $modifyChannel[Channel ID; (Channel Name; Topic; Make NSFW?; Position; Category ID)]
+param: channelID|snowflake|Обязательный|ID или упоминание изменяемого канала
+param: name|text|Необязательный|Новое название канала
+param: topic|text|Необязательный|Новая тема; none очищает тему
+param: nsfw|text|Необязательный|Является ли канал NSFW: yes, no, true или false
+param: position|integer|Необязательный|Новая позиция канала
+param: categoryID|snowflake|Необязательный|ID конечной категории; none, 0 или null очищает категорию
+</details>

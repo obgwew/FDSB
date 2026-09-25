@@ -1,0 +1,31 @@
+<dash>
+name: $editChannelTopic
+desc: Modifie le sujet d'un canal de serveur.
+category: Gestion des canaux
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: Avec un argument, $editChannelTopic modifie le sujet du canal où le script a été déclenché. Avec deux arguments, il modifie le sujet du canal identifié par le premier argument. Un sujet vide ou composé uniquement d'espaces efface le sujet actuel.
+</block>
+
+<block type="code" title="Syntaxe">
+text: $editChannelTopic[(channel ID or mention); new topic]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $editChannelTopic[<#123456789012345678>; Welcome to the community!]
+</block>
+
+<block type="callout" kind="warning">
+text: La commande ne fonctionne qu'à l'intérieur d'un serveur. La cible doit appartenir au serveur actuel, prendre en charge les sujets et être modifiable par le bot. Les sujets ne peuvent pas dépasser 1024 caractères.
+</block>
+
+<block type="callout" kind="note">
+text: Dans l'interpréteur actuel, il s'agit d'une commande autonome. Son résolveur en ligne renvoie une valeur vide et n'exécute pas l'effet de bord.
+</block>
+</dash>
+
+<details>
+syntax: $editChannelTopic[(channel ID or mention); new topic]
+param: channelID|text|Optionnel|L'ID ou la mention du canal cible ; lorsqu'il est omis avec un seul argument, le canal actuel est utilisé
+param: newTopic|text|Requis|Le nouveau sujet, jusqu'à 1024 caractères
+</details>

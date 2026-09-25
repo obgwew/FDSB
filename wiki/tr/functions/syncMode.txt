@@ -1,0 +1,31 @@
+<dash>
+name: $syncMode
+desc: Bir bloğu senkronize FDScript yürütmesi için işaretler.
+category: Akış Kontrolü
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $syncMode, kendisinden sonraki ve geçerli bloğun sonuna kadar olan komutları tek bir senkronize toplu işlem olarak çalıştırmak için tasarlanmıştır. Toplu işlem motoru; kontrol akışı sınırlarını, işlev çağrılarını, kanal yönlendirmelerini, bastırmaları, korumaları ve kapanış belirteçlerini engel olarak kabul eder.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $syncMode
+</block>
+
+<block type="code" title="Kopyalamaya Hazır Örnek">
+text: $syncMode
+$sendMessage[First step]
+$sendMessage[Second step]
+</block>
+
+<block type="callout" kind="warning">
+text: Mevcut yorumlayıcıda $syncMode yalnızca yürütme bağlamı bayrağını ayarlar ve senkronizasyonun etkinleştirildiğini günlüğe kaydeder. sync_mode_ops.py içindeki toplu işlem çalıştırıcısı henüz ana yürütme yoluna bağlı değil; bu nedenle sonraki komutlar hâlâ sıralı çalışır.
+</block>
+
+<block type="callout" kind="note">
+text: Bu sayfayı amaçlanan arayüz olarak değerlendirin. Yorumlayıcı entegrasyonu tamamlanana kadar eşzamanlı yürütmeye veya bir toplu işlemin ya tamamen başarısız olması ya da hiç başarısız olmaması özelliğine güvenmeyin.
+</block>
+</dash>
+
+<details>
+syntax: $syncMode
+</details>

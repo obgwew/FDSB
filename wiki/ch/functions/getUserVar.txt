@@ -1,0 +1,32 @@
+<dash>
+name: $getUserVar
+desc: 检索限定于服务器中某个用户的持久化变量。
+category: 变量
+
+<block type="text" title="命令如何工作？">
+text: $getUserVar 检查以 guild_id:user_id 为键存储的用户覆盖值。如果该覆盖值为空或不存在，它会回退到全局变量。使用一个参数时，使用触发命令的作者和当前服务器；使用两个参数时选择用户 ID；使用三个参数时同时选择用户和服务器 ID。
+</block>
+
+<block type="code" title="语法">
+text: $getUserVar[name; (user_id); (guild_id)]
+</block>
+
+<block type="code" title="可复制示例">
+text: $getUserVar[points; 123456789012345678]
+</block>
+
+<block type="callout" kind="important">
+text: 如果全局变量不存在，命令会创建一个占位条目，必要时创建用户范围的条目，并中止脚本。请先定义全局变量。
+</block>
+
+<block type="callout" kind="note">
+text: 获取器可以内联使用或作为独立语句使用。默认用户是触发命令的作者，而不是机器人。
+</block>
+</dash>
+
+<details>
+syntax: $getUserVar[name; (user_id); (guild_id)]
+param: name|text|Required|要检索的变量名称
+param: userID|text|Optional|要读取其范围值的用户 ID；默认为触发命令的作者
+param: guildID|text|Optional|服务器 ID；默认为当前服务器
+</details>

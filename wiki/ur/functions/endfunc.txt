@@ -1,0 +1,27 @@
+<dash>
+name: $endfunc
+desc: ایک FDScript فنکشن بلاک بند کرتا ہے۔
+category: بہاؤ کنٹرول
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $endfunc سب سے تازہ کھلا ہوا $func بلاک بند کرتا ہے۔ یہ دوبارہ استعمال کیے جانے والے فنکشن کی تعریف کا اختتام نشان زد کرتا ہے اور $func کے ساتھ ملنے والے جڑے میں آنا چاہیے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $endfunc
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $func[ping]
+$sendMessage[Pong]
+$endfunc
+</block>
+
+<block type="callout" kind="warning">
+text: اگر $endfunc کے لیے ملنے والا $func نہ ہو، یا اس کے درمیان کوئی دوسرا کھلا بلاک ہو، تو یہ اسکرپٹ کی خرابی ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $endfunc
+</details>

@@ -1,0 +1,31 @@
+<dash>
+name: $modifyRolePerms
+desc: Aktiviert oder deaktiviert Berechtigungen einer Serverrolle.
+category: Moderation
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: $modifyRolePerms ändert ausgewählte Berechtigungen einer Rolle. Stelle einer Berechtigung ein + vor, um sie zu aktivieren, oder ein -, um sie zu deaktivieren. Das Vorzeichen ist optional und standardmäßig +. Die Sonderberechtigung all aktiviert oder deaktiviert den gesamten Berechtigungssatz. Nicht im Aufruf angegebene Berechtigungen bleiben unverändert.
+</block>
+
+<block type="code" title="Syntax">
+text: $modifyRolePerms[role ID or role mention; permission +/-; ...]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $modifyRolePerms[<@&123456789012345678>; +send_messages; -connect]
+</block>
+
+<block type="callout" kind="warning">
+text: Der Befehl kann nur innerhalb eines Servers verwendet werden. Der Bot benötigt die Berechtigung "Rollen verwalten", und die Zielrolle muss unterhalb der höchsten Rolle des Bots liegen.
+</block>
+
+<block type="callout" kind="note">
+text: Berechtigungsnamen verwenden die Snake_case-Namen von Discord, die vom Interpreter unterstützt werden. Dies ist ein eigenständiger Befehl; der aktuelle Inline-Resolver gibt einen leeren Wert zurück.
+</block>
+</dash>
+
+<details>
+syntax: $modifyRolePerms[role ID or role mention; permission +/-; ...]
+param: roleID|snowflake|Erforderlich|Die numerische Rollen-ID oder Rollenerwähnung
+param: permissions|text|Erforderlich|Ein oder mehrere Berechtigungsnamen mit dem Präfix + oder -; all ändert den gesamten Berechtigungssatz
+</details>

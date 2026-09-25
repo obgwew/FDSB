@@ -1,103 +1,122 @@
 # cmds_FDScripts/getVar.py
 import discord
-from main_app.core_fdsb.FDCore import (
+from FDScript import (
     ExecutionContext, Command,
-    FDLogicError, FDRuntimeError, FDEnvironmentError,
-    _send_error, _load_data, _save_data, _load_ids_data, _save_ids_data,
+    FDEnvironmentError,
+    _send_error, _load_data, _save_data,
     _truncate,
 )
+from FDCore import _load_ids_data, _save_ids_data
 
 
-def _fmt(err) -> str:
-    return f"{err._icon} **{err._category}** — {err.msg}"
+def _display(value) -> str:
+    return "" if value is None else str(value)
 
-async def _send_warning(ch, warning) -> None:
-    ctx = getattr(ch, 'ctx', None)
-    if ctx is not None and getattr(ctx, 'suppress_errors', False):
-        ctx.log_event(f"[suppressed warning] {warning._category}: {warning.msg}")
-        return
-    if ch is not None:
-        try:
-            await ch.send(_fmt(warning))
-        except Exception as e:
-            print(f"[FDScript Warning Logger] Failed to send warning to channel: {e}")
-    else:
-        print(f"[FDScript Console Warning] {warning._category}: {warning.msg}")
 
-def _ensure_exists(name: str, data: dict, save_fn, is_user_scoped: bool = False, user_id: str = None) -> bool:
-    if is_user_scoped:
-        global_data = _load_data()
-        global_exists = name in global_data
-        
-        existed = name in data and user_id in data.get(name, {})
-        if not existed:
-            if name not in data:
-                data[name] = {}
-            data[name][user_id] = ''
-            save_fn(data)
-        
-        return not existed and not global_exists
-    else:
-        existed = name in data
-        if not existed:
-            data[name] = ''
-            save_fn(data)
-        return not existed
+def _fetch_global(name: str) -> tuple[object, bool]:
+    data = _load_data()
+    if name in data:
+        return data[name], False
+    data[name] = None
+    _save_data(data)
+    return None, True
 
-def _get_value(args: list[str], ctx: ExecutionContext) -> tuple[str, bool, str]:
-    resolved_args = [ctx.resolve(a) for a in args]
 
-    if len(resolved_args) == 2:
-        name    = resolved_args[0].strip()
-        user_id = resolved_args[1].strip()
-        if not name:
-            ctx.log_event("getVar inline error: empty variable name")
-            return "", False, name
-        if not user_id:
-            ctx.log_event("getVar inline error: empty user ID")
-            return "", False, name
+def _fetch_scoped(name: str, user_id: str) -> tuple[object, bool]:
+    global_data = _load_data()
+    ids_data = _load_ids_data()
 
-        data = _load_ids_data()
-        warned = _ensure_exists(name, data, _save_ids_data, is_user_scoped=True, user_id=user_id)
-        if warned:
-            ctx.log_event(f"getVar warning: '{name}' is not a predefined variable — created with empty value")
+    if name in global_data:
+        user_val = ids_data.get(name, {}).get(user_id)
+        if user_val is not None:
+            return user_val, False
+        return global_data[name], False
 
-        val = data.get(name, {}).get(user_id, '')
-        ctx.log_event(f"getVar [{name}] for user {user_id} → {_truncate(val)!r}")
-        return str(val), warned, name
+    if name not in ids_data:
+        ids_data[name] = {}
+    ids_data[name][user_id] = None
+    _save_ids_data(ids_data)
+    return None, True
 
-    elif len(resolved_args) == 1:
-        name = resolved_args[0].strip()
-        if not name:
-            ctx.log_event("getVar inline error: empty variable name")
-            return "", False, name
-
-        data = _load_data()
-        warned = _ensure_exists(name, data, _save_data)
-        if warned:
-            ctx.log_event(f"getVar warning: '{name}' is not a predefined variable — created with empty value")
-
-        val = str(data.get(name, ''))
-        ctx.log_event(f"getVar [{name}] → {_truncate(val)!r}")
-        return val, warned, name
-
-    else:
-        ctx.log_event("getVar inline error: invalid argument count")
-        return "", False, ""
 
 def resolve_inline(args: list[str], ctx: ExecutionContext) -> str:
-    value, _warned, _name = _get_value(args, ctx)
-    return value
+    resolved = [ctx.resolve(a) for a in args]
+
+    if len(resolved) == 1:
+        name = resolved[0].strip()
+        if not name:
+            return ""
+        value, is_new = _fetch_global(name)
+        if is_new:
+            ctx._abort_with_error(FDEnvironmentError(
+                f"Variable `{name}` did not exist and has been created for the "
+                f"first time (value: none). Script stopped — please review."
+            ))
+            return ""
+        ctx.log_event(f"getVar [{name}] → {_truncate(_display(value))!r}")
+        return _display(value)
+
+    if len(resolved) == 2:
+        name, user_id = resolved[0].strip(), resolved[1].strip()
+        if not name or not user_id:
+            return ""
+        value, must_stop = _fetch_scoped(name, user_id)
+        if must_stop:
+            ctx._abort_with_error(FDEnvironmentError(
+                f"No global variable `{name}` exists. A private variable "
+                f"`{name}` has been created for user `{user_id}` (value: none). "
+                f"Script stopped."
+            ))
+            return ""
+        ctx.log_event(f"getVar [{name}] for user {user_id} → {_truncate(_display(value))!r}")
+        return _display(value)
+
+    return ""
+
 
 async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: discord.abc.Messageable) -> None:
-    value, warned, name = _get_value(args, ctx)
+    resolved = [ctx.resolve(a) for a in args]
 
-    if warned:
-        await _send_warning(ch, FDEnvironmentError(
-            f"Variable `{name}` is not among the predefined variables. "
-            f"A new variable `{name}` has been created with an empty value. "
-            f"Please review the program if you would like to adjust this."
+    if len(resolved) == 1:
+        name = resolved[0].strip()
+        if not name:
+            await _send_error(ch, FDEnvironmentError("`$getVar` — variable name cannot be empty."))
+            return
+
+        value, is_new = _fetch_global(name)
+        if is_new:
+            await _send_error(ch, FDEnvironmentError(
+                f"Variable `{name}` did not exist and has been created for the "
+                f"first time (value: none). Please review the program."
+            ))
+            return
+
+        ctx.log_event(f"getVar [{name}] → {_truncate(_display(value))!r}")
+        if value is not None:
+            await ch.send(_display(value))
+
+    elif len(resolved) == 2:
+        name, user_id = resolved[0].strip(), resolved[1].strip()
+        if not name:
+            await _send_error(ch, FDEnvironmentError("`$getVar` — variable name cannot be empty."))
+            return
+        if not user_id:
+            await _send_error(ch, FDEnvironmentError("`$getVar` — user ID cannot be empty."))
+            return
+
+        value, must_stop = _fetch_scoped(name, user_id)
+        if must_stop:
+            await _send_error(ch, FDEnvironmentError(
+                f"No global variable `{name}` exists. A private variable "
+                f"`{name}` has been created for user `{user_id}` (value: none)."
+            ))
+            return
+
+        ctx.log_event(f"getVar [{name}] for user {user_id} → {_truncate(_display(value))!r}")
+        if value is not None:
+            await ch.send(_display(value))
+
+    else:
+        await _send_error(ch, FDEnvironmentError(
+            "`$getVar` requires 1 or 2 arguments: `$getVar[name]` or `$getVar[name; user_id]`"
         ))
-
-    if value:
-        await ch.send(value)

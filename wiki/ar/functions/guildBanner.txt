@@ -1,0 +1,30 @@
+<dash>
+name: $guildBanner
+desc: يعيد رابط لافتة السيرفر.
+category: السيرفر
+
+<block type="text" title="كيف تعمل الدالة؟">
+text: بدون وسيط، يستخدم $guildBanner السيرفر الذي فُعّل فيه السكربت أو استُقبل فيه التفاعل. ومع معرّف سيرفر، يعيد لافتة السيرفر الذي يكون البوت عضوًا فيه. تُعاد اللافتات المتحركة كروابط GIF، واللافتات الأخرى كروابط PNG.
+</block>
+
+<block type="code" title="الصيغة">
+text: $guildBanner[(guild_id)]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $guildBanner[123456789012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: يجب أن يكون لدى السيرفر لافتة، ويجب أن يتمكن البوت من تحديدها. استخدم معرّف سيرفر رقميًا عند توفير الوسيط الاختياري.
+</block>
+
+<block type="callout" kind="note">
+text: يمكن أن تستخدم الصيغة المضمّنة بيانات السيرفر المخزنة مؤقتًا فقط. أما الصيغة المستقلة فيمكنها جلب سيرفر غير مخزن مؤقتًا حاليًا، وذلك بحسب توفره في ديسكورد.
+</block>
+</dash>
+
+<details>
+syntax: $guildBanner[(guild_id)]
+param: guildID|snowflake|اختياري|معرّف السيرفر؛ إذا لم يحدد، يُستخدم السيرفر الحالي أو سيرفر التفاعل
+</details>

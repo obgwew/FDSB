@@ -1,0 +1,31 @@
+<dash>
+name: $getGuildVar
+desc: 检索限定于服务器的持久化变量。
+category: 变量
+
+<block type="text" title="命令如何工作？">
+text: $getGuildVar 首先在服务器变量文件中查找针对特定服务器的覆盖值。如果没有覆盖值，它会回退到同名的全局变量。使用一个参数时使用当前服务器 ID；使用两个参数时，第二个参数选择服务器 ID。
+</block>
+
+<block type="code" title="语法">
+text: $getGuildVar[name; (guild_id)]
+</block>
+
+<block type="code" title="可复制示例">
+text: $getGuildVar[welcomeMessage]
+</block>
+
+<block type="callout" kind="important">
+text: 如果全局变量不存在，命令会创建一个占位条目，必要时创建服务器范围的条目，并以环境错误中止脚本。使用前请检查并定义该变量。
+</block>
+
+<block type="callout" kind="note">
+text: 获取器可以内联使用，也可以作为独立语句使用。缺失的全局值不会被静默地视为有效值。
+</block>
+</dash>
+
+<details>
+syntax: $getGuildVar[name; (guild_id)]
+param: name|text|Required|要检索的变量名称
+param: guildID|text|Optional|要读取其范围值的服务器 ID；默认为当前服务器
+</details>

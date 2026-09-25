@@ -1,0 +1,31 @@
+<dash>
+name: $editChannelTopic
+desc: Zmienia temat kanału serwera.
+category: Zarządzanie kanałami
+
+<block type="text" title="Jak działa ta komenda?">
+text: Przy jednym argumencie $editChannelTopic zmienia temat kanału, w którym skrypt został wywołany. Przy dwóch argumentach zmienia temat kanału wskazanego przez pierwszy argument. Temat pusty lub zawierający wyłącznie spacje usuwa bieżący temat.
+</block>
+
+<block type="code" title="Składnia">
+text: $editChannelTopic[(channel ID or mention); new topic]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $editChannelTopic[<#123456789012345678>; Welcome to the community!]
+</block>
+
+<block type="callout" kind="warning">
+text: Komenda działa tylko na serwerze. Kanał docelowy musi należeć do bieżącego serwera, obsługiwać tematy i być edytowalny przez bota. Tematy nie mogą przekraczać 1024 znaków.
+</block>
+
+<block type="callout" kind="note">
+text: W bieżącym interpreterze jest to komenda samodzielna. Jej resolver używany w tekście zwraca pustą wartość i nie wykonuje efektu ubocznego.
+</block>
+</dash>
+
+<details>
+syntax: $editChannelTopic[(channel ID or mention); new topic]
+param: channelID|text|Optional|ID lub wzmianka kanału docelowego; gdy pominięto przy jednym argumencie, używany jest bieżący kanał
+param: newTopic|text|Required|Zastępczy temat, maksymalnie 1024 znaków
+</details>

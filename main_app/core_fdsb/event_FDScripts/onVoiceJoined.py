@@ -1,23 +1,14 @@
 # main_app/core_fdsb/event_FDScripts/onVoiceJoined.py
 import discord
-import re
-from main_app.core_fdsb.FDCore import ExecutionContext
 from main_app.core_fdsb.FDScript import Interpreter
+from main_app.core_fdsb.event_FDScripts._event_context import build_member_context
 
 
 async def handle_event(member: discord.Member, voice_channel: discord.VoiceChannel,
                         bot: discord.Client, script_text: str):
+    from main_app.core_fdsb.Server import set_fgs_state, STATE_SYNCING
+    set_fgs_state(STATE_SYNCING)
+
     interpreter = Interpreter(script_text)
-    ctx = ExecutionContext(message=None, bot=bot, member=member)
-
-    first_line = script_text.split('\n')[0]
-    match = re.search(r'\[(\d+)\]', first_line)
-    if match:
-        channel_id = int(match.group(1))
-        target_channel = bot.get_channel(channel_id)
-        if target_channel:
-            ctx.message.channel = target_channel
-        else:
-            print(f"[Bot] Channel {channel_id} not found or bot lacks permission to view it for $onVoiceJoined event")
-
+    ctx = build_member_context(bot, member, script_text, "$onVoiceJoined")
     await interpreter.run(ctx)

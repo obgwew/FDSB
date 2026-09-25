@@ -1,0 +1,30 @@
+<dash>
+name: $userBannerColor
+desc: Gibt die Banner-Akzentfarbe eines Benutzers im Hexadezimalformat zurück.
+category: Info
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: Ohne Argument gibt $userBannerColor die Akzentfarbe des Bot-Kontos zurück. Mit einer Benutzer-ID oder Erwähnung gibt es die Akzentfarbe dieses Benutzers in Großbuchstaben im Format #RRGGBB zurück.
+</block>
+
+<block type="code" title="Syntax">
+text: $userBannerColor[(user_id)]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $userBannerColor[123456789012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: Der Benutzer muss eine Banner-Akzentfarbe haben, und der Bot muss den Benutzer auflösen können. Ein leeres oder nicht verfügbares Ergebnis wird von der eigenständigen Form als Fehler gemeldet.
+</block>
+
+<block type="callout" kind="note">
+text: Die Inline-Form verwendet nur zwischengespeicherte Benutzer und betrachtet derzeit eine als falsch ausgewertete Akzentfarbe als nicht verfügbar. Der Standard ist immer der Bot-Konto, nicht der auslösende Autor.
+</block>
+</dash>
+
+<details>
+syntax: $userBannerColor[(user_id)]
+param: userID|snowflake|Optional|Die Benutzer-ID oder Erwähnung; Standard ist der Bot-Konto
+</details>

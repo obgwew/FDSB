@@ -1,0 +1,31 @@
+<dash>
+name: $cloneChannel
+desc: یک کانال موجود در سرور را شبیه‌سازی می‌کند.
+category: مدیریت کانال‌ها
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $cloneChannel یک نسخه از یک کانال در سرور فعلی ایجاد می‌کند. کانال مبدأ می‌تواند متنی، صوتی، دسته‌بندی، صحنه یا انجمن باشد. آرگومان اختیاری دوم نام جدید کانال را مشخص می‌کند؛ در غیر این صورت Discord نام کانال مبدأ را حفظ می‌کند. دستور، منشن کانال تازه‌ساخته‌شده را ارسال می‌کند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $cloneChannel[channel ID or channel mention; (new name)]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $cloneChannel[<#123456789012345678>; Archive]
+</block>
+
+<block type="callout" kind="warning">
+text: دستور باید در سرور اجرا شود و ربات باید مجوز «مدیریت کانال‌ها» را داشته باشد. کانال مبدأ باید در کش ربات یا کش سرور فعلی پیدا شود.
+</block>
+
+<block type="callout" kind="note">
+text: در مفسر فعلی، این یک دستور مستقل است. نباید آن را به‌صورت درون‌خطی قرار دهید: حل‌گر آن به‌جای اجرای اثر جانبی، مقدار خالی برمی‌گرداند.
+</block>
+</dash>
+
+<details>
+syntax: $cloneChannel[channel ID or channel mention; (new name)]
+param: channelID|text|الزامی|شناسه عددی یا منشن کانالی که باید شبیه‌سازی شود
+param: newName|text|اختیاری|نام کانال شبیه‌سازی‌شده
+</details>

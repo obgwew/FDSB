@@ -1,0 +1,31 @@
+<dash>
+name: $syncMode
+desc: 标记一个用于同步 FDScript 执行的块。
+category: 流程控制
+
+<block type="text" title="命令如何工作？">
+text: $syncMode 旨在将其下方的命令（直到当前块结束）作为一个同步批次运行。批处理引擎会将控制流边界、函数调用、频道重定向、抑制操作、保护条件和结束标记视为屏障。
+</block>
+
+<block type="code" title="语法">
+text: $syncMode
+</block>
+
+<block type="code" title="可复制示例">
+text: $syncMode
+$sendMessage[First step]
+$sendMessage[Second step]
+</block>
+
+<block type="callout" kind="warning">
+text: 在当前解释器中，$syncMode 只会设置执行上下文标志，并记录已启用同步。sync_mode_ops.py 中的批处理运行器尚未连接到主执行路径，因此其下方的命令仍会顺序运行。
+</block>
+
+<block type="callout" kind="note">
+text: 将此页面视为预期接口。在解释器集成完成之前，不要依赖并发执行或批次失败时的全有或全无行为。
+</block>
+</dash>
+
+<details>
+syntax: $syncMode
+</details>

@@ -25,10 +25,7 @@ except ImportError:
     }
     FUNCTION_COMMANDS = {"func", "endfunc", "call"}
 
-try:
-    from main_app.core_fdsb.local_server import EVENT_PREFIXES
-except ImportError:
-    EVENT_PREFIXES = {'$onJoined', '$onLeave', '$alwaysReply', '$onInteraction'}
+from main_app.core_fdsb.Server import EVENT_PREFIXES
     
 def _t(key: str) -> str:
     return Translations.get(key, get_current_lang())
@@ -54,6 +51,7 @@ _HL_LINE_HEIGHT   = 1.45
 _HL_FONT_FAMILY   = "Consolas, 'Noto Color Emoji', 'Apple Color Emoji', 'Segoe UI Emoji', monospace"
 _HL_FONT_WEIGHT   = ft.FontWeight.W_400
 _HL_LETTER_SPACE  = 0
+_HL_LINE_PX       = _HL_FONT_SIZE * _HL_LINE_HEIGHT
 
 _MOBILE_MIN_LINES = 14
 _DESKTOP_MIN_LINES = 18
@@ -387,7 +385,7 @@ class CommandEditorView:
             value=True,
             active_color=_c('accent'),
             scale=0.80,
-            tooltip="Syntax Switch",
+            tooltip=_t('syntax_switch_tooltip'),
             on_change=self._on_syntax_switch_change,
         )
 
@@ -433,19 +431,15 @@ class CommandEditorView:
             )
         )
 
-        self._highlighter = ft.Text(
-            font_family=_HL_FONT_FAMILY,
-            size=_HL_FONT_SIZE,
-            selectable=False,
-            text_align=ft.TextAlign.LEFT,
-            rtl=False,  
-            style=ft.TextStyle(
-                height=_HL_LINE_HEIGHT,
-                font_family=_HL_FONT_FAMILY,
-                size=_HL_FONT_SIZE,
-                weight=_HL_FONT_WEIGHT,
-                letter_spacing=_HL_LETTER_SPACE,
-            ),
+        # Was a single multi-line ft.Text (spans spanning embedded '\n's).
+        # Now a Column of independent per-line boxes: each line is its own
+        # fresh Text layout instead of a continuation of one growing
+        # paragraph, so line-height drift can no longer accumulate down
+        # the document.
+        self._highlighter = ft.Column(
+            controls=[self._build_highlight_line([])],
+            spacing=0,
+            tight=True,
         )
 
         self._code_edit = ft.TextField(
@@ -489,7 +483,7 @@ class CommandEditorView:
         )
 
         self._title_text = ft.Text(
-            _ar('New.fds'), size=13, weight=ft.FontWeight.BOLD, color=_c('text')
+            _t('new_command_file'), size=13, weight=ft.FontWeight.BOLD, color=_c('text')
         )
         
         self._dirty_dot = ft.Container(
@@ -560,7 +554,7 @@ class CommandEditorView:
             self._apply_highlights()
         else:
             self._highlighter.visible = False
-            self._highlighter.spans = []
+            self._highlighter.controls = [self._build_highlight_line([])]
             self._code_edit.text_style.color = _c('text')
             self._syntax_warning_banner.visible = False
 
@@ -822,7 +816,7 @@ class CommandEditorView:
         wiki_shortcut_btn = ft.IconButton(
             icon=ft.Icons.MENU_BOOK_ROUNDED,
             icon_color=_c('accent'),
-            tooltip="Wiki: Events / ويكي الأحداث",
+            tooltip=_t('wiki_events_tooltip'),
             on_click=lambda _: self._on_wiki_request() if self._on_wiki_request else None,
             icon_size=20,
         )
@@ -953,6 +947,42 @@ class CommandEditorView:
         if self._page:
             self._page.run_task(self._scroll_to_editor_async)
 
+    @staticmethod
+    def _make_hl_span(val: str, col: str) -> ft.TextSpan:
+        return ft.TextSpan(
+            val,
+            ft.TextStyle(
+                color=col,
+                size=_HL_FONT_SIZE,
+                height=1.0,
+                font_family=_HL_FONT_FAMILY,
+                weight=_HL_FONT_WEIGHT,
+                letter_spacing=_HL_LETTER_SPACE,
+            ),
+        )
+
+    def _build_highlight_line(self, raw_spans: list) -> ft.Container:
+        spans = [self._make_hl_span(v, c) for v, c in raw_spans]
+        return ft.Container(
+            height=_HL_LINE_PX,
+            content=ft.Text(
+                spans=spans,
+                font_family=_HL_FONT_FAMILY,
+                size=_HL_FONT_SIZE,
+                selectable=False,
+                no_wrap=True,
+                text_align=ft.TextAlign.LEFT,
+                rtl=False,
+                style=ft.TextStyle(
+                    height=1.0,
+                    font_family=_HL_FONT_FAMILY,
+                    size=_HL_FONT_SIZE,
+                    weight=_HL_FONT_WEIGHT,
+                    letter_spacing=_HL_LETTER_SPACE,
+                ),
+            ),
+        )
+
     def _apply_highlights(self):
         if not self._syntax_enabled:
             return
@@ -961,8 +991,7 @@ class CommandEditorView:
             text = self._code_edit.value or ''
 
             if not text:
-                self._highlighter.spans = []
-                self._highlighter.value = ''
+                self._highlighter.controls = [self._build_highlight_line([])]
                 if self._highlighter.page:
                     self._highlighter.update()
                 return
@@ -971,23 +1000,15 @@ class CommandEditorView:
             colors     = self._hl_colors
             base_color = colors.get('base', '#2ECC71')
 
-            def _make_span(val: str, col: str) -> ft.TextSpan:
-                return ft.TextSpan(
-                    val,
-                    ft.TextStyle(
-                        color=col,
-                        size=_HL_FONT_SIZE,
-                        height=_HL_LINE_HEIGHT,
-                        font_family=_HL_FONT_FAMILY,
-                        weight=_HL_FONT_WEIGHT,
-                        letter_spacing=_HL_LETTER_SPACE,
-                    ),
-                )
+            lines_raw_spans = [[]]
 
-            raw_spans = []
             for match in pattern.finditer(text):
                 val = match.group()
                 grp = match.lastgroup
+
+                if grp == 'nl':
+                    lines_raw_spans.append([])
+                    continue
 
                 if grp == 'comment':   col = colors.get('comment', base_color)
                 elif grp == 'string':  col = colors.get('string', base_color)
@@ -999,12 +1020,15 @@ class CommandEditorView:
                 else:
                     col = base_color
 
-                if raw_spans and raw_spans[-1][1] == col:
-                    raw_spans[-1] = (raw_spans[-1][0] + val, col)
+                line = lines_raw_spans[-1]
+                if line and line[-1][1] == col:
+                    line[-1] = (line[-1][0] + val, col)
                 else:
-                    raw_spans.append((val, col))
+                    line.append((val, col))
 
-            self._highlighter.spans = [_make_span(v, c) for v, c in raw_spans]
+            self._highlighter.controls = [
+                self._build_highlight_line(raw_spans) for raw_spans in lines_raw_spans
+            ]
             if self._highlighter.page:
                 self._highlighter.update()
 
@@ -1068,7 +1092,7 @@ class CommandEditorView:
             self._name_field.value   = ''
             self._prefix_field.value = ''
             self._code_edit.value    = ''
-            self._title_text.value   = _ar('New.fds')
+            self._title_text.value   = _t('new_command_file')
 
         self._clear_name_error()
 
@@ -1103,7 +1127,7 @@ class CommandEditorView:
             self._apply_highlights()
         else:
             self._highlighter.visible = False
-            self._highlighter.spans = []
+            self._highlighter.controls = [self._build_highlight_line([])]
             self._code_edit.text_style.color = _c('text')
 
         self._last_kb_inset = -1
@@ -1415,7 +1439,14 @@ class BotCommandsTab:
             on_saved=self._on_editor_saved,
             on_wiki_request=self._on_wiki_events_req
         )
-        self._container   = ft.Container(expand=True)
+        
+        self._container = ft.AnimatedSwitcher(
+            content=None,
+            transition=ft.AnimatedSwitcherTransition.FADE,
+            duration=220,
+            switch_in_curve=ft.AnimationCurve.EASE_OUT,
+            expand=True,
+        )
 
     def handle_back(self) -> bool:
         if self._in_editor:
@@ -1427,28 +1458,36 @@ class BotCommandsTab:
         self._list_view.load(self._bot_dir)
 
     def build(self) -> ft.Control:
-        self._container.content = self._list_view.build()
+        content = self._list_view.build()
+        content.key = "cmds_list"
+        self._container.content = content
         return self._container
 
     def load_bot(self, bot_dir: str):
         self._bot_dir   = bot_dir
         self._in_editor = False
         self._list_view.load(bot_dir)
-        self._container.content = self._list_view.build()
+        content = self._list_view.build()
+        content.key = "cmds_list"
+        self._container.content = content
         if self._page:
             self._page.update()
 
     def _open_editor(self, cmd_data=None):
         self._in_editor = True
         self._editor_view.load(self._bot_dir, cmd_data)
-        self._container.content = self._editor_view.build()
+        content = self._editor_view.build()
+        content.key = "cmd_editor"
+        self._container.content = content
         if self._page:
             self._page.update()
 
     def _close_editor(self):
         self._in_editor = False
         self._list_view.load(self._bot_dir)
-        self._container.content = self._list_view.build()
+        content = self._list_view.build()
+        content.key = "cmds_list"
+        self._container.content = content
         if self._page:
             self._page.update()
 

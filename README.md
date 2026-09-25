@@ -1,11 +1,15 @@
 ![FDSB.png](./main_app/icons/FDSB.png)
-  <p>
-    <img src="https://img.shields.io/badge/version-2.4.1-blue.svg?cacheSeconds=2592000" alt="Version" />
-  </p>
+<p>
+         <img src="https://img.shields.io/badge/Version-2.4.1-blue?style=for-the-badge" alt="Version" />
+         <img src="https://img.shields.io/badge/Source-AGPL--3.0-blue?style=for-the-badge" alt="License" />
+         <img src="https://img.shields.io/badge/Status-Alpha-orange?style=for-the-badge" alt="Status" />
+         <img src="https://img.shields.io/badge/Languages-10-brightgreen?style=for-the-badge" alt="Languages" />
+</p>
+
 
 # FDSB - Free Design Studio Bot's
 
-> Build and run Discord bots locally using FDScript — a lightweight scripting language designed specifically for this tool.
+> Build and run Discord bots locally using FDScript — a lightweight, high-level DSL/DSLH specifically designed for this purpose.
 
 ---
 
@@ -38,15 +42,17 @@
 6. Go to the Commands tab and click the + button to create a new command. In the editor, enter a name (required) and choose your desired prefix. Write your command's code based on wiki, then click Save when finished.
 
 7. Return to the main interface and press Start to run your bot.
+> [!WARNING]
+> The application runs in the background, but with the conditions of disabling battery optimization and removing network restrictions imposed on the program.
+
 > [!CAUTION]
-> The app does not run in the background. The user interface must remain open/visible, or you must use an external device to keep the bot online 24/7.
+> These settings work on Android 13 and below as shown. Regarding Android 14+ or higher, I am still working on providing that; it may be available in future updates. 
 
 ---
 
 **Notes:**
 
 - The built-in command set is clearly designed to be deliberately simple, with FDScript handling the more complex tasks. (However, this is not related to the number of commands I plan to add later.)
-- While FDScript gen 2 offers greater command-line processing capabilities, it's important to note that some poorly planned complexities may produce undesirable results (please report any such issues).
 - FDSceipt It goes through gradual stages of change in each update, so adding/deleting/modifying commands remains guaranteed to happen in the alpha version. (Please do not build sensitive bots until a stable beta release is available.)
 
 ---
@@ -61,9 +67,9 @@
 
 **Changelog:**
 
-  - Alfa: 1.0.0 to 2.x.x(now)
+  - Alpha: 1.0.0 to 2.x.x(now)
 
-- **1.0.0** — Initial Alfa release
+- **1.0.0** — Initial Alpha release
   - New interface
   - New language (FDScript) Gen 0
   - New control mechanism
@@ -124,6 +130,7 @@
   - Some Fixed commands
   - Increased stability
   - Smooth control
+  - add more error to fix Later :)
 
 - **2.2.4** - Update Extensions
   - Added 30+ new commands to FDScript
@@ -167,10 +174,21 @@
   - some fixed errors of andriod and notifications
   - some fixed commands
 
+- **2.4.2** - more fixed
+  - add more vars/channels commands
+  - FDScript gen 2.5 development
+  - add animtion ui
+  - some fixed commands
+  - edit ui % notifications 
+  - stable on adnriod 13 & earlier versions
 
 ---
 
 **Developers:** @y.lw (contributor) · [@obgwew](https://github.com/obgwew) (programming)
+
+---
+
+**Donation:** [![Sponsor obgwew](https://img.shields.io/badge/Sponsor-obgwew-ea4aaa?style=for-the-badge&logo=github&logoColor=white)](https://github.com/sponsors/obgwew)
 
 ---
 

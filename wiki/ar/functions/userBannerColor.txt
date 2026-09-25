@@ -1,0 +1,30 @@
+<dash>
+name: $userBannerColor
+desc: يعيد لون تمييز لافتة المستخدم بالصيغة السداسية العشرية.
+category: معلومات
+
+<block type="text" title="كيف تعمل الدالة؟">
+text: بدون وسيط، يعيد $userBannerColor لون تمييز مستخدم البوت. ومع معرّف مستخدم أو منشن، يعيد لون تمييز ذلك المستخدم منسقًا كقيمة #RRGGBB بأحرف كبيرة.
+</block>
+
+<block type="code" title="الصيغة">
+text: $userBannerColor[(user_id)]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $userBannerColor[123456789012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: يجب أن يملك المستخدم لون تمييز للافتة، وأن يتمكن البوت من تحديد المستخدم. تعرض الصيغة المستقلة نتيجة فارغة أو غير متاحة على أنها خطأ.
+</block>
+
+<block type="callout" kind="note">
+text: تستخدم الصيغة المضمّنة المستخدمين المخزنين مؤقتًا فقط، وتعامل حاليًا لون التمييز الذي لا قيمة له على أنه غير متاح. الافتراضي هو دائمًا مستخدم البوت، لا كاتب التشغيل.
+</block>
+</dash>
+
+<details>
+syntax: $userBannerColor[(user_id)]
+param: userID|snowflake|اختياري|معرّف المستخدم أو منشنه؛ إذا لم يحدد، يكون مستخدم البوت
+</details>

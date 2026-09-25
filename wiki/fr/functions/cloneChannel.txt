@@ -1,0 +1,31 @@
+<dash>
+name: $cloneChannel
+desc: Clone un canal de serveur existant.
+category: Gestion des canaux
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: $cloneChannel crée une copie d'un canal du serveur actuel. Le canal source peut être un canal texte, vocal, de catégorie, de scène ou de forum. Un deuxième argument optionnel fournit le nom du nouveau canal ; sinon, Discord conserve le nom du canal source. La commande envoie une mention du nouveau canal créé.
+</block>
+
+<block type="code" title="Syntaxe">
+text: $cloneChannel[channel ID or channel mention; (new name)]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $cloneChannel[<#123456789012345678>; Archive]
+</block>
+
+<block type="callout" kind="warning">
+text: La commande doit être exécutée dans un serveur et le bot doit disposer de la permission « Gérer les canaux ». Le canal source doit être trouvé dans le cache du bot ou du serveur actuel.
+</block>
+
+<block type="callout" kind="note">
+text: Dans l'interpréteur actuel, il s'agit d'une commande autonome. Elle ne doit pas être placée en ligne : son résolveur renvoie une valeur vide au lieu d'exécuter l'effet de bord.
+</block>
+</dash>
+
+<details>
+syntax: $cloneChannel[channel ID or channel mention; (new name)]
+param: channelID|text|Requis|L'ID numérique ou la mention du canal à cloner
+param: newName|text|Optionnel|Le nom du canal cloné
+</details>

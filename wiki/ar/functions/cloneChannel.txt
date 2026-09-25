@@ -1,0 +1,31 @@
+<dash>
+name: $cloneChannel
+desc: ينسخ قناة موجودة في السيرفر.
+category: إدارة القنوات
+
+<block type="text" title="كيف تعمل الدالة؟">
+text: $cloneChannel ينشئ نسخة من قناة في السيرفر الحالي. يمكن أن تكون القناة الأصلية نصية أو صوتية أو فئة أو مسرحًا أو منتدى. يوفر الوسيط الثاني الاختياري اسم القناة الجديدة؛ وإلا فسيحتفظ ديسكورد باسم القناة الأصلية. يرسل الأمر منشنًا للقناة التي تم إنشاؤها حديثًا.
+</block>
+
+<block type="code" title="الصيغة">
+text: $cloneChannel[channel ID or channel mention; (new name)]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $cloneChannel[<#123456789012345678>; Archive]
+</block>
+
+<block type="callout" kind="warning">
+text: يجب أن يعمل الأمر داخل سيرفر، وأن يمتلك البوت صلاحية "إدارة القنوات". يجب العثور على القناة الأصلية في ذاكرة البوت أو ذاكرة السيرفر الحالي.
+</block>
+
+<block type="callout" kind="note">
+text: في المفسر الحالي، هذا أمر مستقل. لا ينبغي استخدامه مضمّنًا: إذ يعيد محلّله قيمة فارغة بدلاً من تنفيذ الأثر الجانبي.
+</block>
+</dash>
+
+<details>
+syntax: $cloneChannel[channel ID or channel mention; (new name)]
+param: channelID|text|مطلوب|المعرّف الرقمي للقناة أو منشنها المراد نسخها
+param: newName|text|اختياري|الاسم المراد 부여ه للقناة المنسوخة
+</details>

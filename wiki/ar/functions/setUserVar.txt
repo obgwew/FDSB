@@ -1,0 +1,29 @@
+<dash>
+name: $setUserVar
+desc: يخزن قيمة دائمة بنطاق مستخدم وسيرفر.
+category: المتغيرات
+
+<block type="text" title="كيف تعمل الدالة؟">
+text: $setUserVar يخزن قيمة تحت المفتاح guild_id:user_id في ملف متغيرات المستخدم. مع وسيطين، يُستخدم كاتب التشغيل والسيرفر الحالي. أضف معرّف مستخدم لاختيار مستخدم آخر، وأضف معرّف سيرفر لاختيار سيرفر آخر. لا يمكن استخدام الأمر مضمّنًا.
+</block>
+
+<block type="code" title="الصيغة">
+text: $setUserVar[name; value; (user_id); (guild_id)]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $setUserVar[points; 10; 123456789012345678; 987654321012345678]
+</block>
+
+<block type="callout" kind="important">
+text: إذا لم يوجد متغير عام بهذا الاسم، يخزن الأمر القيمة المقدمة للنطاق، وينشئ تعريفًا عامًا فارغًا، ثم يوقف السكربت بخطأ بيئي. عرّف المتغير العام أولاً.
+</block>
+</dash>
+
+<details>
+syntax: $setUserVar[name; value; (user_id); (guild_id)]
+param: name|text|مطلوب|اسم المتغير
+param: value|text|مطلوب|القيمة المراد تخزينها
+param: userID|snowflake|اختياري|معرّف المستخدم؛ إذا لم يحدد، يكون كاتب التشغيل
+param: guildID|snowflake|اختياري|معرّف السيرفر؛ إذا لم يحدد، يكون السيرفر الحالي
+</details>

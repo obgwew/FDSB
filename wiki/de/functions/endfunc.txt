@@ -1,0 +1,27 @@
+<dash>
+name: $endfunc
+desc: Schließt einen FDScript-Funktionsblock.
+category: Flusssteuerung
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: $endfunc schließt den zuletzt geöffneten $func-Block. Es markiert das Ende einer wiederverwendbaren Funktionsdefinition und muss zusammen mit $func verwendet werden.
+</block>
+
+<block type="code" title="Syntax">
+text: $endfunc
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $func[ping]
+$sendMessage[Pong]
+$endfunc
+</block>
+
+<block type="callout" kind="warning">
+text: Ein $endfunc ohne passendes $func oder mit einem anderen offenen Block dazwischen ist ein Skriptfehler.
+</block>
+</dash>
+
+<details>
+syntax: $endfunc
+</details>

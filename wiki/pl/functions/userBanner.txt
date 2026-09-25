@@ -1,0 +1,30 @@
+<dash>
+name: $userBanner
+desc: Zwraca adres URL banera profilu użytkownika.
+category: Informacje
+
+<block type="text" title="Jak działa ta komenda?">
+text: Bez argumentu $userBanner zwraca baner użytkownika będącego botem. Podając ID użytkownika lub wzmiankę, zwraca baner tego użytkownika. Animowane banery są zwracane jako adresy URL GIF, a pozostałe jako adresy URL PNG.
+</block>
+
+<block type="code" title="Składnia">
+text: $userBanner[(user_id)]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $userBanner[123456789012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: Użytkownik musi mieć baner profilowy, a bot musi być w stanie rozpoznać użytkownika. Opcjonalne ID jest oczyszczane ze znaków innych niż cyfry przed wyszukaniem.
+</block>
+
+<block type="callout" kind="note">
+text: Wersja inline korzysta wyłącznie z użytkowników z pamięci podręcznej. Wersja samodzielna może pobrać użytkownika, który nie jest obecnie w pamięci podręcznej. Domyślnie zawsze jest to użytkownik będący botem, nie autor wywołujący.
+</block>
+</dash>
+
+<details>
+syntax: $userBanner[(user_id)]
+param: userID|snowflake|Optional|ID użytkownika lub wzmianka; domyślnie używany jest użytkownik będący botem
+</details>

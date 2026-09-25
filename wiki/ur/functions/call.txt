@@ -1,0 +1,33 @@
+<dash>
+name: $call
+desc: پہلے سے متعین کردہ FDScript فنکشن کو کال کرتا ہے۔
+category: بہاؤ کنٹرول
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $call ایسے فنکشن کو اجرا کرتا ہے جو $func سے متعین کیا گیا ہو۔ فنکشن کے باڈی عام اجرا سے پہلے جمع کیے جاتے ہیں، اور کال موجودہ اسکرپٹ کانٹیکسٹ کے ذریعے باڈی کو چلاتا ہے۔ لیٹرل فنکشن نام کی جانچ اجرا سے پہلے ہوتی ہے؛ ڈائنامک نام کی جانچ کال چلتے وقت ہوتی ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $call[name]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $func[greet]
+$sendMessage[Hello from the function]
+$endfunc
+$call[greet]
+</block>
+
+<block type="callout" kind="important">
+text: کالز موجودہ اجرا کا کانٹیکسٹ شیئر کرتی ہیں اور مقامی متغیر کا نیا دائرہ نہیں بناتیں۔ زیادہ سے زیادہ کال گہرائی 50 ہے؛ اس حد سے آگے کی ریکرشن کالز کو مسترد کر دیا جاتا ہے۔
+</block>
+
+<block type="callout" kind="note">
+text: ایک فنکشن کا متعین ہونا اور اسے $endfunc کے ساتھ بند کرنا ضروری ہے۔ اگر یہ کسی بڑے FDScript expression کا حصہ ہو تو $call کو دوسرے کمانڈ آرگومینٹس کے اندر بھی پھیلایا جا سکتا ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $call[name]
+param: name|text|لازمی|$func سے متعین اور $endfunc سے بند کردہ فنکشن کا نام
+</details>

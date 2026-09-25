@@ -10,7 +10,6 @@ from datetime import datetime as _datetime
 import discord
 import io
 import json
-import math
 import os
 import re
 import random
@@ -20,6 +19,12 @@ _VARS_DIR: str = ''
 _BOT_START_TIME: float = 0.0
 _inline_resolver = None 
 _cooldowns: dict = {}
+
+_cmd_loader = None
+
+def register_command_loader(fn) -> None:
+    global _cmd_loader
+    _cmd_loader = fn
 
 BUTTON_STYLES = {
     "primary": discord.ButtonStyle.primary,
@@ -93,6 +98,50 @@ def _save_ids_data(data: dict):
     with open(path, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
+def _get_user_vars_dir() -> str:
+    if not _VARS_DIR:
+        return ''
+    return os.path.join(os.path.dirname(_VARS_DIR), 'user_vars')
+
+def _get_guild_vars_dir() -> str:
+    if not _VARS_DIR:
+        return ''
+    return os.path.join(os.path.dirname(_VARS_DIR), 'guild_vars')
+
+def _safe_var_filename(name: str) -> str:
+    safe = ''.join(c for c in name if c.isalnum() or c in ('-', '_')).strip() or 'var'
+    return f'{safe}.json'
+
+def _load_scoped_var(base_dir: str, name: str) -> dict:
+    if not base_dir:
+        return {}
+    path = os.path.join(base_dir, _safe_var_filename(name))
+    if not os.path.isfile(path):
+        return {}
+    try:
+        with open(path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        values = data.get('values') if isinstance(data, dict) else None
+        return values if isinstance(values, dict) else {}
+    except Exception:
+        return {}
+
+def _save_scoped_var(base_dir: str, name: str, values: dict) -> None:
+    if not base_dir:
+        return
+    os.makedirs(base_dir, exist_ok=True)
+    path = os.path.join(base_dir, _safe_var_filename(name))
+    with open(path, 'w', encoding='utf-8') as f:
+        json.dump({'name': name, 'values': values}, f, ensure_ascii=False, indent=2)
+
+def _delete_scoped_key(base_dir: str, name: str, key: str) -> bool:
+    values = _load_scoped_var(base_dir, name)
+    if key not in values:
+        return False
+    del values[key]
+    _save_scoped_var(base_dir, name, values)
+    return True
+
 KNOWN_COMMANDS: set[str] = {
     # a
     "addBotReactions", "addButton", "addTimestamp", "addUserReactions", "and",
@@ -103,7 +152,8 @@ KNOWN_COMMANDS: set[str] = {
     # c
     "call", "ceil", "changeUsername", "channelExists", "channelID", "channelName",
     "channelType", "charCount", "clear", "clientTyping", "cloneRole",
-    "color", "cooldown", "createChannel", "createRole", "cropText", "customID",
+    "color", "cooldown", "createChannel", "createRole", "cropText",
+    "customID", "cloneChannel",
     # d
     "deleteChannels", "deletecommand", "deleteRole", "description",
     "displayName", "div", "dm",
@@ -111,12 +161,13 @@ KNOWN_COMMANDS: set[str] = {
     "editButton", "editChannelPerms", "editIn", "editMessage", "editSplitOut",
     "elif", "else", "endfor", "endfunc", "endif",
     "endwhile", "emojiExists", "emojiName", "editSelectMenu", "editSelectMenuOption",
+    "editChannelTopic",
     # f
     "findChannel", "findRole", "floor", "footer", "footerIcon", "for", "func",
     # g
-    "getBotInvent", "getCreationDateTimestamp", "getMessage", "getServerInvite",
-    "getSplitOutLength", "getTimestamp", "getUserStatus", "getVar",
-    "guildID", "guildName", "guildVerificationLvl",
+    "getBotInvent", "getCreationDateTimestamp", "getGuildVar", "getMessage", "getServerInvite",
+    "getSplitOutLength", "getTimestamp", "getUserStatus", "getUserVar", "getVar",
+    "guildID", "guildName", "guildVerificationLvl", "guildBanner",
     # h
     "httpAddHeader", "httpDelete", "httpGet", "httpPatch", "httpPost",
     "httpPut", "httpResult", "httpStatus",
@@ -131,7 +182,7 @@ KNOWN_COMMANDS: set[str] = {
     "lastBotMessageID", "lastUserMessageID", "log","lineCount",
     # m
     "math", "membersCount", "mention", "message", "messageID",
-    "mod", "mul",
+    "mod", "mul", "modifyRolePerms", "moveChannel", "modifyChannel",
     # n
     "numberSeparator", "numberAbbreviate", "newSelectMenu",
     # o
@@ -141,18 +192,19 @@ KNOWN_COMMANDS: set[str] = {
     # r
     "randomint", "randomRoleID", "randomRoleMention", "randomstr",
     "randomUserID", "removeButtons", "removeComponent", "removeSplitOutElement",
-    "replaceRegex", "replaceText", "reply", "replyIn", "return",
+    "replaceRegex", "replaceText", "reply", "replyIn", "resetGuildVar", "resetUserVar", "return",
     "returnGetReactions", "returnGuildBansID", "returnGuildChannelsID",
     "returnGuildEmojisID", "returnGuildRolesID", "returnGuildUsersID",
     "roleAssign", "round", "removeAllComponents",
     # s
-    "sendEmbedMessage", "sendMessage", "serverOwnerID", "setBotStatus", "setVar",
-    "slowmode", "splitIn", "splitOut", "strictArgs", "sub", "sum",
-    "suppressErrors", "switch","serverIcon",
+    "sendEmbedMessage", "sendMessage", "serverOwnerID", "setBotStatus", "setGuildVar", "setUserVar", "setVar",
+    "slowmode", "splitIn", "splitOut", "strictArgs", "sub",
+    "sum", "suppressErrors", "switch","serverIcon", "syncChannel", "syncMode",
     # t
     "timeout", "title", "thumbnail",
     # u
-    "unban", "untimeout", "uptime", "useChannel",
+    "unban", "untimeout", "uptime", "useChannel", "userBanner",
+    "userBannerColor",
     # v
     "var", "voiceUsersLimit",
     # w
@@ -563,7 +615,9 @@ class _ReplyWrapper:
     def __getattr__(self, name):
         return getattr(self._message.channel, name)
 
-class ExecutionContext:
+from .engine_FDScript.math_ops import MathOpsMixin
+
+class ExecutionContext(MathOpsMixin):
     def __init__(self, message: discord.Message = None, bot: discord.Client = None, member: discord.Member = None, is_event: bool = False, interaction: discord.Interaction = None):
         self.bot = bot
         self.is_event = is_event
@@ -593,6 +647,8 @@ class ExecutionContext:
         self.text_buffer = ""
         self._pending_inline_actions = []
         self._inline_call_values: dict[str, str] = {}
+        self.sync_mode: bool = False
+        self._sync_tasks: list = []
 
         if interaction is not None:
             self.message = interaction.message or message
@@ -888,112 +944,9 @@ class ExecutionContext:
                 )
             return str(self.return_vars[key])
 
-        if cmd_name in ('sum', 'sub', 'mul', 'div', 'mod'):
-            parts = _split_args(inner)
-
-            if len(parts) < 2:
-                self._abort_with_error(
-                    FDLogicError(f"`${cmd_name}` requires at least 2 arguments (e.g. `${cmd_name}[1; 2; 3]`)"),
-                    pos
-                )
-
-            try:
-                values = [float(p) if p else 0.0 for p in parts]
-            except ValueError:
-                self._abort_with_error(
-                    FDLogicError(
-                        f"`${cmd_name}` — Non-numeric value. Cannot perform math operations on text, "
-                        f"ensure you are using numbers."
-                    ),
-                    pos
-                )
-
-            if cmd_name == 'sum':
-                res = sum(values)
-            elif cmd_name == 'mul':
-                res = 1.0
-                for v in values:
-                    res *= v
-            elif cmd_name == 'sub':
-                res = values[0]
-                for v in values[1:]:
-                    res -= v
-            elif cmd_name == 'div':
-                res = values[0]
-                for v in values[1:]:
-                    if v == 0:
-                        self._abort_with_error(FDRuntimeError("Division by zero in math operation"), pos)
-                    res /= v
-            else:
-                res = values[0]
-                for v in values[1:]:
-                    if v == 0:
-                        self._abort_with_error(FDRuntimeError("Division by zero in math operation (mod)"), pos)
-                    res %= v
-
-            return str(int(res)) if float(res).is_integer() else str(res)
-
-        if cmd_name in ('floor', 'ceil'):
-            parts = _split_args(inner)
-
-            if len(parts) != 1:
-                self._abort_with_error(
-                    FDLogicError(f"`${cmd_name}` requires exactly 1 argument (e.g. `${cmd_name}[3.7]`)"),
-                    pos
-                )
-
-            try:
-                value = float(parts[0]) if parts[0] else 0.0
-            except ValueError:
-                self._abort_with_error(
-                    FDLogicError(
-                        f"`${cmd_name}` — Non-numeric value. Cannot perform math operations on text, "
-                        f"ensure you are using numbers."
-                    ),
-                    pos
-                )
-
-            res = math.floor(value) if cmd_name == 'floor' else math.ceil(value)
-            return str(res)
-
-        if cmd_name == 'power':
-            parts = _split_args(inner)
-
-            if len(parts) != 2:
-                self._abort_with_error(
-                    FDLogicError("`$power` requires exactly 2 arguments: `$power[base; exponent]`"),
-                    pos
-                )
-
-            try:
-                base = float(parts[0]) if parts[0] else 0.0
-                exponent = float(parts[1]) if parts[1] else 0.0
-            except ValueError:
-                self._abort_with_error(
-                    FDLogicError(
-                        "`$power` — Non-numeric value. Cannot perform math operations on text, "
-                        "ensure you are using numbers."
-                    ),
-                    pos
-                )
-
-            try:
-                res = base ** exponent
-            except (OverflowError, ZeroDivisionError):
-                self._abort_with_error(
-                    FDRuntimeError("`$power` — result is too large or mathematically undefined"),
-                    pos
-                )
-
-            if isinstance(res, complex):
-                self._abort_with_error(
-                    FDRuntimeError(
-                        "`$power` — result is a complex number (negative base with fractional exponent)"
-                    ),
-                    pos
-                )
-
-            return str(int(res)) if float(res).is_integer() else str(res)
+        math_result = self._apply_math_cmd(cmd_name, inner, pos)
+        if math_result is not None:
+            return math_result
 
         if cmd_name == 'randomint':
             parts = [x.strip() for x in inner.split(';')]
@@ -1104,9 +1057,12 @@ def tokenise(line: str) -> 'Command | str | None':
     return Command(name, args, line)
 
 def _split_args(inner: str) -> list[str]:
+    if not inner:
+        return []
     args = []
     depth = 0
     current = []
+    saw_delim = False
     for ch in inner:
         if ch == "[":
             depth += 1
@@ -1117,32 +1073,36 @@ def _split_args(inner: str) -> list[str]:
         elif ch == ";" and depth == 0:
             args.append("".join(current).strip())
             current = []
+            saw_delim = True
         else:
             current.append(ch)
-    if current:
+    if current or saw_delim:
         args.append("".join(current).strip())
     return args
 
-_INLINE_VARS: set[str] = {
-    'message', 'messageID', 'ping', 'uptime', 'mention',
+_CORE_INLINE_NO_ARGS: set[str] = {
+    'message', 'messageID', 'ping', 'uptime', 'mention', 'return',
     'authorID', 'authorName', 'botID', 'botName',
     'channelID', 'channelName', 'guildID', 'guildName',
-    'randomUserID', 'customID','boostLevel', "guildVerificationLvl",
+    'randomUserID', 'customID', 'boostLevel', 'guildVerificationLvl',
+    'addTimestamp',
 }
 
-_INLINE_WITH_ARGS: set[str] = {
-    'message', 'var', 'return',
-    'getVar',
+_CORE_INLINE_WITH_ARGS: set[str] = {
+    'message', 'var', 'return', 'getVar',
     'randomint', 'randomstr',
     'sum', 'sub', 'mul', 'div', 'mod',
     'floor', 'ceil', 'power',
-    'replaceText', 'cropText',
-    'editSplitOut',
-    'joinSplitOut',
-    'removeSplitOutElement', 'httpAddHeader', 'httpResult',
-    'authorAvatar','authorServerAvatar','serverIcon',
-    'numberSeparator', 'numberAbbreviate',
 }
+
+def _is_inline_capable(cmd_name: str, has_args: bool) -> bool:
+    core_set = _CORE_INLINE_WITH_ARGS if has_args else _CORE_INLINE_NO_ARGS
+    if cmd_name in core_set:
+        return True
+    if _cmd_loader is None:
+        return False
+    module = _cmd_loader(cmd_name)
+    return module is not None and hasattr(module, 'resolve_inline')
 
 def tokenise_line(line: str, base_line_no: int = 1) -> list:
     line = line.strip()
@@ -1191,7 +1151,7 @@ def tokenise_line(line: str, base_line_no: int = 1) -> list:
 
             if cmd_name and is_known:
                 if j >= n or line[j] != '[':
-                    if cmd_name in _INLINE_VARS:
+                    if _is_inline_capable(cmd_name, has_args=False):
                         if not text_buf:
                             text_start = i
                         text_buf.append(f'${cmd_name}')
@@ -1231,7 +1191,7 @@ def tokenise_line(line: str, base_line_no: int = 1) -> list:
                     at_boundary = True
                     continue
 
-                if cmd_name in _INLINE_WITH_ARGS:
+                if _is_inline_capable(cmd_name, has_args=True):
                     if not text_buf:
                         text_start = i
                     text_buf.append(f'${cmd_name}[{inner}]')

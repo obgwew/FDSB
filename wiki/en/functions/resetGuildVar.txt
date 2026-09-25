@@ -1,0 +1,27 @@
+<dash>
+name: $resetGuildVar
+desc: Removes a server-scoped variable override.
+category: Variables
+
+<block type="text" title="How does the command work?">
+text: $resetGuildVar deletes the server-specific value stored for a variable name. It does not delete or change the global variable definition. With one argument, the current server is used; with two arguments, the second argument selects the server ID.
+</block>
+
+<block type="code" title="Syntax">
+text: $resetGuildVar[name; (guild_id)]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $resetGuildVar[welcomeMessage; 123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: If the server override is already absent, the command is a safe no-op and records that state in the execution log.
+</block>
+</dash>
+
+<details>
+syntax: $resetGuildVar[name; (guild_id)]
+param: name|text|Required|The variable name whose server override should be removed
+param: guildID|text|Optional|The server ID; defaults to the current server
+</details>

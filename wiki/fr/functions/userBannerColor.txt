@@ -1,0 +1,30 @@
+<dash>
+name: $userBannerColor
+desc: Renvoie la couleur d'accentuation de la bannière d'un utilisateur au format hexadécimal.
+category: Info
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: Sans argument, $userBannerColor renvoie la couleur d'accentuation de l'utilisateur bot. Avec un ID utilisateur ou une mention, il renvoie cette couleur d'accentuation sous la forme d'une valeur #RRGGBB en majuscules.
+</block>
+
+<block type="code" title="Syntaxe">
+text: $userBannerColor[(user_id)]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $userBannerColor[123456789012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: L'utilisateur doit avoir une couleur d'accentuation de bannière et le bot doit pouvoir résoudre l'utilisateur. Un résultat vide ou indisponible est signalé comme une erreur par la forme autonome.
+</block>
+
+<block type="callout" kind="note">
+text: La forme en ligne utilise uniquement les utilisateurs en cache et considère actuellement une couleur d'accentuation falsy comme indisponible. La valeur par défaut est toujours l'utilisateur bot, pas l'auteur de la commande.
+</block>
+</dash>
+
+<details>
+syntax: $userBannerColor[(user_id)]
+param: userID|snowflake|Optionnel|L'ID utilisateur ou la mention ; par défaut, l'utilisateur bot
+</details>

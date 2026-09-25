@@ -1,0 +1,31 @@
+<dash>
+name: $modifyRolePerms
+desc: مجوزهای مشخصی را روی نقش سرور فعال یا غیرفعال می‌کند.
+category: مدیریت
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $modifyRolePerms مجوزهای انتخاب‌شده را روی یک نقش تغییر می‌دهد. برای فعال کردن هر مجوز، پیش از آن + و برای غیرفعال کردن، پیش از آن - را قرار دهید. علامت اختیاری است و به‌صورت پیش‌فرض + است. مجوز ویژه all مجموعه کامل مجوزها را فعال یا غیرفعال می‌کند. مجوزهایی که در فراخوانی فهرست نشده‌اند بدون تغییر باقی می‌مانند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $modifyRolePerms[role ID or role mention; permission +/-; ...]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $modifyRolePerms[<@&123456789012345678>; +send_messages; -connect]
+</block>
+
+<block type="callout" kind="warning">
+text: این دستور فقط در سرور قابل استفاده است. ربات باید مجوز «مدیریت نقش‌ها» را داشته باشد و نقش هدف باید پایین‌تر از بالاترین نقش ربات قرار گیرد.
+</block>
+
+<block type="callout" kind="note">
+text: نام مجوزها از نام‌های snake_case دیسکورد استفاده می‌کنند که مفسر از آن‌ها پشتیبانی می‌کند. این یک دستور مستقل است؛ حل‌گر فعلی درون‌خطی آن مقدار خالی برمی‌گرداند.
+</block>
+</dash>
+
+<details>
+syntax: $modifyRolePerms[role ID or role mention; permission +/-; ...]
+param: roleID|snowflake|الزامی|شناسه عددی نقش یا منشن آن
+param: permissions|text|الزامی|یک یا چند نام مجوز با پیشوند + یا -؛ all مجموعه کامل را تغییر می‌دهد
+</details>

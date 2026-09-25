@@ -1,0 +1,28 @@
+<dash>
+name: $resetUserVar
+desc: Kullanıcıya özel bir değişken değerini kaldırır.
+category: Değişkenler
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $resetUserVar, guild_id:user_id anahtarı için saklanan kullanıcıya özel değeri siler. Genel değişken tanımını silmez veya değiştirmez. Tek argümanla betiği tetikleyen yazar ve geçerli sunucu kullanılır; iki argüman bir kullanıcı kimliğini, üç argüman ise her iki kimliği seçer.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $resetUserVar[name; (user_id); (guild_id)]
+</block>
+
+<block type="code" title="Kopyalamaya Hazır Örnek">
+text: $resetUserVar[points; 123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: Kullanıcıya özel değer zaten yoksa komut güvenli bir şekilde hiçbir işlem yapmaz ve bu durumu yürütme günlüğüne kaydeder.
+</block>
+</dash>
+
+<details>
+syntax: $resetUserVar[name; (user_id); (guild_id)]
+param: name|text|Required|Kullanıcıya özel değeri kaldırılacak değişkenin adı
+param: userID|text|Optional|Kullanıcı kimliği; varsayılan olarak betiği tetikleyen yazar
+param: guildID|text|Optional|Sunucu kimliği; varsayılan olarak geçerli sunucu
+</details>

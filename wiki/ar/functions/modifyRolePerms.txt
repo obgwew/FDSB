@@ -1,0 +1,31 @@
+<dash>
+name: $modifyRolePerms
+desc: يفعّل أو يعطّل صلاحيات على دور في السيرفر.
+category: الإشراف
+
+<block type="text" title="كيف تعمل الدالة؟">
+text: $modifyRolePerms يغيّر صلاحيات محددة على دور. تسبق علامة + الصلاحية لتفعيلها، وعلامة - لتعطيلها. العلامة اختيارية وتكون + افتراضيًا. الصلاحية الخاصة all تفعّل مجموعة الصلاحيات كاملة أو تعطّلها. الصلاحيات غير المدرجة في الاستدعاء تبقى دون تغيير.
+</block>
+
+<block type="code" title="الصيغة">
+text: $modifyRolePerms[role ID or role mention; permission +/-; ...]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $modifyRolePerms[<@&123456789012345678>; +send_messages; -connect]
+</block>
+
+<block type="callout" kind="warning">
+text: يمكن استخدام الأمر فقط داخل سيرفر. يحتاج البوت إلى صلاحية "إدارة الأدوار"، ويجب أن يكون الدور الهدف أدنى من أعلى دور لدى البوت.
+</block>
+
+<block type="callout" kind="note">
+text: تستخدم أسماء الصلاحيات تنسيق snake_case الخاص بديسكورد، وهو تنسيق يدعمه المفسر. هذا أمر مستقل؛ إذ يعيد محلّله المضمّن حاليًا قيمة فارغة.
+</block>
+</dash>
+
+<details>
+syntax: $modifyRolePerms[role ID or role mention; permission +/-; ...]
+param: roleID|snowflake|مطلوب|معرّف الدور الرقمي أو منشن الدور
+param: permissions|text|مطلوب|اسم صلاحية واحدة أو أكثر مع بادئتي + أو -؛ all يغير المجموعة كاملة
+</details>

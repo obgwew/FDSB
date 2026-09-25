@@ -1,0 +1,28 @@
+<dash>
+name: $resetUserVar
+desc: Supprime la valeur spécifique à un utilisateur d'une variable.
+category: Variables
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: $resetUserVar supprime la valeur spécifique à l'utilisateur stockée pour une clé guild_id:user_id. Il ne supprime ni ne modifie la définition de la variable globale. Avec un argument, l'auteur de la commande et le serveur actuel sont utilisés ; deux arguments sélectionnent un ID utilisateur ; trois arguments sélectionnent les deux ID.
+</block>
+
+<block type="code" title="Syntaxe">
+text: $resetUserVar[name; (user_id); (guild_id)]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $resetUserVar[points; 123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: Si la valeur spécifique à l'utilisateur est déjà absente, la commande est une opération sûre sans effet et enregistre cet état dans le journal d'exécution.
+</block>
+</dash>
+
+<details>
+syntax: $resetUserVar[name; (user_id); (guild_id)]
+param: name|text|Requis|Le nom de la variable dont la valeur spécifique à l'utilisateur doit être supprimée
+param: userID|text|Optionnel|L'ID de l'utilisateur ; par défaut, l'auteur de la commande
+param: guildID|text|Optionnel|L'ID du serveur ; par défaut, le serveur actuel
+</details>

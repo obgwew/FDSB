@@ -1,0 +1,29 @@
+<dash>
+name: $setUserVar
+desc: Speichert einen persistenten Wert mit Benutzer- und Serverbezug.
+category: Variablen
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: $setUserVar speichert einen Wert unter dem Schlüssel guild_id:user_id in der Benutzervariablendatei. Mit zwei Argumenten werden der auslösende Autor und der aktuelle Server verwendet. Füge eine Benutzer-ID hinzu, um einen anderen Benutzer auszuwählen, und eine Server-ID, um einen anderen Server auszuwählen. Der Befehl kann nicht inline verwendet werden.
+</block>
+
+<block type="code" title="Syntax">
+text: $setUserVar[name; value; (user_id); (guild_id)]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $setUserVar[points; 10; 123456789012345678; 987654321012345678]
+</block>
+
+<block type="callout" kind="important">
+text: Wenn keine globale Variable mit diesem Namen existiert, speichert der Befehl den bereitgestellten benutzerbezogenen Wert, erstellt eine leere globale Definition und stoppt anschließend das Skript mit einem Umgebungsfehler. Definiere zuerst die globale Variable.
+</block>
+</dash>
+
+<details>
+syntax: $setUserVar[name; value; (user_id); (guild_id)]
+param: name|text|Erforderlich|Der Variablenname
+param: value|text|Erforderlich|Der zu speichernde Wert
+param: userID|snowflake|Optional|Die Benutzer-ID; Standard ist der auslösende Autor
+param: guildID|snowflake|Optional|Die Server-ID; Standard ist der aktuelle Server
+</details>

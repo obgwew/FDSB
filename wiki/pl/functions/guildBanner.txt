@@ -1,0 +1,30 @@
+<dash>
+name: $guildBanner
+desc: Zwraca adres URL banera serwera.
+category: Serwer
+
+<block type="text" title="Jak działa ta komenda?">
+text: Bez argumentu $guildBanner używa serwera, na którym skrypt został wywołany lub w którym otrzymano interakcję. Podając ID serwera, zwraca baner serwera, którego członkiem jest bot. Animowane banery są zwracane jako adresy URL GIF, a pozostałe jako adresy URL PNG.
+</block>
+
+<block type="code" title="Składnia">
+text: $guildBanner[(guild_id)]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $guildBanner[123456789012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: Serwer musi mieć baner, a bot musi być w stanie go odczytać. Przy podawaniu opcjonalnego argumentu użyj numerycznego ID serwera.
+</block>
+
+<block type="callout" kind="note">
+text: Wersja inline może korzystać wyłącznie z danych gildii z pamięci podręcznej. Wersja samodzielna może pobrać gildię, która nie jest obecnie w pamięci podręcznej, zależnie od dostępności usługi Discord.
+</block>
+</dash>
+
+<details>
+syntax: $guildBanner[(guild_id)]
+param: guildID|snowflake|Optional|ID serwera; gdy pominięto, używany jest bieżący serwer lub serwer interakcji
+</details>

@@ -1,0 +1,27 @@
+<dash>
+name: $resetGuildVar
+desc: مقدار اختصاصی یک متغیر با دامنه سرور را حذف می‌کند.
+category: متغیرها
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $resetGuildVar مقدار مخصوص سروری را که برای یک نام متغیر ذخیره شده است حذف می‌کند. این دستور تعریف متغیر سراسری را حذف یا تغییر نمی‌دهد. با یک آرگومان، سرور فعلی استفاده می‌شود؛ با دو آرگومان، آرگومان دوم شناسه سرور را مشخص می‌کند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $resetGuildVar[name; (guild_id)]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $resetGuildVar[welcomeMessage; 123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: اگر مقدار اختصاصی سرور از قبل وجود نداشته باشد، دستور یک عملیات بی‌اثر و ایمن است و این وضعیت را در گزارش اجرا ثبت می‌کند.
+</block>
+</dash>
+
+<details>
+syntax: $resetGuildVar[name; (guild_id)]
+param: name|text|الزامی|نام متغیری که مقدار اختصاصی سرور آن باید حذف شود
+param: guildID|text|اختیاری|شناسه سرور؛ به‌صورت پیش‌فرض سرور فعلی استفاده می‌شود
+</details>

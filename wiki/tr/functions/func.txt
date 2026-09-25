@@ -1,0 +1,28 @@
+<dash>
+name: $func
+desc: Yeniden kullanılabilir bir FDScript işlev tanımı başlatır.
+category: Akış Kontrolü
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $func, adlandırılmış bir işlev bloğu başlatır. Yorumlayıcı, ana betiği çalıştırmadan önce işlev gövdesini toplar ve normal yürütme sırasında tanım bloğunu atlar. Bloğu kapatmak için $endfunc, daha sonra çalıştırmak için $call kullanın.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $func[name]
+</block>
+
+<block type="code" title="Kopyalamaya Hazır Örnek">
+text: $func[sendWelcome]
+$sendMessage[Welcome!]
+$endfunc
+</block>
+
+<block type="callout" kind="important">
+text: İşlev adları bir betik içinde benzersiz olmalıdır. Her $func için eşleşen bir $endfunc bulunmalı ve bir işlev yalnızca tanımı toplandıktan sonra çağrılabilir.
+</block>
+</dash>
+
+<details>
+syntax: $func[name]
+param: name|text|Required|Benzersiz, boş olmayan işlev adı
+</details>

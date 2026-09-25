@@ -1,0 +1,28 @@
+<dash>
+name: $setGuildVar
+desc: Zapisuje trwałą wartość specyficzną dla serwera.
+category: Zmienne
+
+<block type="text" title="Jak działa ta komenda?">
+text: $setGuildVar zapisuje wartość w pliku zmiennych gildii pod wybranym ID serwera. Przy dwóch argumentach (nazwa i wartość) używany jest bieżący serwer; trzeci argument jawnie wybiera ID serwera. Komendy nie można użyć w tekście.
+</block>
+
+<block type="code" title="Składnia">
+text: $setGuildVar[name; value; (guild_id)]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $setGuildVar[welcomeMessage; Welcome!; 123456789012345678]
+</block>
+
+<block type="callout" kind="important">
+text: Jeśli nie istnieje globalna zmienna o tej nazwie, komenda zapisuje podaną wartość w zakresie serwera, tworzy pustą definicję globalną, a następnie zatrzymuje skrypt błędem środowiska. Przed przypisaniem wartości w zakresie serwera zdefiniuj zmienną globalną.
+</block>
+</dash>
+
+<details>
+syntax: $setGuildVar[name; value; (guild_id)]
+param: name|text|Required|Nazwa zmiennej
+param: value|text|Required|Wartość do zapisania
+param: guildID|text|Optional|ID serwera; domyślnie używany jest bieżący serwer
+</details>

@@ -1,0 +1,31 @@
+<dash>
+name: $modifyRolePerms
+desc: سرور رول پر اجازتیں فعال یا غیر فعال کرتا ہے۔
+category: انتظامات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $modifyRolePerms کسی رول کی منتخب اجازتیں بدلتا ہے۔ کسی اجازت سے پہلے + لگائیں تاکہ اسے فعال کیا جائے یا - لگائیں تاکہ غیر فعال کیا جائے۔ علامت اختیاری ہے اور ڈیفالٹ طور پر + ہوتی ہے۔ خاص اجازت all مکمل اجازتی سیٹ کو فعال یا غیر فعال کرتی ہے۔ کال میں درج نہیں کی گئی اجازتیں تبدیل نہیں ہوتیں۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $modifyRolePerms[role ID or role mention; permission +/-; ...]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $modifyRolePerms[<@&123456789012345678>; +send_messages; -connect]
+</block>
+
+<block type="callout" kind="warning">
+text: یہ کمانڈ صرف سرور کے اندر استعمال کی جا سکتی ہے۔ بوٹ کے پاس Manage Roles اجازت ہونی چاہیے، اور ہدف رول بوٹ کے سب سے اونچے رول سے نیچے ہونا چاہیے۔
+</block>
+
+<block type="callout" kind="note">
+text: اجازتوں کے نام انٹرپریٹر کے معاون Discord snake_case نام استعمال کرتے ہیں۔ یہ ایک اسٹینڈ اَلون کمانڈ ہے؛ اس کا موجودہ ان لائن ریزالورر خالی ویلیو واپس کرتا ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $modifyRolePerms[role ID or role mention; permission +/-; ...]
+param: roleID|snowflake|لازمی|عددی رول ID یا رول مینشن
+param: permissions|text|لازمی|+ یا - کے سابقے والے ایک یا ایک سے زیادہ اجازت نام؛ all پورے سیٹ کو تبدیل کرتا ہے
+</details>

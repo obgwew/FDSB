@@ -1,16 +1,18 @@
-welcome to update 2.4.1
+welcome to update 2.4.2
 
 # add:
-- add all avatar/icon commands 
+- add syncMode function
 
-- add menu commands
+- new FDScript gen 2.5
+
+- new vars/other commands
 
 # ui:
-- all views modification
+
+- #edit main ui
 
 # fixes:
-- fixed notifications on android
 
-- fixed app on 32bit of andriod version old
+- fix some commands
 
-- some fixed commands
+- fix a lot of ui

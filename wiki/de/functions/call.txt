@@ -1,0 +1,33 @@
+<dash>
+name: $call
+desc: Ruft eine zuvor definierte FDScript-Funktion auf.
+category: Flusssteuerung
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: $call führt eine mit $func definierte Funktion aus. Funktionsrümpfe werden vor der normalen Ausführung gesammelt, und der Aufruf führt den Rumpf im aktuellen Skriptkontext aus. Ein Literal-Funktionsname wird vor der Ausführung geprüft; ein dynamischer Name wird erst beim Aufruf geprüft.
+</block>
+
+<block type="code" title="Syntax">
+text: $call[name]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $func[greet]
+$sendMessage[Hello from the function]
+$endfunc
+$call[greet]
+</block>
+
+<block type="callout" kind="important">
+text: Aufrufe verwenden denselben aktuellen Ausführungskontext und erstellen keinen lokalen Variablenbereich. Die maximale Aufruftiefe beträgt 50; rekursive Aufrufe darüber hinaus werden abgelehnt.
+</block>
+
+<block type="callout" kind="note">
+text: Eine Funktion muss mit einem passenden $endfunc definiert werden. $call kann auch innerhalb der Argumente anderer Befehle expandiert werden, wenn es Teil eines größeren FDScript-Ausdrucks ist.
+</block>
+</dash>
+
+<details>
+syntax: $call[name]
+param: name|text|Erforderlich|Der Name einer mit $func definierten und mit $endfunc abgeschlossenen Funktion
+</details>

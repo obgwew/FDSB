@@ -11,6 +11,7 @@ import json
 import shutil
 import logging
 import asyncio
+import time
 import zipfile 
 
 import flet as ft
@@ -101,7 +102,7 @@ from main_app.load.updater import check_for_updates
 
 logging.getLogger('discord').setLevel(logging.INFO)
 
-from main_app.core_fdsb import local_server
+from main_app.core_fdsb import Server
 
 icon_path = get_resource_path('main_app', 'icons', 'FDSB.png')
 
@@ -228,8 +229,20 @@ def _nav_clear():
     _NAV_STACK.clear()
 
 
+_ROOT_SWITCHER = ft.AnimatedSwitcher(
+    content=None,
+    transition=ft.AnimatedSwitcherTransition.FADE,
+    duration=260,
+    switch_in_curve=ft.AnimationCurve.EASE_OUT_CUBIC,
+    switch_out_curve=ft.AnimationCurve.EASE_IN_CUBIC,
+    expand=True,
+)
+
 def _set_body(page: ft.Page, content: ft.Control):
     body = ft.SafeArea(content=content, expand=True) if is_mobile() else content
+    
+    body.key = f"screen_{_CURRENT_SCREEN['kind']}_{time.time()}"
+    _ROOT_SWITCHER.content = body
 
     async def _handle_back(e):
         view = page.views[0]
@@ -250,14 +263,15 @@ def _set_body(page: ft.Page, content: ft.Control):
         page.views.append(
             ft.View(
                 route='/',
-                controls=[body],
+                controls=[_ROOT_SWITCHER],
                 padding=0,
                 can_pop=False,
                 on_confirm_pop=_handle_back,
             )
         )
     else:
-        page.views[0].controls = [body]
+        if page.views[0].controls != [_ROOT_SWITCHER]:
+            page.views[0].controls = [_ROOT_SWITCHER]
 
     page.update()
 
@@ -848,7 +862,7 @@ def main(page: ft.Page):
     _configure_window(page)
 
     try:
-        local_server.ensure_background_mode(page)
+        Server.ensure_background_mode(page)
     except Exception as e:
         print(f'[FDSB] background mode failed: {e}')
 

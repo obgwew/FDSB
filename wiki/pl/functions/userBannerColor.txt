@@ -1,0 +1,30 @@
+<dash>
+name: $userBannerColor
+desc: Zwraca kolor akcentujący banera użytkownika w formacie szesnastkowym.
+category: Informacje
+
+<block type="text" title="Jak działa ta komenda?">
+text: Bez argumentu $userBannerColor zwraca kolor akcentujący użytkownika będącego botem. Podając ID użytkownika lub wzmiankę, zwraca kolor akcentujący tego użytkownika, sformatowany jako wartość #RRGGBB zapisana wielkimi literami.
+</block>
+
+<block type="code" title="Składnia">
+text: $userBannerColor[(user_id)]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $userBannerColor[123456789012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: Użytkownik musi mieć kolor akcentujący banera, a bot musi być w stanie rozpoznać użytkownika. Pusty lub niedostępny wynik jest raportowany jako błąd przez wersję samodzielną.
+</block>
+
+<block type="callout" kind="note">
+text: Wersja inline korzysta wyłącznie z użytkowników z pamięci podręcznej i obecnie traktuje fałszywą wartość koloru akcentującego jako niedostępną. Domyślnie zawsze jest to użytkownik będący botem, nie autor wywołujący.
+</block>
+</dash>
+
+<details>
+syntax: $userBannerColor[(user_id)]
+param: userID|snowflake|Optional|ID użytkownika lub wzmianka; domyślnie używany jest użytkownik będący botem
+</details>

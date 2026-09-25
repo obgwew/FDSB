@@ -1,0 +1,30 @@
+<dash>
+name: $guildBanner
+desc: سرور کا بینر URL واپس کرتا ہے۔
+category: سرور
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: کوئی آرگومینٹ نہ ہونے پر $guildBanner اُس سرور کو استعمال کرتا ہے جہاں اسکرپٹ متحرک ہوا یا انٹریکشن موصول ہوئی۔ سرور کی ID کے ساتھ یہ اُس سرور کا بینر واپس کرتا ہے جس کا بوٹ ممبر ہے۔ اینیمیٹڈ بنر GIF URL کے طور پر اور دیگر بنر PNG URL کے طور پر واپس کیے جاتے ہیں۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $guildBanner[(guild_id)]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $guildBanner[123456789012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: سرور میں بینر ہونا چاہیے اور بوٹ اسے حاصل کر سکنا چاہیے۔ اختیاری آرگومینٹ دیتے وقت عددی سرور ID استعمال کریں۔
+</block>
+
+<block type="callout" kind="note">
+text: ان لائن شکل صرف کیش شدہ گِلڈ ڈیٹا استعمال کر سکتی ہے۔ اسٹینڈ اَلون شکل ایسے گِلڈ کو بھی حاصل کر سکتی ہے جو موجودہ وقت میں کیش میں نہیں ہے، بشرطیکہ Discord دستیاب ہو۔
+</block>
+</dash>
+
+<details>
+syntax: $guildBanner[(guild_id)]
+param: guildID|snowflake|اختیاری|سرور کی ID؛ چھوڑنے پر موجودہ یا انٹریکشن والا سرور استعمال ہوتا ہے
+</details>

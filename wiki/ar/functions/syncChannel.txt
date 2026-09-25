@@ -1,0 +1,30 @@
+<dash>
+name: $syncChannel
+desc: يزامن صلاحيات القناة مع فئتها.
+category: إدارة القنوات
+
+<block type="text" title="كيف تعمل الدالة؟">
+text: بدون وسيط، يستهدف $syncChannel القناة التي فُعّل فيها السكربت. وبوسيط واحد، يستهدف القناة التي يحددها المعرّف الرقمي. يجب أن تكون القناة عادية وتنتسب إلى فئة. إذا كانت الصلاحيات مزامنة بالفعل، يسجل الأمر عدم حدوث تغيير.
+</block>
+
+<block type="code" title="الصيغة">
+text: $syncChannel[(channel ID or mention)]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $syncChannel[123456789012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: يجب أن يعمل الأمر داخل سيرفر، وأن يملك البوت صلاحية إدارة صلاحيات القنوات والأدوار. لا يمكن مزامنة الفئات مباشرة.
+</block>
+
+<block type="callout" kind="note">
+text: في المفسر الحالي، هذا أمر مستقل. يعيد محلّله المضمّن قيمة فارغة ولا ينفذ المزامنة.
+</block>
+</dash>
+
+<details>
+syntax: $syncChannel[(channel ID or mention)]
+param: channelID|snowflake|اختياري|القناة المراد مزامنتها؛ إذا لم يحدد، تُستخدم القناة الحالية
+</details>

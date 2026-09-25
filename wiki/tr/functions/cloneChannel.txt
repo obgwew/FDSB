@@ -1,0 +1,31 @@
+<dash>
+name: $cloneChannel
+desc: Mevcut bir sunucu kanalını klonlar.
+category: Kanal Yönetimi
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $cloneChannel, geçerli sunucuda bir kanalın kopyasını oluşturur. Kaynak; text, voice, category, stage veya forum kanalı olabilir. İsteğe bağlı ikinci argüman yeni kanal adını belirler; aksi takdirde Discord kaynak adını korur. Komut, oluşturulan yeni kanalın bahsetmesini gönderir.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $cloneChannel[channel ID or channel mention; (new name)]
+</block>
+
+<block type="code" title="Kopyalamaya Hazır Örnek">
+text: $cloneChannel[<#123456789012345678>; Archive]
+</block>
+
+<block type="callout" kind="warning">
+text: Komut bir sunucuda çalışmalıdır ve botun Kanalları Yönet iznine sahip olması gerekir. Kaynak kanal, botun veya geçerli sunucunun önbelleğinde bulunmalıdır.
+</block>
+
+<block type="callout" kind="note">
+text: Mevcut yorumlayıcıda bu, tek başına kullanılan bir komuttur. Satır içine yerleştirilmemelidir: çözümleyicisi yan etkiyi çalıştırmak yerine boş bir değer döndürür.
+</block>
+</dash>
+
+<details>
+syntax: $cloneChannel[channel ID or channel mention; (new name)]
+param: channelID|text|Required|Klonlanacak kanalın sayısal kimliği veya bahsetmesi
+param: newName|text|Optional|Klonlanan kanal için ad
+</details>

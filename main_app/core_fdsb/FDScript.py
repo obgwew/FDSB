@@ -19,11 +19,12 @@ sys.modules.setdefault('FDScript', sys.modules[__name__])
 sys.modules.setdefault('FDCore', _FDCore_module)
 
 try:
-    from . import func_FDScript as _func_FDScript_module
-    sys.modules.setdefault('func_FDScript', _func_FDScript_module)
+    from . import engine_FDScript as _engine_FDScript_module
+    sys.modules.setdefault('engine_FDScript', _engine_FDScript_module)
 except ImportError as e:
-    print(f"[FDScript] warning: could not register 'func_FDScript' package ({e}); "
-          f"HTTP commands ($httpGet/$httpPost/...) will fail to load.")
+    print(f"[FDScript] warning: could not register 'engine_FDScript' package ({e}); "
+          f"HTTP commands ($httpGet/$httpPost/...) and other engine-level "
+          f"helpers may fail to load.")
 
 from .FDCore import (
     set_vars_dir,
@@ -62,7 +63,12 @@ from .FDCore import (
     FDEnvironmentError,
     FDAbortScript,
     register_inline_resolver,
+    register_command_loader,
 )
+
+from .engine_FDScript.control_flow import ControlFlowMixin
+from .engine_FDScript.functions_ops import FunctionsMixin
+from .engine_FDScript.sync_mode_ops import SyncModeMixin
 
 # ─────────────────────────────────────────────
 # Command Registry
@@ -92,52 +98,91 @@ def _resolve_inline_cmd(cmd_name: str, args: list, ctx) -> 'str | None':
     return None
 
 register_inline_resolver(_resolve_inline_cmd)
+register_command_loader(_load_cmd)
 
 # ─────────────────────────────────────────────
-# Global Condition Evaluator
+# Condition Evaluator 
 # ─────────────────────────────────────────────
+
+_OPS = ("==", "!=", "=!", ">=", "<=", "=>", "=<", ">", "<")
+
+def _find_comparison_operator(expr: str) -> tuple[str, str, str] | None:
+    depth = 0
+    in_quote = None
+    i = 0
+    n = len(expr)
+
+    while i < n:
+        ch = expr[i]
+
+        if ch in ('"', "'"):
+            if in_quote == ch:
+                in_quote = None
+            elif in_quote is None:
+                in_quote = ch
+            i += 1
+            continue
+
+        if in_quote is None:
+            if ch == '[':
+                depth += 1
+                i += 1
+                continue
+            elif ch == ']':
+                depth = max(0, depth - 1)
+                i += 1
+                continue
+
+            if depth == 0:
+                for op in _OPS:
+                    if expr.startswith(op, i):
+                        left = expr[:i].strip()
+                        right = expr[i + len(op):].strip()
+                        return left, op, right
+        i += 1
+    return None
+
+def _strip_quotes(s: str) -> str:
+    s = s.strip()
+    if len(s) >= 2 and ((s[0] == '"' and s[-1] == '"') or (s[0] == "'" and s[-1] == "'")):
+        return s[1:-1]
+    return s
 
 def evaluate_condition(expr: str, ctx: ExecutionContext) -> bool:
-    import re
-
-    and_match = re.match(r'^\$and\[(.+)\]$', expr.strip(), re.DOTALL)
-    if and_match:
-        for c in _split_args(and_match.group(1)):
-            if not evaluate_condition(c, ctx):
-                return False
-        return True
-
-    or_match = re.match(r'^\$or\[(.+)\]$', expr.strip(), re.DOTALL)
-    if or_match:
-        for c in _split_args(or_match.group(1)):
-            if evaluate_condition(c, ctx):
-                return True
+    expr = expr.strip()
+    if not expr:
         return False
 
-    expr = (ctx.resolve(expr)).strip()
+    comp = _find_comparison_operator(expr)
+    if comp is not None:
+        left_raw, op, right_raw = comp
 
-    if expr.lower() == "true":  return True
-    if expr.lower() == "false": return False
+        left_val = _strip_quotes(ctx.resolve(left_raw).strip())
+        right_val = _strip_quotes(ctx.resolve(right_raw).strip())
 
-    for op in ("=!", "==", "!=", ">=", "=>", "<=", "=<", ">", "<"):
-        if op in expr:
-            left, right = map(str.strip, expr.split(op, 1))
-            try:
-                l_num, r_num = float(left), float(right)
-                if op in ("=="): return l_num == r_num
-                if op in ("!=", "=!"): return l_num != r_num
-                if op in (">=", "=>"): return l_num >= r_num
-                if op in ("<=", "=<"): return l_num <= r_num
-                if op == ">":  return l_num >  r_num
-                if op == "<":  return l_num <  r_num
-            except ValueError:
-                if op in ("=="): return left == right
-                if op in ("!=", "=!"): return left != right
-                if op in (">=", "=>"): return left >= right
-                if op in ("<=", "=<"): return left <= right
-                if op == ">":  return left >  right
-                if op == "<":  return left <  right
-    return False
+        try:
+            l_num, r_num = float(left_val), float(right_val)
+            if op == "==": return l_num == r_num
+            if op in ("!=", "=!"): return l_num != r_num
+            if op in (">=", "=>"): return l_num >= r_num
+            if op in ("<=", "=<"): return l_num <= r_num
+            if op == ">":  return l_num >  r_num
+            if op == "<":  return l_num <  r_num
+        except ValueError:
+            if op == "==": return left_val == right_val
+            if op in ("!=", "=!"): return left_val != right_val
+            if op in (">=", "=>"): return left_val >= right_val
+            if op in ("<=", "=<"): return left_val <= right_val
+            if op == ">":  return left_val >  right_val
+            if op == "<":  return left_val <  right_val
+        return False
+
+    val = _strip_quotes(ctx.resolve(expr).strip())
+    if val.lower() == "true":
+        return True
+    if val.lower() == "false":
+        return False
+    return bool(val)
 
 # ─────────────────────────────────────────────
 # Position-Independent Directives
@@ -156,40 +201,7 @@ class _PreScanDirectives:
 # Interpreter
 # ─────────────────────────────────────────────
 
-_CALL_HEAD = '$call['
-_CALL_SENTINEL = '\uE000{}\uE001'
-
-def _find_inline_call_spans(text: str) -> list:
-    """Finds balanced `$call[...]` spans inside a raw argument string.
-
-    Returns a list of (start, end) tuples where start points at the `$`
-    and end points at the closing `]` (inclusive position).
-    """
-    spans = []
-    i = 0
-    while True:
-        start = text.find(_CALL_HEAD, i)
-        if start < 0:
-            return spans
-        p = start + len(_CALL_HEAD)
-        depth = 1
-        end = -1
-        while p < len(text):
-            c = text[p]
-            if c == '[':
-                depth += 1
-            elif c == ']':
-                depth -= 1
-                if depth == 0:
-                    end = p
-                    break
-            p += 1
-        if end < 0:
-            return spans
-        spans.append((start, end))
-        i = end + 1
-
-class Interpreter:
+class Interpreter(ControlFlowMixin, FunctionsMixin, SyncModeMixin):
     _MAX_CALL_DEPTH = 50
 
     def __init__(self, script: str):
@@ -235,6 +247,10 @@ class Interpreter:
 
         try:
             await self._execute(tokens, ctx)
+
+            if hasattr(self, 'await_sync_tasks'):
+                await self.await_sync_tasks(ctx)
+
             await self._drain_pending_inline(ctx)
 
             await self._flush_message(ctx)
@@ -447,8 +463,6 @@ class Interpreter:
                 if not tok.args or not tok.args[0].strip():
                     return [FDLogicError(f"Line {line_num}: `$call[]` — function name cannot be empty")]
                 raw = tok.args[0].strip()
-                # Only statically validate literal names; names built from other
-                # commands (e.g. `$call[$var[fnName]]`) are resolved at runtime.
                 if '$' not in raw and raw not in func_names:
                     return [FDLogicError(
                         f"Line {line_num}: `$call[{raw}]` — no function named `{raw}` is defined "
@@ -594,6 +608,10 @@ class Interpreter:
             if tok.name == "func":
                 i = self._find_closer(tokens, i, "func", "endfunc") + 1
                 continue
+            if tok.name == "syncMode":
+                ctx.sync_mode = True
+                ctx.log_event("syncMode enabled")
+                continue
             if tok.name == "endfunc":
                 continue
             if tok.name == "call":
@@ -608,7 +626,7 @@ class Interpreter:
 
         return i
 
-    # ── $useChannel — redirects output from this point onward ──
+    # ── $useChannel ──
     async def _exec_use_channel(self, cmd: Command, ctx: ExecutionContext) -> None:
         args = cmd.args
         if len(args) < 2:
@@ -661,6 +679,10 @@ class Interpreter:
             return
         if cmd.name == "useChannel":
             await self._exec_use_channel(cmd, ctx)
+            return
+        if cmd.name == "syncMode":
+            ctx.sync_mode = True
+            ctx.log_event("syncMode enabled")
             return
 
         module = _load_cmd(cmd.name)
@@ -774,294 +796,6 @@ class Interpreter:
 
         await self._exec_command(cmd, ctx)
         return next_idx
-
-    # ── if / elif / else / endif ──────────────────────────────
-    async def _exec_if(self, tokens: list, start: int, ctx: ExecutionContext) -> int:
-        i, branch_taken = start, False
-
-        while i < len(tokens):
-            tok = tokens[i]
-            if tok.name in ("if", "elif"):
-                ctx.set_line(tok.line_no)
-                cond_args = list(tok.args)
-                await self._expand_inline_calls(cond_args, tokens, ctx)
-                cond_str = cond_args[0] if cond_args else ""
-                cond_val = self._evaluate(cond_str, ctx)
-                ctx.log_event(f"{tok.name} [{cond_str}] → {'✓' if cond_val else '✗'}")
-                i += 1
-                execute = not branch_taken and cond_val
-                if execute: branch_taken = True
-                i = await self._run_block_until(tokens, i, {"elif", "else", "endif"}, ctx, execute=execute)
-                if i == "break": return "break"
-                continue
-
-            if tok.name == "else":
-                ctx.log_event(f"else → {'taken' if not branch_taken else 'skipped'}")
-                i += 1
-                i = await self._run_block_until(tokens, i, {"endif"}, ctx, execute=not branch_taken)
-                if i == "break": return "break"
-                continue
-
-            if tok.name == "endif": return i + 1
-            i += 1
-        return i
-
-    # ── while / endwhile ──────────────────────────────────────
-    async def _exec_while(self, tokens: list, start: int, ctx: ExecutionContext) -> int:
-        tok = tokens[start]
-        body_start, body_end = start + 1, self._find_closer(tokens, start + 1, "while", "endwhile")
-        iterations = 0
-        while True:
-            ctx.set_line(tok.line_no)
-            cond_args = list(tok.args)
-            await self._expand_inline_calls(cond_args, tokens, ctx)
-            cond_str = cond_args[0] if cond_args else ""
-            if not self._evaluate(cond_str, ctx):
-                break
-            iterations += 1
-            if await self._run_block_slice(tokens, body_start, body_end, ctx) == "break": break
-        ctx.log_event(f"while → {iterations} iters")
-        return body_end + 1
-
-    # ── for / endfor ──────────────────────────────────────────
-    async def _exec_for(self, tokens: list, start: int, ctx: ExecutionContext) -> int:
-        tok = tokens[start]
-        ctx.set_line(tok.line_no)
-        count_args = list(tok.args)
-        await self._expand_inline_calls(count_args, tokens, ctx)
-        count_str = (ctx.resolve(count_args[0])) if count_args else "0"
-        try: count = int(count_str)
-        except ValueError:
-            loc = f"Line {tok.line_no}: " if tok.line_no is not None else ""
-            await _send_error(ctx.message.channel, FDRuntimeError(f"{loc}`$for` expects integer, got: `{count_str}`"))
-            count = 0
-        body_start, body_end = start + 1, self._find_closer(tokens, start + 1, "for", "endfor")
-        for _ in range(count):
-            if await self._run_block_slice(tokens, body_start, body_end, ctx) == "break": break
-        ctx.log_event(f"for [{count}] → {count} iters")
-        return body_end + 1
-
-    # ── _run_block_until ──────────────────────────────────────
-    async def _run_block_until(self, tokens, start, stoppers, ctx, execute):
-        i, depth = start, 0
-        while i < len(tokens):
-            tok = tokens[i]
-
-            if not isinstance(tok, str):
-                if depth > 0:
-                    if tok.name in ("if", "while", "for"): depth += 1
-                    elif tok.name in ("endif", "endwhile", "endfor"): depth -= 1
-                    i += 1
-                    continue
-
-                if tok.name in stoppers: return i
-
-                if not execute:
-                    if tok.name in ("if", "while", "for"): depth = 1
-                    i += 1
-                    continue
-
-                if tok.name == "break": return "break"
-                if tok.name == "if":
-                    i = await self._exec_if(tokens, i, ctx)
-                    if i == "break": return "break"
-                    continue
-                if tok.name == "while":
-                    i = await self._exec_while(tokens, i, ctx)
-                    continue
-                if tok.name == "for":
-                    i = await self._exec_for(tokens, i, ctx)
-                    continue
-                if tok.name == "func":
-                    i = self._find_closer(tokens, i + 1, "func", "endfunc") + 1
-                    continue
-                if tok.name == "endfunc":
-                    i += 1
-                    continue
-                if tok.name == "call":
-                    await self._exec_call(tok, tokens, ctx)
-                    i += 1
-                    continue
-
-                i = await self._exec_command_with_lookahead(tok, tokens, i + 1, ctx)
-                continue
-
-            if execute and depth == 0:
-                i = await self._process_text_token(tokens, tok, i + 1, ctx)
-            else:
-                i += 1
-        return i
-
-    # ── _run_block_slice ──────────────────────────────────────
-    async def _run_block_slice(self, tokens, start, end, ctx):
-        i = start
-        while i < end:
-            tok = tokens[i]
-            i += 1
-            if isinstance(tok, str):
-                i = await self._process_text_token(tokens, tok, i, ctx)
-                continue
-            
-            if tok.name == "break": return "break"
-            if tok.name == "if":
-                res = await self._exec_if(tokens, i - 1, ctx)
-                if res == "break": return "break"
-                i = res
-            elif tok.name == "while": i = await self._exec_while(tokens, i - 1, ctx)
-            elif tok.name == "for": i = await self._exec_for(tokens, i - 1, ctx)
-            elif tok.name == "func":
-                i = self._find_closer(tokens, i, "func", "endfunc") + 1
-            elif tok.name == "endfunc":
-                pass
-            elif tok.name == "call":
-                await self._exec_call(tok, tokens, ctx)
-            else: 
-                i = await self._exec_command_with_lookahead(tok, tokens, i, ctx)
-        return None
-
-    # ── $func — pre-scan every function definition ─────────────
-    def _collect_functions(self, tokens: list) -> dict[str, tuple[int, int]]:
-        """Maps function name -> (body_start, body_end) token indices.
-
-        Called once per run, after `_validate` has already confirmed every
-        `$func` has a name, is unique, and is properly closed by `$endfunc`.
-        Function bodies are never executed in place — only `$call[name]`
-        runs the token slice between body_start and body_end.
-        """
-        functions: dict[str, tuple[int, int]] = {}
-        i = 0
-        while i < len(tokens):
-            tok = tokens[i]
-            if not isinstance(tok, str) and tok.name == "func":
-                name = tok.args[0].strip() if tok.args else ""
-                end = self._find_closer(tokens, i + 1, "func", "endfunc")
-                if name:
-                    functions[name] = (i + 1, end)
-                i = end + 1
-                continue
-            i += 1
-        return functions
-
-    # ── $call — run a previously-defined function body ─────────
-    async def _exec_call(self, cmd: Command, tokens: list, ctx: ExecutionContext) -> None:
-        ctx.set_line(cmd.line_no)
-        dest = await ctx.get_dest()
-
-        raw_name = cmd.args[0] if cmd.args else ""
-        name = (ctx.resolve(raw_name)).strip() if raw_name else ""
-
-        if not name:
-            await _send_error(dest, FDLogicError("`$call[]` — function name cannot be empty"))
-            return
-
-        body = self.functions.get(name)
-        if body is None:
-            await _send_error(dest, FDRuntimeError(
-                f"`$call[{name}]` — no function named `{name}` is defined "
-                f"(define it with `$func[{name}] ... $endfunc`)"
-            ))
-            return
-
-        depth = getattr(ctx, '_call_depth', 0)
-        if depth >= self._MAX_CALL_DEPTH:
-            await _send_error(dest, FDRuntimeError(
-                f"`$call[{name}]` — maximum function call depth "
-                f"({self._MAX_CALL_DEPTH}) exceeded; likely infinite recursion"
-            ))
-            return
-
-        body_start, body_end = body
-        ctx._call_depth = depth + 1
-        ctx.log_event(f"call [{name}] → entering function")
-        try:
-            await self._run_block_slice(tokens, body_start, body_end, ctx)
-        finally:
-            ctx._call_depth = depth
-        ctx.log_event(f"call [{name}] → exiting function")
-
-    # ── inline $call[...] inside other commands' arguments ─────
-    async def _run_function_capture(self, name: str, tokens: list, ctx: ExecutionContext) -> str:
-        dest = await ctx.get_dest()
-
-        if not name:
-            await _send_error(dest, FDLogicError("`$call[]` — function name cannot be empty"))
-            return ""
-
-        body = self.functions.get(name)
-        if body is None:
-            await _send_error(dest, FDRuntimeError(
-                f"`$call[{name}]` — no function named `{name}` is defined "
-                f"(define it with `$func[{name}] ... $endfunc`)"
-            ))
-            return ""
-
-        depth = getattr(ctx, '_call_depth', 0)
-        if depth >= self._MAX_CALL_DEPTH:
-            await _send_error(dest, FDRuntimeError(
-                f"`$call[{name}]` — maximum function call depth "
-                f"({self._MAX_CALL_DEPTH}) exceeded; likely infinite recursion"
-            ))
-            return ""
-
-        body_start, body_end = body
-        prev_capture = getattr(ctx, '_capture_out', None)
-        ctx._capture_out = []
-        ctx._call_depth = depth + 1
-        try:
-            await self._run_block_slice(tokens, body_start, body_end, ctx)
-            captured = '\n'.join(ctx._capture_out).strip()
-        finally:
-            ctx._call_depth = depth
-            ctx._capture_out = prev_capture
-
-        ctx.log_event(f"call [{name}] → captured {_truncate(captured)!r}")
-        return captured
-
-    async def _expand_inline_calls(self, args: list, tokens: list | None, ctx: ExecutionContext) -> None:
-        if not args:
-            return
-
-        for idx, arg in enumerate(args):
-            if not arg or '$call[' not in arg:
-                continue
-
-            spans = _find_inline_call_spans(arg)
-            if not spans:
-                continue
-
-            parts = []
-            last = 0
-            for start, end in spans:
-                parts.append(arg[last:start])
-                raw_name = arg[start + len(_CALL_HEAD):end]
-                name = (ctx.resolve(raw_name)).strip() if raw_name else ""
-
-                value = await self._run_function_capture(
-                    name,
-                    tokens if tokens is not None else self._active_tokens,
-                    ctx,
-                )
-
-                sentinel = _CALL_SENTINEL.format(len(ctx._inline_call_values))
-                ctx._inline_call_values[sentinel] = value
-                parts.append(sentinel)
-                last = end + 1
-
-            parts.append(arg[last:])
-            args[idx] = ''.join(parts)
-
-    # ── _find_closer ──────────────────────────────────────────
-    def _find_closer(self, tokens, start, opener, closer):
-        depth, i = 0, start
-        while i < len(tokens):
-            tok = tokens[i]
-            if not isinstance(tok, str):
-                if tok.name == opener: depth += 1
-                elif tok.name == closer:
-                    if depth == 0: return i
-                    depth -= 1
-            i += 1
-        return i
 
     # ── Condition evaluator ───────────────────────────────────
     def _evaluate(self, expr: str, ctx: ExecutionContext) -> bool:

@@ -2,14 +2,25 @@
 import discord
 from FDScript import ExecutionContext, Command
 
+
+def _to_raw(text: str) -> str:
+    if not text:
+        return ""
+    return text.replace('$', '$\u200b')
+
+
 def resolve_inline(args: list[str], ctx: ExecutionContext) -> str:
+    if not getattr(ctx, 'message', None) or not ctx.message.content:
+        return ""
+
     full = ctx.message.content.strip()
 
     if not args:
         if getattr(ctx, 'is_event', False):
-            return full
+            return _to_raw(full)
         parts = full.split(None, 1)
-        return parts[1] if len(parts) > 1 else ""
+        raw_msg = parts[1] if len(parts) > 1 else ""
+        return _to_raw(raw_msg)
 
     if getattr(ctx, 'is_event', False):
         parts = full.split()
@@ -20,10 +31,12 @@ def resolve_inline(args: list[str], ctx: ExecutionContext) -> str:
     try:
         idx = int(ctx.resolve(args[0]).strip())
         if 1 <= idx <= len(parts):
-            return parts[idx - 1]
+            return _to_raw(parts[idx - 1])
     except ValueError:
         pass
+
     return ""
+
 
 async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: discord.abc.Messageable) -> None:
     res = resolve_inline(cmd.args, ctx)

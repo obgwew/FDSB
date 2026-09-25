@@ -1,0 +1,27 @@
+<dash>
+name: $resetGuildVar
+desc: 删除服务器范围的变量覆盖值。
+category: 变量
+
+<block type="text" title="命令如何工作？">
+text: $resetGuildVar 删除为变量名存储的服务器特定值。它不会删除或更改全局变量定义。使用一个参数时使用当前服务器；使用两个参数时，第二个参数选择服务器 ID。
+</block>
+
+<block type="code" title="语法">
+text: $resetGuildVar[name; (guild_id)]
+</block>
+
+<block type="code" title="可复制示例">
+text: $resetGuildVar[welcomeMessage; 123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: 如果服务器覆盖值已经不存在，该命令是安全的无操作，并会将此状态记录在执行日志中。
+</block>
+</dash>
+
+<details>
+syntax: $resetGuildVar[name; (guild_id)]
+param: name|text|Required|要移除其服务器覆盖值的变量名称
+param: guildID|text|Optional|服务器 ID；默认为当前服务器
+</details>

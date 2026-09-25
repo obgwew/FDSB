@@ -1,0 +1,27 @@
+<dash>
+name: $endfunc
+desc: يغلق كتلة دالة FDScript.
+category: التحكم في التدفق
+
+<block type="text" title="كيف تعمل الدالة؟">
+text: $endfunc يغلق كتلة $func التي فُتحت مؤخرًا. يحدد نهاية تعريف دالة قابلة لإعادة الاستخدام، ويجب أن يظهر في زوج مطابق مع $func.
+</block>
+
+<block type="code" title="الصيغة">
+text: $endfunc
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $func[ping]
+$sendMessage[Pong]
+$endfunc
+</block>
+
+<block type="callout" kind="warning">
+text: إذا كان $endfunc بلا $func مطابقة، أو كانت هناك كتلة مفتوحة مختلفة بينهما، فهذا خطأ في السكربت.
+</block>
+</dash>
+
+<details>
+syntax: $endfunc
+</details>

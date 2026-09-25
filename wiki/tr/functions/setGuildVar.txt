@@ -1,0 +1,28 @@
+<dash>
+name: $setGuildVar
+desc: Sunucuya özel kalıcı bir değer saklar.
+category: Değişkenler
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $setGuildVar, seçilen sunucu kimliği altında guild değişken dosyasına bir değer saklar. Ad ve değerden oluşan iki argümanla geçerli sunucu kullanılır; üçüncü argüman sunucu kimliğini açıkça seçer. Komut satır içinde kullanılamaz.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $setGuildVar[name; value; (guild_id)]
+</block>
+
+<block type="code" title="Kopyalamaya Hazır Örnek">
+text: $setGuildVar[welcomeMessage; Welcome!; 123456789012345678]
+</block>
+
+<block type="callout" kind="important">
+text: Bu adda bir genel değişken yoksa komut, sağlanan sunucuya özel değeri saklar, boş bir genel tanım oluşturur ve ardından betiği bir ortam hatasıyla durdurur. Sunucuya özel değerler atamadan önce genel değişkeni tanımlayın.
+</block>
+</dash>
+
+<details>
+syntax: $setGuildVar[name; value; (guild_id)]
+param: name|text|Required|Değişkenin adı
+param: value|text|Required|Saklanacak değer
+param: guildID|text|Optional|Sunucu kimliği; varsayılan olarak geçerli sunucu
+</details>

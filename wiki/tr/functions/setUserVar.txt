@@ -1,0 +1,29 @@
+<dash>
+name: $setUserVar
+desc: Bir kullanıcı ve sunucuya özel kalıcı bir değer saklar.
+category: Değişkenler
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $setUserVar, kullanıcı değişken dosyasında guild_id:user_id anahtarı altında bir değer saklar. İki argümanla betiği tetikleyen yazar ve geçerli sunucu kullanılır. Başka bir kullanıcı seçmek için bir kullanıcı kimliği, başka bir sunucu seçmek için bir sunucu kimliği ekleyin. Komut satır içinde kullanılamaz.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $setUserVar[name; value; (user_id); (guild_id)]
+</block>
+
+<block type="code" title="Kopyalamaya Hazır Örnek">
+text: $setUserVar[points; 10; 123456789012345678; 987654321012345678]
+</block>
+
+<block type="callout" kind="important">
+text: Bu adda bir genel değişken yoksa komut, sağlanan kullanıcı ve sunucuya özel değeri saklar, boş bir genel tanım oluşturur ve ardından betiği durdurur. Önce genel değişkeni tanımlayın.
+</block>
+</dash>
+
+<details>
+syntax: $setUserVar[name; value; (user_id); (guild_id)]
+param: name|text|Required|Değişkenin adı
+param: value|text|Required|Saklanacak değer
+param: userID|snowflake|Optional|Kullanıcı kimliği; varsayılan olarak betiği tetikleyen yazar
+param: guildID|snowflake|Optional|Sunucu kimliği; varsayılan olarak geçerli sunucu
+</details>

@@ -1,0 +1,33 @@
+<dash>
+name: $call
+desc: Daha önce tanımlanmış bir FDScript işlevini çağırır.
+category: Akış Kontrolü
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $call, $func ile tanımlanan bir işlevi çalıştırır. İşlev gövdeleri normal yürütmeden önce toplanır ve çağrı, gövdeyi geçerli betik bağlamında çalıştırır. Sabit bir işlev adı yürütmeden önce denetlenir; dinamik ad ise çağrı çalıştığında denetlenir.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $call[name]
+</block>
+
+<block type="code" title="Kopyalamaya Hazır Örnek">
+text: $func[greet]
+$sendMessage[Hello from the function]
+$endfunc
+$call[greet]
+</block>
+
+<block type="callout" kind="important">
+text: Çağrılar geçerli yürütme bağlamını paylaşır ve yerel bir değişken kapsamı oluşturmaz. En fazla 50 çağrı derinliğine izin verilir; bu sınırın ötesindeki özyinelemeli çağrılar reddedilir.
+</block>
+
+<block type="callout" kind="note">
+text: Bir işlev, eşleşen bir $endfunc ile tanımlanmalıdır. $call, daha büyük bir FDScript ifadesinin parçası olduğunda diğer komut argümanlarının içinde de genişletilebilir.
+</block>
+</dash>
+
+<details>
+syntax: $call[name]
+param: name|text|Required|$func ile tanımlanıp $endfunc ile kapatılan işlevin adı
+</details>

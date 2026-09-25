@@ -1,0 +1,27 @@
+<dash>
+name: $resetGuildVar
+desc: سرور کے لیے مخصوص متغیر کا اوور رائیڈ حذف کرتا ہے۔
+category: متغیرات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $resetGuildVar کسی متغیر نام کے لیے محفوظ سرور کے لیے مخصوص ویلیو حذف کرتا ہے۔ یہ عالمی متغیر کی تعریف حذف یا تبدیل نہیں کرتا۔ ایک آرگومینٹ کے ساتھ موجودہ سرور استعمال ہوتا ہے؛ دو آرگومینٹس کے ساتھ دوسرا آرگومینٹ سرور کی ID منتخب کرتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $resetGuildVar[name; (guild_id)]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $resetGuildVar[welcomeMessage; 123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: اگر سرور کا اوور رائیڈ پہلے سے موجود نہیں ہے تو کمانڈ محفوظ طور پر کوئی کارروائی نہیں کرتی اور یہ حالت اجرا کے لاگ میں درج کرتی ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $resetGuildVar[name; (guild_id)]
+param: name|text|لازمی|جس متغیر کا سرور اوور رائیڈ حذف کرنا ہے
+param: guildID|text|اختیاری|سرور کی ID؛ ڈیفالٹ موجودہ سرور
+</details>

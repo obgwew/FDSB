@@ -1,21 +1,13 @@
-# main_app/core_bcfd/event_FDScripts/onLeave.py
+# main_app/core_fdsb/event_FDScripts/onLeave.py
 import discord
-import re
-from main_app.core_fdsb.FDCore import ExecutionContext
 from main_app.core_fdsb.FDScript import Interpreter
+from main_app.core_fdsb.event_FDScripts._event_context import build_member_context
+
 
 async def handle_event(member: discord.Member, bot: discord.Client, script_text: str):
-    interpreter = Interpreter(script_text)
-    ctx = ExecutionContext(message=None, bot=bot, member=member)
-    
-    first_line = script_text.split('\n')[0]
-    match = re.search(r'\[(\d+)\]', first_line)
-    if match:
-        channel_id = int(match.group(1))
-        target_channel = bot.get_channel(channel_id)
-        if target_channel:
-            ctx.message.channel = target_channel
-        else:
-            print(f"[Bot] ❌ الروم {channel_id} غير موجود أو البوت لا يملك صلاحية رؤيته لحدث onLeave")
+    from main_app.core_fdsb.Server import set_fgs_state, STATE_SYNCING
+    set_fgs_state(STATE_SYNCING)
 
+    interpreter = Interpreter(script_text)
+    ctx = build_member_context(bot, member, script_text, "$onLeave")
     await interpreter.run(ctx)

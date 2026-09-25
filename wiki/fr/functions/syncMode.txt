@@ -1,0 +1,31 @@
+<dash>
+name: $syncMode
+desc: Marque un bloc pour une exécution FDScript synchronisée.
+category: Contrôle de flux
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: $syncMode est destiné à exécuter les commandes situées en dessous, jusqu'à la fin du bloc actuel, comme un seul lot synchronisé. Le moteur de lot considère les limites de contrôle de flux, les appels de fonctions, les redirections de canal, les suppressions, les gardes et les jetons de fermeture comme des barrières.
+</block>
+
+<block type="code" title="Syntaxe">
+text: $syncMode
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $syncMode
+$sendMessage[First step]
+$sendMessage[Second step]
+</block>
+
+<block type="callout" kind="warning">
+text: Dans l'interpréteur actuel, $syncMode définit uniquement le drapeau du contexte d'exécution et enregistre que la synchronisation a été activée. Le moteur de lot dans sync_mode_ops.py n'est pas encore connecté au chemin d'exécution principal ; les commandes situées en dessous s'exécutent donc toujours séquentiellement.
+</block>
+
+<block type="callout" kind="note">
+text: Considérez cette page comme l'interface prévue. Ne comptez pas sur une exécution concurrente ou sur l'échec global d'un lot tant que l'intégration à l'interpréteur n'est pas terminée.
+</block>
+</dash>
+
+<details>
+syntax: $syncMode
+</details>

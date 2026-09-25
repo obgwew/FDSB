@@ -84,10 +84,6 @@ async def _edit_target_with_button(ch: discord.abc.Messageable, ctx: ExecutionCo
 
     return True
 
-def resolve_inline(args: list[str], ctx: ExecutionContext) -> str:
-    return ""
-
-
 async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: discord.abc.Messageable) -> None:
     if len(args) < 4:
         await _send_error(ch, FDSyntaxError(

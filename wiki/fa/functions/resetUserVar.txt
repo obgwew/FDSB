@@ -1,0 +1,28 @@
+<dash>
+name: $resetUserVar
+desc: مقدار اختصاصی یک متغیر با دامنه کاربر را حذف می‌کند.
+category: متغیرها
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $resetUserVar مقدار اختصاصی ذخیره‌شده برای کلید guild_id:user_id را حذف می‌کند. این دستور تعریف متغیر سراسری را حذف یا تغییر نمی‌دهد. با یک آرگومان، نویسنده‌ای که اسکریپت را فعال کرده و سرور فعلی استفاده می‌شوند؛ دو آرگومان شناسه کاربر را مشخص می‌کنند؛ سه آرگومان هر دو شناسه را مشخص می‌کنند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $resetUserVar[name; (user_id); (guild_id)]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $resetUserVar[points; 123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: اگر مقدار اختصاصی از قبل وجود نداشته باشد، دستور یک عملیات بی‌اثر و ایمن است و این وضعیت را در گزارش اجرا ثبت می‌کند.
+</block>
+</dash>
+
+<details>
+syntax: $resetUserVar[name; (user_id); (guild_id)]
+param: name|text|الزامی|نام متغیری که مقدار اختصاصی کاربر آن باید حذف شود
+param: userID|text|اختیاری|شناسه کاربر؛ به‌صورت پیش‌فرض نویسنده فعال‌کننده اسکریپت استفاده می‌شود
+param: guildID|text|اختیاری|شناسه سرور؛ به‌صورت پیش‌فرض سرور فعلی استفاده می‌شود
+</details>

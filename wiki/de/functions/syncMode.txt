@@ -1,0 +1,31 @@
+<dash>
+name: $syncMode
+desc: Markiert einen Block für die synchronisierte FDScript-Ausführung.
+category: Flusssteuerung
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: $syncMode soll die Befehle darunter bis zum Ende des aktuellen Blocks als einen synchronisierten Stapel ausführen. Die Batch-Engine behandelt Grenzen der Flusssteuerung, Funktionsaufrufe, Kanalumleitungen, Unterdrückungen, Schutzprüfungen und abschließende Tokens als Barrieren.
+</block>
+
+<block type="code" title="Syntax">
+text: $syncMode
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $syncMode
+$sendMessage[First step]
+$sendMessage[Second step]
+</block>
+
+<block type="callout" kind="warning">
+text: Im aktuellen Interpreter setzt $syncMode nur das Ausführungskontext-Flag und protokolliert, dass die Synchronisierung aktiviert wurde. Der Batch-Runner in sync_mode_ops.py ist noch nicht mit dem Hauptausführungspfad verbunden, daher werden die Befehle darunter weiterhin sequenziell ausgeführt.
+</block>
+
+<block type="callout" kind="note">
+text: Betrachte diese Seite als vorgesehene Schnittstelle. Verlasse dich erst auf gleichzeitige Ausführung oder einen Alles-oder-nichts-Fehlschlag des Stapels, wenn die Interpreter-Integration abgeschlossen ist.
+</block>
+</dash>
+
+<details>
+syntax: $syncMode
+</details>

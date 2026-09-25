@@ -1,0 +1,28 @@
+<dash>
+name: $setGuildVar
+desc: 存储限定于服务器的持久化值。
+category: 变量
+
+<block type="text" title="命令如何工作？">
+text: $setGuildVar 根据选择的服务器 ID 将值存储在服务器变量文件中。只提供名称和值时使用当前服务器；提供第三个参数时显式选择服务器 ID。该命令不能内联使用。
+</block>
+
+<block type="code" title="语法">
+text: $setGuildVar[name; value; (guild_id)]
+</block>
+
+<block type="code" title="可复制示例">
+text: $setGuildVar[welcomeMessage; Welcome!; 123456789012345678]
+</block>
+
+<block type="callout" kind="important">
+text: 如果不存在同名的全局变量，命令会存储提供的范围值，创建一个空的全局定义，然后以环境错误停止脚本。分配范围值前请先定义全局变量。
+</block>
+</dash>
+
+<details>
+syntax: $setGuildVar[name; value; (guild_id)]
+param: name|text|Required|变量名称
+param: value|text|Required|要存储的值
+param: guildID|text|Optional|服务器 ID；默认为当前服务器
+</details>

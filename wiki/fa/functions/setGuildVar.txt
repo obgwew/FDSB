@@ -1,0 +1,28 @@
+<dash>
+name: $setGuildVar
+desc: یک مقدار پایدار با دامنه سرور را ذخیره می‌کند.
+category: متغیرها
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $setGuildVar مقداری را در فایل متغیرهای سرور تحت شناسه سرور انتخاب‌شده ذخیره می‌کند. اگر فقط آرگومان مقدار داده شود، سرور فعلی استفاده می‌شود؛ با آرگومان سوم، شناسه سرور به‌طور صریح انتخاب می‌شود. این دستور را نمی‌توان به‌صورت درون‌خطی استفاده کرد.
+</block>
+
+<block type="code" title="سینتکس">
+text: $setGuildVar[name; value; (guild_id)]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $setGuildVar[welcomeMessage; Welcome!; 123456789012345678]
+</block>
+
+<block type="callout" kind="important">
+text: اگر هیچ متغیر سراسری با این نام وجود نداشته باشد، دستور مقدار اختصاصی داده‌شده را ذخیره می‌کند، یک تعریف سراسری خالی ایجاد می‌کند و سپس اسکریپت را با خطای محیطی متوقف می‌کند. پیش از تعیین مقادیر اختصاصی، متغیر سراسری را تعریف کنید.
+</block>
+</dash>
+
+<details>
+syntax: $setGuildVar[name; value; (guild_id)]
+param: name|text|الزامی|نام متغیر
+param: value|text|الزامی|مقداری که باید ذخیره شود
+param: guildID|text|اختیاری|شناسه سرور؛ به‌صورت پیش‌فرض سرور فعلی استفاده می‌شود
+</details>

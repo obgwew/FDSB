@@ -1,0 +1,31 @@
+<dash>
+name: $editChannelTopic
+desc: سرور چینل کا ٹاپک بدلتا ہے۔
+category: چینل انتظامات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: ایک آرگومینٹ کے ساتھ، $editChannelTopic اس اسکرپٹ کو متحرک کرنے والے چینل کا ٹاپک بدلتا ہے۔ دو آرگومینٹس کے ساتھ، یہ پہلے آرگومینٹ سے متشن ہونے والے چینل کا ٹاپک بدلتا ہے۔ خالی یا صرف whitespace پر مشتمل ٹاپک موجودہ ٹاپک کو صاف کر دیتا ہے۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $editChannelTopic[(channel ID or mention); new topic]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $editChannelTopic[<#123456789012345678>; Welcome to the community!]
+</block>
+
+<block type="callout" kind="warning">
+text: یہ کمانڈ صرف سرور کے اندر کام کرتی ہے۔ ہدف موجودہ سرور کا حصہ ہونا چاہیے، ٹاپک سپورٹ کرنا چاہیے، اور بوٹ اسے ترمیم کر سکے۔ ٹاپکس 1024 حروف سے زیادہ نہیں ہو سکتے۔
+</block>
+
+<block type="callout" kind="note">
+text: موجودہ انٹرپریٹر میں یہ ایک اسٹینڈ اَلون کمانڈ ہے۔ اس کا ان لائن ریزالورر خالی ویلیو واپس کرتا ہے اور سائیڈ ایفیکٹ چلاتا نہیں۔
+</block>
+</dash>
+
+<details>
+syntax: $editChannelTopic[(channel ID or mention); new topic]
+param: channelID|text|اختیاری|ہدف چینل کی ID یا مینشن؛ ایک آرگومینٹ کے ساتھ چھوڑنے پر موجودہ چینل استعمال ہوتا ہے
+param: newTopic|text|لازمی|نیا ٹاپک، زیادہ سے زیادہ 1024 حروف
+</details>

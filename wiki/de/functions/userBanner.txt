@@ -1,0 +1,30 @@
+<dash>
+name: $userBanner
+desc: Gibt die Banner-URL eines Benutzerprofils zurück.
+category: Info
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: Ohne Argument gibt $userBanner das Profilbanner des Bot-Kontos zurück. Mit einer Benutzer-ID oder Erwähnung gibt es das Banner dieses Benutzers zurück. Animierte Banner werden als GIF-URLs und andere Banner als PNG-URLs zurückgegeben.
+</block>
+
+<block type="code" title="Syntax">
+text: $userBanner[(user_id)]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $userBanner[123456789012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: Der Benutzer muss ein Profilbanner haben, und der Bot muss den Benutzer auflösen können. Die optionale ID wird vor der Suche von Zeichen bereinigt, die keine Ziffern sind.
+</block>
+
+<block type="callout" kind="note">
+text: Die Inline-Form verwendet nur zwischengespeicherte Benutzer. Die eigenständige Form kann einen Benutzer abrufen, der derzeit nicht zwischengespeichert ist. Der Standard ist immer der Bot-Konto, nicht der auslösende Autor.
+</block>
+</dash>
+
+<details>
+syntax: $userBanner[(user_id)]
+param: userID|snowflake|Optional|Die Benutzer-ID oder Erwähnung; Standard ist der Bot-Konto
+</details>

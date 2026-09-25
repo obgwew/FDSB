@@ -1,0 +1,27 @@
+<dash>
+name: $endfunc
+desc: Closes an FDScript function block.
+category: Flow Control
+
+<block type="text" title="How does the command work?">
+text: $endfunc closes the most recently opened $func block. It marks the end of a reusable function definition and must appear in a matching pair with $func.
+</block>
+
+<block type="code" title="Syntax">
+text: $endfunc
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $func[ping]
+$sendMessage[Pong]
+$endfunc
+</block>
+
+<block type="callout" kind="warning">
+text: An $endfunc without a matching $func, or with a different open block in between, is a script error.
+</block>
+</dash>
+
+<details>
+syntax: $endfunc
+</details>

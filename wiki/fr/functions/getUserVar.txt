@@ -1,0 +1,32 @@
+<dash>
+name: $getUserVar
+desc: Récupère une variable persistante limitée à un utilisateur dans un serveur.
+category: Variables
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: $getUserVar vérifie la valeur spécifique à l'utilisateur stockée sous la clé guild_id:user_id. Si cette valeur est vide ou absente, il utilise la variable globale. Avec un argument, l'auteur de la commande et le serveur actuel sont utilisés ; deux arguments sélectionnent un ID utilisateur ; trois arguments sélectionnent les deux ID, utilisateur et serveur.
+</block>
+
+<block type="code" title="Syntaxe">
+text: $getUserVar[name; (user_id); (guild_id)]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $getUserVar[points; 123456789012345678]
+</block>
+
+<block type="callout" kind="important">
+text: Si la variable globale n'existe pas, la commande crée une entrée provisoire, crée l'entrée limitée à l'utilisateur si nécessaire, puis interrompt le script. Définissez d'abord la variable globale.
+</block>
+
+<block type="callout" kind="note">
+text: Cette commande peut être utilisée en ligne ou comme instruction autonome. L'utilisateur par défaut est l'auteur de la commande, pas le bot.
+</block>
+</dash>
+
+<details>
+syntax: $getUserVar[name; (user_id); (guild_id)]
+param: name|text|Requis|Le nom de la variable à récupérer
+param: userID|text|Optionnel|L'ID de l'utilisateur dont la valeur limitée doit être lue ; par défaut, l'auteur de la commande
+param: guildID|text|Optionnel|L'ID du serveur ; par défaut, le serveur actuel
+</details>

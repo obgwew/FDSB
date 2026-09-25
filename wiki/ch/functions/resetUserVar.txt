@@ -1,0 +1,28 @@
+<dash>
+name: $resetUserVar
+desc: 删除用户范围的变量覆盖值。
+category: 变量
+
+<block type="text" title="命令如何工作？">
+text: $resetUserVar 删除以 guild_id:user_id 为键存储的覆盖值。它不会删除或更改全局变量定义。使用一个参数时，使用触发命令的作者和当前服务器；使用两个参数时选择用户 ID；使用三个参数时同时选择两个 ID。
+</block>
+
+<block type="code" title="语法">
+text: $resetUserVar[name; (user_id); (guild_id)]
+</block>
+
+<block type="code" title="可复制示例">
+text: $resetUserVar[points; 123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: 如果覆盖值已经不存在，该命令是安全的无操作，并会将此状态记录在执行日志中。
+</block>
+</dash>
+
+<details>
+syntax: $resetUserVar[name; (user_id); (guild_id)]
+param: name|text|Required|要移除其用户覆盖值的变量名称
+param: userID|text|Optional|用户 ID；默认为触发命令的作者
+param: guildID|text|Optional|服务器 ID；默认为当前服务器
+</details>

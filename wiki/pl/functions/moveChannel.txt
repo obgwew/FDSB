@@ -1,0 +1,31 @@
+<dash>
+name: $moveChannel
+desc: Przenosi kanał do kategorii serwera.
+category: Zarządzanie kanałami
+
+<block type="text" title="Jak działa ta komenda?">
+text: $moveChannel przenosi istniejący zwykły kanał do kategorii wskazanej przez drugi argument. Oba ID muszą być numerycznymi identyfikatorami snowflake na bieżącym serwerze. Jeśli kanał znajduje się już w tej kategorii, komenda rejestruje brak operacji i nie wykonuje żadnego żądania do Discorda.
+</block>
+
+<block type="code" title="Składnia">
+text: $moveChannel[channel ID; new category ID]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $moveChannel[123456789012345678; 987654321012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: Komenda musi być uruchomiona na serwerze. Celem musi być zwykły kanał, miejscem docelowym kategoria, a bot musi mieć uprawnienie do zarządzania kanałami. Bieżąca implementacja nie akceptuje wzmianek.
+</block>
+
+<block type="callout" kind="note">
+text: Kategorii nie można przenosić do innej kategorii. W bieżącym interpreterze ta komenda działa tylko samodzielnie, ponieważ jej resolver używany w tekście nie wykonuje efektu ubocznego.
+</block>
+</dash>
+
+<details>
+syntax: $moveChannel[channel ID; new category ID]
+param: channelID|snowflake|Required|Numeryczne ID zwykłego kanału do przeniesienia
+param: categoryID|snowflake|Required|Numeryczne ID kategorii docelowej
+</details>

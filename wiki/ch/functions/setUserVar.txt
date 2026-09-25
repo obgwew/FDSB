@@ -1,0 +1,29 @@
+<dash>
+name: $setUserVar
+desc: 存储限定于用户和服务器的持久化值。
+category: 变量
+
+<block type="text" title="命令如何工作？">
+text: $setUserVar 将值以 guild_id:user_id 为键存储在用户变量文件中。使用两个参数时，使用触发命令的作者和当前服务器。添加用户 ID 可选择其他用户，添加服务器 ID 可选择其他服务器。该命令不能内联使用。
+</block>
+
+<block type="code" title="语法">
+text: $setUserVar[name; value; (user_id); (guild_id)]
+</block>
+
+<block type="code" title="可复制示例">
+text: $setUserVar[points; 10; 123456789012345678; 987654321012345678]
+</block>
+
+<block type="callout" kind="important">
+text: 如果不存在同名的全局变量，命令会存储提供的范围值，创建一个空的全局定义，然后以环境错误停止脚本。请先定义全局变量。
+</block>
+</dash>
+
+<details>
+syntax: $setUserVar[name; value; (user_id); (guild_id)]
+param: name|text|Required|变量名称
+param: value|text|Required|要存储的值
+param: userID|snowflake|Optional|用户 ID；默认为触发命令的作者
+param: guildID|snowflake|Optional|服务器 ID；默认为当前服务器
+</details>

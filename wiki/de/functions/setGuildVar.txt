@@ -1,0 +1,28 @@
+<dash>
+name: $setGuildVar
+desc: Speichert einen persistenten Wert mit Serverbezug.
+category: Variablen
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: $setGuildVar speichert einen Wert in der Guild-Variablendatei unter der ausgewählten Server-ID. Wenn nur ein Wert angegeben wird, wird der aktuelle Server verwendet; mit dem dritten Argument wird die Server-ID ausdrücklich ausgewählt. Der Befehl kann nicht inline verwendet werden.
+</block>
+
+<block type="code" title="Syntax">
+text: $setGuildVar[name; value; (guild_id)]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $setGuildVar[welcomeMessage; Welcome!; 123456789012345678]
+</block>
+
+<block type="callout" kind="important">
+text: Wenn keine globale Variable mit diesem Namen existiert, speichert der Befehl den bereitgestellten serverspezifischen Wert, erstellt eine leere globale Definition und stoppt anschließend das Skript mit einem Umgebungsfehler. Definiere die globale Variable, bevor du serverspezifische Werte zuweist.
+</block>
+</dash>
+
+<details>
+syntax: $setGuildVar[name; value; (guild_id)]
+param: name|text|Erforderlich|Der Variablenname
+param: value|text|Erforderlich|Der zu speichernde Wert
+param: guildID|text|Optional|Die Server-ID; Standard ist der aktuelle Server
+</details>

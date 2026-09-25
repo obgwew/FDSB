@@ -4,7 +4,6 @@
 # -*- coding: utf-8 -*-
 # main_app/wiki_view.py — Wiki tab (Flet 0.85.2+ / v1 API)
 
-from operator import index
 import os
 import re
 import json
@@ -27,7 +26,6 @@ def _c(key: str) -> str:
 
 
 GITHUB_RAW_BASE = "https://raw.githubusercontent.com/obgwew/FDSB/main/wiki"
-
 REQUEST_TIMEOUT = 10 
 
 _BLOCK_TAG_RE  = re.compile(r'<block([^>]*)>(.*?)</block>', re.DOTALL | re.IGNORECASE)
@@ -96,17 +94,6 @@ def _category_color(cat: str) -> str:
     key = _canonical_category(cat)
     return _CATEGORY_META[key][2] if key in _CATEGORY_META else _CATEGORY_DEFAULT_COLOR
 
-try:
-    from main_app.core_fdsb.FDCore import (
-        KNOWN_COMMANDS, CONTROL_FLOW_COMMANDS, FUNCTION_COMMANDS,
-    )
-except ImportError:
-    KNOWN_COMMANDS = set()
-    CONTROL_FLOW_COMMANDS = {
-        "if", "elif", "else", "endif", "while", "endwhile", "for", "endfor",
-        "break", "return", "and", "or", "onlyIf", "onlyAdmin", "log"
-    }
-    FUNCTION_COMMANDS = {"func", "endfunc", "call"}
 
 _HL_FUNC_COLOR = '#F1C40F'
 _HL_FONT_SIZE   = 13
@@ -293,8 +280,53 @@ class WikiParser:
                             notes=notes, warnings=warnings,
                             importants=importants, questions=questions)
 
+    # ⚡ محلل خفيف للغاية للواجهة: يقرأ الاسم، الوصف، والتاق فقط ويتجاهل كل شيء آخر
     @classmethod
-    def parse(cls, text: str, file_name: str = '') -> Optional[WikiEntry]:
+    def parse_light(cls, text: str, file_name: str = '') -> Optional[WikiEntry]:
+        dash_start = text.find('<dash>')
+        dash_end = text.find('</dash>')
+        if dash_start == -1 or dash_end == -1 or dash_end < dash_start:
+            return None
+
+        dash_content = text[dash_start + 6:dash_end]
+        name = ''
+        desc = ''
+        category = ''
+
+        for line in dash_content.splitlines():
+            line = line.strip()
+            if not line or ':' not in line:
+                continue
+            key, _, val = line.partition(':')
+            k = key.strip().lower()
+            v = val.strip()
+            if k == 'name':
+                name = v
+            elif k == 'desc':
+                desc = v
+            elif k == 'category':
+                category = v
+            if name and desc and category:
+                break
+
+        if not name or not desc:
+            return None
+
+        has_details = ('<details>' in text and '</details>' in text)
+
+        return WikiEntry(
+            name=name,
+            desc=desc,
+            category=category,
+            details=None,
+            blocks=[],
+            file_name=file_name,
+            has_details=has_details,
+        )
+
+    # ⚡ قراءة كاملة للملف الفردي فقط عند ضغط المستخدم عليه
+    @classmethod
+    def parse_full(cls, text: str, file_name: str = '') -> Optional[WikiEntry]:
         try:
             dash_block = cls._extract_block(text, 'dash')
             if dash_block is None:
@@ -315,6 +347,7 @@ class WikiParser:
                 details=details,
                 blocks=dash_blocks,
                 file_name=file_name,
+                has_details=details is not None,
             )
         except Exception:
             return None
@@ -384,7 +417,7 @@ class WikiCache:
         with open(os.path.join(folder, file_name), 'w', encoding='utf-8') as f:
             f.write(text)
 
-        entry = WikiParser.parse(text, file_name)
+        entry = WikiParser.parse_light(text, file_name)
         if entry is not None:
             return cls._entry_meta(entry)
         return None
@@ -400,7 +433,7 @@ class WikiCache:
             'desc':        entry.desc,
             'category':    entry.category,
             'file_name':   entry.file_name,
-            'has_details': entry.details is not None,
+            'has_details': entry.has_details,
         }
 
     @classmethod
@@ -433,7 +466,7 @@ class WikiCache:
                     text = f.read()
             except Exception:
                 continue
-            entry = WikiParser.parse(text, file_name)
+            entry = WikiParser.parse_light(text, file_name)
             if entry is not None:
                 items.append(cls._entry_meta(entry))
         if items:
@@ -470,7 +503,7 @@ class WikiCache:
                 text = f.read()
         except Exception:
             return None
-        return WikiParser.parse(text, file_name)
+        return WikiParser.parse_full(text, file_name)
 
 
 class WikiRemote:
@@ -498,6 +531,7 @@ class WikiRemote:
         return cls._get(url)
 
 
+# ── عناصر الواجهة الأصلية 100% ──────────────────────────
 def _ink_btn(content: ft.Control, bgcolor: str, on_click,
              border_radius: int = 10, padding=None, width=None,
              disabled: bool = False) -> ft.Container:
@@ -531,19 +565,21 @@ class BotWikiTab:
     def __init__(self, page: ft.Page, on_open_dashboard: Optional[Callable[[str], None]] = None):
         self._page              = page
         self._on_open_dashboard = on_open_dashboard
-        self._lang    = get_current_lang() or 'en'
+        self._lang              = get_current_lang() or 'en'
         
         self._entries: List[WikiEntry] = []
         self._filtered: List[WikiEntry] = []
         self._view_mode  = 'list'
         self._current: Optional[WikiEntry] = None
         
-        # نظام الفلاتر النشطة (اختيار متعدد)
+        # كاش في الذاكرة لتفاصيل الأوامر التي يفتحها المستخدم لحظياً
+        self._full_cache: Dict[str, WikiEntry] = {}
+
         self._active_filters: Set[str] = set()
         self._busy = False
         self._hl_colors: Dict[str, str] = {}
+        self._search_debounce_task: Optional[asyncio.Task] = None
 
-        # ── العداد (أقصى اليمين) ──────────────────────────────────
         self._count_text = ft.Text(
             value="",
             size=12,
@@ -555,7 +591,6 @@ class BotWikiTab:
             _t('tab_wiki'), size=15, weight=ft.FontWeight.BOLD, color=_c('text'),
         )
 
-        # ── مربع البحث (على اليسار بجانب العنوان) ──────────────────────
         self._search_field = ft.TextField(
             hint_text=_t('search_hint'),
             height=40,
@@ -574,7 +609,6 @@ class BotWikiTab:
             ),
         )
 
-        # ── زر الفلترة (بجانب البحث) ───────────────────────────
         self._filter_btn = ft.IconButton(
             icon=ft.Icons.FILTER_LIST_ROUNDED,
             icon_color=_c('accent'),
@@ -592,7 +626,6 @@ class BotWikiTab:
             on_click=self._check_updates,
         )
 
-        # ── الهيدر الرئيسي ──
         self._header = ft.Container(
             content=ft.Row(
                 [
@@ -649,7 +682,6 @@ class BotWikiTab:
         ThemeEngine.subscribe(self._on_theme)
 
     def _build_sub_views(self):
-        # واجهة الـ Dash
         self._dash_back_btn = ft.IconButton(
             icon=ft.Icons.ARROW_BACK_ROUNDED, icon_color='#FFFFFF',
             bgcolor=_c('accent'), icon_size=16,
@@ -671,7 +703,6 @@ class BotWikiTab:
             expand=True,
         )
 
-        # واجهة التفاصيل (Detail)
         self._detail_back_btn = ft.IconButton(
             icon=ft.Icons.ARROW_BACK_ROUNDED, icon_color='#FFFFFF',
             bgcolor=_c('accent'), icon_size=16,
@@ -694,17 +725,14 @@ class BotWikiTab:
         )
 
     def _open_filter_sheet(self, _):
-        # استخراج التصنيفات وبناء قائمة الخيارات
         found_cats = sorted(list({e.category.strip() for e in self._entries if e.category}))
         filter_col = ft.Column(spacing=10, tight=True)
         checkboxes: List[ft.Checkbox] = []
 
         def _close_sheet(_e=None):
-            # إغلاق البوتوم شيت - النظير الصحيح لـ page.close() في هذا الإصدار
             self._page.pop_dialog()
 
         def _reset_filters(_e=None):
-            # مسح كل الفلاتر النشطة وإعادة تحديد كل الـ checkboxes
             self._active_filters.clear()
             for cb in checkboxes:
                 cb.value = False
@@ -734,7 +762,6 @@ class BotWikiTab:
                 checkboxes.append(cb)
                 filter_col.controls.append(cb)
 
-        # ── هيدر الشيت: عنوان + زر ريسيت + زر إغلاق (X) ──
         header_row = ft.Row(
             [
                 ft.Text(_t('filter_title') or "Categories / التصنيفات",
@@ -758,7 +785,6 @@ class BotWikiTab:
             vertical_alignment=ft.CrossAxisAlignment.CENTER,
         )
 
-        # ── زر تطبيق/إغلاق سفلي واضح للمستخدم ──
         apply_btn = _ink_btn(
             content=ft.Text(_t('done') or "تم", size=13, color='#FFFFFF',
                              weight=ft.FontWeight.W_600),
@@ -766,7 +792,6 @@ class BotWikiTab:
             on_click=_close_sheet,
         )
 
-        # بناء الـ BottomSheet (v1 API)
         bs = ft.BottomSheet(
             ft.Container(
                 content=ft.Column(
@@ -776,7 +801,7 @@ class BotWikiTab:
                         filter_col,
                         ft.Container(height=10),
                         apply_btn,
-                        ft.Container(height=10),  # مسافة أمان سفلية
+                        ft.Container(height=10),
                     ],
                     tight=True,
                     scroll=ft.ScrollMode.AUTO,
@@ -799,13 +824,11 @@ class BotWikiTab:
         self._page.update()
 
     def _clear_search(self, _e=None):
-        # زر مسح سريع لمربع البحث
         self._search_field.value = ""
         self._apply_filters()
         self._page.update()
 
     def _reset_all_filters(self, _e=None):
-        # اختصار: ضغط مطوّل على زر الفلترة يمسح كل الفلاتر دفعة واحدة
         self._active_filters.clear()
         self._apply_filters()
         self._page.update()
@@ -857,7 +880,8 @@ class BotWikiTab:
             'comment': get('text_dim'),
         }
         self._render()
-        self._page.update()
+        if self._page:
+            self._page.update()
 
     def build(self) -> ft.Control:
         self._lang = get_current_lang() or 'en'
@@ -876,8 +900,16 @@ class BotWikiTab:
             self._root.content = self._detail_root
 
     def _on_search_change(self, e):
-        self._apply_filters()
-        self._page.update()
+        if self._search_debounce_task:
+            self._search_debounce_task.cancel()
+        
+        async def _debounced():
+            await asyncio.sleep(0.18)
+            self._apply_filters()
+            if self._page:
+                self._page.update()
+
+        self._search_debounce_task = self._page.run_task(_debounced)
 
     def _update_wiki_count(self):
         count = len(self._filtered)
@@ -903,6 +935,7 @@ class BotWikiTab:
         self._update_wiki_count()
         self._rebuild_list()
 
+    # ⚡ إلغاء الـ 15 دفعة: يتم بناء جميع العناصر كاملة ومباشرة كما طلبت
     def _rebuild_list(self):
         self._list_view.controls.clear()
 
@@ -920,6 +953,7 @@ class BotWikiTab:
         for entry in self._filtered:
             self._list_view.controls.append(self._build_card(entry))
 
+    # ⚡ التصميم الأصلي 100% كما كان من قبل دون أي تبسيط
     def _build_card(self, entry: WikiEntry) -> ft.Container:
         header_children = [
             ft.Text(entry.name, size=15, weight=ft.FontWeight.BOLD, color=_c('text')),
@@ -956,7 +990,7 @@ class BotWikiTab:
                 [
                     ft.Row(header_children, spacing=8),
                     ft.Text(entry.desc, size=13, color=_c('text_dim'), rtl=self._is_rtl()),
-                    ft.Row(card_buttons, spacing=8, expand=True),
+                    ft.Row(card_buttons, spacing=8),
                 ],
                 spacing=8,
             ),
@@ -1041,15 +1075,28 @@ class BotWikiTab:
     def _pill(self, text: str) -> ft.Container:
         return ft.Container(content=ft.Text(text, size=12, color=_c('accent'), font_family='monospace', weight=ft.FontWeight.W_600), bgcolor=_tint(_c('accent'), 24), border_radius=6, padding=ft.Padding(10, 4, 10, 4))
 
+    # ⚡ قراءة واستدعاء محتوى الملف الواحد فورياً عند الضغط عليه فقط
+    async def _get_full_entry(self, entry: WikiEntry) -> WikiEntry:
+        if entry.file_name in self._full_cache:
+            return self._full_cache[entry.file_name]
+
+        full_entry = await asyncio.get_event_loop().run_in_executor(
+            None, WikiCache.load_entry_full, self._lang, entry.file_name
+        )
+        resolved = full_entry or entry
+        self._full_cache[entry.file_name] = resolved
+        return resolved
+
     async def _async_open_dash(self, entry: WikiEntry):
         self._view_mode = 'dash'
         self._render()
         self._page.update()
-        full_entry = await asyncio.get_event_loop().run_in_executor(None, WikiCache.load_entry_full, self._lang, entry.file_name)
-        full_entry = full_entry or entry
+
+        full_entry = await self._get_full_entry(entry)
         self._dash_title.value = full_entry.name
         controls = [self._rich_paragraph(full_entry.desc)]
-        for b in full_entry.blocks: controls.append(self._render_dash_block(b))
+        for b in full_entry.blocks: 
+            controls.append(self._render_dash_block(b))
         self._dash_body.controls = controls
         self._render()
         self._page.update()
@@ -1058,8 +1105,12 @@ class BotWikiTab:
         self._view_mode = 'detail'
         self._render()
         self._page.update()
-        full_entry = await asyncio.get_event_loop().run_in_executor(None, WikiCache.load_entry_full, self._lang, entry.file_name)
-        if not full_entry or not full_entry.details: self._back_to_list(None); return
+
+        full_entry = await self._get_full_entry(entry)
+        if not full_entry or not full_entry.details: 
+            self._back_to_list(None)
+            return
+
         self._detail_title.value = f'${full_entry.name}'
         self._build_detail_body(full_entry)
         self._render()
@@ -1075,9 +1126,24 @@ class BotWikiTab:
         controls = [ft.Text(entry.desc, size=13, color=_c('text_dim')), self._code_box(det.syntax, True)]
         if det.params:
             for p in det.params:
-                controls.append(ft.Container(content=ft.Column([ft.Row([ft.Text(p.name, weight='bold', color=_c('text')), _badge(p.type, '#6366F1'), _badge(p.flag, '#3B82F6')], spacing=6), ft.Text(p.desc, size=12, color=_c('text_dim'))], spacing=4), bgcolor=_c('card_bg'), border=self._card_border(), border_radius=8, padding=10))
+                controls.append(
+                    ft.Container(
+                        content=ft.Column(
+                            [
+                                ft.Row([ft.Text(p.name, weight='bold', color=_c('text')), _badge(p.type, '#6366F1'), _badge(p.flag, '#3B82F6')], spacing=6),
+                                ft.Text(p.desc, size=12, color=_c('text_dim'))
+                            ],
+                            spacing=4,
+                        ),
+                        bgcolor=_c('card_bg'),
+                        border=self._card_border(),
+                        border_radius=8,
+                        padding=10,
+                    )
+                )
         if det.examples:
-            for ex in det.examples: controls.append(self._code_box(ex, True))
+            for ex in det.examples: 
+                controls.append(self._code_box(ex, True))
         self._detail_body.controls = controls
 
     def _set_busy(self, busy: bool, label: str = ''):
@@ -1089,7 +1155,6 @@ class BotWikiTab:
         self._page.update()
 
     async def _check_updates(self, e):
-        # حارس: يمنع تشغيل نسختين متوازيتين لو ضغط المستخدم على الزر أكثر من مرة
         if self._busy:
             return
         self._set_busy(True, _t('checking'))
@@ -1101,7 +1166,7 @@ class BotWikiTab:
             remote_version = await loop.run_in_executor(None, WikiRemote.fetch_version, lang)
         except Exception as ex:
             print(f'[Wiki] fetch_version failed: {ex}')
-            self._set_busy(False, _t_or_fallback('update_failed', 'فشل التحقق من التحديثات'))
+            self._set_busy(False, _t_or_fallback('update_failed', 'Failed to check for updates'))
             return
 
         local_version = WikiCache.get_local_version(lang)
@@ -1109,18 +1174,6 @@ class BotWikiTab:
         if remote_version <= local_version:
             self._set_busy(False, _t('up_to_date').format(v=local_version))
             return
-
-        # طلب إذن الإشعارات على الموبايل (اختياري تمامًا، لا يوقف التحديث لو فشل)
-        try:
-            if hasattr(self._page, 'platform') and self._page.platform in [
-                'android', 'ios',
-                getattr(ft.PagePlatform, 'ANDROID', 'android'),
-                getattr(ft.PagePlatform, 'IOS', 'ios'),
-            ]:
-                if hasattr(ft, 'PermissionType'):
-                    self._page.request_permission(ft.PermissionType.NOTIFICATION)
-        except Exception as ex:
-            print(f'[Wiki] notification permission request failed: {ex}')
 
         self._page.show_dialog(
             ft.SnackBar(
@@ -1137,7 +1190,6 @@ class BotWikiTab:
             )
         )
 
-        # شاشة تحميل بشريط تقدم فعلي تغطي جسم التاب أثناء التنزيل
         loader = LoadingScreen(container=self._root, page=self._page, title=_t('downloading'))
 
         async def _do_download(screen: LoadingScreen):
@@ -1151,23 +1203,17 @@ class BotWikiTab:
             async def _fetch_one(file_name: str):
                 nonlocal done_count
                 text = await loop.run_in_executor(None, WikiRemote.fetch_function, lang, file_name)
-                # نكتب الملف فقط هنا؛ meta.json يُعاد بناؤه مرة واحدة بعد اكتمال كل الدفعات
-                # بدل قراءة/كتابة meta.json لكل ملف على حدة، لتفادي تعارض الكتابة المتزامنة
-                # وتسريع العملية عمومًا
                 await loop.run_in_executor(None, WikiCache.save_function_file_only, lang, file_name, text)
                 done_count += 1
                 screen.set_progress(done_count / total, f'{done_count}/{total}')
 
-            # تنزيل بالتوازي على دفعات بدل ملف-بملف تسلسليًا
             chunk_size = 45
             for i in range(0, len(index), chunk_size):
                 chunk = index[i:i + chunk_size]
                 await asyncio.gather(*[_fetch_one(fn) for fn in chunk])
                 await asyncio.sleep(0.5)
 
-            # إعادة بناء meta.json مرة واحدة فقط لكل الملفات المحلية بعد التنزيل
             await loop.run_in_executor(None, WikiCache._rebuild_meta, lang)
-
             WikiCache.save_index(lang, index)
             WikiCache.set_local_version(lang, remote_version)
 
@@ -1179,12 +1225,12 @@ class BotWikiTab:
             )
         except Exception as ex:
             print(f'[Wiki] update download failed: {ex}')
-            self._set_busy(False, _t_or_fallback('update_failed', 'فشل التحديث'))
+            self._set_busy(False, _t_or_fallback('update_failed', 'Update failed'))
             return
 
+        self._full_cache.clear()
         self._entries = WikiCache.load_light_entries(lang)
         self._apply_filters()
-
         self._set_busy(False, _t('up_to_date').format(v=remote_version))
 
         self._page.show_dialog(
@@ -1192,12 +1238,15 @@ class BotWikiTab:
         )
 
     def load_bot(self, *_args, **_kwargs):
+        if self._entries:
+            return
         self._page.run_task(self._async_load_bot_task)
 
     async def _async_load_bot_task(self, *args):
         self._entries = await asyncio.get_event_loop().run_in_executor(None, WikiCache.load_light_entries, self._lang)
         self._apply_filters()
-        self._page.update()
+        if self._page:
+            self._page.update()
 
     def select_events_filter(self):
         self._view_mode = 'list'

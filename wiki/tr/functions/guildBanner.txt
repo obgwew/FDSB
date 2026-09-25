@@ -1,0 +1,30 @@
+<dash>
+name: $guildBanner
+desc: Bir sunucunun banner URL'sini döndürür.
+category: Sunucu
+
+<block type="text" title="Komut nasıl çalışır?">
+text: Argüman verilmediğinde $guildBanner, betiğin tetiklendiği veya etkileşimin alındığı sunucuyu kullanır. Bir sunucu kimliği verildiğinde, botun üyesi olduğu sunucunun bannerını döndürür. Hareketli bannerlar GIF URL'si, diğer bannerlar PNG URL'si olarak döndürülür.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $guildBanner[(guild_id)]
+</block>
+
+<block type="code" title="Kopyalamaya Hazır Örnek">
+text: $guildBanner[123456789012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: Sunucunun bir bannerı olmalı ve bot bunu çözümleyebilmelidir. İsteğe bağlı argüman verirken sayısal bir sunucu kimliği kullanın.
+</block>
+
+<block type="callout" kind="note">
+text: Satır içi biçim yalnızca önbelleğe alınmış sunucu verilerini kullanabilir. Discord'un kullanılabilirliğine bağlı olarak tek başına kullanılan biçim, şu anda önbellekte olmayan bir sunucuyu da getirebilir.
+</block>
+</dash>
+
+<details>
+syntax: $guildBanner[(guild_id)]
+param: guildID|snowflake|Optional|Sunucu kimliği; belirtilmezse geçerli veya etkileşimin alındığı sunucu kullanılır
+</details>

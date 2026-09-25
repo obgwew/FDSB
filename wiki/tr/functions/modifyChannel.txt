@@ -1,0 +1,35 @@
+<dash>
+name: $modifyChannel
+desc: Bir sunucu kanalının bir veya daha fazla özelliğini değiştirir.
+category: Kanal Yönetimi
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $modifyChannel, geçerli sunucudaki bir kanalı düzenler. Zorunlu ilk argüman kanalı seçer; kalan argümanlar konumsaldır ve ad, konu, NSFW ayarı, konum ve kategori değerlerini güncelleyebilir. İsteğe bağlı bir argümanı atlayın veya boş bırakın; böylece ilgili özellik değiştirilmez.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $modifyChannel[Channel ID; (Channel Name; Topic; Make NSFW?; Position; Category ID)]
+</block>
+
+<block type="code" title="Kopyalamaya Hazır Örnek">
+text: $modifyChannel[123456789012345678; Announcements; Welcome messages; no; 2; 987654321012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: Komut bir sunucuda çalışmalı ve botun kanalı yönetme izni olmalıdır. Kanal adları en fazla 100, konular ise en fazla 1024 karakter olabilir. Bir kategori başka bir kategoriye atanamaz.
+</block>
+
+<block type="callout" kind="note">
+text: NSFW değeri için yes, no, true veya false kullanın. Kategoriyi kaldırmak için kategori alanında none, 0 veya null kullanın. Mevcut yorumlayıcıda bu, tek başına kullanılan bir komuttur; satır içi çözümleyicisi yan etkiyi çalıştırmaz.
+</block>
+</dash>
+
+<details>
+syntax: $modifyChannel[Channel ID; (Channel Name; Topic; Make NSFW?; Position; Category ID)]
+param: channelID|snowflake|Required|Değiştirilecek kanalın kimliği veya bahsetmesi
+param: name|text|Optional|Yeni kanal adı
+param: topic|text|Optional|Yeni konu; none değeri konuyu temizler
+param: nsfw|text|Optional|Kanalın NSFW olup olmadığı: yes, no, true veya false
+param: position|integer|Optional|Yeni kanal konumu
+param: categoryID|snowflake|Optional|Hedef kategori kimliği; none, 0 veya null değeri kategoriyi temizler
+</details>

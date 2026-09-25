@@ -1,0 +1,31 @@
+<dash>
+name: $moveChannel
+desc: Bir kanalı bir sunucu kategorisine taşır.
+category: Kanal Yönetimi
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $moveChannel, mevcut bir normal kanalı ikinci argümanla belirtilen kategoriye taşır. Her iki kimlik de geçerli sunucudaki sayısal snowflake olmalıdır. Kanal zaten bu kategorideyse komut, Discord'a istek göndermeden işlem yapılmadığını günlüğe kaydeder.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $moveChannel[channel ID; new category ID]
+</block>
+
+<block type="code" title="Kopyalamaya Hazır Örnek">
+text: $moveChannel[123456789012345678; 987654321012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: Komut bir sunucuda çalışmalıdır. Hedef normal bir kanal, varış yeri bir kategori olmalı ve botun kanalları yönetme izni bulunmalıdır. Mevcut uygulama bahsetmeleri kabul etmez.
+</block>
+
+<block type="callout" kind="note">
+text: Kategoriler başka bir kategoriye taşınamaz. Mevcut yorumlayıcıda bu komut yalnızca tek başına kullanılabilir; çünkü satır içi çözümleyicisi yan etkiyi çalıştırmaz.
+</block>
+</dash>
+
+<details>
+syntax: $moveChannel[channel ID; new category ID]
+param: channelID|snowflake|Required|Taşınacak normal kanalın sayısal kimliği
+param: categoryID|snowflake|Required|Hedef kategorinin sayısal kimliği
+</details>

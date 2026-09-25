@@ -1,0 +1,31 @@
+<dash>
+name: $editChannelTopic
+desc: Changes a server channel topic.
+category: Channel Management
+
+<block type="text" title="How does the command work?">
+text: With one argument, $editChannelTopic changes the topic of the channel where the script was triggered. With two arguments, it changes the topic of the channel identified by the first argument. A blank or whitespace-only topic clears the current topic.
+</block>
+
+<block type="code" title="Syntax">
+text: $editChannelTopic[(channel ID or mention); new topic]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $editChannelTopic[<#123456789012345678>; Welcome to the community!]
+</block>
+
+<block type="callout" kind="warning">
+text: The command only works inside a server. The target must belong to the current server, support topics, and be editable by the bot. Topics cannot exceed 1024 characters.
+</block>
+
+<block type="callout" kind="note">
+text: In the current interpreter this is a standalone command. Its inline resolver returns an empty value and does not run the side effect.
+</block>
+</dash>
+
+<details>
+syntax: $editChannelTopic[(channel ID or mention); new topic]
+param: channelID|text|Optional|The target channel ID or mention; when omitted with one argument, the current channel is used
+param: newTopic|text|Required|The replacement topic, up to 1024 characters
+</details>

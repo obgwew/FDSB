@@ -1,0 +1,30 @@
+<dash>
+name: $userBannerColor
+desc: Bir kullanıcının banner vurgu rengini onaltılık biçimde döndürür.
+category: Bilgi
+
+<block type="text" title="Komut nasıl çalışır?">
+text: Argüman verilmediğinde $userBannerColor, bot kullanıcısının vurgu rengini döndürür. Bir kullanıcı kimliği veya bahsetmesi verildiğinde o kullanıcının vurgu rengini büyük harfli #RRGGBB biçiminde döndürür.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $userBannerColor[(user_id)]
+</block>
+
+<block type="code" title="Kopyalamaya Hazır Örnek">
+text: $userBannerColor[123456789012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: Kullanıcının bir banner vurgu rengi olmalı ve bot kullanıcıyı çözümleyebilmelidir. Boş veya kullanılamayan bir sonuç, tek başına kullanılan biçim tarafından hata olarak bildirilir.
+</block>
+
+<block type="callout" kind="note">
+text: Satır içi biçim yalnızca önbelleğe alınmış kullanıcıları kullanır ve şu anda yanlış değerli bir vurgu rengini kullanılamaz olarak değerlendirir. Varsayılan her zaman bot kullanıcısıdır; betiği tetikleyen yazar değildir.
+</block>
+</dash>
+
+<details>
+syntax: $userBannerColor[(user_id)]
+param: userID|snowflake|Optional|Kullanıcı kimliği veya bahsetmesi; varsayılan olarak bot kullanıcısı
+</details>

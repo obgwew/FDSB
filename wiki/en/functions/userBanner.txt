@@ -1,0 +1,30 @@
+<dash>
+name: $userBanner
+desc: Returns a user's profile banner URL.
+category: Info
+
+<block type="text" title="How does the command work?">
+text: With no argument, $userBanner returns the banner of the bot user. With a user ID or mention, it returns that user's banner. Animated banners are returned as GIF URLs and other banners as PNG URLs.
+</block>
+
+<block type="code" title="Syntax">
+text: $userBanner[(user_id)]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $userBanner[123456789012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: The user must have a profile banner and the bot must be able to resolve the user. The optional ID is cleaned of non-digit characters before lookup.
+</block>
+
+<block type="callout" kind="note">
+text: The inline form uses cached users only. The standalone form can fetch a user that is not currently cached. The default is always the bot user, not the triggering author.
+</block>
+</dash>
+
+<details>
+syntax: $userBanner[(user_id)]
+param: userID|snowflake|Optional|The user ID or mention; defaults to the bot user
+</details>

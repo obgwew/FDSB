@@ -1,0 +1,29 @@
+<dash>
+name: $setUserVar
+desc: صارف اور سرور کے لیے مخصوص مستقل قدر محفوظ کرتا ہے۔
+category: متغیرات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $setUserVar صارف متغیر فائل میں `guild_id:user_id` کلید کے تحت قدر محفوظ کرتا ہے۔ دو آرگومینٹس کے ساتھ متحرک کرنے والا مصنف اور موجودہ سرور استعمال ہوتے ہیں۔ کوئی دوسرا صارف منتخب کرنے کے لیے صارف کی ID شامل کریں، اور کوئی دوسرا سرور منتخب کرنے کے لیے سرور کی ID شامل کریں۔ کمانڈ ان لائن استعمال نہیں ہو سکتی۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $setUserVar[name; value; (user_id); (guild_id)]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $setUserVar[points; 10; 123456789012345678; 987654321012345678]
+</block>
+
+<block type="callout" kind="important">
+text: اگر اس نام کا کوئی عالمی متغیر موجود نہیں ہوتا تو کمانڈ دی گئی مخصوص قدر محفوظ کرتی ہے، خالی عالمی تعریف بناتی ہے، اور پھر ماحولیاتی خرابی کے ساتھ اسکرپٹ روک دیتی ہے۔ پہلے عالمی متغیر متعین کریں۔
+</block>
+</dash>
+
+<details>
+syntax: $setUserVar[name; value; (user_id); (guild_id)]
+param: name|text|لازمی|متغیر کا نام
+param: value|text|لازمی|محفوظ کرنے کے لیے قدر
+param: userID|snowflake|اختیاری|صارف کی ID؛ ڈیفالٹ متحرک کرنے والا مصنف
+param: guildID|snowflake|اختیاری|سرور کی ID؛ ڈیفالٹ موجودہ سرور
+</details>

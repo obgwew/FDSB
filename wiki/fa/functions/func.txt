@@ -1,0 +1,28 @@
+<dash>
+name: $func
+desc: تعریف یک تابع قابل استفاده مجدد FDScript را آغاز می‌کند.
+category: کنترل جریان
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $func یک بلوک تابع نام‌گذاری‌شده را آغاز می‌کند. مفسر بدنه تابع را پیش از اجرای اسکریپت اصلی جمع‌آوری می‌کند و هنگام اجرای معمولی، بلوک تعریف را رد می‌کند. برای بستن بلوک از $endfunc و برای اجرای آن در آینده از $call استفاده کنید.
+</block>
+
+<block type="code" title="سینتکس">
+text: $func[name]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $func[sendWelcome]
+$sendMessage[Welcome!]
+$endfunc
+</block>
+
+<block type="callout" kind="important">
+text: نام توابع باید در یک اسکریپت یکتا باشند. هر $func باید یک $endfunc متناظر داشته باشد و تابع فقط پس از جمع‌آوری تعریفش قابل فراخوانی است.
+</block>
+</dash>
+
+<details>
+syntax: $func[name]
+param: name|text|الزامی|نام تابع یکتا و غیرخالی
+</details>

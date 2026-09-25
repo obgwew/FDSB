@@ -1,0 +1,32 @@
+<dash>
+name: $getUserVar
+desc: Bir sunucuda kullanıcıya özel kalıcı bir değişkeni alır.
+category: Değişkenler
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $getUserVar, guild_id:user_id anahtarı altında saklanan kullanıcıya özel değeri denetler. Bu değer boşsa veya yoksa genel değişkene geri döner. Tek argümanla betiği tetikleyen yazar ve geçerli sunucu kullanılır; iki argüman bir kullanıcı kimliğini, üç argüman ise hem kullanıcı hem de sunucu kimliğini seçer.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $getUserVar[name; (user_id); (guild_id)]
+</block>
+
+<block type="code" title="Kopyalamaya Hazır Örnek">
+text: $getUserVar[points; 123456789012345678]
+</block>
+
+<block type="callout" kind="important">
+text: Genel değişken mevcut değilse komut bir yer tutucu kaydı oluşturur, gerektiğinde kullanıcıya özel kaydı da oluşturur ve betiği durdurur. Önce genel değişkeni tanımlayın.
+</block>
+
+<block type="callout" kind="note">
+text: Bu komut satır içinde veya tek başına bir deyim olarak kullanılabilir. Varsayılan kullanıcı, bot değil, betiği tetikleyen yazardır.
+</block>
+</dash>
+
+<details>
+syntax: $getUserVar[name; (user_id); (guild_id)]
+param: name|text|Required|Alınacak değişkenin adı
+param: userID|text|Optional|Okunacak kapsamlı değerin kullanıcı kimliği; varsayılan olarak betiği tetikleyen yazar
+param: guildID|text|Optional|Sunucu kimliği; varsayılan olarak geçerli sunucu
+</details>

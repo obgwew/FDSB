@@ -1,0 +1,31 @@
+<dash>
+name: $editChannelTopic
+desc: Bir sunucu kanalının konusunu değiştirir.
+category: Kanal Yönetimi
+
+<block type="text" title="Komut nasıl çalışır?">
+text: Tek argümanla $editChannelTopic, betiğin tetiklendiği kanalın konusunu değiştirir. İki argümanla ilk argümanla belirtilen kanalın konusunu değiştirir. Boş veya yalnızca boşluk içeren bir konu, mevcut konuyu temizler.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $editChannelTopic[(channel ID or mention); new topic]
+</block>
+
+<block type="code" title="Kopyalamaya Hazır Örnek">
+text: $editChannelTopic[<#123456789012345678>; Welcome to the community!]
+</block>
+
+<block type="callout" kind="warning">
+text: Komut yalnızca bir sunucu içinde çalışır. Hedef geçerli sunucuya ait olmalı, kanal konularını desteklemeli ve bot tarafından düzenlenebilmelidir. Konular 1024 karakteri geçemez.
+</block>
+
+<block type="callout" kind="note">
+text: Mevcut yorumlayıcıda bu, tek başına kullanılan bir komuttur. Satır içi çözümleyicisi boş bir değer döndürür ve yan etkiyi çalıştırmaz.
+</block>
+</dash>
+
+<details>
+syntax: $editChannelTopic[(channel ID or mention); new topic]
+param: channelID|text|Optional|Hedef kanal kimliği veya bahsetmesi; tek argümanla belirtilmediğinde geçerli kanal kullanılır
+param: newTopic|text|Required|Değiştirilecek konu, en fazla 1024 karakter
+</details>

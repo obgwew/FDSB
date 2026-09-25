@@ -1,0 +1,31 @@
+<dash>
+name: $getGuildVar
+desc: Pobiera trwałą zmienną specyficzną dla serwera.
+category: Zmienne
+
+<block type="text" title="Jak działa ta komenda?">
+text: $getGuildVar najpierw szuka nadpisania specyficznego dla serwera w pliku zmiennych gildii. Jeśli nadpisanie nie istnieje, korzysta ze zmiennej globalnej o tej samej nazwie. Z jednym argumentem używany jest bieżący identyfikator serwera; z dwoma argumentami drugi argument wybiera identyfikator serwera.
+</block>
+
+<block type="code" title="Składnia">
+text: $getGuildVar[name; (guild_id)]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $getGuildVar[welcomeMessage]
+</block>
+
+<block type="callout" kind="important">
+text: Jeśli zmienna globalna nie istnieje, komenda tworzy wpis zastępczy, w razie potrzeby tworzy wpis specyficzny dla serwera i przerywa skrypt błędem środowiska. Przejrzyj i zdefiniuj zmienną przed jej użyciem.
+</block>
+
+<block type="callout" kind="note">
+text: Tę komendę można użyć w tekście i jako samodzielną instrukcję. Brakująca wartość globalna nie jest po cichu traktowana jako prawidłowa wartość.
+</block>
+</dash>
+
+<details>
+syntax: $getGuildVar[name; (guild_id)]
+param: name|text|Required|Nazwa zmiennej do pobrania
+param: guildID|text|Optional|ID serwera, dla którego należy odczytać wartość specyficzną dla serwera; domyślnie używany jest bieżący serwer
+</details>

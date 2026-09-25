@@ -1,0 +1,35 @@
+<dash>
+name: $modifyChannel
+desc: سرور چینل کی ایک یا ایک سے زیادہ خصوصیات بدلتا ہے۔
+category: چینل انتظامات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $modifyChannel موجودہ سرور میں کسی چینل میں ترمیم کرتا ہے۔ پہلا لازمی آرگومینٹ چینل منتخب کرتا ہے؛ باقی آرگومینٹس پوزیشن کے لحاظ سے آتے ہیں اور نام، ٹاپک، NSFW سیٹنگ، پوزیشن اور کیٹیگری کو اپ ڈیٹ کر سکتے ہیں۔ کوئی اختیاری آرگومینٹ چھوڑیں یا خالی رکھیں تاکہ وہ خصوصیت تبدیل نہ ہو۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $modifyChannel[Channel ID; (Channel Name; Topic; Make NSFW?; Position; Category ID)]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $modifyChannel[123456789012345678; Announcements; Welcome messages; no; 2; 987654321012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: کمانڈ سرور کے اندر چلنا چاہیے اور بوٹ کے پاس چینل منیج کرنے کی اجازت ہونی چاہیے۔ نام 100 حروف اور ٹاپک 1024 حروف تک محدود ہیں۔ کسی کیٹیگری کو دوسری کیٹیگری میں تفویض نہیں کیا جا سکتا۔
+</block>
+
+<block type="callout" kind="note">
+text: NSFW ویلیو کے لیے yes، no، true یا false استعمال کریں۔ کیٹیگری فیلڈ سے کیٹیگری ہٹانے کے لیے none، 0 یا null استعمال کریں۔ موجودہ انٹرپریٹر میں یہ اسٹینڈ اَلون کمانڈ ہے؛ اس کا ان لائن ریزالورر سائیڈ ایفیکٹ چلاتا نہیں۔
+</block>
+</dash>
+
+<details>
+syntax: $modifyChannel[Channel ID; (Channel Name; Topic; Make NSFW?; Position; Category ID)]
+param: channelID|snowflake|لازمی|ترمیم کیے جانے والے چینل کی ID یا مینشن
+param: name|text|اختیاری|نئے چینل کا نام
+param: topic|text|اختیاری|نیا ٹاپک؛ none اسے صاف کرتا ہے
+param: nsfw|text|اختیاری|چینل NSFW ہے یا نہیں: yes، no، true یا false
+param: position|integer|اختیاری|نئی چینل پوزیشن
+param: categoryID|snowflake|اختیاری|مقصد کی کیٹیگری کی ID؛ none، 0 یا null اسے صاف کرتا ہے
+</details>

@@ -22,9 +22,20 @@ def _sync_fdcore(bot_dir: str):
     os.makedirs(path, exist_ok=True)
     _fd_set_vars_dir(path)
 
+def _bot_root_from_dir(bot_dir: str) -> str:
+    return os.path.dirname(os.path.abspath(bot_dir))
+
 def _ids_data_path(bot_dir: str) -> str:
     vars_dir = _vars_dir(bot_dir)
     return os.path.join(os.path.dirname(vars_dir), 'bot_ids', 'ids_data.json')
+
+def _user_vars_dir(bot_dir: str) -> str:
+    vars_dir = _vars_dir(bot_dir)
+    return os.path.join(os.path.dirname(vars_dir), 'user_vars')
+
+def _guild_vars_dir(bot_dir: str) -> str:
+    vars_dir = _vars_dir(bot_dir)
+    return os.path.join(os.path.dirname(vars_dir), 'guild_vars')
 
 def _load_ids_data(bot_dir: str) -> dict:
     path = _ids_data_path(bot_dir)
@@ -43,6 +54,39 @@ def _save_ids_data(bot_dir: str, data: dict):
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
+
+def _safe_name(name: str) -> str:
+    return ''.join(c for c in name if c.isalnum() or c in ('-', '_')).strip() or 'var'
+
+def _load_scoped_var(base_dir: str, name: str) -> dict:
+    if not base_dir:
+        return {}
+    path = os.path.join(base_dir, f'{_safe_name(name)}.json')
+    if not os.path.isfile(path):
+        return {}
+    try:
+        with open(path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        values = data.get('values') if isinstance(data, dict) else None
+        return values if isinstance(values, dict) else {}
+    except Exception:
+        return {}
+
+def _save_scoped_var(base_dir: str, name: str, values: dict):
+    if not base_dir:
+        return
+    os.makedirs(base_dir, exist_ok=True)
+    path = os.path.join(base_dir, f'{_safe_name(name)}.json')
+    with open(path, 'w', encoding='utf-8') as f:
+        json.dump({'name': name, 'values': values}, f, ensure_ascii=False, indent=2)
+
+def _delete_scoped_file(base_dir: str, name: str):
+    path = os.path.join(base_dir, f'{_safe_name(name)}.json')
+    if os.path.isfile(path):
+        try:
+            os.remove(path)
+        except Exception:
+            pass
 
 def _t(key: str) -> str:
     return Translations.get(key, get_current_lang())
@@ -177,17 +221,10 @@ def _confirm_unsaved(page: ft.Page, on_save: callable, on_discard: callable,
     )
     page.show_dialog(dlg)
 
-def _bot_root_from_dir(bot_dir: str) -> str:
-    return os.path.dirname(os.path.abspath(bot_dir))
-
 def _ensure_vars_dir(bot_dir: str) -> str:
     path = _vars_dir(bot_dir)
     os.makedirs(path, exist_ok=True)
     return path
-
-def _var_path(bot_dir: str, name: str) -> str:
-    safe = ''.join(c for c in name if c.isalnum() or c in ('-', '_')).strip() or 'var'
-    return os.path.join(_vars_dir(bot_dir), f'{safe}.json')
 
 def _var_file_exists(bot_dir: str, safe_name: str, exclude_path: str = '') -> bool:
     exclude_abs = os.path.abspath(exclude_path) if exclude_path else ''
@@ -198,25 +235,61 @@ def _var_file_exists(bot_dir: str, safe_name: str, exclude_path: str = '') -> bo
 
 def _load_all_vars(bot_dir: str) -> list:
     d = _vars_dir(bot_dir)
-    if not os.path.isdir(d):
-        return []
+    os.makedirs(d, exist_ok=True)
     result = []
-    for fname in sorted(os.listdir(d)):
-        if not fname.endswith('.json'):
-            continue
-        fpath = os.path.join(d, fname)
-        try:
-            with open(fpath, 'r', encoding='utf-8') as f:
-                data = json.load(f)
-            if isinstance(data, dict):
-                data['_path'] = fpath
-                result.append(data)
-        except Exception as e:
-            print(f'[Variables] load error {fpath}: {e}')
+    loaded_names = set()
+
+    if os.path.isdir(d):
+        for fname in sorted(os.listdir(d)):
+            if not fname.endswith('.json'):
+                continue
+            fpath = os.path.join(d, fname)
+            try:
+                with open(fpath, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                if isinstance(data, dict):
+                    data['_path'] = fpath
+                    name = data.get('name', '')
+                    if name:
+                        loaded_names.add(name)
+                    result.append(data)
+            except Exception as e:
+                print(f'[Variables] load error {fpath}: {e}')
+
+    uv_dir = _user_vars_dir(bot_dir)
+    if os.path.isdir(uv_dir):
+        for fname in sorted(os.listdir(uv_dir)):
+            if fname.endswith('.json'):
+                try:
+                    with open(os.path.join(uv_dir, fname), 'r', encoding='utf-8') as f:
+                        data = json.load(f)
+                    name = data.get('name', '')
+                    if name and name not in loaded_names:
+                        p = _write_var(bot_dir, name, '')
+                        loaded_names.add(name)
+                        result.append({'name': name, 'value': '', '_path': p})
+                except Exception:
+                    pass
+
+    gv_dir = _guild_vars_dir(bot_dir)
+    if os.path.isdir(gv_dir):
+        for fname in sorted(os.listdir(gv_dir)):
+            if fname.endswith('.json'):
+                try:
+                    with open(os.path.join(gv_dir, fname), 'r', encoding='utf-8') as f:
+                        data = json.load(f)
+                    name = data.get('name', '')
+                    if name and name not in loaded_names:
+                        p = _write_var(bot_dir, name, '')
+                        loaded_names.add(name)
+                        result.append({'name': name, 'value': '', '_path': p})
+                except Exception:
+                    pass
+
     return result
 
 def _write_var(bot_dir: str, name: str, value: str, old_path: str = '') -> str:
-    safe = ''.join(c for c in name if c.isalnum() or c in ('-', '_')).strip() or 'var'
+    safe = _safe_name(name)
     new_path = os.path.join(_vars_dir(bot_dir), f'{safe}.json')
     if old_path and os.path.abspath(old_path) != os.path.abspath(new_path):
         if os.path.isfile(old_path):
@@ -227,16 +300,20 @@ def _write_var(bot_dir: str, name: str, value: str, old_path: str = '') -> str:
     _ensure_vars_dir(bot_dir)
     with open(new_path, 'w', encoding='utf-8') as f:
         json.dump({'name': name, 'value': value}, f, ensure_ascii=False, indent=2)
-    print(f'[Variables] saved → {new_path}')
     return new_path
 
-def _delete_var(path: str):
+def _delete_var(bot_dir: str, path: str, name: str):
     if os.path.isfile(path):
         try:
             os.remove(path)
-            print(f'[Variables] deleted → {path}')
-        except Exception as e:
-            print(f'[Variables] delete error: {e}')
+        except Exception:
+            pass
+    _delete_scoped_file(_user_vars_dir(bot_dir), name)
+    _delete_scoped_file(_guild_vars_dir(bot_dir), name)
+    ids_data = _load_ids_data(bot_dir)
+    if name in ids_data:
+        ids_data.pop(name, None)
+        _save_ids_data(bot_dir, ids_data)
 
 
 class BotVariablesTab:
@@ -249,7 +326,6 @@ class BotVariablesTab:
         self._edit_path    = ''
         self._current_view = 'list'
 
-        # العداد المخصص
         self._count_label = ft.Text(
             value="",
             size=11,
@@ -265,8 +341,13 @@ class BotVariablesTab:
 
         self._build_controls()
         self._build_json_editor_dialog()
-        self._container = ft.Container(
+        self._list_root.key = "vars_list"
+        self._editor_root.key = "vars_editor"
+        self._container = ft.AnimatedSwitcher(
             content=self._list_root,
+            transition=ft.AnimatedSwitcherTransition.FADE,
+            duration=220,
+            switch_in_curve=ft.AnimationCurve.EASE_OUT,
             expand=True,
         )
 
@@ -389,11 +470,10 @@ class BotVariablesTab:
     def guard_tab_change(self, on_proceed: callable, on_cancel: callable = None):
         def _reset_then_proceed():
             _sync_fdcore(self._bot_dir)
-            self._variables    = _load_all_vars(self._bot_dir)
             self._current_view = 'list'
-            self._update_vars_count()
-            self._refresh_list()
+            self._refresh_list_data()
             self._container.content = self._list_root
+            self._page.update()
             on_proceed and on_proceed()
 
         if self.is_dirty:
@@ -489,7 +569,7 @@ class BotVariablesTab:
                 spacing=2,
             ),
             padding=ft.Padding(left=12, right=12, top=6, bottom=6),
-            height=66, # تم زيادة الارتفاع قليلاً ليتناسب مع العداد
+            height=66,
         )
 
         self._grid = ft.Column(spacing=10, scroll=ft.ScrollMode.AUTO, expand=True)
@@ -561,7 +641,7 @@ class BotVariablesTab:
             _t('variables_slash') or "Variable's /", size=13, color=_c('text_dim'),
         )
         self._editor_title = ft.Text(
-            _ar('new.json'), size=13, weight=ft.FontWeight.BOLD, color=_c('text'),
+            _t('new_variable_file'), size=13, weight=ft.FontWeight.BOLD, color=_c('text'),
         )
         self._dirty_dot = ft.Container(
             width=7, height=7,
@@ -574,7 +654,7 @@ class BotVariablesTab:
             icon=ft.Icons.MENU_ROUNDED,
             icon_color=_c('text_dim'),
             icon_size=18,
-            tooltip=_t('scoped_vars') or 'Per-user values',
+            tooltip=_t('scoped_vars') or 'Scoped / Per-user / Guild JSON Data',
             visible=False,
             on_click=lambda _: self._open_json_editor(self._name_inp.value or ''),
             style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=8)),
@@ -686,9 +766,9 @@ class BotVariablesTab:
     def _show_list(self):
         _sync_fdcore(self._bot_dir)
         self._current_view      = 'list'
+        self._refresh_list_data()
+        self._list_root.key     = "vars_list"
         self._container.content = self._list_root
-        self._update_vars_count()
-        self._refresh_list()
         self._page.update()
 
     def _open_editor(self, var_path: str):
@@ -698,7 +778,7 @@ class BotVariablesTab:
         if not var_path:
             self._name_inp.value     = ''
             self._value_inp.value    = ''
-            self._editor_title.value = _ar('new.json')
+            self._editor_title.value = _t('new_variable_file')
         else:
             var  = next((v for v in self._variables if v.get('_path') == var_path), {})
             name = var.get('name', '')
@@ -710,6 +790,7 @@ class BotVariablesTab:
         self._clear_name_error()
         self._clear_dirty()
 
+        self._editor_root.key   = f"vars_editor_{var_path or 'new'}"
         self._container.content = self._editor_root
         self._page.update()
 
@@ -718,6 +799,10 @@ class BotVariablesTab:
         self._scoped_btn.visible = bool(name)
 
     def _refresh_list(self):
+        self._refresh_list_data()
+        self._page.update()
+
+    def _refresh_list_data(self):
         if self._bot_dir:
             self._variables = _load_all_vars(self._bot_dir)
             self._ids_data  = _load_ids_data(self._bot_dir)
@@ -730,27 +815,23 @@ class BotVariablesTab:
                 seen.add(key)
                 unique.append(v)
         self._variables = unique
-    
-        self._grid.controls.clear()
-    
+
         q = (self._search_inp.value or '').strip().lower()
         filtered = [
             v for v in self._variables
             if not q
-            or q in v.get('name',  '').lower()
-            or q in v.get('value', '').lower()
+            or q in (v.get('name')  or '').lower()
+            or q in (v.get('value') or '').lower()
         ]
-    
+
         self._empty_lbl.visible = (len(filtered) == 0)
-    
-        for num, var in enumerate(filtered, start=1):
-            self._grid.controls.append(self._var_card(num, var))
-            
+
+        new_controls = [self._var_card(num, var) for num, var in enumerate(filtered, start=1)]
         if filtered:
-            self._grid.controls.append(ft.Container(height=60))
-        
+            new_controls.append(ft.Container(height=60))
+        self._grid.controls = new_controls
+
         self._update_vars_count()
-        self._page.update()
 
     def _var_card(self, num: int, var: dict) -> ft.Control:
         path = var.get('_path', '')
@@ -814,11 +895,11 @@ class BotVariablesTab:
         _confirm_delete(
             self._page,
             item_name=name,
-            on_confirm=lambda: self._do_delete(path),
+            on_confirm=lambda: self._do_delete(path, name),
         )
 
-    def _do_delete(self, path: str):
-        _delete_var(path)
+    def _do_delete(self, path: str, name: str):
+        _delete_var(self._bot_dir, path, name)
         _sync_fdcore(self._bot_dir)
         self._show_list()
 
@@ -832,7 +913,7 @@ class BotVariablesTab:
                 self._page.update()
             return False
 
-        safe_name = ''.join(c for c in name if c.isalnum() or c in ('-', '_')).strip() or 'var'
+        safe_name = _safe_name(name)
 
         if _var_file_exists(self._bot_dir, safe_name, self._edit_path):
             self._set_name_taken_error()
@@ -966,9 +1047,20 @@ class BotVariablesTab:
         self._json_editor_dirty_dot.visible = False
         self._json_editor_error_lbl.visible = False
 
-        scoped = self._ids_data.get(name, {})
-        self._json_editor.value = json.dumps(scoped, ensure_ascii=False, indent=2)
-        self._json_editor_title.value = _ar(f'{name} — {_t("scoped_vars") or "Per-user values"}')
+        u_dir = _user_vars_dir(self._bot_dir)
+        g_dir = _guild_vars_dir(self._bot_dir)
+        user_vars  = _load_scoped_var(u_dir, name)
+        guild_vars = _load_scoped_var(g_dir, name)
+        ids_data   = self._ids_data.get(name, {})
+
+        data_to_show = {
+            "user_vars": user_vars,
+            "guild_vars": guild_vars,
+            "ids_data": ids_data,
+        }
+
+        self._json_editor.value = json.dumps(data_to_show, ensure_ascii=False, indent=2)
+        self._json_editor_title.value = _t('scoped_json_title').format(name=name)
 
         self._page.show_dialog(self._json_editor_dialog)
         self._page.update()
@@ -1005,18 +1097,39 @@ class BotVariablesTab:
             self._page.update()
             return
 
-        normalized = {str(uid): ('' if v is None else str(v)) for uid, v in parsed.items()}
-
         if not self._bot_dir:
             print('[Variables] bot_dir not set')
             return
 
-        self._ids_data = _load_ids_data(self._bot_dir)
-        if normalized:
-            self._ids_data[self._json_editor_var] = normalized
+        name = self._json_editor_var
+        u_dir = _user_vars_dir(self._bot_dir)
+        g_dir = _guild_vars_dir(self._bot_dir)
+
+        if any(k in parsed for k in ("user_vars", "guild_vars", "ids_data")):
+            if "user_vars" in parsed and isinstance(parsed["user_vars"], dict):
+                _save_scoped_var(u_dir, name, parsed["user_vars"])
+            if "guild_vars" in parsed and isinstance(parsed["guild_vars"], dict):
+                _save_scoped_var(g_dir, name, parsed["guild_vars"])
+            if "ids_data" in parsed and isinstance(parsed["ids_data"], dict):
+                self._ids_data = _load_ids_data(self._bot_dir)
+                norm = {str(k): ('' if v is None else str(v)) for k, v in parsed["ids_data"].items()}
+                if norm:
+                    self._ids_data[name] = norm
+                else:
+                    self._ids_data.pop(name, None)
+                _save_ids_data(self._bot_dir, self._ids_data)
         else:
-            self._ids_data.pop(self._json_editor_var, None)
-        _save_ids_data(self._bot_dir, self._ids_data)
+            norm = {str(k): ('' if v is None else str(v)) for k, v in parsed.items()}
+            has_colon = any(':' in k for k in norm.keys())
+            if has_colon:
+                _save_scoped_var(u_dir, name, norm)
+            else:
+                self._ids_data = _load_ids_data(self._bot_dir)
+                if norm:
+                    self._ids_data[name] = norm
+                else:
+                    self._ids_data.pop(name, None)
+                _save_ids_data(self._bot_dir, self._ids_data)
 
         self._json_editor_dirty = False
         self._json_editor_dirty_dot.visible = False

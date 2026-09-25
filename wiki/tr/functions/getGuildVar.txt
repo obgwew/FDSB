@@ -1,0 +1,31 @@
+<dash>
+name: $getGuildVar
+desc: Sunucuya özel kalıcı bir değişkeni alır.
+category: Değişkenler
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $getGuildVar, önce guild değişken dosyasında sunucuya özel bir değer arar. Böyle bir değer yoksa aynı addaki genel değişkene geri döner. Tek argümanla geçerli sunucu kimliği kullanılır; iki argümanla ikinci argüman sunucu kimliğini seçer.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $getGuildVar[name; (guild_id)]
+</block>
+
+<block type="code" title="Kopyalamaya Hazır Örnek">
+text: $getGuildVar[welcomeMessage]
+</block>
+
+<block type="callout" kind="important">
+text: Genel değişken mevcut değilse komut bir yer tutucu kaydı oluşturur, gerektiğinde sunucuya özel kaydı da oluşturur ve betiği bir ortam hatasıyla durdurur. Değişkeni kullanmadan önce gözden geçirip tanımlayın.
+</block>
+
+<block type="callout" kind="note">
+text: Bu komut satır içinde veya tek başına bir deyim olarak kullanılabilir. Eksik bir genel değer, sessizce geçerli bir değer olarak kabul edilmez.
+</block>
+</dash>
+
+<details>
+syntax: $getGuildVar[name; (guild_id)]
+param: name|text|Required|Alınacak değişkenin adı
+param: guildID|text|Optional|Kapsamlı değeri okunacak sunucunun kimliği; varsayılan olarak geçerli sunucu
+</details>

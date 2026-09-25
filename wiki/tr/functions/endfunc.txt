@@ -1,0 +1,27 @@
+<dash>
+name: $endfunc
+desc: Bir FDScript işlev bloğunu kapatır.
+category: Akış Kontrolü
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $endfunc, en son açılan $func bloğunu kapatır. Yeniden kullanılabilir bir işlev tanımının sonunu işaretler ve $func ile eşleşen bir çift içinde bulunmalıdır.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $endfunc
+</block>
+
+<block type="code" title="Kopyalamaya Hazır Örnek">
+text: $func[ping]
+$sendMessage[Pong]
+$endfunc
+</block>
+
+<block type="callout" kind="warning">
+text: $func ile eşleşmeyen bir $endfunc veya aralarında farklı bir açık blok bulunan bir $endfunc, betik hatasıdır.
+</block>
+</dash>
+
+<details>
+syntax: $endfunc
+</details>

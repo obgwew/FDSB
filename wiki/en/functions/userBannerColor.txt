@@ -1,0 +1,30 @@
+<dash>
+name: $userBannerColor
+desc: Returns a user's banner accent color in hexadecimal format.
+category: Info
+
+<block type="text" title="How does the command work?">
+text: With no argument, $userBannerColor returns the accent color of the bot user. With a user ID or mention, it returns that user's accent color formatted as an uppercase #RRGGBB value.
+</block>
+
+<block type="code" title="Syntax">
+text: $userBannerColor[(user_id)]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $userBannerColor[123456789012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: The user must have a banner accent color and the bot must be able to resolve the user. An empty or unavailable result is reported as an error by the standalone form.
+</block>
+
+<block type="callout" kind="note">
+text: The inline form uses cached users only and currently treats a falsey accent color as unavailable. The default is always the bot user, not the triggering author.
+</block>
+</dash>
+
+<details>
+syntax: $userBannerColor[(user_id)]
+param: userID|snowflake|Optional|The user ID or mention; defaults to the bot user
+</details>

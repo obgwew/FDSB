@@ -1,0 +1,28 @@
+<dash>
+name: $func
+desc: Rozpoczyna definicję funkcji FDScript, którą można wielokrotnie używać.
+category: Sterowanie przepływem
+
+<block type="text" title="Jak działa ta komenda?">
+text: $func rozpoczyna blok funkcji o podanej nazwie. Interpreter zbiera ciało funkcji przed uruchomieniem głównego skryptu i pomija blok definicji podczas normalnego wykonania. Użyj $endfunc, aby zamknąć blok, i $call, aby wykonać go później.
+</block>
+
+<block type="code" title="Składnia">
+text: $func[name]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $func[sendWelcome]
+$sendMessage[Welcome!]
+$endfunc
+</block>
+
+<block type="callout" kind="important">
+text: Nazwy funkcji muszą być unikalne w obrębie skryptu. Każdy $func musi mieć pasujące $endfunc, a funkcję można wywołać dopiero po zebraniu jej definicji.
+</block>
+</dash>
+
+<details>
+syntax: $func[name]
+param: name|text|Required|Unikalna, niepusta nazwa funkcji
+</details>

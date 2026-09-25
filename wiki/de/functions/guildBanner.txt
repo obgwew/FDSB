@@ -1,0 +1,30 @@
+<dash>
+name: $guildBanner
+desc: Gibt die Banner-URL eines Servers zurück.
+category: Server
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: Ohne Argument verwendet $guildBanner den Server, in dem das Skript ausgelöst oder die Interaktion empfangen wurde. Mit einer Server-ID gibt es das Banner des Servers zurück, in dem der Bot ein Mitglied ist. Animierte Banner werden als GIF-URLs und andere Banner als PNG-URLs zurückgegeben.
+</block>
+
+<block type="code" title="Syntax">
+text: $guildBanner[(guild_id)]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $guildBanner[123456789012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: Der Server muss ein Banner haben, und der Bot muss es auflösen können. Verwende eine numerische Server-ID, wenn du das optionale Argument angibst.
+</block>
+
+<block type="callout" kind="note">
+text: Die Inline-Form kann nur zwischengespeicherte Serverdaten verwenden. Die eigenständige Form kann einen Server abrufen, der derzeit nicht zwischengespeichert ist, sofern dies bei Discord möglich ist.
+</block>
+</dash>
+
+<details>
+syntax: $guildBanner[(guild_id)]
+param: guildID|snowflake|Optional|Die Server-ID; wenn sie weggelassen wird, wird der aktuelle Server oder der Server der Interaktion verwendet
+</details>

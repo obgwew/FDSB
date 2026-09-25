@@ -1,0 +1,29 @@
+<dash>
+name: $setUserVar
+desc: Stores a persistent value scoped to a user and server.
+category: Variables
+
+<block type="text" title="How does the command work?">
+text: $setUserVar stores a value under the key guild_id:user_id in the user variable file. With two arguments, the triggering author and current server are used. Add a user ID to select another user, and add a server ID to select another server. The command cannot be used inline.
+</block>
+
+<block type="code" title="Syntax">
+text: $setUserVar[name; value; (user_id); (guild_id)]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $setUserVar[points; 10; 123456789012345678; 987654321012345678]
+</block>
+
+<block type="callout" kind="important">
+text: If no global variable with this name exists, the command stores the supplied scoped value, creates an empty global definition, and then stops the script with an environment error. Define the global variable first.
+</block>
+</dash>
+
+<details>
+syntax: $setUserVar[name; value; (user_id); (guild_id)]
+param: name|text|Required|The variable name
+param: value|text|Required|The value to store
+param: userID|snowflake|Optional|The user ID; defaults to the triggering author
+param: guildID|snowflake|Optional|The server ID; defaults to the current server
+</details>

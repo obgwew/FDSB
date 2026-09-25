@@ -1,0 +1,31 @@
+<dash>
+name: $moveChannel
+desc: Verschiebt einen Kanal in eine Serverkategorie.
+category: Kanalverwaltung
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: $moveChannel verschiebt einen vorhandenen normalen Kanal in die durch das zweite Argument bestimmte Kategorie. Beide IDs müssen numerische Snowflakes im aktuellen Server sein. Befindet sich der Kanal bereits in dieser Kategorie, protokolliert der Befehl einen No-op und sendet keine Discord-Anfrage.
+</block>
+
+<block type="code" title="Syntax">
+text: $moveChannel[channel ID; new category ID]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $moveChannel[123456789012345678; 987654321012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: Der Befehl muss in einem Server ausgeführt werden. Der zu verschiebende Kanal muss ein normaler Kanal und die Zielkategorie eine Kategorie sein; außerdem benötigt der Bot die Berechtigung, Kanäle zu verwalten. Erwähnungen werden von der aktuellen Implementierung nicht akzeptiert.
+</block>
+
+<block type="callout" kind="note">
+text: Kategorien können nicht in eine andere Kategorie verschoben werden. Im aktuellen Interpreter kann dieser Befehl nur eigenständig verwendet werden, da sein Inline-Resolver die Nebenwirkung nicht ausführt.
+</block>
+</dash>
+
+<details>
+syntax: $moveChannel[channel ID; new category ID]
+param: channelID|snowflake|Erforderlich|Die numerische ID des zu verschiebenden normalen Kanals
+param: categoryID|snowflake|Erforderlich|Die numerische ID der Zielkategorie
+</details>
