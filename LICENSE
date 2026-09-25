@@ -629,8 +629,7 @@ to attach them to the start of each source file to most effectively
 state the exclusion of warranty; and each file should have at least
 the "copyright" line and a pointer to where the full notice is found.
 
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) <year>  <name of author>
+    Copyright (C) 2026 obgwew
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published by
@@ -659,3 +658,80 @@ specific requirements.
 if any, to sign a "copyright disclaimer" for the program, if necessary.
 For more information on this, and how to apply and follow the GNU AGPL, see
 <https://www.gnu.org/licenses/>.
+
+--------------------------------------------------------------------------
+
+## Additional Permission under Section 7 of the GNU Affero General Public License
+
+In accordance with Section 7 of the GNU Affero General Public License,
+version 3 ("AGPL-3.0"), the copyright holder grants the following
+Additional Permission, which supplements and qualifies the obligations
+set forth in Section 13 of this License (Remote Network Interaction;
+Use with the GNU General Public License).
+
+### 1. Scope of the Permission
+
+No individual or entity is required to comply with the source-code
+disclosure obligations of Section 13 of this License with respect to
+the server itself, provided that the application communicates
+exclusively through the official Application Programming Interface
+(API) endpoints, access keys, tokens, credentials, configuration
+mechanisms, or other access points published or provided by the
+copyright holder in the original source code of this program
+("Official Access Points").
+
+Official Access Points include, without limitation, any built-in,
+unmodified configuration mechanism already present in the original
+source code that allows a user or entity to specify a server address,
+domain, or endpoint of their own choosing — such as an MCP server
+address field, a custom VPS address, or a general-purpose or private
+server field. Use of such an unmodified configuration mechanism to
+point the application to a server operated by that individual or
+entity, including a server that is entirely private or proprietary to
+them, does not by itself constitute a modification of the
+server-connection mechanism for the purposes of this Additional
+Permission, provided that the mechanism itself — its code, protocol,
+and logic — is not altered.
+
+This Section 1 also includes any build or variant in which only the
+end user's ability to view or change the server address or endpoint
+from within the application has been removed, provided that the
+server-side code itself remains external to, and independent of, the
+application's architecture and logic, and is not otherwise affected.
+
+### 2. Concealment Disclosure Obligation
+
+The permission granted in Section 1 above extends only to the source
+code of the external server; it does not extend to, and does not
+excuse, any concealment of the existence, nature, or configurability
+of an application's connection to such server. If any individual or
+entity conceals, hides, disables, removes from view, or otherwise
+prevents the end user from becoming aware of, accessing, or
+controlling the Official Access Points, or of the fact that the
+application communicates with an external server through them, that
+individual or entity must publish, under the terms of this License,
+the complete source code of the specific modification that implements
+such concealment ("Concealment Code"). This obligation applies
+regardless of whether the server itself, or the underlying
+connection mechanism, has been modified, and is independent of, and
+in addition to, the obligation described in Section 3 below.
+
+### 3. Termination of the Permission upon Modification of the Connection Mechanism
+
+If any individual or entity modifies the source code governing the
+application's server-connection mechanism — including, without
+limitation, changes to the connection method, protocol, endpoints,
+authentication scheme, or any other logic directly governing
+communication with the server, such as adapting it to connect to a
+different or additional server — the permission granted in Section 1
+above automatically and immediately ceases to apply with respect to
+those modifications. In such case, that individual or entity is fully
+bound by the source-code disclosure requirements of Section 13 of this
+License with respect to the modified server-connection code.
+
+### 4. No Effect on Other Obligations
+
+This Additional Permission does not waive, limit, or otherwise affect
+any other right or obligation established by this License. Its effect
+is strictly limited to the matters described in Sections 1 through 3
+above.
