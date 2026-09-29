@@ -179,7 +179,7 @@ This project uses its own versioning convention, which differs from Semantic Ver
 
 ## Contributors
 
-- [@y.lw](https://github.com/y.lw) — Contributor
+- @y.lw(Hidden for privacy reasons) — Contributor
 - [@obgwew](https://github.com/obgwew) — Programming
 
 ## Support the Project
