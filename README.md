@@ -197,3 +197,11 @@ This program is free software: you can redistribute it and/or modify it under th
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.
 
 You should have received a copy of the GNU Affero General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
+
+### Additional Permission (AGPL-3.0, Section 7)
+
+A summary only; the full text in the license file governs.
+
+- **Permitted:** You are not required to disclose the source code of your own external server, provided the application connects to it only through the official, unmodified access points (such as a built-in server address field).
+- **Not covered:** Concealing that connection from end users. Any modification that does so must be published under this License.
+- **Termination:** The permission ends for any modification of the connection mechanism itself (protocol, endpoints, authentication, or logic), and Section 13 of the AGPL-3.0 then applies in full to that code.
