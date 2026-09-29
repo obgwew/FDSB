@@ -29,26 +29,26 @@ FDSB is a cross-platform application for creating and running Discord bots local
 2. Launch the application. The interface is displayed in English by default.
 3. Select **New Bot**. On the page that opens, enter the bot token and bot name, and optionally add a bot image.
 
-   > [!NOTE]
-   > In the Discord Developer Portal, create your bot and enable all three Gateway Intents (the toggles at the bottom of the **Bot** tab). Then copy the bot token and paste it into the application.
+> [!NOTE]
+> In the Discord Developer Portal, create your bot and enable all three Gateway Intents (the toggles at the bottom of the **Bot** tab). Then copy the bot token and paste it into the application.
 
 4. Open the bot and go to **Settings** to select the preferred language and interface theme.
 
-   > [!NOTE]
-   > The bot name and image configured within the application do not modify the original bot on Discord.
+> [!NOTE]
+> The bot name and image configured within the application do not modify the original bot on Discord.
 
-   > [!WARNING]
-   > The token is stored locally on the device and is **not encrypted**.
+> [!WARNING]
+> The token is stored locally on the device and is **not encrypted**.
 
 5. Consult the **Wiki** page for the full list of available FDScript commands.
 6. Open the **Commands** tab and select the **+** button to create a new command. In the editor, enter a command name (required) and choose a prefix. Write the command's code according to the Wiki, then select **Save**.
 7. Return to the main screen and select **Start** to run the bot.
 
-   > [!WARNING]
-   > The application can run in the background, provided that battery optimization is disabled for it and no network restrictions are applied to it.
+> [!WARNING]
+> The application can run in the background, provided that battery optimization is disabled for it and no network restrictions are applied to it.
 
-   > [!CAUTION]
-   > The background-execution settings described above are documented for Android 13 and earlier. Support for Android 14 and later is under development and may be provided in a future update.
+> [!CAUTION]
+> The background-execution settings described above are documented for Android 13 and earlier. Support for Android 14 and later is under development and may be provided in a future update.
 
 ---
 
