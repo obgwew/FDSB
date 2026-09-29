@@ -131,7 +131,7 @@ This project uses its own versioning convention, which differs from Semantic Ver
 - Added APK compatibility
 - Fixed several commands
 - Improved stability and control responsiveness
-- Identified additional errors to be addressed in a later release
+- Added more errors to fix later :)
 
 ### 2.3.0 — Wiki Page
 - Added support for channel commands
