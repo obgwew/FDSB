@@ -7,6 +7,7 @@
 
 ## v2.6.x
 - [ ] Slash commands support
+- [ ] Create via no-code
 
 ## Future
 - [ ] Audio system
