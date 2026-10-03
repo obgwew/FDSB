@@ -14,3 +14,4 @@
 - [ ] Linking with a website
 - [ ] Official version release
 - [ ] Providing the ability to connect to a server/vps
+- [ ] The app was published on the Google Play Store.
