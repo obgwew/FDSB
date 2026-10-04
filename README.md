@@ -182,10 +182,6 @@ This project uses its own versioning convention, which differs from Semantic Ver
 - @y.lw(Hidden for privacy reasons) — Contributor
 - [@obgwew](https://github.com/obgwew) — Programming
 
-## Support the Project
-
-[![Sponsor obgwew](https://img.shields.io/badge/Sponsor-obgwew-ea4aaa?style=for-the-badge&logo=github&logoColor=white)](https://github.com/sponsors/obgwew)
-
 ---
 
 ## License
