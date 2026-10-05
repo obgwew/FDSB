@@ -3,6 +3,10 @@
 
 # main_app/core_fdsb/engine_FDScript/functions_ops.py
 
+from .errors import FDLogicError, FDRuntimeError, _send_error
+from .parse_utils import _truncate
+
+
 _CALL_HEAD = '$call['
 _CALL_SENTINEL = '\uE000{}\uE001'
 
@@ -54,7 +58,6 @@ class FunctionsMixin:
         return functions
 
     async def _exec_call(self, cmd, tokens: list, ctx) -> None:
-        from FDCore import FDLogicError, FDRuntimeError, _send_error
 
         ctx.set_line(cmd.line_no)
         dest = await ctx.get_dest()
@@ -96,7 +99,6 @@ class FunctionsMixin:
         ctx.log_event(f"call [{name}] → exiting function")
 
     async def _run_function_capture(self, name: str, tokens: list, ctx) -> str:
-        from FDCore import FDLogicError, FDRuntimeError, _send_error, _truncate
 
         dest = await ctx.get_dest()
 

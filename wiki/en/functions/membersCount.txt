@@ -1,10 +1,20 @@
 <dash>
 name: $membersCount
-desc: Returns the number of members in a server.
+desc: Gives you the number of members in a server.
 category: Info
 
 <block type="text" title="How does the command work?">
-text: When $membersCount is called without arguments, the bot counts all non-bot human members in the current server and sends the count. When called with a guild ID and a yes/no flag, it counts members in that specific server and optionally includes bots.
+text: On its own $membersCount counts the human members of the server the message was sent in and the bot posts that number in the channel. Put a server ID and a yes inside the brackets and it counts a different server instead, this time with bot accounts included in the total. Leave the yes out and only real people are counted, so the figure you see is the membership a server owner would quote.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !info
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -17,12 +27,12 @@ text: We have $membersCount members!
 </block>
 
 <block type="callout" kind="note">
-text: By default, bots are excluded from the count. To include bots, use $membersCount[guildID; yes]. Without arguments, this command only works inside a server. When providing a guild ID, the bot must be a member of that guild.
+text: Bot accounts stay out of the count unless you ask for them by writing yes after the server ID. The plain version only works inside a server, and to count another one the bot has to be a member of it as well.
 </block>
 </dash>
 
 <details>
 syntax: $membersCount[(guildID; includeBots)]
-param: guildID|snowflake|Optional|The ID of a different server to count members from. If omitted, uses the current server.
-param: includeBots|yes/no|Optional|Set to "yes" to include bot accounts in the count. If omitted, only human members are counted.
+param: guildID|snowflake|Optional|Which server to count. Leave it out to use the one the message was sent in.
+param: includeBots|yes/no|Optional|Write yes to count bot accounts too. Leave it out and only human members are counted.
 </details>

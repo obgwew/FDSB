@@ -1,10 +1,20 @@
 <dash>
 name: $endfor
-desc: يحدد نهاية كتلة حلقة $for.
+desc: يحدد مهاية حلقة $for ليعرف البوت أين يتوقف عن التكرار.
 category: التحكم في التدفق
 
-<block type="text" title="كيف تعمل الدالة؟">
-text: $endfor يشير إلى الحدود الختامية لحلقة $for. بعد كل تكرار، يعود التنفيذ إلى أعلى جسم الحلقة. يجب أن يكون لكل $for $endfor مطابق.
+<block type="text" title="كيف يعمل الأمر؟">
+text: يُغلق $endfor حلقة $for. وكل ما كتبته بين السطرين يعمل من جديد مرة واحدة لكل عدد طلبته، ثم ينتقل البوت إلى الأسطر التي تحته. فحلقة بـ 5 تنشر الرسالة نفسها خمس مرات قبل أن يستمر بقية الأمر.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة على !welcome
+item: اكتب سكربتك في المحرر
+item: الصق السطر أدناه في المكان الذي تحتاجه
+item: اضغط على حفظ
 </block>
 
 <block type="code" title="الصيغة">
@@ -13,11 +23,11 @@ text: $endfor
 
 <block type="code" title="مثال جاهز للنسخ">
 text: $for[5]
-  $sendMessage[Iteration!]
-$endfor
+text:   $sendMessage[Iteration!]
+text: $endfor
 </block>
 
 <block type="callout" kind="warning">
-text: يجب إغلاق كل كتلة $for بشكل صحيح باستخدام $endfor. نقص $endfor سيسبب خطأً في السكربت.
+text: كل $for يحتاج إلى $endfor مقابل. واحذف سطر الإغلاق فيصطدم البوت بخطأ في السكربت بمجرد تجاوزه نهاية الحلقة.
 </block>
 </dash>

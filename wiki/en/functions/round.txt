@@ -1,10 +1,20 @@
 <dash>
 name: $round
-desc: Rounds a number to the nearest whole number.
+desc: Rounds a number off to the nearest whole number.
 category: Math & Numbers
 
 <block type="text" title="How does the command work?">
-text: $round takes a single numeric value, rounds it to the nearest integer, and sends the result. For example, 1.7 becomes 2 and 1.4 becomes 1.
+text: $round takes a single number and hands back the nearest whole one, so 1.7 becomes 2 and 1.4 becomes 1. On a line of its own the bot posts the rounded figure, and inside another command the number drops into the middle of a sentence where any other value would go.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !round
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,11 +26,11 @@ text: $round[1.7]
 </block>
 
 <block type="callout" kind="note">
-text: $round[1.7] returns 2. $round[2.4] returns 2. The command accepts a single argument; if the value is not a valid number, an error is returned.
+text: Exactly one number is needed, and anything that is not a number stops the command with an error. A value ending in .5 goes to the nearest even number, which means 2.5 becomes 2 and 3.5 becomes 4.
 </block>
 </dash>
 
 <details>
 syntax: $round[number]
-param: number|number|Required|The number to round to the nearest whole number
+param: number|number|Required|The number to round off to a whole number
 </details>

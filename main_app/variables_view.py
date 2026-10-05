@@ -17,6 +17,28 @@ from main_app.core_fdsb.FDCore   import set_vars_dir as _fd_set_vars_dir
 def _vars_dir(bot_dir: str) -> str:
     return os.path.join(os.path.dirname(os.path.abspath(bot_dir)), 'bot_vars')
 
+def _theme_unsub(cb):
+    """Remove a ThemeEngine subscription (works even without ThemeEngine.unsubscribe)."""
+    fn = getattr(ThemeEngine, 'unsubscribe', None)
+    if callable(fn):
+        try:
+            fn(cb)
+            return
+        except Exception:
+            pass
+    for holder in (ThemeEngine, getattr(ThemeEngine, '_instance', None)):
+        if holder is None:
+            continue
+        for val in list(vars(holder).values()):
+            try:
+                if isinstance(val, list) and cb in val:
+                    val.remove(cb)
+                elif isinstance(val, set) and cb in val:
+                    val.discard(cb)
+            except Exception:
+                pass
+
+
 def _sync_fdcore(bot_dir: str):
     path = _vars_dir(bot_dir)
     os.makedirs(path, exist_ok=True)
@@ -336,6 +358,7 @@ class BotVariablesTab:
         self._snapshot: dict = {}
 
         self._poll_task = None
+        self._last_sig = None
         self._json_editor_var = ''
         self._json_editor_dirty = False
 
@@ -343,15 +366,12 @@ class BotVariablesTab:
         self._build_json_editor_dialog()
         self._list_root.key = "vars_list"
         self._editor_root.key = "vars_editor"
-        self._container = ft.AnimatedSwitcher(
-            content=self._list_root,
-            transition=ft.AnimatedSwitcherTransition.FADE,
-            duration=220,
-            switch_in_curve=ft.AnimationCurve.EASE_OUT,
-            expand=True,
-        )
+        self._container = ft.Container(content=self._list_root, expand=True)
 
         ThemeEngine.subscribe(self._on_theme)
+
+    def swipe_blocked(self) -> bool:
+        return self._current_view == 'editor'
 
     def handle_back(self) -> bool:
         if getattr(self, '_json_editor_dialog', None) and getattr(self._json_editor_dialog, 'open', False):
@@ -373,14 +393,39 @@ class BotVariablesTab:
         self._update_vars_count()
         if self._current_view == 'list':
             self._refresh_list()
-        self._start_polling()
 
     def _update_vars_count(self):
         count = len(self._variables)
         self._count_label.value = _t('total_vars_count').format(count=count)
 
+    def on_show(self):
+        self._last_sig = None
+        self._start_polling()
+
+    def on_hide(self):
+        self._stop_polling()
+
     def dispose(self):
         self._stop_polling()
+        _theme_unsub(self._on_theme)
+
+    def _dir_signature(self) -> tuple:
+        sig = []
+        dirs = (_vars_dir(self._bot_dir), _user_vars_dir(self._bot_dir), _guild_vars_dir(self._bot_dir))
+        for d in dirs:
+            try:
+                with os.scandir(d) as it:
+                    for e in it:
+                        if e.name.endswith('.json'):
+                            sig.append((e.name, e.stat().st_mtime_ns))
+            except OSError:
+                pass
+        try:
+            st = os.stat(_ids_data_path(self._bot_dir))
+            sig.append(('ids_data', st.st_mtime_ns))
+        except OSError:
+            pass
+        return tuple(sorted(sig))
 
     def _start_polling(self):
         if self._poll_task is not None:
@@ -395,11 +440,13 @@ class BotVariablesTab:
     async def _poll_loop(self):
         try:
             while True:
+                if self._bot_dir and self._current_view == 'list':
+                    loop = asyncio.get_event_loop()
+                    sig = await loop.run_in_executor(None, self._dir_signature)
+                    if sig != self._last_sig:
+                        self._last_sig = sig
+                        self._refresh_list()
                 await asyncio.sleep(2)
-                if not self._bot_dir:
-                    continue
-                if self._current_view == 'list':
-                    self._refresh_list()
         except asyncio.CancelledError:
             pass
 

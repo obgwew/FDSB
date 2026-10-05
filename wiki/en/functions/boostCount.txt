@@ -1,10 +1,20 @@
 <dash>
 name: $boostCount
-desc: Returns how many boost contributions the server currently has.
+desc: Tells you how many boosts a server currently has.
 category: Server
 
 <block type="text" title="How does the command work?">
-text: $boostCount returns the server's current number of boosts (premium subscriptions). Without arguments it reads the server where the event occurred. You can pass any guild ID the bot shares to read another server's count.
+text: Ask with nothing inside and the bot counts the boosts sitting on the server where the command ran. Add a server ID and it counts that one instead, as long as the bot is a member there. What comes back is the bare number and nothing else, so it slots neatly into a sentence you write around it. A server the bot cannot see is reported as an error rather than as a zero.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $boostCount
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,11 +26,11 @@ text: $sendMessage[This server has $boostCount boosts!]
 </block>
 
 <block type="callout" kind="note">
-text: This is the number of boosts, not the boost level - use $boostLevel for that.
+text: This is the number of boosts, not the tier the server has reached. For the tier, ask for $boostLevel instead.
 </block>
 </dash>
 
 <details>
 syntax: $boostCount[(guildID)]
-param: guildID|snowflake|Optional|ID of the server whose boost count should be read (defaults to the current server)
+param: guildID|snowflake|Optional|Which server to count the boosts of; leave empty for the current one
 </details>

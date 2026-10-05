@@ -1,0 +1,41 @@
+<dash>
+name: $onlyBotPerms
+desc: Botun sıradaki işlemi yapmaya izni yoksa komutu kendi mesajınla durdurur.
+category: Erişim Kontrolü
+
+<block type="text" title="Komut nasıl çalışır?">
+text: ⁨$onlyBotPerms⁩, komutunuzun korumalı bölümü çalışmadan önce botun kendi izinlerini denetler. İhtiyaç duyduğunuz izinleri listeleyin, sonra herhangi biri eksik olduğunda üyelerin göreceği mesajla bitirin. Bot hepsine sahipse hiçbir şey gösterilmez ve komutunuz devam eder. Biri eksikse mesaj gönderilir ve komutun geri kalanı orada bırakılır.
+</block>
+
+<block type="list" title="Uygulamada nasıl kullanılır">
+item: Komutlar sekmesini açın
+item: Yeni bir komut başlatmak için + düğmesine dokunun
+item: Ad alanına bir ad verin
+item: Önek alanını ayarlayın
+item: Aşağıdaki kodu düzenleyiciye yapıştırın
+item: Kaydet düğmesine dokunun
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $onlyBotPerms[permission; ...; error message]
+</block>
+
+<block type="code" title="Kopyalamaya hazır örnek">
+text: $onlyBotPerms[kick_members; ban_members; I need permission to kick and ban members.]
+text: $sendMessage[Done!]
+</block>
+
+<block type="callout" kind="note">
+text: İzin adları Discord'un kendi adlarıdır; küçük harfle ve alt çizgiyle yazılır, örneğin ⁎kick_members⁎, ⁎ban_members⁎ veya ⁎manage_messages⁎. Mesajı sona koyun — izinlerden sonraki her şey tek bir mesaj sayılır.
+</block>
+
+<block type="callout" kind="important">
+text: Denetim, komutun kullanıldığı kanala bakar; bu yüzden botun bir kanalda olup başka bir kanalda olmadığı bir izin onu yine de engeller. Discord'da botun rolünü kontrol edin ve üzerinde işlem yapması gereken rollerin üzerinde olduğundan emin olun.
+</block>
+</dash>
+
+<details>
+syntax: $onlyBotPerms[permission; ...; error message]
+param: permission|text|Required|Noktalı virgülle ayrılmış bir veya daha fazla Discord izin adı, örneğin ⁎kick_members⁎ veya ⁎manage_roles⁎.
+param: error message|text|Required|Bot izinlerden birine sahip olmadığında kanala gönderilen mesaj. İzinlerden sonraki her şey bu mesaj sayılır.
+</details>

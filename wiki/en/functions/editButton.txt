@@ -1,10 +1,19 @@
 <dash>
 name: $editButton
-desc: Edits the properties of an existing button on a message.
+desc: Rewrites the wording, colour or state of a button already on your message.
 category: Components
 
 <block type="text" title="How does the command work?">
-text: $editButton finds a button by its ID or URL on a message and updates its label, style, disabled state, and/or emoji. It can target buttons on a pending view, an interaction source message, or a specific message by ID.
+text: Point at a button by the ID you gave it, or by the link behind it, and the bot puts a new label, style and state on the message that button sits on. Name a message ID and it edits that exact message; leave it out and it looks at the buttons you have queued, then the message the press came from, then the last message the bot sent. Link buttons keep their link and only the wording changes.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $editButton
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,20 +25,20 @@ text: $editButton[btn_confirm; Confirmed; success]
 </block>
 
 <block type="callout" kind="note">
-text: If messageID is provided, the bot fetches that specific message and edits the button on it. Otherwise, it searches the pending view, then the interaction source message, then the last message the bot sent.
+text: Give the same ID the button was created with. Set disabled to yes and the button goes grey and stops responding; leave it out and the button keeps whatever state it had.
 </block>
 
 <block type="callout" kind="warning">
-text: The target message must have been sent by this bot. The button must already exist on the message with the given ID or URL.
+text: Only messages this bot sent can be edited, and the button has to already be on that message. If the ID does not match anything, the bot reports that it found no such button.
 </block>
 </dash>
 
 <details>
 syntax: $editButton[ID/URL; label; style; (disabled; emoji; messageID)]
-param: ID/URL|text|Required|The custom ID or URL of the button to edit
-param: label|text|Required|The new text to display on the button
-param: style|text|Required|primary / secondary / success / danger / link
-param: disabled|yes/no|Optional|yes to disable the button, no to enable it
-param: emoji|text|Optional|New emoji to display inside the button
-param: messageID|snowflake|Optional|ID of a specific bot message to edit the button on
+param: ID/URL|text|Required|The button's own ID, or the link it points at
+param: label|text|Required|The wording to show on the button
+param: style|text|Required|primary, secondary, success, danger or link
+param: disabled|yes/no|Optional|yes greys the button out, no makes it clickable again
+param: emoji|text|Optional|An emoji to show on the button
+param: messageID|snowflake|Optional|Which bot message holds the button; leave it out and the closest match is used
 </details>

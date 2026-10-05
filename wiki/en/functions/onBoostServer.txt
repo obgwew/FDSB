@@ -1,10 +1,22 @@
 <dash>
 name: $onBoostServer
-desc: Event triggered when someone boosts the server or raises its boost level.
+desc: Runs your lines when someone boosts the server or pushes it to the next boost level.
 category: Event
 
 <block type="text" title="How does the event work?">
-text: $onBoostServer fires whenever Discord posts a system message about server boosts - including a new boost and the server reaching Level 1, 2 or 3. Inside the event script you can reach the boosting member through commands like $authorID or $mention, and the channel context points to the channel where Discord posted the system message.
+text: Discord posts a short system message whenever a boost arrives or the server climbs to Level 1, 2 or 3, and this event runs your lines against that message.
+text: The person who boosted is the author here, so $mention and $authorID point at them, and the channel is wherever Discord put the boost notice.
+text: Say something back, and pairing it with $boostCount or $boostLevel lets you tell them what their boost is worth.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $onBoostServer
+item: The app marks it as an Event for you
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -17,10 +29,11 @@ text:  sendMessage[Thanks $mention for boosting! This server now has $boostCount
 </block>
 
 <block type="callout" kind="note">
-text: Only real boost system messages trigger this event - normal chat never will. Thanking boosters here pairs well with $boostLevel and $boostCount.
+text: Only real boost system messages set this off, never ordinary chat. It is a good spot for a thank-you the moment somebody boosts.
 </block>
 
 <block type="callout" kind="important">
-text: This event runs in the bot_events folder, not bot_commands. Create your .fds file there.
+text: The bot has to be online and still a member of the server when the boost lands.
+text: Your lines then appear in the channel Discord used for the boost notice, which is often a system or boost channel rather than where people talk.
 </block>
 </dash>

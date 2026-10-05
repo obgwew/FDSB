@@ -1,0 +1,35 @@
+<dash>
+name: $removeLinks
+desc: ربات کی آنے والے پیغام سے ہر ویب لنک نکال دیتا ہے۔
+category: ٹولز
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $removeLinks کمانڈ کے باقی حصے کے لیے لنک ہٹانا شروع کر دیتا ہے۔ اس کے بعد ربات جہاں بھی پیغام بھیجتا ہے، وہاں کوئی بھی http یا www پتہ ہٹا دیا جاتا ہے اور باقی الفاظ برقرار رہتے ہیں۔ اس کو کوئی پیمانہ نہیں لیتا؛ بس اسے اُس متن سے پہلے رکھ دیں جسے صاف کرنا ہے۔
+</block>
+
+<block type="list" title="ایپ میں اسے کیسے استعمال کریں">
+item: کمانڈز ٹیب کھولیں
+item: نیا کمانڈ شروع کرنے کے لیے + پر تپ کریں
+item: نام کے خانے میں اسے نام دیں
+item: پریفکس کا خانہ مقرر کریں
+item: نیچے دیا گیا کوڈ ایڈیٹر میں چسپاں کریں
+item: محفوظ پر تپ کریں
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $removeLinks
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $removeLinks
+text: $sendMessage[Check https://example.com and www.example.org for details.]
+</block>
+
+<block type="callout" kind="note">
+text: یہ کمانڈ میں اس نقطے کے بعد ربات کی بھیجی ہر پیغام پر اثر کرتا ہے، بشمول کسی متغیر سے آنے والا متن بھی۔ اگر آپ صرف ایک پیغام صاف کرنا چاہتے ہیں تو اسے جتنی دیر ہو سکے بعد رکھیں۔
+</block>
+</dash>
+
+<details>
+syntax: $removeLinks
+</details>

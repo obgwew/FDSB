@@ -1,10 +1,21 @@
 <dash>
 name: $addUserReactions
-desc: Adds one or more emoji reactions to the user's original message that triggered the command.
+desc: Puts emoji reactions on the message that triggered your command.
 category: Components
 
 <block type="text" title="How does the command work?">
-text: $addUserReactions takes one or more emoji arguments, resolves any variables/placeholders inside them, and adds each resulting emoji as a reaction to the user's triggering message. It reacts in order with a short delay between each to avoid rate limits.
+text: $addUserReactions sticks your chosen emojis onto the message the member just sent, so the reaction shows up right under what they wrote.
+text: List as many as you like, separated by semicolons, and anything the bot can work out inside them is filled in first, which means saved values work as emoji too.
+text: Each emoji goes on one at a time with a short pause in between, and you can have up to 20 of them in a single call.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !react
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,15 +27,16 @@ text: $addUserReactions[👍; ❤️]
 </block>
 
 <block type="callout" kind="note">
-text: Rate limits are handled automatically — if Discord returns a 429, the command waits and retries that specific emoji once before continuing.
+text: If Discord is busy and answers with a rate limit, the bot waits and gives that one emoji a second try before carrying on with the rest.
 </block>
 
 <block type="callout" kind="warning">
-text: Maximum 20 emojis per call. If no valid emojis are found in the arguments, the command silently does nothing. The bot must have "Add Reactions" permission in the channel.
+text: Twenty emojis is the ceiling, and anything beyond that is refused with an error.
+text: If your text holds no emojis at all the command simply does nothing and says nothing, and the bot needs Add Reactions in that channel.
 </block>
 </dash>
 
 <details>
 syntax: $addUserReactions[emoji1; emoji2; emoji3; ...]
-param: emoji|text|Required|One or more emoji values to react with. All arguments are resolved (variables/placeholders supported) and merged, then every emoji found is added as a reaction to the user's message, in order.
+param: emoji|text|Required|One or more emoji to react with, separated by semicolons. Values inside them are filled in first, then every emoji found is added in order.
 </details>

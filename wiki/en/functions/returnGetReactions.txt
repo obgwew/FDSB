@@ -1,10 +1,20 @@
 <dash>
 name: $returnGetReactions
-desc: Fetches users who reacted with a specific emoji on a message and stores the result.
+desc: Counts the human reactions on a message or lists who reacted, ready to read back.
 category: Return Commands
 
 <block type="text" title="How does the command work?">
-text: $returnGetReactions fetches a specific message, finds the users who reacted with a given emoji, and stores the result. You can store the reacted users' IDs or the total reaction count. Bots are always excluded — only human users are considered.
+text: Point it at a message and an emoji, and the bot opens that message to see who pressed that emoji. You choose whether it counts the people or writes their IDs out as one joined list, and either way the answer is parked under the storage name you gave, so nothing appears in the chat at this point. Later, $return with that same name brings the result back out as text. Bot accounts never count, whichever way you ask for it.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $returnGetReactions
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,16 +26,20 @@ text: $returnGetReactions[$channelID; 123456789; usersID; reactors; ,; 👍]
 </block>
 
 <block type="callout" kind="note">
-text: The type parameter accepts "usersID" (to store the reacting users' IDs, joined by the separator) or "tr" (to store the total reaction count from human users only). If the emoji is not found on the message: "tr" silently stores "0", while "usersID" raises an error. In "usersID" mode an error is also raised if no human user reacted with the emoji. The result is stored in the variable and retrieved later with $return[var].
+text: Ask for a count and a message where nobody used that emoji simply stores 0. Ask for the list of IDs instead and that same situation posts an error, as does a message only bots reacted to.
+</block>
+
+<block type="callout" kind="important">
+text: The bot needs Read Message History in that channel, otherwise it cannot open the message and your command stops with a permissions error.
 </block>
 </dash>
 
 <details>
 syntax: $returnGetReactions[channelID; messageID; type; var; separator; emoji]
-param: channelID|snowflake|Required|The ID of the channel containing the message
-param: messageID|snowflake|Required|The ID of the message to check reactions on
-param: type|text|Required|usersID to store the reacting users' IDs, or tr to store the total reaction count (humans only)
-param: var|text|Required|The variable name to store the result in
-param: separator|text|Required|The separator between multiple user IDs (e.g., , or ;). You can use named separators: dot, com, apo, sem, colon
-param: emoji|text|Required|The emoji to look for reactions with (matched by its string form or name)
+param: channelID|snowflake|Required|Which channel the message is sitting in
+param: messageID|snowflake|Required|Which message to look at
+param: type|text|Required|usersID to store who reacted, or tr to store how many people did
+param: var|text|Required|What to store the result under, read back later with $return[]
+param: separator|text|Required|What goes between the IDs. Words work too: dot, com, apo, sem, colon
+param: emoji|text|Required|Which emoji to look for, typed the way it appears on the message
 </details>

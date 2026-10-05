@@ -1,0 +1,50 @@
+<dash>
+name: $getLeaderboardPosition
+desc: 返回某个成员或服务器在排行榜中的名次，若未被排名则返回 0。
+category: 变量
+
+<block type="text" title="命令如何工作？">
+text: $getLeaderboardPosition 会构建与排行榜命令相同的排名，然后只报告其中一个条目的名次。它以数字返回名次并从 1 开始；该条目没有存储值或其值不是数字时返回 0。每次都要用相同方式排序，因为在最高优先和最低优先之间切换时名次会发生变化。
+</block>
+
+<block type="list" title="如何在应用中使用">
+item: 先在“变量”标签页中创建变量
+item: 打开“命令”标签页
+item: 点击 + 开始新命令
+item: 在“名称”字段中填写名称
+item: 设置“前缀”字段
+item: 将下面的代码粘贴到编辑器中
+item: 点击保存
+</block>
+
+<block type="code" title="语法">
+text: $getLeaderboardPosition[type; name; sort; id]
+</block>
+
+<block type="code" title="可直接复制的示例">
+text: $sendMessage[You are #$getLeaderboardPosition[user; points; desc]]
+</block>
+
+<block type="options" title="变量类型">
+option: user|每位成员一个值，在每个服务器中各自单独保存
+option: globaluser|每位成员一个值，在机器人所在的每个服务器之间共享
+option: server|每个服务器一个值
+</block>
+
+<block type="options" title="排序类型">
+option: desc|值最高的排在前面（排序留空时使用）
+option: asc|值最低的排在前面
+</block>
+
+<block type="callout" kind="note">
+text: 把 ID 留空即可对运行命令的人进行排名。对于 server 类型，默认值会变成当前服务器。不是数字的值会被跳过。
+</block>
+</dash>
+
+<details>
+syntax: $getLeaderboardPosition[type; name; sort; (id)]
+param: type|text|必需|要对哪个范围进行排名：user、globaluser 或 server。
+param: name|text|必需|用于排序的变量名称。
+param: sort|text|必需|desc 表示最高优先，或 asc 表示最低优先。
+param: id|snowflake|可选|要查找哪位成员或哪个服务器。默认为运行命令的人；server 类型则默认为当前服务器。
+</details>

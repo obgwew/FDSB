@@ -1,10 +1,19 @@
 <dash>
 name: $cloneRole
-desc: Creates a duplicate of an existing role with the same permissions and settings.
+desc: Puts a brand new role in the server with the same settings as an existing one.
 category: Moderation
 
 <block type="text" title="How does the command work?">
-text: $cloneRole takes a role ID/mention and optionally a new name. The bot fetches the original role's properties (permissions, color, hoist, mentionable) and creates a new role with those same settings.
+text: Point it at a role and the bot reads off that role's permissions, colour, whether it is lifted out in the member list, and whether members are allowed to ping it. It then creates a second role carrying all of that over. Add a name as the second part and the copy gets renamed; leave it out and the new role keeps the original name.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !ping
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,12 +25,12 @@ text: $cloneRole[&123456789; Cloned Role]
 </block>
 
 <block type="callout" kind="note">
-text: If no new name is provided, the cloned role keeps the original role's name. The bot must have "Manage Roles" permission.
+text: The bot needs the Manage Roles permission, and the role you name has to belong to the server you are in. Nothing is taken away — the original stays exactly where it was.
 </block>
 </dash>
 
 <details>
 syntax: $cloneRole[role ID or @mention; (optional new name)]
-param: role ID or @mention|text|Required|The ID or @mention of the role to clone
-param: optional new name|text|Optional|A custom name for the cloned role. If omitted, the original name is used.
+param: role ID or @mention|text|Required|The role you want to copy
+param: optional new name|text|Optional|What to call the copy. Leave empty to reuse the original name.
 </details>

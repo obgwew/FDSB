@@ -1,10 +1,20 @@
 <dash>
 name: $isOwner
-desc: Checks whether a user is the owner of the server.
+desc: Tells you whether a member is the owner of the server.
 category: Info
 
 <block type="text" title="How does the command work?">
-text: $isOwner takes a user ID or mention and checks if that user is the owner of the current server. Returns "true" or "false".
+text: $isOwner takes a member as a user ID or a mention and compares them with the owner of the server the message was sent in. The bot answers with the word true or false, so you can drop it straight into a condition and let it decide what happens next. Anyone who is not the owner, and any member the bot cannot find in that server, comes back false.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !check
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,11 +26,11 @@ text: $isOwner[$authorID]
 </block>
 
 <block type="callout" kind="note">
-text: Returns "true" only if the user is the server owner. Returns "false" if the user is not the owner or is not found in the server.
+text: Only the one person who owns the server gets true. Admins sitting at the top of the role list still get false, so use this when you mean the owner and not the moderation team.
 </block>
 </dash>
 
 <details>
 syntax: $isOwner[userID]
-param: userID|text|Required|The user ID or @mention to check. Supports variables and placeholders.
+param: userID|text|Required|The member to look up, as a user ID or a mention
 </details>

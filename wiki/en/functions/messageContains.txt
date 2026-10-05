@@ -1,10 +1,20 @@
 <dash>
 name: $messageContains
-desc: Event triggered when a message contains ANY of the specified words.
+desc: Runs your lines by themselves whenever a message carries one of your words.
 category: Event
 
 <block type="text" title="How does the event work?">
-text: $messageContains is an event prefix that triggers an FDScript when a message contains ANY of the specified trigger words. Words are separated by semicolons inside the brackets. The match is case-insensitive.
+text: List your trigger words in the Prefix field, separated by semicolons, and the app marks the command as an Event for you. After that, any message containing even one of those words sets the lines underneath running on its own. Matching ignores capital letters, so Hi and hi count the same, and it makes no difference where in the message the word sits.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $messageContains[hello;hi;hey]
+item: The app marks it as an Event for you
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,19 +23,19 @@ text: #PREFIX:$messageContains[word1;word2;word3]
 
 <block type="code" title="Ready-to-copy Example">
 text: #PREFIX:$messageContains[hello;hi;hey]
- sendMessage[Hey there! How can I help?]
+text:  sendMessage[Hey there! How can I help?]
 </block>
 
 <block type="callout" kind="note">
-text: The script runs if the message contains ANY one of the listed words. For ALL words to be present, use $messageContainsAll instead.
+text: One word out of the list is enough to set it off. If every word has to be present in the same message, choose $messageContainsAll instead.
 </block>
 
 <block type="callout" kind="important">
-text: This event runs in the bot_events folder, not bot_commands. Create your .fds file there.
+text: Words are matched as plain stretches of text, so hi also fires on a message saying hiya. Keep each trigger a single unbroken word if you want it to stay tight.
 </block>
 </dash>
 
 <details>
-syntax: #PREFIX:$messageContains[word1;word2;...]
-param: words|text|Required|Semicolon-separated list of trigger words. ANY match triggers the script.
+syntax: $messageContains[word1;word2;...]
+param: words|text|Required|Your trigger words, separated by semicolons. One match is enough.
 </details>

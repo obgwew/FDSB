@@ -1,0 +1,36 @@
+<dash>
+name: $ephemeral
+desc: Rend la réponse du bot privée afin que seule la personne ayant lancé la commande puisse la voir.
+category: Messages
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: $ephemeral fait passer la réponse du bot en mode privé. Sans argument, ou avec toute valeur autre que false, la réponse n'est affichée qu'à l'utilisateur qui l'a déclenchée. Passez false, no, 0 ou off pour désactiver le mode privé pour le reste du script. Si vous le placez près du début de votre commande, tout ce que le bot enverra ensuite restera privé lui aussi.
+</block>
+
+<block type="list" title="Comment l'utiliser dans l'application">
+item: Ouvrez l'onglet Commandes
+item: Appuyez sur + pour créer une nouvelle commande
+item: Donnez-lui un nom dans le champ Nom
+item: Renseignez le champ Préfixe
+item: Collez le code ci-dessous dans l'éditeur
+item: Appuyez sur Enregistrer
+</block>
+
+<block type="code" title="Syntaxe">
+text: $ephemeral[(false)]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $ephemeral
+text: $sendMessage[Only you can see this.]
+</block>
+
+<block type="callout" kind="note">
+text: Les réponses privées ne fonctionnent que si la commande a été lancée depuis une commande slash ou depuis un bouton et un menu de sélection. Si quelqu'un la déclenche en écrivant un message normal, le réglage est ignoré et la réponse reste publique.
+</block>
+</dash>
+
+<details>
+syntax: $ephemeral[(false)]
+param: false|yes/no|Facultatif|Laissez vide pour rendre les réponses privées. Passez false, no, 0 ou off pour rendre les réponses publiques à nouveau.
+</details>

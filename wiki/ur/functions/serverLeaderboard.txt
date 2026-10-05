@@ -1,0 +1,52 @@
+<dash>
+name: $serverLeaderboard
+desc: محفوظ کردہ اسکور کی بنیاد پر سروروں کو آپس میں مقابلے میں درجہ بند کرنے والی قائمہ سازتا ہے۔
+category: ⁨متغیرات⁩
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: ⁨$serverLeaderboard⁩ ایک متغیر پڑھتا ہے جو ہر سرور کے لیے ایک اسکور رکھتا ہے، اور سروروں کو سب سے زیادہ اسکور سے کم اسکور کی طرف ترتیب دیتا ہے۔ یہ درجہ بند قائمہ چینل میں بھیجتا ہے۔ اِسے اُن مقابلوں کے لیے استعمال کریں جہاں ہر سرور ایک ہی پیمانے پر باقیوں کو پیچھے چھوڑنے کی کوشش کرتا ہے۔
+</block>
+
+<block type="list" title="ایپ میں اسے کیسے استعمال کریں">
+item: پہلے متغیرات کے ٹیب میں متغیر بنائیں
+item: کمانڈز کا ٹیب کھولیں
+item: نئی کمانڈ شروع کرنے کے لیے + پر دبائیں
+item: نام کے خانے میں اسے کوئی نام دیں
+item: پریفکس کا خانہ مقرر کریں
+item: نیچے دیا گیا کوڈ ایڈیٹر میں چسپاں کریں
+item: محفوظ پر دبائیں
+</block>
+
+<block type="code" title="ترتیب">
+text: $serverLeaderboard[name; (sort); (limit); (format)]
+</block>
+
+<block type="code" title="کاپی کے لیے تیار مثال">
+text: $serverLeaderboard[serverPoints; desc; 10]
+</block>
+
+<block type="options" title="ترتیب کی اقسام">
+option: desc|سب سے بڑی قدر پہلے (جب آپ ترتیب خالی چھوڑیں تو یہی استعمال ہوتا ہے)
+option: asc|سب سے چھوٹی قدر پہلے
+</block>
+
+<block type="options" title="سطر میں جگہ رکھنے والے نشانیں">
+option: {rank}|درجہ، 1 سے شروع
+option: {name}|سرور کا نام
+option: {mention}|سرور کی شناخت
+option: {id}|سرور کی ڈسکارڈ شناخت
+option: {value}|محفوظ کردہ اسکور
+</block>
+
+<block type="callout" kind="note">
+text: صرف اعداد کو درجہ بند کیا جا سکتا ہے، اس لیے جن اندراجات میں متن ہو وہ چھوڑ دیے جاتے ہیں۔ limit ایک سے ۲۵ تک ہو سکتا ہے اور آپ کے لیے پہلے ہی حد مقرر ہے؛ اس سے زیادہ کو کاٹ دیا جاتا ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $serverLeaderboard[name; (sort); (limit); (format)]
+param: name|text|⁨لازمی⁩|اس متغیر کا نام جو ہر سرور کے لیے ایک اسکور رکھتا ہے۔
+param: sort|text|⁨اختیاری⁩|سب سے بڑی قدر پہلے کے لیے ⁎desc⁎ (طے شدہ)، یا سب سے چھوٹی قدر پہلے کے لیے ⁎asc⁎۔
+param: limit|number|⁨اختیاری⁩|کتنی سطریں دکھانی ہیں، ایک سے ۲۵ تک۔ طے شدہ ۱۰۔
+param: format|text|⁨اختیاری⁩|سطر کا فارمیٹ۔ طے شدہ ⁎{rank}. {name} — {value}⁎۔ آپ ⁎{rank}⁎، ⁎{name}⁎، ⁎{mention}⁎، ⁎{id}⁎ اور ⁎{value}⁎ استعمال کر سکتے ہیں۔
+</details>

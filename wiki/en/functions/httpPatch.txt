@@ -1,10 +1,19 @@
 <dash>
 name: $httpPatch
-desc: Sends an HTTP PATCH request to a URL with an optional body.
+desc: Sends a PATCH request to a web address from your command.
 category: HTTP
 
 <block type="text" title="How does the command work?">
-text: $httpPatch sends a PATCH request with a 10 second timeout. The body is sent as JSON when it is valid JSON, otherwise as raw text. The response is stored in $httpResult and the status code in $httpStatus. Headers added with $httpAddHeader are sent and then cleared.
+text: Give it a web address and the bot makes a PATCH call there and waits up to ten seconds for the answer, optionally with a body in the second slot. Anything that reads as JSON goes out as JSON, and everything else is sent as plain text. When the call returns, the answer sits in $httpResult and the status code in $httpStatus, ready for the lines below.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $httpPatch
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,17 +22,17 @@ text: $httpPatch[URL; (Body)]
 
 <block type="code" title="Ready-to-copy Example">
 text: $httpAddHeader[Content-Type; application/json]
-$httpPatch[https://api.example.com/users/1; {"name": "FDScript"}]
-$httpStatus
+text: $httpPatch[https://api.example.com/users/1; {"name": "FDScript"}]
+text: $httpStatus
 </block>
 
 <block type="callout" kind="note">
-text: If the body is valid JSON it is sent as JSON, otherwise it is sent as raw data. On failure the status is set to 500 and $httpResult contains the error message.
+text: Headers you added with $httpAddHeader go out with this request and are then cleared, so the next call starts clean. If the site cannot be reached the status drops to 500 and the reason lands in $httpResult for you to read. Addresses on private or internal networks are turned down before the request leaves, and that shows up as status 400.
 </block>
 </dash>
 
 <details>
 syntax: $httpPatch[URL; (Body)]
-param: URL|text|Required|The URL to send the PATCH request to
-param: Body|text|Optional|The request body (JSON or raw text)
+param: URL|text|Required|The web address to send the PATCH request to
+param: Body|text|Optional|What to send with it, either JSON or plain text
 </details>

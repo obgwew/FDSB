@@ -1,10 +1,20 @@
 <dash>
 name: $switch
-desc: Selects and returns one item from a list based on an index number.
+desc: Picks a single choice out of the list you write, using its position number.
 category: String Utilities
 
 <block type="text" title="How does the command work?">
-text: $switch takes a list of items and an index number (as the last argument). It returns the item at that position (1-based index). This is useful for selecting from predefined options.
+text: Write your choices out in the order you want them numbered, then finish with the number of the one you would like — 1 is the first, 2 the second, and so on. The bot posts that one item on its own, so the choice it made is on show in the channel. Because the number can come from anywhere, $randomint or a variable can pick for you.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !pick
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,12 +26,16 @@ text: $switch[Red; Green; Blue; $randomint[1; 3]]
 </block>
 
 <block type="callout" kind="note">
-text: The index is the LAST argument and must be a number between 1 and the total number of items. If the index is out of bounds, an error is returned.
+text: Use it to hand over a set of ready-made options — colours, answers, a list of maps — without repeating the same lines over and over. Nesting it inside $sendMessage puts the chosen item straight into a sentence instead of on a line of its own.
+</block>
+
+<block type="callout" kind="warning">
+text: The number has to be the very last thing in the brackets, and it has to be a whole number between 1 and how many items you listed. Zero, a number that is too big, or anything that is not a number at all, and the bot reports it rather than guessing for you.
 </block>
 </dash>
 
 <details>
 syntax: $switch[item1; item2; ... ; index]
-param: item|text|Required|One or more items to choose from
-param: index|number|Required|The 1-based position of the item to return (must be last argument)
+param: item|text|Required|One of the choices, written in the order they should be numbered
+param: index|number|Required|Which one to take, counting from 1; always the last thing in the brackets
 </details>

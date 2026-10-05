@@ -1,10 +1,20 @@
 <dash>
 name: $authorServerAvatar
-desc: Returns or sends the direct image URL of the command author's (or a user's) server avatar.
+desc: Gives you the picture link of a member's server avatar, or of whoever ran the command.
 category: Info
 
 <block type="text" title="How does the command work?">
-text: $authorServerAvatar resolves and returns the direct image URL of a user's server (guild) avatar if they have set one. Without an argument it uses the command author; with a user ID or @mention it uses that user. When no custom server avatar exists, the user's display avatar is used. The result is a URL you can embed in messages or images.
+text: This hands back a direct image link you can drop into a message or an embed. Leave it empty and it uses whoever triggered the command; give it a user ID or an @mention and it reads that person instead. Members who never picked a per-server picture get their ordinary avatar, and animated ones come back as .gif links.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $authorServerAvatar
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -17,11 +27,11 @@ text: Your server avatar: $authorServerAvatar
 </block>
 
 <block type="callout" kind="note">
-text: This is the avatar shown to other members inside the server, which may differ from the user's global avatar ($authorAvatar). Animated avatars are returned as .gif URLs.
+text: A server avatar is the picture a member can change for one server only, so it often differs from their normal avatar ($authorAvatar). If the ID matches nobody the bot knows, you get an error rather than a link.
 </block>
 </dash>
 
 <details>
 syntax: $authorServerAvatar[(userID/@mention)]
-param: userID/@mention|text|Optional|The user ID or @mention whose server avatar URL to get. If omitted, uses the command author.
+param: userID/@mention|text|Optional|Which member to read. Leave empty for whoever ran the command.
 </details>

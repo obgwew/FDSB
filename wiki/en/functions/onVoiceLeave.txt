@@ -1,10 +1,20 @@
 <dash>
 name: $onVoiceLeave
-desc: Event triggered when a member leaves a voice channel.
+desc: Runs your command by itself every time somebody disconnects from a voice channel.
 category: Event
 
 <block type="text" title="How does the event work?">
-text: $onVoiceLeave is an event prefix that triggers an FDScript whenever a member leaves a voice channel. The script receives the member and voice channel information. You can optionally specify a channel ID in the first line to direct the output to a specific text channel.
+text: Put $onVoiceLeave in the Prefix field and the app tags the command as an Event, so nobody has to type anything to set it off. The moment a member drops out of any voice channel, the lines below play out with that person as $author, and whatever you send lands in your server's system channel. Add a channel ID in square brackets after the prefix, like $onVoiceLeave[123456789012345678], and it all goes to that channel instead.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $onVoiceLeave
+item: The app marks it as an Event for you
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,18 +23,18 @@ text: #PREFIX:$onVoiceLeave
 
 <block type="code" title="Ready-to-copy Example">
 text: #PREFIX:$onVoiceLeave
- sendMessage[$authorName left a voice channel.]
+text:  sendMessage[$authorName left a voice channel.]
 </block>
 
 <block type="callout" kind="note">
-text: Place this in the first line of your FDScript file. The script will run automatically when any member leaves a voice channel.
+text: Once you tap Save the command waits on its own and fires for every voice disconnect in the server. $authorName and $mention both refer to the person who just left, so you can name them or tag them as you like.
 </block>
 
 <block type="callout" kind="important">
-text: This event runs in the bot_events folder, not bot_commands. Create your .fds file there.
+text: Because the app files this as an Event, it never appears in the ordinary command list and nobody can trigger it by typing. A member moving from one voice channel straight to another counts as leaving the first one, so the command runs even when they never really went anywhere.
 </block>
 </dash>
 
 <details>
-syntax: #PREFIX:$onVoiceLeave
+syntax: $onVoiceLeave
 </details>

@@ -1,0 +1,50 @@
+<dash>
+name: $getLeaderboardPosition
+desc: Renvoie le rang d'un membre ou d'un serveur dans un classement, ou 0 s'il n'y est pas classé.
+category: Variables
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: $getLeaderboardPosition construit le même classement que les commandes de classement puis indique la place d'une seule entrée. Il renvoie la position sous forme de nombre à partir de 1, et 0 lorsque cette entrée n'a pas de valeur enregistrée ou que sa valeur n'est pas un nombre. Triez la liste de la même façon à chaque fois, car la position change quand vous passez du plus élevé au plus bas.
+</block>
+
+<block type="list" title="Comment l'utiliser dans l'application">
+item: Créez d'abord la variable dans l'onglet Variables
+item: Ouvrez l'onglet Commandes
+item: Appuyez sur + pour créer une nouvelle commande
+item: Donnez-lui un nom dans le champ Nom
+item: Renseignez le champ Préfixe
+item: Collez le code ci-dessous dans l'éditeur
+item: Appuyez sur Enregistrer
+</block>
+
+<block type="code" title="Syntaxe">
+text: $getLeaderboardPosition[type; name; sort; id]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $sendMessage[You are #$getLeaderboardPosition[user; points; desc]]
+</block>
+
+<block type="options" title="Types de variables">
+option: user|Une valeur par membre, conservée séparément dans chaque serveur
+option: globaluser|Une valeur par membre, partagée entre tous les serveurs où le bot se trouve
+option: server|Une valeur par serveur
+</block>
+
+<block type="options" title="Types de tri">
+option: desc|Valeur la plus élevée d'abord (utilisé lorsque vous laissez le tri vide)
+option: asc|Valeur la plus basse d'abord
+</block>
+
+<block type="callout" kind="note">
+text: Laissez l'ID vide pour classer la personne qui a lancé la commande. Pour le type server, cette valeur par défaut devient le serveur actuel. Les valeurs qui ne sont pas des nombres sont ignorées.
+</block>
+</dash>
+
+<details>
+syntax: $getLeaderboardPosition[type; name; sort; (id)]
+param: type|text|Obligatoire|Quel ensemble classer : user, globaluser ou server.
+param: name|text|Obligatoire|Nom de la variable selon laquelle classer.
+param: sort|text|Obligatoire|desc pour le plus élevé d'abord, ou asc pour le plus bas d'abord.
+param: id|snowflake|Facultatif|Quel membre ou serveur rechercher. Par défaut la personne qui a lancé la commande, ou le serveur actuel pour le type server.
+</details>

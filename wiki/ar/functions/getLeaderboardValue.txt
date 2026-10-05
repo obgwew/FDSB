@@ -1,0 +1,52 @@
+<dash>
+name: $getLeaderboardValue
+desc: يعيد القيمة أو المعرّف أو الاسم لكل من يحتل مرتبة معينة في لوحة متصدرين.
+category: المتغيرات
+
+<block type="text" title="كيف يعمل الأمر؟">
+text: $getLeaderboardValue يبني ترتيبًا ثم يدخل داخله. أنت تعطيه مرتبة، فيعيد لك ما هو موضوع فيها — النتيجة المخزنة، أو المعرّف، أو الاسم الظاهر. وحده يطبع هذه النتيجة في القناة، وداخل أمر آخر تُدرج النتيجة في مكانها. وإذا طلبت مرتبة تتجاوز نهاية القائمة، فلا يعود شيء، لذا افحص الطول أولًا عندما تكون القائمة قصيرة.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: أنشئ المتغير أولًا في تبويب المتغيرات
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة
+item: الصق الكود أدناه في المحرر
+item: اضغط على حفظ
+</block>
+
+<block type="code" title="الصيغة">
+text: $getLeaderboardValue[type; name; sort; position; return_type]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $sendMessage[Top player: $getLeaderboardValue[user; points; desc; 1; name]]
+</block>
+
+<block type="options" title="أنواع المتغيرات">
+option: user|قيمة واحدة لكل عضو، تُحفظ بشكل منفصل في كل خادم
+option: globaluser|قيمة واحدة لكل عضو، مشتركة بين كل الخوادم التي فيها البوت
+option: server|قيمة واحدة لكل خادم
+</block>
+
+<block type="options" title="ما الذي يُعاد">
+option: value|النتيجة المخزنة نفسها (تُستخدم عندما تترك هذا فارغًا)
+option: id|معرّف Discord لذلك الإدخال
+option: name|الاسم الظاهر، مع الرجوع إلى المعرّف الخام إذا تعذّر تحويله
+</block>
+
+<block type="callout" kind="note">
+text: رتّب القائمة بالطريقة نفسها التي قرأت بها المرتبة، وإلا حصلت على إدخال مختلف. وتُتجاهل القيم التي ليست أرقامًا.
+</block>
+</dash>
+
+<details>
+syntax: $getLeaderboardValue[type; name; sort; position; (return_type)]
+param: type|text|مطلوب|أي مجموعة تُرتَّب: user أو globaluser أو server.
+param: name|text|مطلوب|اسم المتغير الذي يتم الترتيب حسبه.
+param: sort|text|مطلوب|desc للأعلى أولًا، أو asc للأدنى أولًا.
+param: position|number|مطلوب|أي مركز يُقرأ، بدءًا من 1. والمرتبة التي تتجاوز نهاية القائمة لا تعيد شيئًا.
+param: return_type|text|اختياري|value للنتيجة المخزنة، أو id لمعرّف Discord، أو name للاسم الظاهر.
+</details>

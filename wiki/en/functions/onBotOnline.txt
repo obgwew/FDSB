@@ -1,10 +1,20 @@
 <dash>
 name: $onBotOnline
-desc: Event triggered once when the bot comes online.
+desc: Runs your script by itself once each time the bot finishes logging in.
 category: Event
 
 <block type="text" title="How does the event work?">
-text: $onBotOnline is an event prefix that triggers an FDScript a single time, right after the bot logs in successfully. It runs without any user message, so there is no author, message content, or channel context available. Use it for one-time setup such as storing variables or logging that the bot started.
+text: Set a command's Prefix field to $onBotOnline and the app marks it as an Event for you. Nobody has to type anything, because the lines underneath start running on their own the moment the bot is connected and ready, which makes this the right place for one-time setup such as noting the start time. There is no message behind it, so nothing about the person or the words they wrote is available.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $onBotOnline
+item: The app marks it as an Event for you
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,18 +23,18 @@ text: #PREFIX:$onBotOnline
 
 <block type="code" title="Ready-to-copy Example">
 text: #PREFIX:$onBotOnline
-$setVar[botStartupTime; $addTimestamp]
+text: $setVar[botStartupTime; $addTimestamp]
 </block>
 
 <block type="callout" kind="note">
-text: Because there is no triggering message, sending output with commands like $sendMessage requires $useChannel to pick a target channel first; author/channel based tokens such as $channelID or $message are not available.
+text: With no message there is nowhere to post either. Put a channel ID in brackets straight after the prefix, as in $onBotOnline[123456789], and everything your lines send lands in that channel.
 </block>
 
 <block type="callout" kind="important">
-text: This event runs in the bot_events folder, not bot_commands. Create your .fds file there.
+text: It fires on every successful login, not just the very first one, so a restart or a dropped connection that comes back will run your lines again.
 </block>
 </dash>
 
 <details>
-syntax: #PREFIX:$onBotOnline
+syntax: $onBotOnline
 </details>

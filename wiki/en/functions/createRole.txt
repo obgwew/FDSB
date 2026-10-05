@@ -1,10 +1,22 @@
 <dash>
 name: $createRole
-desc: Creates a new role in the server with specified name, color, and permissions.
+desc: Creates a new role in the server with the name, colour and permissions you choose.
 category: Moderation
 
 <block type="text" title="How does the command work?">
-text: $createRole creates a new role with the given name, color, and permissions. Permissions can be specified as a preset (cosmetic, member, mod, manager) or a raw permission number. Optionally, you can control whether the role is displayed separately and whether it is mentionable.
+text: $createRole adds a new role to the server where the command was used.
+text: You give it a name, a colour, and how much power the role should carry, either one of the presets below or a raw permission number.
+text: You can also decide whether the role is listed on its own next to members and whether anyone is allowed to ping it, and both of those stay off unless you say yes.
+text: The finished role appears in your server's role list straight away, and its ID can be picked up with $return[createdRoleID] to hand to a later command.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !role
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,22 +28,23 @@ text: $createRole[VIP; #FFD700; member; yes; no]
 </block>
 
 <block type="options" title="Permission presets">
-option: cosmetic|No special permissions (display-only role)
-option: member|Basic member permissions (send messages, react, connect, etc.)
-option: mod / moderator|Moderation permissions (kick, ban, manage messages, timeout, etc.)
-option: manager / admin|Full management permissions (manage channels, roles, webhooks, etc.)
+option: cosmetic|No permissions at all, just a coloured name
+option: member|Normal member powers: send messages, react, upload files, join voice
+option: mod / moderator|Kicking, banning, timeouts and message management
+option: manager / admin|Everything a moderator can do, plus channels, roles, webhooks and emojis
 </block>
 
 <block type="callout" kind="note">
-text: The created role's ID is stored in $return[createdRoleID] for later use. The bot must have "Manage Roles" permission.
+text: The bot needs the Manage Roles permission in that server, and the command only works inside a server, never in a private chat.
+text: Discord's own limit of 100 characters applies to the role name.
 </block>
 </dash>
 
 <details>
 syntax: $createRole[role name; color; permissions; (display role; mention role)]
-param: role name|text|Required|The name for the new role (max 100 characters)
-param: color|text|Required|Hex color code (e.g., #FF5733) or empty for default
-param: permissions|text|Required|A preset (cosmetic, member, mod/moderator, manager/admin) or a raw permission integer
-param: display role|yes/no|Optional|yes to display the role separately in the member list (default: no)
-param: mention role|yes/no|Optional|yes to make the role mentionable by everyone (default: no)
+param: role name|text|Required|The name shown for the new role, up to 100 characters
+param: color|text|Required|A hex colour such as #FF5733, or empty for the default
+param: permissions|text|Required|One of the presets above, or the raw permission number
+param: display role|yes/no|Optional|yes to list the role on its own beside members (default: no)
+param: mention role|yes/no|Optional|yes to let everybody ping the role (default: no)
 </details>

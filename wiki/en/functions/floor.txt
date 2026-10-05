@@ -1,10 +1,20 @@
 <dash>
 name: $floor
-desc: Rounds a number down to the nearest integer.
+desc: Rounds a number down to the whole number sitting just below it.
 category: Math & Numbers
 
 <block type="text" title="How does the command work?">
-text: $floor takes a single numeric value and rounds it down to the nearest whole number (floor). For example, 3.9 becomes 3, and -2.1 becomes -3. Works both as a standalone command and inline inside other commands.
+text: Hand it a decimal and it drops the fractional part, always downwards. So 3.9 becomes 3, and -2.1 becomes -3 rather than -2. The result is always a whole number, and you can write it straight into a message or into a calculation.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !welcome
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,11 +26,11 @@ text: $sendMessage[Result is $floor[3.9]]
 </block>
 
 <block type="callout" kind="note">
-text: $floor[3.9] returns 3. $floor[-2.1] returns -3. $floor[5.0] returns 5. The result is always an integer.
+text: It wants exactly one number, so two or none is refused with an error. Anything that is not a number is refused too. Want the other direction? Reach for $ceil instead.
 </block>
 </dash>
 
 <details>
 syntax: $floor[number]
-param: number|number|Required|The number to round down to the nearest integer, e.g., 3.9, -2.1, 10
+param: number|number|Required|The number to round down, such as 3.9 or -2.1
 </details>

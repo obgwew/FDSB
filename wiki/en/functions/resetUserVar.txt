@@ -1,10 +1,20 @@
 <dash>
 name: $resetUserVar
-desc: Removes a user-scoped variable override.
+desc: Throws away one member's personal value for a variable so they fall back to the default.
 category: Variables
 
 <block type="text" title="How does the command work?">
-text: $resetUserVar deletes the override stored for a guild_id:user_id key. It does not delete or change the global variable definition. With one argument, the triggering author and current server are used; two arguments select a user ID; three arguments select both IDs.
+text: Every member can carry their own copy of a variable, and this drops that private copy for good. The variable itself stays exactly as it is in the Variables tab, together with its default value, so only that one person goes back to the shared starting point while everyone else keeps theirs. Name a member yourself and you clear somebody else's score; add a server ID as well and you clear it in that one server only.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Create the variable first in the Variables tab
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !resetpoints
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,13 +26,13 @@ text: $resetUserVar[points; 123456789012345678]
 </block>
 
 <block type="callout" kind="note">
-text: If the override is already absent, the command is a safe no-op and records that state in the execution log.
+text: With nothing after the name the bot clears the value belonging to whoever ran the command, in the server they typed it in. Resetting somebody who never had a personal value is harmless and changes nothing at all.
 </block>
 </dash>
 
 <details>
 syntax: $resetUserVar[name; (user_id); (guild_id)]
-param: name|text|Required|The variable name whose user override should be removed
-param: userID|text|Optional|The user ID; defaults to the triggering author
-param: guildID|text|Optional|The server ID; defaults to the current server
+param: name|text|Required|The variable whose personal copy should be dropped
+param: userID|text|Optional|Which member to clear it for. Leave it out to use the person who ran the command.
+param: guildID|text|Optional|Which server to clear it in. Leave it out to use the current one.
 </details>

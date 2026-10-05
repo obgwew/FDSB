@@ -1,0 +1,52 @@
+<dash>
+name: $userLeaderboard
+desc: Baut eine Rangliste, die die Mitglieder des aktuellen Servers anhand eines gespeicherten Punktestands ordnet.
+category: Variablen
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: ⁨$userLeaderboard⁩ liest eine Variable, die im Server, in dem der Befehl verwendet wurde, einen Punktestand pro Mitglied speichert, und ordnet die Mitglieder vom höchsten zum niedrigsten Punktestand. Die sortierte Liste wird in den Kanal gesendet. Jeder Server behält seine eigene Kopie der Punktestände, bekommt also eine eigene separate Rangfolge.
+</block>
+
+<block type="list" title="So verwendest du es in der App">
+item: Erstelle die Variable im Tab Variablen
+item: Öffne den Befehle-Tab
+item: Tippe auf +, um einen neuen Befehl zu beginnen
+item: Gib ihm im Feld Name einen Namen
+item: Setze das Feld Prefix
+item: Füge den folgenden Code in den Editor ein
+item: Tippe auf Speichern
+</block>
+
+<block type="code" title="Syntax">
+text: $userLeaderboard[name; (sort); (limit); (format)]
+</block>
+
+<block type="code" title="Fertiges Beispiel zum Kopieren">
+text: $userLeaderboard[points; desc; 5; {rank}. {mention} — {value}]
+</block>
+
+<block type="options" title="Sortierarten">
+option: desc|Höchster Wert zuerst (wird verwendet, wenn du sort leer lässt)
+option: asc|Niedrigster Wert zuerst
+</block>
+
+<block type="options" title="Platzhalter in der Zeile">
+option: {rank}|Der Platz, beginnend bei 1
+option: {name}|Anzeigename des Mitglieds
+option: {mention}|Ein klickbarer Mention des Mitglieds
+option: {id}|Discord-ID des Mitglieds
+option: {value}|Der gespeicherte Punktestand
+</block>
+
+<block type="callout" kind="note">
+text: Nur Zahlen lassen sich ordnen, daher werden Einträge mit Text ausgelassen. Das Limit kann von 1 bis 25 gehen und ist für dich gedeckelt; alles Höhere wird heruntergesetzt.
+</block>
+</dash>
+
+<details>
+syntax: $userLeaderboard[name; (sort); (limit); (format)]
+param: name|text|Erforderlich|Name der Variablen, die in diesem Server einen Punktestand pro Mitglied speichert.
+param: sort|text|Optional|⁎desc⁎ für den höchsten Wert zuerst (Standard), oder ⁎asc⁎ für den niedrigsten zuerst.
+param: limit|number|Optional|Wie viele Zeilen gezeigt werden, von 1 bis 25. Standard ist 10.
+param: format|text|Optional|Zeilen-Vorlage. Standard ist ⁎{rank}. {name} — {value}⁎. Du kannst ⁎{rank}⁎, ⁎{name}⁎, ⁎{mention}⁎, ⁎{id}⁎ und ⁎{value}⁎ verwenden.
+</details>

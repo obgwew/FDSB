@@ -1,10 +1,20 @@
 <dash>
 name: $serverIcon
-desc: Returns or sends the direct image URL of the current server's (or a server's) icon.
+desc: Gives you the picture of a server's icon.
 category: Server
 
 <block type="text" title="How does the command work?">
-text: $serverIcon resolves and returns the direct image URL of a server's icon. Without an argument it uses the current server; with a guild ID it uses that specific server (the bot must be in it). Animated server icons are returned as .gif URLs.
+text: $serverIcon fetches the icon of a server and hands back the address of that picture. Used on its own it takes the server the message was sent in; give it a server ID and it uses that one instead, as long as the bot is a member there. The address drops straight into a card or goes out as a plain link, and an animated icon arrives in its moving form.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !welcome
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -17,11 +27,11 @@ text: Server icon: $serverIcon
 </block>
 
 <block type="callout" kind="note">
-text: If the given server has no icon set, an error is returned. You can use the URL in embeds ($image, $thumbnail, $authorIcon, $footerIcon) or send it as a link.
+text: A server with no icon set gives you an error instead of a blank address. The result works anywhere a picture goes, cards, thumbnails and footer icons among them, or you can just post the link on its own.
 </block>
 </dash>
 
 <details>
 syntax: $serverIcon[(guildID)]
-param: guildID|snowflake|Optional|The ID of the server whose icon URL to get. If omitted, uses the current server.
+param: guildID|snowflake|Optional|Which server to take the icon from. Leave it out to use the one the message was sent in.
 </details>

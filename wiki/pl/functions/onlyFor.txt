@@ -1,0 +1,46 @@
+<dash>
+name: $onlyFor
+desc: Pozwala tylko wymienionym członkom lub rolom korzystać z polecenia, a pozostałym pokazuje twoją własną wiadomość.
+category: Kontrola dostępu
+
+<block type="text" title="Jak działa ta komenda?">
+text: $onlyFor to bramka, którą stawiasz na początku polecenia. Wymień osoby i role, które mają przejść, a na końcu podaj wiadomość, którą mają zobaczyć wszyscy pozostali. Jeśli osoba, która uruchomiła polecenie, pasuje do jednego z wpisów, nic się nie dzieje i reszta polecenia działa dalej. Jeśli nie pasuje, wiadomość zostaje wysłana, a reszta polecenia jest w tym miejscu odrzucana.
+</block>
+
+<block type="list" title="Jak używać go w aplikacji">
+item: Otwórz zakładkę Polecenia
+item: Dotknij +, aby rozpocząć nowe polecenie
+item: Nadaj mu nazwę w polu Nazwa
+item: Ustaw pole Prefiks
+item: Wklej poniższy kod w edytorze
+item: Dotknij Zapisz
+</block>
+
+<block type="code" title="Składnia">
+text: $onlyFor[ID or name; ...; error message]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $onlyFor[123456789012345678; Moderator; This command is for moderators only.]
+text: $sendMessage[Here is the secret!]
+</block>
+
+<block type="options" title="Co możesz wymienić">
+option: ID|ID użytkownika lub roli, na przykład 123456789012345678, z symbolami wzmianki lub bez nich
+option: name|Nazwa roli, na przykład Moderator, albo nazwa użytkownika dla pojedynczej osoby
+</block>
+
+<block type="callout" kind="note">
+text: Wiadomość umieszczaj na końcu — wszystko po wpisach liczy się jako jedna wiadomość. Członek przechodzi, gdy jest wskazany po imieniu albo gdy ma jedną z wymienionych ról.
+</block>
+
+<block type="callout" kind="important">
+text: Ta bramka jest dla wygody, a nie dla prawdziwego bezpieczeństwa. Kto potrafi czytać twoje polecenia, dowiaduje się, kto jest na liście, a kto potrafi je edytować, może usunąć z niej samego siebie. Naprawdę wrażliwe fragmenty trzymaj po swojej stronie.
+</block>
+</dash>
+
+<details>
+syntax: $onlyFor[ID or name; ...; error message]
+param: ID or name|text|Wymagane|Jeden lub kilka ID użytkowników, ID ról lub nazw, którym wolno kontynuować.
+param: error message|text|Wymagane|Wiadomość wysyłana na kanał, gdy osoba nie ma zgody. Wszystko po wpisach liczy się jako ta wiadomość.
+</details>

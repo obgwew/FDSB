@@ -1,0 +1,41 @@
+<dash>
+name: $onlyBotPerms
+desc: 除非机器人本身被允许执行接下来的操作，否则用你自己的消息停止命令。
+category: 访问控制
+
+<block type="text" title="这个命令是如何工作的？">
+text: ⁨$onlyBotPerms⁩ 会在你命令中受保护的部分运行之前检查机器人自身的权限。列出你需要的权限，然后用成员在缺少其中任何一项时应当看到的消息收尾。如果机器人拥有全部权限，就不会显示任何东西，你的命令继续执行。如果缺少其中一项，消息会被发送，而命令的其余部分就在那里被丢弃。
+</block>
+
+<block type="list" title="如何在应用中使用它">
+item: 打开命令标签页
+item: 点击 + 开始一个新命令
+item: 在名称字段中为它取一个名字
+item: 设置前缀字段
+item: 将下面的代码粘贴到编辑器中
+item: 点击保存
+</block>
+
+<block type="code" title="语法">
+text: $onlyBotPerms[permission; ...; error message]
+</block>
+
+<block type="code" title="可直接复制的示例">
+text: $onlyBotPerms[kick_members; ban_members; I need permission to kick and ban members.]
+text: $sendMessage[Done!]
+</block>
+
+<block type="callout" kind="note">
+text: 权限名称是 Discord 自己的名称，用小写加下划线，例如 ⁎kick_members⁎、⁎ban_members⁎ 或 ⁎manage_messages⁎。把消息放在最后 —— 权限之后的一切都被当作一条消息。
+</block>
+
+<block type="callout" kind="important">
+text: 该检查会查看命令被使用的那个频道，所以机器人在一个频道有而在另一个频道没有的权限仍然会阻止它。请在 Discord 中检查机器人的角色，并确保它位于它需要执行操作的那些角色之上。
+</block>
+</dash>
+
+<details>
+syntax: $onlyBotPerms[permission; ...; error message]
+param: permission|text|Required|一个或多个 Discord 权限名称，用分号分隔，例如 ⁎kick_members⁎ 或 ⁎manage_roles⁎。
+param: error message|text|Required|当机器人缺少其中一项权限时发送到频道的消息。权限之后的一切都算作这条消息。
+</details>

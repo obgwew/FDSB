@@ -1,10 +1,19 @@
 <dash>
 name: $deleteRole
-desc: Deletes a role from the server.
+desc: Removes a role from the server for good.
 category: Moderation
 
 <block type="text" title="How does the command work?">
-text: $deleteRole takes a role ID or @mention, looks it up in the server, and permanently deletes it. This action cannot be undone.
+text: Name a role by its ID or an @mention and the bot looks it up in the server the command was used in, then deletes it. Everyone who had it loses it at the same moment and there is no way back. A role that is not in that server is reported back as missing rather than quietly ignored.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $deleteRole
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,11 +25,11 @@ text: $deleteRole[&123456789]
 </block>
 
 <block type="callout" kind="warning">
-text: The bot must have "Manage Roles" permission and its highest role must be above the target role. Deleting a role is permanent and cannot be undone.
+text: Deleting cannot be undone. The bot needs Manage Roles, and its own highest role has to sit above the one you are removing, otherwise Discord turns the request down.
 </block>
 </dash>
 
 <details>
 syntax: $deleteRole[role ID or @mention]
-param: role ID or @mention|text|Required|The ID or @mention of the role to delete
+param: role ID or @mention|text|Required|The role to delete, as its number or an @mention of it
 </details>

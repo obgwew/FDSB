@@ -1,10 +1,20 @@
 <dash>
 name: $addTimestamp
-desc: Fetches the current time and sends it as a dynamic Discord timestamp format.
+desc: Stamps the current date and time onto the card your command builds.
 category: Timing & Delays
 
 <block type="text" title="How does the command work?">
-text: When $addTimestamp is invoked, the bot calculates the current time, converts it into Discord's dynamic timestamp format (Long Time format), and sends the result directly to the destination channel.
+text: Add this while you are putting a card together and the bot writes the present date and time onto that card, in the small line along its bottom edge. Discord renders that line in each reader's own time zone, so it reads correctly for everybody no matter where they happen to be. It touches only the card, so make sure one is being built before you ask for it.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $addTimestamp
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,6 +26,6 @@ text: $addTimestamp
 </block>
 
 <block type="callout" kind="note">
-text: The sent timestamp uses the Long Time format, meaning it will automatically adjust and display to every Discord user according to their device's local time zone (e.g., 6:46:58 PM).
+text: Everyone is shown the same moment written in the time zone of their own device, so your card never has to explain where the date came from.
 </block>
 </dash>

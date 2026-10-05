@@ -1,10 +1,19 @@
 <dash>
 name: $modifyRolePerms
-desc: Enables or disables permissions on a server role.
+desc: Switches individual permissions on or off for a role in your server.
 category: Moderation
 
 <block type="text" title="How does the command work?">
-text: $modifyRolePerms changes selected permissions on a role. Prefix a permission with + to enable it or - to disable it. A sign is optional and defaults to +. The special permission all enables or disables the complete permission set. Permissions not listed in the call remain unchanged.
+text: Name the role first, then list the permissions you want changed, each with a + or a - in front of it: + hands the permission over, - takes it away. Leave the sign off and you get a +. Anything you do not mention keeps whatever it had before. The single word all is special, because a + next to it turns on the complete permission set in one go. When the save goes through the bot replies with a green tick naming the role it changed.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !perms
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,16 +25,16 @@ text: $modifyRolePerms[<@&123456789012345678>; +send_messages; -connect]
 </block>
 
 <block type="callout" kind="warning">
-text: The command can only be used inside a server. The bot needs Manage Roles permission, and the target role must be below the bot's highest role.
+text: This one only works inside a server, and the bot needs Manage Roles plus a role that sits below its own highest role. Miss either of those out and Discord simply refuses the change.
 </block>
 
 <block type="callout" kind="note">
-text: Permission names use Discord snake_case names supported by the interpreter. This is a standalone command; its current inline resolver returns an empty value.
+text: Permission names are the snake_case spelling Discord itself uses, for example send_messages, kick_members or manage_channels. A name the app does not recognise stops the command with an error before anything at all is saved.
 </block>
 </dash>
 
 <details>
 syntax: $modifyRolePerms[role ID or role mention; permission +/-; ...]
-param: roleID|snowflake|Required|The numeric role ID or role mention
-param: permissions|text|Required|One or more permission names with + or - prefixes; all changes the complete set
+param: roleID|snowflake|Required|The role to change, as an @role mention or its ID
+param: permissions|text|Required|Permission names to switch, each marked + or -; all covers the whole set
 </details>

@@ -1,10 +1,20 @@
 <dash>
 name: $onLeave
-desc: Event triggered when a member leaves the server.
+desc: Runs your script by itself whenever somebody leaves the server.
 category: Event
 
 <block type="text" title="How does the event work?">
-text: $onLeave is an event prefix that triggers an FDScript whenever a member leaves or is removed from the server. The script receives the departing member's information. You can optionally specify a channel ID in the first line to direct the output to a specific channel.
+text: $onLeave fires on its own: the moment a member walks out or is removed, Discord hands your script that person and it runs straight away. Inside it you can use the usual values such as $authorName and $authorID to name whoever just left, or to check which roles they had. Nobody has to type anything for this to happen, it reacts to the event by itself.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $onLeave
+item: The app marks it as an Event for you
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,18 +23,18 @@ text: #PREFIX:$onLeave
 
 <block type="code" title="Ready-to-copy Example">
 text: #PREFIX:$onLeave
- sendMessage[Goodbye $authorName!]
+text:  sendMessage[Goodbye $authorName!]
 </block>
 
 <block type="callout" kind="note">
-text: Place this in the first line of your FDScript file. The script will run automatically when any member leaves.
+text: Leave the channel out and the bot posts in the channel the event came from. If you would rather have the farewell somewhere else, drop a channel ID in brackets on that first line.
 </block>
 
 <block type="callout" kind="important">
-text: This event runs in the bot_events folder, not bot_commands. Create your .fds file there.
+text: This one never waits for a message to arrive, it only runs while the bot is online. Switch the bot on from the Main tab and make sure it is a member of the server you want to watch, otherwise nothing will ever fire.
 </block>
 </dash>
 
 <details>
-syntax: #PREFIX:$onLeave
+syntax: $onLeave
 </details>

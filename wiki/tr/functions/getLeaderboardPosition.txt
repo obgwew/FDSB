@@ -1,0 +1,50 @@
+<dash>
+name: $getLeaderboardPosition
+desc: Sıralama tablosunda bir üyenin veya sunucunun sırasını döndürür, sıralanmamışsa 0 döndürür.
+category: Değişkenler
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $getLeaderboardPosition, sıralama komutlarının oluşturduğu sıralamayı kurar ve ardından tek bir kaydın yerini bildirir. Konumu 1'den başlayan bir sayı olarak döndürür; o kaydın kayıtlı bir değeri yoksa ya da değeri sayı değilse 0 döndürür. Listeyi her seferinde aynı şekilde sıralayın, çünkü en yüksek önce ile en düşük önce arasında geçiş yapıldığında konum değişir.
+</block>
+
+<block type="list" title="Uygulamada nasıl kullanılır">
+item: Önce Değişkenler sekmesinde değişkeni oluştur
+item: Komutlar sekmesini aç
+item: Yeni bir komut başlatmak için + düğmesine dokun
+item: Ad alanına bir ad ver
+item: Önek alanını ayarla
+item: Aşağıdaki kodu düzenleyiciye yapıştır
+item: Kaydet düğmesine dokun
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $getLeaderboardPosition[type; name; sort; id]
+</block>
+
+<block type="code" title="Kopyalanmaya hazır örnek">
+text: $sendMessage[You are #$getLeaderboardPosition[user; points; desc]]
+</block>
+
+<block type="options" title="Değişken türleri">
+option: user|Üye başına bir değer, her sunucuda ayrı ayrı saklanır
+option: globaluser|Üye başına bir değer, botun bulunduğu tüm sunucularda ortaktır
+option: server|Sunucu başına bir değer
+</block>
+
+<block type="options" title="Sıralama türleri">
+option: desc|Önce en yüksek değer (sıralamayı boş bıraktığınızda kullanılır)
+option: asc|Önce en düşük değer
+</block>
+
+<block type="callout" kind="note">
+text: Komutu çalıştıran kişiyi sıralamak için ID'yi boş bırakın. server türünde bu varsayılan değer yerine geçer. Sayı olmayan değerler atlanır.
+</block>
+</dash>
+
+<details>
+syntax: $getLeaderboardPosition[type; name; sort; (id)]
+param: type|text|Zorunlu|Hangi havuz sıralansın: user, globaluser ya da server.
+param: name|text|Zorunlu|Sıralanacak değişkenin adı.
+param: sort|text|Zorunlu|Önce en yüksek için desc, önce en düşük için asc.
+param: id|snowflake|İsteğe bağlı|Hangi üye ya da sunucuya bakılacak. Varsayılan, komutu çalıştıran kişidir; server türünde ise geçerli sunucudur.
+</details>

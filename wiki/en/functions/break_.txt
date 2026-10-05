@@ -1,10 +1,20 @@
 <dash>
 name: $break
-desc: Exits the nearest enclosing $for or $while loop immediately.
+desc: Ends the loop it sits in and picks up at the line after it.
 category: Flow Control
 
 <block type="text" title="How does the command work?">
-text: When $break is encountered inside a loop ($for or $while), the bot immediately stops iterating and continues execution after the matching $endfor or $endwhile. Any remaining iterations in the current loop are skipped.
+text: Drop this on its own line inside a $for or a $while and the bot stops looping the moment it arrives there, carrying straight on from the first line after the matching $endfor or $endwhile. Whatever the loop still had left to do never happens. It takes no brackets and prints nothing of its own.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !search
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,13 +23,13 @@ text: $break
 
 <block type="code" title="Ready-to-copy Example">
 text: $for[10]
-  $if[$message == stop]
-    $break
-  $endif
-$endfor
+text:   $if[$message == stop]
+text:     $break
+text:   $endif
+text: $endfor
 </block>
 
 <block type="callout" kind="note">
-text: $break only exits the innermost loop it is currently in. If loops are nested, the outer loops continue executing normally.
+text: Only the loop you are standing in stops. If loops are wrapped inside one another, the outer ones keep turning over exactly as before.
 </block>
 </dash>

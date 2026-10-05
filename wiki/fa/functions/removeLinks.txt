@@ -1,0 +1,35 @@
+<dash>
+name: $removeLinks
+desc: هر پیوند وب را از پیامی که ربات در آستانه ارسال آن است جدا می‌کند.
+category: ابزارها
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $removeLinks حذف پیوند را برای ادامه دستور روشن می‌کند. هر جا ربات پس از آن پیامی بفرستد، هر نشانی http یا www حذف می‌شود و بقیه کلمات باقی می‌ماند. هیچ آرگومانی نمی‌گیرد و کافی است آن را پیش از متنی که می‌خواهید پاک‌سازی شود قرار دهید.
+</block>
+
+<block type="list" title="نحوه استفاده در برنامه">
+item: زبانه دستورها را باز کنید
+item: برای شروع یک دستور جدید روی + بزنید
+item: در فیلد نام، نامی برای آن بگذارید
+item: فیلد پیشوند را تنظیم کنید
+item: کد زیر را در ویرایشگر بچسبانید
+item: روی ذخیره بزنید
+</block>
+
+<block type="code" title="سینتکس">
+text: $removeLinks
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $removeLinks
+text: $sendMessage[Check https://example.com and www.example.org for details.]
+</block>
+
+<block type="callout" kind="note">
+text: بر هر پیامی که ربات پس از آن نقطه در دستور می‌فرستد اثر می‌گذارد، از جمله متنی که از یک متغیر آمده است. اگر تنها می‌خواهید یک پیام پاک شود، آن را تا حد ممکن دیرتر بگذارید.
+</block>
+</dash>
+
+<details>
+syntax: $removeLinks
+</details>

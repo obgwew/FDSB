@@ -1,10 +1,19 @@
 <dash>
 name: $removeComponent
-desc: Removes specific button components from a message by their custom ID or URL.
+desc: Takes the buttons you name off a message and leaves the rest sitting on screen.
 category: Components
 
 <block type="text" title="How does the command work?">
-text: $removeComponent takes one or more custom IDs (or URLs) and removes the matching button components from a message. It can target the pending view, the interaction source message, or a specific message by ID.
+text: Name the buttons by the IDs you gave them when you added them and the bot takes them off the message, leaving everything else in its place. You can clear several in one go, and tack a message ID on the end when you want to tidy up an older message rather than the current one. The message is re-posted with the trimmed row, so the change is visible right away.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !tidybuttons
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,16 +25,16 @@ text: $removeComponent[btn_cancel; btn_confirm]
 </block>
 
 <block type="callout" kind="note">
-text: When there are at least two arguments and the last one is a numeric snowflake, it's treated as a message ID. Otherwise, all arguments are treated as component IDs to remove.
+text: Link buttons are matched on their web address rather than an ID, so you can remove those with the same line. Menus you added with a custom ID can be taken off in exactly the same way as buttons.
 </block>
 
 <block type="callout" kind="warning">
-text: If none of the provided IDs are found on the target message, an error is returned. The target message must have been sent by this bot.
+text: If the last thing in the brackets is a plain number and there is at least one ID in front of it, that number is read as the message to work on. Leave it out and the bot uses the message it is building right now, or the one the person clicked, and if not one of your IDs is there it says so instead of quietly doing nothing.
 </block>
 </dash>
 
 <details>
 syntax: $removeComponent[customID1; customID2; ...; (messageID)]
-param: customID|text|Required|One or more custom IDs or URLs of the button components to remove
-param: messageID|snowflake|Optional|ID of a specific bot message to remove components from
+param: customID|text|Required|The ID or web address you gave the button or menu when you added it
+param: messageID|snowflake|Optional|ID of an older bot message to strip down instead of the current one
 </details>

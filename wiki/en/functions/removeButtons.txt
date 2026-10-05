@@ -1,10 +1,20 @@
 <dash>
 name: $removeButtons
-desc: Removes all buttons from a message or from the pending view.
+desc: Clears the buttons off a message so nobody can press them any more.
 category: Components
 
 <block type="text" title="How does the command work?">
-text: When $removeButtons is called without arguments, it clears all buttons from the pending view or the interaction source message. When called with a message ID, it removes all buttons from that specific bot message.
+text: $removeButtons takes the buttons away and leaves the message itself in place. Give it the ID of a message the bot sent and every button on that message disappears; leave the ID out and it works on the buttons still waiting to go out with your next message, or on the message behind a button press. Members then see the same words with a bare row underneath.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !removeButtons
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -17,11 +27,15 @@ text: $removeButtons[123456789012345678]
 </block>
 
 <block type="callout" kind="note">
-text: The message ID must point to a message sent by this bot. If called without arguments, it first checks the pending view, then falls back to the interaction source message.
+text: The ID has to point to a message the bot sent in the channel the command was used in. With buttons waiting to go out, they are dropped before the message is ever posted.
+</block>
+
+<block type="callout" kind="important">
+text: In the build you are running, this line is skipped before it can act, so the buttons stay where they are and can still be pressed.
 </block>
 </dash>
 
 <details>
 syntax: $removeButtons[(messageID)]
-param: messageID|snowflake|Optional|The ID of a bot message to remove all buttons from. If omitted, clears buttons from the pending view or interaction source.
+param: messageID|snowflake|Optional|Which message to strip. Leave it out to clear the buttons still waiting to be sent.
 </details>

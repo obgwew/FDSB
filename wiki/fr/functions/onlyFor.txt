@@ -1,0 +1,46 @@
+<dash>
+name: $onlyFor
+desc: N'autorise que les membres ou rôles listés à utiliser la commande, et affiche votre propre message aux autres.
+category: Contrôle d'accès
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: $onlyFor est une porte que vous placez en haut d'une commande. Listez les personnes et les rôles autorisés à passer, puis terminez par le message que tout le monde doit voir. Si la personne qui a lancé la commande correspond à une des entrées, il ne se passe rien et la suite de votre commande continue. Si elle ne correspond pas, le message est envoyé et le reste de la commande est abandonné sur place.
+</block>
+
+<block type="list" title="Comment l'utiliser dans l'application">
+item: Ouvrez l'onglet Commandes
+item: Appuyez sur + pour créer une nouvelle commande
+item: Donnez-lui un nom dans le champ Nom
+item: Renseignez le champ Préfixe
+item: Collez le code ci-dessous dans l'éditeur
+item: Appuyez sur Enregistrer
+</block>
+
+<block type="code" title="Syntaxe">
+text: $onlyFor[ID or name; ...; error message]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $onlyFor[123456789012345678; Moderator; This command is for moderators only.]
+text: $sendMessage[Here is the secret!]
+</block>
+
+<block type="options" title="Ce que vous pouvez lister">
+option: ID|Un ID d'utilisateur ou de rôle comme 123456789012345678, avec ou sans les signes de mention
+option: name|Un nom de rôle comme Moderator, ou un nom d'utilisateur pour un seul utilisateur
+</block>
+
+<block type="callout" kind="note">
+text: Mettez le message en dernier — tout ce qui suit les entrées compte comme un seul message. Un membre passe lorsqu'il est nommé directement ou lorsqu'il détient l'un des rôles listés.
+</block>
+
+<block type="callout" kind="important">
+text: Cette porte est une commodité, pas une vraie sécurité. Quiconque peut lire vos commandes peut découvrir qui figure sur la liste, et quiconque peut les modifier peut s'en retirer. Gardez les parties réellement sensibles de votre côté.
+</block>
+</dash>
+
+<details>
+syntax: $onlyFor[ID or name; ...; error message]
+param: ID or name|text|Obligatoire|Un ou plusieurs ID d'utilisateur, ID de rôle ou noms autorisés à continuer.
+param: error message|text|Obligatoire|Message envoyé au salon lorsque la personne n'est pas autorisée. Tout ce qui suit les entrées compte comme ce message.
+</details>

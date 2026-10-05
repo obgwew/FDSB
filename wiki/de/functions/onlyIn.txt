@@ -1,0 +1,47 @@
+<dash>
+name: $onlyIn
+desc: Lässt den Befehl nur in den aufgeführten Kanälen oder Servern laufen und zeigt überall sonst deine eigene Nachricht.
+category: Zugriffskontrolle
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: $onlyIn prüft, wo der Befehl verwendet wurde, bevor irgendetwas ausgeführt wird. Liste die erlaubten Kanäle und Server auf und schließe dann mit der Nachricht ab, die alle anderen sehen sollen. Wurde der Befehl in einem davon verwendet, passiert nichts und dein Befehl läuft weiter. Überall sonst wird die Nachricht gesendet und der Rest des Befehls fällt dort weg.
+</block>
+
+<block type="list" title="So verwenden Sie es in der App">
+item: Öffnen Sie den Tab Befehle
+item: Tippen Sie auf +, um einen neuen Befehl zu starten
+item: Geben Sie im Feld Name einen Namen ein
+item: Legen Sie das Feld Präfix fest
+item: Fügen Sie den folgenden Code in den Editor ein
+item: Tippen Sie auf Speichern
+</block>
+
+<block type="code" title="Syntax">
+text: $onlyIn[channel or server ID or name; ...; error message]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $onlyIn[123456789012345678; general; Use this command in #general.]
+text: $sendMessage[Welcome!]
+</block>
+
+<block type="options" title="Was Sie auflisten können">
+option: channel ID|Eine Kanal-ID wie 123456789012345678, mit oder ohne #-Zeichen
+option: channel name|Ein Kanalname wie general
+option: server ID or name|Die ID oder der Name eines Servers, damit der Befehl auch im passenden Kanal dieses Servers läuft
+</block>
+
+<block type="callout" kind="note">
+text: Setze die Nachricht zuletzt — alles nach den Einträgen gilt als eine Nachricht. Ein Servername in der Liste lässt den Befehl in jedem Kanal dieses Servers laufen.
+</block>
+
+<block type="callout" kind="important">
+text: Die Prüfung sieht den Kanal an, in dem der Befehl getippt wurde. In einer Direktnachricht gibt es keinen Kanal und keinen Server zum Abgleichen, daher wird der Befehl dort immer blockiert.
+</block>
+</dash>
+
+<details>
+syntax: $onlyIn[channel or server ID or name; ...; error message]
+param: channel or server ID or name|text|Erforderlich|Eine oder mehrere Kanal-IDs, Kanalnamen, Server-IDs oder Servernamen, die erlaubt sind.
+param: error message|text|Erforderlich|Nachricht, die an den Kanal gesendet wird, wenn der Befehl anderswo verwendet wurde. Alles nach den Einträgen gilt als diese Nachricht.
+</details>

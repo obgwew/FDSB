@@ -1,10 +1,20 @@
 <dash>
 name: $removeSplitOutElement
-desc: Removes one element from the current split result ($splitIn) by its 1-based index.
+desc: Takes one entry out of a list you split apart earlier.
 category: String Utilities
 
 <block type="text" title="How does the command work?">
-text: $removeSplitOutElement deletes the element at the given position from the data stored by $splitIn. The remaining elements keep their order. $splitIn must be called before this command.
+text: Once $splitIn has broken a line of text into separate pieces, this drops one of them out of the list. Everything you keep stays in the order it already had, so removing the second of three leaves you holding the first and the third. Send the trimmed list back out with $joinSplitOut once you are done.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !clean
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,16 +23,16 @@ text: $removeSplitOutElement[index]
 
 <block type="code" title="Ready-to-copy Example">
 text: $splitIn[apple,banana,cherry; ,]
-$removeSplitOutElement[2]
-$joinSplitOut[; ]
+text: $removeSplitOutElement[2]
+text: $joinSplitOut[; ]
 </block>
 
 <block type="callout" kind="note">
-text: The index must be a positive integer within the current split length, otherwise an error is raised.
+text: Counting starts at 1, not 0. A position that is not a whole number, or one that falls outside the list you split, stops the command with an error rather than quietly doing nothing.
 </block>
 </dash>
 
 <details>
 syntax: $removeSplitOutElement[index]
-param: index|number|Required|1-based position of the element to remove
+param: index|number|Required|Which piece to drop, counting from 1
 </details>

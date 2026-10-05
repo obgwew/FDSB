@@ -7,40 +7,34 @@
 import os
 import json
 import base64
+import shutil
 import threading
 import time
 
 import flet as ft
 
 from main_app.settings import BotSettingsTab, get_current_lang, is_mobile
+from main_app.load.token_vault import TokenVault
 from main_app.commands_view import BotCommandsTab
 from main_app.langs.translations import Translations
 from main_app.theme.theme_engine import ThemeEngine
 from main_app.variables_view import BotVariablesTab
 from main_app.wiki_view import BotWikiTab
+from main_app.load.motion import SlideStack, SwipeController
 
 NEW_TXT_PATH = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), '..', 'main_app/new.txt'
 )
 
+_AVATAR_EXTS = ('.png', '.jpg', '.jpeg', '.webp', '.gif')
+
 
 def _t(key: str) -> str:
     return Translations.get(key, get_current_lang())
 
-def _ar(text: str) -> str:
-    return text
 
-def _t_safe(key: str, fallback_en: str, fallback_ar: str = None) -> str:
-    try:
-        val = Translations.get(key, get_current_lang())
-    except Exception:
-        val = None
-    if val and val != key:
-        return val
-    if get_current_lang() == 'ar' and fallback_ar:
-        return fallback_ar
-    return fallback_en
-
+# last error raised while importing main_app.core_fdsb (shown to the user instead of failing silently)
+_CORE_ERR = {'msg': ''}
 
 def _run_bg(page: ft.Page, fn, *args):
     runner = getattr(page, 'run_thread', None)
@@ -55,6 +49,28 @@ def _run_bg(page: ft.Page, fn, *args):
 
 def _c(key: str) -> str:
     return ThemeEngine.hex(key)
+
+
+def _theme_unsub(cb):
+    """Remove a ThemeEngine subscription (works even without ThemeEngine.unsubscribe)."""
+    fn = getattr(ThemeEngine, 'unsubscribe', None)
+    if callable(fn):
+        try:
+            fn(cb)
+            return
+        except Exception:
+            pass
+    for holder in (ThemeEngine, getattr(ThemeEngine, '_instance', None)):
+        if holder is None:
+            continue
+        for val in list(vars(holder).values()):
+            try:
+                if isinstance(val, list) and cb in val:
+                    val.remove(cb)
+                elif isinstance(val, set) and cb in val:
+                    val.discard(cb)
+            except Exception:
+                pass
 
 
 def _get_bot_id_from_token(token: str) -> str:
@@ -72,9 +88,6 @@ def _get_bot_id_from_token(token: str) -> str:
 
 
 def _validate_discord_token(token: str) -> bool:
-    """
-    التحقق من صحة توكن ديسكورد مع مهلة محددة ودعم بيئة الجوال دون تعليق.
-    """
     if not token or not str(token).strip():
         return False
 
@@ -203,7 +216,6 @@ def _ink_btn(content: ft.Control, bgcolor: str, on_click,
         ink=True,
         width=width,
         alignment=ft.Alignment(0, 0),
-        animate_opacity=150,
     )
 
 
@@ -233,12 +245,14 @@ def _card(content: ft.Control, bgcolor: str, border_color: str,
 
 
 _TABS = [
-    ('main',      ft.Icons.HOME_ROUNDED,     'tab_main'),
-    ('commands',  ft.Icons.CODE_ROUNDED,     'tab_commands'),
-    ('variables', ft.Icons.TUNE_ROUNDED,     'tab_variables'),
-    ('wiki',      ft.Icons.MENU_BOOK_ROUNDED, 'tab_wiki'),
-    ('settings',  ft.Icons.SETTINGS_ROUNDED, 'tab_settings'),
+    ('main',      ft.Icons.HOME_ROUNDED,      'tab_main'),
+    ('commands',  ft.Icons.CODE_ROUNDED,      'tab_commands'),
+    ('variables', ft.Icons.TUNE_ROUNDED,      'tab_variables'),
+    ('wiki',      ft.Icons.MENU_BOOK_ROUNDED,  'tab_wiki'),
+    ('settings',  ft.Icons.SETTINGS_ROUNDED,  'tab_settings'),
 ]
+
+_TAB_TITLE_KEYS = {tab_id: label_key for tab_id, _, label_key in _TABS}
 
 
 class BotMainTab:
@@ -248,6 +262,7 @@ class BotMainTab:
         self._server_online = False
         self._busy          = False
         self._verifying     = False
+        self._start_gen     = 0
         self._bot_data      = {}
 
         self._mobile_warn_btn = ft.Container(
@@ -281,7 +296,9 @@ class BotMainTab:
                 right=ft.BorderSide(3, _c('accent')), bottom=ft.BorderSide(3, _c('accent')),
             ),
             shadow=_soft_shadow(blur=18, dy=8, opacity=0.16),
+            on_long_press=self._show_change_avatar_dialog,
         )
+        self._avatar_picker = ft.FilePicker()
 
         self._name_text = ft.Text(
             '', size=18, weight=ft.FontWeight.BOLD,
@@ -316,7 +333,7 @@ class BotMainTab:
                 [
                     ft.Row([self._srv_icon_wrap, self._srv_dot], spacing=6,
                            vertical_alignment=ft.CrossAxisAlignment.CENTER),
-                    ft.Text(_t_safe('status_bot_section', 'Server Status', 'حالة الخادم'),
+                    ft.Text(_t('state_server'),
                             size=11, color=_c('text_dim'), weight=ft.FontWeight.W_500),
                     self._srv_state,
                 ],
@@ -342,7 +359,7 @@ class BotMainTab:
                     ft.Row([self._guild_icon_wrap, ft.Container(expand=True),
                             self._guild_refresh_icon],
                            vertical_alignment=ft.CrossAxisAlignment.CENTER),
-                    ft.Text(_t_safe('servers_count', 'Servers', 'عدد السيرفرات'),
+                    ft.Text(_t('servers_count'),
                             size=11, color=_c('text_dim'), weight=ft.FontWeight.W_500),
                     self._guild_count_text,
                 ],
@@ -360,13 +377,8 @@ class BotMainTab:
             vertical_alignment=ft.CrossAxisAlignment.START,
         )
 
-        # ─── تحذير عدم تفعيل خيارات الـ Gateway Intents الثلاثة ───
         self._intents_warn_text = ft.Text(
-            _t_safe(
-                'intents_warning_msg',
-                'Warning: Privileged Gateway Intents (Presence, Members, Message Content) are not enabled in Discord Developer Portal. Commands and events may not work correctly.',
-                'تنبيه: خيارات تتبع البوت (Privileged Gateway Intents) غير مفعلة في Discord Developer Portal (Presence / Members / Message Content). لن يستجيب البوت للأوامر والأحداث بشكل صحيح بدون تفعيلها.'
-            ),
+            _t('intents_warning_msg'),
             size=12,
             color=_c('warning'),
             expand=True,
@@ -377,7 +389,7 @@ class BotMainTab:
                 [
                     ft.Icon(ft.Icons.OPEN_IN_NEW_ROUNDED, size=14, color='#FFFFFF'),
                     ft.Text(
-                        _t_safe('open_dev_portal', 'Enable in Portal', 'تفعيل من موقع المطورين'),
+                        _t('open_dev_portal'),
                         size=11,
                         color='#FFFFFF',
                         weight=ft.FontWeight.BOLD,
@@ -400,7 +412,7 @@ class BotMainTab:
                         [
                             ft.Icon(ft.Icons.WARNING_AMBER_ROUNDED, size=20, color=_c('warning')),
                             ft.Text(
-                                _t_safe('intents_warning_title', 'Privileged Intents Disabled', 'خيارات البوت الأساسية غير مفعلة!'),
+                                _t('intents_warning_title'),
                                 size=13,
                                 weight=ft.FontWeight.BOLD,
                                 color=_c('warning'),
@@ -423,7 +435,7 @@ class BotMainTab:
             ),
             border_radius=12,
             padding=ft.Padding(left=14, top=12, right=14, bottom=12),
-            visible=False, # مخفي بشكل افتراضي، يظهر فقط إذا لم تكن مفعلة
+            visible=False,
         )
 
         self._toggle_icon      = ft.Icon(ft.Icons.PLAY_ARROW_ROUNDED, color='#FFFFFF', size=20)
@@ -465,8 +477,25 @@ class BotMainTab:
 
         ThemeEngine.subscribe(self._on_theme)
 
+    def dispose(self):
+        _theme_unsub(self._on_theme)
+        srv, _ = self._bot_client()
+        unreg = getattr(srv, 'unregister_state_listener', None)
+        if callable(unreg):
+            try:
+                unreg(self._on_server_state_changed)
+            except Exception:
+                pass
+
+    def _token(self) -> str:
+        return (
+            TokenVault.get_cached_for_dir(self._bot_data.get('bot_dir', ''))
+            or self._bot_data.get('token', '')
+            or ''
+        )
+
     async def _open_discord_dev_portal(self, _):
-        bot_id = _get_bot_id_from_token(self._bot_data.get('token', ''))
+        bot_id = _get_bot_id_from_token(self._token())
         if bot_id:
             url = f"https://discord.com/developers/applications/{bot_id}/bot"
         else:
@@ -474,18 +503,7 @@ class BotMainTab:
         await self._page.launch_url(url)
 
     def _check_privileged_intents_bg(self):
-        token = self._bot_data.get('token', '')
-        if not token and self._bot_data.get('bot_dir'):
-            try:
-                cfg_path = os.path.join(self._bot_data['bot_dir'], 'bot_files', 'config.json')
-                if os.path.isfile(cfg_path):
-                    with open(cfg_path, 'r', encoding='utf-8') as f:
-                        disk_cfg = json.load(f)
-                    token = disk_cfg.get('token', '')
-                    if token:
-                        self._bot_data['token'] = token
-            except Exception:
-                pass
+        token = self._token()
 
         if not token:
             self._intents_warning_card.visible = False
@@ -498,10 +516,7 @@ class BotMainTab:
             if data.get('checked'):
                 if not data.get('all_enabled'):
                     missing_str = ", ".join(data.get("missing", []))
-                    if get_current_lang() == 'ar':
-                        self._intents_warn_text.value = f"تنبيه: الخيارات التالية غير مفعلة في Discord Developer Portal للبوت:\n({missing_str})\nيرجى تفعيلها من قسم Bot لكي يعمل البوت والردود بشكل سليم."
-                    else:
-                        self._intents_warn_text.value = f"Warning: The following privileged intents are not enabled in Discord Developer Portal:\n({missing_str})\nPlease enable them under the Bot section."
+                    self._intents_warn_text.value = _t('intents_missing_msg').format(missing=missing_str)
                     self._intents_warning_card.visible = True
                 else:
                     self._intents_warning_card.visible = False
@@ -576,14 +591,14 @@ class BotMainTab:
         self._server_online = online
         if online:
             self._srv_dot.bgcolor          = _c('online')
-            self._srv_state.value          = _t_safe('online', 'Online', 'متصل')
+            self._srv_state.value          = _t('online')
             self._srv_state.color          = _c('online')
             self._toggle_icon.name         = ft.Icons.STOP_ROUNDED
             self._toggle_label.value       = _t('stop')
             self._toggle_container.bgcolor = _c('danger')
         else:
             self._srv_dot.bgcolor          = _c('offline')
-            self._srv_state.value          = _t_safe('offline', 'Offline', 'غير متصل')
+            self._srv_state.value          = _t('offline')
             self._srv_state.color          = _c('offline')
             self._toggle_icon.name         = ft.Icons.PLAY_ARROW_ROUNDED
             self._toggle_label.value       = _t('start')
@@ -599,6 +614,12 @@ class BotMainTab:
         self._set_online_state(is_online)
         if is_online:
             self._fetch_guild_count(apply=True)
+        else:
+            srv, _ = self._bot_client()
+            consume = getattr(srv, 'consume_last_error', None)
+            err = consume() if callable(consume) else ''
+            if err:
+                self._notify(err, _c('danger'))
         try:
             self._page.update()
         except Exception:
@@ -608,8 +629,12 @@ class BotMainTab:
     def _bot_client():
         try:
             from main_app.core_fdsb import Server
+            _CORE_ERR['msg'] = ''
             return Server, getattr(Server, '_client', None)
-        except Exception:
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            _CORE_ERR['msg'] = f'{type(e).__name__}: {e}'
             return None, None
 
     def _client_is_ready(self) -> bool:
@@ -640,8 +665,8 @@ class BotMainTab:
             width=16, height=16, stroke_width=2, color='#FFFFFF',
         )
         self._toggle_label.value = (
-            _t_safe('starting', 'Connecting…', 'جاري الاتصال…') if going_online
-            else _t_safe('stopping', 'Stopping…', 'جاري الإيقاف…')
+            _t('starting') if going_online
+            else _t('stopping')
         )
         try:
             self._page.update()
@@ -659,6 +684,10 @@ class BotMainTab:
             if not local_server:
                 self._busy = False
                 self._set_online_state(False)
+                self._notify(
+                    f"Bot engine failed to load: {_CORE_ERR['msg'] or 'unknown error'}",
+                    _c('danger'),
+                )
                 try: self._page.update()
                 except Exception: pass
                 return
@@ -674,12 +703,23 @@ class BotMainTab:
                         except Exception:
                             pass
 
-                    started = local_server.start_bot(self._bot_data.get('bot_dir', ''))
+                    started = local_server.start_bot(
+                        self._bot_data.get('bot_dir', ''), token=self._token(),
+                    )
                     if not started:
                         self._busy = False
                         self._set_online_state(False)
+                        consume = getattr(local_server, 'consume_last_error', None)
+                        self._notify(
+                            (consume() if callable(consume) else '')
+                            or 'Bot did not start (start_bot returned False). '
+                               'Check the token, intents and console output.',
+                            _c('danger'),
+                        )
                         try: self._page.update()
                         except Exception: pass
+                    else:
+                        self._arm_start_watchdog()
                 else:
                     local_server.stop_bot()
                     self._busy = False
@@ -687,31 +727,48 @@ class BotMainTab:
                     try: self._page.update()
                     except Exception: pass
             except Exception as e:
+                import traceback
+                traceback.print_exc()
                 print(f'[Dashboard] toggle failed: {e}')
                 self._busy = False
                 self._set_online_state(self._server_online)
+                self._notify(f'Bot start/stop failed: {type(e).__name__}: {e}', _c('danger'))
                 try: self._page.update()
                 except Exception: pass
 
         _run_bg(self._page, work)
 
+    def _arm_start_watchdog(self, timeout: float = 60.0):
+        """If the bot never reports ready (e.g. login failed / missing intents),
+        don't leave the button stuck on 'Starting...' forever."""
+        self._start_gen += 1
+        gen = self._start_gen
+
+        def check():
+            if gen != self._start_gen or not self._busy:
+                return
+            if self._client_is_ready():
+                self._on_server_state_changed(True)
+                return
+            self._busy = False
+            self._set_online_state(False)
+            self._notify(
+                'Bot did not become ready in time. Check the token, '
+                'Privileged Gateway Intents and the console output.',
+                _c('danger'),
+            )
+            try: self._page.update()
+            except Exception: pass
+
+        timer = threading.Timer(timeout, check)
+        timer.daemon = True
+        timer.start()
+
     def _verify_token(self, _):
         if self._verifying:
             return
 
-        token = self._bot_data.get('token', '')
-
-        if not token and self._bot_data.get('bot_dir'):
-            try:
-                cfg_path = os.path.join(self._bot_data['bot_dir'], 'bot_files', 'config.json')
-                if os.path.isfile(cfg_path):
-                    with open(cfg_path, 'r', encoding='utf-8') as f:
-                        disk_cfg = json.load(f)
-                    token = disk_cfg.get('token', '')
-                    if token:
-                        self._bot_data['token'] = token
-            except Exception:
-                pass
+        token = self._token()
 
         if not token or not str(token).strip():
             self._notify(_t('token_required'), _c('danger'))
@@ -746,7 +803,6 @@ class BotMainTab:
                 try:
                     if is_valid:
                         self._notify(_t('token_valid'), _c('success'))
-                        # إعادة فحص الـ Privileged Intents
                         self._check_privileged_intents_bg()
                     else:
                         self._notify(_t('token_invalid'), _c('danger'))
@@ -822,6 +878,9 @@ class BotMainTab:
         self._page.update()
 
     def build(self) -> ft.Control:
+        if self._avatar_picker not in self._page.services:
+            self._page.services.append(self._avatar_picker)
+
         avatar_section = ft.Stack(
             [
                 ft.Row([self._avatar_ctrl], alignment=ft.MainAxisAlignment.CENTER),
@@ -845,7 +904,7 @@ class BotMainTab:
                         spacing=10,
                     ),
                     self._status_row,
-                    self._intents_warning_card,  # التحذير الأصفر يظهر أسفل حالة السيرفر وعدد السيرفرات
+                    self._intents_warning_card,
                     ft.Divider(color=_c('divider')),
                     ft.Text(_t('whats_new'), size=15,
                             weight=ft.FontWeight.BOLD, color=_c('text')),
@@ -872,11 +931,7 @@ class BotMainTab:
             horizontal_alignment=ft.CrossAxisAlignment.STRETCH,
         )
 
-    def load_bot(self, bot_data: dict):
-        self._bot_data        = bot_data
-        self._name_text.value = bot_data.get('name', 'Bot')
-
-        img_path = bot_data.get('image', '')
+    def _set_avatar(self, img_path: str):
         if img_path and os.path.isfile(img_path):
             self._avatar_ctrl.content = ft.Image(
                 src=img_path, width=96, height=96,
@@ -891,17 +946,171 @@ class BotMainTab:
             )
             self._avatar_ctrl.bgcolor = _c('card_border')
 
+    def load_bot(self, bot_data: dict):
+        self._bot_data        = bot_data
+        self._name_text.value = bot_data.get('name', 'Bot')
+
+        self._set_avatar(bot_data.get('image', ''))
+
         is_online = self._client_is_ready()
         self._set_online_state(is_online)
         if is_online:
             self._fetch_guild_count(apply=True)
         self._news_text.value = _read_new_txt()
 
-        # فحص خيارات المطورين في الخلفية أول فتح البوت
         self._check_privileged_intents_bg()
 
+
+    def _show_change_avatar_dialog(self, _):
+        if not self._bot_data.get('bot_dir'):
+            return
+
+        cur = self._bot_data.get('image', '')
+        if cur and os.path.isfile(cur):
+            preview_content = ft.Image(
+                src=cur, width=96, height=96,
+                fit=ft.BoxFit.COVER, border_radius=48,
+            )
+            preview_bg = None
+        else:
+            preview_content = ft.Text(
+                _t('avatar_none'), size=13, color=_c('text_dim'),
+                text_align=ft.TextAlign.CENTER,
+            )
+            preview_bg = _c('card_border')
+
+        preview = ft.Container(
+            content=preview_content,
+            width=96, height=96, border_radius=48,
+            bgcolor=preview_bg, alignment=ft.Alignment(0, 0),
+        )
+
+        def _close(_):
+            self._page.pop_dialog()
+
+        async def _choose(_):
+            self._page.pop_dialog()
+            await self._pick_and_apply_avatar()
+
+        dlg = ft.AlertDialog(
+            modal=True,
+            bgcolor=_c('popup_bg'),
+            shape=ft.RoundedRectangleBorder(radius=16),
+            title=ft.Text(
+                _t('avatar_change_title'),
+                weight=ft.FontWeight.BOLD, color=_c('text'), size=16,
+            ),
+            content=ft.Column(
+                [
+                    ft.Row([preview], alignment=ft.MainAxisAlignment.CENTER),
+                    ft.Text(
+                        _t('avatar_change_body'),
+                        color=_c('text_dim'), size=13,
+                        text_align=ft.TextAlign.CENTER,
+                    ),
+                ],
+                tight=True, spacing=14,
+                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+            ),
+            actions=[
+                ft.TextButton(
+                    content=ft.Text(_t('cancel'),
+                                    color=_c('text_dim')),
+                    on_click=_close,
+                ),
+                ft.FilledButton(
+                    content=ft.Text(
+                        _t('avatar_choose_btn'),
+                        color='#FFFFFF', weight=ft.FontWeight.BOLD,
+                    ),
+                    on_click=_choose,
+                    style=ft.ButtonStyle(
+                        bgcolor=_c('accent'),
+                        shape=ft.RoundedRectangleBorder(radius=10),
+                        padding=ft.Padding(left=18, top=8, right=18, bottom=8),
+                    ),
+                ),
+            ],
+            actions_alignment=ft.MainAxisAlignment.END,
+        )
+        self._page.show_dialog(dlg)
+
+    async def _pick_and_apply_avatar(self):
+        bot_dir = self._bot_data.get('bot_dir', '')
+        if not bot_dir:
+            return
+
+        fail_msg = _t('avatar_change_failed')
+
+        try:
+            files = await self._avatar_picker.pick_files(
+                dialog_title=_t('avatar_pick_title'),
+                file_type=ft.FilePickerFileType.IMAGE,
+                allow_multiple=False,
+            )
+        except Exception as e:
+            print(f'[Dashboard] avatar pick failed: {e}')
+            self._notify(fail_msg, _c('danger'))
+            return
+
+        if not files:
+            return
+
+        src = getattr(files[0], 'path', None)
+        ext = os.path.splitext(getattr(files[0], 'name', '') or src or '')[1].lower()
+
+        if ext not in _AVATAR_EXTS:
+            self._notify(
+                _t('avatar_invalid_type'),
+                _c('danger'),
+            )
+            return
+        if not src or not os.path.isfile(src):
+            self._notify(fail_msg, _c('danger'))
+            return
+
+        bot_files_dir = os.path.join(bot_dir, 'bot_files')
+        config_path   = os.path.join(bot_files_dir, 'config.json')
+        new_path = os.path.join(bot_files_dir, f'avatar_{int(time.time() * 1000)}{ext}')
+        old_path = self._bot_data.get('image', '')
+
+        try:
+            os.makedirs(bot_files_dir, exist_ok=True)
+            shutil.copyfile(src, new_path)
+            with open(config_path, 'r', encoding='utf-8') as f:
+                cfg = json.load(f)
+            cfg['image'] = new_path
+            with open(config_path, 'w', encoding='utf-8') as f:
+                json.dump(cfg, f, ensure_ascii=False, indent=2)
+        except Exception as e:
+            print(f'[Dashboard] avatar save failed: {e}')
+            try:
+                if os.path.isfile(new_path):
+                    os.remove(new_path)
+            except Exception:
+                pass
+            self._notify(fail_msg, _c('danger'))
+            return
+
+        try:
+            if (old_path and old_path != new_path
+                    and os.path.basename(old_path).startswith('avatar_')
+                    and os.path.dirname(os.path.abspath(old_path)) == os.path.abspath(bot_files_dir)
+                    and os.path.isfile(old_path)):
+                os.remove(old_path)
+        except Exception:
+            pass
+
+        self._bot_data['image'] = new_path
+        self._set_avatar(new_path)
+        self._page.update()
+        self._notify(
+            _t('avatar_changed'),
+            _c('success'),
+        )
+
     async def _invite_bot(self, e):
-        bot_id = _get_bot_id_from_token(self._bot_data.get('token', ''))
+        bot_id = _get_bot_id_from_token(self._token())
         if bot_id:
             url = f'https://discord.com/oauth2/authorize?client_id={bot_id}&permissions=8&scope=bot'
             await self._page.launch_url(url)
@@ -916,13 +1125,16 @@ class BotDashboardScreen:
         self._page    = page
         self._on_back = on_back
         self._active  = 'main'
+        self._return_to = None   # tab we jumped from (e.g. editor -> wiki), so Back returns there
         self._bot_dir = bot_dir
         self._tab_containers: dict[str, ft.Container] = {}
 
         self._title_text = ft.Text(
             '', size=16, weight=ft.FontWeight.BOLD,
-            color=_c('text'), expand=True,
+            color=_c('text'),
             text_align=ft.TextAlign.CENTER,
+            no_wrap=True,
+            overflow=ft.TextOverflow.ELLIPSIS,
         )
 
         self._back_btn = ft.IconButton(
@@ -935,58 +1147,52 @@ class BotDashboardScreen:
             visible=True,
         )
 
-        self._main_tab      = BotMainTab(page)
-        self._commands_tab  = BotCommandsTab(page, on_wiki_events_req=self._go_to_wiki_events)
-        self._variables_tab = BotVariablesTab(page)
-        self._settings_tab  = BotSettingsTab(
-            page,
-            on_lang_change=self._on_settings_lang_change,
-            on_theme_change=self._on_settings_theme_change,
-        )
-        self._wiki_tab   = BotWikiTab(page)
-
-        self._tab_views = {
-            'main':      self._main_tab,
-            'commands':  self._commands_tab,
-            'variables': self._variables_tab,
-            'settings':  self._settings_tab,
-            'wiki':      self._wiki_tab,
-        }
+        self._tab_views: dict = {}   # created lazily in _view()
 
         self._tab_ids = [t[0] for t in _TABS]
 
-        self._tab_containers: dict[str, ft.Container] = {}
-        self._tabs_switcher = ft.AnimatedSwitcher(
-            content=None,
-            transition=ft.AnimatedSwitcherTransition.FADE,
-            duration=240,
-            reverse_duration=180,
-            switch_in_curve=ft.AnimationCurve.EASE_OUT_CUBIC,
-            switch_out_curve=ft.AnimationCurve.EASE_IN_CUBIC,
-            expand=True,
+        self._slider = SlideStack(page)
+        self._swipe  = SwipeController(
+            page, self._slider,
+            neighbour=self._swipe_neighbour,
+            can_swipe=self._swipe_allowed,
+            on_commit=self._swipe_commit,
         )
 
         self._nav_bar = self._build_nav()
 
         if bot_dir:
             self.load_bot(bot_dir)
+        else:
+            self._update_title()
 
         ThemeEngine.subscribe(self._on_theme)
 
+    def _update_title(self):
+        title_key = _TAB_TITLE_KEYS.get(self._active, 'tab_main')
+        self._title_text.value = _t(title_key)
+
     def _go_to_wiki_events(self):
-        self._wiki_tab.select_events_filter()
+        origin = self._active
+        self._view('wiki').select_events_filter()
         self._switch_tab('wiki')
+        if origin != 'wiki':
+            self._return_to = origin   # set after _switch_tab (which clears it)
 
     def handle_back(self) -> bool:
+        # 1) deepest level first: editor / folder / detail inside the active tab
         active_tab = self._tab_views.get(self._active)
         if active_tab and hasattr(active_tab, 'handle_back'):
             if active_tab.handle_back():
                 return True
 
-        if self._active != 'main':
-            self._switch_tab('main')
+        # 2) we arrived here from another tab (e.g. editor -> wiki): go back to it
+        if self._return_to and self._return_to != self._active:
+            target, self._return_to = self._return_to, None
+            self._switch_tab(target)
             return True
 
+        # 3) every tab sits directly under the bot list: let the app go there
         return False
 
     def _on_theme(self, data: dict):
@@ -999,51 +1205,78 @@ class BotDashboardScreen:
             self._header.bgcolor      = get('card_bg')
             self._header.border       = ft.Border(bottom=ft.BorderSide(1, get('divider')))
 
+        self._update_title()
         self._nav_bar.destinations = self._build_destinations()
         self._page.update()
 
-    def _rebuild_all_tabs(self, update_nav: bool):
-        self._main_tab      = BotMainTab(self._page)
-        self._commands_tab  = BotCommandsTab(self._page, on_wiki_events_req=self._go_to_wiki_events)
-        self._variables_tab = BotVariablesTab(self._page)
-        self._settings_tab  = BotSettingsTab(
-            self._page,
-            on_lang_change=self._on_settings_lang_change,
-            on_theme_change=self._on_settings_theme_change,
-        )
-        self._wiki_tab      = BotWikiTab(self._page)
+    def _read_bot_data(self) -> dict:
+        try:
+            with open(os.path.join(self._bot_dir, 'bot_files', 'config.json'), 'r', encoding='utf-8') as f:
+                data = json.load(f)
+            data['bot_dir'] = self._bot_dir
+            return data
+        except Exception as e:
+            print(f'[Dashboard] failed to read config.json: {e}')
+            return {}
 
-        self._tab_views = {
-            'main':      self._main_tab,
-            'commands':  self._commands_tab,
-            'variables': self._variables_tab,
-            'settings':  self._settings_tab,
-            'wiki':      self._wiki_tab,
-        }
+    def _view(self, tab_id: str):
+        view = self._tab_views.get(tab_id)
+        if view is not None:
+            return view
+        page = self._page
+        if tab_id == 'main':
+            view = BotMainTab(page)
+        elif tab_id == 'commands':
+            view = BotCommandsTab(page, on_wiki_events_req=self._go_to_wiki_events)
+        elif tab_id == 'variables':
+            view = BotVariablesTab(page)
+        elif tab_id == 'settings':
+            view = BotSettingsTab(
+                page,
+                on_lang_change=self._on_settings_lang_change,
+                on_theme_change=self._on_settings_theme_change,
+            )
+        else:
+            view = BotWikiTab(page)
+        self._tab_views[tab_id] = view
+        if self._bot_dir:
+            if tab_id in ('commands', 'variables'):
+                view.load_bot(os.path.join(self._bot_dir, 'bot_files'))
+            else:
+                view.load_bot(self._read_bot_data())
+        return view
 
+    def _notify(self, tab_id: str, hook: str):
+        fn = getattr(self._tab_views.get(tab_id), hook, None)
+        if callable(fn):
+            fn()
+
+    def _dispose_tabs(self):
+        for view in list(self._tab_views.values()):
+            fn = getattr(view, 'dispose', None)
+            if callable(fn):
+                try:
+                    fn()
+                except Exception as e:
+                    print(f'[Dashboard] tab dispose failed: {e}')
+        self._tab_views.clear()
         self._tab_containers.clear()
 
-        if self._bot_dir:
-            bot_files_dir = os.path.join(self._bot_dir, 'bot_files')
-            config_path   = os.path.join(self._bot_dir, 'bot_files', 'config.json')
-            try:
-                with open(config_path, 'r', encoding='utf-8') as f:
-                    bot_data = json.load(f)
-                bot_data['bot_dir'] = self._bot_dir
-            except Exception:
-                bot_data = {}
+    def dispose(self):
+        self._dispose_tabs()
+        _theme_unsub(self._on_theme)
 
-            self._title_text.value = bot_data.get('name', 'Bot')
-            self._main_tab.load_bot(bot_data)
-            self._commands_tab.load_bot(bot_files_dir)
-            self._variables_tab.load_bot(bot_files_dir)
-            self._settings_tab.load_bot(bot_data)
-            self._wiki_tab.load_bot(bot_data)
+    def _rebuild_all_tabs(self, update_nav: bool):
+        active = self._active
+        self._dispose_tabs()
+
+        self._update_title()
 
         if update_nav:
             self._nav_bar.destinations = self._build_destinations()
-            
-        self._switch_tab(self._active)
+
+        self._switch_tab(active, animate=False)
+        self._notify(active, 'on_show')
         self._page.update()
 
     def _on_settings_lang_change(self, lang: str):
@@ -1053,27 +1286,35 @@ class BotDashboardScreen:
         self._rebuild_all_tabs(update_nav=False)
 
     def build(self) -> ft.Control:
+        # Header using Stack to guarantee absolute center alignment of title
         self._header = ft.Container(
-            content=ft.Row(
-                [
-                    self._back_btn,
-                    self._title_text,
-                    ft.Container(width=52),
+            content=ft.Stack(
+                controls=[
+                    ft.Container(
+                        content=self._title_text,
+                        alignment=ft.Alignment(0, 0),
+                        padding=ft.Padding(left=48, right=48, top=0, bottom=0),
+                    ),
+                    ft.Container(
+                        content=self._back_btn,
+                        alignment=ft.Alignment(-1, 0),
+                        left=0,
+                        top=0,
+                        bottom=0,
+                    ),
                 ],
-                vertical_alignment=ft.CrossAxisAlignment.CENTER,
-                spacing=10,
             ),
             bgcolor=_c('card_bg'),
             border=ft.Border(bottom=ft.BorderSide(1, _c('divider'))),
-            padding=ft.Padding(left=14, top=10, right=14, bottom=10),
+            padding=ft.Padding(left=14, top=6, right=14, bottom=6),
             height=52,
             shadow=_soft_shadow(blur=10, dy=2, opacity=0.06),
         )
 
-        self._switch_tab('main')
+        self._switch_tab('main', animate=False)
 
         return ft.Column(
-            [self._header, self._tabs_switcher, self._nav_bar],
+            [self._header, self._swipe.control, self._nav_bar],
             spacing=0,
             expand=True,
         )
@@ -1118,39 +1359,63 @@ class BotDashboardScreen:
         else:
             _do_switch()
 
-    def _switch_tab(self, tab_id: str):
-        if tab_id not in self._tab_containers:
-            view_control = self._tab_views[tab_id].build()
-            container = ft.Container(
-                key=f"tab_{tab_id}",
-                content=view_control,
-                expand=True,
-            )
-            self._tab_containers[tab_id] = container
+    def _get_slot(self, tab_id: str) -> ft.Container:
+        slot = self._tab_containers.get(tab_id)
+        if slot is None:
+            view_control = self._view(tab_id).build()
+            slot = SlideStack.make_slot(view_control)
+            self._tab_containers[tab_id] = slot
+        return slot
 
-        self._tabs_switcher.content = self._tab_containers[tab_id]
-
+    def _activate(self, tab_id: str):
+        prev                         = self._active
         self._active                 = tab_id
+        self._return_to              = None   # any manual/explicit switch forgets the jump origin
         self._nav_bar.selected_index = self._tab_ids.index(tab_id)
         self._back_btn.visible       = (tab_id == 'main')
-        self._page.update()
+        self._update_title()
+        if prev != tab_id:
+            self._notify(prev, 'on_hide')
+            self._notify(tab_id, 'on_show')
+
+    def _switch_tab(self, tab_id: str, animate: bool = True):
+        slot      = self._get_slot(tab_id)
+        direction = 0
+        if animate and tab_id != self._active:
+            direction = 1 if self._tab_ids.index(tab_id) > self._tab_ids.index(self._active) else -1
+        self._activate(tab_id)
+        self._slider.show_slot(slot, direction)
+
+    # ── swipe between tabs ────────────────────────────────────────────────
+
+    def _swipe_allowed(self) -> bool:
+        view    = self._tab_views.get(self._active)
+        blocked = getattr(view, 'swipe_blocked', None)
+        return not (callable(blocked) and blocked())
+
+    def _swipe_neighbour(self, side: int):
+        idx = self._tab_ids.index(self._active) + side
+        if 0 <= idx < len(self._tab_ids):
+            return self._get_slot(self._tab_ids[idx])
+        return None
+
+    def _swipe_commit(self, side: int, finish):
+        target = self._tab_ids[self._tab_ids.index(self._active) + side]
+
+        def _go():
+            self._activate(target)
+            finish(True)
+
+        def _stay():
+            finish(False)
+
+        guard = getattr(self._tab_views.get(self._active), 'guard_tab_change', None)
+        if callable(guard):
+            guard(_go, _stay)
+        else:
+            _go()
 
     def load_bot(self, bot_dir: str):
-        config_path = os.path.join(bot_dir, 'bot_files', 'config.json')
-        try:
-            with open(config_path, 'r', encoding='utf-8') as f:
-                bot_data = json.load(f)
-            bot_data['bot_dir'] = bot_dir
-        except Exception as e:
-            print(f'[Dashboard] failed to read config.json: {e}')
-            bot_data = {}
-
-        self._title_text.value = bot_data.get('name', 'Bot')
-
-        bot_files_dir = os.path.join(bot_dir, 'bot_files')
-        self._main_tab.load_bot(bot_data)
-        self._commands_tab.load_bot(bot_files_dir)
-        self._variables_tab.load_bot(bot_files_dir)
-        self._settings_tab.load_bot(bot_data)
-        self._wiki_tab.load_bot(bot_data)
-        self._switch_tab('main')
+        self._bot_dir = bot_dir
+        self._dispose_tabs()
+        self._update_title()

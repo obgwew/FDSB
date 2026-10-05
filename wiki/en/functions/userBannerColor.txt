@@ -1,10 +1,20 @@
 <dash>
 name: $userBannerColor
-desc: Returns a user's banner accent color in hexadecimal format.
+desc: Gives you the accent colour behind a member's profile banner as a hex value you can use.
 category: Info
 
 <block type="text" title="How does the command work?">
-text: With no argument, $userBannerColor returns the accent color of the bot user. With a user ID or mention, it returns that user's accent color formatted as an uppercase #RRGGBB value.
+text: Put a user ID or a mention in the brackets and the bot reports the accent colour sitting behind that person's banner; leave them out and you get the bot's own. What comes back is the #RRGGBB shape that colour fields and embed bars already expect, in capital letters. It is a quick way to tint a card to match whoever you are talking about.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !themecolor
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,15 +26,15 @@ text: $userBannerColor[123456789012345678]
 </block>
 
 <block type="callout" kind="warning">
-text: The user must have a banner accent color and the bot must be able to resolve the user. An empty or unavailable result is reported as an error by the standalone form.
+text: Only members who picked an accent colour have one to give, and the bot still has to track them down first. When nothing comes back the standalone form says so in the channel rather than posting an empty line.
 </block>
 
 <block type="callout" kind="note">
-text: The inline form uses cached users only and currently treats a falsey accent color as unavailable. The default is always the bot user, not the triggering author.
+text: Used inside another line it works only from members the bot already knows about, and a colour of all zeroes counts as nothing worth showing. With no argument it always means the bot's own colour, never the member who ran the command.
 </block>
 </dash>
 
 <details>
 syntax: $userBannerColor[(user_id)]
-param: userID|snowflake|Optional|The user ID or mention; defaults to the bot user
+param: userID|snowflake|Optional|The member to look up, as an ID or a mention; leave it out and you get the bot's own accent colour
 </details>

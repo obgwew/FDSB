@@ -1,0 +1,38 @@
+<dash>
+name: $checkContains
+desc: Returns true or false depending on whether a text contains at least one of the phrases you list.
+category: String Utilities
+
+<block type="text" title="How does the command work?">
+text: $checkContains looks at one piece of text and one or more phrases, then answers with the word true or false. It answers true as soon as any single phrase shows up inside the text, so you never need to test each phrase yourself. An empty phrase only matches empty text. On its own it prints the answer in the channel, and inside another command the answer is inserted in place.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field
+item: Paste the code below into the editor
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: $checkContains[text; phrase; ...]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $if[$checkContains[$message; hello; hi; hey]]
+text:   $sendMessage[Say hello back!]
+text: $endif
+</block>
+
+<block type="callout" kind="note">
+text: The answer is always the plain word true or false, which is what $if and $onlyIf expect. You need at least two arguments — the text plus one phrase.
+</block>
+</dash>
+
+<details>
+syntax: $checkContains[text; phrase; ...]
+param: text|text|Required|The text to search through. Nested commands such as $message are resolved first.
+param: phrase|text|Required|One or more phrases to look for. The result is true if any one of them appears in the text.
+</details>

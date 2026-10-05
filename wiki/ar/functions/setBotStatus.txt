@@ -1,10 +1,20 @@
 <dash>
 name: $setBotStatus
-desc: يغيّر حالة حضور البوت (online أو idle أو dnd أو invisible).
-category: السيرفر
+desc: يغيّر النقطة بجوار اسم البوت إلى متصل أو خامل أو لا تزعجني أو غير مرئي.
+category: الخادم
 
-<block type="text" title="كيف تعمل الدالة؟">
-text: تبدّل $setBotStatus مؤشر حضور البوت بين online (متصل) و idle (خامل) و dnd (عدم الإزعاج) و invisible (يظهر دون اتصال). تبقى الحالة كما هي حتى تتغير مرة أخرى - إعادة تشغيل التطبيق تعيدها حسب الإعدادات المحفوظة.
+<block type="text" title="كيف يعمل الأمر؟">
+text: يغيّر ⁨$setBotStatus⁩ كيف يبدو البوت لكل من في خادمك. فالنقطة بجوار اسمه يمكن أن تقرأ online أو idle أو dnd أو invisible، وهذا يجعل البوت يبدو غير متصل وهو ما زال يعمل. ويبقى المظهر الجديد حتى تغيّره مرة أخرى، وهو محفوظ مع إعدادات Status Bot لديك.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة على $setBotStatus
+item: اكتب سكربتك في المحرر
+item: الصق السطر أدناه في المكان الذي تحتاجه
+item: اضغط على حفظ
 </block>
 
 <block type="code" title="الصيغة">
@@ -16,11 +26,15 @@ text: $setBotStatus[idle]
 </block>
 
 <block type="callout" kind="important">
-text: محدودة داخليًا بتغيير واحد كل 12 ثانية - الاستدعاءات الإضافية خلال هذه الفترة تفشل بصمت. تُقبل offline كبديل عن invisible. أي قيمة أخرى ترمي خطأً.
+text: يسمح Discord بتغيير واحد كل 12 ثانية. حاول مرة أخرى داخل تلك الفترة فيرد البوت بعدد الثواني المتبقية للانتظار، وoffline ببساطة صيغة أخرى لكتابة invisible.
+</block>
+
+<block type="callout" kind="warning">
+text: في النسخة التي تشغّلها، يُتخطّى هذا السطر قبل أن يعمل، فيحتفظ البوت بالمظهر الذي كان عليه.
 </block>
 </dash>
 
 <details>
 syntax: $setBotStatus[online|idle|dnd|invisible]
-param: status|text|مطلوب|إحدى القيم: online أو idle أو dnd أو invisible (تعمل offline بديلًا عن invisible)
+param: status|text|مطلوب|أحد online أو idle أو dnd أو invisible. وoffline يعمل كصيغة أخرى لكتابة invisible.
 </details>

@@ -1,10 +1,20 @@
 <dash>
 name: $cropText
-desc: Cuts a text to a maximum number of characters, optionally adding an ending like "...".
+desc: Shortens a piece of text to a length you choose and marks the cut.
 category: String Utilities
 
 <block type="text" title="How does the command work?">
-text: $cropText shortens a text to at most the given number of characters. If the text is longer, it is cut and the optional ending (for example "..." or "... [more]") is appended. If the text is already short enough, it is returned unchanged.
+text: Pass it some text and a maximum length, and what comes back is never longer than that. If the original was over the limit it is cut right there and whatever ending you supplied is added on, three dots being the usual choice. Text that already fits is handed back exactly as it was, ending and all. It is the standard way to stop a long quote from overflowing a narrow field.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $cropText
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,13 +26,13 @@ text: $cropText[This is a very long message; 10; ...]
 </block>
 
 <block type="callout" kind="note">
-text: The max characters argument must be a non-negative integer. When no ending is given, the text is simply cut at the limit.
+text: The length has to be a whole number of zero or more; anything else stops the command with an error. Leave the ending out and the text is simply chopped at the limit with no marker at all.
 </block>
 </dash>
 
 <details>
 syntax: $cropText[text; max characters; (ending)]
-param: text|text|Required|The text to crop
-param: max characters|number|Required|Maximum number of characters to keep (must be a non-negative integer)
-param: ending|text|Optional|Text appended when the input is longer than the limit (e.g. "...")
+param: text|text|Required|The text to shorten
+param: max characters|number|Required|How many characters to keep at most
+param: ending|text|Optional|What to tack on after the cut, such as ...
 </details>

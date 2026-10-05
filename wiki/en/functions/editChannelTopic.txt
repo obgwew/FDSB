@@ -1,10 +1,19 @@
 <dash>
 name: $editChannelTopic
-desc: Changes a server channel topic.
+desc: Rewrites the topic shown at the top of a server channel.
 category: Channel Management
 
 <block type="text" title="How does the command work?">
-text: With one argument, $editChannelTopic changes the topic of the channel where the script was triggered. With two arguments, it changes the topic of the channel identified by the first argument. A blank or whitespace-only topic clears the current topic.
+text: Give it a new topic on its own and it rewrites the one above the channel the command ran in. Add a channel ID or mention first and it rewrites that channel's topic instead, as long as the channel belongs to the same server. An empty topic clears whatever was there, and anything past 1024 characters is refused.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $editChannelTopic
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,16 +25,16 @@ text: $editChannelTopic[<#123456789012345678>; Welcome to the community!]
 </block>
 
 <block type="callout" kind="warning">
-text: The command only works inside a server. The target must belong to the current server, support topics, and be editable by the bot. Topics cannot exceed 1024 characters.
+text: Only inside a server, only on channels of that server, and only where a topic exists at all. The bot also needs Manage Channels, or Discord turns the change down. Topics stop at 1024 characters.
 </block>
 
 <block type="callout" kind="note">
-text: In the current interpreter this is a standalone command. Its inline resolver returns an empty value and does not run the side effect.
+text: It works as a line of its own. Dropped inside another command it does nothing, so keep it on its own line.
 </block>
 </dash>
 
 <details>
 syntax: $editChannelTopic[(channel ID or mention); new topic]
-param: channelID|text|Optional|The target channel ID or mention; when omitted with one argument, the current channel is used
-param: newTopic|text|Required|The replacement topic, up to 1024 characters
+param: channelID|text|Optional|Which channel to set the topic of; leave it out and the current channel is used
+param: newTopic|text|Required|The replacement topic, up to 1024 characters. An empty value clears it
 </details>

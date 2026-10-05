@@ -1,10 +1,20 @@
 <dash>
 name: $returnGuildChannelsID
-desc: Collects channel IDs from a guild by type and stores them for later retrieval.
+desc: Gathers the channel IDs of a server under a name you can read back later.
 category: Return Commands
 
 <block type="text" title="How does the command work?">
-text: $returnGuildChannelsID collects all channel IDs of a specified type from a given guild and stores them under a variable name. The result can be retrieved later using $return[variableName]. You can filter by channel type such as text, voice, category, forum, stage, or get all channels.
+text: Ask for one kind of channel in a server and the bot collects the ID of every channel of that kind, glues them together with the separator you picked and files the whole string under a name of your choosing. Later in the same command you read that list back with $return[name]. Nothing is posted in the channel until you send it yourself.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $returnGuildChannelsID
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,27 +23,31 @@ text: $returnGuildChannelsID[GuildID; ChannelType; var; separator]
 
 <block type="code" title="Ready-to-copy Example">
 text: $returnGuildChannelsID[$guildID; text; channelIDs; ,]
-$sendMessage[Text channels: $return[channelIDs]]
+text: $sendMessage[Text channels: $return[channelIDs]]
 </block>
 
 <block type="options" title="Channel types">
-option: all|All channel types
+option: all|Every channel in the server
 option: text|Text channels only
 option: voice|Voice channels only
-option: category|Category channels only
+option: category|The category rows only
 option: forum|Forum channels only
 option: stage|Stage channels only
 </block>
 
 <block type="callout" kind="note">
-text: The bot must be a member of the target guild. Use $return[variableName] to retrieve the stored IDs after execution. The separator defines how multiple IDs are joined (e.g., , or ; or space).
+text: Bring the list back with $return[name] once it has been stored. The separator decides how the IDs sit next to each other — a comma, a semicolon, a space, or a named one such as com or sem.
+</block>
+
+<block type="callout" kind="important">
+text: The bot can only look inside a server it has joined. Give a server it is not in, or a type it does not recognise, and it reports the problem instead of storing anything.
 </block>
 </dash>
 
 <details>
 syntax: $returnGuildChannelsID[GuildID; ChannelType; var; separator]
-param: GuildID|snowflake|Required|The ID of the guild (server) to collect channels from
-param: ChannelType|text|Required|The type of channels to collect: all, text, voice, category, forum, or stage
-param: var|text|Required|The variable name to store the result in (use with $return[])
-param: separator|text|Required|The separator between multiple IDs (e.g., , or ;). You can use named separators: dot, com, apo, sem, colon
+param: GuildID|snowflake|Required|Which server to read the channels from
+param: ChannelType|text|Required|What to collect: all, text, voice, category, forum or stage
+param: var|text|Required|The name you will read the list back under with $return
+param: separator|text|Required|What goes between the IDs, such as , or ;. Named ones work too: dot, com, apo, sem, colon
 </details>

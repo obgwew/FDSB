@@ -1,10 +1,20 @@
 <dash>
 name: $endwhile
-desc: Marks the end of a $while loop block.
+desc: Marks where a repeating loop stops so the bot goes back and tests the condition again.
 category: Flow Control
 
 <block type="text" title="How does the command work?">
-text: $endwhile signals the closing boundary of a $while loop. After each iteration, execution returns to the $while condition to re-evaluate it. Every $while must have a matching $endwhile.
+text: $endwhile closes a loop you opened with $while. Each time the bot reaches it, the lines in between have already run and it goes back up to read the condition again, repeating for as long as the answer stays yes. So a loop written with a limit of 5 posts its block five times and then your command carries on underneath.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !countdown
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,13 +23,17 @@ text: $endwhile
 
 <block type="code" title="Ready-to-copy Example">
 text: $setVar[count; 0]
-$while[$getVar[count] < 5]
-  $sendMessage[Count: $getVar[count]]
-  $setVar[count; $math[$getVar[count] + 1]]
-$endwhile
+text: $while[$getVar[count] < 5]
+text:   $sendMessage[Count: $getVar[count]]
+text:   $setVar[count; $math[$getVar[count] + 1]]
+text: $endwhile
+</block>
+
+<block type="callout" kind="important">
+text: Nothing limits how many times a loop may repeat. Make sure something inside the block eventually turns the condition false, because otherwise the bot keeps posting the same lines and never reaches the rest of your command.
 </block>
 
 <block type="callout" kind="warning">
-text: Every $while block must be properly closed with $endwhile. Missing $endwhile will cause a script error. Ensure your loop has a termination condition to avoid infinite loops.
+text: Every $while needs its own $endwhile. Leave the closing line out and the rest of the script becomes part of the loop body, so commands you put after the loop start repeating along with it.
 </block>
 </dash>

@@ -1,10 +1,20 @@
 <dash>
 name: $returnGuildEmojisID
-desc: يجمع معرّفات الإيموجي من السيرفر حسب النوع ويخزنها.
+desc: يجمع أرقام معرّفات رموز تعبير الخادم المخصصة في قيمة واحدة تستطيع قراءتها.
 category: أوامر الإرجاع
 
-<block type="text" title="كيف تعمل الدالة؟">
-text: تجمع $returnGuildEmojisID معرّفات الإيموجي المخصصة من السيرفر المحدد وتخزنها تحت اسم متغير مفصولة بالفاصل. يختار مرشّح النوع بين كل الإيموجي أو الثابتة منها (png) أو المتحركة (gif).
+<block type="text" title="كيف يعمل الأمر؟">
+text: أعطِ البوت معرّف خادم فيجمع رقم معرّف كل رمز تعبير مخصص يسكن هناك، ويحفظها تحت اسم تختاره، ويجمعها بالفاصل الذي تطلبه. واختر متحركًا أو ثابتًا أولًا لتحصل على ذلك النوع وحده. ولا يُكتب شيء في المحادثة وحده، فاقرأ القائمة بـ ⁨$return⁩ قبل أن تستخدمها.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة على !emojis
+item: اكتب سكربتك في المحرر
+item: الصق السطر أدناه في المكان الذي تحتاجه
+item: اضغط على حفظ
 </block>
 
 <block type="code" title="الصيغة">
@@ -17,14 +27,14 @@ text: $sendMessage[Animated emojis: $return[animEmojis]]
 </block>
 
 <block type="callout" kind="note">
-text: تقبل قيمة type‏: all أو static أو animated. يجب أن يكون البوت عضوًا في السيرفر المستهدف. لا يُضمن أن يكون ترتيب النتائج مطابقًا لقائمة إيموجي السيرفر.
+text: يقبل المرشّح كل من all وstatic وanimated. والخادم الذي لا يملك من نوع ما طلبته يُبلَّغ عنه كخطأ بدلًا من نتيجة فارغة، وليس ضروريًا أن تعود الأرقام بالترتيب نفسه الذي تظهر به الرموز في شاشة إعدادات الخادم.
 </block>
 </dash>
 
 <details>
 syntax: $returnGuildEmojisID[GuildID; type; var; separator]
-param: GuildID|snowflake|مطلوب|معرّف السيرفر الذي تُجمع إيموجيه
-param: type|text|مطلوب|المرشّح: all أو static أو animated
-param: var|text|مطلوب|اسم المتغير لتخزين النتيجة (يُقرأ بـ $return[])
-param: separator|text|مطلوب|الفاصل بين المعرّفات (مثال: ،). تعمل الفواصل المسماة أيضًا: dot، com، apo، sem، colon
+param: GuildID|snowflake|مطلوب|أي خادم تُجمع منه الرموز
+param: type|text|مطلوب|أي رموز تُضمَّن: all, static أو animated
+param: var|text|مطلوب|الاسم الذي تُحفظ النتيجة تحته، وتُقرأ لاحقًا بـ ⁨$return[]⁩
+param: separator|text|مطلوب|ما الذي يوضع بين الأرقام. وتُقبل الأسماء أيضًا: dot, com, apo, sem, colon
 </details>

@@ -1,10 +1,20 @@
 <dash>
 name: $for
-desc: Repeats the enclosed code block a specified number of times.
+desc: Runs the block of lines underneath it a set number of times.
 category: Flow Control
 
 <block type="text" title="How does the command work?">
-text: $for takes a count argument and executes the code between $for and $endfor that many times. The loop can be broken early using $break.
+text: Hand it a whole number and every line you place before $endfor runs exactly that many times, one after the other. Set the number to zero or below and the whole block is skipped. Anywhere inside, $break cuts the loop short and carries on with the rest of your command.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !countdown
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,16 +23,16 @@ text: $for[count]
 
 <block type="code" title="Ready-to-copy Example">
 text: $for[5]
-  $sendMessage[Iteration!]
-$endfor
+text:   $sendMessage[Iteration!]
+text: $endfor
 </block>
 
 <block type="callout" kind="note">
-text: If the count is 0 or negative, the loop body is skipped entirely. Use $break inside the loop to exit early. Nested loops are supported.
+text: The count has to be a whole number, otherwise the bot posts an error and treats the loop as if it ran zero times. $for and $endfor always travel in pairs, and one loop can sit inside another as deep as you like.
 </block>
 </dash>
 
 <details>
 syntax: $for[count]
-param: count|number|Required|The number of times to repeat the loop body. Must be a non-negative integer.
+param: count|number|Required|How many times to run the block; anything below zero skips it
 </details>

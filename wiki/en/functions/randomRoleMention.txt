@@ -1,10 +1,20 @@
 <dash>
 name: $randomRoleMention
-desc: Returns a mention of a random role from the server.
+desc: Picks a role from your server at random and mentions it.
 category: Randomness
 
 <block type="text" title="How does the command work?">
-text: When $randomRoleMention is called, the bot collects all roles in the current server (excluding the default @everyone role), picks one at random, and sends its mention format to the channel.
+text: The bot reads the list of roles in the server, picks one at random and posts a mention of it, which arrives highlighted and clickable. The role every member already has by default is never the one chosen. Each call is independent, so the same role can come up twice in a row.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $randomRoleMention
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,6 +26,6 @@ text: Congrats $randomRoleMention!
 </block>
 
 <block type="callout" kind="note">
-text: The returned value is a Discord role mention (e.g., <@&123456789>), which renders as a clickable colored mention in the chat. The @everyone role is always excluded.
+text: Outside a server, or in a server with no roles beyond the default one, the bot reports an error instead of a mention. Every other role in the server is fair game, including ones nobody has been given.
 </block>
 </dash>

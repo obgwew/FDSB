@@ -1,10 +1,20 @@
 <dash>
 name: $onVoiceJoined
-desc: Event triggered when a member joins a voice channel.
+desc: Runs your lines by themselves whenever somebody joins a voice channel.
 category: Event
 
 <block type="text" title="How does the event work?">
-text: $onVoiceJoined is an event prefix that triggers an FDScript whenever a member joins a voice channel. The script receives the member and voice channel information. You can optionally specify a channel ID in the first line to direct the output to a specific text channel.
+text: $onVoiceJoined is an Event, so the app starts your lines the moment any member connects to a voice channel, with nobody typing anything. Inside them $mention and $authorID point at the member who just arrived. To have the answer land somewhere other than the voice channel, put that text channel's ID in square brackets after the prefix, the way $onVoiceJoined[123456789012345678] does.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $onVoiceJoined
+item: The app marks it as an Event for you
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,18 +23,18 @@ text: #PREFIX:$onVoiceJoined
 
 <block type="code" title="Ready-to-copy Example">
 text: #PREFIX:$onVoiceJoined
- sendMessage[$mention joined a voice channel!]
+text:  sendMessage[$mention joined a voice channel!]
 </block>
 
 <block type="callout" kind="note">
-text: Place this in the first line of your FDScript file. The script will run automatically when any member joins a voice channel.
+text: Leave the square brackets out of the Prefix field and the event has no channel of its own to post in, so anything you send from it never arrives. Adding the ID there is the part that makes it work.
 </block>
 
 <block type="callout" kind="important">
-text: This event runs in the bot_events folder, not bot_commands. Create your .fds file there.
+text: The bot has to be a member of the server and started from the Main tab, otherwise nobody joins and nothing happens. Your lines run once per member per voice channel, so a busy server will run them often.
 </block>
 </dash>
 
 <details>
-syntax: #PREFIX:$onVoiceJoined
+syntax: $onVoiceJoined
 </details>

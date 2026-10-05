@@ -1,0 +1,40 @@
+<dash>
+name: $onlyNSFW
+desc: N'exécute la commande que dans les salons marqués comme réservés aux adultes, et affiche votre propre message partout ailleurs.
+category: Contrôle d'accès
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: ⁨$onlyNSFW⁩ est une porte d'entrée pour le contenu adulte. Il regarde si le salon où la commande a été utilisée est marqué comme réservé aux adultes sur Discord. Si c'est le cas, il ne se passe rien et le reste de votre commande continue. Si ce n'est pas le cas, votre message est envoyé et le reste de la commande est abandonné sur place.
+</block>
+
+<block type="list" title="Comment l'utiliser dans l'application">
+item: Ouvrez l'onglet Commandes
+item: Touchez + pour créer une nouvelle commande
+item: Donnez-lui un nom dans le champ Nom
+item: Définissez le champ Préfixe
+item: Collez le code ci-dessous dans l'éditeur
+item: Touchez Enregistrer
+</block>
+
+<block type="code" title="Syntaxe">
+text: $onlyNSFW[error message]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $onlyNSFW[This command only works in age restricted channels.]
+text: $sendMessage[Here is the adult content.]
+</block>
+
+<block type="callout" kind="note">
+text: C'est vous qui devez marquer le salon sur Discord : ouvrez les paramètres du salon, activez Réservé aux adultes, puis enregistrez. La porte d'entrée ne fait rien tant que le salon n'est pas réglé ainsi.
+</block>
+
+<block type="callout" kind="important">
+text: Cette porte d'entrée relève de la commodité, pas d'une vraie sécurité. Quiconque peut lire vos commandes peut découvrir que la commande existe et retirer la porte d'entrée.
+</block>
+</dash>
+
+<details>
+syntax: $onlyNSFW[error message]
+param: error message|text|Requis|Message envoyé dans le salon quand il n'est pas marqué comme réservé aux adultes.
+</details>

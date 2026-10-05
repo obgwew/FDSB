@@ -1,0 +1,41 @@
+<dash>
+name: $repeatMessage
+desc: Bir metin parçasını belirli sayıda tekrarlar ve sonucu tek iletide gönderir.
+category: Matematik ve Sayılar
+
+<block type="text" title="Komut nasıl çalışır?">
+text: ⁨$repeatMessage⁩ bir tam sayı ve bir metin parçası alır, ardından o metni o kadar kez arka arkaya gönderir. Tek başına kullanıldığında tekrarlanan sonucu yazar; başka bir komutun içinde ise tekrarlanan metin yerine yerleştirilir, bu da desenler ve ayırıcılar kurmak için kullanışlıdır. Tekrarlar arasında boşluk istediğiniz yere ⁎\s⁎ yazın.
+</block>
+
+<block type="list" title="Uygulamada nasıl kullanılır">
+item: Komutlar sekmesini açın
+item: Yeni bir komut başlatmak için + düğmesine dokunun
+item: Ad alanına bir ad verin
+item: Önek alanını ayarlayın
+item: Aşağıdaki kodu düzenleyiciye yapıştırın
+item: Kaydet düğmesine dokunun
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $repeatMessage[amount; message]
+</block>
+
+<block type="code" title="Kopyalamaya hazır örnek">
+text: $repeatMessage[5; ★]
+</block>
+
+<block type="options" title="Kurallar">
+option: amount|1 veya daha büyük bir tam sayı. 0 için hiçbir şey gönderilmez.
+option: message|Tekrarlanacak metin. Bir boşluk için ⁎\s⁎ yazın.
+</block>
+
+<block type="callout" kind="note">
+text: Discord tek bir iletiyi 2000 karakterle sınırlar, bu yüzden tekrarlar bir şey gönderilmeden önce denetlenir. amount ile metin uzunluğunun çarpımı bu sınırı aşarsa komut durur ve daha az tekrar ya da daha kısa metin kullanmanızı söyler.
+</block>
+</dash>
+
+<details>
+syntax: $repeatMessage[amount; message]
+param: amount|number|Required|Metnin kaç kez tekrarlanacağı. 1 veya daha büyük bir tam sayı olmalıdır.
+param: message|text|Required|Tekrarlanacak metin. Bir boşluk için ⁎\s⁎ yazın.
+</details>

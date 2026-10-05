@@ -1,0 +1,38 @@
+<dash>
+name: $checkContains
+desc: يعيد true أو false بحسب ما إذا كان نص يحتوي على واحدة على الأقل من العبارات التي تسردها.
+category: أدوات النصوص
+
+<block type="text" title="كيف يعمل الأمر؟">
+text: $checkContains يفحص جزءًا من النص وعبارةً واحدة أو أكثر، ثم يجيب بكلمة true أو false. يجيب بـ true بمجرد أن تظهر أي عبارة واحدة داخل النص، فلا تحتاج أبدًا إلى اختبار كل عبارة بنفسك. العبارة الفارغة لا تطابق إلا النص الفارغ. وهو وحده يطبع الإجابة في القناة، وداخل أمر آخر تُدرج الإجابة في مكانها.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة
+item: الصق الكود أدناه في المحرر
+item: اضغط على حفظ
+</block>
+
+<block type="code" title="الصيغة">
+text: $checkContains[text; phrase; ...]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $if[$checkContains[$message; hello; hi; hey]]
+text:   $sendMessage[Say hello back!]
+text: $endif
+</block>
+
+<block type="callout" kind="note">
+text: الإجابة دائمًا هي الكلمة المجردة true أو false، وهذا ما يتوقعه كل من $if و$onlyIf. تحتاج إلى وسيطين على الأقل — النص إضافة إلى عبارة واحدة.
+</block>
+</dash>
+
+<details>
+syntax: $checkContains[text; phrase; ...]
+param: text|text|مطلوب|النص الذي تبحث فيه. أوامر مثل $message المتداخلة تُحل أولًا.
+param: phrase|text|مطلوب|عبارة واحدة أو أكثر للبحث عنها. تكون النتيجة true إذا ظهر أي منها في النص.
+</details>

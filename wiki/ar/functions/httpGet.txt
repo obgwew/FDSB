@@ -1,10 +1,22 @@
 <dash>
 name: $httpGet
-desc: يرسل طلب HTTP من نوع GET إلى عنوان URL ويخزّن رمز الحالة والاستجابة.
+desc: يجلب عنوان ويب ويحتفظ بالإجابة جاهزة لبقية أمرك.
 category: HTTP
 
-<block type="text" title="كيف تعمل الدالة؟">
-text: ينفّذ $httpGet طلب GET بمهلة 10 ثوانٍ. تُخزَّن الاستجابة في $httpResult (بصيغة JSON عندما يكون ذلك ممكنًا، وإلا كنص عادي) ويُخزَّن رمز الحالة في $httpStatus. تُرسل أي ترويسات أُضيفت بواسطة $httpAddHeader ثم تُمسح.
+<block type="text" title="كيف يعمل الأمر؟">
+text: يطلب $httpGet من موقع محتواه وينتظر حتى عشر ثوانٍ للإجابة.
+text: وكل ما يعود يُحتفظ به لبقية التشغيل، فتعطي $httpStatus شيفرة الحالة و$httpResult الجسم، مقروءًا كـ JSON حين تكون الصفحة JSON وتركًا كنص عادي في غير ذلك.
+text: والترويسات التي أضفتها سابقًا بـ $httpAddHeader تخرج مع هذا الطلب ثم تُمسح، فيبدأ كل طلب نظيفًا.
+text: ولا شيء يظهر في القناة حتى ترسل رسالة بالإجابة بنفسك.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة على !api
+item: الصق الكود أدناه في المحرر
+item: اضغط على حفظ
 </block>
 
 <block type="code" title="الصيغة">
@@ -13,16 +25,17 @@ text: $httpGet[URL]
 
 <block type="code" title="مثال جاهز للنسخ">
 text: $httpGet[https://api.example.com/users]
-$httpStatus
-$httpResult[0; name]
+text: $httpStatus
+text: $httpResult[0; name]
 </block>
 
 <block type="callout" kind="note">
-text: عند الفشل، يُضبط رمز الحالة على 500 ويحتوي $httpResult على رسالة الخطأ.
+text: إذا فشل الطلب صارت الحالة 500 ويحمل $httpResult نص الخطأ بدل الصفحة.
+text: والعناوين التي يرفض التطبيق فتحها تعود بحالة 400 مع شرح قصير.
 </block>
 </dash>
 
 <details>
 syntax: $httpGet[URL]
-param: URL|text|مطلوب|عنوان URL الذي سيُرسل إليه طلب GET
+param: URL|text|مطلوب|عنوان الويب الذي تريد جلبه
 </details>

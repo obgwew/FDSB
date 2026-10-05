@@ -1,10 +1,20 @@
 <dash>
 name: $isBot
-desc: Checks whether a user is a bot account.
+desc: Answers true or false depending on whether a member is a bot account.
 category: Info
 
 <block type="text" title="How does the command work?">
-text: $isBot takes a user ID or mention and checks if that user is a Discord bot account. Returns "true" or "false".
+text: Hand it a member and the bot replies with true when that account belongs to a machine, or false when a person is behind it. A mention and a bare ID are both accepted, so testing whoever typed the current message takes one word. Only members of this server can be looked up; anyone else is reported as false.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !checkbot
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,11 +26,11 @@ text: $isBot[$authorID]
 </block>
 
 <block type="callout" kind="note">
-text: Returns "true" if the user is a bot account, "false" if they are a human user. The user must be a member of the server.
+text: Testing the member who just sent the message is the everyday use for it, and the quickest way to keep people and automated accounts apart.
 </block>
 </dash>
 
 <details>
 syntax: $isBot[userID]
-param: userID|text|Required|The user ID or @mention to check. Supports variables and placeholders.
+param: userID|text|Required|The member to test, as an @mention or their ID
 </details>

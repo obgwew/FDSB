@@ -1,10 +1,22 @@
 <dash>
 name: $httpGet
-desc: Sends an HTTP GET request to a URL and stores the status code and response.
+desc: Fetches a web address and keeps the answer ready for the rest of your command.
 category: HTTP
 
 <block type="text" title="How does the command work?">
-text: $httpGet performs a GET request with a 10 second timeout. The response is stored in $httpResult (JSON when possible, otherwise plain text) and the status code in $httpStatus. Any headers added with $httpAddHeader are sent and then cleared.
+text: $httpGet asks a website for its content and waits up to ten seconds for the answer.
+text: Whatever comes back is held for the rest of the run, with $httpStatus giving the status code and $httpResult giving the body, read as JSON when the page is JSON and left as plain text otherwise.
+text: Headers you added earlier with $httpAddHeader travel out with this request and are then cleared, so every request starts clean.
+text: Nothing shows up in the channel until you send a message with the answer yourself.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !api
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,16 +25,17 @@ text: $httpGet[URL]
 
 <block type="code" title="Ready-to-copy Example">
 text: $httpGet[https://api.example.com/users]
-$httpStatus
-$httpResult[0; name]
+text: $httpStatus
+text: $httpResult[0; name]
 </block>
 
 <block type="callout" kind="note">
-text: On failure, the status is set to 500 and $httpResult contains the error message.
+text: If the request fails, the status is set to 500 and $httpResult holds the error text instead of a page.
+text: Addresses the app refuses to open come back with a status of 400 and a short explanation.
 </block>
 </dash>
 
 <details>
 syntax: $httpGet[URL]
-param: URL|text|Required|The URL to send the GET request to
+param: URL|text|Required|The web address you want to fetch
 </details>

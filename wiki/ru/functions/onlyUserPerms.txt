@@ -1,0 +1,51 @@
+<dash>
+name: $onlyUserPerms
+desc: Останавливает команду вашим собственным сообщением, если запустившему её человеку не разрешено то, что идёт дальше.
+category: ⁨Контроль доступа⁩
+
+<block type="text" title="Как работает команда?">
+text: ⁨$onlyUserPerms⁩ проверяет права участника, запустившего команду, до того как выполнится защищённая часть. Перечислите нужные ему права и закончите сообщением, которое нужно отправить, если какого-то права не хватает. Если у него есть все права, ничего не показывается и команда продолжается. Если одного не хватает, сообщение отправляется, а остаток команды отбрасывается прямо здесь.
+</block>
+
+<block type="list" title="Как использовать в приложении">
+item: Откройте вкладку «Команды»
+item: Нажмите +, чтобы начать новую команду
+item: Введите имя в поле «Название»
+item: Задайте поле «Префикс»
+item: Вставьте приведённый ниже код в редактор
+item: Нажмите «Сохранить»
+</block>
+
+<block type="code" title="Синтаксис">
+text: $onlyUserPerms[permission; ...; error message]
+</block>
+
+<block type="code" title="Готовый пример для копирования">
+text: $onlyUserPerms[manage_messages; You need Manage Messages to do that.]
+text: $onlyAdmin
+text: $sendMessage[Message deleted.]
+</block>
+
+<block type="options" title="Частые права">
+option: manage_messages|Удаление и закрепление сообщений
+option: kick_members|Исключение участников
+option: ban_members|Баны участников
+option: timeout_members|Выдача таймаута участникам
+option: manage_roles|Назначение и снятие ролей
+option: moderate_members|Таймаут и исключение участников
+</block>
+
+<block type="callout" kind="note">
+text: Названия прав — это собственные названия Discord в нижнем регистре с подчёркиваниями. Сообщение ставьте в конце — всё после прав считается одним сообщением.
+</block>
+
+<block type="callout" kind="important">
+text: Это не то же самое, что ⁨$onlyAdmin⁩. Здесь проверяются собственные права человека, а значит роль, которой вы выдали дополнительные права, пройдёт проверку, даже если это не роль администратора.
+</block>
+</dash>
+
+<details>
+syntax: $onlyUserPerms[permission; ...; error message]
+param: permission|text|Required|Одно или несколько названий прав Discord через точку с запятой, например ⁎manage_messages⁎ или ⁎kick_members⁎.
+param: error message|text|Required|Сообщение, отправляемое в канал, когда участнику не хватает одного из прав. Всё после прав считается этим сообщением.
+</details>

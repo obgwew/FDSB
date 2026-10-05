@@ -1,10 +1,20 @@
 <dash>
 name: $clientTyping
-desc: Shows the bot's "typing..." indicator in the current channel.
+desc: Shows the bot's typing bubble in the channel for as long as it works.
 category: Utilities
 
 <block type="text" title="How does the command work?">
-text: When $clientTyping is called, the bot displays the "Bot is typing..." indicator in the current channel, signaling to users that the bot is processing or preparing a response. This indicator persists until the bot sends a message or the script ends.
+text: On a line of its own this puts the familiar typing indicator up in the channel, so anyone watching knows the bot is busy rather than idle. It stays there while your command carries on and clears as soon as the bot actually posts something, or the run comes to an end. Pairing it with a $wait before a slow step makes the answer feel like it was genuinely being typed out.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $clientTyping
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,11 +23,11 @@ text: $clientTyping
 
 <block type="code" title="Ready-to-copy Example">
 text: $clientTyping
-$wait[3s]
-$sendMessage[Done!]
+text: $wait[3s]
+text: $sendMessage[Done!]
 </block>
 
 <block type="callout" kind="note">
-text: This command is useful for simulating a more natural conversation flow. Combine it with $wait to create a deliberate delay before the bot sends its next message.
+text: The bubble comes up in the channel the command was typed in, so there is nothing to set. Add a $wait straight after it to keep it there for a chosen length of time.
 </block>
 </dash>

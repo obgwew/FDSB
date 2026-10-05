@@ -1,10 +1,20 @@
 <dash>
 name: $userBanner
-desc: Returns a user's profile banner URL.
+desc: Hands you the link to a member's profile banner picture so you can show it in your channel.
 category: Info
 
 <block type="text" title="How does the command work?">
-text: With no argument, $userBanner returns the banner of the bot user. With a user ID or mention, it returns that user's banner. Animated banners are returned as GIF URLs and other banners as PNG URLs.
+text: Leave the brackets empty and you get the bot's own profile banner; drop a user ID or a mention in and you get that person's banner instead. Banners that move come back as a .gif link and the still ones as a .png. On its own line the bot posts the address in the channel, so what you see is the picture link itself rather than the picture.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !profilecard
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,15 +26,15 @@ text: $userBanner[123456789012345678]
 </block>
 
 <block type="callout" kind="warning">
-text: The user must have a profile banner and the bot must be able to resolve the user. The optional ID is cleaned of non-digit characters before lookup.
+text: The member needs a profile banner set, and the bot has to be able to find them at all. Anything in the ID that is not a digit is quietly dropped before the lookup happens, so a mention works as readily as a raw ID.
 </block>
 
 <block type="callout" kind="note">
-text: The inline form uses cached users only. The standalone form can fetch a user that is not currently cached. The default is always the bot user, not the triggering author.
+text: Nested inside another line it can only reach members the bot already has to hand. On its own line it is free to go and look someone up that it has never met before.
 </block>
 </dash>
 
 <details>
 syntax: $userBanner[(user_id)]
-param: userID|snowflake|Optional|The user ID or mention; defaults to the bot user
+param: userID|snowflake|Optional|The member to look up, as an ID or a mention; leave it out and you get the bot's own banner
 </details>

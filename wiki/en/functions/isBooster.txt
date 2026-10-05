@@ -1,10 +1,20 @@
 <dash>
 name: $isBooster
-desc: Checks whether a user is a server booster (has an active Nitro boost).
+desc: Answers true or false depending on whether a member is boosting the server now.
 category: Info
 
 <block type="text" title="How does the command work?">
-text: $isBooster takes a user ID or mention and checks if that user is currently boosting the server (has an active premium subscription). Returns "true" or "false".
+text: Point it at a member and it works out whether that person is currently boosting the server, then prints true or false. The boost has to be running at this very moment, so the answer flips back to false as soon as it lapses. Somebody who has never joined, or who is not a member here, always comes back false too.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !checkboost
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,11 +26,11 @@ text: $isBooster[$authorID]
 </block>
 
 <block type="callout" kind="note">
-text: Returns "true" if the user has an active Nitro boost for the server, "false" otherwise. The user must be a member of the server.
+text: The boost has to be on this server. Someone boosting a different server of their own, or whose boost here has already run out, counts as false.
 </block>
 </dash>
 
 <details>
 syntax: $isBooster[userID]
-param: userID|text|Required|The user ID or @mention to check. Supports variables and placeholders.
+param: userID|text|Required|The member to test, as an @mention or their ID
 </details>

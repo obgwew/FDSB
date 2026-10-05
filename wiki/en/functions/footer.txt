@@ -1,10 +1,20 @@
 <dash>
 name: $footer
-desc: Sets the footer text of the embed being built.
+desc: Adds a line of small grey text along the bottom of an embed card.
 category: Embed Builder
 
 <block type="text" title="How does the command work?">
-text: $footer takes a text argument and sets it as the footer of the current embed being constructed. The footer appears at the very bottom of the embed in smaller, lighter text.
+text: Whatever you hand it becomes the footer line of the card you are building, sitting underneath everything else in smaller, lighter lettering. That is the natural home for a credit, a date, or a short remark about what the card is showing. Because it only shapes the card, nothing appears until you send the embed.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !card
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,11 +26,11 @@ text: $footer[Requested by $authorName]
 </block>
 
 <block type="callout" kind="note">
-text: The footer is useful for attribution, timestamps, or additional context. It appears in smaller grey text at the bottom of the embed.
+text: Add $footerIcon when you want a tiny picture beside that line. Calling $footer a second time simply overwrites the words you set the first time round.
 </block>
 </dash>
 
 <details>
 syntax: $footer[text]
-param: text|text|Required|The footer text for the embed
+param: text|text|Required|The words to print along the card footer
 </details>

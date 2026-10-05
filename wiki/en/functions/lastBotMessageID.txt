@@ -1,10 +1,22 @@
 <dash>
 name: $lastBotMessageID
-desc: Returns the ID of the last message the bot sent during the current script.
+desc: Gives you the ID of the last message the bot sent while running your command.
 category: Variables
 
 <block type="text" title="How does the command work?">
-text: $lastBotMessageID resolves to the snowflake ID of the most recent message the bot sent during the current script execution. It is updated automatically by output commands such as $sendMessage, $reply, and $sendEmbedMessage. If the bot has not sent any message yet, an empty string is returned.
+text: Once the bot has posted something, $lastBotMessageID gives you that message's ID as plain digits.
+text: Every message the bot sends while your command runs moves the value along, so a later line can point back at the message it just wrote.
+text: Before anything has been sent you get an empty string instead, and in a script started by a button tap it falls back to the message the button sits on.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !edit
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -14,11 +26,11 @@ text: $lastBotMessageID[]
 
 <block type="code" title="Ready-to-copy Example">
 text: $sendMessage[Look at this!]
-$editIn[10s; The last message ID was $lastBotMessageID]
+text: $editIn[10s; The last message ID was $lastBotMessageID]
 </block>
 
 <block type="callout" kind="note">
-text: This is an inline-only command and cannot be used as a standalone statement. Use it inside another command's argument brackets or as a bare inline token.
+text: This one only works inside another command, never on a line of its own. Give it a bracket, or drop it straight into a sentence.
 </block>
 </dash>
 

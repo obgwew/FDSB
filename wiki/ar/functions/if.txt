@@ -1,10 +1,20 @@
 <dash>
 name: $if
-desc: يقيّم شرطاً وينفذ كتلة الكود المحاطة إذا كان الشرط صحيحاً.
+desc: ينفّذ الأسطر التي تحته فقط عندما يخرج شرط تكتبه صحيحًا.
 category: التحكم في التدفق
 
-<block type="text" title="كيف تعمل الدالة؟">
-text: $if يأخذ تعبير شرط ويقيمه. إذا كان الشرط صحيحاً، يتم تنفيذ الكود بين $if و $elif التالي أو $else أو $endif. إذا كان خاطئاً، ينتقل التنفيذ إلى الفرع المطابق التالي.
+<block type="text" title="كيف يعمل الأمر؟">
+text: يأخذ $if شرطًا ويفحصه قبل أن يفعل بوتك أي شيء آخر. وعندما يتحقق الشرط، تعمل الأسطر بين $if و$endif الختامي ويراها الأعضاء ما كتبته هناك. وعندما لا يتحقق، تُتخطّى تلك الأسطر في صمت ويواصل البوت تحته، وهكذا يمكن للأمر نفسه أن يعطي عضوًا إجابة وبقية الأعضاء إجابة أخرى.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة على !welcome
+item: اكتب سكربتك في المحرر
+item: الصق السطر أدناه في المكان الذي تحتاجه
+item: اضغط على حفظ
 </block>
 
 <block type="code" title="الصيغة">
@@ -13,27 +23,27 @@ text: $if[condition]
 
 <block type="code" title="مثال جاهز للنسخ">
 text: $if[$authorID == 123456789]
-  Hello Admin!
-$else
-  You are not an admin.
-$endif
+text:   Hello Admin!
+text: $else
+text:   You are not an admin.
+text: $endif
 </block>
 
 <block type="options" title="معاملات المقارنة">
-option: ==|يساوي (يقارن عددياً عندما يكون كلا الطرفين أرقاماً)
-option: !=|لا يساوي
+option: ==|نفس الشيء — تُقارَن الأرقام كأرقام
+option: !=|ليس نفس الشيء
 option: >|أكبر من
 option: <|أصغر من
-option: >=|أكبر من أو يساوي
-option: <=|أصغر من أو يساوي
+option: >=|أكبر من، أو نفس الشيء
+option: <=|أصغر من، أو نفس الشيء
 </block>
 
 <block type="callout" kind="note">
-text: يدعم كتل $if المتداخلة. يمكنك استخدام $elif لشروط إضافية و $else كحل بديل. أغلق دائماً بـ $endif.
+text: يمكن أن يقع $if داخل آخر. أضف $elif لشرط ثانٍ و$else للحالة التي لم يطابق أيٌّ منها، ثم أنهِ الكتلة دائمًا بـ $endif ليعرف البوت أين تنتهي.
 </block>
 </dash>
 
 <details>
 syntax: $if[condition]
-param: condition|expression|مطلوب|شرط لتقييمه، مثال: $authorID == 123، $var[score] >= 90، $isNumber[int; $message]. يدعم معاملات ==، !=، >، <، >=، <=.
+param: condition|expression|مطلوب|ما يُفحص، مثل $authorID == 123 أو $var[score] >= 90. يعمل مع معاملات المقارنة الستة.
 </details>

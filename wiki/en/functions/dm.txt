@@ -1,10 +1,19 @@
 <dash>
 name: $dm
-desc: Sets the destination for subsequent messages to be sent as a direct message (DM).
+desc: Sends everything your command says straight into someone's private messages.
 category: Messaging
 
 <block type="text" title="How does the command work?">
-text: When $dm is called without arguments, it sets the message destination to the command author's DMs. When called with a user ID or mention, it sets the destination to that user's DMs. All subsequent $sendMessage calls will be sent to the DM target instead of the current channel.
+text: Stand this line above your messages and everything they send afterwards leaves the channel and arrives in a private conversation instead. Used with no brackets the recipient is whoever typed the command; give it a member's ID or mention and it is that person instead. The switch lasts only until the end of this run, so it never leaks into your next command.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !notify
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -14,15 +23,19 @@ text: $dm[(userID/mention)]
 
 <block type="code" title="Ready-to-copy Example">
 text: $dm
-$sendMessage[Check your DMs!]
+text: $sendMessage[Check your DMs!]
+</block>
+
+<block type="callout" kind="warning">
+text: The two of you have to share a server, and the recipient needs private messages switched on. Otherwise the bot cannot deliver anything, and the person waiting in the channel never finds out why nothing arrived.
 </block>
 
 <block type="callout" kind="note">
-text: The bot and the target user must share a server for DMs to work. If the user has DMs disabled, the message will fail to send. Using $dm without brackets targets the command author.
+text: Keep it above the messages that should go private. Anything you send before this line stays in the public channel where everyone can read it.
 </block>
 </dash>
 
 <details>
 syntax: $dm[(userID/mention)]
-param: userID/mention|text|Optional|The user ID or @mention to send DMs to. If omitted, targets the command author.
+param: userID/mention|text|Optional|Who should receive the private messages; leave empty for whoever typed the command
 </details>

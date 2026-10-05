@@ -1,10 +1,20 @@
 <dash>
 name: $splitIn
-desc: Splits a text string into parts using a delimiter and stores the result.
+desc: Cuts a piece of text into separate parts you can pick out one by one.
 category: String Utilities
 
 <block type="text" title="How does the command work?">
-text: $splitIn takes a text string and a delimiter, splits the text by that delimiter, and stores the resulting parts. Use $splitOut afterwards to access individual parts.
+text: $splitIn breaks a piece of text wherever the delimiter you give it appears and keeps the pieces for the rest of the command. Nothing is printed on its own, the parts simply wait until you ask for one of them with $splitOut. From there you can take the first piece, the last piece, or any numbered part in between and use it wherever you would use any other value.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !welcome
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,16 +23,16 @@ text: $splitIn[text; delimiter]
 
 <block type="code" title="Ready-to-copy Example">
 text: $splitIn[apple,banana,cherry; ,]
-$splitOut[1]
+text: $splitOut[1]
 </block>
 
 <block type="callout" kind="note">
-text: The split parts are stored in context and can be accessed using $splitOut with an index (1-based), < for first, or > for last.
+text: Parts are counted from 1: give $splitOut a number, or < for the very first piece and > for the very last. Spaces around each piece are trimmed off as the text is cut, and an empty delimiter is refused.
 </block>
 </dash>
 
 <details>
 syntax: $splitIn[text; delimiter]
-param: text|text|Required|The text string to split
-param: delimiter|text|Required|The delimiter/separator to split by (cannot be empty)
+param: text|text|Required|The text to cut into pieces
+param: delimiter|text|Required|What to cut between the pieces, for example a comma. It cannot be left empty.
 </details>

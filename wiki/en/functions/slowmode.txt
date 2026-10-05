@@ -1,10 +1,19 @@
 <dash>
 name: $slowmode
-desc: Sets the slowmode delay for a specified channel.
+desc: Sets how often members are allowed to post in a channel.
 category: Moderation
 
 <block type="text" title="How does the command work?">
-text: $slowmode takes a channel ID and a time duration, then sets the slowmode delay for that channel. Slowmode limits how often users can send messages.
+text: $slowmode puts a gap between messages in the channel you name. Give it a channel and a length such as 10s and members then have to wait that long before posting again, which takes the heat out of a busy channel without locking it. Use 0s to lift the limit and let everyone type as often as they like, the same way you found it.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !slowmode
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,16 +25,16 @@ text: $slowmode[$channelID; 10s]
 </block>
 
 <block type="callout" kind="note">
-text: The time format uses: s (seconds), m (minutes), h (hours). Maximum slowmode is 6 hours (21600 seconds). Use 0s to disable slowmode.
+text: A length is a number plus a unit: s for seconds, m for minutes, h for hours. Six hours is the ceiling, so anything longer is turned down, and 0s switches slowmode off again in one go.
 </block>
 
 <block type="callout" kind="warning">
-text: The bot must have "Manage Channels" permission in the target channel.
+text: The bot needs Manage Channels in that channel before the change takes. A channel type that has no slowmode setting at all, a category for instance, is refused with an error instead of being changed.
 </block>
 </dash>
 
 <details>
 syntax: $slowmode[channelID; time]
-param: channelID|snowflake|Required|The ID of the channel to set slowmode for
-param: time|text|Required|Duration of the slowmode. Format: number + unit (s/m/h), e.g., 10s, 5m, 0s to disable
+param: channelID|snowflake|Required|Which channel to put the gap in
+param: time|text|Required|How long the gap lasts, as a number plus s, m or h. 0s switches slowmode off.
 </details>

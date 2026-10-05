@@ -1,10 +1,20 @@
 <dash>
 name: $httpResult
-desc: Returns the response of the last HTTP request, optionally extracting nested JSON values.
+desc: Reads back the answer your bot got from its last web request.
 category: HTTP
 
 <block type="text" title="How does the command work?">
-text: $httpResult returns the result stored by the last HTTP request ($httpGet, $httpPost, $httpPut, $httpPatch or $httpDelete). With no arguments it returns the whole response (as JSON text when it is an object or array). With arguments it navigates into the result step by step, supporting object keys and numeric array indexes. Returns an empty text when a key does not exist.
+text: $httpResult picks up whatever the last web request brought back and hands it to you. With nothing inside the brackets you get the whole answer, laid out as text when it is an object or a list. Add parts to walk into it: a name picks a field, a number picks an item out of a list, and you can chain as many of them as you need to dig further down.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !weather
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,15 +23,15 @@ text: $httpResult[(key1; key2; ...)]
 
 <block type="code" title="Ready-to-copy Example">
 text: $httpGet[https://api.example.com/users]
-$httpResult[0; username]
+text: $httpResult[0; username]
 </block>
 
 <block type="callout" kind="note">
-text: Use a number to pick a list element. If any key is missing, an empty text is returned.
+text: Numbers pick a position in a list, names pick a field in an object. Ask for something that is not there and you simply get an empty result rather than an error, so nothing at all shows in the message.
 </block>
 </dash>
 
 <details>
 syntax: $httpResult[(key1; key2; ...)]
-param: key|text|Optional|Key or numeric index to navigate into the JSON result (repeat for nested values)
+param: key|text|Optional|Which field or position to walk into in the answer. Repeat it for values further down.
 </details>

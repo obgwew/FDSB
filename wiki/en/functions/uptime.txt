@@ -1,10 +1,20 @@
 <dash>
 name: $uptime
-desc: Returns how long the bot has been online since its last startup.
+desc: Shows how long the bot has been online since it last started.
 category: Utilities
 
 <block type="text" title="How does the command work?">
-text: When $uptime is called, the bot calculates the elapsed time since its last startup (on_ready event) and formats it into a human-readable string, then sends it to the channel.
+text: $uptime counts the time since the bot came online and hands it back as a readable stretch, such as 2d 5h 30m 12s. Any unit that would be zero is left out, so a young bot simply reads 45s. The clock starts again every time the bot starts, and is put back to zero the moment you restart it.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !uptime
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,6 +26,6 @@ text: Bot has been up for $uptime
 </block>
 
 <block type="callout" kind="note">
-text: The formatted output includes days, hours, minutes, and seconds as applicable (e.g., 2d 5h 30m 12s). The bot must have called set_bot_start_time() during startup for this to work.
+text: It is a value rather than a message, so it drops straight into a sentence, and on a line of its own the bot posts it for you.
 </block>
 </dash>

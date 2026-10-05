@@ -1,10 +1,20 @@
 <dash>
 name: $returnGuildBansID
-desc: Collects the IDs of all banned users from a guild and stores them.
+desc: Gathers every banned member's ID from a server into one list you can read later.
 category: Return Commands
 
 <block type="text" title="How does the command work?">
-text: $returnGuildBansID requests the ban list of the specified guild and stores every banned member's user ID under the given variable name, joined by the separator. Retrieve the stored string later with $return[var].
+text: Name a server, a storage name and a separator, and the bot walks that server's ban list. Each banned member's ID is joined with your separator and parked under the storage name, so nothing is printed in the channel at this point. Later, $return with the same name brings the whole list back out as one line of text.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !welcome
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -17,13 +27,13 @@ text: $sendMessage[Banned users: $return[bannedIDs]]
 </block>
 
 <block type="callout" kind="important">
-text: Requires the Ban Members permission - without it the command fails with a permissions error. An empty variable means nobody is banned.
+text: The bot needs the Ban Members permission in that server or the read fails with a permissions error. A server with nobody banned is reported as an error too, so do not read that as an empty list.
 </block>
 </dash>
 
 <details>
 syntax: $returnGuildBansID[GuildID; var; separator]
-param: GuildID|snowflake|Required|The ID of the guild whose ban list is read
-param: var|text|Required|Variable name to store the result in (read back with $return[])
-param: separator|text|Required|Separator between IDs (e.g., ,). Named separators work too: dot, com, apo, sem, colon
+param: GuildID|snowflake|Required|Which server to read the ban list from
+param: var|text|Required|What to store the list under, read back later with $return[]
+param: separator|text|Required|What goes between the IDs. Words work too: dot, com, apo, sem, colon
 </details>

@@ -1,10 +1,22 @@
 <dash>
 name: $customID
-desc: Returns the custom_id of the button or component interaction that triggered the script.
+desc: Tells you which button or menu entry the member just pressed.
 category: Info
 
 <block type="text" title="How does the command work?">
-text: When a user clicks a button or interacts with a component, $customID returns the custom_id string assigned to that component. This is useful for identifying which button was pressed in an onInteraction event.
+text: $customID reads back the label you gave a button or menu entry when you built it, so one script can react differently depending on what was tapped.
+text: The value is filled in only when the script was started by somebody pressing a component, and it comes back empty anywhere else.
+text: That makes it the natural thing to compare against inside an $if when you offer more than one choice.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !buttons
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,13 +25,13 @@ text: $customID
 
 <block type="code" title="Ready-to-copy Example">
 text: $if[$customID == btn_confirm]
-  You confirmed!
-$elif[$customID == btn_cancel]
-  You cancelled!
-$endif
+text:   You confirmed!
+text: $elif[$customID == btn_cancel]
+text:   You cancelled!
+text: $endif
 </block>
 
 <block type="callout" kind="note">
-text: This variable is only meaningful inside interaction-triggered scripts (e.g., onInteraction). When used in a regular message context, it returns an empty string.
+text: Only a tap can fill this in. When the command comes from ordinary chat the value is empty, so a check against it will never match.
 </block>
 </dash>

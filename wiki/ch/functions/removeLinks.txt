@@ -1,0 +1,35 @@
+<dash>
+name: $removeLinks
+desc: 从机器人即将发送的消息中剥离所有网页链接。
+category: 实用工具
+
+<block type="text" title="命令如何工作？">
+text: $removeLinks 会为命令余下部分开启链接移除。之后机器人每发出一处消息，任何 http 或 www 地址都会被去掉，其余文字保留。它不需要任何参数，你只要把它放在想清理的文本前面即可。
+</block>
+
+<block type="list" title="如何在应用中使用">
+item: 打开“命令”标签页
+item: 点击 + 开始新命令
+item: 在“名称”字段中填写名称
+item: 设置“前缀”字段
+item: 将下面的代码粘贴到编辑器中
+item: 点击保存
+</block>
+
+<block type="code" title="语法">
+text: $removeLinks
+</block>
+
+<block type="code" title="可直接复制的示例">
+text: $removeLinks
+text: $sendMessage[Check https://example.com and www.example.org for details.]
+</block>
+
+<block type="callout" kind="note">
+text: 它会影响命令中该位置之后机器人发送的每一条消息，包括来自变量的文本。如果你只想清理一条消息，请尽量把它放得靠后。
+</block>
+</dash>
+
+<details>
+syntax: $removeLinks
+</details>

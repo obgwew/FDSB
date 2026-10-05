@@ -1,10 +1,21 @@
 <dash>
 name: $else
-desc: يوفر كتلة كود بديلة عندما يكون شرط $if السابق خاطئاً.
+desc: ينفّذ مجموعة أسطر ثانية عندما لا يطابق الفحص الذي فوقها.
 category: التحكم في التدفق
 
-<block type="text" title="كيف تعمل الدالة؟">
-text: عند استخدامه داخل كتلة $if، يحدد $else مسار كود احتياطياً. إذا تم تقييم شرط $if على أنه خاطئ، يتم تنفيذ الكود بعد $else (وقبل $endif) بدلاً منه.
+<block type="text" title="كيف يعمل الأمر؟">
+text: يمنح $else أمرك مسارًا احتياطيًا. ضعه بعد $if، أو بعد آخر $elif، وقبل $endif الذي يغلق الكتلة، ثم اكتب الأسطر التي يجب أن تعمل عندما لا يطابق أي فحص.
+text: ولا يرى العضو سوى جانب واحد منه: الفرع الأول عندما يصحّ فحص، وفرع الاحتياط عندما لا يصحّ أي منها.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة على !branch
+item: اكتب سكربتك في المحرر
+item: الصق السطر أدناه في المكان الذي تحتاجه
+item: اضغط على حفظ
 </block>
 
 <block type="code" title="الصيغة">
@@ -13,13 +24,13 @@ text: $else
 
 <block type="code" title="مثال جاهز للنسخ">
 text: $if[$authorID == 123456789]
-  Hello Admin!
-$else
-  You are not an admin.
-$endif
+text:   Hello Admin!
+text: $else
+text:   You are not an admin.
+text: $endif
 </block>
 
 <block type="callout" kind="note">
-text: يجب وضع $else بين $if و $endif. استخدام $else خارج كتلة $if سينتج خطأً.
+text: لا معنى لـ $else إلا بين $if و$endif المقابلين. وحده خارج كتلة شرط فهو خطأ.
 </block>
 </dash>

@@ -1,0 +1,46 @@
+<dash>
+name: $onlyFor
+desc: Lässt nur die aufgeführten Mitglieder oder Rollen den Befehl nutzen und zeigt allen anderen deine eigene Nachricht.
+category: Zugriffskontrolle
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: $onlyFor ist ein Tor, das du oben in einen Befehl setzt. Liste die Personen und Rollen auf, die passieren dürfen, und schließe dann mit der Nachricht ab, die alle anderen sehen sollen. Passt die Person, die den Befehl ausgeführt hat, zu einem der Einträge, passiert nichts und dein Befehl läuft weiter. Passt sie nicht, wird die Nachricht gesendet und der Rest des Befehls fällt dort weg.
+</block>
+
+<block type="list" title="So verwenden Sie es in der App">
+item: Öffnen Sie den Tab Befehle
+item: Tippen Sie auf +, um einen neuen Befehl zu starten
+item: Geben Sie im Feld Name einen Namen ein
+item: Legen Sie das Feld Präfix fest
+item: Fügen Sie den folgenden Code in den Editor ein
+item: Tippen Sie auf Speichern
+</block>
+
+<block type="code" title="Syntax">
+text: $onlyFor[ID or name; ...; error message]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $onlyFor[123456789012345678; Moderator; This command is for moderators only.]
+text: $sendMessage[Here is the secret!]
+</block>
+
+<block type="options" title="Was Sie auflisten können">
+option: ID|Eine Benutzer- oder Rollen-ID wie 123456789012345678, mit oder ohne Erwähnungszeichen
+option: name|Ein Rollenname wie Moderator oder ein Benutzername für einen einzelnen Benutzer
+</block>
+
+<block type="callout" kind="note">
+text: Setze die Nachricht zuletzt — alles nach den Einträgen gilt als eine Nachricht. Ein Mitglied kommt durch, wenn es direkt genannt ist oder eine der aufgeführten Rollen hält.
+</block>
+
+<block type="callout" kind="important">
+text: Dieses Tor dient der Bequemlichkeit, nicht echter Sicherheit. Wer deine Befehle lesen kann, erfährt, wer auf der Liste steht, und wer sie bearbeiten kann, kann sich selbst davon entfernen. Behalte die wirklich sensiblen Teile bei dir.
+</block>
+</dash>
+
+<details>
+syntax: $onlyFor[ID or name; ...; error message]
+param: ID or name|text|Erforderlich|Eine oder mehrere Benutzer-IDs, Rollen-IDs oder Namen, die fortfahren dürfen.
+param: error message|text|Erforderlich|Nachricht, die an den Kanal gesendet wird, wenn die Person nicht erlaubt ist. Alles nach den Einträgen gilt als diese Nachricht.
+</details>

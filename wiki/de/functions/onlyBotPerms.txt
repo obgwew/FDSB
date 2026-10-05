@@ -1,0 +1,41 @@
+<dash>
+name: $onlyBotPerms
+desc: Stoppt den Befehl mit deiner eigenen Nachricht, sofern dem Bot das Folgende nicht erlaubt ist.
+category: Zugriffskontrolle
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: ⁨$onlyBotPerms⁩ prüft die Berechtigungen des Bots selbst, bevor der geschützte Teil deines Befehls läuft. Liste die Berechtigungen auf, die du brauchst, und beende die Zeile mit der Nachricht, die Mitglieder sehen sollen, wenn eine davon fehlt. Hat der Bot alle, wird nichts angezeigt und dein Befehl läuft weiter. Fehlt eine, wird die Nachricht gesendet und der Rest des Befehls wird genau dort verworfen.
+</block>
+
+<block type="list" title="So verwendest du es in der App">
+item: Öffne den Befehle-Tab
+item: Tippe auf +, um einen neuen Befehl zu beginnen
+item: Gib ihm im Feld Name einen Namen
+item: Setze das Feld Prefix
+item: Füge den folgenden Code in den Editor ein
+item: Tippe auf Speichern
+</block>
+
+<block type="code" title="Syntax">
+text: $onlyBotPerms[permission; ...; error message]
+</block>
+
+<block type="code" title="Fertiges Beispiel zum Kopieren">
+text: $onlyBotPerms[kick_members; ban_members; I need permission to kick and ban members.]
+text: $sendMessage[Done!]
+</block>
+
+<block type="callout" kind="note">
+text: Berechtigungsnamen sind die eigenen Namen von Discord in Kleinbuchstaben mit Unterstrichen, etwa ⁎kick_members⁎, ⁎ban_members⁎ oder ⁎manage_messages⁎. Setze die Nachricht ans Ende — alles nach den Berechtigungen gilt als eine Nachricht.
+</block>
+
+<block type="callout" kind="important">
+text: Die Prüfung sieht den Kanal an, in dem der Befehl verwendet wurde. Eine Berechtigung, die der Bot in einem Kanal hat, in einem anderen aber nicht, blockiert ihn also trotzdem. Prüfe die Rolle des Bots in Discord und stelle sicher, dass sie über den Rollen liegt, auf die sie wirken muss.
+</block>
+</dash>
+
+<details>
+syntax: $onlyBotPerms[permission; ...; error message]
+param: permission|text|Erforderlich|Ein oder mehrere Discord-Berechtigungsnamen, durch Semikolons getrennt, etwa ⁎kick_members⁎ oder ⁎manage_roles⁎.
+param: error message|text|Erforderlich|Nachricht, die in den Kanal gesendet wird, wenn dem Bot eine der Berechtigungen fehlt. Alles nach den Berechtigungen zählt als diese Nachricht.
+</details>

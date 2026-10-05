@@ -1,10 +1,20 @@
 <dash>
 name: $getSplitOutLength
-desc: Returns the number of elements in the split result of $splitIn.
+desc: Tells you how many pieces the last split produced.
 category: String Utilities
 
 <block type="text" title="How does the command work?">
-text: $getSplitOutLength returns how many parts were produced by the last $splitIn call. It is useful to check whether there is enough data before using $splitOut. The value is sent to the channel or can be used inline.
+text: After you split a line up, this counts the pieces for you. That number is handy for checking there is enough to work with before you reach for a particular one. On its own it prints the count in the channel; inside a condition it becomes the value you compare against.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $getSplitOutLength
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,11 +23,11 @@ text: $getSplitOutLength
 
 <block type="code" title="Ready-to-copy Example">
 text: $splitIn[apple,banana,cherry; ,]
-$getSplitOutLength
+text: $getSplitOutLength
 </block>
 
 <block type="callout" kind="note">
-text: Returns "0" when no split was performed yet. The same value can be used inline, for example with $if.
+text: Before any split has happened the answer is 0. Compare it inside $if when a message might not carry the separators you were counting on.
 </block>
 </dash>
 

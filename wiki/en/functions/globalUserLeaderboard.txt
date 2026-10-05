@@ -1,0 +1,52 @@
+<dash>
+name: $globalUserLeaderboard
+desc: Builds a leaderboard from a single scoreboard shared by every server the bot is in.
+category: Variables
+
+<block type="text" title="How does the command work?">
+text: $globalUserLeaderboard reads one variable that stores a score for every user across the whole bot, not per server, and lines the members up from highest score to lowest. It sends a ranked list to the channel. Use it when you want one competition between all servers instead of a separate scoreboard in each one.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Create the variable first in the Variables tab
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field
+item: Paste the code below into the editor
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: $globalUserLeaderboard[name; (sort); (limit); (format)]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $globalUserLeaderboard[points; desc; 5]
+</block>
+
+<block type="options" title="Sort types">
+option: desc|Highest value first (used when you leave the sort empty)
+option: asc|Lowest value first
+</block>
+
+<block type="options" title="Line placeholders">
+option: {rank}|The place, starting at 1
+option: {name}|Display name of the member
+option: {mention}|A clickable mention of the member
+option: {id}|Discord ID of the member
+option: {value}|The stored score
+</block>
+
+<block type="callout" kind="note">
+text: Only numbers can be ranked, so entries holding text are left out. The limit can go from 1 to 25 and is capped for you; anything higher is trimmed down.
+</block>
+</dash>
+
+<details>
+syntax: $globalUserLeaderboard[name; (sort); (limit); (format)]
+param: name|text|Required|Name of the variable that holds one score per user across all servers.
+param: sort|text|Optional|desc for highest first (default), or asc for lowest first.
+param: limit|number|Optional|How many lines to show, from 1 to 25. Defaults to 10.
+param: format|text|Optional|Line template. Defaults to {rank}. {name} — {value}. You can use {rank}, {name}, {mention}, {id} and {value}.
+</details>

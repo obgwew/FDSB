@@ -1,10 +1,21 @@
 <dash>
 name: $deleteChannels
-desc: Deletes one or more channels from the server.
+desc: Removes one or more channels from the server.
 category: Channel Management
 
 <block type="text" title="How does the command work?">
-text: $deleteChannels takes one or more channel IDs or mentions and deletes them from the server. The bot must have "Manage Channels" permission. If any channel cannot be deleted (e.g., missing permissions), the operation stops with an error.
+text: $deleteChannels takes channel IDs or channel mentions and removes them from the server, one after another, in the order you listed them.
+text: Each value has to be a plain run of digits or a channel mention such as <#123456789012345678>, and anything else stops the run with an error naming the bad value.
+text: If the bot is not allowed to delete one of them it stops there and says so in the channel, so check the result before you plan a second batch.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !clean
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,11 +27,12 @@ text: $deleteChannels[<#123456789012345678>]
 </block>
 
 <block type="callout" kind="warning">
-text: This command permanently deletes channels. The bot must have "Manage Channels" permission for each channel being deleted.
+text: Removing a channel cannot be undone from inside the chat, and the messages inside it go with it.
+text: The bot needs Manage Channels for every channel you list, and a failure partway through leaves the earlier ones already gone.
 </block>
 </dash>
 
 <details>
 syntax: $deleteChannels[channel ID/mention; ...]
-param: channels|text|Required|One or more channel IDs or mentions separated by semicolons.
+param: channels|text|Required|One or more channel IDs or channel mentions, separated by semicolons.
 </details>

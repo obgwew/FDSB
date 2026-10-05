@@ -1,0 +1,47 @@
+<dash>
+name: $onlyIn
+desc: Pozwala poleceniu działać tylko na wymienionych kanałach lub serwerach, a wszędzie indziej pokazuje twoją własną wiadomość.
+category: Kontrola dostępu
+
+<block type="text" title="Jak działa ta komenda?">
+text: $onlyIn sprawdza, gdzie polecenie zostało użyte, zanim cokolwiek wykona. Wymień dozwolone kanały i serwery, a na końcu podaj wiadomość, którą mają zobaczyć wszyscy pozostali. Jeśli polecenie użyto w jednym z nich, nic się nie dzieje i polecenie działa dalej. W każdym innym miejscu wiadomość zostaje wysłana, a reszta polecenia odrzucona.
+</block>
+
+<block type="list" title="Jak używać go w aplikacji">
+item: Otwórz zakładkę Polecenia
+item: Dotknij +, aby rozpocząć nowe polecenie
+item: Nadaj mu nazwę w polu Nazwa
+item: Ustaw pole Prefiks
+item: Wklej poniższy kod w edytorze
+item: Dotknij Zapisz
+</block>
+
+<block type="code" title="Składnia">
+text: $onlyIn[channel or server ID or name; ...; error message]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $onlyIn[123456789012345678; general; Use this command in #general.]
+text: $sendMessage[Welcome!]
+</block>
+
+<block type="options" title="Co możesz wymienić">
+option: channel ID|ID kanała, na przykład 123456789012345678, ze znakiem # lub bez niego
+option: channel name|Nazwa kanału, na przykład general
+option: server ID or name|ID lub nazwa serwera, aby polecenie działało także w pasującym kanale tego serwera
+</block>
+
+<block type="callout" kind="note">
+text: Wiadomość umieszczaj na końcu — wszystko po wpisach liczy się jako jedna wiadomość. Podanie nazwy serwera pozwala poleceniu działać w dowolnym kanale tego serwera.
+</block>
+
+<block type="callout" kind="important">
+text: Sprawdzenie dotyczy kanału, w którym polecenie zostało wpisane. W wiadomości bezpośredniej nie ma kanału ani serwera do dopasowania, więc polecenie jest tam zawsze blokowane.
+</block>
+</dash>
+
+<details>
+syntax: $onlyIn[channel or server ID or name; ...; error message]
+param: channel or server ID or name|text|Wymagane|Jeden lub kilka ID kanałów, nazw kanałów, ID serwerów lub nazw serwerów, których użycie jest dozwolone.
+param: error message|text|Wymagane|Wiadomość wysyłana na kanał, gdy polecenie użyto gdzie indziej. Wszystko po wpisach liczy się jako ta wiadomość.
+</details>

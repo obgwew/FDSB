@@ -1,10 +1,20 @@
 <dash>
 name: $alwaysReply
-desc: Event triggered on every non-bot message.
+desc: Runs your lines by themselves after every message a person sends.
 category: Event
 
 <block type="text" title="How does the event work?">
-text: $alwaysReply is an event prefix that triggers an FDScript for every message sent by a non-bot user. The script runs as a reply to the original message. This is useful for auto-responses or message processing.
+text: Set the Prefix field to $alwaysReply and the app marks the command as an Event for you, which means nobody ever has to type it. From then on, every message from a real person in the channel sets your lines running as a reply to that message, without anyone doing a thing. It is the easiest way to build something that listens to the whole conversation.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $alwaysReply
+item: The app marks it as an Event for you
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,18 +23,18 @@ text: #PREFIX:$alwaysReply
 
 <block type="code" title="Ready-to-copy Example">
 text: #PREFIX:$alwaysReply
- sendMessage[You said: $message]
+text:  sendMessage[You said: $message]
 </block>
 
 <block type="callout" kind="warning">
-text: This triggers on EVERY message. Use carefully to avoid excessive bot activity or rate limits.
+text: This fires on absolutely everything, so keep the lines short. On a busy server a bot that answers every single message runs into Discord's sending limits very quickly and starts being ignored.
 </block>
 
 <block type="callout" kind="important">
-text: This event runs in the bot_events folder, not bot_commands. Create your .fds file there.
+text: Because it answers as a reply, whatever your lines send shows up tucked under the message that set it off instead of standing on its own.
 </block>
 </dash>
 
 <details>
-syntax: #PREFIX:$alwaysReply
+syntax: $alwaysReply
 </details>

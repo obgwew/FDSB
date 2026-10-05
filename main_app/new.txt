@@ -1,18 +1,14 @@
-welcome to update 2.4.2
+welcome to update 2.4.3
 
 # add:
-- add syncMode function
-
-- new FDScript gen 2.5
-
-- new vars/other commands
-
-# ui:
-
-- #edit main ui
+- add more commands
 
 # fixes:
 
 - fix some commands
 
-- fix a lot of ui
+- fix animation
+
+- fix change bot or token
+
+- fix some ui

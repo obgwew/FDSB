@@ -1,0 +1,51 @@
+<dash>
+name: $onlyUserPerms
+desc: 除非运行命令的人被允许执行接下来的操作，否则用你自己的消息停止命令。
+category: 访问控制
+
+<block type="text" title="这个命令是如何工作的？">
+text: ⁨$onlyUserPerms⁩ 会在受保护的部分运行之前检查运行该命令的成员的权限。列出他们需要的权限，然后在末尾放上缺少某项权限时要发送的消息。如果他们拥有全部权限，就不会显示任何东西，你的命令继续执行。如果缺少其中一项，消息会被发送，而命令的其余部分就在那里被丢弃。
+</block>
+
+<block type="list" title="如何在应用中使用它">
+item: 打开命令标签页
+item: 点击 + 开始一个新命令
+item: 在名称字段中为它取一个名字
+item: 设置前缀字段
+item: 将下面的代码粘贴到编辑器中
+item: 点击保存
+</block>
+
+<block type="code" title="语法">
+text: $onlyUserPerms[permission; ...; error message]
+</block>
+
+<block type="code" title="可直接复制的示例">
+text: $onlyUserPerms[manage_messages; You need Manage Messages to do that.]
+text: $onlyAdmin
+text: $sendMessage[Message deleted.]
+</block>
+
+<block type="options" title="常用权限">
+option: manage_messages|删除和置顶消息
+option: kick_members|踢出成员
+option: ban_members|封禁成员
+option: timeout_members|对成员实施超时
+option: manage_roles|分配和移除角色
+option: moderate_members|对成员实施超时和踢出
+</block>
+
+<block type="callout" kind="note">
+text: 权限名称是 Discord 自己的名称，用小写加下划线。把消息放在最后 —— 权限之后的一切都算作一条消息。
+</block>
+
+<block type="callout" kind="important">
+text: 这与 ⁨$onlyAdmin⁩ 不同。它查看的是该人自己的权限，因此你额外给了权限的角色会通过检查，即使它不是管理员角色。
+</block>
+</dash>
+
+<details>
+syntax: $onlyUserPerms[permission; ...; error message]
+param: permission|text|Required|一个或多个 Discord 权限名称，用分号分隔，例如 ⁎manage_messages⁎ 或 ⁎kick_members⁎。
+param: error message|text|Required|当该成员缺少其中一项权限时发送到频道的消息。权限之后的一切都算作这条消息。
+</details>

@@ -1,10 +1,19 @@
 <dash>
 name: $modifyChannel
-desc: Changes one or more properties of a server channel.
+desc: Renames, rearranges or moves a channel in the current server.
 category: Channel Management
 
 <block type="text" title="How does the command work?">
-text: $modifyChannel edits a channel in the current server. The required first argument selects the channel; the remaining arguments are positional and can update the name, topic, NSFW setting, position, and category. Omit or leave an optional argument empty to leave that property unchanged.
+text: The first part picks the channel, and everything after it follows in one fixed order: name, topic, age-restriction switch, position, then category. Leave any of those empty and that setting is left alone, which means you can change one thing per call. Nothing is posted when it finishes, so the confirmation is the channel itself looking different.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !tidy
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,20 +25,20 @@ text: $modifyChannel[123456789012345678; Announcements; Welcome messages; no; 2;
 </block>
 
 <block type="callout" kind="warning">
-text: The command must run in a server and the bot needs permission to manage the channel. Names are limited to 100 characters and topics to 1024 characters. A category cannot be assigned to another category.
+text: It needs a server around it, and your bot needs Manage Channels on the channel being changed. Names stop at 100 characters and topics at 1024, and a category can never be tucked inside another category.
 </block>
 
 <block type="callout" kind="note">
-text: Use yes, no, true, or false for the NSFW value. Use none, 0, or null in the category field to remove a category. In the current interpreter this is a standalone command; its inline resolver does not run the side effect.
+text: Answer the age-restriction slot with yes, no, true or false. Writing none as the topic wipes the current one, while none, 0 or null in the category slot takes the channel back out of its category. Supply nothing to change and the bot tells you no changes were given.
 </block>
 </dash>
 
 <details>
 syntax: $modifyChannel[Channel ID; (Channel Name; Topic; Make NSFW?; Position; Category ID)]
-param: channelID|snowflake|Required|The ID or mention of the channel to modify
-param: name|text|Optional|The new channel name
-param: topic|text|Optional|The new topic; none clears it
-param: nsfw|text|Optional|Whether the channel is NSFW: yes, no, true, or false
-param: position|integer|Optional|The new channel position
-param: categoryID|snowflake|Optional|The destination category ID; none, 0, or null clears it
+param: channelID|snowflake|Required|The channel to change, as an @channel mention or its ID
+param: name|text|Optional|New name for the channel
+param: topic|text|Optional|New topic; write none to wipe the current one
+param: nsfw|text|Optional|Age restriction switch: yes, no, true or false
+param: position|integer|Optional|New spot for the channel in the sidebar
+param: categoryID|snowflake|Optional|Category to drop the channel into; none, 0 or null removes it
 </details>

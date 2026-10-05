@@ -1,10 +1,19 @@
 <dash>
 name: $moveChannel
-desc: Moves a channel into a server category.
+desc: Moves a channel under a different category on the server.
 category: Channel Management
 
 <block type="text" title="How does the command work?">
-text: $moveChannel moves an existing regular channel into the category identified by the second argument. Both IDs must be numeric snowflakes in the current server. If the channel is already in that category, the command logs a no-op and makes no Discord request.
+text: $moveChannel takes a channel that already exists and files it under the category you name, so the sidebar rearranges itself in front of everyone. Both parts are plain numeric IDs taken from the server the message was sent in, and the first one has to be a normal text or voice channel rather than a category. If the channel is already sitting in that category the bot leaves it exactly where it is and does nothing.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !move
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,16 +25,16 @@ text: $moveChannel[123456789012345678; 987654321012345678]
 </block>
 
 <block type="callout" kind="warning">
-text: The command must run in a server. The target must be a regular channel, the destination must be a category, and the bot needs permission to manage channels. Mentions are not accepted by the current implementation.
+text: This one only works inside a server, never in a private chat. The first ID has to be a regular channel and the second a real category, the bot needs Manage Channels to shuffle it around, and mentions are not understood here, so paste the raw numbers.
 </block>
 
 <block type="callout" kind="note">
-text: Categories cannot be moved into another category. In the current interpreter this command is standalone-only because its inline resolver does not execute the side effect.
+text: A category cannot be moved into another category, so only the channels sitting under them move. Keep this on a line of its own, because dropping it inside another command does not carry the move out.
 </block>
 </dash>
 
 <details>
 syntax: $moveChannel[channel ID; new category ID]
-param: channelID|snowflake|Required|The numeric ID of the regular channel to move
-param: categoryID|snowflake|Required|The numeric ID of the destination category
+param: channelID|snowflake|Required|The numeric ID of the channel you want moved
+param: categoryID|snowflake|Required|The numeric ID of the category it should end up under
 </details>

@@ -1,10 +1,20 @@
 <dash>
 name: $footerIcon
-desc: Sets the footer icon image of an embed using a URL.
+desc: Puts a small round picture beside the footer of a card you are building.
 category: Embed Builder
 
 <block type="text" title="How does the command work?">
-text: $footerIcon places a small round picture next to the footer text of the target embed. Any argument containing a valid web address works - the command extracts the first URL found. The optional last numeric argument selects which embed to edit.
+text: $footerIcon attaches a picture to the bottom line of the card you are building, the little circle that sits next to the footer text. Hand it any piece of text containing a web address and the bot picks the first link it finds, so you can leave punctuation around it. If several cards are going out together, finish with the card number so the picture lands on the one you meant.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !welcome
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -17,12 +27,12 @@ text: $footerIcon[https://example.com/logo.png]
 </block>
 
 <block type="callout" kind="note">
-text: The URL must start with http:// or https://. Trailing punctuation after the URL (like . or )) is trimmed automatically. An error is raised if no valid URL is found.
+text: The address has to start with http:// or https://. Anything stuck on the end of it, a full stop or a closing bracket for instance, is trimmed away for you, and text with no valid link in it at all is refused.
 </block>
 </dash>
 
 <details>
 syntax: $footerIcon[url;(index)]
-param: url|text|Required|Text containing the image URL (http:// or https://)
-param: index|number|Optional|Embed number to edit when several embeds are being built (default 1)
+param: url|text|Required|Text holding the picture address, beginning with http:// or https://
+param: index|number|Optional|Which card to put the picture on when you are building several at once (default 1)
 </details>

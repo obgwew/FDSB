@@ -1,10 +1,20 @@
 <dash>
 name: $wait
-desc: Pauses the script execution for a specified duration.
+desc: Holds your command still for a while so the next lines land later.
 category: Timing & Delays
 
 <block type="text" title="How does the command work?">
-text: $wait freezes the entire script execution for the specified duration. No subsequent commands in the script will execute until the wait period has elapsed.
+text: $wait is meant to pause everything for a set stretch, so the lines under it only begin once the time is up. A length is a number plus a unit: s for seconds, m for minutes, h for hours, d for days. Anything you have already written above the pause is sent before it starts, which is how a short line lands at once and the rest follows later.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !wait
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,16 +23,20 @@ text: $wait[time]
 
 <block type="code" title="Ready-to-copy Example">
 text: $sendMessage[Starting...]
-$wait[5s]
-$sendMessage[Done after 5 seconds!]
+text: $wait[5s]
+text: $sendMessage[Done after 5 seconds!]
 </block>
 
 <block type="callout" kind="note">
-text: The time format uses: s (seconds), m (minutes), h (hours), d (days). The entire script is frozen during the wait — other scripts from other users are not affected.
+text: While the pause runs, only the command that asked for it is held up, and other people's commands carry on as usual.
+</block>
+
+<block type="callout" kind="important">
+text: In the build you are running the pause is not applied. The line is skipped and the lines below it start straight away, so nothing is actually held back for you.
 </block>
 </dash>
 
 <details>
 syntax: $wait[time]
-param: time|text|Required|Duration to wait. Format: number + unit (s/m/h/d), e.g., 5s, 10m, 1h, 1d
+param: time|text|Required|How long to hold on for, as a number plus s, m, h or d, such as 5s, 10m or 1h
 </details>

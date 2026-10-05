@@ -1,10 +1,20 @@
 <dash>
 name: $messageContains
-desc: حدث يُطلق عندما تحتوي رسالة على أي كلمة من الكلمات المحددة.
+desc: يشغّل أسطرك وحدها كلما حملت رسالة إحدى كلماتك.
 category: الحدث
 
-<block type="text" title="كيف تعمل الدالة؟">
-text: $messageContains هو بادئة حدث تُطلق سكربت FDScript عندما تحتوي رسالة على أي كلمة من كلمات التشغيل المحددة. تُفصل الكلمات بفواصل منقوطة داخل الأقواس. المطابقة غير حساسة لحالة الأحرف.
+<block type="text" title="كيف يعمل الحدث؟">
+text: اكتب كلماتك المشغِّلة في حقل البادئة مفصولة بفواصل منقوطة، فيضع التطبيق على الأمر علامة حدث نيابةً عنك. وبعدها، أي رسالة تحتوي حتى على كلمة واحدة منها تجعل الأسطر تحتها تعمل من تلقاء نفسها. والمطابقة تتجاهل الأحرف الكبيرة، فـ Hi و hi تُحسبان سواءً، ولا يهم أين في الرسالة تقع الكلمة.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة على $messageContains[hello;hi;hey]
+item: يضع التطبيق عليه علامة حدث نيابةً عنك
+item: الصق الكود أدناه في المحرر
+item: اضغط على حفظ
 </block>
 
 <block type="code" title="الصيغة">
@@ -13,19 +23,19 @@ text: #PREFIX:$messageContains[word1;word2;word3]
 
 <block type="code" title="مثال جاهز للنسخ">
 text: #PREFIX:$messageContains[hello;hi;hey]
- sendMessage[Hey there! How can I help?]
+text:  sendMessage[Hey there! How can I help?]
 </block>
 
 <block type="callout" kind="note">
-text: يعمل السكربت إذا احتوت الرسالة على أي كلمة واحدة من الكلمات المدرجة. لوجود جميع الكلمات، استخدم $messageContainsAll بدلاً من ذلك.
+text: كلمة واحدة من القائمة تكفي لإشعالها. وإذا كان يجب وجود كل الكلمات في الرسالة نفسها، فاختر $messageContainsAll بدلًا منها.
 </block>
 
 <block type="callout" kind="important">
-text: يعمل هذا الحدث في مجلد bot_events وليس bot_commands. أنشئ ملف .fds الخاص بك هناك.
+text: تُطابَق الكلمات كمقاطع نصية مجردة، فـ hi تطلقه أيضًا رسالة تقول hiya. أبقِ كل مشغّل كلمة واحدة متصلة إن أردته دقيقًا.
 </block>
 </dash>
 
 <details>
-syntax: #PREFIX:$messageContains[word1;word2;...]
-param: words|text|مطلوب|قائمة كلمات التشغيل مفصولة بفواصل منقوطة. تطابق أي منها يُطلق السكربت.
+syntax: $messageContains[word1;word2;...]
+param: words|text|مطلوب|كلماتك المشغِّلة، مفصولة بفواصل منقوطة. مطابقة واحدة تكفي.
 </details>

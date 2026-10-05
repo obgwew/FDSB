@@ -1,10 +1,19 @@
 <dash>
 name: $httpAddHeader
-desc: يضيف ترويسة HTTP مخصصة تُرسل مع طلب HTTP التالي.
+desc: يرفق ترويسة إضافية بطلب الويب الذي ينفذه أمرك التالي.
 category: HTTP
 
-<block type="text" title="كيف تعمل الدالة؟">
-text: يسجّل $httpAddHeader ترويسة (اسم وقيمة) ستُرفق بطلب HTTP التالي المُنفَّذ عبر $httpGet أو $httpPost أو $httpPut أو $httpPatch أو $httpDelete. تُمسح الترويسات تلقائيًا بعد الطلب.
+<block type="text" title="كيف يعمل الأمر؟">
+text: أعطه اسم ترويسة وقيمة، فيرافق الاثنان الطلب التالي الذي ينفذه أمرك، سواء انتهى إلى GET أو POST أو PUT أو patch أو delete. وهكذا تدرج مفتاح API أو رمز bearer دون بنائه في العنوان. وبمجرد إرسال الطلب تُمسح الترويسات، فينطبق كل منها على نداء واحد لا أكثر.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة على !lookup
+item: الصق الكود أدناه في المحرر
+item: اضغط على حفظ
 </block>
 
 <block type="code" title="الصيغة">
@@ -13,16 +22,16 @@ text: $httpAddHeader[name; value]
 
 <block type="code" title="مثال جاهز للنسخ">
 text: $httpAddHeader[Authorization; Bearer token123]
-$httpGet[https://api.example.com/data]
+text: $httpGet[https://api.example.com/data]
 </block>
 
 <block type="callout" kind="note">
-text: إضافة الاسم نفسه مرتين يستبدل القيمة السابقة. تُمسح الترويسات المخزنة بعد إرسال الطلب.
+text: اضبط اسم الترويسة نفسه مرتين فالقيمة الثانية تستبدل الأولى. ويجب أن يكون كلا الجزأين موجودًا: واحذف أيًّا منهما يتوقف البوت بخطأ يخبرك بما ينقص.
 </block>
 </dash>
 
 <details>
 syntax: $httpAddHeader[name; value]
-param: name|text|مطلوب|اسم الترويسة (مثل Authorization)
-param: value|text|مطلوب|قيمة الترويسة
+param: name|text|مطلوب|ما اسم الترويسة، مثل Authorization
+param: value|text|مطلوب|ما يُرسَل كقيمة لها
 </details>

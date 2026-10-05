@@ -1,0 +1,52 @@
+<dash>
+name: $getLeaderboardValue
+desc: Returns the value, ID or name of whoever sits at a given rank in a leaderboard.
+category: Variables
+
+<block type="text" title="How does the command work?">
+text: $getLeaderboardValue builds a ranking and then reaches into it. You give it a position, and it hands back what is sitting there — the stored score, the ID, or the display name. On its own it prints that result in the channel, and inside another command the result is inserted in place. If you ask for a position that is past the end of the list, you get nothing back, so check the length first when the list can be short.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Create the variable first in the Variables tab
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field
+item: Paste the code below into the editor
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: $getLeaderboardValue[type; name; sort; position; return_type]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $sendMessage[Top player: $getLeaderboardValue[user; points; desc; 1; name]]
+</block>
+
+<block type="options" title="Variable types">
+option: user|One value per member, kept separately in each server
+option: globaluser|One value per member, shared across every server the bot is in
+option: server|One value per server
+</block>
+
+<block type="options" title="What to return">
+option: value|The stored score itself (used when you leave this empty)
+option: id|The Discord ID of that entry
+option: name|The display name, falling back to the raw ID if it cannot be resolved
+</block>
+
+<block type="callout" kind="note">
+text: Sort the list the same way you did when you read the position, otherwise you will get a different entry. Values that are not numbers are skipped.
+</block>
+</dash>
+
+<details>
+syntax: $getLeaderboardValue[type; name; sort; position; (return_type)]
+param: type|text|Required|Which pool to rank: user, globaluser or server.
+param: name|text|Required|Name of the variable to rank by.
+param: sort|text|Required|desc for highest first, or asc for lowest first.
+param: position|number|Required|Which place to read, starting at 1. A position past the end of the list returns nothing.
+param: return_type|text|Optional|value for the stored score, id for the Discord ID, or name for the display name.
+</details>

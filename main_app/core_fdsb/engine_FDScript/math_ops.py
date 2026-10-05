@@ -5,6 +5,9 @@
 
 import math
 
+from .errors import FDLogicError, FDRuntimeError
+from .parse_utils import _split_args
+
 
 class MathOpsMixin:
 
@@ -12,11 +15,6 @@ class MathOpsMixin:
     _MATH_ROUNDING_OPS = ('floor', 'ceil')
 
     def _apply_math_cmd(self, cmd_name: str, inner: str, pos: int = 0):
-        """Entry point called from ExecutionContext._apply_cmd.
-
-        Returns the resolved string if `cmd_name` is a math command,
-        or None if it isn't (caller should keep checking other command
-        families)."""
         if cmd_name in self._MATH_BASIC_OPS:
             return self._math_basic(cmd_name, inner, pos)
         if cmd_name in self._MATH_ROUNDING_OPS:
@@ -26,7 +24,6 @@ class MathOpsMixin:
         return None
 
     def _math_basic(self, cmd_name: str, inner: str, pos: int) -> str:
-        from FDCore import _split_args, FDLogicError, FDRuntimeError
 
         parts = _split_args(inner)
         if len(parts) < 2:
@@ -62,7 +59,7 @@ class MathOpsMixin:
                 if v == 0:
                     self._abort_with_error(FDRuntimeError("Division by zero in math operation"), pos)
                 res /= v
-        else:  # mod
+        else:
             res = values[0]
             for v in values[1:]:
                 if v == 0:
@@ -72,7 +69,6 @@ class MathOpsMixin:
         return str(int(res)) if float(res).is_integer() else str(res)
 
     def _math_rounding(self, cmd_name: str, inner: str, pos: int) -> str:
-        from FDCore import _split_args, FDLogicError
 
         parts = _split_args(inner)
         if len(parts) != 1:
@@ -96,7 +92,6 @@ class MathOpsMixin:
         return str(res)
 
     def _math_power(self, inner: str, pos: int) -> str:
-        from FDCore import _split_args, FDLogicError, FDRuntimeError
 
         parts = _split_args(inner)
         if len(parts) != 2:

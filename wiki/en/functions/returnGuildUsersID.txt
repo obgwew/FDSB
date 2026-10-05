@@ -1,10 +1,20 @@
 <dash>
 name: $returnGuildUsersID
-desc: Collects human (non-bot) member IDs from a guild and stores them.
+desc: Collects the ID of every human member in a server so you can reuse the list.
 category: Return Commands
 
 <block type="text" title="How does the command work?">
-text: $returnGuildUsersID collects all human (non-bot) member IDs from a specified guild and stores them under a variable name. You can choose between "cache" mode (uses already cached members) or "chunk" mode (forces a full guild member fetch first for complete data). The result can be retrieved later using $return[variableName].
+text: $returnGuildUsersID walks through the members of the server you name and collects the ID of each person, leaving bot accounts out. The IDs are joined with a separator you choose and parked under a name you pick, and $return brings the whole list back out wherever you need it. Nothing is printed in the channel while it collects.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !userlist
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,23 +23,23 @@ text: $returnGuildUsersID[guildID; cache/chunk; var; separator]
 
 <block type="code" title="Ready-to-copy Example">
 text: $returnGuildUsersID[$guildID; cache; userIDs; ,]
-$sendMessage[Users: $return[userIDs]]
+text: $sendMessage[Users: $return[userIDs]]
 </block>
 
 <block type="options" title="Fetch modes">
-option: cache|Uses the bot's cached member list (fast, but may be incomplete for large servers)
-option: chunk|Forces a full member list fetch from Discord first (slower, but complete)
+option: cache|Uses the member list the bot already has, quick but sometimes short on large servers
+option: chunk|Asks Discord for the whole member list first, slower but always complete
 </block>
 
 <block type="callout" kind="note">
-text: Only human (non-bot) members are included. The bot must be a member of the target guild. Use "chunk" mode for large servers where the cached member list may be incomplete.
+text: Bot accounts are never collected, and the bot has to be a member of the server you name. A server that turns out to have nobody in it is reported as an error rather than as an empty list.
 </block>
 </dash>
 
 <details>
 syntax: $returnGuildUsersID[guildID; cache/chunk; var; separator]
-param: guildID|snowflake|Required|The ID of the guild (server) to collect member IDs from
-param: cache/chunk|text|Required|Fetch mode: "cache" for cached members (fast), "chunk" for full fetch (complete)
-param: var|text|Required|The variable name to store the result in (use with $return[])
-param: separator|text|Required|The separator between multiple IDs (e.g., , or ;). You can use named separators: dot, com, apo, sem, colon
+param: guildID|snowflake|Required|Which server to walk through
+param: cache/chunk|text|Required|cache for the member list the bot already has, chunk for a complete fresh list
+param: var|text|Required|The name the list is filed under, read back later with $return[]
+param: separator|text|Required|What goes between the IDs, such as a comma or a semicolon. You can also type a name: dot, com, apo, sem, colon
 </details>

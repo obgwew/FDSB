@@ -1,10 +1,22 @@
 <dash>
 name: $lastBotMessageID
-desc: إرجاع معرّف آخر رسالة أرسلها البوت أثناء السكربت الحالي.
+desc: يعطيك معرّف آخر رسالة أرسلها البوت أثناء تنفيذ أمرك.
 category: المتغيرات
 
-<block type="text" title="كيف تعمل الدالة؟">
-text: $lastBotMessageID يُحل إلى معرّف snowflake لأحدث رسالة أرسلها البوت أثناء تنفيذ السكربت الحالي. يتم تحديثه تلقائيًا بواسطة أوامر الإخراج مثل $sendMessage و$reply و$sendEmbedMessage. إذا لم يرسل البوت أي رسالة بعد، يتم إرجاع سلسلة فارغة.
+<block type="text" title="كيف يعمل الأمر؟">
+text: بمجرد أن ينشر البوت شيئًا، يعطيك $lastBotMessageID معرّف تلك الرسالة كأرقام مجردة.
+text: وكل رسالة يرسلها البوت أثناء عمل أمرك تحرّك القيمة إلى الأمام، فيستطيع سطر لاحق أن يشير إلى الرسالة التي كتبها للتو.
+text: وقبل إرسال أي شيء تحصل على سلسلة نصية فارغة، وفي سكربت يبدأ بالضغط على زر يعود إلى الرسالة التي يقف عليها الزر.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة على !edit
+item: اكتب سكربتك في المحرر
+item: الصق السطر أدناه في المكان الذي تحتاجه
+item: اضغط على حفظ
 </block>
 
 <block type="code" title="الصيغة">
@@ -14,11 +26,11 @@ text: $lastBotMessageID[]
 
 <block type="code" title="مثال جاهز للنسخ">
 text: $sendMessage[Look at this!]
-$editIn[10s; The last message ID was $lastBotMessageID]
+text: $editIn[10s; The last message ID was $lastBotMessageID]
 </block>
 
 <block type="callout" kind="note">
-text: هذا أمر مضمّن فقط ولا يمكن استخدامه كعبارة مستقلة. استخدمه داخل أقواس وسائط أمر آخر أو كرمز مضمّن.
+text: هذا لا يعمل إلا داخل أمر آخر، ولا يتجاوز ذلك أبدًا سطرًا وحده. امنحه قوسًا، أو أدرجه مباشرة في جملة.
 </block>
 </dash>
 

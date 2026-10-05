@@ -8,3 +8,4 @@ requirements.txt
 build_apk.ps1
 pyproject.toml
 __pycache__/
+build_number.txt

@@ -1,10 +1,19 @@
 <dash>
 name: $editSelectMenu
-desc: Edits the minimum/maximum selection and the placeholder of an existing select menu.
+desc: Changes how many options a menu demands and what hint it shows before anyone picks.
 category: Components
 
 <block type="text" title="How does the command work?">
-text: $editSelectMenu finds a select menu by its Menu ID on a message and updates how many options the user must/may pick (Min/Max) and the hint text shown before the choice (Placeholder). The options already added to the menu stay unchanged. To edit an individual option, use $editSelectMenuOption.
+text: Point this at the ID you gave a menu when you built it and the bot rewrites that menu in place on the message it is already sitting on. You can loosen or tighten how many options somebody has to choose from, and change the grey hint text above the closed menu. The options themselves are left exactly as they were, so one line turns a one-pick menu into a two-pick one.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !colors
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,25 +22,25 @@ text: $editSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
 
 <block type="code" title="Ready-to-copy Example">
 text: $newSelectMenu[color_menu; 1; 1; Pick a color]
-$addSelectMenuOption[color_menu; Red; red; The color red]
-$addSelectMenuOption[color_menu; Blue; blue; The color blue]
-$editSelectMenu[color_menu; 1; 2; Pick one or two colors]
+text: $addSelectMenuOption[color_menu; Red; red; The color red]
+text: $addSelectMenuOption[color_menu; Blue; blue; The color blue]
+text: $editSelectMenu[color_menu; 1; 2; Pick one or two colors]
 </block>
 
 <block type="callout" kind="note">
-text: Without a Message ID, the bot looks for the menu on the interaction source message first, then on the last message the bot sent. The menu options are preserved.
+text: Leave the message ID out and the bot looks for the menu on the message the interaction came from first, then on the last message it sent. Either way that message has to be one the bot posted itself.
 </block>
 
 <block type="callout" kind="warning">
-text: Min must be between 0 and 25, Max between 1 and 25, and Min cannot exceed Max. The target message must have been sent by this bot and must already contain a menu with the given ID.
+text: Min runs from 0 to 25, Max from 1 to 25, and Min can never sit above Max. If the message carries no menu with the ID you named, the bot says so rather than editing something else.
 </block>
 </dash>
 
 <details>
 syntax: $editSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
-param: Menu ID|text|Required|The ID of the select menu to edit
-param: Min|number|Required|New minimum number of options the user must select (0 to 25)
-param: Max|number|Required|New maximum number of options the user may select (1 to 25)
-param: Placeholder|text|Optional|New hint text shown before a choice is made
-param: Message ID|snowflake|Optional|ID of a specific bot message that holds the menu to edit
+param: Menu ID|text|Required|The ID you gave the menu when you built it
+param: Min|number|Required|How many options the user must pick, 0 to 25
+param: Max|number|Required|How many options the user may pick, 1 to 25
+param: Placeholder|text|Optional|New hint text shown above the menu before a choice is made
+param: Message ID|snowflake|Optional|Which bot message holds the menu. Leave it out to use the obvious one.
 </details>

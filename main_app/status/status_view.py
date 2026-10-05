@@ -32,9 +32,6 @@ def _btn_style(bg: str, fg: str = '#FFFFFF',
         style.padding = padding
     return style
 
-
-# Fixed presence colors (Discord-style) — intentionally not theme-driven,
-# same way 'discord'/'btn_invite' colors are fixed across every theme.
 _PRESENCE_COLORS = {
     'online':     '#23A55A',
     'idle':       '#F0B232',
@@ -53,8 +50,6 @@ _ACTIVITY_ICONS = {
     'competing':  ft.Icons.EMOJI_EVENTS_ROUNDED,
 }
 
-# Loop-time unit → seconds multiplier, and the minimum allowed loop time
-# expressed in seconds (a loop can never fire more often than every 12s).
 _LOOP_UNIT_SECONDS = {
     'second': 1,
     'minute': 60,
@@ -184,12 +179,6 @@ class BotStatusView:
     # ── translation shortcut ────────────────────────────────────────────────
     def _tt(self, key: str) -> str:
         return _t(key, self._lang)
-
-    # ══════════════════════════════════════════════════════════════════════
-    #  Persistence — status_config.json lives next to config.json inside
-    #  bot_files (same resolution logic as _get_token in local_server.py),
-    #  so the running bot can read it directly without going through the UI.
-    # ══════════════════════════════════════════════════════════════════════
 
     def _status_config_path(self) -> str | None:
         if not self._bot_dir:
@@ -438,8 +427,6 @@ class BotStatusView:
         if raw == '':
             self._loop_time_field.error = None
         elif not raw.isdigit():
-            # Anything that isn't a plain whole number — decimals, signs,
-            # letters, etc. — is rejected outright.
             self._loop_time_field.error = self._tt('sv_loop_time_integer_error')
         else:
             value = int(raw)
@@ -641,7 +628,6 @@ class BotStatusView:
         self._activity_dropdown.value = self._activity_type_value
         if self._activity_type_value != 'streaming':
             self._stream_url_field.error = None
-        # Rebuild so the Stream URL field appears/disappears as needed.
         self._container.content = self._build_editor_view()
         self._page.update()
         self._refresh_preview()
@@ -661,8 +647,6 @@ class BotStatusView:
 
     @staticmethod
     def _is_allowed_stream_url(url: str) -> bool:
-        # Discord itself only renders the "Live" badge for Twitch and
-        # YouTube links, so those are the only two hosts we accept.
         if not (url.startswith('http://') or url.startswith('https://')):
             return False
         try:

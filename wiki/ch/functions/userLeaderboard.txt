@@ -1,0 +1,52 @@
+<dash>
+name: $userLeaderboard
+desc: 使用存储的分数构建一个排行榜，对当前服务器中的成员进行排名。
+category: 变量
+
+<block type="text" title="这个命令是如何工作的？">
+text: ⁨$userLeaderboard⁩ 读取一个变量，该变量在命令被使用的服务器中为每个成员保存一个分数，并把成员按分数从高到低排列。它把排好名的列表发送到频道。每个服务器都保存自己的一份分数，因此每一个都会得到自己独立的排名。
+</block>
+
+<block type="list" title="如何在应用中使用它">
+item: 先在变量标签页中创建该变量
+item: 打开命令标签页
+item: 点击 + 开始一个新命令
+item: 在名称字段中为它取一个名字
+item: 设置前缀字段
+item: 将下面的代码粘贴到编辑器中
+item: 点击保存
+</block>
+
+<block type="code" title="语法">
+text: $userLeaderboard[name; (sort); (limit); (format)]
+</block>
+
+<block type="code" title="可直接复制的示例">
+text: $userLeaderboard[points; desc; 5; {rank}. {mention} — {value}]
+</block>
+
+<block type="options" title="排序类型">
+option: desc|最高的值在前（排序留空时使用）
+option: asc|最低的值在前
+</block>
+
+<block type="options" title="行占位符">
+option: {rank}|名次，从 1 开始
+option: {name}|成员的显示名称
+option: {mention}|成员的可点击提及
+option: {id}|成员的 Discord ID
+option: {value}|存储的分数
+</block>
+
+<block type="callout" kind="note">
+text: 只有数字才能排名，所以含有文本的条目会被排除。limit 可以从 1 到 25，并且已经为你设了上限；超过的数值会被削减。
+</block>
+</dash>
+
+<details>
+syntax: $userLeaderboard[name; (sort); (limit); (format)]
+param: name|text|Required|在本服务器中为每个成员保存一个分数的变量名称。
+param: sort|text|Optional|⁎desc⁎ 表示最高的在前（默认），⁎asc⁎ 表示最低的在前。
+param: limit|number|Optional|显示多少行，从 1 到 25。默认为 10。
+param: format|text|Optional|行模板。默认为 ⁎{rank}. {name} — {value}⁎。你可以使用 ⁎{rank}⁎、⁎{name}⁎、⁎{mention}⁎、⁎{id}⁎ 和 ⁎{value}⁎。
+</details>

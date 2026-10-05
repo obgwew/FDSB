@@ -1,0 +1,40 @@
+<dash>
+name: $onlyNSFW
+desc: Uruchamia polecenie tylko na kanałach oznaczonych jako ograniczone wiekowo, a wszędzie indziej pokazuje Twoją własną wiadomość.
+category: Kontrola dostępu
+
+<block type="text" title="Jak działa to polecenie?">
+text: ⁨$onlyNSFW⁩ to bramka dla treści dla dorosłych. Sprawdza, czy kanał, w którym użyto polecenia, jest na Discordzie oznaczony jako ograniczony wiekowo. Jeśli tak, nic się nie dzieje i reszta Twojego polecenia trwa dalej. Jeśli nie, Twoja wiadomość zostanie wysłana, a reszta polecenia odrzucona w tym miejscu.
+</block>
+
+<block type="list" title="Jak używać go w aplikacji">
+item: Otwórz zakładkę Polecenia
+item: Dotknij +, aby rozpocząć nowe polecenie
+item: Nadaj mu nazwę w polu Nazwa
+item: Ustaw pole Prefiks
+item: Wklej poniższy kod do edytora
+item: Dotknij Zapisz
+</block>
+
+<block type="code" title="Składnia">
+text: $onlyNSFW[error message]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $onlyNSFW[This command only works in age restricted channels.]
+text: $sendMessage[Here is the adult content.]
+</block>
+
+<block type="callout" kind="note">
+text: Musisz sam oznaczyć kanał na Discordzie: otwórz ustawienia kanału, włącz Ograniczenie wiekowe, a następnie zapisz. Bramka nic nie robi, dopóki kanał nie jest tak ustawiony.
+</block>
+
+<block type="callout" kind="important">
+text: Ta bramka służy wygodzie, a nie prawdziwemu bezpieczeństwu. Każdy, kto może czytać Twoje polecenia, może dowiedzieć się, że polecenie istnieje, i usunąć bramkę.
+</block>
+</dash>
+
+<details>
+syntax: $onlyNSFW[error message]
+param: error message|text|Required|Wiadomość wysyłana na kanał, gdy nie jest on oznaczony jako ograniczony wiekowo.
+</details>

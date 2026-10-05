@@ -1,10 +1,20 @@
 <dash>
 name: $suppressErrors
-desc: Suppresses all error messages for the script and optionally sends a custom message instead.
+desc: Hides the bot's error messages and shows one message of your own instead.
 category: Access Control
 
 <block type="text" title="How does the command work?">
-text: When $suppressErrors appears anywhere in the script, all error messages (syntax, logic, runtime, environment) are suppressed. Instead of showing the actual error, the script aborts silently or sends a custom message if one is provided.
+text: $suppressErrors tells the bot to keep its mistakes to itself for the rest of the command. Once the line is anywhere in your script, a syntax slip, a bad value or a failed action no longer prints its usual explanation in the channel. Put a short message in the brackets and that is what members see instead, or leave it empty and the failure passes by in silence.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !welcome
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,15 +26,15 @@ text: $suppressErrors[Something went wrong! Please try again.]
 </block>
 
 <block type="callout" kind="note">
-text: This command is detected at parse time — it must appear anywhere in the script (even on a line by itself). When active, all errors are logged internally but not shown to users. If a custom message is provided, it is sent instead of the error.
+text: The bot spots this line before your command even starts, so it can sit anywhere and does not have to come first. Whatever went wrong is still recorded on the bot's side, it simply no longer reaches the channel.
 </block>
 
 <block type="callout" kind="warning">
-text: Use with caution — suppressing errors can make debugging difficult. The script still aborts on error, just silently.
+text: Lovely when you want a tidy channel, but it makes genuine problems much harder to track down. The command still stops where it failed, it just stops quietly.
 </block>
 </dash>
 
 <details>
 syntax: $suppressErrors[(custom message)]
-param: custom message|text|Optional|A message to send to the user when any error occurs, instead of the default error message. If omitted, errors are suppressed silently.
+param: custom message|text|Optional|What to send to the channel when anything goes wrong. Leave it out and nothing is shown at all.
 </details>

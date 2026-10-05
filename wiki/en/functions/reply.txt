@@ -1,10 +1,19 @@
 <dash>
 name: $reply
-desc: Enables reply mode, making the bot reply to the user's original message instead of sending a new one.
+desc: Makes everything the bot posts next appear as a reply to the message that triggered it.
 category: Messaging
 
 <block type="text" title="How does the command work?">
-text: When $reply is called, the bot enables reply mode for the current script execution. All subsequent messages sent by the bot in this script will be sent as replies to the user's original message, creating a threaded conversation effect.
+text: Stand this line above your sending commands and instead of a fresh message appearing at the bottom of the channel, each one attaches itself to the member's own message with the little reply arrow. The exchange stays in one place and it is obvious which question produced which answer. It covers everything that follows in that run of the command, not just the very next message.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !ask
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,10 +22,10 @@ text: $reply
 
 <block type="code" title="Ready-to-copy Example">
 text: $reply
-$sendMessage[This will be a reply!]
+text: $sendMessage[This will be a reply!]
 </block>
 
 <block type="callout" kind="note">
-text: Once enabled, reply mode persists for the entire script execution. The bot's messages will appear as reply threads to the triggering message in the Discord UI.
+text: If you have already pointed the command somewhere specific with $useChannel or asked for a direct message, that destination wins and the reply arrow never appears.
 </block>
 </dash>

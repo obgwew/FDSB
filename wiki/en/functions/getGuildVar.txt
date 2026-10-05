@@ -1,10 +1,21 @@
 <dash>
 name: $getGuildVar
-desc: Retrieves a persistent variable scoped to a server.
+desc: Reads back the value one server keeps for a variable name.
 category: Variables
 
 <block type="text" title="How does the command work?">
-text: $getGuildVar first looks for a server-specific override in the guild variable file. If no override exists, it falls back to the global variable with the same name. With one argument, the current server ID is used; with two arguments, the second argument selects the server ID.
+text: Give it a name and the bot looks for the value this particular server has set aside under it. When the server has not set one, you still get an answer: the shared value from the Variables tab stands in. Leave the second part out and it reads the server the command ran in; add a server ID and it reads that one instead.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Create the variable first in the Variables tab
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !rules
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,16 +27,16 @@ text: $getGuildVar[welcomeMessage]
 </block>
 
 <block type="callout" kind="important">
-text: If the global variable does not exist, the command creates a placeholder entry, creates the server-scoped entry when needed, and aborts the script with an environment error. Review and define the variable before using it.
+text: Ask for a name that was never created in the Variables tab and the bot makes an empty one, posts a warning about it and stops your command right there. Get the name right first.
 </block>
 
 <block type="callout" kind="note">
-text: The getter can be used inline and as a standalone statement. A missing global value is not silently treated as a valid value.
+text: Whatever you save from a command is still there after the bot restarts, so this is how you remember something per server rather than per person.
 </block>
 </dash>
 
 <details>
 syntax: $getGuildVar[name; (guild_id)]
-param: name|text|Required|The variable name to retrieve
-param: guildID|text|Optional|The server ID whose scoped value should be read; defaults to the current server
+param: name|text|Required|Which variable to read
+param: guildID|text|Optional|Which server's own value to read; leave empty for the server the command ran in
 </details>

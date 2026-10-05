@@ -1,10 +1,20 @@
 <dash>
 name: $var
-desc: Reads or writes a temporary variable that lives only during the current script execution.
+desc: Holds a value for the length of one run of your command, then forgets it again.
 category: Variables
 
 <block type="text" title="How does the command work?">
-text: $var with one argument reads the variable's value. $var with two arguments writes a value to the variable. Temporary variables are cleared when the script finishes.
+text: Give it a name and a value and it tucks that value away for the rest of the run; give it only the name and it hands the value straight back to you. That makes it the right place for a running total, a loop counter or any working figure you do not want cluttering up the channel. Everything it stored disappears the moment your command finishes.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !scoreboard
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,16 +23,16 @@ text: $var[name; value]
 
 <block type="code" title="Ready-to-copy Example">
 text: $var[score; 10]
-$sendMessage[Your score is $var[score]]
+text: $sendMessage[Your score is $var[score]]
 </block>
 
 <block type="callout" kind="note">
-text: Unlike $setVar/$getVar (persistent), $var is only available during the current script run. It can be used inline inside other commands' arguments.
+text: $setVar and $getVar are the ones that remember things between runs, which is what you want for scores and settings. $var is the scratch pad for figures that only matter while this command is running, and it can sit inside another command's brackets too.
 </block>
 </dash>
 
 <details>
 syntax: $var[name; (value)]
-param: name|text|Required|The variable name to read or write
-param: value|text|Optional|If provided, writes this value to the variable (2-arg mode). If omitted, reads and returns the current value (1-arg mode).
+param: name|text|Required|The name you want to read or write
+param: value|text|Optional|Add a value and it gets saved under that name; leave it out and whatever is stored there is returned instead
 </details>

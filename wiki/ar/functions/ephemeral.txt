@@ -1,0 +1,36 @@
+<dash>
+name: $ephemeral
+desc: يجعل رد البوت خاصًا بحيث لا يراه إلا من قام بتشغيل الأمر.
+category: الرسائل
+
+<block type="text" title="كيف يعمل الأمر؟">
+text: $ephemeral يحوّل رد البوت إلى الوضع الخاص. بلا وسائط، أو بأي قيمة أخرى غير false، يظهر الرد للمستخدم الذي شغّله فقط. مرّر false أو no أو 0 أو off لإلغاء الوضع الخاص لبقية السكربت. وإذا وضعته قرب أعلى الأمر فإن كل ما يرسله البوت بعده يبقى خاصًا أيضًا.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة
+item: الصق الكود أدناه في المحرر
+item: اضغط على حفظ
+</block>
+
+<block type="code" title="الصيغة">
+text: $ephemeral[(false)]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $ephemeral
+text: $sendMessage[Only you can see this.]
+</block>
+
+<block type="callout" kind="note">
+text: الردود الخاصة تعمل فقط إذا بدأ الأمر من أمر مائل أو من زر وقائمة اختيار. وإذا فُعّل أحدهم بكتابة رسالة عادية فسيُتجاهل هذا الإعداد ويبقى الرد عامًا.
+</block>
+</dash>
+
+<details>
+syntax: $ephemeral[(false)]
+param: false|yes/no|اختياري|اتركه فارغًا لجعل الردود خاصة. مرّر false أو no أو 0 أو off لجعل الردود علنية مرة أخرى.
+</details>

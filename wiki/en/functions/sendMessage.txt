@@ -1,10 +1,20 @@
 <dash>
 name: $sendMessage
-desc: Sends a text message to the current channel.
+desc: Posts a line of text in the channel where the command was used.
 category: Messaging
 
 <block type="text" title="How does the command work?">
-text: $sendMessage takes a text argument, resolves any variables/placeholders inside it, and sends the resulting message to the current channel. If a view with buttons is pending, it attaches them to the message.
+text: $sendMessage puts whatever you write in the brackets into the channel, and any values or placeholders inside it are filled in first. It takes a single piece of text, and that is the line members see appear. Buttons you have lined up with $addButton ride along on the same message.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !sendMessage
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,11 +26,11 @@ text: $sendMessage[Hello, $authorName!]
 </block>
 
 <block type="callout" kind="note">
-text: This is the primary way to send messages in FDScript. Variables and placeholders inside the text are automatically resolved before sending.
+text: One piece of text only: a semicolon inside your message splits it in two and the bot stops with an error, so leave them out. Discord formatting such as **bold**, italics and links comes through as usual.
 </block>
 </dash>
 
 <details>
 syntax: $sendMessage[text]
-param: text|text|Required|The message text to send. Supports variables, placeholders, and Discord markdown.
+param: text|text|Required|The words to post. Values inside them are filled in first.
 </details>

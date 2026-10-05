@@ -1,0 +1,50 @@
+<dash>
+name: $getLeaderboardPosition
+desc: رتبه یک عضو یا سرور را در یک جدول رتبه‌بندی برمی‌گرداند، یا ۰ اگر رتبه‌ای نداشته باشد.
+category: متغیرها
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $getLeaderboardPosition همان رتبه‌بندی‌ای را می‌سازد که دستورهای جدول رتبه‌بندی می‌سازند و سپس جایگاه تنها یک ورودی را گزارش می‌دهد. جایگاه را به‌صورت عددی از ۱ برمی‌گرداند و ۰ وقتی آن ورودی مقدار ذخیره‌شده ندارد یا مقدارش عدد نیست. فهرست را هر بار به یک شیوه مرتب کنید، چون با جابه‌جایی میان بیشترین و کمترین، جایگاه تغییر می‌کند.
+</block>
+
+<block type="list" title="نحوه استفاده در برنامه">
+item: ابتدا متغیر را در زبانه متغیرت‌ها بسازید
+item: زبانه دستورها را باز کنید
+item: برای شروع یک دستور جدید روی + بزنید
+item: در فیلد نام، نامی برای آن بگذارید
+item: فیلد پیشوند را تنظیم کنید
+item: کد زیر را در ویرایشگر بچسبانید
+item: روی ذخیره بزنید
+</block>
+
+<block type="code" title="سینتکس">
+text: $getLeaderboardPosition[type; name; sort; id]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $sendMessage[You are #$getLeaderboardPosition[user; points; desc]]
+</block>
+
+<block type="options" title="انواع متغیرها">
+option: user|یک مقدار برای هر عضو، که در هر سرور جداگانه نگهداری می‌شود
+option: globaluser|یک مقدار برای هر عضو، که میان همه سرورهایی که ربات در آن‌هاست مشترک است
+option: server|یک مقدار برای هر سرور
+</block>
+
+<block type="options" title="انواع مرتب‌سازی">
+option: desc|بیشترین مقدار اول (وقتی مرتب‌سازی را خالی می‌گذارید استفاده می‌شود)
+option: asc|کمترین مقدار اول
+</block>
+
+<block type="callout" kind="note">
+text: اگر معرّف را خالی بگذارید، شخصی که دستور را اجرا کرده رتبه‌بندی می‌شود. در نوع server این پیش‌فرض به‌جای آن سرور فعلی می‌شود. مقدارهایی که عدد نیستند نادیده گرفته می‌شوند.
+</block>
+</dash>
+
+<details>
+syntax: $getLeaderboardPosition[type; name; sort; (id)]
+param: type|text|الزامی|کدام مجموعه رتبه‌بندی شود: user یا globaluser یا server.
+param: name|text|الزامی|نام متغیری که رتبه‌بندی بر اساس آن انجام می‌شود.
+param: sort|text|الزامی|desc برای بیشترین اول، یا asc برای کمترین اول.
+param: id|snowflake|اختیاری|کدام عضو یا سرور جست‌وجو شود. پیش‌فرض شخصی است که دستور را اجرا کرده، یا در نوع server سرور فعلی.
+</details>

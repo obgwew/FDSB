@@ -30,6 +30,9 @@ from main_app.core_fdsb.Server import EVENT_PREFIXES
 def _t(key: str) -> str:
     return Translations.get(key, get_current_lang())
 
+def _wiki_lang() -> str:
+    return (get_current_lang() or 'en').lstrip('_')
+
 def _t_or(key: str, fallback: str = '') -> str:
     try:
         val = _t(key)
@@ -115,8 +118,45 @@ def _ensure_cmds_dir(bot_dir: str) -> str:
     os.makedirs(path, exist_ok=True)
     return path
 
+def _theme_unsub(cb):
+    """Remove a ThemeEngine subscription (works even without ThemeEngine.unsubscribe)."""
+    fn = getattr(ThemeEngine, 'unsubscribe', None)
+    if callable(fn):
+        try:
+            fn(cb)
+            return
+        except Exception:
+            pass
+    for holder in (ThemeEngine, getattr(ThemeEngine, '_instance', None)):
+        if holder is None:
+            continue
+        for val in list(vars(holder).values()):
+            try:
+                if isinstance(val, list) and cb in val:
+                    val.remove(cb)
+                elif isinstance(val, set) and cb in val:
+                    val.discard(cb)
+            except Exception:
+                pass
+
+
+# Spaces in a command name are kept as spaces in the UI, but stored / handled
+# in code as '_' (file name). Reading a file name back turns '_' into ' '.
+NEW_FILE_TEMPLATE = '$syncMode\n\n'
+
+
+def _safe_cmd_name(name: str) -> str:
+    name = (name or '').strip().replace(' ', '_')
+    safe = ''.join(c for c in name if c.isalnum() or c in ('-', '_'))
+    return safe or 'command'
+
+
+def _display_cmd_name(file_path: str) -> str:
+    return os.path.splitext(os.path.basename(file_path))[0].replace('_', ' ')
+
+
 def _parse_cmd_file(path: str) -> dict:
-    name = os.path.splitext(os.path.basename(path))[0]
+    name = _display_cmd_name(path)
     try:
         with open(path, 'r', encoding='utf-8') as f:
             raw = f.read()
@@ -132,6 +172,18 @@ def _parse_cmd_file(path: str) -> dict:
 
     return {'name': name, 'prefix': prefix, 'content': content, 'path': path}
 
+def _parse_cmd_header(path: str) -> dict:
+    name = _display_cmd_name(path)
+    prefix = ''
+    try:
+        with open(path, 'r', encoding='utf-8') as f:
+            first = f.readline()
+        if first.startswith('#PREFIX:'):
+            prefix = first[8:].strip()
+    except Exception:
+        pass
+    return {'name': name, 'prefix': prefix, 'path': path}
+
 def _list_cmd_files(bot_dir: str) -> list:
     results = []
 
@@ -139,12 +191,12 @@ def _list_cmd_files(bot_dir: str) -> list:
         if not os.path.isdir(folder):
             continue
         try:
-            for f in os.listdir(folder):
-                if not f.endswith('.fds'):
-                    continue
-                parsed = _parse_cmd_file(os.path.join(folder, f))
-                parsed['is_event'] = is_event
-                results.append(parsed)
+            with os.scandir(folder) as it:
+                for entry in it:
+                    if entry.is_file() and entry.name.endswith('.fds'):
+                        parsed = _parse_cmd_header(entry.path)
+                        parsed['is_event'] = is_event
+                        results.append(parsed)
         except Exception:
             pass
 
@@ -160,7 +212,7 @@ def _cmd_file_exists(bot_dir: str, safe_name: str, exclude_path: str = '') -> bo
 
 def _write_cmd_file(bot_dir: str, name: str, prefix: str,
                     content: str, old_path: str = '') -> str:
-    safe     = ''.join(c for c in name if c.isalnum() or c in ('-', '_')).strip() or 'command'
+    safe     = _safe_cmd_name(name)
 
     if _is_event_prefix(prefix):
         dest_dir = _ensure_events_dir(bot_dir)
@@ -511,6 +563,9 @@ class CommandEditorView:
         )
 
         ThemeEngine.subscribe(self._on_theme)
+
+    def dispose(self):
+        _theme_unsub(self._on_theme)
 
     def _on_syntax_switch_change(self, e):
         new_val = e.control.value
@@ -1091,7 +1146,7 @@ class CommandEditorView:
         else:
             self._name_field.value   = ''
             self._prefix_field.value = ''
-            self._code_edit.value    = ''
+            self._code_edit.value    = NEW_FILE_TEMPLATE
             self._title_text.value   = _t('new_command_file')
 
         self._clear_name_error()
@@ -1145,7 +1200,7 @@ class CommandEditorView:
             self._scroll_to_name_error()
             return False
 
-        safe_name = ''.join(c for c in name if c.isalnum() or c in ('-', '_')).strip() or 'command'
+        safe_name = _safe_cmd_name(name)
 
         if _cmd_file_exists(self._bot_dir, safe_name, self._cmd_path):
             self._set_name_taken_error()
@@ -1205,9 +1260,16 @@ class CommandsListView:
             enable_suggestions=True,
             on_change=self._on_search,
         )
-        self._list_col = ft.Column(spacing=10, scroll=ft.ScrollMode.AUTO, expand=True)
+        self._list_col = ft.ListView(spacing=10, expand=True, build_controls_on_demand=True)
+        self._search_task = None
 
         ThemeEngine.subscribe(self._on_theme)
+
+    def dispose(self):
+        if self._search_task:
+            self._search_task.cancel()
+            self._search_task = None
+        _theme_unsub(self._on_theme)
 
     def _update_cmds_count(self):
         count = len(self._all_cmds)
@@ -1302,19 +1364,26 @@ class CommandsListView:
     async def _async_load_task(self, *args):
         loop = asyncio.get_event_loop()
         self._all_cmds = await loop.run_in_executor(None, _list_cmd_files, self._bot_dir)
-        
-        self._update_cmds_count()
-        self._render(self._all_cmds)
-        if self._page:
-            self._page.update()
+        self._render(self._filtered())
 
-    def _on_search(self, e):
-        q        = (e.control.value or '').strip().lower()
-        filtered = self._all_cmds if not q else [
+    def _filtered(self) -> list:
+        q = (self._search_field.value or '').strip().lower()
+        if not q:
+            return self._all_cmds
+        return [
             c for c in self._all_cmds
             if q in c['name'].lower() or q in c['prefix'].lower()
         ]
-        self._render(filtered)
+
+    def _on_search(self, e):
+        if self._search_task:
+            self._search_task.cancel()
+
+        async def _debounced():
+            await asyncio.sleep(0.15)
+            self._render(self._filtered())
+
+        self._search_task = self._page.run_task(_debounced)
 
     def _render(self, cmds: list):
         self._list_col.controls.clear()
@@ -1422,7 +1491,8 @@ class CommandsListView:
 
     def _do_delete(self, cmd: dict):
         _remove_cmd_file(cmd.get('path', ''))
-        self.load(self._bot_dir)
+        self._all_cmds = [c for c in self._all_cmds if c.get('path') != cmd.get('path')]
+        self._render(self._filtered())
 
 
 class BotCommandsTab:
@@ -1440,13 +1510,21 @@ class BotCommandsTab:
             on_wiki_request=self._on_wiki_events_req
         )
         
-        self._container = ft.AnimatedSwitcher(
-            content=None,
-            transition=ft.AnimatedSwitcherTransition.FADE,
-            duration=220,
-            switch_in_curve=ft.AnimationCurve.EASE_OUT,
-            expand=True,
-        )
+        self._container = ft.Container(content=None, expand=True)
+
+    def _list_ui(self) -> ft.Control:
+        # Build a fresh tree on every swap between list and editor. Re-using one
+        # cached instance across editor <-> list swaps left the tab body blank.
+        content = self._list_view.build()
+        content.key = "cmds_list"
+        return content
+
+    def dispose(self):
+        self._list_view.dispose()
+        self._editor_view.dispose()
+
+    def swipe_blocked(self) -> bool:
+        return self._in_editor
 
     def handle_back(self) -> bool:
         if self._in_editor:
@@ -1458,8 +1536,7 @@ class BotCommandsTab:
         self._list_view.load(self._bot_dir)
 
     def build(self) -> ft.Control:
-        content = self._list_view.build()
-        content.key = "cmds_list"
+        content = self._list_ui()
         self._container.content = content
         return self._container
 
@@ -1467,13 +1544,16 @@ class BotCommandsTab:
         self._bot_dir   = bot_dir
         self._in_editor = False
         self._list_view.load(bot_dir)
-        content = self._list_view.build()
-        content.key = "cmds_list"
+        content = self._list_ui()
         self._container.content = content
         if self._page:
             self._page.update()
 
     def _open_editor(self, cmd_data=None):
+        if cmd_data and 'content' not in cmd_data:
+            full = _parse_cmd_file(cmd_data['path'])
+            full['is_event'] = cmd_data.get('is_event', False)
+            cmd_data = full
         self._in_editor = True
         self._editor_view.load(self._bot_dir, cmd_data)
         content = self._editor_view.build()
@@ -1485,8 +1565,7 @@ class BotCommandsTab:
     def _close_editor(self):
         self._in_editor = False
         self._list_view.load(self._bot_dir)
-        content = self._list_view.build()
-        content.key = "cmds_list"
+        content = self._list_ui()
         self._container.content = content
         if self._page:
             self._page.update()
@@ -1496,6 +1575,8 @@ class BotCommandsTab:
             def _proceed_with_refresh():
                 self._list_view.load(self._bot_dir)
                 self._in_editor = False
+                content = self._list_ui()
+                self._container.content = content
                 on_proceed and on_proceed()
 
             self._editor_view.guard_navigation(_proceed_with_refresh, on_cancel)

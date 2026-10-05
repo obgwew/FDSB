@@ -1,0 +1,51 @@
+<dash>
+name: $onlyUserPerms
+desc: يوقف الأمر برسالتك الخاصة إلا إذا كان من شغّله مسموحًا له بما يأتي بعد ذلك.
+category: التحكم في الوصول
+
+<block type="text" title="كيف يعمل الأمر؟">
+text: $onlyUserPerms يفحص صلاحيات العضو الذي شغّل الأمر قبل أن يعمل الجزء المحمي. سجّل الصلاحيات التي يحتاجها، ثم أنهِ بالرسالة التي تُرسل عند نقص إحداها. فإذا كان يملكها كلها فلا يظهر شيء ويستمر أمرك. وإذا نقصت إحداها، تُرسل الرسالة ويُسقط بقية الأمر في مكانه.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة
+item: الصق الكود أدناه في المحرر
+item: اضغط على حفظ
+</block>
+
+<block type="code" title="الصيغة">
+text: $onlyUserPerms[permission; ...; error message]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $onlyUserPerms[manage_messages; You need Manage Messages to do that.]
+text: $onlyAdmin
+text: $sendMessage[Message deleted.]
+</block>
+
+<block type="options" title="الصلاحيات الشائعة">
+option: manage_messages|حذف الرسائل وتثبيتها
+option: kick_members|طرد الأعضاء
+option: ban_members|حظر الأعضاء
+option: timeout_members|كتم الأعضاء
+option: manage_roles|إسناد الأدوار وإزالتها
+option: moderate_members|كتم الأعضاء وطردهم
+</block>
+
+<block type="callout" kind="note">
+text: أسماء الصلاحيات هي أسماء Discord نفسها بأحرف صغيرة وشرطات سفلية. ضع الرسالة أخيرًا — كل ما بعد الصلاحيات يُحسب رسالة واحدة.
+</block>
+
+<block type="callout" kind="important">
+text: هذا ليس مثل $onlyAdmin. فهو ينظر إلى صلاحيات الشخص نفسها، ما يعني أن دورًا أعطيته صلاحيات إضافية سيمر حتى لو لم يكن دور مسؤول.
+</block>
+</dash>
+
+<details>
+syntax: $onlyUserPerms[permission; ...; error message]
+param: permission|text|مطلوب|اسم صلاحية Discord واحد أو أكثر، مفصولة بفواصل منقوطة، مثل manage_messages أو kick_members.
+param: error message|text|مطلوب|الرسالة التي تُرسل إلى القناة عندما ينقص العضو إحدى الصلاحيات. كل ما بعد الصلاحيات يُحسب هذه الرسالة.
+</details>

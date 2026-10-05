@@ -1,0 +1,36 @@
+<dash>
+name: $ephemeral
+desc: Makes the bot's reply private so only the person who ran the command can see it.
+category: Messaging
+
+<block type="text" title="How does the command work?">
+text: $ephemeral switches the bot's reply to private mode. With no argument, or with any value other than false, the reply is shown only to the user who triggered it. Pass false, no, 0 or off to turn private mode back off for the rest of the script. When you put it near the top of your command, everything the bot sends afterwards stays private too.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field
+item: Paste the code below into the editor
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: $ephemeral[(false)]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $ephemeral
+text: $sendMessage[Only you can see this.]
+</block>
+
+<block type="callout" kind="note">
+text: Private replies only work when the command was started from a slash command or from a button and select menu. If someone triggers it by typing a normal message, the setting is ignored and the reply stays public.
+</block>
+</dash>
+
+<details>
+syntax: $ephemeral[(false)]
+param: false|yes/no|Optional|Leave empty to make replies private. Pass false, no, 0 or off to make replies public again.
+</details>

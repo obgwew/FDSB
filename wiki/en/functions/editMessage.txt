@@ -1,10 +1,19 @@
 <dash>
 name: $editMessage
-desc: Edits a previously sent bot message in any channel, optionally converting it to an embed.
+desc: Rewrites the text of a message the bot already sent, in any channel it can reach.
 category: Messaging
 
 <block type="text" title="How does the command work?">
-text: $editMessage fetches a specific bot message by channel ID and message ID, then edits its content. Optionally, you can provide title, description, color, and footer to convert the message into an embed.
+text: Name a channel and a message and the bot pulls that message up and swaps its text for whatever you give it. The message has to be one the bot itself posted. Add a title, description, colour or footer afterwards and the message grows a card underneath the new text.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !ping
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,21 +25,21 @@ text: $editMessage[$channelID; 123456789; Updated content!]
 </block>
 
 <block type="callout" kind="note">
-text: The target message must have been sent by this bot. If optional embed parameters are provided, the message is edited to include an embed alongside the content.
+text: Both the channel and the message come as plain numbers, not mentions. If either one matches nothing the bot can see, it says which of the two failed rather than failing quietly.
 </block>
 
 <block type="callout" kind="warning">
-text: The bot must have permission to view and edit messages in the target channel.
+text: The bot needs to be able to view the channel and to edit the message inside it. Colours are given as hex values such as #FF0000.
 </block>
 </dash>
 
 <details>
 syntax: $editMessage[channelID; messageID; content; (title; description; color; footer)]
-param: channelID|snowflake|Required|The ID of the channel containing the message
-param: messageID|snowflake|Required|The ID of the bot message to edit
-param: content|text|Required|The new text content for the message
-param: title|text|Optional|Title for an embed to attach to the message
-param: description|text|Optional|Description for the embed
-param: color|text|Optional|Hex color for the embed
-param: footer|text|Optional|Footer text for the embed
+param: channelID|snowflake|Required|Numeric ID of the channel holding the message
+param: messageID|snowflake|Required|Numeric ID of the bot message to rewrite
+param: content|text|Required|The text the message should show afterwards
+param: title|text|Optional|Headline for a card under the text
+param: description|text|Optional|Body text for that card
+param: color|text|Optional|Hex colour for that card
+param: footer|text|Optional|Small footer line for that card
 </details>

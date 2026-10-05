@@ -1,10 +1,22 @@
 <dash>
 name: $isNumber
-desc: Checks whether a value matches a specific numeric formula/type.
+desc: Answers true or false depending on whether a value is the kind of number you asked about.
 category: Math & Numbers
 
 <block type="text" title="How does the command work?">
-text: $isNumber takes a formula (type check) and a value, then checks if the value matches that type. Returns "true" or "false".
+text: $isNumber looks at a value and tells you whether it matches the kind of number you named.
+text: Give it a formula and a value and it answers with the plain words true or false, which is a quick way to guard a command before it does any arithmetic.
+text: Text it cannot read at all, such as a word or a formula name it does not know, simply counts as false instead of stopping the run.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !num
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,25 +28,25 @@ text: $isNumber[int; 42]
 </block>
 
 <block type="options" title="Available formulas">
-option: int|Is an integer (no decimal point)
-option: nat|Is a natural number (positive integer, >= 1)
-option: pos|Is a positive number (> 0)
-option: neg|Is a negative number (< 0)
-option: zero|Is zero
-option: even|Is an even integer
-option: odd|Is an odd integer
-option: dec|Is a decimal number (has a decimal point)
-option: frac|Is a fraction (format: a/b)
-option: num|Is any valid number (integer or decimal)
+option: int|A whole number written without a decimal point
+option: nat|A whole number of 1 or more
+option: pos|Anything above zero
+option: neg|Anything below zero
+option: zero|Exactly zero
+option: even|A whole number that divides by two
+option: odd|A whole number that does not divide by two
+option: dec|A number written with a decimal point
+option: frac|A fraction written like 3/4, with a bottom number other than zero
+option: num|Any number at all, whole or decimal
 </block>
 
 <block type="callout" kind="note">
-text: Returns "true" if the value matches the given formula, "false" otherwise. Invalid inputs that can't be parsed always return "false".
+text: The answer is always the word true or the word false, never a number. Anything unreadable counts as false, so your command keeps going.
 </block>
 </dash>
 
 <details>
 syntax: $isNumber[formula; value]
-param: formula|text|Required|The type check to perform: int, nat, pos, neg, zero, even, odd, dec, frac, num
-param: value|text|Required|The value to check against the formula
+param: formula|text|Required|Which kind to test for: int, nat, pos, neg, zero, even, odd, dec, frac, num
+param: value|text|Required|The text you want tested
 </details>

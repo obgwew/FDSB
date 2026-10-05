@@ -1,0 +1,35 @@
+<dash>
+name: $removeLinks
+desc: ينزع كل رابط ويب من الرسالة التي على وشك إرسالها البوت.
+category: الأدوات
+
+<block type="text" title="كيف يعمل الأمر؟">
+text: $removeLinks يفعّل إزالة الروابط لبقية الأمر. أينما أرسل البوت رسالة بعدها، يُحذف أي عنوان من نوع http أو www وتبقى بقية الكلمات. لا يأخذ أي وسائط، فكل ما عليك هو وضعه قبل النص الذي تريد تنظيفه.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة
+item: الصق الكود أدناه في المحرر
+item: اضغط على حفظ
+</block>
+
+<block type="code" title="الصيغة">
+text: $removeLinks
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $removeLinks
+text: $sendMessage[Check https://example.com and www.example.org for details.]
+</block>
+
+<block type="callout" kind="note">
+text: يؤثر في كل رسالة يرسلها البوت بعد تلك النقطة في الأمر، بما في ذلك النص القادم من متغير. ضعه في أبعد نقطة ممكنة إن أردت تنظيف رسالة واحدة فقط.
+</block>
+</dash>
+
+<details>
+syntax: $removeLinks
+</details>

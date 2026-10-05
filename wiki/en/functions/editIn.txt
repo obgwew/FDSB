@@ -1,10 +1,20 @@
 <dash>
 name: $editIn
-desc: Edits the bot's last sent message after a specified delay.
+desc: Waits a set time, then swaps the text of the message the bot sent last.
 category: Timing & Delays
 
 <block type="text" title="How does the command work?">
-text: $editIn waits for the specified duration, then edits the content of the bot's most recently sent message to the new provided text. The original message must have been sent earlier in the same script execution.
+text: The bot pauses for the length you give it — seconds, minutes, hours or days — and then rewrites its own most recent message. That makes it easy to post a placeholder like Loading... and replace it once the work is done. The message it changes has to be one the bot posted during the same run.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !welcome
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,16 +23,16 @@ text: $editIn[time; newMessage]
 
 <block type="code" title="Ready-to-copy Example">
 text: $sendMessage[Loading...]
-$editIn[5s; Done!]
+text: $editIn[5s; Done!]
 </block>
 
 <block type="callout" kind="note">
-text: The time format uses: s (seconds), m (minutes), h (hours), d (days). Only the text content is replaced — embeds and components are not affected.
+text: The wait is written as a number and a unit: 5s, 10m, 2h, 1d. Anything in another shape is refused. Only the text is replaced — an embed or buttons already sitting on the message are left alone.
 </block>
 </dash>
 
 <details>
 syntax: $editIn[time; newMessage]
-param: time|text|Required|Duration to wait before editing. Format: number + unit (s/m/h/d), e.g., 5s, 10m
-param: newMessage|text|Required|The new text content to replace the old message with
+param: time|text|Required|How long to wait, as a number and a unit: 5s, 10m, 2h, 1d
+param: newMessage|text|Required|The text that should be there once the wait is over
 </details>

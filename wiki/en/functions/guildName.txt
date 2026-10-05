@@ -1,10 +1,20 @@
 <dash>
 name: $guildName
-desc: Returns the name of the server (guild) where the command was used.
+desc: Gives you the name of the server where the command was typed.
 category: Info
 
 <block type="text" title="How does the command work?">
-text: When $guildName is called, the bot retrieves the name of the server where the command was executed and sends it directly to the channel as a plain text string. If used in a DM, it returns "DM".
+text: $guildName puts the name of the server the command was typed in straight into your line of text. Put it in the middle of a sentence and the bot drops the name in between, which makes greetings and channel announcements read as if you typed the server name yourself. Nothing else is added to it, so it comes out as one plain piece of text.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !welcome
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,6 +26,6 @@ text: Welcome to $guildName!
 </block>
 
 <block type="callout" kind="note">
-text: When used outside a server (in DMs), the command returns the string "DM" instead of a server name.
+text: Send the command in a direct message and there is no server to name, so the bot writes DM where the name would normally appear.
 </block>
 </dash>

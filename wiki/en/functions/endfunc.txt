@@ -1,10 +1,20 @@
 <dash>
 name: $endfunc
-desc: Closes an FDScript function block.
+desc: Closes a named block of lines so you can run it again with $call.
 category: Flow Control
 
 <block type="text" title="How does the command work?">
-text: $endfunc closes the most recently opened $func block. It marks the end of a reusable function definition and must appear in a matching pair with $func.
+text: $endfunc marks the end of the named block you opened with $func. The lines inside it are held back rather than run straight away, and only play out when $call[that name] asks for them, so one piece of work can sit in a command as many times as you like. Name it after $func and close it with $endfunc, and the rest of your command continues as normal.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !welcome
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,12 +23,12 @@ text: $endfunc
 
 <block type="code" title="Ready-to-copy Example">
 text: $func[ping]
-$sendMessage[Pong]
-$endfunc
+text: $sendMessage[Pong]
+text: $endfunc
 </block>
 
 <block type="callout" kind="warning">
-text: An $endfunc without a matching $func, or with a different open block in between, is a script error.
+text: An $endfunc with no $func to match it leaves the block unbalanced and the bot reports a script error. One $endfunc closes one $func, even if loops or conditions are nested inside it.
 </block>
 </dash>
 

@@ -1,10 +1,20 @@
 <dash>
 name: $strictArgs
-desc: Enforces a specific word count constraint on the user's command arguments.
+desc: Stops the command unless the person typed a particular number of words.
 category: Access Control
 
 <block type="text" title="How does the command work?">
-text: $strictArgs checks if the number of words the user provided matches the specified constraint. If the check fails, the error message is displayed and the script is aborted.
+text: Put this near the top of a command and it counts the words that came in after your prefix. If the number does not match the rule you set, the bot posts your error message and abandons the rest of the command, so nothing below it runs. When the count does match, nothing at all is printed and the command carries straight on.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !quote
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,19 +26,19 @@ text: $strictArgs[>2; Please provide more than 2 words!]
 </block>
 
 <block type="options" title="Comparison operators">
-option: >|Greater than — user must provide more than N words
-option: <|Less than — user must provide fewer than N words
-option: (none)|Equal to (e.g., just 2) — user must provide exactly N words
-option: !|Not equal to — user must NOT provide exactly N words
+option: >|More than — the person must type more than N words
+option: <|Fewer than — the person must type fewer than N words
+option: (none)|Equal to, such as just 2 — the person must type exactly N words
+option: !|Not equal to — the person must not type exactly N words
 </block>
 
 <block type="callout" kind="note">
-text: The word count excludes the command name itself. For example, if the user types "!cmd hello world", the word count is 2.
+text: Your prefix and the command name are not part of the count, so !quote hello world counts as two words. The rule has to be a number with an optional >, < or ! in front of it, and anything else is rejected before the count is even looked at.
 </block>
 </dash>
 
 <details>
 syntax: $strictArgs[comparison; error_message]
-param: comparison|text|Required|A constraint like >2, <2, 2, or !2 where the number is the required word count (plain 2 means exactly 2)
-param: error_message|text|Required|Message displayed if the word count doesn't match the constraint
+param: comparison|text|Required|The rule to test the word count against, such as >2, <2, 2 or !2
+param: error_message|text|Required|What the bot posts when the count does not match, before stopping
 </details>

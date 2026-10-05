@@ -1,0 +1,50 @@
+<dash>
+name: $getLeaderboardPosition
+desc: Returns the rank of a member or server inside a leaderboard, or 0 if it is not ranked.
+category: Variables
+
+<block type="text" title="How does the command work?">
+text: $getLeaderboardPosition builds the same ranking as the leaderboard commands and then reports the place of one single entry. It returns the position as a number starting at 1, and 0 when that entry has no stored value or its value is not a number. Sort the list the same way every time, because the position changes when you switch between highest first and lowest first.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Create the variable first in the Variables tab
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field
+item: Paste the code below into the editor
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: $getLeaderboardPosition[type; name; sort; id]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $sendMessage[You are #$getLeaderboardPosition[user; points; desc]]
+</block>
+
+<block type="options" title="Variable types">
+option: user|One value per member, kept separately in each server
+option: globaluser|One value per member, shared across every server the bot is in
+option: server|One value per server
+</block>
+
+<block type="options" title="Sort types">
+option: desc|Highest value first (used when you leave the sort empty)
+option: asc|Lowest value first
+</block>
+
+<block type="callout" kind="note">
+text: Leave the ID empty to rank the person who ran the command. For the server type that default becomes the current server instead. Values that are not numbers are skipped.
+</block>
+</dash>
+
+<details>
+syntax: $getLeaderboardPosition[type; name; sort; (id)]
+param: type|text|Required|Which pool to rank: user, globaluser or server.
+param: name|text|Required|Name of the variable to rank by.
+param: sort|text|Required|desc for highest first, or asc for lowest first.
+param: id|snowflake|Optional|Which member or server to look up. Defaults to the person who ran the command, or the current server for the server type.
+</details>

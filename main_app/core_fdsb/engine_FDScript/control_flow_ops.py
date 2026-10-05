@@ -1,7 +1,10 @@
 # Copyright (C) 2026 obgwew
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# main_app/core_fdsb/engine_FDScript/control_flow.py
+# main_app/core_fdsb/engine_FDScript/control_flow_ops.py
+
+from .errors import FDRuntimeError, _send_error
+
 
 class ControlFlowMixin:
 
@@ -60,7 +63,6 @@ class ControlFlowMixin:
 
     # ── for / endfor ──────────────────────────────────────────
     async def _exec_for(self, tokens: list, start: int, ctx) -> int:
-        from FDCore import FDRuntimeError, _send_error
 
         tok = tokens[start]
         ctx.set_line(tok.line_no)

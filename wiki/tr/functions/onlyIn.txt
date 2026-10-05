@@ -1,0 +1,47 @@
+<dash>
+name: $onlyIn
+desc: Komutun yalnızca listelenen kanallarda ya da sunucularda çalışmasına izin verir, başka her yerde kendi mesajını gösterir.
+category: Erişim Kontrolü
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $onlyIn, hiçbir şey çalıştırılmadan önce komutun nerede kullanıldığını denetler. İzin verilen kanalları ve sunucuları listeleyin, ardından herkesin görmesi gereken mesajla bitirin. Komut bunlardan birinde kullanıldıysa hiçbir şey olmaz ve komutun geri kalanı devam eder. Başka her yerde mesaj gönderilir ve komutun geri kalanı orada bırakılır.
+</block>
+
+<block type="list" title="Uygulamada nasıl kullanılır">
+item: Komutlar sekmesini aç
+item: Yeni bir komut başlatmak için + düğmesine dokun
+item: Ad alanına bir ad ver
+item: Önek alanını ayarla
+item: Aşağıdaki kodu düzenleyiciye yapıştır
+item: Kaydet düğmesine dokun
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $onlyIn[channel or server ID or name; ...; error message]
+</block>
+
+<block type="code" title="Kopyalanmaya hazır örnek">
+text: $onlyIn[123456789012345678; general; Use this command in #general.]
+text: $sendMessage[Welcome!]
+</block>
+
+<block type="options" title="Listeleyebilecekleriniz">
+option: channel ID|123456789012345678 gibi bir kanal ID'si, # işaretiyle ya da onsuz
+option: channel name|general gibi bir kanal adı
+option: server ID or name|Bir sunucunun ID'si veya adı, böylece komut o sunucunun eşleşen kanalında da çalışır
+</block>
+
+<block type="callout" kind="note">
+text: Mesajı en sona koyun — girdilerden sonraki her şey tek bir mesaj sayılır. Bir sunucu adı listelemek, komutun o sunucunun herhangi bir kanalında çalışmasını sağlar.
+</block>
+
+<block type="callout" kind="important">
+text: Denetim, komutun yazıldığı kanala bakar. Doğrudan mesajda eşleştirilecek bir kanal ya da sunucu bulunmadığından komut orada her zaman engellenir.
+</block>
+</dash>
+
+<details>
+syntax: $onlyIn[channel or server ID or name; ...; error message]
+param: channel or server ID or name|text|Zorunlu|İzin verilen bir veya daha fazla kanal ID'si, kanal adı, sunucu ID'si ya da sunucu adı.
+param: error message|text|Zorunlu|Komut başka bir yerde kullanıldığında kanala gönderilen mesaj. Girdilerden sonraki her şey bu mesaj sayılır.
+</details>

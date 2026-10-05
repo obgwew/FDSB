@@ -1,10 +1,20 @@
 <dash>
 name: $timeout
-desc: Applies a timeout (mute) to a server member for a specified duration.
+desc: Times a member out for a set stretch, so they cannot post, react or join voice.
 category: Moderation
 
 <block type="text" title="How does the command work?">
-text: $timeout takes a duration and a user ID/mention, then applies a timeout to that member. The timed-out member cannot send messages, react, or join voice channels for the specified duration.
+text: $timeout takes a length of time and a member, then puts that member under a timeout for exactly that long. While it lasts they cannot send messages, react or join a voice channel, and Discord marks them as timed out. The clock belongs to Discord itself, so it carries on even if the bot goes away.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !timeout
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,16 +26,20 @@ text: $timeout[1h; @user]
 </block>
 
 <block type="callout" kind="note">
-text: The time format uses: s (seconds), m (minutes), h (hours), d (days). Maximum timeout duration is 28 days. Use $untimeout to remove a timeout early.
+text: A length is a number plus a unit: s for seconds, m for minutes, h for hours, d for days. The longest Discord allows is 28 days, and $untimeout lifts a timeout early.
 </block>
 
 <block type="callout" kind="warning">
-text: The bot must have "Moderate Members" permission and its highest role must be above the target's highest role.
+text: The bot needs Moderate Members, and its highest role has to sit above the member you name.
+</block>
+
+<block type="callout" kind="important">
+text: In the build you are running, this line is skipped before it can act, so nobody ends up timed out. The rest of your command carries on as if it had run.
 </block>
 </dash>
 
 <details>
 syntax: $timeout[time; user]
-param: time|text|Required|Duration of the timeout. Format: number + unit (s/m/h/d), e.g., 1h, 30m, 7d
-param: user|text|Required|The user ID or @mention of the member to timeout
+param: time|text|Required|How long the timeout lasts, as a number plus s, m, h or d, such as 1h, 30m or 7d
+param: user|text|Required|The member to time out, by ID or by mention
 </details>

@@ -1,0 +1,47 @@
+<dash>
+name: $onlyIn
+desc: N'autorise la commande à s'exécuter que dans les salons ou serveurs listés, et affiche votre propre message partout ailleurs.
+category: Contrôle d'accès
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: $onlyIn vérifie où la commande a été utilisée avant d'exécuter quoi que ce soit. Listez les salons et serveurs autorisés, puis terminez par le message que tout le monde doit voir. Si la commande a été utilisée dans l'un d'eux, il ne se passe rien et la suite de votre commande continue. Ailleurs, le message est envoyé et le reste de la commande est abandonné sur place.
+</block>
+
+<block type="list" title="Comment l'utiliser dans l'application">
+item: Ouvrez l'onglet Commandes
+item: Appuyez sur + pour créer une nouvelle commande
+item: Donnez-lui un nom dans le champ Nom
+item: Renseignez le champ Préfixe
+item: Collez le code ci-dessous dans l'éditeur
+item: Appuyez sur Enregistrer
+</block>
+
+<block type="code" title="Syntaxe">
+text: $onlyIn[channel or server ID or name; ...; error message]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $onlyIn[123456789012345678; general; Use this command in #general.]
+text: $sendMessage[Welcome!]
+</block>
+
+<block type="options" title="Ce que vous pouvez lister">
+option: channel ID|Un ID de salon comme 123456789012345678, avec ou sans les signes #
+option: channel name|Un nom de salon comme general
+option: server ID or name|L'ID ou le nom d'un serveur, pour que la commande fonctionne aussi dans le salon correspondant de ce serveur
+</block>
+
+<block type="callout" kind="note">
+text: Mettez le message en dernier — tout ce qui suit les entrées compte comme un seul message. Indiquer un nom de serveur laisse la commande s'exécuter dans n'importe quel salon de ce serveur.
+</block>
+
+<block type="callout" kind="important">
+text: La vérification regarde le salon dans lequel la commande a été tapée. Dans un message direct il n'y a ni salon ni serveur à comparer, la commande y est donc toujours bloquée.
+</block>
+</dash>
+
+<details>
+syntax: $onlyIn[channel or server ID or name; ...; error message]
+param: channel or server ID or name|text|Obligatoire|Un ou plusieurs ID de salon, noms de salon, ID de serveur ou noms de serveur autorisés.
+param: error message|text|Obligatoire|Message envoyé au salon lorsque la commande a été utilisée ailleurs. Tout ce qui suit les entrées compte comme ce message.
+</details>

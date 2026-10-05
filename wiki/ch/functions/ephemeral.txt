@@ -1,0 +1,36 @@
+<dash>
+name: $ephemeral
+desc: 让机器人的回复变为私密，只有运行命令的人能看到。
+category: 消息发送
+
+<block type="text" title="命令如何工作？">
+text: $ephemeral 会把机器人的回复切换到私密模式。不带参数，或带任何不是 false 的值时，回复只会显示给触发它的用户。传入 false、no、0 或 off 可为脚本余下部分关闭私密模式。把它放在命令靠前的位置，机器人之后发送的一切也都会保持私密。
+</block>
+
+<block type="list" title="如何在应用中使用">
+item: 打开“命令”标签页
+item: 点击 + 开始新命令
+item: 在“名称”字段中填写名称
+item: 设置“前缀”字段
+item: 将下面的代码粘贴到编辑器中
+item: 点击保存
+</block>
+
+<block type="code" title="语法">
+text: $ephemeral[(false)]
+</block>
+
+<block type="code" title="可直接复制的示例">
+text: $ephemeral
+text: $sendMessage[Only you can see this.]
+</block>
+
+<block type="callout" kind="note">
+text: 私密回复只在命令由斜杠命令、按钮或选择菜单启动时才会生效。若有人通过输入普通消息来触发，设置会被忽略，回复仍是公开的。
+</block>
+</dash>
+
+<details>
+syntax: $ephemeral[(false)]
+param: false|yes/no|可选|留空即让回复变为私密。传入 false、no、0 或 off 可让回复重新变为公开。
+</details>

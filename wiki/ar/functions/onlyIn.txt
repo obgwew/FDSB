@@ -1,0 +1,47 @@
+<dash>
+name: $onlyIn
+desc: يسمح بتشغيل الأمر داخل القنوات أو الخوادم المدرجة فقط، ويعرض رسالتك الخاصة في أي مكان آخر.
+category: التحكم في الوصول
+
+<block type="text" title="كيف يعمل الأمر؟">
+text: $onlyIn يفحص أين استُخدم الأمر قبل أن يشغّل أي شيء. سجّل القنوات والخوادم المسموح بها، ثم أنهِ بالرسالة التي يجب أن يراها الجميع. إذا استُخدم الأمر في أحدها فلا يحدث شيء ويستمر بقية الأمر. وفي أي مكان آخر تُرسل الرسالة ويُسقط بقية الأمر في مكانه.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة
+item: الصق الكود أدناه في المحرر
+item: اضغط على حفظ
+</block>
+
+<block type="code" title="الصيغة">
+text: $onlyIn[channel or server ID or name; ...; error message]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $onlyIn[123456789012345678; general; Use this command in #general.]
+text: $sendMessage[Welcome!]
+</block>
+
+<block type="options" title="ما يمكنك سرده">
+option: channel ID|معرّف قناة مثل 123456789012345678، مع علامة # أو بدونها
+option: channel name|اسم قناة مثل general
+option: server ID or name|معرّف الخادم أو اسمه، ليعمل الأمر أيضًا في القناة المطابقة لذلك الخادم
+</block>
+
+<block type="callout" kind="note">
+text: ضع الرسالة أخيرًا — كل ما بعد الإدخالات يُحسب رسالة واحدة. وذكر اسم خادم يتيح للأمر أن يعمل في أي قناة من قنوات ذلك الخادم.
+</block>
+
+<block type="callout" kind="important">
+text: يفحص هذا الشرط القناة التي كُتب فيها الأمر. وفي رسالة مباشرة لا توجد قناة أو خادم للمطابقة، لذا يُحجب الأمر هناك دائمًا.
+</block>
+</dash>
+
+<details>
+syntax: $onlyIn[channel or server ID or name; ...; error message]
+param: channel or server ID or name|text|مطلوب|معرّف قناة واحد أو أكثر، أو أسماء قنوات، أو معرّفات خوادم، أو أسماء خوادم مسموح بها.
+param: error message|text|مطلوب|الرسالة التي تُرسل إلى القناة عندما يُستخدم الأمر في مكان آخر. كل ما بعد الإدخالات يُحسب هذه الرسالة.
+</details>

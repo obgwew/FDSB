@@ -7,33 +7,35 @@ from FDScript import (
 )
 
 
-def _format_banner(asset: discord.Asset) -> str:
-    fmt = "gif" if asset.is_animated() else "png"
-    return asset.with_format(fmt).url
+def _format_banner(guild: discord.Guild) -> str:
+    key = guild.banner.key
+    ext = "gif" if guild.banner.is_animated() else "png"
+    return f"https://cdn.discordapp.com/banners/{guild.id}/{key}.{ext}"
 
 
-def _resolve_banner_url(guild_id_str: str, ctx: ExecutionContext) -> str | None:
-    guild = None
-
-    if not guild_id_str:
-        if getattr(ctx, "message", None) and ctx.message.guild:
-            guild = ctx.message.guild
-        elif getattr(ctx, "interaction", None) and ctx.interaction.guild:
-            guild = ctx.interaction.guild
-    else:
-        if not guild_id_str.isdigit():
-            return None
-        guild = ctx.bot.get_guild(int(guild_id_str))
-
-    if guild is None or guild.banner is None:
-        return None
-
-    return _format_banner(guild.banner)
+def _current_guild(ctx: ExecutionContext) -> discord.Guild | None:
+    if getattr(ctx, "message", None) and ctx.message.guild:
+        return ctx.message.guild
+    if getattr(ctx, "interaction", None) and ctx.interaction.guild:
+        return ctx.interaction.guild
+    return None
 
 
 def resolve_inline(args: list[str], ctx: ExecutionContext) -> str:
     guild_id_str = ctx.resolve(args[0]).strip() if args and args[0].strip() else ""
-    return _resolve_banner_url(guild_id_str, ctx) or ""
+    fallback = ctx.resolve(args[1]).strip() if len(args) > 1 else ""
+
+    if guild_id_str:
+        if not guild_id_str.isdigit():
+            return fallback
+        guild = ctx.bot.get_guild(int(guild_id_str))
+    else:
+        guild = _current_guild(ctx)
+
+    if guild is None or guild.banner is None:
+        return fallback
+
+    return _format_banner(guild)
 
 
 async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: discord.abc.Messageable) -> None:
@@ -62,11 +64,7 @@ async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: disc
             ))
             return
     else:
-        if getattr(ctx, "message", None) and ctx.message.guild:
-            guild = ctx.message.guild
-        elif getattr(ctx, "interaction", None) and ctx.interaction.guild:
-            guild = ctx.interaction.guild
-
+        guild = _current_guild(ctx)
         if guild is None:
             await _send_error(ch, FDEnvironmentError(
                 "`$guildBanner` — this command can only be used inside a server, or provide a guild ID in DMs."
@@ -74,15 +72,12 @@ async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: disc
             return
 
     if guild.banner is None:
-        await _send_error(ch, FDLogicError(
-            "`$guildBanner` — that server has no banner set"
-        ))
+        await _send_error(ch, FDLogicError("`$guildBanner` — that server has no banner set"))
         return
 
-    url = _format_banner(guild.banner)
+    url = _format_banner(guild)
 
     ctx.stop_typing()
     dest = await ctx.get_dest()
-    sent = await dest.send(url)
-    ctx.last_bot_message = sent
+    ctx.last_bot_message = await dest.send(url)
     ctx.log_event(f"guildBanner → {url}")

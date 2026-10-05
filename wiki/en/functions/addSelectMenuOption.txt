@@ -1,10 +1,19 @@
 <dash>
 name: $addSelectMenuOption
-desc: Adds an option to an existing select menu created with $newSelectMenu.
+desc: Adds one choice to a dropdown you started earlier in the same command.
 category: Components
 
 <block type="text" title="How does the command work?">
-text: $addSelectMenuOption adds one option to a select menu that was created earlier with $newSelectMenu, matching it by Menu ID. Each option has a visible label, a unique value, and an optional description. Use the Default argument to pre-select it, and an Emoji argument to show an emoji next to the label.
+text: Every line you write puts a fresh entry into the dropdown named by the Menu ID, matched against the one you started with $newSelectMenu. People see the label with your description underneath and an optional emoji beside it, while your code only ever receives the value. Mark an entry as the default and the menu opens with it already chosen.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !ping
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,32 +22,32 @@ text: $addSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; 
 
 <block type="code" title="Ready-to-copy Example">
 text: $newSelectMenu[color_menu; 1; 1; Pick a color]
-$addSelectMenuOption[color_menu; Red; red; The color red]
-$addSelectMenuOption[color_menu; Blue; blue; The color blue; yes]
+text: $addSelectMenuOption[color_menu; Red; red; The color red]
+text: $addSelectMenuOption[color_menu; Blue; blue; The color blue; yes]
 </block>
 
 <block type="options" title="Details">
-option: Default|set to yes to pre-select this option (only one default per menu)
-option: Emoji|an emoji displayed next to the option label
-option: Message ID|optional ID of an already-sent bot message holding this menu
+option: Default|set to yes and this choice is already selected when the menu opens
+option: Emoji|an emoji shown next to the option label
+option: Message ID|ID of a message the bot already sent, so its menu updates live
 </block>
 
 <block type="callout" kind="note">
-text: Option values must be unique within the same menu. When a Message ID is given, the menu on that message is updated live; otherwise the option is attached to the menu on the message being built.
+text: Values inside one dropdown have to be different from each other, and an empty label or value is refused. Leave the Message ID out and the menu rides along with the message being sent; give one and the menu on that older message is rebuilt on the spot.
 </block>
 
 <block type="callout" kind="warning">
-text: Maximum 25 options per select menu. If no menu with the given ID was created in the script (via $newSelectMenu), an error is returned.
+text: A dropdown holds at most 25 choices and only one of them may be the default. If the Menu ID matches nothing you started in this same command, the bot reports an error.
 </block>
 </dash>
 
 <details>
 syntax: $addSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
-param: Menu ID|text|Required|The ID of the select menu (from $newSelectMenu) to add this option to
-param: Label|text|Required|The text shown to the user for this option
-param: Value|text|Required|A unique value returned when this option is selected
-param: Description|text|Emptiable|Small description shown under the label
-param: Default|yes/no|Optional|yes to pre-select this option (default: no)
-param: Emoji|text|Optional|An emoji displayed next to the option label
-param: Message ID|snowflake|Optional|ID of an already-sent bot message whose menu should be updated live
+param: Menu ID|text|Required|Which dropdown from $newSelectMenu this choice belongs to
+param: Label|text|Required|The words people see in the list
+param: Value|text|Required|The unique text handed back when this choice is picked
+param: Description|text|Emptiable|Smaller line shown under the label
+param: Default|yes/no|Optional|yes to have this choice already selected
+param: Emoji|text|Optional|Emoji shown beside the label
+param: Message ID|snowflake|Optional|A message the bot already sent, to rebuild its menu live
 </details>

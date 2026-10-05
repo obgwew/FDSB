@@ -1,0 +1,41 @@
+<dash>
+name: $repeatMessage
+desc: 将一段文本重复固定次数，并在一条消息中发送结果。
+category: 数学与数字
+
+<block type="text" title="这个命令是如何工作的？">
+text: ⁨$repeatMessage⁩ 接受一个整数和一段文本，然后把那段文本连续发送那么多次。单独使用时它打印重复后的结果，放在另一个命令内部时重复的文本会被就地插入，这很适合用来构建图案和分隔符。在你想要重复内容之间出现空格的地方写上 ⁎\s⁎。
+</block>
+
+<block type="list" title="如何在应用中使用它">
+item: 打开命令标签页
+item: 点击 + 开始一个新命令
+item: 在名称字段中为它取一个名字
+item: 设置前缀字段
+item: 将下面的代码粘贴到编辑器中
+item: 点击保存
+</block>
+
+<block type="code" title="语法">
+text: $repeatMessage[amount; message]
+</block>
+
+<block type="code" title="可直接复制的示例">
+text: $repeatMessage[5; ★]
+</block>
+
+<block type="options" title="规则">
+option: amount|大于或等于 1 的整数。为 0 时不会发送任何内容。
+option: message|要重复的文本。写 ⁎\s⁎ 表示一个空格。
+</block>
+
+<block type="callout" kind="note">
+text: Discord 把单条消息限制在 2000 个字符以内，所以在发送任何内容之前会先检查重复结果。如果 amount 乘以文本长度超过了这个上限，命令就会停止，并告诉你要减少重复次数或缩短文本。
+</block>
+</dash>
+
+<details>
+syntax: $repeatMessage[amount; message]
+param: amount|number|Required|文本要重复多少次。必须是大于或等于 1 的整数。
+param: message|text|Required|要重复的文本。写 ⁎\s⁎ 表示一个空格。
+</details>

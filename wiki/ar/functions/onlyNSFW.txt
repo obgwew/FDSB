@@ -1,0 +1,40 @@
+<dash>
+name: $onlyNSFW
+desc: يشغّل الأمر فقط في القنوات المعلَّمة كمقيّدة بالعمر، ويعرض رسالتك الخاصة في كل مكان آخر.
+category: التحكم في الوصول
+
+<block type="text" title="كيف يعمل الأمر؟">
+text: $onlyNSFW بوابة للمحتوى الإباحي. ينظر إلى ما إذا كانت القناة التي استُخدم فيها الأمر معلَّمة في Discord كمقيّدة بالعمر. فإذا كانت كذلك فلا يحدث شيء ويستمر بقية أمرك. وإن لم تكن كذلك، تُرسل رسالتك ويُسقط بقية الأمر في مكانه.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة
+item: الصق الكود أدناه في المحرر
+item: اضغط على حفظ
+</block>
+
+<block type="code" title="الصيغة">
+text: $onlyNSFW[error message]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $onlyNSFW[This command only works in age restricted channels.]
+text: $sendMessage[Here is the adult content.]
+</block>
+
+<block type="callout" kind="note">
+text: عليك أن تعلّم القناة بنفسك في Discord: افتح إعدادات القناة، وفعّل Age Restricted، ثم احفظ. ولا تفعل البوابة شيئًا قبل أن تُعدّ القناة على هذا النحو.
+</block>
+
+<block type="callout" kind="important">
+text: هذه البوابة من أجل الراحة لا من أجل الأمان الحقيقي. فأي شخص يستطيع قراءة أوامرك يستطيع أن يعرف وجود الأمر وأن يزيل البوابة.
+</block>
+</dash>
+
+<details>
+syntax: $onlyNSFW[error message]
+param: error message|text|مطلوب|الرسالة التي تُرسل إلى القناة عندما لا تكون معلَّمة كمقيّدة بالعمر.
+</details>

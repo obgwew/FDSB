@@ -1,0 +1,52 @@
+<dash>
+name: $userLeaderboard
+desc: Buduje ranking członków bieżącego serwera na podstawie zapisanych punktów.
+category: Zmienne
+
+<block type="text" title="Jak działa to polecenie?">
+text: ⁨$userLeaderboard⁩ odczytuje zmienną, która przechowuje po jednym punkcie dla każdego członka w serwerze, w którym użyto polecenia, i ustawia członków od najwyższego wyniku do najniższego. Wysyła ułożony ranking na kanał. Każdy serwer trzyma własną kopię punktów, więc każdy dostaje własny, oddzielny ranking.
+</block>
+
+<block type="list" title="Jak używać go w aplikacji">
+item: Najpierw utwórz zmienną w zakładce Zmienne
+item: Otwórz zakładkę Polecenia
+item: Dotknij +, aby rozpocząć nowe polecenie
+item: Nadaj mu nazwę w polu Nazwa
+item: Ustaw pole Prefiks
+item: Wklej poniższy kod do edytora
+item: Dotknij Zapisz
+</block>
+
+<block type="code" title="Składnia">
+text: $userLeaderboard[name; (sort); (limit); (format)]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $userLeaderboard[points; desc; 5; {rank}. {mention} — {value}]
+</block>
+
+<block type="options" title="Rodzaje sortowania">
+option: desc|Najwyższa wartość najpierw (używane, gdy sort zostawisz puste)
+option: asc|Najniższa wartość najpierw
+</block>
+
+<block type="options" title="Znaczniki wiersza">
+option: {rank}|Miejsce, zaczynając od 1
+option: {name}|Nazwa wyświetlana członka
+option: {mention}|Klikalna wzmianka członka
+option: {id}|Identyfikator Discorda członka
+option: {value}|Zapisany wynik punktowy
+</block>
+
+<block type="callout" kind="note">
+text: Ranking można zbudować tylko z liczb, więc wpisy zawierające tekst są pomijane. Limit może wynosić od 1 do 25 i jest dla Ciebie ograniczony; wszystko powyżej zostaje obcięte.
+</block>
+</dash>
+
+<details>
+syntax: $userLeaderboard[name; (sort); (limit); (format)]
+param: name|text|Required|Nazwa zmiennej, która przechowuje po jednym punkcie dla każdego członka w tym serwerze.
+param: sort|text|Optional|⁎desc⁎ dla najwyższego wyniku najpierw (domyślnie), albo ⁎asc⁎ dla najniższego najpierw.
+param: limit|number|Optional|Ile wierszy pokazać, od 1 do 25. Domyślnie 10.
+param: format|text|Optional|Szablon wiersza. Domyślnie ⁎{rank}. {name} — {value}⁎. Możesz użyć ⁎{rank}⁎, ⁎{name}⁎, ⁎{mention}⁎, ⁎{id}⁎ i ⁎{value}⁎.
+</details>

@@ -1,10 +1,20 @@
 <dash>
 name: $displayName
-desc: Returns the display name of a user.
+desc: Gives you the name a member is known by in this server.
 category: User
 
 <block type="text" title="How does the command work?">
-text: $displayName returns the display name (server nickname or username) of a user. If no argument is provided, it returns the display name of the command author. When a user ID or mention is provided, it returns that user's display name.
+text: If someone has set a nickname for the server, that is the name you get; without one, their account name stands in instead. Used with no brackets it describes whoever typed the command, which makes it the friendly way to greet people. Add a mention or an ID and it answers for that member instead. Either way the name lands in the channel or is filled into your own line.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $displayName
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,11 +26,11 @@ text: Hello, $displayName!
 </block>
 
 <block type="callout" kind="note">
-text: The display name is the server-specific nickname if set, otherwise the global username. Can be used inline.
+text: This is the per-server nickname when there is one, otherwise the account username. If you always want the account name and never the nickname, ask for $authorName.
 </block>
 </dash>
 
 <details>
 syntax: $displayName[(user mention/ID)]
-param: user|text|Optional|A user mention or numeric ID. If empty, uses the command author.
+param: user|text|Optional|Which member to name; leave empty for whoever typed the command
 </details>

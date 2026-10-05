@@ -1,10 +1,20 @@
 <dash>
 name: $thumbnail
-desc: Sets the thumbnail image of an embed using a URL.
+desc: Puts the small picture in the corner of the card your command builds.
 category: Embed Builder
 
 <block type="text" title="How does the command work?">
-text: $thumbnail places a large image in the top-right corner of the target embed. Any argument containing a valid web address works - the command extracts the first URL found. The optional last numeric argument selects which embed to edit.
+text: $thumbnail sets the picture that sits in the top right corner of a card. Hand it any text holding a web address and the first address inside it is used, so a link you built earlier can be dropped straight in. Add a number at the end when one command builds several cards and you want it on the second or the third.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !thumbnail
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -17,12 +27,12 @@ text: $thumbnail[https://example.com/chart.png]
 </block>
 
 <block type="callout" kind="note">
-text: The URL must start with http:// or https://. Trailing punctuation after the URL is trimmed automatically. An error is raised if no valid URL is found.
+text: The address has to start with http:// or https://, and punctuation left over after it is trimmed off for you. Nothing usable in the text and the bot stops with an error rather than sending a card with no picture.
 </block>
 </dash>
 
 <details>
 syntax: $thumbnail[url;(index)]
-param: url|text|Required|Text containing the image URL (http:// or https://)
-param: index|number|Optional|Embed number to edit when several embeds are being built (default 1)
+param: url|text|Required|Text holding the picture address, starting with http:// or https://
+param: index|number|Optional|Which card to add it to when you build several; the first one is used by default
 </details>

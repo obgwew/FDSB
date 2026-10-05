@@ -1,10 +1,20 @@
 <dash>
 name: $getServerInvite
-desc: Generates and sends an invite link for a server.
+desc: Produces an invite link for a server.
 category: Utilities
 
 <block type="text" title="How does the command work?">
-text: When $getServerInvite is called without arguments, it generates an invite link for the current server. When called with a guild ID, it generates an invite for that specific server. The bot first checks if the server has a vanity URL. If not, it finds a channel where the bot has "Create Invite" permissions and generates a permanent invite link.
+text: On its own it makes an invite for the server the command ran in; hand it a server ID and it does that one instead. When the server already has a vanity address, that is what comes back, and otherwise the bot creates a permanent invite in the first text channel where it is allowed to. Either way the finished link is posted in the channel ready to be copied.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $getServerInvite
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -17,11 +27,11 @@ text: Join our server: $getServerInvite
 </block>
 
 <block type="callout" kind="note">
-text: The bot must be a member of the target server and have "Create Invite" permissions. If a vanity URL is set for the server, it will be returned instead of creating a new invite. Without arguments, uses the current server.
+text: The bot has to be a member of the server and be able to create invites there, otherwise it tells you it cannot make one. Leave the brackets empty and the server you are standing in is used.
 </block>
 </dash>
 
 <details>
 syntax: $getServerInvite[(guildID)]
-param: guildID|snowflake|Optional|The ID of a different server to get an invite for. If omitted, uses the current server.
+param: guildID|snowflake|Optional|Which server to get an invite for. Leave it out and the current one is used.
 </details>

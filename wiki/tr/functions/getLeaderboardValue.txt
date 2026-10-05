@@ -1,0 +1,50 @@
+<dash>
+name: $getLeaderboardValue
+desc: Sıralama tablosunda bir üyenin veya sunucunun kayıtlı puanını döndürür, kayıtlı bir şey yoksa 0 döndürür.
+category: Değişkenler
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $getLeaderboardValue, sıralama komutlarının oluşturduğu sıralamaya bakar ve tek bir üyenin ya da sunucunun puanını döndürür. Eksik bir kayıt, eksik bir değer veya sayı olmayan bir değer — hepsi 0 olarak döner.
+</block>
+
+<block type="list" title="Uygulamada nasıl kullanılır">
+item: Önce Değişkenler sekmesinde değişkeni oluştur
+item: Komutlar sekmesini aç
+item: Yeni bir komut başlatmak için + düğmesine dokun
+item: Ad alanına bir ad ver
+item: Önek alanını ayarla
+item: Aşağıdaki kodu düzenleyiciye yapıştır
+item: Kaydet düğmesine dokun
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $getLeaderboardValue[type; name; sort; id]
+</block>
+
+<block type="code" title="Kopyalanmaya hazır örnek">
+text: $sendMessage[You have #$getLeaderboardValue[user; points; desc] points.]
+</block>
+
+<block type="options" title="Değişken türleri">
+option: user|Üye başına bir değer, her sunucuda ayrı ayrı saklanır
+option: globaluser|Üye başına bir değer, botun bulunduğu tüm sunucularda ortaktır
+option: server|Sunucu başına bir değer
+</block>
+
+<block type="options" title="Sıralama türleri">
+option: desc|Önce en yüksek değer (sıralamayı boş bıraktığınızda kullanılır)
+option: asc|Önce en düşük değer
+</block>
+
+<block type="callout" kind="note">
+text: Komutu çalıştıran kişiyi okumak için ID'yi boş bırakın. server türünde bu varsayılan değer yerine geçer. Sayı olmayan değerler 0 olarak döner.
+</block>
+</dash>
+
+<details>
+syntax: $getLeaderboardValue[type; name; sort; (id)]
+param: type|text|Zorunlu|Hangi havuz sıralansın: user, globaluser ya da server.
+param: name|text|Zorunlu|Sıralanacak değişkenin adı.
+param: sort|text|Zorunlu|Önce en yüksek için desc, önce en düşük için asc.
+param: id|snowflake|İsteğe bağlı|Hangi üye ya da sunucuya bakılacak. Varsayılan, komutu çalıştıran kişidir; server türünde ise geçerli sunucudur.
+</details>

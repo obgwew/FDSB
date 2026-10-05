@@ -1,10 +1,20 @@
 <dash>
 name: $setUserVar
-desc: Stores a persistent value scoped to a user and server.
+desc: Remembers a value for one member inside one server.
 category: Variables
 
 <block type="text" title="How does the command work?">
-text: $setUserVar stores a value under the key guild_id:user_id in the user variable file. With two arguments, the triggering author and current server are used. Add a user ID to select another user, and add a server ID to select another server. The command cannot be used inline.
+text: $setUserVar saves a value against a name you choose and a member you pick, so a score, a strike count or a last-seen note can sit next to that person and nowhere else. With just a name and a value it files the entry under whoever ran the command, in the server they typed it in. Add a user ID or a server ID as the third or fourth part and the value is written somewhere else entirely.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Create the variable first in the Variables tab
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !points
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,14 +26,14 @@ text: $setUserVar[points; 10; 123456789012345678; 987654321012345678]
 </block>
 
 <block type="callout" kind="important">
-text: If no global variable with this name exists, the command stores the supplied scoped value, creates an empty global definition, and then stops the script with an environment error. Define the global variable first.
+text: The value does get saved even on the first run, but if the name is not in the Variables tab yet the command still stops with an error. Create the variable there first and the save goes through quietly from then on.
 </block>
 </dash>
 
 <details>
 syntax: $setUserVar[name; value; (user_id); (guild_id)]
-param: name|text|Required|The variable name
-param: value|text|Required|The value to store
-param: userID|snowflake|Optional|The user ID; defaults to the triggering author
-param: guildID|snowflake|Optional|The server ID; defaults to the current server
+param: name|text|Required|The name the value is filed under
+param: value|text|Required|What to remember
+param: userID|snowflake|Optional|Which member it belongs to. Leave it out to use the person who ran the command.
+param: guildID|snowflake|Optional|Which server it belongs to. Leave it out to use the current one.
 </details>

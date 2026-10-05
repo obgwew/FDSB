@@ -1,10 +1,20 @@
 <dash>
 name: $guildBanner
-desc: Returns the banner URL of a server.
+desc: Gives you the link to a server's banner picture.
 category: Server
 
 <block type="text" title="How does the command work?">
-text: With no argument, $guildBanner uses the server where the script was triggered or the interaction was received. With a server ID, it returns the banner of the server where the bot is a member. Animated banners are returned as GIF URLs and other banners as PNG URLs.
+text: Use it with no argument and it returns the banner of the server the command was used in; add a server ID and it reads that server instead. Animated banners come back as a .gif link and still ones as a .png, ready to drop into a message or a card. A server with no banner set gives you an error instead of a link.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $guildBanner
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,15 +26,15 @@ text: $guildBanner[123456789012345678]
 </block>
 
 <block type="callout" kind="warning">
-text: The server must have a banner and the bot must be able to resolve it. Use a numeric server ID when supplying the optional argument.
+text: The server needs a banner and the bot has to be a member of it, otherwise there is nothing to hand back. In a private chat you must name the server, since there is no current one to read.
 </block>
 
 <block type="callout" kind="note">
-text: The inline form can only use cached guild data. The standalone form can fetch a guild that is not currently cached, subject to Discord availability.
+text: Dropped inside a line it works from what the bot already has loaded, so it can only return a server it is quick to recognise. On its own line it is also willing to go and look a server up.
 </block>
 </dash>
 
 <details>
 syntax: $guildBanner[(guild_id)]
-param: guildID|snowflake|Optional|The server ID; when omitted, the current or interaction server is used
+param: guildID|snowflake|Optional|Which server to read; leave it out and the current one is used
 </details>

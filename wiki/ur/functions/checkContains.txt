@@ -1,0 +1,38 @@
+<dash>
+name: $checkContains
+desc: متن میں آپ کی فہرست کردہ جملوں میں سے کوئی ایک بھی موجود ہو تو true وگرنہ false برگلاتا ہے۔
+category: متن ٹولز
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $checkContains ایک متن کے ٹکڑے اور ایک یا ایک سے زیادہ جملوں کو دیکھتا ہے، پھر true یا false لفظ کے ساتھ جواب دیتا ہے۔ جیسے ہی متن میں کوئی ایک جملہ نظر آ جائے تو یہ true جواب دے دیتا ہے، اس لیے آپ کو کبھی ہر جملے کو خود آزما کرنے کی ضرورت نہیں پڑتی۔ خالی جملہ صرف خالی متن سے مطابقت رکھتا ہے۔ اکیلے استعمال کرنے پر یہ جواب چینل میں چھاپ دیتا ہے، اور کسی دوسرے کمانڈ کے اندر جواب اپنی جگہ شامل ہو جاتا ہے۔
+</block>
+
+<block type="list" title="ایپ میں اسے کیسے استعمال کریں">
+item: کمانڈز ٹیب کھولیں
+item: نیا کمانڈ شروع کرنے کے لیے + پر تپ کریں
+item: نام کے خانے میں اسے نام دیں
+item: پریفکس کا خانہ مقرر کریں
+item: نیچے دیا گیا کوڈ ایڈیٹر میں چسپاں کریں
+item: محفوظ پر تپ کریں
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $checkContains[text; phrase; ...]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $if[$checkContains[$message; hello; hi; hey]]
+text:   $sendMessage[Say hello back!]
+text: $endif
+</block>
+
+<block type="callout" kind="note">
+text: جواب ہمیشہ صاف true یا false لفظ ہوتا ہے، اور $if و $onlyIf بالکل یہی expect کرتے ہیں۔ آپ کو کم از کم دو پیمانے درکار ہیں — متن اور ایک جملہ۔
+</block>
+</dash>
+
+<details>
+syntax: $checkContains[text; phrase; ...]
+param: text|text|لازمی|وہ متن جس میں تلاش کرنا ہے۔ $message جیسے اندرونی کمانڈز پہلے حل کر لیے جاتے ہیں۔
+param: phrase|text|لازمی|ایک یا ایک سے زیادہ جملے جن کو تلاش کرنا ہے۔ ان میں سے کوئی بھی متن میں ظاہر ہو جائے تو نتیجہ true ہوتا ہے۔
+</details>

@@ -15,6 +15,8 @@ def _do_split(args: list[str], ctx: ExecutionContext) -> tuple[list[str] | None,
 
     parts = [part.strip() for part in text.split(delimiter)]
     ctx.split_result = parts
+    ctx.split_out = parts
+    
     return parts, "", delimiter
 
 

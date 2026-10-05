@@ -1,10 +1,20 @@
 <dash>
 name: $randomUserID
-desc: Returns the user ID of a random human member from the server.
+desc: Picks a random human member of the server and hands back their ID.
 category: Randomness
 
 <block type="text" title="How does the command work?">
-text: When $randomUserID is called, the bot collects all non-bot members in the current server, picks one at random, and sends their user ID as a raw numeric string.
+text: Run it and the bot picks one member at random out of everyone in the server, then posts that person's ID as plain digits. Bot accounts are never in the draw, so a server full of bots cannot be picked from. Put it inside a line and the number is filled in wherever you typed it.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $randomUserID
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,6 +26,6 @@ text: Random user ID: $randomUserID
 </block>
 
 <block type="callout" kind="note">
-text: This command only works inside a server (not in DMs). Bot accounts are excluded from the selection pool. If there are no human members, the command will fail with an error.
+text: Only works inside a server, because a private chat has no member list to draw from. If no human members are found there, the bot says it found nobody to choose.
 </block>
 </dash>

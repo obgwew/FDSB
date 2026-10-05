@@ -1,10 +1,20 @@
 <dash>
 name: $lastUserMessageID
-desc: Returns the ID of the user message that triggered the current script.
+desc: Hands you the ID of the message that set your command running.
 category: Variables
 
 <block type="text" title="How does the command work?">
-text: $lastUserMessageID resolves to the snowflake ID of the message that started the current script execution — always the original author's message, the one that contained the $ command. It does not change during the script's lifetime. It behaves the same as the built-in $messageID token.
+text: This fills in the ID of the message that triggered the command — the one that carried your prefix. It stays the same for the whole run, so lines further down, or a function you call later, all see the same number. On its own the number means little to anyone reading the chat, so it is normally wrapped inside a message or handed to another command that works with IDs.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !welcome
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -17,7 +27,7 @@ text: $sendMessage[Your message ID is $lastUserMessageID]
 </block>
 
 <block type="callout" kind="note">
-text: This is an inline-only command and cannot be used as a standalone statement. Use it inside another command's argument brackets or as a bare inline token.
+text: It is a value rather than an action, so it only does something when it sits inside another command. On a line by itself there is nothing for it to send.
 </block>
 </dash>
 

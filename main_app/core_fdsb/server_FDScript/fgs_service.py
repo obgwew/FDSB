@@ -21,7 +21,7 @@ try:
 except ImportError:
     fph = None
 
-_current_lang = 'ar'
+_current_lang = 'en'
 
 def set_language(lang: str) -> None:
     global _current_lang
@@ -54,18 +54,38 @@ _fgs_running = False
 _FGS_NOTIFICATION_ID = 101
 _FGS_MAX_SECONDS = 5 * 3600 + 50 * 60
 
+_LEAVE_NOTIFICATION_ID = 102
+_LIMIT_NOTIFICATION_ID = 103
+_ALERT_CHANNEL_ID = "fdsb_alerts"
+_FGS_LIMIT_WARN_SECONDS = 15 * 60
+
+_bot_should_run = False
+_app_in_background = False
+
 _fgs_timeout_task = None
 _fgs_bot_name = ''
 _fgs_bot_image = ''
 _fgs_start_time = None
 
+def _title() -> str:
+    return _fgs_bot_name or _t('fgs_default_title')
+
 # ══════════════════════════════════════════════════════════════
 # Flet page / notifications
 # ══════════════════════════════════════════════════════════════
+_prev_lifecycle_handler = None
+
 def set_flet_page(page: ft.Page):
-    global _flet_page
+    global _flet_page, _prev_lifecycle_handler
     _flet_page = page
     ensure_background_mode(page)
+    try:
+        current = getattr(page, 'on_app_lifecycle_state_change', None)
+        if current is not _on_app_lifecycle_change:
+            _prev_lifecycle_handler = current
+            page.on_app_lifecycle_state_change = _on_app_lifecycle_change
+    except Exception as e:
+        print(f"[FGS] lifecycle hook failed: {e}")
 
 def send_flet_notification(message: str):
     global _flet_page
@@ -121,6 +141,10 @@ def schedule_on_flet_loop(coro) -> bool:
             return True
         except RuntimeError:
             pass
+    try:
+        coro.close()
+    except Exception:
+        pass
     return False
 
 def ensure_background_mode(page: ft.Page):
@@ -178,7 +202,51 @@ async def request_background_permissions() -> None:
         print(f"[Permissions] IGNORE_BATTERY_OPTIMIZATIONS request failed: {e}")
 
 # ══════════════════════════════════════════════════════════════
-# Foreground service 
+# Notifications helpers
+# ══════════════════════════════════════════════════════════════
+async def _show_alert(notification_id: int, title: str, body: str):
+    n = _android_notifications
+    if n is None:
+        return
+    try:
+        await n.show_notification(
+            notification_id=notification_id,
+            title=title,
+            body=body,
+            channel_id=_ALERT_CHANNEL_ID,
+            channel_name=_t('fgs_alert_channel_name'),
+            channel_description=_t('fgs_alert_channel_desc'),
+            importance="high",
+            play_sound=False,
+            enable_vibration=False,
+            auto_cancel=True,
+            only_alert_once=True,
+            visibility="public",
+        )
+    except Exception as e:
+        print(f"[FGS] alert {notification_id} failed: {e}")
+
+async def _cancel_alert(notification_id: int):
+    n = _android_notifications
+    if n is None:
+        return
+    try:
+        await n.cancel(notification_id)
+    except Exception:
+        pass
+
+async def _fgs_notification_visible() -> bool:
+    n = _android_notifications
+    if n is None:
+        return False
+    try:
+        active = await n.get_active_notifications()
+        return any(int(a.get('id', -1)) == _FGS_NOTIFICATION_ID for a in active)
+    except Exception:
+        return True
+
+# ══════════════════════════════════════════════════════════════
+# Foreground service
 # ══════════════════════════════════════════════════════════════
 async def _push_fgs_notification(notifications, title: str, image_path: str = ""):
     fgs_types = ["data_sync"]
@@ -206,39 +274,72 @@ async def _push_fgs_notification(notifications, title: str, image_path: str = ""
 def set_fgs_state(state: str, detail: str = ""):
     pass
 
+def is_fgs_running() -> bool:
+    return _fgs_running
+
+def _restart_timeout_task():
+    global _fgs_timeout_task
+    if _fgs_timeout_task and not _fgs_timeout_task.done():
+        _fgs_timeout_task.cancel()
+    _fgs_timeout_task = asyncio.create_task(_fgs_timeout_loop())
+
 async def _fgs_timeout_loop():
+    global _fgs_running
     try:
-        await asyncio.sleep(_FGS_MAX_SECONDS)
-        global _fgs_running
+        await asyncio.sleep(max(_FGS_MAX_SECONDS - _FGS_LIMIT_WARN_SECONDS, 0))
+        if not _fgs_running:
+            return
+        await _show_alert(
+            _LIMIT_NOTIFICATION_ID,
+            _title(),
+            _t('fgs_limit_warning'),
+        )
+        await asyncio.sleep(_FGS_LIMIT_WARN_SECONDS)
         if _fgs_running:
             print("[FGS] Reached safe limit (5h50m). Stopping foreground service.")
             await stop_android_foreground_service()
-            send_flet_notification(_t('fgs_limit_reached'))
+            await _show_alert(
+                _LIMIT_NOTIFICATION_ID,
+                _title(),
+                _t('fgs_limit_reached'),
+            )
     except asyncio.CancelledError:
         pass
 
 async def start_android_foreground_service(bot_name: str, bot_image: str = ""):
-    global _fgs_running, _fgs_timeout_task, _fgs_bot_name, _fgs_bot_image, _fgs_start_time
+    global _fgs_running, _fgs_bot_name, _fgs_bot_image, _fgs_start_time
     if not _is_android():
         return
+    if _android_notifications is None and _flet_page is not None:
+        ensure_background_mode(_flet_page)
     notifications = _android_notifications
     if not notifications:
+        print("[FGS] notifications plugin unavailable - bot will NOT survive leaving the app")
         return
-    title = bot_name or "FDSB Bot Server"
+    title = bot_name or _title()
+
+    if _fgs_running:
+        _fgs_bot_name = title
+        _fgs_bot_image = bot_image or _fgs_bot_image
+        try:
+            await _push_fgs_notification(notifications, title, _fgs_bot_image)
+        except Exception as e:
+            print(f"[FGS] refresh failed: {e}")
+        return
+
     _fgs_bot_name = title
     _fgs_bot_image = bot_image or ''
     _fgs_start_time = datetime.now()
-
     try:
         if hasattr(notifications, 'request_permissions'):
             await notifications.request_permissions()
         await request_background_permissions()
-        _fgs_running = True
         await _push_fgs_notification(notifications, title, _fgs_bot_image)
-        if _fgs_timeout_task and not _fgs_timeout_task.done():
-            _fgs_timeout_task.cancel()
-        _fgs_timeout_task = asyncio.create_task(_fgs_timeout_loop())
+        _fgs_running = True
+        _restart_timeout_task()
     except Exception as e:
+        _fgs_running = False
+        _fgs_start_time = None
         print(f"[FGS] start failed: {e}")
         send_flet_notification(_t('fgs_start_failed', error=e))
 
@@ -260,7 +361,71 @@ async def stop_android_foreground_service():
         print(f"[FGS] stop failed: {e}")
 
 # ══════════════════════════════════════════════════════════════
-# Wakelock + combined start/stop used by local_server.start_bot/stop_bot
+# Leaving / returning to the app
+# ══════════════════════════════════════════════════════════════
+_LEAVING_STATES = {"pause", "hide", "detach"}
+_RETURNING_STATES = {"resume", "show"}
+
+def _on_app_lifecycle_change(e):
+    state = getattr(e, 'state', None)
+    name = str(getattr(state, 'value', state) or '').lower().split('.')[-1]
+    if name in _LEAVING_STATES:
+        schedule_on_flet_loop(_handle_user_leaving())
+    elif name in _RETURNING_STATES:
+        schedule_on_flet_loop(_handle_user_returning())
+    if _prev_lifecycle_handler is not None:
+        try:
+            _prev_lifecycle_handler(e)
+        except Exception:
+            pass
+
+async def _handle_user_leaving():
+    global _app_in_background
+    _app_in_background = True
+    if not _is_android() or not _bot_should_run:
+        return
+    if not _fgs_running:
+        await start_android_foreground_service(_title(), _fgs_bot_image)
+    elif not await _fgs_notification_visible():
+        try:
+            await _push_fgs_notification(_android_notifications, _title(), _fgs_bot_image)
+        except Exception as ex:
+            print(f"[FGS] re-push failed: {ex}")
+    if _fgs_running:
+        await _show_alert(
+            _LEAVE_NOTIFICATION_ID,
+            _title(),
+            _t('fgs_background_notice'),
+        )
+    else:
+        await _show_alert(
+            _LEAVE_NOTIFICATION_ID,
+            _title(),
+            _t('fgs_background_unprotected'),
+        )
+
+async def _handle_user_returning():
+    global _app_in_background
+    _app_in_background = False
+    if not _is_android():
+        return
+    await _cancel_alert(_LEAVE_NOTIFICATION_ID)
+    await _cancel_alert(_LIMIT_NOTIFICATION_ID)
+    if not _bot_should_run:
+        return
+    if not _fgs_running:
+        await start_android_foreground_service(_title(), _fgs_bot_image)
+    else:
+        if _fgs_timeout_task is not None:
+            _restart_timeout_task()
+        if not await _fgs_notification_visible():
+            try:
+                await _push_fgs_notification(_android_notifications, _title(), _fgs_bot_image)
+            except Exception as ex:
+                print(f"[FGS] re-push failed: {ex}")
+
+# ══════════════════════════════════════════════════════════════
+# Wakelock + combined start/stop used by server.start_bot/stop_bot
 # ══════════════════════════════════════════════════════════════
 async def _enable_wakelock():
     w = _wakelock
@@ -281,12 +446,20 @@ async def _disable_wakelock():
         pass
 
 async def start_background_mode(bot_name: str, bot_image: str = ""):
+    global _bot_should_run
+    _bot_should_run = True
     await _enable_wakelock()
     await start_android_foreground_service(bot_name, bot_image)
 
 async def stop_background_mode():
+    global _bot_should_run
+    if not _bot_should_run and not _fgs_running:
+        return
+    _bot_should_run = False
     await _disable_wakelock()
     await stop_android_foreground_service()
+    await _cancel_alert(_LEAVE_NOTIFICATION_ID)
+    await _cancel_alert(_LIMIT_NOTIFICATION_ID)
 
 async def update_android_status_notification(bot_name: str, online: bool, bot_image: str = ""):
     if online:

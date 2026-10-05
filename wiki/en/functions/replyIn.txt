@@ -1,10 +1,19 @@
 <dash>
 name: $replyIn
-desc: Delays the next reply by the bot for a specified duration.
+desc: Holds the bot's next reply back for a set amount of time.
 category: Timing & Delays
 
 <block type="text" title="How does the command work?">
-text: $replyIn pauses the script execution for the specified duration. After the delay, the script continues with the next command. This is useful for creating timed responses.
+text: $replyIn pauses your command so the bot does not rush straight on to the next line. Put a length such as 5s and everything after it waits five seconds before starting, which is the easy way to stage a message that lands a little later instead of all at once. The wait prints nothing by itself, your script simply picks up again once the time is up.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !remind
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,15 +22,15 @@ text: $replyIn[time]
 
 <block type="code" title="Ready-to-copy Example">
 text: $replyIn[5s]
-$sendMessage[This appears after 5 seconds!]
+text: $sendMessage[This appears after 5 seconds!]
 </block>
 
 <block type="callout" kind="note">
-text: The time format uses: s (seconds), m (minutes), h (hours), d (days). The script is frozen during the delay — no other commands in this script will execute until the delay completes.
+text: A length is a number plus a unit: s for seconds, m for minutes, h for hours, d for days. Anything you wrote above the wait has already been sent, and only this one command is held up while the time passes.
 </block>
 </dash>
 
 <details>
 syntax: $replyIn[time]
-param: time|text|Required|Duration to wait. Format: number + unit (s/m/h/d), e.g., 5s, 10m, 1h
+param: time|text|Required|How long to wait, as a number plus s, m, h or d, such as 5s, 10m or 1h
 </details>

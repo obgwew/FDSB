@@ -25,7 +25,7 @@ from main_app.core_fdsb.server_FDScript.fgs_service import (
     set_flet_page, send_flet_notification, ensure_background_mode,
     schedule_on_flet_loop, set_fgs_state,
     start_background_mode, stop_background_mode,
-    update_android_status_notification,
+    update_android_status_notification, is_fgs_running,
 )
 
 _current_lang = 'ar'
@@ -183,10 +183,41 @@ _vars_dir_path = ''
 _status_task = None
 
 _state_listeners: list = []
+_last_error = ''
 
 def register_state_listener(callback):
     if callback not in _state_listeners:
         _state_listeners.append(callback)
+
+def unregister_state_listener(callback):
+    try:
+        _state_listeners.remove(callback)
+    except ValueError:
+        pass
+
+def _set_error(msg: str) -> None:
+    global _last_error
+    _last_error = msg or ''
+
+def consume_last_error() -> str:
+    """Return the reason of the last failed start (and clear it) so the UI can show it."""
+    global _last_error
+    msg, _last_error = _last_error, ''
+    return msg
+
+def _clean_token(token) -> str:
+    t = str(token or '').strip().strip('"\'')
+    if t.lower().startswith('bot '):
+        t = t[4:].strip()
+    return t
+
+def _describe_start_error(e: Exception) -> str:
+    if isinstance(e, getattr(discord, 'PrivilegedIntentsRequired', ())):
+        return ('Privileged Gateway Intents are not enabled for this bot. In the Discord '
+                'Developer Portal (Bot tab) enable Presence, Server Members and Message Content intents.')
+    if isinstance(e, getattr(discord, 'LoginFailure', ())):
+        return 'Login failed: the token used to start the bot is invalid or malformed.'
+    return f'{type(e).__name__}: {e}'
 
 def _notify_state_change(is_online: bool):
     for listener in list(_state_listeners):
@@ -403,22 +434,38 @@ def _runner(token: str):
     try:
         _loop.run_until_complete(_client.start(token))
     except Exception as e:
-        print(f"[Runner Error] {e}")
+        print(f"[Runner Error] {type(e).__name__}: {e}")
+        _set_error(_describe_start_error(e))
         set_fgs_state(STATE_ERROR, str(e))
     finally:
         _stopping = False
         _client = None
         _notify_state_change(False)
+        schedule_on_flet_loop(stop_background_mode())
 
-def start_bot(bot_dir: str) -> bool:
+def is_running() -> bool:
+    """True while the Discord client is alive OR the foreground service is active."""
+    client_alive = _client is not None and not _client.is_closed()
+    return client_alive or is_fgs_running()
+
+def start_bot(bot_dir: str, token: str = '') -> bool:
+    """Start the bot. `token` (e.g. from TokenVault) wins over the one in config.json.
+    On failure returns False and the reason is available via consume_last_error()."""
     global _client, _thread, _stopping, _vars_dir_path
+    _set_error('')
     if _stopping:
+        _set_error('The bot is still shutting down, try again in a few seconds.')
         return False
     if _client and not _client.is_closed():
+        try:
+            if _client.is_ready():
+                _notify_state_change(True)
+        except Exception:
+            pass
         return True
-    token = _get_token(bot_dir)
+    token = _clean_token(token) or _clean_token(_get_token(bot_dir))
     if not token:
-        _notify_state_change(False)
+        _set_error('No bot token found (not passed by the app and not present in config.json).')
         return False
     prefix_manager.set_bot_dir(bot_dir)
     abs_bot_dir = os.path.abspath(bot_dir)
@@ -433,7 +480,10 @@ def start_bot(bot_dir: str) -> bool:
     _client = _make_bot(bot_root, bot_image)
     _thread = threading.Thread(target=_runner, args=(token,), daemon=True)
     _thread.start()
-    schedule_on_flet_loop(start_background_mode('FDSB Server', bot_image))
+    try:
+        schedule_on_flet_loop(start_background_mode('FDSB Server', bot_image))
+    except Exception as e:
+        print(f"[Server] background mode failed to start: {e}")
     return True
 
 def stop_bot() -> None:
@@ -442,9 +492,9 @@ def stop_bot() -> None:
         return
     if _client is None or _client.is_closed():
         return
-    _stopping = True
 
     if _loop and _loop.is_running():
+        _stopping = True
         asyncio.run_coroutine_threadsafe(_client.close(), _loop)
     if _status_task and not _status_task.done():
         _status_task.cancel()

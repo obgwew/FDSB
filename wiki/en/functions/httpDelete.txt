@@ -1,10 +1,19 @@
 <dash>
 name: $httpDelete
-desc: Sends an HTTP DELETE request to a URL with an optional body.
+desc: Sends a DELETE request to a web address and keeps the answer for you to read.
 category: HTTP
 
 <block type="text" title="How does the command work?">
-text: $httpDelete sends a DELETE request with a 10 second timeout. The body is sent as JSON when it is valid JSON, otherwise as raw text. The response is stored in $httpResult and the status code in $httpStatus. Headers added with $httpAddHeader are sent and then cleared.
+text: The bot calls the address you hand it over HTTP DELETE and waits up to ten seconds for a reply. A body you add travels with the call, sent as JSON when it parses as JSON and as plain text when it does not. The reply body lands in $httpResult and the code in $httpStatus, and the bot prints nothing by itself.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !ping
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,16 +22,16 @@ text: $httpDelete[URL; (Body)]
 
 <block type="code" title="Ready-to-copy Example">
 text: $httpDelete[https://api.example.com/users/1]
-$httpStatus
+text: $httpStatus
 </block>
 
 <block type="callout" kind="note">
-text: If the body is valid JSON it is sent as JSON, otherwise it is sent as raw data. On failure the status is set to 500 and $httpResult contains the error message.
+text: Headers you added with $httpAddHeader go out with this call and are then cleared, ready for the next request. A blocked address shows up as status 400, and a failed call as status 500 with the reason sitting in $httpResult.
 </block>
 </dash>
 
 <details>
 syntax: $httpDelete[URL; (Body)]
-param: URL|text|Required|The URL to send the DELETE request to
-param: Body|text|Optional|The request body (JSON or raw text)
+param: URL|text|Required|The address to send the DELETE call to
+param: Body|text|Optional|Extra content to send along, as JSON or plain text
 </details>

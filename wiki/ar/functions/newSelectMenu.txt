@@ -1,10 +1,19 @@
 <dash>
 name: $newSelectMenu
-desc: يُنشئ ويُسجّل قائمة اختيار جديدة لرسالة.
-category: المكوّنات
+desc: يبني القائمة المنسدلة التي تجلس تحت إحدى رسائل بوتك.
+category: المكونات
 
-<block type="text" title="كيف تعمل الدالة؟">
-text: تبدأ $newSelectMenu في بناء قائمة اختيار منسدلة معرّفة بمعرّف فريد (Menu ID). تُحدد الحد الأدنى والحد الأقصى لعدد الخيارات التي يجب/يمكن للمستخدم اختيارها. استخدم $addSelectMenuOption بعدها لملء القائمة بالخيارات، وسيتم إرفاقها بالرسالة التي تقوم بإنشائها. يمكنك أيضًا تمرير معرّف رسالة لإرفاق القائمة برسالة بوت مرسلة مسبقًا.
+<block type="text" title="كيف يعمل الأمر؟">
+text: ابدأ القائمة بمعرّف تخترعه أنت، ثم قل كم خيارًا يجب أن يختار العضو وكم يُسمح له أن يختار. وهذا المعرّف هو كيف يشير إليه كل سطر لاحق. أما الخيارات نفسها فتأتي لاحقًا وتُضاف بـ $addSelectMenuOption، والقائمة المكتملة ترافق الرسالة التي ترسلها. وأعطه معرّف رسالة بوت سبق نشرها فتقع القائمة على تلك الرسالة بدلًا من ذلك.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة على !colors
+item: الصق الكود أدناه في المحرر
+item: اضغط على حفظ
 </block>
 
 <block type="code" title="الصيغة">
@@ -13,32 +22,32 @@ text: $newSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
 
 <block type="code" title="مثال جاهز للنسخ">
 text: $newSelectMenu[color_menu; 1; 1; Pick a color]
-$addSelectMenuOption[color_menu; Red; red; The color red]
-$addSelectMenuOption[color_menu; Blue; blue; The color blue]
-$sendMessage[Choose your favorite color!]
+text: $addSelectMenuOption[color_menu; Red; red; The color red]
+text: $addSelectMenuOption[color_menu; Blue; blue; The color blue]
+text: $sendMessage[Choose your favorite color!]
 </block>
 
 <block type="options" title="تفاصيل السلوك">
-option: Min|الحد الأدنى لعدد الخيارات المطلوب اختيارها من قبل المستخدم (0 إلى 25)
-option: Max|الحد الأقصى لعدد الخيارات المسموح اختيارها من قبل المستخدم (1 إلى 25)
-option: Placeholder|النص التلميحي الرمادي المعروض قبل أن يختار المستخدم أي خيار
-option: Message ID|معرّف اختياري لرسالة بوت مرسلة مسبقًا لإرفاق القائمة بها
+option: Min|كم خيارًا يجب أن يختاره أحدهم قبل قبوله
+option: Max|كم خيارًا قد يختاره أحدهم في المرة الواحدة
+option: Placeholder|تلميح رمادي يستقر في القائمة المغلقة
+option: Message ID|رسالة بوت منشورة سابقًا تُوضع عليها القائمة
 </block>
 
 <block type="callout" kind="note">
-text: تكون القائمة جاهزة فقط بعد إضافة خيار واحد على الأقل باستخدام $addSelectMenuOption. استخدم $editSelectMenu لتغيير Min/Max/Placeholder لقائمة موجودة، و$editSelectMenuOption لتعديل خيار محدد.
+text: لا تصبح القائمة مرئية إلا بعد إضافة خيار واحد على الأقل بـ $addSelectMenuOption. وبعد ذلك يغيّر $editSelectMenu الحدود أو التلميح، ويغيّر $editSelectMenuOption خيارًا واحدًا.
 </block>
 
 <block type="callout" kind="warning">
-text: لا يمكن أن يكون Min أكبر من Max. يمكن أن تحمل رسالة最多 25 مكوّنًا إجماليًا. إذا لم تكن الرسالة المحددة من هذا البوت، يتم إرجاع خطأ.
+text: لا يجوز أن يتجاوز Min قيمة Max. وتحمل رسالة واحدة 25 قائمة منسدلة وزرًا معًا على الأكثر، ويُرفض الإشارة إلى رسالة لم يرسلها بوتك.
 </block>
 </dash>
 
 <details>
 syntax: $newSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
-param: Menu ID|text|Required|معرّف فريد يُستخدم للإشارة إلى هذه القائمة لاحقًا ($addSelectMenuOption, $editSelectMenu, $editSelectMenuOption)
-param: Min|number|Required|الحد الأدنى لعدد الخيارات المطلوب اختيارها (0 إلى 25)
-param: Max|number|Required|الحد الأقصى لعدد الخيارات المسموح اختيارها (1 إلى 25)
-param: Placeholder|text|Optional|النص التلميحي المعروض داخل القائمة قبل إجراء الاختيار
-param: Message ID|snowflake|Optional|معرّف رسالة بوت مرسلة مسبقًا لإرفاق هذه القائمة بها بدلاً من الرسالة الحالية
+param: Menu ID|text|مطلوب|الاسم الذي ستستخدمه لهذه القائمة لاحقًا
+param: Min|number|مطلوب|كم خيارًا يجب أن يُختار
+param: Max|number|مطلوب|أكبر عدد خيارات يمكن اختياره
+param: Placeholder|text|اختياري|تلميح رمادي يُرى قبل اختيار أي شيء
+param: Message ID|snowflake|اختياري|إحدى رسائل بوتك التي تُربط بها هذه القائمة
 </details>

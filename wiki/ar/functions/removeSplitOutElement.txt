@@ -1,10 +1,20 @@
 <dash>
 name: $removeSplitOutElement
-desc: يزيل عنصرًا واحدًا من نتيجة القسمة الحالية ($splitIn) وفقًا لفهرسه الذي يبدأ من 1.
+desc: يزيل مدخلًا واحدًا من قائمة سبق أن شقّتها.
 category: أدوات النصوص
 
-<block type="text" title="كيف تعمل الدالة؟">
-text: يحذف $removeSplitOutElement العنصر الموجود في الموضع المحدد من البيانات المخزنة بواسطة $splitIn. تحتفظ العناصر المتبقية بترتيبها. يجب استدعاء $splitIn قبل هذا الأمر.
+<block type="text" title="كيف يعمل الأمر؟">
+text: بعد أن يكون ⁨$splitIn⁩ قد شقّ سطر نص إلى قطع منفصلة، ينزع هذا منها واحدًا. وكل ما تحتفظ به يبقي في الترتيب الذي كان عليه، فنزع الثاني من ثلاثة يترك لك الأول والثالث. وأرسل القائمة المقلَّمة إلى الخارج بـ ⁨$joinSplitOut⁩ عندما تنتهي.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة على !clean
+item: اكتب سكربتك في المحرر
+item: الصق السطر أدناه في المكان الذي تحتاجه
+item: اضغط على حفظ
 </block>
 
 <block type="code" title="الصيغة">
@@ -13,16 +23,16 @@ text: $removeSplitOutElement[index]
 
 <block type="code" title="مثال جاهز للنسخ">
 text: $splitIn[apple,banana,cherry; ,]
-$removeSplitOutElement[2]
-$joinSplitOut[; ]
+text: $removeSplitOutElement[2]
+text: $joinSplitOut[; ]
 </block>
 
 <block type="callout" kind="note">
-text: يجب أن يكون الفهرس عددًا صحيحًا موجبًا ضمن طول القسمة الحالي، وإلا سيتم رفع خطأ.
+text: العد يبدأ من 1 لا من 0. والموضع الذي ليس عددًا صحيحًا، أو يقع خارج القائمة التي شقّتها، يوقف الأمر بخطأ بدلًا من أن يفعل شيئًا بهدوء.
 </block>
 </dash>
 
 <details>
 syntax: $removeSplitOutElement[index]
-param: index|number|مطلوب|موضع العنصر المراد إزالته (يبدأ من 1)
+param: index|number|مطلوب|أي قطعة تُنزع، بالعدّ من 1
 </details>

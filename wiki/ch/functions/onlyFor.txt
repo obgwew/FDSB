@@ -1,0 +1,46 @@
+<dash>
+name: $onlyFor
+desc: 仅允许列出的成员或角色使用该命令，并向其他人显示你自己的消息。
+category: 访问控制
+
+<block type="text" title="命令如何工作？">
+text: $onlyFor 是你放在命令顶部的一道关卡。列出允许通过的人员和角色，然后以所有人都应看到的消息收尾。如果运行命令的人与其中某一项相符，则什么都不会发生，你的命令会继续执行。如果不相符，则发送该消息，其余命令就此终止。
+</block>
+
+<block type="list" title="如何在应用中使用">
+item: 打开“命令”标签页
+item: 点击 + 开始新命令
+item: 在“名称”字段中填写名称
+item: 设置“前缀”字段
+item: 将下面的代码粘贴到编辑器中
+item: 点击保存
+</block>
+
+<block type="code" title="语法">
+text: $onlyFor[ID or name; ...; error message]
+</block>
+
+<block type="code" title="可直接复制的示例">
+text: $onlyFor[123456789012345678; Moderator; This command is for moderators only.]
+text: $sendMessage[Here is the secret!]
+</block>
+
+<block type="options" title="可以列出的内容">
+option: ID|用户或角色 ID，例如 123456789012345678，带或不带提及符号
+option: name|角色名称，例如 Moderator，或者单个用户的用户名
+</block>
+
+<block type="callout" kind="note">
+text: 把消息放在最后——所有条目之后的内容都算作一条消息。成员被直接点名，或持有其中一个列出的角色时即可通过。
+</block>
+
+<block type="callout" kind="important">
+text: 这道关卡只是图方便，并非真正的安全措施。任何能读取你命令的人都能查出名单上有谁，任何能修改命令的人都能把自己从名单中删掉。真正敏感的部分请留在你这一侧。
+</block>
+</dash>
+
+<details>
+syntax: $onlyFor[ID or name; ...; error message]
+param: ID or name|text|必需|一个或多个允许继续的用户 ID、角色 ID 或名称。
+param: error message|text|必需|当该人不被允许时发送到频道的消息。所有条目之后的内容都算作这条消息。
+</details>

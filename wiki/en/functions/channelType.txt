@@ -1,10 +1,20 @@
 <dash>
 name: $channelType
-desc: Returns the type of a channel (text, voice, category, forum, stage).
+desc: Says what kind of channel something is: text, voice, category, forum or stage.
 category: Channel
 
 <block type="text" title="How does the command work?">
-text: $channelType takes a channel mention or ID and returns the channel's type name as a string. Valid types include: text, voice, category, forum, stage. If no argument is provided, it returns the type of the current channel. Returns "unknown" if the channel cannot be found.
+text: Point it at a channel and you get that channel's kind back as a single word. Leave the brackets empty and it reports on the channel the command was used in instead. The answer comes in handy for guarding actions that only make sense in one kind of place.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $channelType
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,11 +26,11 @@ text: $channelType[<#123456789012345678>]
 </block>
 
 <block type="callout" kind="note">
-text: Useful for validating channel types before executing type-specific operations like $createChannel or $voiceUsersLimit.
+text: A channel the bot cannot find, or brackets holding something that is not a channel ID, come back as unknown rather than an error. Check for that word before you act on the result.
 </block>
 </dash>
 
 <details>
 syntax: $channelType[channel mention/ID]
-param: channel|text|Optional|The channel mention or numeric ID. If empty, uses the current channel.
+param: channel|text|Optional|Which channel to look at, by mention or ID. Leave empty for the current one.
 </details>

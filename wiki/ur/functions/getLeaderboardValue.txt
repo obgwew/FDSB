@@ -1,0 +1,50 @@
+<dash>
+name: $getLeaderboardValue
+desc: ڈیٹ بورڈ میں کسی ممبر یا سرور کا محفوظ اسکور برگلاتا ہے، یا اگر اس کے لیے کچھ محفوظ نہ ہو تو 0۔
+category: متغیرات
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $getLeaderboardValue وہی ترتیب دیکھتا ہے جو ترتیب کمانڈز بناتی ہیں، پھر ایک ممبر یا سرور کا اسکور برگلاتا ہے۔ جو اندراج موجود نہ ہو، یا اس کی قدر موجود نہ ہو، یا قدر عدد نہ ہو، ان سب کا جواب 0 ہوتا ہے۔
+</block>
+
+<block type="list" title="ایپ میں اسے کیسے استعمال کریں">
+item: پہلے متغیرات ٹیب میں متغیر بنائیں
+item: کمانڈز ٹیب کھولیں
+item: نیا کمانڈ شروع کرنے کے لیے + پر تپ کریں
+item: نام کے خانے میں اسے نام دیں
+item: پریفکس کا خانہ مقرر کریں
+item: نیچے دیا گیا کوڈ ایڈیٹر میں چسپاں کریں
+item: محفوظ پر تپ کریں
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $getLeaderboardValue[type; name; sort; id]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $sendMessage[You have #$getLeaderboardValue[user; points; desc] points.]
+</block>
+
+<block type="options" title="متغیر کی اقسام">
+option: user|ہر ممبر کے لیے ایک قدر، جو ہر سرور میں الگ الگ محفوظ رہتی ہے
+option: globaluser|ہر ممبر کے لیے ایک قدر، جو ربات کے موجود ہر سرور میں مشترک ہے
+option: server|ہر سرور کے لیے ایک قدر
+</block>
+
+<block type="options" title="ترتیب کی اقسام">
+option: desc|سب سے زیادہ قدر پہلے (جب آپ ترتیب خالی چھوڑیں تو استعمال ہوتا ہے)
+option: asc|سب سے کم قدر پہلے
+</block>
+
+<block type="callout" kind="note">
+text: جس شخص نے کمانڈ چلایا اس کا اسکور پڑھنے کے لیے ID خالی چھوڑیں۔ server قسم میں یہ طے شدہ قدر موجودہ سرور بن جاتی ہے۔ جو قدریں عدد نہیں ہیں ان کا جواب 0 آتا ہے۔
+</block>
+</dash>
+
+<details>
+syntax: $getLeaderboardValue[type; name; sort; (id)]
+param: type|text|لازمی|کون سا مجموعہ درجہ بند کیا جائے: user، globaluser یا server۔
+param: name|text|لازمی|اس متغیر کا نام جس کے مطابق درجہ بندی ہو۔
+param: sort|text|لازمی|سب سے زیادہ کے لیے desc، یا سب سے کم کے لیے asc۔
+param: id|snowflake|اختیاری|کون سا ممبر یا سرور دیکھا جائے۔ طے شدہ طور پر وہ شخص جس نے کمانڈ چلایا، یا server قسم کے لیے موجودہ سرور۔
+</details>

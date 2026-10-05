@@ -1,0 +1,36 @@
+<dash>
+name: $ephemeral
+desc: Sprawia, że odpowiedź bota jest prywatna, więc widzi ją tylko osoba, która uruchomiła polecenie.
+category: Wiadomości
+
+<block type="text" title="Jak działa ta komenda?">
+text: $ephemeral przełącza odpowiedź bota w tryb prywatny. Bez argumentu albo z dowolną wartością inną niż false odpowiedź jest pokazywana tylko użytkownikowi, który ją wywołał. Przekaż false, no, 0 lub off, aby wyłączyć tryb prywatny w dalszej części skryptu. Jeśli umieścisz to blisko początku polecenia, wszystko, co bot wyśle później, też pozostanie prywatne.
+</block>
+
+<block type="list" title="Jak używać go w aplikacji">
+item: Otwórz zakładkę Polecenia
+item: Dotknij +, aby rozpocząć nowe polecenie
+item: Nadaj mu nazwę w polu Nazwa
+item: Ustaw pole Prefiks
+item: Wklej poniższy kod w edytorze
+item: Dotknij Zapisz
+</block>
+
+<block type="code" title="Składnia">
+text: $ephemeral[(false)]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $ephemeral
+text: $sendMessage[Only you can see this.]
+</block>
+
+<block type="callout" kind="note">
+text: Prywatne odpowiedzi działają tylko wtedy, gdy polecenie zostało uruchomione ze slash-polecenia albo z przycisku i menu wyboru. Jeśli ktoś wywoła je, wpisując zwykłą wiadomość, ustawienie zostanie zignorowane, a odpowiedź pozostanie publiczna.
+</block>
+</dash>
+
+<details>
+syntax: $ephemeral[(false)]
+param: false|yes/no|Opcjonalne|Zostaw puste, aby odpowiedzi były prywatne. Przekaż false, no, 0 lub off, aby odpowiedzi znów stały się publiczne.
+</details>

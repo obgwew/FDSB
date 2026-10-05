@@ -1,0 +1,41 @@
+<dash>
+name: $onlyBotPerms
+desc: Arrête la commande avec votre propre message, sauf si le bot est autorisé à faire la suite.
+category: Contrôle d'accès
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: ⁨$onlyBotPerms⁩ vérifie les permissions du bot lui-même avant que la partie protégée de votre commande ne s'exécute. Listez les permissions dont vous avez besoin, puis terminez par le message que les membres doivent voir s'il en manque une. Si le bot les possède toutes, rien ne s'affiche et votre commande continue. S'il en manque une, le message est envoyé et le reste de la commande est abandonné sur place.
+</block>
+
+<block type="list" title="Comment l'utiliser dans l'application">
+item: Ouvrez l'onglet Commandes
+item: Touchez + pour créer une nouvelle commande
+item: Donnez-lui un nom dans le champ Nom
+item: Définissez le champ Préfixe
+item: Collez le code ci-dessous dans l'éditeur
+item: Touchez Enregistrer
+</block>
+
+<block type="code" title="Syntaxe">
+text: $onlyBotPerms[permission; ...; error message]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $onlyBotPerms[kick_members; ban_members; I need permission to kick and ban members.]
+text: $sendMessage[Done!]
+</block>
+
+<block type="callout" kind="note">
+text: Les noms de permissions sont ceux de Discord, en minuscules avec des tirets bas, comme ⁎kick_members⁎, ⁎ban_members⁎ ou ⁎manage_messages⁎. Mettez le message à la fin — tout ce qui suit les permissions compte comme un seul message.
+</block>
+
+<block type="callout" kind="important">
+text: La vérification regarde le salon où la commande a été utilisée, donc une permission que le bot a dans un salon mais pas dans un autre le bloquera quand même. Vérifiez le rôle du bot sur Discord et assurez-vous qu'il se trouve au-dessus des rôles sur lesquels il doit agir.
+</block>
+</dash>
+
+<details>
+syntax: $onlyBotPerms[permission; ...; error message]
+param: permission|text|Requis|Un ou plusieurs noms de permissions Discord, séparés par des points-virgules, comme ⁎kick_members⁎ ou ⁎manage_roles⁎.
+param: error message|text|Requis|Message envoyé dans le salon quand il manque une des permissions au bot. Tout ce qui suit les permissions compte comme ce message.
+</details>

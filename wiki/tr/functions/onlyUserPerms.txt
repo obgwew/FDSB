@@ -1,0 +1,51 @@
+<dash>
+name: $onlyUserPerms
+desc: Komutu çalıştıran kişinin sıradaki işlemi yapmaya izni yoksa komutu kendi mesajınla durdurur.
+category: Erişim Kontrolü
+
+<block type="text" title="Komut nasıl çalışır?">
+text: ⁨$onlyUserPerms⁩, korumalı bölüm çalışmadan önce komutu çalıştıran üyenin izinlerini denetler. Bu kişinin ihtiyaç duyduğu izinleri listeleyin, sonra biri eksik olduğunda gönderilecek mesajla bitirin. Hepsine sahipse hiçbir şey gösterilmez ve komutunuz devam eder. Biri eksikse mesaj gönderilir ve komutun geri kalanı orada bırakılır.
+</block>
+
+<block type="list" title="Uygulamada nasıl kullanılır">
+item: Komutlar sekmesini açın
+item: Yeni bir komut başlatmak için + düğmesine dokunun
+item: Ad alanına bir ad verin
+item: Önek alanını ayarlayın
+item: Aşağıdaki kodu düzenleyiciye yapıştırın
+item: Kaydet düğmesine dokunun
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $onlyUserPerms[permission; ...; error message]
+</block>
+
+<block type="code" title="Kopyalamaya hazır örnek">
+text: $onlyUserPerms[manage_messages; You need Manage Messages to do that.]
+text: $onlyAdmin
+text: $sendMessage[Message deleted.]
+</block>
+
+<block type="options" title="Yaygın izinler">
+option: manage_messages|İletileri silme ve sabitleme
+option: kick_members|Üyeleri atma
+option: ban_members|Üyeleri yasaklama
+option: timeout_members|Üyeleri geçici susturma
+option: manage_roles|Rol atama ve rol kaldırma
+option: moderate_members|Üyeleri geçici susturma ve atma
+</block>
+
+<block type="callout" kind="note">
+text: İzin adları Discord'un kendi adlarıdır; küçük harfle ve alt çizgiyle yazılır. Mesajı sona koyun — izinlerden sonraki her şey tek bir mesaj sayılır.
+</block>
+
+<block type="callout" kind="important">
+text: Bu, ⁨$onlyAdmin⁩ ile aynı şey değildir. Kişinin kendi izinlerine bakar; bu yüzden fazladan izin verdiğiniz bir rol, yönetici rolü olmasa bile bu denetimi geçer.
+</block>
+</dash>
+
+<details>
+syntax: $onlyUserPerms[permission; ...; error message]
+param: permission|text|Required|Noktalı virgülle ayrılmış bir veya daha fazla Discord izin adı, örneğin ⁎manage_messages⁎ veya ⁎kick_members⁎.
+param: error message|text|Required|Üye izinlerden birine sahip olmadığında kanala gönderilen mesaj. İzinlerden sonraki her şey bu mesaj sayılır.
+</details>

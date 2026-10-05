@@ -1,10 +1,20 @@
 <dash>
 name: $replaceText
-desc: Replaces occurrences of a substring within a text with new text.
+desc: Swaps one piece of text for another inside a message.
 category: String Utilities
 
 <block type="text" title="How does the command work?">
-text: $replaceText takes a message, an old text to find, and a new text to replace it with. Optionally, you can specify how many occurrences to replace. Returns the modified text.
+text: Give it the original text, the piece you want gone and what should stand in its place, and the edited version comes back. Every match is swapped unless you add a fourth part holding a number, which caps how many of them get changed. Stand it on its own line and the rewritten text is posted straight into the channel.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !clean
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,14 +26,14 @@ text: $replaceText[Hello World; World; FDScript]
 </block>
 
 <block type="callout" kind="note">
-text: By default, all occurrences are replaced. Provide a number as the 4th argument to limit replacements. Use -1 or omit to replace all.
+text: Leave the fourth part out, or set it to -1, to catch every occurrence. Something that is not a number in that spot stops the command with an error instead of the bot guessing how many you had in mind.
 </block>
 </dash>
 
 <details>
 syntax: $replaceText[message; old; new; (amount)]
-param: message|text|Required|The original text to search within
-param: old|text|Required|The substring to find and replace
-param: new|text|Required|The replacement text
-param: amount|number|Optional|Maximum number of replacements. -1 or omitted = replace all occurrences
+param: message|text|Required|The text you want to work on
+param: old|text|Required|The exact piece to hunt for
+param: new|text|Required|What should sit in its place
+param: amount|number|Optional|How many matches to change; -1 or blank takes them all
 </details>

@@ -1,10 +1,19 @@
 <dash>
 name: $httpDelete
-desc: يرسل طلب HTTP من نوع DELETE إلى عنوان URL مع نص جسم اختياري.
+desc: يرسل طلب DELETE إلى عنوان ويب ويحتفظ بالإجابة لتقرأها.
 category: HTTP
 
-<block type="text" title="كيف تعمل الدالة؟">
-text: يرسل $httpDelete طلب DELETE بمهلة 10 ثوانٍ. يُرسل الجسم بصيغة JSON عندما يكون JSON صالحًا، وإلا كنص خام. تُخزَّن الاستجابة في $httpResult ويُخزَّن رمز الحالة في $httpStatus. تُرسل الترويسات المضافة بواسطة $httpAddHeader ثم تُمسح.
+<block type="text" title="كيف يعمل الأمر؟">
+text: ينادي البوت العنوان الذي تعطيه عبر HTTP DELETE وينتظر حتى عشر ثوانٍ كمال على رد. وأي جسم تضيفه يرافق النداء، فيُرسل كـ JSON حين يُحلَّل كـ JSON وكنص عادي حين لا يكون كذلك. ويهبط جسم الرد في $httpResult والشيفرة في $httpStatus، ولا يطبع البوت شيئًا من تلقاء نفسه.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة على !ping
+item: الصق الكود أدناه في المحرر
+item: اضغط على حفظ
 </block>
 
 <block type="code" title="الصيغة">
@@ -13,16 +22,16 @@ text: $httpDelete[URL; (Body)]
 
 <block type="code" title="مثال جاهز للنسخ">
 text: $httpDelete[https://api.example.com/users/1]
-$httpStatus
+text: $httpStatus
 </block>
 
 <block type="callout" kind="note">
-text: إذا كان الجسم JSON صالحًا يُرسل بصيغة JSON، وإلا يُرسل كبيانات خام. عند الفشل يُضبط رمز الحالة على 500 ويحتوي $httpResult على رسالة الخطأ.
+text: الترويسات التي أضفتها بـ $httpAddHeader تخرج مع هذا النداء ثم تُمسح، فتكون جاهزة للطلب التالي. ويظهر العنوان المحظور بحالة 400، والنداء الفاشل بحالة 500 مع السبب في $httpResult.
 </block>
 </dash>
 
 <details>
 syntax: $httpDelete[URL; (Body)]
-param: URL|text|مطلوب|عنوان URL الذي سيُرسل إليه طلب DELETE
-param: Body|text|اختياري|نص جسم الطلب (JSON أو نص خام)
+param: URL|text|مطلوب|العنوان الذي يُرسَل إليه نداء DELETE
+param: Body|text|اختياري|محتوى إضافي يُرسَل معه، كـ JSON أو كنص عادي
 </details>

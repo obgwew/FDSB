@@ -1,10 +1,19 @@
 <dash>
 name: $untimeout
-desc: Removes an active timeout from a server member.
+desc: Lifts an active timeout off a member and hands their normal permissions straight back.
 category: Moderation
 
 <block type="text" title="How does the command work?">
-text: $untimeout takes a user ID or mention and removes any active timeout on that member, immediately restoring their permissions to send messages, react, and join voice channels.
+text: Give it a mention or a user ID and the bot clears whatever timeout that member is currently sitting under, so they can talk, react and join voice again straight away. Somebody who was not timed out is simply left alone, and the command finishes quietly. The bot has to be allowed to do it, which means the Moderate Members permission and a role sitting above the person you are clearing.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !untimeout
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,15 +25,15 @@ text: $untimeout[@user]
 </block>
 
 <block type="callout" kind="note">
-text: The user must currently have an active timeout for this command to have any effect. If the user is not timed out, the command completes without error.
+text: A member with no active timeout comes out of this untouched, and the bot posts no confirmation either way. Pair it with $timeout if you want the matching pair of actions in the same command.
 </block>
 
 <block type="callout" kind="warning">
-text: The bot must have "Moderate Members" permission and its highest role must be above the target's highest role.
+text: Without Moderate Members, or with the bot's highest role below the target's, Discord turns the request down and the bot reports it in the channel. It only works inside a server, so trying it in a direct message ends in an error.
 </block>
 </dash>
 
 <details>
 syntax: $untimeout[user]
-param: user|text|Required|The user ID or @mention of the member to remove the timeout from
+param: user|text|Required|The member to clear, written as an @mention or a user ID
 </details>

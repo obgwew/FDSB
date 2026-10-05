@@ -1,0 +1,38 @@
+<dash>
+name: $checkContains
+desc: 依文本是否包含你列出的至少一个短语，返回 true 或 false。
+category: 字符串工具
+
+<block type="text" title="命令如何工作？">
+text: $checkContains 查看一段文本和一个或多个短语，然后以单词 true 或 false 作答。只要任意一个短语出现在文本中，它就会回答 true，因此你永远不必自己逐个测试。空短语只能匹配空文本。单独使用时它会把答案打印到频道里，放到另一个命令内部时答案会被插入到原处。
+</block>
+
+<block type="list" title="如何在应用中使用">
+item: 打开“命令”标签页
+item: 点击 + 开始新命令
+item: 在“名称”字段中填写名称
+item: 设置“前缀”字段
+item: 将下面的代码粘贴到编辑器中
+item: 点击保存
+</block>
+
+<block type="code" title="语法">
+text: $checkContains[text; phrase; ...]
+</block>
+
+<block type="code" title="可直接复制的示例">
+text: $if[$checkContains[$message; hello; hi; hey]]
+text:   $sendMessage[Say hello back!]
+text: $endif
+</block>
+
+<block type="callout" kind="note">
+text: 答案始终是原样的单词 true 或 false，这正是 $if 和 $onlyIf 所期待的。你至少需要两个参数——文本加上一个短语。
+</block>
+</dash>
+
+<details>
+syntax: $checkContains[text; phrase; ...]
+param: text|text|必需|要搜索的文本。嵌套命令（例如 $message）会先被解析。
+param: phrase|text|必需|一个或多个要查找的短语。只要其中任意一个出现在文本中，结果就是 true。
+</details>

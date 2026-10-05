@@ -1,10 +1,20 @@
 <dash>
 name: $guildID
-desc: Returns the Discord server (guild) ID where the command was used.
+desc: Gives you the long ID number Discord uses for the server the command was typed in.
 category: Info
 
 <block type="text" title="How does the command work?">
-text: When $guildID is called, the bot retrieves the unique Discord guild ID of the server where the command was executed and sends it directly as a raw numeric string. If used in a DM, it returns "DM".
+text: $guildID hands back the number that identifies the server your command was typed in, with nothing wrapped around it. Drop it anywhere in a line of text and the bot prints the digits in the middle of the sentence. It is the same figure Discord shows once you switch Developer Mode on, and it is what other commands expect when you need to point them at a server.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !serverid
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,6 +26,6 @@ text: Server ID: $guildID
 </block>
 
 <block type="callout" kind="note">
-text: The returned value is a snowflake ID (e.g., 123456789012345678). When used outside a server (in DMs), the command returns the string "DM" instead.
+text: Type the command in a direct message and there is no server to report on, so the bot prints DM in place of the number.
 </block>
 </dash>

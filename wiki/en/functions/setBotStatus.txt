@@ -1,10 +1,20 @@
 <dash>
 name: $setBotStatus
-desc: Changes the bot's presence status (online, idle, dnd or invisible).
+desc: Changes the dot next to the bot's name to online, idle, do not disturb or invisible.
 category: Server
 
 <block type="text" title="How does the command work?">
-text: $setBotStatus switches the bot's presence indicator between online, idle, dnd (do not disturb) and invisible (appears offline). The status stays until changed again - restarting the app resets it according to the saved settings.
+text: $setBotStatus changes how the bot looks to everyone in your server. The dot beside its name can read online, idle, dnd, or invisible, which makes the bot look offline while it is still working. The new look stays until you change it again, and it is saved alongside your Status Bot settings.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !setBotStatus
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,11 +26,15 @@ text: $setBotStatus[idle]
 </block>
 
 <block type="callout" kind="important">
-text: Rate-limited internally to one change every 12 seconds - extra calls within that window fail silently. offline is accepted as an alias for invisible. Anything else raises an error.
+text: Discord allows one change every 12 seconds. Try again inside that window and the bot answers with the number of seconds left to wait, and offline is simply another way of writing invisible.
+</block>
+
+<block type="callout" kind="warning">
+text: In the build you are running, this line is skipped before it can act, so the bot keeps the look it already had.
 </block>
 </dash>
 
 <details>
 syntax: $setBotStatus[online|idle|dnd|invisible]
-param: status|text|Required|One of: online, idle, dnd, invisible (offline works as alias for invisible)
+param: status|text|Required|One of online, idle, dnd or invisible. offline works as another way of writing invisible.
 </details>

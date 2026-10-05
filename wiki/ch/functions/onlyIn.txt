@@ -1,0 +1,47 @@
+<dash>
+name: $onlyIn
+desc: 仅允许命令在列出的频道或服务器中运行，并在其他任何位置显示你自己的消息。
+category: 访问控制
+
+<block type="text" title="命令如何工作？">
+text: $onlyIn 会在执行任何内容之前检查命令是在哪里使用的。列出允许的频道和服务器，然后以所有人都应看到的消息收尾。如果命令在其中之一中使用，则什么都不会发生，你的命令会继续执行。在其他任何地方，该消息会被发送，其余命令就此终止。
+</block>
+
+<block type="list" title="如何在应用中使用">
+item: 打开“命令”标签页
+item: 点击 + 开始新命令
+item: 在“名称”字段中填写名称
+item: 设置“前缀”字段
+item: 将下面的代码粘贴到编辑器中
+item: 点击保存
+</block>
+
+<block type="code" title="语法">
+text: $onlyIn[channel or server ID or name; ...; error message]
+</block>
+
+<block type="code" title="可直接复制的示例">
+text: $onlyIn[123456789012345678; general; Use this command in #general.]
+text: $sendMessage[Welcome!]
+</block>
+
+<block type="options" title="可以列出的内容">
+option: channel ID|频道 ID，例如 123456789012345678，带或不带 # 符号
+option: channel name|频道名称，例如 general
+option: server ID or name|服务器的 ID 或名称，这样命令在该服务器对应的频道中也能工作
+</block>
+
+<block type="callout" kind="note">
+text: 把消息放在最后——所有条目之后的内容都算作一条消息。列出服务器名称后，命令便可在该服务器的任何频道中运行。
+</block>
+
+<block type="callout" kind="important">
+text: 该检查针对的是输入命令的那个频道。在直接消息中并没有可匹配的频道或服务器，因此命令在那里总会被拦截。
+</block>
+</dash>
+
+<details>
+syntax: $onlyIn[channel or server ID or name; ...; error message]
+param: channel or server ID or name|text|必需|一个或多个允许的频道 ID、频道名称、服务器 ID 或服务器名称。
+param: error message|text|必需|当命令在别处被使用时发送到频道的消息。所有条目之后的内容都算作这条消息。
+</details>

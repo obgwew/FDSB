@@ -1,0 +1,41 @@
+<dash>
+name: $repeatMessage
+desc: يكرر جزءًا من النص عددًا ثابتًا من المرات ويرسل النتيجة في رسالة واحدة.
+category: أدوات النصوص
+
+<block type="text" title="كيف يعمل الأمر؟">
+text: $repeatMessage يأخذ عددًا صحيحًا وجزءًا من النص، ثم يرسل النص ذلك العدد من المرات متتالية. وحده يطبع النتيجة المكررة، وداخل أمر آخر يُدرج النص المكرر في مكانه، وهو أمر مفيد لبناء الأنماط والفواصل. اكتب \s حيث تريد مسافة بين التكرارات.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة
+item: الصق الكود أدناه في المحرر
+item: اضغط على حفظ
+</block>
+
+<block type="code" title="الصيغة">
+text: $repeatMessage[amount; message]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $repeatMessage[5; ★]
+</block>
+
+<block type="options" title="القواعد">
+option: amount|عدد صحيح قدره 1 أو أكثر. ولا يُرسل شيء عند 0.
+option: message|النص المراد تكراره. اكتب \s للمسافة.
+</block>
+
+<block type="callout" kind="note">
+text: يحد Discord الرسالة الواحدة بـ 2000 حرف، لذا تُفحص التكرارات قبل إرسال أي شيء. وإذا تجاوز حاصل ضرب amount في طول النص هذا الحد، يتوقف الأمر ويخبرك بأن تستخدم تكرارات أقل أو نصًا أقصر.
+</block>
+</dash>
+
+<details>
+syntax: $repeatMessage[amount; message]
+param: amount|number|مطلوب|كم مرة يُكرر النص. يجب أن يكون عددًا صحيحًا قدره 1 أو أكثر.
+param: message|text|مطلوب|النص المراد تكراره. اكتب \s للمسافة.
+</details>

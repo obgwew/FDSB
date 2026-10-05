@@ -1,10 +1,19 @@
 <dash>
 name: $httpPost
-desc: يرسل طلب HTTP من نوع POST إلى عنوان URL مع نص جسم اختياري.
+desc: يرسل بيانات إلى عنوان ويب ويحتفظ بما يعود.
 category: HTTP
 
-<block type="text" title="كيف تعمل الدالة؟">
-text: يرسل $httpPost طلب POST بمهلة 10 ثوانٍ. يُرسل الجسم بصيغة JSON عندما يكون JSON صالحًا، وإلا كنص خام. تُخزَّن الاستجابة في $httpResult ويُخزَّن رمز الحالة في $httpStatus. تُرسل الترويسات المضافة بواسطة $httpAddHeader ثم تُمسح.
+<block type="text" title="كيف يعمل الأمر؟">
+text: وجّه هذا إلى عنوان فيجري البوت طلب POST إليه، مرسلًا الجسم الذي تعطيه مع أي ترويسات أضفتها سابقًا. وعندما تصل الإجابة تُحتفظ لتقرأها، مع شيفرة الحالة التي أعادها الموقع، لتتمكن الأسفل من سحب حقل من الرد وإسقاطه في رسالة. ونص الجسم الذي يصح أن يكون JSON صالحًا يخرج كـ JSON، وأي شيء آخر يخرج كبيانات عادية.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة على !notify
+item: الصق الكود أدناه في المحرر
+item: اضغط على حفظ
 </block>
 
 <block type="code" title="الصيغة">
@@ -13,17 +22,21 @@ text: $httpPost[URL; (Body)]
 
 <block type="code" title="مثال جاهز للنسخ">
 text: $httpAddHeader[Content-Type; application/json]
-$httpPost[https://api.example.com/users; {"name": "FDScript"}]
-$httpResult[id]
+text: $httpPost[https://api.example.com/users; {"name": "FDScript"}]
+text: $httpResult[id]
 </block>
 
 <block type="callout" kind="note">
-text: إذا كان الجسم JSON صالحًا يُرسل بصيغة JSON، وإلا يُرسل كبيانات خام. عند الفشل يُضبط رمز الحالة على 500 ويحتوي $httpResult على رسالة الخطأ.
+text: الترويسات تخص نداءً واحدًا فقط. فما أضفته بـ $httpAddHeader يخرج مع هذا النداء ثم يُمسح، فيبدأ الطلب التالي نظيفًا ولا يرث Content-Type لم تقصد إرساله.
+</block>
+
+<block type="callout" kind="warning">
+text: شيء ما يصل إلى النتيجة دائمًا. فإن فشل الموقع أو انقطع الاتصال تعود الحالة 500 وتحمل النتيجة السبب بدلًا من توقف الأمر، والعنوان الذي يرفض البوت نداءه يعود بحالة 400.
 </block>
 </dash>
 
 <details>
 syntax: $httpPost[URL; (Body)]
-param: URL|text|مطلوب|عنوان URL الذي سيُرسل إليه طلب POST
-param: Body|text|اختياري|نص جسم الطلب (JSON أو نص خام)
+param: URL|text|مطلوب|العنوان الذي يُرسَل إليه الطلب
+param: Body|text|اختياري|ما يُرسَل معه، إما JSON أو نص عادي
 </details>

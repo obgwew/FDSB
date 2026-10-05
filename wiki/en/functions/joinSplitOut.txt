@@ -1,10 +1,22 @@
 <dash>
 name: $joinSplitOut
-desc: Joins all elements of the current split result ($splitIn) back into a single text.
+desc: Glues the pieces produced by $splitIn back together with a separator between them.
 category: String Utilities
 
 <block type="text" title="How does the command work?">
-text: $joinSplitOut combines every element stored by $splitIn into one string, inserting the given separator between them. The result is sent to the channel.
+text: $joinSplitOut takes everything $splitIn broke apart and puts it back into one piece of text, with a separator of your choosing in between.
+text: Leave the separator out and a single space is used instead, so the quickest form is just $joinSplitOut with nothing after it.
+text: The finished line joins whatever else the bot is about to say, which makes it easy to build a sentence out of split parts.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !join
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,15 +25,15 @@ text: $joinSplitOut[separator]
 
 <block type="code" title="Ready-to-copy Example">
 text: $splitIn[apple,banana,cherry; ,]
-$joinSplitOut[ + ]
+text: $joinSplitOut[ + ]
 </block>
 
 <block type="callout" kind="note">
-text: $splitIn must be called before $joinSplitOut so there is data to join.
+text: $splitIn has to run first, otherwise there is nothing to join. Give $joinSplitOut an empty separator and the pieces are joined with one space each.
 </block>
 </dash>
 
 <details>
 syntax: $joinSplitOut[separator]
-param: separator|text|Required|The text inserted between every two elements
+param: separator|text|Required|The text placed between every two pieces
 </details>

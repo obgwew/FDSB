@@ -1,10 +1,20 @@
 <dash>
 name: $voiceUsersLimit
-desc: Returns the user limit of a voice or stage channel.
+desc: Gives you the member cap on a voice or stage channel.
 category: Channel
 
 <block type="text" title="How does the command work?">
-text: $voiceUsersLimit takes a voice or stage channel ID and returns its user limit. A value of 0 means there is no limit. Returns an error if the channel is not a voice/stage channel.
+text: $voiceUsersLimit takes the ID of a voice or stage channel and hands back how many people Discord lets in at once. The answer is 0 when nobody has set a cap, which means the channel is open. It is a value rather than a message, so you can put it in a message or use it to decide whether to open or close something.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !voiceUsersLimit
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,11 +26,11 @@ text: $voiceUsersLimit[123456789012345678]
 </block>
 
 <block type="callout" kind="note">
-text: Returns 0 if the channel has no user limit set. Can be used inline for conditional checks.
+text: Exactly one part is expected, and it has to be plain numbers. A channel the bot cannot find, or one that is not a voice or stage channel at all, stops your command with an error.
 </block>
 </dash>
 
 <details>
 syntax: $voiceUsersLimit[voice channel ID]
-param: channelID|text|Required|The ID of a voice or stage channel.
+param: channelID|text|Required|Which voice or stage channel to check.
 </details>

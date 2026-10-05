@@ -1,10 +1,22 @@
 <dash>
 name: $setVar
-desc: Stores a value in a persistent variable.
+desc: Keeps a value under a name so your other commands can read it back later.
 category: Variables
 
 <block type="text" title="How does the command work?">
-text: $setVar stores a value under a given variable name. With two arguments, it stores a global variable. With three arguments (name, value, user ID), it stores a user-specific variable. Values persist across bot restarts.
+text: $setVar files a value under the name you choose, so any later command can read it back with $getVar. Give it a name and a value and the value is shared by everyone; add a member ID as a third part and it is kept for that person alone. What you save stays saved when the bot is restarted.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Variables tab
+item: Tap + and type the name you want to use
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !setVar
+item: Write your script in the editor
+item: Add the name and the value, then a member ID if the value is for one person
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,13 +28,17 @@ text: $setVar[greeting; Hello World!]
 </block>
 
 <block type="callout" kind="note">
-text: Variables are stored on disk and survive bot restarts. Use $getVar to retrieve stored values. $setVar cannot be used inline (as a placeholder).
+text: It needs a line of its own, so you cannot drop $setVar inside the text of another command. Read the value back with $getVar, using the same name and, for a private value, the same member ID.
+</block>
+
+<block type="callout" kind="important">
+text: If that name is not in the list yet, the bot saves the value anyway and then stops your command with a warning. Make the variable in the Variables tab first and the value lands the way you meant it.
 </block>
 </dash>
 
 <details>
 syntax: $setVar[name; value; (userID)]
-param: name|text|Required|The variable name to store the value under
-param: value|text|Required|The value to store
-param: userID|snowflake|Optional|If provided, stores the value as user-specific instead of global
+param: name|text|Required|The name the value is filed under, exactly as it appears in the Variables tab
+param: value|text|Required|The value to keep until you change it again
+param: userID|snowflake|Optional|If given, the value is kept for that member instead of for everyone
 </details>

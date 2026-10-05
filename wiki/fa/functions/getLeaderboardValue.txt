@@ -1,0 +1,50 @@
+<dash>
+name: $getLeaderboardValue
+desc: امتیاز ذخیره‌شده یک عضو یا سرور را در یک جدول رتبه‌بندی برمی‌گرداند، یا ۰ اگر چیزی برای آن ذخیره نشده باشد.
+category: متغیرها
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $getLeaderboardValue همان رتبه‌بندی‌ای را جست‌وجو می‌کند که دستورهای جدول رتبه‌بندی می‌سازند و امتیاز تنها یک عضو یا سرور را برمی‌گرداند. نبودِ یک ورودی، نبودِ مقدار، یا مقداری که عدد نیست، همگی ۰ برمی‌گردند.
+</block>
+
+<block type="list" title="نحوه استفاده در برنامه">
+item: ابتدا متغیر را در زبانه متغیرت‌ها بسازید
+item: زبانه دستورها را باز کنید
+item: برای شروع یک دستور جدید روی + بزنید
+item: در فیلد نام، نامی برای آن بگذارید
+item: فیلد پیشوند را تنظیم کنید
+item: کد زیر را در ویرایشگر بچسبانید
+item: روی ذخیره بزنید
+</block>
+
+<block type="code" title="سینتکس">
+text: $getLeaderboardValue[type; name; sort; id]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $sendMessage[You have #$getLeaderboardValue[user; points; desc] points.]
+</block>
+
+<block type="options" title="انواع متغیرها">
+option: user|یک مقدار برای هر عضو، که در هر سرور جداگانه نگهداری می‌شود
+option: globaluser|یک مقدار برای هر عضو، که میان همه سرورهایی که ربات در آن‌هاست مشترک است
+option: server|یک مقدار برای هر سرور
+</block>
+
+<block type="options" title="انواع مرتب‌سازی">
+option: desc|بیشترین مقدار اول (وقتی مرتب‌سازی را خالی می‌گذارید استفاده می‌شود)
+option: asc|کمترین مقدار اول
+</block>
+
+<block type="callout" kind="note">
+text: اگر معرّف را خالی بگذارید، نتیجه شخصی که دستور را اجرا کرده خوانده می‌شود. در نوع server این پیش‌فرض به‌جای آن سرور فعلی می‌شود. مقدارهایی که عدد نیستند به‌شکل ۰ برمی‌گردند.
+</block>
+</dash>
+
+<details>
+syntax: $getLeaderboardValue[type; name; sort; (id)]
+param: type|text|الزامی|کدام مجموعه رتبه‌بندی شود: user یا globaluser یا server.
+param: name|text|الزامی|نام متغیری که رتبه‌بندی بر اساس آن انجام می‌شود.
+param: sort|text|الزامی|desc برای بیشترین اول، یا asc برای کمترین اول.
+param: id|snowflake|اختیاری|کدام عضو یا سرور جست‌وجو شود. پیش‌فرض شخصی است که دستور را اجرا کرده، یا در نوع server سرور فعلی.
+</details>

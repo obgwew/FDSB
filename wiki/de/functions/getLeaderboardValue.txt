@@ -1,0 +1,50 @@
+<dash>
+name: $getLeaderboardValue
+desc: Gibt den gespeicherten Punktestand eines Mitglieds oder Servers innerhalb einer Rangliste zurück, oder 0, wenn nichts gespeichert ist.
+category: Variablen
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: $getLeaderboardValue schlägt dieselbe Reihenfolge nach, die die Ranglistenbefehle aufbauen, und gibt den Punktestand eines einzelnen Mitglieds oder Servers zurück. Ein fehlender Eintrag, ein fehlender Wert oder ein Wert, der keine Zahl ist, kommen alle als 0 zurück.
+</block>
+
+<block type="list" title="So verwenden Sie es in der App">
+item: Erstellen Sie zuerst die Variable im Tab Variablen
+item: Öffnen Sie den Tab Befehle
+item: Tippen Sie auf +, um einen neuen Befehl zu starten
+item: Geben Sie im Feld Name einen Namen ein
+item: Legen Sie das Feld Präfix fest
+item: Fügen Sie den folgenden Code in den Editor ein
+item: Tippen Sie auf Speichern
+</block>
+
+<block type="code" title="Syntax">
+text: $getLeaderboardValue[type; name; sort; id]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $sendMessage[You have #$getLeaderboardValue[user; points; desc] points.]
+</block>
+
+<block type="options" title="Variablentypen">
+option: user|Ein Wert pro Mitglied, in jedem Server getrennt gespeichert
+option: globaluser|Ein Wert pro Mitglied, überall dort geteilt, wo der Bot ist
+option: server|Ein Wert pro Server
+</block>
+
+<block type="options" title="Sortiertypen">
+option: desc|Höchster Wert zuerst (wird verwendet, wenn du die Sortierung leer lässt)
+option: asc|Niedrigster Wert zuerst
+</block>
+
+<block type="callout" kind="note">
+text: Lass die ID leer, um die Person zu lesen, die den Befehl ausgeführt hat. Beim Typ server wird daraus stattdessen der aktuelle Server. Werte, die keine Zahlen sind, kommen als 0 zurück.
+</block>
+</dash>
+
+<details>
+syntax: $getLeaderboardValue[type; name; sort; (id)]
+param: type|text|Erforderlich|Welche Gruppe gerankt wird: user, globaluser oder server.
+param: name|text|Erforderlich|Name der Variablen, nach der sortiert wird.
+param: sort|text|Erforderlich|desc für höchster zuerst oder asc für niedrigster zuerst.
+param: id|snowflake|Optional|Welches Mitglied oder welcher Server nachgeschlagen wird. Standard ist die Person, die den Befehl ausgeführt hat, bzw. der aktuelle Server beim Typ server.
+</details>

@@ -1,10 +1,20 @@
 <dash>
 name: $ceil
-desc: Rounds a number up to the nearest integer.
+desc: Rounds a number up to the next whole number.
 category: Math & Numbers
 
 <block type="text" title="How does the command work?">
-text: $ceil takes a single numeric value and rounds it up to the nearest whole number (ceiling). For example, 3.1 becomes 4, and 5.0 stays 5. Works both as a standalone command and inline inside other commands.
+text: Give it a single number and you get that number turned upwards, so 3.1 comes back as 4 and 3.9 gives 4 as well. A number that is already whole is handed back untouched, and rounding a negative value upwards moves it towards zero, putting -2.5 up to -2. It drops straight into a line of text wherever you need a figure with no decimal left on it.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $ceil
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,11 +26,11 @@ text: $sendMessage[Result is $ceil[3.2]]
 </block>
 
 <block type="callout" kind="note">
-text: $ceil[3.1] returns 4. $ceil[-2.5] returns -2. $ceil[5.0] returns 5. The result is always an integer.
+text: One number goes in and one whole number comes out: 3.1 gives 4, -2.5 gives -2, and 5.0 stays 5. Anything that is not a number at all is turned away with an error.
 </block>
 </dash>
 
 <details>
 syntax: $ceil[number]
-param: number|number|Required|The number to round up to the nearest integer, e.g., 3.1, -2.5, 10
+param: number|number|Required|The number to round upwards, such as 3.1, -2.5 or 10
 </details>

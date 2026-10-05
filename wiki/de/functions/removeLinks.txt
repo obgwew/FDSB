@@ -1,0 +1,35 @@
+<dash>
+name: $removeLinks
+desc: Entfernt jeden Web-Link aus der Nachricht, die der Bot gleich senden will.
+category: Werkzeuge
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: $removeLinks schaltet die Linkentfernung für den Rest des Befehls ein. Wo auch immer der Bot danach eine Nachricht sendet, wird jede http- oder www-Adresse herausgenommen und der Rest der Wörter bleibt erhalten. Es braucht keine Argumente, du stellst es einfach vor den Text, den du bereinigen möchtest.
+</block>
+
+<block type="list" title="So verwenden Sie es in der App">
+item: Öffnen Sie den Tab Befehle
+item: Tippen Sie auf +, um einen neuen Befehl zu starten
+item: Geben Sie im Feld Name einen Namen ein
+item: Legen Sie das Feld Präfix fest
+item: Fügen Sie den folgenden Code in den Editor ein
+item: Tippen Sie auf Speichern
+</block>
+
+<block type="code" title="Syntax">
+text: $removeLinks
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $removeLinks
+text: $sendMessage[Check https://example.com and www.example.org for details.]
+</block>
+
+<block type="callout" kind="note">
+text: Es wirkt auf jede Nachricht, die der Bot nach dieser Stelle im Befehl sendet, auch auf Text aus einer Variable. Setze es so spät wie möglich, wenn du nur eine Nachricht bereinigen willst.
+</block>
+</dash>
+
+<details>
+syntax: $removeLinks
+</details>

@@ -1,10 +1,21 @@
 <dash>
 name: $getVar
-desc: Retrieves the value of a persistent variable by name.
+desc: Reads back a saved variable, either the shared value or one member's own.
 category: Variables
 
 <block type="text" title="How does the command work?">
-text: $getVar looks up a stored variable by its name. With one argument, it retrieves a global variable. With two arguments (name and user ID), it retrieves a user-specific variable. The stored value is sent to the channel.
+text: Give it a name and you get back whatever is saved under it. One name returns the value shared by everybody, while a name plus a user ID returns that person's own value for the same name and falls back to the shared one when they have none. The result appears in the channel, or is filled in inline wherever you wrote it.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Create the variable first in the Variables tab
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !welcome
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,12 +27,12 @@ text: $getVar[mySetting]
 </block>
 
 <block type="callout" kind="note">
-text: Variables are persistent — they survive bot restarts. Use $setVar to store values. If the variable doesn't exist, an empty string is returned.
+text: Saved variables keep their value across bot restarts. Ask for a name that was never saved and the bot creates it empty, posts a warning and stops your command, so check the spelling.
 </block>
 </dash>
 
 <details>
 syntax: $getVar[name; (userID)]
-param: name|text|Required|The name of the variable to retrieve
-param: userID|snowflake|Optional|If provided, retrieves the user-specific value for this variable instead of the global value
+param: name|text|Required|The saved variable to read
+param: userID|snowflake|Optional|Which member's own value to read; leave empty for the shared one
 </details>

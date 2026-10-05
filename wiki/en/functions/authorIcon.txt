@@ -1,10 +1,20 @@
 <dash>
 name: $authorIcon
-desc: Sets the author icon image of an embed using a URL.
+desc: Puts a small picture beside the author name at the top of an embed.
 category: Embed Builder
 
 <block type="text" title="How does the command work?">
-text: $authorIcon places a small round picture next to the embed's author name. The optional index selects which embed to edit when building multiple embeds. If no author name has been set yet, a blank placeholder name is used so the icon still appears.
+text: Hand it an image link and the embed grows a round picture in its top corner, right where the author name sits. Building several embeds in one message? The optional second part says which one to touch, and it defaults to the first. Come to it before setting a name and a blank placeholder is used, so the picture still has something to sit next to.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !welcome
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,12 +26,12 @@ text: $authorIcon[https://example.com/bot.png]
 </block>
 
 <block type="callout" kind="note">
-text: The URL must start with http:// or https://. Use $author to set the name displayed next to the icon.
+text: The link has to begin with http:// or https://, otherwise Discord shows a broken image. Pair it with $author to set the name that appears beside the picture.
 </block>
 </dash>
 
 <details>
 syntax: $authorIcon[url;(index)]
-param: url|text|Required|Direct image URL (http:// or https://)
-param: index|number|Optional|Embed number to edit when several embeds are being built (default 1)
+param: url|text|Required|Image link to show, starting with http:// or https://
+param: index|number|Optional|Which embed to touch when several are being built (default 1)
 </details>

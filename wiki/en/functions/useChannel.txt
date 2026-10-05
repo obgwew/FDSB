@@ -1,10 +1,20 @@
 <dash>
 name: $useChannel
-desc: Redirects all script output from this point onward to a specific channel in any server.
+desc: Sends everything your command writes after it into a different channel.
 category: Access Control
 
 <block type="text" title="How does the command work?">
-text: $useChannel is executed in place, in the order the lines appear in the script. When the interpreter reaches it, it redirects the output of everything that follows (all $sendMessage, $sendEmbedMessage, $reply, buffered text, and so on) to the specified channel. Lines before it are unaffected.
+text: $useChannel takes a server ID and a channel ID and moves the output of your command over to that channel. Everything written above it stays where it was; every message after it, plain text, cards and replies alike, is posted in the channel you named instead. It can point at a channel in a completely different server.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !useChannel
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,21 +23,21 @@ text: $useChannel[guildID; channelID]
 
 <block type="code" title="Ready-to-copy Example">
 text: $sendMessage[This goes to the current channel]
-$useChannel[1234567890; 9876543210]
-$sendMessage[This goes to the specified channel!]
+text: $useChannel[1234567890; 9876543210]
+text: $sendMessage[This goes to the specified channel!]
 </block>
 
 <block type="callout" kind="note">
-text: Both arguments are resolved before checking, but they must be numeric. The bot must be a member of the specified guild and be able to see the target channel. If the guild or channel is not found, or the arguments are not numeric, the command is silently ignored and a log entry is created.
+text: Both parts are worked out before they are checked, and both have to be plain numbers. The bot also has to be a member of the server you name and able to see the channel. Anything it cannot find is quietly skipped and noted in the log, so the rest of your command still goes to the original channel.
 </block>
 
 <block type="callout" kind="warning">
-text: Once set, the redirect applies to all subsequent output in the script — the original channel is no longer used. In a button interaction, the interaction response is deferred and later messages are sent to the target channel instead.
+text: Once the switch is on it never turns itself off, so every later line lands in the other channel too. Behind a button press the answer to Discord is held back first, and the text goes to the target channel rather than under the button.
 </block>
 </dash>
 
 <details>
 syntax: $useChannel[guildID; channelID]
-param: guildID|number|Required|The ID of the server (guild) where the target channel is located
-param: channelID|number|Required|The ID of the channel to redirect all output to
+param: guildID|number|Required|Which server the target channel is in
+param: channelID|number|Required|Which channel everything after this line should go to
 </details>

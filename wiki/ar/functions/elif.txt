@@ -1,10 +1,20 @@
 <dash>
 name: $elif
-desc: يوفر شرطاً بديلاً داخل كتلة $if عندما تكون الشروط السابقة خاطئة.
+desc: يضيف فرعًا آخر من نوع «أو إذا كان» إلى كتلة $if، ويُفحص بالترتيب.
 category: التحكم في التدفق
 
-<block type="text" title="كيف تعمل الدالة؟">
-text: يُستخدم $elif داخل كتلة $if لإضافة شروط إضافية. عندما يكون شرط $if (أو $elif) السابق خاطئاً، يتم فحص شرط $elif التالي. إذا كان صحيحاً، يتم تنفيذ كتلة الكود الخاصة به.
+<block type="text" title="كيف يعمل الأمر؟">
+text: بعد $if، يتيح لك $elif وضع شرط آخر مع الأسطر التي يفتحها. وتُجرَّب كل الشروط بالترتيب الذي كتبتها به، ولا ينفَّذ إلا أول شرط تخرج نتيجته true — فتُتخطّى كل الفروع التي تأتي بعده. وأنهِ بـ $else للحالة العامة، وأغلق السلسلة كلها بـ $endif.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة على !welcome
+item: اكتب سكربتك في المحرر
+item: الصق السطر أدناه في المكان الذي تحتاجه
+item: اضغط على حفظ
 </block>
 
 <block type="code" title="الصيغة">
@@ -13,18 +23,18 @@ text: $elif[condition]
 
 <block type="code" title="مثال جاهز للنسخ">
 text: $if[$message == hello]
-  Hi there!
-$elif[$message == bye]
-  Goodbye!
-$endif
+text:   Hi there!
+text: $elif[$message == bye]
+text:   Goodbye!
+text: $endif
 </block>
 
 <block type="callout" kind="note">
-text: يجب وضع $elif بين $if و $endif. يمكن ربط عدة كتل $elif معاً. يتم تنفيذ كتلة الكود الخاصة بالشرط الأول المطابق فقط.
+text: ينتمي $elif بين $if و$endif. اربط ما تشاء منها، ورتّبها من الأكثر تحديدًا إلى الأكثر عمومًا حتى تعطي الأولوية لما قبلها.
 </block>
 </dash>
 
 <details>
 syntax: $elif[condition]
-param: condition|expression|مطلوب|الشرط المطلوب تقييمه (مثال: $message == hello، $authorID == 123). يستخدم نفس معاملات $if.
+param: condition|expression|مطلوب|ما الذي يُختبر، باستخدام المعاملات نفسها التي تستخدمها $if
 </details>

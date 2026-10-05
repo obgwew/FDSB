@@ -1,10 +1,20 @@
 <dash>
 name: $while
-desc: Repeats the enclosed code block as long as a condition remains true.
+desc: Keeps replaying the lines beneath it for as long as the condition you give stays true.
 category: Flow Control
 
 <block type="text" title="How does the command work?">
-text: $while evaluates a condition before each iteration. If the condition is true, the loop body executes. This repeats until the condition becomes false or $break is encountered.
+text: $while looks at its condition, plays out the lines underneath it, then looks again, and it goes round like that until the condition finally comes out false. Something inside the loop has to change on every pass, otherwise it never finishes. Close the block with $endwhile, and drop $break wherever you want to leave early.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !countdown
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,18 +23,18 @@ text: $while[condition]
 
 <block type="code" title="Ready-to-copy Example">
 text: $setVar[i; 0]
-$while[$getVar[i] < 5]
-  $sendMessage[Count: $getVar[i]]
-  $setVar[i; $math[$getVar[i] + 1]]
-$endwhile
+text: $while[$getVar[i] < 5]
+text:   $sendMessage[Count: $getVar[i]]
+text:   $setVar[i; $math[$getVar[i] + 1]]
+text: $endwhile
 </block>
 
 <block type="callout" kind="warning">
-text: Ensure your loop has a clear termination condition to avoid infinite loops. An infinite loop will hang the script indefinitely. Use $break to exit early.
+text: A condition that never turns false leaves the bot spinning and your command never wraps up. Always change the thing the condition is watching from inside the loop, and keep $break handy as your way out.
 </block>
 </dash>
 
 <details>
 syntax: $while[condition]
-param: condition|expression|Required|The condition to evaluate before each iteration. The loop continues while this is true. Uses the same operators as $if (==, !=, >, <, >=, <=).
+param: condition|expression|Required|What to test before every pass, using the same operators as $if (==, !=, >, <, >=, <=). The loop keeps running while it is true.
 </details>

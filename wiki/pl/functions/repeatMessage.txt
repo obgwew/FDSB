@@ -1,0 +1,41 @@
+<dash>
+name: $repeatMessage
+desc: Powtarza fragment tekstu stałą liczbę razy i wysyła wynik w jednej wiadomości.
+category: Matematyka i liczby
+
+<block type="text" title="Jak działa to polecenie?">
+text: ⁨$repeatMessage⁩ przyjmuje liczbę całkowitą i fragment tekstu, a następnie wysyła ten tekst tyle razy pod rząd. Samodzielnie wypisuje powtórzony wynik, a wewnątrz innego polecenia powtórzony tekst wstawiany jest w jego miejsce, co przydaje się do budowania wzorców i separatorów. Wpisz ⁎\s⁎ tam, gdzie chcesz spację między powtórzeniami.
+</block>
+
+<block type="list" title="Jak używać go w aplikacji">
+item: Otwórz zakładkę Polecenia
+item: Dotknij +, aby rozpocząć nowe polecenie
+item: Nadaj mu nazwę w polu Nazwa
+item: Ustaw pole Prefiks
+item: Wklej poniższy kod do edytora
+item: Dotknij Zapisz
+</block>
+
+<block type="code" title="Składnia">
+text: $repeatMessage[amount; message]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $repeatMessage[5; ★]
+</block>
+
+<block type="options" title="Zasady">
+option: amount|Liczba całkowita 1 lub większa. Dla 0 nic nie jest wysyłane.
+option: message|Tekst do powtórzenia. Wpisz ⁎\s⁎ dla spacji.
+</block>
+
+<block type="callout" kind="note">
+text: Discord ogranicza jedną wiadomość do 2000 znaków, więc powtórzenia są sprawdzane, zanim cokolwiek zostanie wysłane. Jeśli amount pomnożone przez długość tekstu przekroczy ten limit, polecenie się zatrzyma i powie Ci, aby użyć mniejszej liczby powtórzeń lub krótszego tekstu.
+</block>
+</dash>
+
+<details>
+syntax: $repeatMessage[amount; message]
+param: amount|number|Required|Ile razy powtórzyć tekst. Musi to być liczba całkowita 1 lub większa.
+param: message|text|Required|Tekst do powtórzenia. Wpisz ⁎\s⁎ dla spacji.
+</details>

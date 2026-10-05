@@ -1,10 +1,20 @@
 <dash>
 name: $splitOut
-desc: Retrieves a specific part from a previously split text (using $splitIn).
+desc: Picks one piece out of text you cut up with $splitIn.
 category: String Utilities
 
 <block type="text" title="How does the command work?">
-text: $splitOut accesses a specific part of the split result from $splitIn. Use a 1-based index, < for the first part, or > for the last part. The retrieved value is sent to the channel.
+text: $splitOut reaches for a single piece of a text that $splitIn cut apart earlier in the same run. Give it a number and you get that piece, counting from 1, or use < for the very first piece and > for the very last. What comes back can be dropped into a sentence, and on a line of its own the bot posts just that piece.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !splitOut
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,15 +23,15 @@ text: $splitOut[index]
 
 <block type="code" title="Ready-to-copy Example">
 text: $splitIn[apple,banana,cherry; ,]
-$splitOut[2]
+text: $splitOut[2]
 </block>
 
 <block type="callout" kind="note">
-text: Valid index values: a number (1-based), < (first element), > (last element). $splitIn must be called before $splitOut.
+text: $splitIn has to run first in the same command, otherwise there is nothing to pick from and the line comes out empty. A number past the end of the list comes out empty as well.
 </block>
 </dash>
 
 <details>
 syntax: $splitOut[index]
-param: index|text|Required|The index of the part to retrieve: a number (1-based), < for first, or > for last
+param: index|text|Required|Which piece to take: a number counting from 1, < for the first, or > for the last
 </details>

@@ -1,10 +1,19 @@
 <dash>
 name: $cloneChannel
-desc: Clones an existing server channel.
+desc: Copies an existing channel, settings and all, into a second one.
 category: Channel Management
 
 <block type="text" title="How does the command work?">
-text: $cloneChannel creates a copy of a channel in the current server. The source can be a text, voice, category, stage, or forum channel. An optional second argument supplies the new channel name; otherwise Discord keeps the source name. The command sends a mention of the newly created channel.
+text: Point it at a channel and the bot makes a duplicate of it, carrying across its topic, its settings and where it sits in the server. Text, voice, category, stage and forum channels can all be copied. Add a second part and the copy gets that name instead of the original one, and the bot then posts a mention of the new channel so it is one click away in the chat.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !clone
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,16 +25,16 @@ text: $cloneChannel[<#123456789012345678>; Archive]
 </block>
 
 <block type="callout" kind="warning">
-text: The command must run in a server and the bot needs the Manage Channels permission. The source channel must be found in the bot or current-guild cache.
+text: The bot needs the Manage Channels permission and the command only works inside a server. Mention the channel you want copied — a plain name on its own will not do.
 </block>
 
 <block type="callout" kind="note">
-text: In the current interpreter this is a standalone command. It should not be placed inline: its resolver returns an empty value instead of running the side effect.
+text: Give it a line of its own instead of slotting it into the middle of a sentence: it copies the channel as a side effect and hands back nothing to print.
 </block>
 </dash>
 
 <details>
 syntax: $cloneChannel[channel ID or channel mention; (new name)]
-param: channelID|text|Required|The numeric ID or channel mention of the channel to clone
-param: newName|text|Optional|The name for the cloned channel
+param: channelID|text|Required|Which channel to copy, by its mention or its ID
+param: newName|text|Optional|What to call the copy; leave empty to reuse the original name
 </details>

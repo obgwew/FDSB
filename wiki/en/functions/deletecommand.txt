@@ -1,10 +1,19 @@
 <dash>
 name: $deletecommand
-desc: Deletes the message that triggered the command.
+desc: Clears away the message that ran your command.
 category: Moderation
 
 <block type="text" title="How does the command work?">
-text: When $deletecommand is called, the bot attempts to delete the user's message that triggered the script execution. This is commonly used to keep channels clean by removing the original command invocation.
+text: Put $deletecommand at the top of a command and the bot removes the message that triggered it, so a busy channel stays tidy instead of filling up with command lines. Everything you wrote after it still runs and is still sent. If the bot is not allowed to remove messages there, the original stays put and the bot says why.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $deletecommand
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,10 +22,10 @@ text: $deletecommand
 
 <block type="code" title="Ready-to-copy Example">
 text: $deletecommand
-$sendMessage[Command received!]
+text: $sendMessage[Command received!]
 </block>
 
 <block type="callout" kind="warning">
-text: The bot must have the "Manage Messages" permission in the channel to delete user messages. If the permission is missing, an error is returned.
+text: The bot needs Manage Messages in that channel. Without it Discord refuses the deletion and the bot posts an error saying it lacks the permission.
 </block>
 </dash>

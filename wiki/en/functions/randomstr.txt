@@ -1,10 +1,20 @@
 <dash>
 name: $randomstr
-desc: Returns a randomly selected string from the provided arguments.
+desc: Picks one of the options you list at random and shows it.
 category: Randomness
 
 <block type="text" title="How does the command work?">
-text: $randomstr takes one or more string arguments and randomly picks one, then sends it to the channel. This is useful for random responses, quotes, or messages.
+text: $randomstr takes the options you list and chooses one of them at random, then the bot posts that one. Every option is equally likely and each run is a fresh throw, so the same command can answer differently every time. One option is enough, and there is no upper limit on how many you give it.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !randomstr
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,11 +26,11 @@ text: $randomstr[Hello!; Hi there!; Hey!; What's up?]
 </block>
 
 <block type="callout" kind="note">
-text: Each argument is a possible output. One is chosen at random with equal probability. At least one string must be provided.
+text: On a line of its own the chosen option is posted as a message of its own; inside another command it drops into the middle of a sentence instead. An empty list is refused with an error.
 </block>
 </dash>
 
 <details>
 syntax: $randomstr[string1; string2; string3; ...]
-param: string|text|Required|One or more strings to choose from. One is randomly selected and sent.
+param: string|text|Required|One or more options to choose from. One of them is picked and shown.
 </details>

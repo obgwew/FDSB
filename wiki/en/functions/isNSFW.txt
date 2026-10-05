@@ -1,10 +1,20 @@
 <dash>
 name: $isNSFW
-desc: Checks if a channel is marked as NSFW.
+desc: Answers true or false depending on whether a channel is age-restricted.
 category: Channel
 
 <block type="text" title="How does the command work?">
-text: $isNSFW takes a channel mention or ID and checks whether the channel is marked as NSFW (Not Safe For Work). Returns "true" if the channel is NSFW, "false" otherwise.
+text: Point it at a channel mention or ID and it reports whether that channel carries the age-restricted setting. The word true or false shows up in the channel, and inside another command it drops straight in as text. Handy for quietly reining replies in whenever the conversation has moved somewhere adults only.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !channelcheck
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,11 +26,11 @@ text: $isNSFW[<#123456789012345678>]
 </block>
 
 <block type="callout" kind="note">
-text: Useful for conditional logic to restrict content based on channel age-rating.
+text: A channel the bot is not allowed to see comes back as an error rather than a plain false, so make sure it has been given access to the one you name.
 </block>
 </dash>
 
 <details>
 syntax: $isNSFW[channel mention/ID]
-param: channel|text|Required|The channel mention or numeric ID to check.
+param: channel|text|Required|The channel to check, as an @channel mention or its ID
 </details>

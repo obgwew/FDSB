@@ -1,10 +1,20 @@
 <dash>
 name: $onJoined
-desc: Event triggered when a member joins the server.
+desc: Runs your script on its own every time a new member joins the server.
 category: Event
 
 <block type="text" title="How does the event work?">
-text: $onJoined is an event prefix that triggers an FDScript whenever a new member joins the server. The script receives the joining member's information. You can optionally specify a channel ID in the first line to direct the output to a specific channel.
+text: Save a command whose Prefix field is $onJoined and the app marks it as an Event for you. The instant a member walks in, the lines under that prefix start running with nobody typing anything. Use $mention to tag whoever has just arrived. If you put a channel ID in brackets straight after the prefix, replies land in that channel instead of wherever the command was set up.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $onJoined
+item: The app marks it as an Event for you
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,18 +23,18 @@ text: #PREFIX:$onJoined
 
 <block type="code" title="Ready-to-copy Example">
 text: #PREFIX:$onJoined
- sendMessage[Welcome $mention to the server!]
+text:  sendMessage[Welcome $mention to the server!]
 </block>
 
 <block type="callout" kind="note">
-text: Place this in the first line of your FDScript file. The script will run automatically when any member joins. Use $mention to tag the new member.
+text: Keep $onJoined on the first line. Move it further down and the app stops treating the command as an event, so it will sit and wait for somebody to type its prefix like any other command.
 </block>
 
 <block type="callout" kind="important">
-text: This event runs in the bot_events folder, not bot_commands. Create your .fds file there.
+text: Nobody ever types $onJoined in the chat, so anything that expects a typed keyword will simply never fire. One member arriving triggers a single run, and the same event keeps firing as people come and go.
 </block>
 </dash>
 
 <details>
-syntax: #PREFIX:$onJoined
+syntax: $onJoined
 </details>

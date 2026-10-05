@@ -1,10 +1,20 @@
 <dash>
 name: $boostLevel
-desc: Returns the server's current boost level from 0 to 3.
+desc: Reads out the server's boost tier as a plain number from 0 to 3.
 category: Server
 
 <block type="text" title="How does the command work?">
-text: $boostLevel returns the server's boost tier as a number: 0 (no level), 1 (Level 1), 2 (Level 2), or 3 (Level 3). Levels are unlocked by reaching 2, 7 or 14 boosts respectively.
+text: Every server sits on a boost tier, and this tells you which one: 0 while nobody has boosted, then 1, 2 or 3 as you climb. Discord hands out tier 1 at two boosts, tier 2 at seven and tier 3 at fourteen. It is only the number, so you can drop it into a sentence or compare it inside a condition.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $boostLevel
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,6 +26,6 @@ text: $sendMessage[Boost level: $boostLevel]
 </block>
 
 <block type="callout" kind="important">
-text: Can only be used inside a server - in DMs it raises an environment error and stops the script.
+text: Boost tiers only exist inside a server. Ask for this in a direct message and the bot reports an error and stops the command there.
 </block>
 </dash>

@@ -1,10 +1,20 @@
 <dash>
 name: $findChannel
-desc: Finds a channel by name or ID and returns its ID.
+desc: Turns a channel name into the ID you can use elsewhere.
 category: Channel
 
 <block type="text" title="How does the command work?">
-text: $findChannel searches for a channel in the server by name or mention. If a channel mention is provided, it verifies the channel exists and returns its ID. If a channel name is provided, it searches all server channels for a case-insensitive match and returns the ID of the first match. Returns an empty string if not found.
+text: Hand it a channel name and the bot walks the server's channels looking for that exact name, ignoring capitalisation, and hands back the ID of the one it finds. Paste a channel mention such as <#123> and it simply confirms the channel exists and returns its ID. Nothing found means an empty answer, so it is worth checking before you send anything to it.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $findChannel
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,11 +26,11 @@ text: $findChannel[general]
 </block>
 
 <block type="callout" kind="note">
-text: Channel name matching is case-insensitive. Can be used inline to resolve channel names to IDs dynamically.
+text: The name has to match from the first letter to the last — general-chat will not find general. Being able to name a channel instead of pasting a long ID is the whole point, and it only looks inside the server the command ran in.
 </block>
 </dash>
 
 <details>
 syntax: $findChannel[name/mention/ID]
-param: channel|text|Required|A channel name or mention to search for.
+param: channel|text|Required|The channel name or mention to look for.
 </details>

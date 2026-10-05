@@ -1,10 +1,21 @@
 <dash>
 name: $getUserVar
-desc: Retrieves a persistent variable scoped to a user in a server.
+desc: Reads back the value one member keeps for a variable name.
 category: Variables
 
 <block type="text" title="How does the command work?">
-text: $getUserVar checks the user override stored under the key guild_id:user_id. If that override is empty or absent, it falls back to the global variable. With one argument, the triggering author and current server are used; two arguments select a user ID; three arguments select both the user and server IDs.
+text: Every member gets their own slot under the same variable name, and this is what reads it. With just a name you get the slot belonging to whoever typed the command; add a member ID and you read theirs instead. While that slot is still empty the shared value from the Variables tab is handed back, so nobody is ever left with nothing at all.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Create the variable first in the Variables tab
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !profile
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,17 +27,17 @@ text: $getUserVar[points; 123456789012345678]
 </block>
 
 <block type="callout" kind="important">
-text: If the global variable does not exist, the command creates a placeholder entry, creates the user-scoped entry when needed, and aborts the script. Define the global variable first.
+text: Name a variable that was never created in the Variables tab and the bot adds an empty one, warns you about it and stops your command. Set the variable up first.
 </block>
 
 <block type="callout" kind="note">
-text: The getter can be used inline or as a standalone statement. The default user is the triggering author, not the bot.
+text: The member you get by default is whoever typed the command, and the server defaults to the one it ran in. Nothing reaches the chat unless you leave the line on its own.
 </block>
 </dash>
 
 <details>
 syntax: $getUserVar[name; (user_id); (guild_id)]
-param: name|text|Required|The variable name to retrieve
-param: userID|text|Optional|The user ID whose scoped value should be read; defaults to the triggering author
-param: guildID|text|Optional|The server ID; defaults to the current server
+param: name|text|Required|Which variable to read
+param: userID|text|Optional|Whose own value to read; leave empty for the person who typed the command
+param: guildID|text|Optional|Which server to look in; leave empty for the server the command ran in
 </details>

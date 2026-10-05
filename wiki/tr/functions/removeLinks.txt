@@ -1,0 +1,35 @@
+<dash>
+name: $removeLinks
+desc: Botun bir dakika sonra göndereceği mesajdan tüm web bağlantılarını ayıklar.
+category: Araçlar
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $removeLinks, komutun geri kalanı için bağlantı kaldırmayı açar. Bundan sonra botun mesaj gönderdiği her yerde http ya da www adresleri çıkarılır ve kalan kelimeler korunur. Hiçbir argüman almaz; temizlemek istediğiniz metnin hemen önüne koymanız yeterlidir.
+</block>
+
+<block type="list" title="Uygulamada nasıl kullanılır">
+item: Komutlar sekmesini aç
+item: Yeni bir komut başlatmak için + düğmesine dokun
+item: Ad alanına bir ad ver
+item: Önek alanını ayarla
+item: Aşağıdaki kodu düzenleyiciye yapıştır
+item: Kaydet düğmesine dokun
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $removeLinks
+</block>
+
+<block type="code" title="Kopyalanmaya hazır örnek">
+text: $removeLinks
+text: $sendMessage[Check https://example.com and www.example.org for details.]
+</block>
+
+<block type="callout" kind="note">
+text: Komutta o noktadan sonra botun gönderdiği her mesajı etkiler; bir değişkenden gelen metni de kapsar. Yalnızca tek bir mesajı temizlemek istiyorsanız onu olabildiğince geç yere koyun.
+</block>
+</dash>
+
+<details>
+syntax: $removeLinks
+</details>

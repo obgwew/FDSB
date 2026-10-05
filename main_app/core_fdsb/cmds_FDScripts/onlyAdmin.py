@@ -57,13 +57,13 @@ async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: disc
             sent = await dest.send(error_msg)
             ctx.last_bot_message = sent
             ctx.log_event(f"onlyAdmin → Denied for {member.id}. Custom error sent.")
-            raise FDAbortScript()
         else:
             ctx.log_event(f"onlyAdmin → Denied for {member.id}. Default error sent.")
             await _send_error(
                 dest,
                 FDEnvironmentError("`$onlyAdmin` — Only server administrators or the server owner can execute this command.")
             )
-            return
+
+        raise FDAbortScript()
 
     ctx.log_event(f"onlyAdmin → Passed for user {member.id}.")

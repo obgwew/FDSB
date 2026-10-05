@@ -1,10 +1,20 @@
 <dash>
 name: $emojiExists
-desc: Checks whether a custom emoji exists and returns true or false.
+desc: Answers true or false depending on whether the bot can use a custom emoji.
 category: Info
 
 <block type="text" title="How does the command work?">
-text: $emojiExists takes a custom emoji ID (or a full emoji mention like <:name:id> or <a:name:id>) and returns true if the bot shares a server where that emoji exists, otherwise false.
+text: Give it a custom emoji and the bot answers with the word true or false in the channel. The bot only knows emojis from servers it has joined, so an ID from a server it is not in comes back false. A full mention such as <:name:id> or <a:name:id> is picked apart for you, while the everyday Unicode emojis have no ID here and are turned down with an error.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $emojiExists
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,20 +23,20 @@ text: $emojiExists[emoji id]
 
 <block type="code" title="Ready-to-copy Example">
 text: $if[$emojiExists[123456789012345678]]
- $sendMessage[That emoji exists!]
-$endif
+text:  $sendMessage[That emoji exists!]
+text: $endif
 </block>
 
 <block type="callout" kind="note">
-text: This is useful inside $if / $onlyIf conditions. Built-in Unicode emojis do not have an ID, so only custom server emojis can be checked.
+text: Handy as the test inside an $if or $onlyIf, where the answer decides whether the lines underneath run at all.
 </block>
 
 <block type="callout" kind="warning">
-text: The emoji must be reachable by the bot (the bot must share a server with it), otherwise the check may return false.
+text: The bot has to share a server with the emoji. A perfectly valid ID from a server the bot is not in still answers false.
 </block>
 </dash>
 
 <details>
 syntax: $emojiExists[emoji id]
-param: emoji id|snowflake|Required|The numeric ID of the custom emoji, or an emoji mention like <:name:id> / <a:name:id>
+param: emoji id|snowflake|Required|The custom emoji to look for, as a number or a mention like <:name:id> / <a:name:id>
 </details>

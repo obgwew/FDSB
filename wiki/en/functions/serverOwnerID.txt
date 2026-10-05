@@ -1,10 +1,20 @@
 <dash>
 name: $serverOwnerID
-desc: Returns the Discord user ID of the server owner.
+desc: Gives you the ID of the account that owns the server the command ran in.
 category: Info
 
 <block type="text" title="How does the command work?">
-text: When $serverOwnerID is called, the bot retrieves the unique Discord user ID of the server owner and sends it directly as a raw numeric string.
+text: $serverOwnerID looks up the server the command was used in and hands back the ID of the account that runs it. Put the number in a message to show it, or feed it to anything that needs a user ID. It is a value rather than a message, so it can sit in the middle of a sentence on its own.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !serverOwnerID
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,6 +26,6 @@ text: Server owner ID: $serverOwnerID
 </block>
 
 <block type="callout" kind="note">
-text: This command only works inside a server (not in DMs). The returned value is the snowflake user ID of the account that owns the server.
+text: It only works inside a server. In a private chat there is nothing to look up, so the bot answers with an error instead of a number.
 </block>
 </dash>

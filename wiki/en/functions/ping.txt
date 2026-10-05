@@ -1,10 +1,20 @@
 <dash>
 name: $ping
-desc: Returns the bot's latency (response time) to the Discord gateway in milliseconds.
+desc: Gives you how quickly the bot is talking to Discord, in milliseconds.
 category: Utilities
 
 <block type="text" title="How does the command work?">
-text: The command fetches the current connection speed between the bot and the Discord Gateway, then sends the result directly as a raw number representing the time in milliseconds.
+text: $ping measures the round trip between the bot and Discord and hands back the figure in milliseconds. Drop it into a line of text and the bot posts that number in the channel, so members can judge the connection for themselves. A small number means the bot is reacting quickly, a large one means something is slowing the link down right now.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !speed
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,6 +26,6 @@ text: $ping pong!
 </block>
 
 <block type="callout" kind="note">
-text: The resulting value represents the responsiveness of the bot's server. The lower the returned number, the faster the bot will respond to commands and interactions.
+text: The lower the figure, the snappier the bot feels in the channel. It measures the connection between the bot and Discord rather than anything on your device, so the same value can change from one minute to the next.
 </block>
 </dash>

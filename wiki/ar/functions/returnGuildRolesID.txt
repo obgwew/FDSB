@@ -1,10 +1,20 @@
 <dash>
 name: $returnGuildRolesID
-desc: يجمع معرّفات الأدوار من السيرفر، مع التصفية الاختيارية حسب الصلاحية، ويخزنها.
+desc: يجمع معرّفات أدوار الخادم في قيمة واحدة تستطيع إعادة استخدامها.
 category: أوامر الإرجاع
 
-<block type="text" title="كيف تعمل الدالة؟">
-text: $returnGuildRolesID يجمع معرّفات الأدوار من سيرفر محدد، مع التصفية الاختيارية حسب صلاحية مطلوبة. تُخزن النتيجة تحت اسم متغير ويمكن استرجاعها لاحقًا باستخدام $return[variableName]. إذا لم يتم تحديد مرشح صلاحية، يتم جمع جميع الأدوار (باستثناء @everyone).
+<block type="text" title="كيف يعمل الأمر؟">
+text: يجمع ⁨$returnGuildRolesID⁩ معرّفات أدوار الخادم الذي سمّيته ويلصقها كلها تحت تسمية تختارها. اقرأ تلك التسمية لاحقًا بـ ⁨$return[label]⁩ فتصل القائمة كلها دفعة واحدة، جاهزة لتُلقى في رسالة أو تُعالَج خطوة بخطوة. واترك جزء الصلاحية فارغًا أو اكتب all فيعود كل دور؛ وسمِّ صلاحية بدلًا من ذلك فتُدرج الأدوار التي تحملها وحدها.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة على !rolelist
+item: اكتب سكربتك في المحرر
+item: الصق السطر أدناه في المكان الذي تحتاجه
+item: اضغط على حفظ
 </block>
 
 <block type="code" title="الصيغة">
@@ -13,22 +23,22 @@ text: $returnGuildRolesID[GuildID; permission; var; separator]
 
 <block type="code" title="مثال جاهز للنسخ">
 text: $returnGuildRolesID[$guildID; all; roleIDs; ,]
-$sendMessage[Roles: $return[roleIDs]]
+text: $sendMessage[Roles: $return[roleIDs]]
 </block>
 
 <block type="callout" kind="note">
-text: بالنسبة لمعامل الصلاحية: اتركه فارغًا أو استخدم "all" للحصول على جميع الأدوار. يمكنك أيضًا تحديد صلاحية مسماة (مثال: kick_members، manage_messages) أو رقم صلاحية خام. سيتم تضمين الأدوار التي تمتلك الصلاحية المحددة (أو أعلى) فقط.
+text: أمّا جزء الصلاحية، فاتركه فارغًا أو اكتب all لأخذ كل الأدوار، أو اكتب اسم صلاحية مثل ‎kick_members‎ أو ‎manage_messages‎، أو حتى الرقم الخام الذي يستخدمه Discord. ويؤهل الدور حين يحمل تلك الصلاحية أو أيًّا أقوى منها.
 </block>
 
 <block type="callout" kind="warning">
-text: يجب أن يكون البوت عضوًا في السيرفر المستهدف. يتم دائمًا استبعاد دور @everyone من النتائج.
+text: على البوت أن يكون عضوًا في ذلك الخادم، ودور ‎@everyone‎ لا يكون جزءًا من الإجابة أبدًا. وإذا لم يطابق شيء في الخادم ما طلبته حصلت على خطأ لا على قائمة فارغة.
 </block>
 </dash>
 
 <details>
 syntax: $returnGuildRolesID[GuildID; permission; var; separator]
-param: GuildID|snowflake|مطلوب|معرّف السيرفر الذي سيتم جمع الأدوار منه
-param: الصلاحية|text|مطلوب|مرشح الصلاحية: اتركه فارغًا أو استخدم "all" لجميع الأدوار، أو صلاحية مسماة (مثال: kick_members)، أو رقم صلاحية خام
-param: المتغير|text|مطلوب|اسم المتغير لتخزين النتيجة فيه (يُستخدم مع $return[])
-param: الفاصل|text|مطلوب|الفاصل بين المعرّفات المتعددة (مثال: ، أو ؛). يمكنك استخدام فواصل مسماة: dot، com، apo، sem، colon
+param: GuildID|snowflake|مطلوب|أي خادم تُؤخذ منه الأدوار
+param: permission|text|مطلوب|أي الأدوار تُبقي: فارغًا أو all للجميع، أو اسم صلاحية مثل ‎kick_members‎، أو رقم الصلاحية الخام
+param: var|text|مطلوب|التي تُحفظ تحتها المعرّفات المجموعة، وتُقرأ بـ ⁨$return[]⁩
+param: separator|text|مطلوب|ما الذي يوضع بين المعرّفات، مثل فاصلة. والصيغ المسمّاة: dot, com, apo, sem, colon
 </details>

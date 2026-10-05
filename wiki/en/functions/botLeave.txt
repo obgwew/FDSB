@@ -1,10 +1,21 @@
 <dash>
 name: $botLeave
-desc: Makes the bot leave a server (guild).
+desc: Removes the bot from a server.
 category: Server
 
 <block type="text" title="How does the command work?">
-text: $botLeave makes the bot leave the specified guild. When no guild ID is given, the bot leaves the guild the command was used in. When a guild ID is given, that guild is left instead (this works even from a DM, as long as the bot is a member of the target guild).
+text: Run it with nothing after it and the bot walks out of the server the command was used in, straight away.
+text: Give it a server ID instead and that server is the one it leaves, which even works from a private chat as long as the bot is still a member there.
+text: A server ID that is not plain digits, or one the bot has not joined, is turned down with an error in the channel.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !leave
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -17,11 +28,12 @@ text: $botLeave
 </block>
 
 <block type="callout" kind="warning">
-text: This immediately removes the bot from the guild. If no guild ID is provided and the command is used outside a server (in DMs), an error is returned. The guild ID argument must be a numeric snowflake.
+text: There is no undo from inside the chat — bringing the bot back means inviting it again through the app.
+text: Outside a server always pass the server ID, and remember it has to be digits only.
 </block>
 </dash>
 
 <details>
 syntax: $botLeave[(guildID)]
-param: guildID|snowflake|Optional|The ID of the guild to leave. If omitted, the current guild is left.
+param: guildID|snowflake|Optional|Which server to leave. Leave it out and the bot leaves the server the command was used in.
 </details>

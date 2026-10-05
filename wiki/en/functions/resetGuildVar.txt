@@ -1,10 +1,20 @@
 <dash>
 name: $resetGuildVar
-desc: Removes a server-scoped variable override.
+desc: Clears the value one server keeps for a variable.
 category: Variables
 
 <block type="text" title="How does the command work?">
-text: $resetGuildVar deletes the server-specific value stored for a variable name. It does not delete or change the global variable definition. With one argument, the current server is used; with two arguments, the second argument selects the server ID.
+text: Each server can hold its own value for a variable you made in the Variables tab. $resetGuildVar throws that per-server value away, so the variable falls back to the default everyone else sees, and the variable itself stays exactly where it was. Name it on its own and the server where the command ran is the one cleared; put a server ID after a semicolon and that server is cleared instead.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Create the variable first in the Variables tab
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $resetGuildVar
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,12 +26,12 @@ text: $resetGuildVar[welcomeMessage; 123456789012345678]
 </block>
 
 <block type="callout" kind="note">
-text: If the server override is already absent, the command is a safe no-op and records that state in the execution log.
+text: If that server never had its own value there is nothing to remove, and the bot notes the state and carries on instead of stopping.
 </block>
 </dash>
 
 <details>
 syntax: $resetGuildVar[name; (guild_id)]
-param: name|text|Required|The variable name whose server override should be removed
-param: guildID|text|Optional|The server ID; defaults to the current server
+param: name|text|Required|The variable whose value for that server should be cleared
+param: guildID|text|Optional|Which server to clear it for; defaults to the server you are in
 </details>

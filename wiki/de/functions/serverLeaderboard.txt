@@ -1,0 +1,52 @@
+<dash>
+name: $serverLeaderboard
+desc: Baut eine Rangliste, die Server anhand eines gespeicherten Punktestands gegeneinander ordnet.
+category: Variablen
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: ⁨$serverLeaderboard⁩ liest eine Variable, die einen Punktestand pro Server speichert, und ordnet die Server vom höchsten zum niedrigsten Punktestand. Die sortierte Liste wird in den Kanal gesendet. Verwende sie für Wettbewerbe über Server hinweg, bei denen jeder Server die anderen in derselben Messgröße übertreffen will.
+</block>
+
+<block type="list" title="So verwendest du es in der App">
+item: Erstelle die Variable im Tab Variablen
+item: Öffne den Befehle-Tab
+item: Tippe auf +, um einen neuen Befehl zu beginnen
+item: Gib ihm im Feld Name einen Namen
+item: Setze das Feld Prefix
+item: Füge den folgenden Code in den Editor ein
+item: Tippe auf Speichern
+</block>
+
+<block type="code" title="Syntax">
+text: $serverLeaderboard[name; (sort); (limit); (format)]
+</block>
+
+<block type="code" title="Fertiges Beispiel zum Kopieren">
+text: $serverLeaderboard[serverPoints; desc; 10]
+</block>
+
+<block type="options" title="Sortierarten">
+option: desc|Höchster Wert zuerst (wird verwendet, wenn du sort leer lässt)
+option: asc|Niedrigster Wert zuerst
+</block>
+
+<block type="options" title="Platzhalter in der Zeile">
+option: {rank}|Der Platz, beginnend bei 1
+option: {name}|Name des Servers
+option: {mention}|Die Server-ID
+option: {id}|Discord-ID des Servers
+option: {value}|Der gespeicherte Punktestand
+</block>
+
+<block type="callout" kind="note">
+text: Nur Zahlen lassen sich ordnen, daher werden Einträge mit Text ausgelassen. Das Limit kann von 1 bis 25 gehen und ist für dich gedeckelt; alles Höhere wird heruntergesetzt.
+</block>
+</dash>
+
+<details>
+syntax: $serverLeaderboard[name; (sort); (limit); (format)]
+param: name|text|Erforderlich|Name der Variablen, die einen Punktestand pro Server speichert.
+param: sort|text|Optional|⁎desc⁎ für den höchsten Wert zuerst (Standard), oder ⁎asc⁎ für den niedrigsten zuerst.
+param: limit|number|Optional|Wie viele Zeilen gezeigt werden, von 1 bis 25. Standard ist 10.
+param: format|text|Optional|Zeilen-Vorlage. Standard ist ⁎{rank}. {name} — {value}⁎. Du kannst ⁎{rank}⁎, ⁎{name}⁎, ⁎{mention}⁎, ⁎{id}⁎ und ⁎{value}⁎ verwenden.
+</details>

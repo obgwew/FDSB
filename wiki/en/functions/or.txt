@@ -1,10 +1,20 @@
 <dash>
 name: $or
-desc: Evaluates multiple conditions and returns true if ANY condition is true.
+desc: Says true when at least one of the checks you list comes out right, and false when none of them do.
 category: Flow Control
 
 <block type="text" title="How does the command work?">
-text: $or takes multiple condition arguments and evaluates each one. It returns "true" if at least one condition is true, and "false" if all conditions are false. This is useful for building alternative conditional checks.
+text: $or looks at every check you hand it and asks whether at least one of them holds. Two numbers are compared as numbers and two words as words, so different kinds of check can share one line. What comes back is the word true or false, ready to drop into an if block.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !or
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,11 +26,11 @@ text: $or[$authorID == 123; $authorID == 456]
 </block>
 
 <block type="callout" kind="note">
-text: Each condition uses the same comparison operators as $if (==, !=, >, <, >=, <=). Returns the string "true" or "false".
+text: Each check may use the same signs as an if block: ==, !=, >, <, >= and <=. A check with no sign at all counts as true unless the text behind it turns out to be empty.
 </block>
 </dash>
 
 <details>
 syntax: $or[condition1; condition2; condition3; ...]
-param: condition|expression|Required|One or more conditions to evaluate. Each can use operators like ==, !=, >, <, >=, <=. Only one needs to be true for the result to be "true".
+param: condition|expression|Required|One or more checks to test. Each can use ==, !=, >, <, >= and <=.
 </details>

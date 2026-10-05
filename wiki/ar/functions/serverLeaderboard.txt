@@ -1,0 +1,52 @@
+<dash>
+name: $serverLeaderboard
+desc: يبني لوحة متصدرين ترتّب الخوادم فيما بينها باستخدام نتيجة مخزنة.
+category: المتغيرات
+
+<block type="text" title="كيف يعمل الأمر؟">
+text: $serverLeaderboard يقرأ متغيرًا يحتفظ بنتيجة واحدة لكل خادم ثم يرتّب الخوادم من أعلى نتيجة إلى أدنى نتيجة. ويرسل القائمة المرتّبة إلى القناة. استخدمه في المسابقات بين الخوادم حيث يحاول كل خادم التفوق على غيره على المقياس نفسه.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: أنشئ المتغير أولًا في تبويب المتغيرات
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة
+item: الصق الكود أدناه في المحرر
+item: اضغط على حفظ
+</block>
+
+<block type="code" title="الصيغة">
+text: $serverLeaderboard[name; (sort); (limit); (format)]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $serverLeaderboard[serverPoints; desc; 10]
+</block>
+
+<block type="options" title="أنواع الفرز">
+option: desc|الأعلى قيمة أولًا (يُستخدم عندما تترك الفرز فارغًا)
+option: asc|الأدنى قيمة أولًا
+</block>
+
+<block type="options" title="عناصر السطر">
+option: {rank}|المركز، بدءًا من 1
+option: {name}|اسم الخادم
+option: {mention}|معرّف الخادم
+option: {id}|معرّف Discord للخادم
+option: {value}|النتيجة المخزنة
+</block>
+
+<block type="callout" kind="note">
+text: لا يمكن ترتيب إلا الأرقام، لذا تُترك الإدخالات التي تحمل نصًا. ويمكن أن يتراوح الحد من 1 إلى 25 وهو محدود مسبقًا؛ وأي قيمة أعلى من ذلك تُقلَّص.
+</block>
+</dash>
+
+<details>
+syntax: $serverLeaderboard[name; (sort); (limit); (format)]
+param: name|text|مطلوب|اسم المتغير الذي يحمل نتيجة واحدة لكل خادم.
+param: sort|text|اختياري|desc للأعلى أولًا (الافتراضي)، أو asc للأدنى أولًا.
+param: limit|number|اختياري|كم سطرًا يُعرض، من 1 إلى 25. الافتراضي هو 10.
+param: format|text|اختياري|قالب السطر. الافتراضي هو {rank}. {name} — {value}. ويمكنك استخدام {rank} و{name} و{mention} و{id} و{value}.
+</details>

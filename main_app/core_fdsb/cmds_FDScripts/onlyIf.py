@@ -6,16 +6,10 @@ from FDScript import (
 )
 
 
-def resolve_inline(args: list[str], ctx: ExecutionContext) -> str:
-    if len(args) < 2:
-        return "false"
-    return "true" if evaluate_condition(args[0].strip(), ctx) else "false"
-
-
 async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: discord.abc.Messageable) -> None:
-    if len(args) < 2:
+    if not args or not args[0].strip():
         await _send_error(ch, FDLogicError(
-            "`$onlyIf` requires a condition and an error message separated by a semicolon `;` — "
+            "`$onlyIf` requires a condition — "
             "example: `$onlyIf[x == y; Custom Error Message!]`"
         ))
         return
@@ -25,14 +19,24 @@ async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: disc
     result = evaluate_condition(cond_str, ctx)
     ctx.log_event(f"onlyIf [{cond_str}] → {'✓ Passed' if result else '✗ Failed'}")
 
-    if not result:
-        error_msg = ctx.resolve(args[1]).strip()
+    if result:
+        return
 
-        ctx.stop_typing()
-        if error_msg:
-            dest = await ctx.get_dest()
-            sent = await dest.send(error_msg)
-            ctx.last_bot_message = sent
+    ctx.stop_typing()
 
-        ctx.log_event("onlyIf → Aborting script execution.")
-        raise FDAbortScript()
+    error_msg = ";".join(ctx.resolve(arg) for arg in args[1:]).strip() if len(args) > 1 else ""
+
+    dest = await ctx.get_dest()
+    if error_msg:
+        sent = await dest.send(error_msg)
+        ctx.last_bot_message = sent
+        ctx.log_event("onlyIf → Failed. Custom error sent.")
+    else:
+        ctx.log_event("onlyIf → Failed. Default error sent.")
+        await _send_error(
+            dest,
+            FDLogicError(f"`$onlyIf` — Condition failed: `{cond_str}`")
+        )
+
+    ctx.log_event("onlyIf → Aborting script execution.")
+    raise FDAbortScript()

@@ -1,0 +1,36 @@
+<dash>
+name: $ephemeral
+desc: Botun yanıtını özel yapar, böylece yalnızca komutu çalıştıran kişi görür.
+category: Mesajlaşma
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $ephemeral, botun yanıtını özel moda geçirir. Argüman verilmediğinde veya false dışında herhangi bir değer verildiğinde yanıt yalnızca onu tetikleyen kullanıcıya gösterilir. Betiğin geri kalanı için özel modu kapatmak üzere false, no, 0 ya da off değerlerinden birini verin. Komutunuzun baş tarafına yakın koyarsanız, botun bundan sonra göndereceği her şey de özel kalır.
+</block>
+
+<block type="list" title="Uygulamada nasıl kullanılır">
+item: Komutlar sekmesini aç
+item: Yeni bir komut başlatmak için + düğmesine dokun
+item: Ad alanına bir ad ver
+item: Önek alanını ayarla
+item: Aşağıdaki kodu düzenleyiciye yapıştır
+item: Kaydet düğmesine dokun
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $ephemeral[(false)]
+</block>
+
+<block type="code" title="Kopyalanmaya hazır örnek">
+text: $ephemeral
+text: $sendMessage[Only you can see this.]
+</block>
+
+<block type="callout" kind="note">
+text: Özel yanıtlar yalnızca komut bir eğik çizgi komutundan ya da bir düğme ve seçim menüsünden başlatıldığında çalışır. Birisi komutu normal bir mesaj yazarak tetiklerse bu ayar yok sayılır ve yanıt herkese açık kalır.
+</block>
+</dash>
+
+<details>
+syntax: $ephemeral[(false)]
+param: false|yes/no|İsteğe bağlı|Yanıtları özel yapmak için boş bırakın. Yanıtları yeniden herkese açık yapmak için false, no, 0 ya da off değerlerinden birini verin.
+</details>

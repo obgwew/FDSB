@@ -1,10 +1,20 @@
 <dash>
 name: $getBotInvent
-desc: Generates and sends the bot's OAuth2 invite link.
+desc: Hands you a ready-made link for adding the bot to another server.
 category: Utilities
 
 <block type="text" title="How does the command work?">
-text: When $getBotInvent is called, the bot constructs an OAuth2 authorization URL using its application ID with full permissions (8) and the bot scope, then sends the link to the channel.
+text: The bot builds its own add link on the spot and posts it in the channel. Whoever follows it is asked for every permission at once, so there is no second screen of ticks to tick. Write it inside a sentence if you would rather it did not arrive on its own.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $getBotInvent
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,6 +26,6 @@ text: Invite me: $getBotInvent
 </block>
 
 <block type="callout" kind="note">
-text: The generated link includes all permissions (permissions=8). The link format is: https://discord.com/oauth2/authorize?client_id={id}&permissions=8&scope=bot
+text: The link asks for all permissions rather than a chosen few, which is more than most servers actually need. If the bot cannot read its own application ID, the message says so instead of showing a link.
 </block>
 </dash>

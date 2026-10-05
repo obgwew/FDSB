@@ -1,10 +1,20 @@
 <dash>
 name: $onlyAdmin
-desc: Restricts script execution to server administrators and the server owner only.
+desc: Stops the command dead unless whoever ran it is a server admin or the server owner.
 category: Access Control
 
 <block type="text" title="How does the command work?">
-text: When $onlyAdmin is called, the bot checks whether the command author is a server administrator or the server owner. If the check fails, the script execution is immediately aborted. Optionally, a custom error message can be displayed.
+text: This is a checkpoint you can drop at the top of a command. The bot looks at the person who triggered it: if they own the server or hold the Administrator permission, the rest of your lines run untouched. If they do not, everything stops right there and the remainder is thrown away.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !welcome
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,6 +26,6 @@ text: $onlyAdmin[You need admin permissions!]
 </block>
 
 <block type="callout" kind="note">
-text: This command only works inside a server (not in DMs). A user passes the check if they have the Administrator permission or are the server owner. If no error message is provided, the script simply aborts silently.
+text: This gate only makes sense inside a server — in a direct message it reports an error. Write your own text in the brackets and that exact line is sent as the refusal; leave it out and the bot uses a default refusal of its own.
 </block>
 </dash>

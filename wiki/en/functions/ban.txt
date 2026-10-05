@@ -1,10 +1,19 @@
 <dash>
 name: $ban
-desc: Bans a user from the server.
+desc: Removes a member from the server for good.
 category: Moderation
 
 <block type="text" title="How does the command work?">
-text: When $ban is called without arguments, it bans the command author. When called with a user ID or mention, it bans that specific user. The bot extracts the numeric user ID from the provided argument and issues a ban through the Discord API.
+text: Hand it a member's ID or mention and the bot bans that account straight away, with no confirmation step in between. Leave the brackets off entirely and it turns on whoever typed the command, which is an easy mistake to make. Nothing is printed when it works, so the member simply goes quiet from that point on.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !ban
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,6 +25,10 @@ text: $ban[123456789]
 </block>
 
 <block type="callout" kind="warning">
-text: The bot must have "Ban Members" permission and its highest role must be above the target's highest role. Using $ban without brackets will ban the user who triggered the command.
+text: The bot needs the Ban Members permission, and its highest role has to sit above the member's highest role. Keep in mind that a bare $ban with no brackets bans the person who typed it.
+</block>
+
+<block type="callout" kind="note">
+text: It only works inside a server. In a private conversation the bot posts an error and the command stops there without banning anybody.
 </block>
 </dash>

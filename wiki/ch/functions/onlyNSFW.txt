@@ -1,0 +1,40 @@
+<dash>
+name: $onlyNSFW
+desc: 只在被标记为年龄受限的频道中运行命令，并在其他地方显示你自己的消息。
+category: 访问控制
+
+<block type="text" title="这个命令是如何工作的？">
+text: ⁨$onlyNSFW⁩ 是一道成人内容的关卡。它会查看命令被使用的那个频道在 Discord 中是否被标记为年龄受限。如果是，就什么都不会发生，你的命令的其余部分继续执行。如果不是，你的消息会被发送，而命令的其余部分就在那里被丢弃。
+</block>
+
+<block type="list" title="如何在应用中使用它">
+item: 打开命令标签页
+item: 点击 + 开始一个新命令
+item: 在名称字段中为它取一个名字
+item: 设置前缀字段
+item: 将下面的代码粘贴到编辑器中
+item: 点击保存
+</block>
+
+<block type="code" title="语法">
+text: $onlyNSFW[error message]
+</block>
+
+<block type="code" title="可直接复制的示例">
+text: $onlyNSFW[This command only works in age restricted channels.]
+text: $sendMessage[Here is the adult content.]
+</block>
+
+<block type="callout" kind="note">
+text: 你需要自己在 Discord 中标记频道：打开频道设置，开启年龄受限，然后保存。在频道这样设置好之前，这道关卡不会有任何作用。
+</block>
+
+<block type="callout" kind="important">
+text: 这道关卡是为了方便，而不是真正的安全措施。任何能读到你的命令的人都能发现该命令的存在，并移除这道关卡。
+</block>
+</dash>
+
+<details>
+syntax: $onlyNSFW[error message]
+param: error message|text|Required|当频道未被标记为年龄受限时发送到频道的消息。
+</details>

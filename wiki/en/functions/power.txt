@@ -1,10 +1,20 @@
 <dash>
 name: $power
-desc: Raises a number to the power of another number.
+desc: Raises one number to the power of another.
 category: Math & Numbers
 
 <block type="text" title="How does the command work?">
-text: $power takes two numeric arguments — a base and an exponent — and raises the base to the power of the exponent. Works both as a standalone command and inline inside other commands.
+text: $power takes a base and an exponent and works out the base raised to that power. You can drop it straight inside a line of text and the bot prints the answer in the channel, or keep it on a line of its own while you are working out the numbers. A whole-number answer arrives without a decimal tail, so raising 2 to the power of 10 shows up as plain 1024.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !calc
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,16 +26,16 @@ text: $sendMessage[$power[2; 10]]
 </block>
 
 <block type="callout" kind="note">
-text: $power[2; 10] returns 1024. $power[3; 3] returns 27. $power[5; 0] returns 1. The result is an integer if the result has no decimal part.
+text: $power[2; 10] gives 1024, $power[3; 3] gives 27 and $power[5; 0] gives 1. Exactly two numbers are needed, and text in either spot stops the command with an error.
 </block>
 
 <block type="callout" kind="warning">
-text: Negative base with a fractional exponent results in a complex number, which returns an error. Very large results may also trigger an overflow error.
+text: A negative base raised to a fractional exponent has no real answer, and a result too large to hold is refused as well. Both cases stop the command rather than printing a number you could not use.
 </block>
 </dash>
 
 <details>
 syntax: $power[base; exponent]
-param: base|number|Required|The base number to raise, e.g., 2, 10, 3.5
-param: exponent|number|Required|The exponent (power), e.g., 3, 10, 0.5
+param: base|number|Required|The number being raised, such as 2, 10 or 3.5
+param: exponent|number|Required|How many times to raise it, such as 3, 10 or 0.5
 </details>

@@ -1,10 +1,20 @@
 <dash>
 name: $numberAbbreviate
-desc: Converts a whole number into a short abbreviated form with a suffix (k, m, b, ...).
+desc: Shortens a large whole number into a compact form with a letter on the end.
 category: Math & Numbers
 
 <block type="text" title="How does the command work?">
-text: $numberAbbreviate takes a whole number and rounds it to its short form using a suffix: k (thousand), m (million), b (billion), t (trillion), and so on. For example 1500 becomes 1.5k and 2500000 becomes 2.5m. Negative numbers are handled as well.
+text: Hand it a whole number and it comes back trimmed down to something readable, with a letter tacked on: 1500 turns into 1.5k, 1000000 into 1m and 2500000 into 2.5m. Anything below a thousand is handed back untouched, and a leading minus sign survives the trip. A good fit for member counts and other totals that would otherwise fill the whole screen.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !views
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,15 +26,15 @@ text: $numberAbbreviate[1523487]
 </block>
 
 <block type="callout" kind="note">
-text: Supported suffixes: k, m, b, t, qa, qi, sx, sp, oc, no, dc. Numbers smaller than 1000 are returned unchanged.
+text: The letters run k, m, b, t, qa, qi, sx, sp, oc, no and dc. Digits too many for even the last one are printed in full rather than shortened any further.
 </block>
 
 <block type="callout" kind="warning">
-text: Only whole numbers are accepted. Decimals and non-numeric characters return an error.
+text: Whole numbers only. A decimal point or any stray letter and the bot posts an error instead of shortening part of it.
 </block>
 </dash>
 
 <details>
 syntax: $numberAbbreviate[number]
-param: number|number|Required|A whole number to abbreviate (may include a leading - sign)
+param: number|number|Required|The whole number to shorten; a leading - is kept
 </details>

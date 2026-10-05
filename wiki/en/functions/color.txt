@@ -1,10 +1,20 @@
 <dash>
 name: $color
-desc: Sets the color of the embed being built.
+desc: Paints the coloured strip down the side of your embed card.
 category: Embed Builder
 
 <block type="text" title="How does the command work?">
-text: $color takes a hex color value or a named color and applies it to the current embed being constructed. The color appears as the embed's left-side accent bar.
+text: The card your command is building takes its colour from this line, shown as the strip down the left edge once the card is sent at the end. Use a hex value such as #FF5733 or one of the colour names and that is the shade you get. Anything the bot cannot make sense of quietly falls back to the usual dark grey bar.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !welcome
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,11 +26,11 @@ text: $color[#FF5733]
 </block>
 
 <block type="callout" kind="note">
-text: You can use hex codes (e.g., #FF5733, FF5733) or named colors. This command only affects embeds sent after it is called.
+text: Leave it out and the card keeps the default dark strip. Building several cards at once? Add the card number after the colour to paint them one by one.
 </block>
 </dash>
 
 <details>
 syntax: $color[hex or name]
-param: hex or name|text|Required|A hex color code (e.g., #FF5733) or a named color to set the embed accent bar color
+param: hex or name|text|Required|A hex value like #FF5733, or a colour name
 </details>

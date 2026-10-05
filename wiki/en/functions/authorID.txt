@@ -1,10 +1,20 @@
 <dash>
 name: $authorID
-desc: Returns the Discord user ID of the person who triggered the command.
+desc: Posts the long numeric Discord ID of whoever typed the command.
 category: Info
 
 <block type="text" title="How does the command work?">
-text: When $authorID is called, the bot retrieves the unique Discord user ID of the command author and sends it directly to the channel as a raw numeric string.
+text: Whenever your command runs, the bot looks up the account behind the message and sends that account's ID back as a plain run of digits. Left on its own line it lands in the channel as a message of its own. Written inside a line of text it is filled in there instead, so you can build a whole sentence around it.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $authorID
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,6 +26,6 @@ text: Your ID is $authorID
 </block>
 
 <block type="callout" kind="note">
-text: The returned value is a snowflake ID (e.g., 123456789012345678), which is a unique numeric identifier for every Discord user.
+text: What you get looks like 123456789012345678 — that run of digits is the one and only identifier for that account, and it stays the same even if the person renames themselves.
 </block>
 </dash>

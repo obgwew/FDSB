@@ -1,10 +1,19 @@
 <dash>
 name: $cooldown
-desc: Prevents a user from re-running the script for a specified duration.
+desc: Stops the same member running your command again for a while.
 category: Access Control
 
 <block type="text" title="How does the command work?">
-text: $cooldown sets a time-based restriction per user per script. If the user tries to run the same script again before the cooldown expires, the provided error message is displayed (with remaining time) and execution is aborted.
+text: Put a duration on the command and the first member to trigger it gets a clear run; anyone who tries again before the time is up is stopped right at the door and never reaches your lines. The block belongs to this one command only, so that member is still free to use your other commands while they wait. Add a second part and that is the message they get instead of silence.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !daily
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,12 +25,16 @@ text: $cooldown[10s; Please wait {time} before using this again!]
 </block>
 
 <block type="callout" kind="note">
-text: The time format uses: s (seconds), m (minutes), h (hours), d (days). Use {time} or %time% in the error message to show the remaining cooldown time.
+text: Write the time as a number and a letter: s for seconds, m for minutes, h for hours, d for days, so 10s or 5m. Drop the letter and seconds are assumed, while anything else is rejected with an error.
+</block>
+
+<block type="callout" kind="important">
+text: Put {time} or %time% in your message and the bot fills it in with the time still to go, counting down as they read it. Leave the message out entirely and the repeat attempt simply stops with nothing posted.
 </block>
 </dash>
 
 <details>
 syntax: $cooldown[time; error message]
-param: time|text|Required|Duration before the user can run the script again. Format: number + unit (s/m/h/d), e.g., 10s, 5m, 1h, 1d
-param: error message|text|Required|Message sent to the user when cooldown is active. Use {time} or %time% to display remaining time.
+param: time|text|Required|How long the wait lasts, as a number plus s, m, h or d, such as 10s, 5m, 1h, 1d
+param: error message|text|Required|What to tell them while the wait is on. Use {time} or %time% for the time left.
 </details>

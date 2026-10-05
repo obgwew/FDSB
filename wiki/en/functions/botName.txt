@@ -1,10 +1,20 @@
 <dash>
 name: $botName
-desc: Returns the username of the bot.
+desc: Reads back the username the bot is currently signed in with.
 category: Info
 
 <block type="text" title="How does the command work?">
-text: When $botName is called, the bot retrieves its own username and sends it directly to the channel as a plain text string.
+text: The bot posts the display name it is signed in with, spelled exactly as Discord shows it. Used on its own it appears in the channel by itself; placed inside a line it is swapped in as plain text. The name is read fresh on every call, so a rename shows up immediately.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $botName
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,6 +26,6 @@ text: I am $botName!
 </block>
 
 <block type="callout" kind="note">
-text: This returns the bot's current username. If the bot's username is changed via the Developer Portal, the next call will reflect the updated name.
+text: This follows the live name rather than a snapshot. Rename the bot from the Developer Portal, or with $changeUsername, and the next call returns the new one.
 </block>
 </dash>

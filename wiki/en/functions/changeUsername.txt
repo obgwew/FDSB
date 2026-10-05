@@ -1,10 +1,19 @@
 <dash>
 name: $changeUsername
-desc: Changes the nickname of a server member.
+desc: Gives a server member a new nickname.
 category: Moderation
 
 <block type="text" title="How does the command work?">
-text: $changeUsername takes a user ID/mention and a new name. The bot looks up the member in the server and changes their nickname to the provided name using the Discord API.
+text: Give it a member's ID or mention followed by the name you want, and the bot writes that name over their nickname for this server alone. Their account name stays as it was, while everyone in the channel sees the new nickname from then on. Leave the second part empty and the nickname goes away, putting their account name back on display.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !nick
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,12 +25,12 @@ text: $changeUsername[123456789; NewNickname]
 </block>
 
 <block type="callout" kind="warning">
-text: The bot must have "Manage Nicknames" permission and its highest role must be above the target's highest role. The bot cannot change its own nickname or the server owner's nickname.
+text: The bot needs the Manage Nicknames permission and its highest role has to sit above the member's. It cannot rename itself or the server owner, and it only works inside a server.
 </block>
 </dash>
 
 <details>
 syntax: $changeUsername[user ID/mention; new name]
-param: user ID/mention|text|Required|The target member's Discord user ID or @mention
-param: new name|text|Required|The new nickname to assign. Leave empty to reset to default.
+param: user ID/mention|text|Required|Which member to rename
+param: new name|text|Required|The nickname to give them. Leave empty to clear it and show their account name again.
 </details>

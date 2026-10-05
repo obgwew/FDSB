@@ -1,10 +1,19 @@
 <dash>
 name: $kick
-desc: Kicks a user from the server.
+desc: Removes a member from the server, leaving their account untouched so they can come back.
 category: Moderation
 
 <block type="text" title="How does the command work?">
-text: When $kick is called without arguments, it kicks the command author. When called with a user ID or mention, it kicks that specific user. The bot extracts the numeric user ID from the provided argument and issues a kick through the Discord API.
+text: Leave the brackets off and the bot removes whoever typed the command. Put a user ID or a mention inside them and that person is removed instead, with a note left behind saying which command did it. The member loses access straight away but their account is untouched, so a fresh invite brings them back with the same roles and the same old messages.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !kick
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,6 +25,10 @@ text: $kick[123456789]
 </block>
 
 <block type="callout" kind="warning">
-text: The bot must have "Kick Members" permission and its highest role must be above the target's highest role. Using $kick without brackets will kick the user who triggered the command.
+text: Removing somebody needs the Kick Members permission, and the bot's highest role has to sit above the target's or Discord refuses. Use the brackets carefully, because a bare $kick kicks the person who ran it.
+</block>
+
+<block type="callout" kind="note">
+text: There is no server to remove anyone from in a direct message, so the bot reports an error instead of acting.
 </block>
 </dash>

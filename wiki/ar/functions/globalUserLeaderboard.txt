@@ -1,0 +1,52 @@
+<dash>
+name: $globalUserLeaderboard
+desc: يبني لوحة متصدرين من نتيجة واحدة مشتركة بين كل الخوادم التي فيها البوت.
+category: المتغيرات
+
+<block type="text" title="كيف يعمل الأمر؟">
+text: $globalUserLeaderboard يقرأ متغيرًا واحدًا يخزّن نتيجة لكل مستخدم عبر البوت كله، لا لكل خادم على حدة، ثم يرتّب الأعضاء من أعلى نتيجة إلى أدنى نتيجة. ويرسل قائمة مرتّبة إلى القناة. استخدمه عندما تريد مسابقة واحدة بين كل الخوادم بدلًا من لوحة نتائج منفصلة في كل واحد منها.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: أنشئ المتغير أولًا في تبويب المتغيرات
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة
+item: الصق الكود أدناه في المحرر
+item: اضغط على حفظ
+</block>
+
+<block type="code" title="الصيغة">
+text: $globalUserLeaderboard[name; (sort); (limit); (format)]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $globalUserLeaderboard[points; desc; 5]
+</block>
+
+<block type="options" title="أنواع الفرز">
+option: desc|الأعلى قيمة أولًا (يُستخدم عندما تترك الفرز فارغًا)
+option: asc|الأدنى قيمة أولًا
+</block>
+
+<block type="options" title="عناصر السطر">
+option: {rank}|المركز، بدءًا من 1
+option: {name}|الاسم الظاهر للعضو
+option: {mention}|منشن قابل للنقر للعضو
+option: {id}|معرّف Discord للعضو
+option: {value}|النتيجة المخزنة
+</block>
+
+<block type="callout" kind="note">
+text: لا يمكن ترتيب إلا الأرقام، لذا تُترك الإدخالات التي تحمل نصًا. ويمكن أن يتراوح الحد من 1 إلى 25 وهو محدود مسبقًا؛ وأي قيمة أعلى من ذلك تُقلَّص.
+</block>
+</dash>
+
+<details>
+syntax: $globalUserLeaderboard[name; (sort); (limit); (format)]
+param: name|text|مطلوب|اسم المتغير الذي يحمل نتيجة واحدة لكل مستخدم عبر كل الخوادم.
+param: sort|text|اختياري|desc للأعلى أولًا (الافتراضي)، أو asc للأدنى أولًا.
+param: limit|number|اختياري|كم سطرًا يُعرض، من 1 إلى 25. الافتراضي هو 10.
+param: format|text|اختياري|قالب السطر. الافتراضي هو {rank}. {name} — {value}. ويمكنك استخدام {rank} و{name} و{mention} و{id} و{value}.
+</details>

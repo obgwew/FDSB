@@ -1,0 +1,38 @@
+<dash>
+name: $checkContains
+desc: Gibt true oder false zurück, je nachdem, ob ein Text mindestens eine der von dir aufgeführten Phrasen enthält.
+category: Textwerkzeuge
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: $checkContains sieht sich ein Stück Text und eine oder mehrere Phrasen an und antwortet dann mit dem Wort true oder false. Es antwortet mit true, sobald eine einzige Phrase im Text auftaucht, du musst also nie jede Phrase selbst prüfen. Eine leere Phrase trifft nur auf leeren Text zu. Für sich allein genommen druckt es die Antwort in den Kanal, in einem anderen Befehl hinein wird die Antwort an der Stelle eingefügt.
+</block>
+
+<block type="list" title="So verwenden Sie es in der App">
+item: Öffnen Sie den Tab Befehle
+item: Tippen Sie auf +, um einen neuen Befehl zu starten
+item: Geben Sie im Feld Name einen Namen ein
+item: Legen Sie das Feld Präfix fest
+item: Fügen Sie den folgenden Code in den Editor ein
+item: Tippen Sie auf Speichern
+</block>
+
+<block type="code" title="Syntax">
+text: $checkContains[text; phrase; ...]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $if[$checkContains[$message; hello; hi; hey]]
+text:   $sendMessage[Say hello back!]
+text: $endif
+</block>
+
+<block type="callout" kind="note">
+text: Die Antwort ist immer das einfache Wort true oder false, und genau das erwarten $if und $onlyIf. Du brauchst mindestens zwei Argumente — den Text plus eine Phrase.
+</block>
+</dash>
+
+<details>
+syntax: $checkContains[text; phrase; ...]
+param: text|text|Erforderlich|Der Text, in dem gesucht wird. Eingebettete Befehle wie $message werden zuerst aufgelöst.
+param: phrase|text|Erforderlich|Eine oder mehrere Phrasen, nach denen gesucht wird. Das Ergebnis ist true, sobald eine davon im Text auftaucht.
+</details>

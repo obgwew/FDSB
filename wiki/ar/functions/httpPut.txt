@@ -1,10 +1,19 @@
 <dash>
 name: $httpPut
-desc: يرسل طلب HTTP من نوع PUT إلى عنوان URL مع نص جسم اختياري.
+desc: يرسل طلب PUT إلى عنوان ويب ويحتفظ بالإجابة.
 category: HTTP
 
-<block type="text" title="كيف تعمل الدالة؟">
-text: يرسل $httpPut طلب PUT بمهلة 10 ثوانٍ. يُرسل الجسم بصيغة JSON عندما يكون JSON صالحًا، وإلا كنص خام. تُخزَّن الاستجابة في $httpResult ويُخزَّن رمز الحالة في $httpStatus. تُرسل الترويسات المضافة بواسطة $httpAddHeader ثم تُمسح.
+<block type="text" title="كيف يعمل الأمر؟">
+text: أعطه عنوان ويب فيرسل البوت طلب PUT هناك، مضافًا الجسم عندما تزوّدنا بواحد. والجسم الذي يُحلَّل كـ JSON يسافر كـ JSON، وأي شيء آخر يعبر كنص عادي. والترويسات التي صففتها بـ $httpAddHeader تخرج مع هذا الطلب وتُمسح بعده مباشرة. تعود شيفرة الحالة في $httpStatus ونص الإجابة في $httpResult، جاهزًا للطباعة أو لإعادة الاستعمال.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة على !webhook
+item: الصق الكود أدناه في المحرر
+item: اضغط على حفظ
 </block>
 
 <block type="code" title="الصيغة">
@@ -13,17 +22,17 @@ text: $httpPut[URL; (Body)]
 
 <block type="code" title="مثال جاهز للنسخ">
 text: $httpAddHeader[Content-Type; application/json]
-$httpPut[https://api.example.com/users/1; {"name": "FDScript"}]
-$httpStatus
+text: $httpPut[https://api.example.com/users/1; {"name": "FDScript"}]
+text: $httpStatus
 </block>
 
 <block type="callout" kind="note">
-text: إذا كان الجسم JSON صالحًا يُرسل بصيغة JSON، وإلا يُرسل كبيانات خام. عند الفشل يُضبط رمز الحالة على 500 ويحتوي $httpResult على رسالة الخطأ.
+text: يعطي البوت الطلب عشر ثوانٍ قبل أن يتخلى عنه. والفاشل منها يُبلّغ عن حالة 500 مع رسالة الخطأ في انتظارك في $httpResult، بينما العنوان الذي لا يبلغه البوت يُبلّغ عن 400 بدلًا منه.
 </block>
 </dash>
 
 <details>
 syntax: $httpPut[URL; (Body)]
-param: URL|text|مطلوب|عنوان URL الذي سيُرسل إليه طلب PUT
-param: Body|text|اختياري|نص جسم الطلب (JSON أو نص خام)
+param: URL|text|مطلوب|عنوان الويب الذي يُرسَل إليه PUT
+param: Body|text|اختياري|ما يحمله الطلب، كـ JSON أو نص عادي
 </details>

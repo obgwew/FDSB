@@ -1,10 +1,20 @@
 <dash>
 name: $setGuildVar
-desc: Stores a persistent value scoped to a server.
+desc: Remembers a value for one server and keeps it there until you change it.
 category: Variables
 
 <block type="text" title="How does the command work?">
-text: $setGuildVar stores a value in the guild variable file under the selected server ID. With one value argument, the current server is used; with the third argument, the server ID is selected explicitly. The command cannot be used inline.
+text: $setGuildVar writes a value under a name you choose and keeps it for a single server, so every other server the bot is in carries on with its own separate copy. Give it a name and a value and it saves against the server where the command was used. Add a server ID as the third part and the value is filed under that server instead, which lets one command feed a whole list of servers in a single run.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Create the variable first in the Variables tab
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !welcome
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,13 +26,13 @@ text: $setGuildVar[welcomeMessage; Welcome!; 123456789012345678]
 </block>
 
 <block type="callout" kind="important">
-text: If no global variable with this name exists, the command stores the supplied scoped value, creates an empty global definition, and then stops the script with an environment error. Define the global variable before assigning scoped values.
+text: The value is written straight away, but if the name is not in the Variables tab yet the command still stops with an error afterwards. Make the variable there first and the next run saves it without any fuss.
 </block>
 </dash>
 
 <details>
 syntax: $setGuildVar[name; value; (guild_id)]
-param: name|text|Required|The variable name
-param: value|text|Required|The value to store
-param: guildID|text|Optional|The server ID; defaults to the current server
+param: name|text|Required|The name the value is filed under
+param: value|text|Required|What to remember
+param: guildID|text|Optional|Which server it belongs to. Leave it out to use the current one.
 </details>

@@ -1,10 +1,20 @@
 <dash>
 name: $getUserStatus
-desc: Returns the online status of a user in the server.
+desc: Tells you whether a member is online, idle, busy or offline.
 category: Info
 
 <block type="text" title="How does the command work?">
-text: When $getUserStatus is called without arguments, it returns the online status of the command author. When called with a user ID or mention, it returns that user's status. Returns "offline" if the user is not found or is not a member of the server.
+text: Use it with no argument and the bot reports the status of the person who ran the command. Add a user ID or an @mention and it checks that member of the server instead. Anyone who is not in the server counts as offline, and the same answer comes back if you try to use it in a private chat.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $getUserStatus
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -17,11 +27,11 @@ text: Your status is: $getUserStatus
 </block>
 
 <block type="callout" kind="note">
-text: Possible return values are: online, idle, dnd, offline. This command only works inside a server (not in DMs) since Discord only provides status information for guild members.
+text: The answers are online, idle, dnd and offline. Discord only shares this for members of a server, so the command has to run inside one.
 </block>
 </dash>
 
 <details>
 syntax: $getUserStatus[(userID/mention)]
-param: userID/mention|text|Optional|The user ID or @mention to check. If omitted, checks the command author.
+param: userID/mention|text|Optional|Who to check. Leave it empty and the bot looks at the person who ran the command
 </details>

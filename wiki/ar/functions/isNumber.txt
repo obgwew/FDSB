@@ -1,10 +1,22 @@
 <dash>
 name: $isNumber
-desc: يفحص ما إذا كانت القيمة تطابق نوع/صيغة رقمية محددة.
+desc: يجيب بـ true أو false حسب ما إذا كانت القيمة من نوع الرقم الذي سألت عنه.
 category: الرياضيات والأرقام
 
-<block type="text" title="كيف تعمل الدالة؟">
-text: $isNumber يأخذ صيغة (فحص نوع) وقيمة، ثم يفحص ما إذا كانت القيمة تطابق ذلك النوع. يعيد "true" أو "false".
+<block type="text" title="كيف يعمل الأمر؟">
+text: ينظر $isNumber إلى قيمة ويخبرك إن كانت تطابق نوع الرقم الذي سمّيته.
+text: أعطه صيغة وقيمة فيجيب بالكلمات المجردة true أو false، وهي طريقة سريعة لحماية أمر قبل أن يقوم بأي عملية حسابية.
+text: والنص الذي لا يستطيع قراءته إطلاقًا، مثل كلمة أو اسم صيغة لا يعرفه، يُحسب false ببساطة بدلًا من إيقاف التشغيل.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة على !num
+item: اكتب سكربتك في المحرر
+item: الصق السطر أدناه في المكان الذي تحتاجه
+item: اضغط على حفظ
 </block>
 
 <block type="code" title="الصيغة">
@@ -16,25 +28,25 @@ text: $isNumber[int; 42]
 </block>
 
 <block type="options" title="الصيغ المتاحة">
-option: int|عدد صحيح (بدون فاصلة عشرية)
-option: nat|عدد طبيعي (عدد صحيح موجب، >= 1)
-option: pos|عدد موجب (> 0)
-option: neg|عدد سالب (< 0)
-option: zero|صفر
-option: even|عدد صحيح زوجي
-option: odd|عدد صحيح فردي
-option: dec|عدد عشري (يحتوي على فاصلة عشرية)
-option: frac|كسر (التنسيق: a/b)
-option: num|أي عدد صالح (عدد صحيح أو عشري)
+option: int|عدد صحيح مكتوب بلا فاصلة عشرية
+option: nat|عدد صحيح يساوي 1 أو أكثر
+option: pos|أي شيء أكبر من صفر
+option: neg|أي شيء أصغر من صفر
+option: zero|صفر بالضبط
+option: even|عدد صحيح يقبل القسمة على اثنين
+option: odd|عدد صحيح لا يقبل القسمة على اثنين
+option: dec|رقم مكتوب بفاصلة عشرية
+option: frac|كسر مكتوب مثل 3/4، بمقام غير صفر
+option: num|أي رقم على الإطلاق، صحيح أو عشري
 </block>
 
 <block type="callout" kind="note">
-text: يعيد "true" إذا كانت القيمة تطابق الصيغة المعطاة، و"false" في الحالات الأخرى. المدخلات غير الصالحة التي لا يمكن تحليلها تعيد دائماً "false".
+text: الإجابة دائمًا الكلمة true أو الكلمة false، ولا تكون رقمًا أبدًا. وكل ما لا يُقرأ يُحسب false، فيستمر أمرك.
 </block>
 </dash>
 
 <details>
 syntax: $isNumber[formula; value]
-param: formula|text|مطلوب|فحص النوع الذي يجب تنفيذه: int، nat، pos، neg، zero، even، odd، dec، frac، num
-param: value|text|مطلوب|القيمة المراد فحصها مقابل الصيغة
+param: formula|text|مطلوب|أي نوع يُفحص: int، nat، pos، neg، zero، even، odd، dec، frac، num
+param: value|text|مطلوب|النص الذي تريد فحصه
 </details>

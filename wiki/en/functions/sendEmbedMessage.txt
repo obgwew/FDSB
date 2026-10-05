@@ -1,10 +1,19 @@
 <dash>
 name: $sendEmbedMessage
-desc: Sends an embed message to a specified channel with title, description, color, and footer.
+desc: Posts a coloured card to a channel with a title, text, colour and footer.
 category: Messaging
 
 <block type="text" title="How does the command work?">
-text: $sendEmbedMessage constructs an embed with the provided title, description, color, and footer, then sends it to the specified channel. All five arguments are required.
+text: $sendEmbedMessage builds a card out of the parts you give it and posts it in the channel you name. The parts come in a fixed order, channel, title, description, colour, then footer, and members see the title on top, the body in the middle and the small footer line at the bottom. After the footer you can keep going with more parts, an author, an author icon, a footer icon, a thumbnail, a picture, a yes to add the time, and a last yes that appends the new message ID.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !embed
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,15 +25,19 @@ text: $sendEmbedMessage[$channelID; Welcome!; Thanks for joining; #00FF00; Enjoy
 </block>
 
 <block type="callout" kind="note">
-text: The color argument accepts hex values (e.g., #FF5733). The bot must have "Send Messages" and "Embed Links" permissions in the target channel.
+text: The colour part takes a hex value such as #FF5733 and paints the stripe down the left side of the card. Anything you leave out is simply kept off the card, and only the channel is really needed to get one out.
+</block>
+
+<block type="callout" kind="warning">
+text: The bot needs Send Messages and Embed Links in that channel, and it has to be able to see the channel at all. A channel it cannot reach gives an error rather than a card posted somewhere else.
 </block>
 </dash>
 
 <details>
 syntax: $sendEmbedMessage[channelID; title; description; color; footer]
-param: channelID|snowflake|Required|The ID of the channel to send the embed to
-param: title|text|Required|The title of the embed
-param: description|text|Required|The description/body text of the embed
-param: color|text|Required|Hex color code for the embed accent bar (e.g., #FF5733)
-param: footer|text|Required|Footer text displayed at the bottom of the embed
+param: channelID|snowflake|Required|Which channel the card is posted in
+param: title|text|Optional|The heading at the top of the card
+param: description|text|Optional|The body text of the card
+param: color|text|Optional|The stripe colour, as a hex value such as #FF5733
+param: footer|text|Optional|The small line at the bottom of the card
 </details>

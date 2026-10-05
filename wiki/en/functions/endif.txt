@@ -1,10 +1,20 @@
 <dash>
 name: $endif
-desc: Marks the end of an $if or $elif block.
+desc: Closes a condition block and tells the bot to carry on with the lines below it.
 category: Flow Control
 
 <block type="text" title="How does the command work?">
-text: $endif signals the closing boundary of a conditional $if block. All code between $if and $endif is only executed when the condition is met. Every $if must have a matching $endif.
+text: $endif closes a test you opened with $if, $elif or $else. The bot reads the condition, runs the lines underneath only when the answer is yes, and then reaches $endif and moves on to whatever comes next in your command. Nest as many tests inside one another as you like, as long as each one has its own closing line.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !check
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,11 +23,11 @@ text: $endif
 
 <block type="code" title="Ready-to-copy Example">
 text: $if[$authorID == 123456789]
-  Hello Admin!
-$endif
+text:   Hello Admin!
+text: $endif
 </block>
 
 <block type="callout" kind="warning">
-text: Every $if block must be properly closed with $endif. Missing $endif will cause a script error.
+text: Pair every $if with its own $endif. Leave the closing line out and the bot does not stop with an error, it simply keeps treating everything after the test as part of the block, so commands you expected to always run can be skipped without a word.
 </block>
 </dash>

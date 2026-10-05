@@ -1,10 +1,20 @@
 <dash>
 name: $elif
-desc: Provides an alternative condition within an $if block when the previous conditions were false.
+desc: Adds another "or else if" branch to an $if block, checked in order.
 category: Flow Control
 
 <block type="text" title="How does the command work?">
-text: $elif is used inside an $if block to add additional conditions. When the preceding $if (or $elif) condition is false, the next $elif condition is checked. If it is true, its code block is executed.
+text: After an $if, $elif lets you lay down one more condition together with the lines it unlocks. Each condition is tried in the order you wrote them, and only the first one that comes out true runs — every branch after it is stepped over. Finish with $else for the catch-all case and close the whole chain with $endif.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !welcome
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,18 +23,18 @@ text: $elif[condition]
 
 <block type="code" title="Ready-to-copy Example">
 text: $if[$message == hello]
-  Hi there!
-$elif[$message == bye]
-  Goodbye!
-$endif
+text:   Hi there!
+text: $elif[$message == bye]
+text:   Goodbye!
+text: $endif
 </block>
 
 <block type="callout" kind="note">
-text: $elif must be placed between an $if and an $endif. Multiple $elif blocks can be chained. Only the first matching condition's code block is executed.
+text: An $elif belongs between an $if and an $endif. Chain as many as you need, ordering them from most specific to most general so the earlier ones get first refusal.
 </block>
 </dash>
 
 <details>
 syntax: $elif[condition]
-param: condition|expression|Required|The condition to evaluate (e.g., $message == hello, $authorID == 123). Uses the same operators as $if.
+param: condition|expression|Required|What to test, using the same operators as $if
 </details>

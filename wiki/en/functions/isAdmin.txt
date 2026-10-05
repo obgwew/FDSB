@@ -1,10 +1,20 @@
 <dash>
 name: $isAdmin
-desc: Checks whether a user has administrator permissions in the server.
+desc: Answers true or false depending on whether a member administers the server.
 category: Info
 
 <block type="text" title="How does the command work?">
-text: $isAdmin takes a user ID or mention and checks if that user has administrator permissions, is the server owner, or is a bot account. Returns "true" or "false".
+text: Give it a member as a mention or an ID and you get back the word true or false. The server owner always counts as an admin, and so does anyone who has the Administrator permission switched on. A member who cannot be found in the server, or anyone asked about in a private chat, comes back false.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !checkadmin
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,11 +26,11 @@ text: $isAdmin[$authorID]
 </block>
 
 <block type="callout" kind="note">
-text: Returns "true" if the user is the server owner, a bot, or has the Administrator permission. Returns "false" otherwise or if the user is not found in the server.
+text: Only the Administrator permission counts here. A member who can ban, mute and manage messages but lacks Administrator still gets false, so pair it with other checks if you need finer control.
 </block>
 </dash>
 
 <details>
 syntax: $isAdmin[userID]
-param: userID|text|Required|The user ID or @mention to check. Supports variables and placeholders.
+param: userID|text|Required|The member to test, as an @mention or their ID
 </details>

@@ -1,0 +1,52 @@
+<dash>
+name: $serverLeaderboard
+desc: جدول رتبه‌بندی‌ای می‌سازد که سرورها را بر پایهٔ یک امتیاز ذخیره‌شده در برابر هم رتبه‌بندی می‌کند.
+category: ⁨⁨متغیرها⁩⁩
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: ⁨$serverLeaderboard⁩ متغیری را می‌خواند که برای هر سرور یک امتیاز نگه می‌دارد و سرورها را از بیشترین امتیاز به کمترین امتیاز کنار هم می‌چیند. فهرست رتبه‌بندی‌شده را به کانال می‌فرستد. آن را برای رقابت‌های میان‌سروری به کار ببر که در آن هر سرور می‌کوشد دیگران را در همان معیار شکست دهد.
+</block>
+
+<block type="list" title="چگونه در برنامه استفاده‌اش کنید">
+item: نخست متغیر را در تب متغیرها بسازید
+item: تب دستورها را باز کنید
+item: برای شروع یک دستور تازه روی + بزنید
+item: در فیلد نام، نامی برایش بگذارید
+item: فیلد پیشوند را تنظیم کنید
+item: کد زیر را در ویرایشگر بچسبانید
+item: روی ذخیره بزنید
+</block>
+
+<block type="code" title="نحو">
+text: $serverLeaderboard[name; (sort); (limit); (format)]
+</block>
+
+<block type="code" title="نمونهٔ آمادهٔ کپی">
+text: $serverLeaderboard[serverPoints; desc; 10]
+</block>
+
+<block type="options" title="گونه‌های مرتب‌سازی">
+option: desc|بیشترین مقدار نخست (وقتی sort را خالی می‌گذاریم)
+option: asc|کمترین مقدار نخست
+</block>
+
+<block type="options" title="جای‌نگهدارهای خط">
+option: {rank}|رتبه، از ۱ آغاز می‌شود
+option: {name}|نام سرور
+option: {mention}|شناسهٔ سرور
+option: {id}|شناسهٔ دیسکورد سرور
+option: {value}|امتیاز ذخیره‌شده
+</block>
+
+<block type="callout" kind="note">
+text: تنها عددها را می‌توان رتبه‌بندی کرد، پس مدخل‌هایی که متن دارند کنار گذاشته می‌شوند. limit می‌تواند از ۱ تا ۲۵ باشد و برای خودت سقف خورده است؛ هر چه بیشتر باشد کوتاه‌تر می‌شود.
+</block>
+</dash>
+
+<details>
+syntax: $serverLeaderboard[name; (sort); (limit); (format)]
+param: name|text|⁨الزامی⁩|نام متغیری که برای هر سرور یک امتیاز نگه می‌دارد.
+param: sort|text|⁨اختیاری⁩|⁎desc⁎ برای بیشترین مقدار نخست (پیش‌فرض)، یا ⁎asc⁎ برای کمترین مقدار نخست.
+param: limit|number|⁨اختیاری⁩|چند خط نشان داده شود، از ۱ تا ۲۵. پیش‌فرض ۱۰ است.
+param: format|text|⁨اختیاری⁩|الگوی خط. پیش‌فرض ⁎{rank}. {name} — {value}⁎ است. می‌توانی از ⁎{rank}⁎، ⁎{name}⁎، ⁎{mention}⁎، ⁎{id}⁎ و ⁎{value}⁎ استفاده کنی.
+</details>

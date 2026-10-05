@@ -1,10 +1,20 @@
 <dash>
 name: $sum
-desc: Adds two or more numbers together and returns the result.
+desc: Adds up every number you hand it and hands back the total.
 category: Math & Numbers
 
 <block type="text" title="How does the command work?">
-text: $sum takes two or more numeric arguments and returns their sum. Works both as a standalone command and inline inside other commands.
+text: Put two or more numbers in and the bot adds them all together, however many you feel like listing. You get a clean figure back, with the decimal point dropped whenever the total lands on a whole number. Because it settles to a value rather than a message, you can drop it straight inside another command's brackets and let the total appear mid-sentence.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !cart
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,12 +26,16 @@ text: $sendMessage[$sum[8; 2]]
 </block>
 
 <block type="callout" kind="note">
-text: Supports any number of arguments. All values are treated as numbers. If a non-numeric value is provided, an error is returned. The result is an integer if the sum has no decimal part.
+text: A good companion to $sub, $mul and $div when you are working through a basket total or a set of scores. On its own line the total is posted by itself; nested inside $sendMessage it lands in the middle of your own wording.
+</block>
+
+<block type="callout" kind="warning">
+text: Two numbers at the very least are needed, and a stray letter anywhere in the list stops the whole sum with an error. Leave a space in the middle of the list and it is read as zero rather than upsetting the calculation.
 </block>
 </dash>
 
 <details>
 syntax: $sum[a; b; ...]
-param: a|number|Required|First number to add
-param: b|number|Required|Second number to add (additional numbers are also accepted)
+param: a|number|Required|The first number to add up
+param: b|number|Required|The second number to add up, and you can keep going with as many more as you like
 </details>

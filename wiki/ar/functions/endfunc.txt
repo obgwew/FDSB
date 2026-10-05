@@ -1,10 +1,20 @@
 <dash>
 name: $endfunc
-desc: يغلق كتلة دالة FDScript.
+desc: يغلق كتلة مسماة من الأسطر لتتمكن من تشغيلها مجددًا بـ $call.
 category: التحكم في التدفق
 
-<block type="text" title="كيف تعمل الدالة؟">
-text: $endfunc يغلق كتلة $func التي فُتحت مؤخرًا. يحدد نهاية تعريف دالة قابلة لإعادة الاستخدام، ويجب أن يظهر في زوج مطابق مع $func.
+<block type="text" title="كيف يعمل الأمر؟">
+text: يحدد $endfunc نهاية الكتلة المسماة التي فتحتها بـ $func. وتُحجز الأسطر داخلها بدلًا من أن تعمل فورًا، ولا تنفَّذ إلا عندما يطلبها $call[that name]، فيمكن لقطعة عمل واحدة أن توجد في أمر العدد من المرات الذي تريد. سمِّها بعد $func وأغلقها بـ $endfunc، ويستمر بقية أمرك كالمعتاد.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة على !welcome
+item: اكتب سكربتك في المحرر
+item: الصق السطر أدناه في المكان الذي تحتاجه
+item: اضغط على حفظ
 </block>
 
 <block type="code" title="الصيغة">
@@ -13,12 +23,12 @@ text: $endfunc
 
 <block type="code" title="مثال جاهز للنسخ">
 text: $func[ping]
-$sendMessage[Pong]
-$endfunc
+text: $sendMessage[Pong]
+text: $endfunc
 </block>
 
 <block type="callout" kind="warning">
-text: إذا كان $endfunc بلا $func مطابقة، أو كانت هناك كتلة مفتوحة مختلفة بينهما، فهذا خطأ في السكربت.
+text: إن $endfunc بلا $func يقابله يترك الكتلة غير متوازنة ويبلّغ البوت عن خطأ في السكربت. و $endfunc واحد يغلق $func واحدًا، حتى لو كانت حلقات أو شروط متداخلة داخله.
 </block>
 </dash>
 

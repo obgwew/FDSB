@@ -1,10 +1,20 @@
 <dash>
 name: $returnGuildEmojisID
-desc: Collects emoji IDs from a guild, filtered by type, and stores them.
+desc: Gathers the ID numbers of a server's custom emojis into one value you can read back.
 category: Return Commands
 
 <block type="text" title="How does the command work?">
-text: $returnGuildEmojisID gathers the IDs of custom emojis from the specified guild and stores them under a variable name, joined by the separator. The type filter chooses between all emojis, static ones (png) and animated ones (gif).
+text: Give the bot a server ID and it collects the ID number of every custom emoji living there, files them under a name you choose and joins them with the separator you ask for. Pick animated or static first and you get only that kind. Nothing is written in the chat on its own, so read the list back with $return before you use it.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !emojis
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -17,14 +27,14 @@ text: $sendMessage[Animated emojis: $return[animEmojis]]
 </block>
 
 <block type="callout" kind="note">
-text: Type accepts: all, static, animated. The bot must be a member of the target guild. The stored order is not guaranteed to match the server's emoji list.
+text: The filter takes all, static or animated. A server holding no emoji of the kind you asked for reports an error instead of an empty result, and the numbers need not come back in the same order the emoji are listed on the server settings screen.
 </block>
 </dash>
 
 <details>
 syntax: $returnGuildEmojisID[GuildID; type; var; separator]
-param: GuildID|snowflake|Required|ID of the guild whose emojis are collected
-param: type|text|Required|Filter: all, static or animated
-param: var|text|Required|Variable name to store the result in (read back with $return[])
-param: separator|text|Required|Separator between IDs (e.g., ,). Named separators work too: dot, com, apo, sem, colon
+param: GuildID|snowflake|Required|Which server to collect the emoji from
+param: type|text|Required|Which emoji to include: all, static or animated
+param: var|text|Required|Name the result is filed under, read back later with $return[]
+param: separator|text|Required|What goes between the numbers. Names work too: dot, com, apo, sem, colon
 </details>

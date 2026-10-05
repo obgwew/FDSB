@@ -1,0 +1,41 @@
+<dash>
+name: $onlyBotPerms
+desc: Stops the command with your own message unless the bot itself is allowed to do what comes next.
+category: Access Control
+
+<block type="text" title="How does the command work?">
+text: $onlyBotPerms checks the bot's own permissions before the protected part of your command runs. List the permissions you need, then finish with the message members should see if any of them is missing. If the bot has all of them, nothing is shown and your command carries on. If one is missing, the message is sent and the rest of the command is dropped right there.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field
+item: Paste the code below into the editor
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: $onlyBotPerms[permission; ...; error message]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $onlyBotPerms[kick_members; ban_members; I need permission to kick and ban members.]
+text: $sendMessage[Done!]
+</block>
+
+<block type="callout" kind="note">
+text: Permission names are Discord's own names in lowercase with underscores, such as kick_members, ban_members or manage_messages. Put the message last — everything after the permissions is treated as one message.
+</block>
+
+<block type="callout" kind="important">
+text: The check looks at the channel the command was used in, so a permission the bot has in one channel but not another will still block it. Check the bot's role in Discord and make sure it sits above the roles it needs to act on.
+</block>
+</dash>
+
+<details>
+syntax: $onlyBotPerms[permission; ...; error message]
+param: permission|text|Required|One or more Discord permission names, separated by semicolons, such as kick_members or manage_roles.
+param: error message|text|Required|Message sent to the channel when the bot is missing one of the permissions. Everything after the permissions counts as this message.
+</details>

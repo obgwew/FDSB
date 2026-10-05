@@ -1,10 +1,20 @@
 <dash>
 name: $description
-desc: Sets the description text of the embed being built.
+desc: Fills in the main body paragraph of the card the bot is building.
 category: Embed Builder
 
 <block type="text" title="How does the command work?">
-text: $description takes a text argument and sets it as the main body/description of the current embed being constructed. This is the primary content area of the embed.
+text: A card sent with $sendEmbedMessage starts out empty, and this is where the main paragraph goes. Whatever you hand it is placed under the title in the reading order Discord uses, so it is the first thing a member reads under the headline. Add a number after the text and that line fills the second, third or later card in the same run instead of the first, which lets one command send several cards at once.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !announce
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,11 +26,11 @@ text: $description[This is the embed body text]
 </block>
 
 <block type="callout" kind="note">
-text: The description supports Discord markdown formatting (bold, italic, code blocks, etc.). It appears below the title in the embed.
+text: Discord's own markdown works in here, so bold, italic, inline code and quoted lines all look the way you typed them. Discord itself refuses a body much beyond 4,000 characters, so keep long explanations in a following message.
 </block>
 </dash>
 
 <details>
 syntax: $description[text]
-param: text|text|Required|The description text for the embed. Supports Discord markdown formatting.
+param: text|text|Required|The body paragraph for the card. Discord markdown works here.
 </details>

@@ -1,10 +1,19 @@
 <dash>
 name: $httpPost
-desc: Sends an HTTP POST request to a URL with an optional body.
+desc: Sends data to a web address and keeps hold of whatever comes back.
 category: HTTP
 
 <block type="text" title="How does the command work?">
-text: $httpPost sends a POST request with a 10 second timeout. The body is sent as JSON when it is valid JSON, otherwise as raw text. The response is stored in $httpResult and the status code in $httpStatus. Headers added with $httpAddHeader are sent and then cleared.
+text: Point this at an address and the bot makes a POST request to it, sending whatever body you give along with any headers you added beforehand. When the answer arrives it is kept for you to read back, together with the status code the site returned, so the lines underneath can pull a field out of the reply and drop it into a message. Body text that happens to be valid JSON goes out as JSON, and anything else goes out as plain data.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !notify
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,17 +22,21 @@ text: $httpPost[URL; (Body)]
 
 <block type="code" title="Ready-to-copy Example">
 text: $httpAddHeader[Content-Type; application/json]
-$httpPost[https://api.example.com/users; {"name": "FDScript"}]
-$httpResult[id]
+text: $httpPost[https://api.example.com/users; {"name": "FDScript"}]
+text: $httpResult[id]
 </block>
 
 <block type="callout" kind="note">
-text: If the body is valid JSON it is sent as JSON, otherwise it is sent as raw data. On failure the status is set to 500 and $httpResult contains the error message.
+text: Headers belong to one request only. Whatever you added with $httpAddHeader goes out with this call and is then cleared, so the next request starts clean and cannot inherit a Content-Type you did not mean to send.
+</block>
+
+<block type="callout" kind="warning">
+text: Something always lands in the result. If the site fails or the connection drops, the status comes back as 500 and the result holds the reason rather than the command stopping dead, and a URL the bot refuses to call comes back as 400.
 </block>
 </dash>
 
 <details>
 syntax: $httpPost[URL; (Body)]
-param: URL|text|Required|The URL to send the POST request to
-param: Body|text|Optional|The request body (JSON or raw text)
+param: URL|text|Required|The address to send the request to
+param: Body|text|Optional|What to send with it, either JSON or plain text
 </details>

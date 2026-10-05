@@ -1,10 +1,20 @@
 <dash>
 name: $httpStatus
-desc: Returns the HTTP status code of the last request.
+desc: Tells you the status number your last web request came back with.
 category: HTTP
 
 <block type="text" title="How does the command work?">
-text: $httpStatus returns the status code stored by the last HTTP request. It returns "0" when no request has been made yet.
+text: $httpStatus hands back the number your last web request came back with, the same 200 or 404 you would see in a browser's address bar. Nothing has been asked yet and it reports 0. Because it settles to a value, you can drop it into an if block to decide what happens next.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !httpStatus
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,13 +23,21 @@ text: $httpStatus
 
 <block type="code" title="Ready-to-copy Example">
 text: $httpGet[https://api.example.com/data]
-$if[$httpStatus == 200] {
-  $reply[Request succeeded]
-}
+text: $if[$httpStatus == 200] {
+text:   $reply[Request succeeded]
+text: }
 </block>
 
 <block type="callout" kind="note">
-text: On a failed request the status code is set to 500.
+text: A request that never reached the site is reported as 500, and one the bot refused to make is 400. Read it after the request line, not before.
+</block>
+
+<block type="callout" kind="warning">
+text: In the build you are running, asking for it stops the whole command with an internal error before anything reaches the channel. Leave it out until that is sorted.
+</block>
+
+<block type="callout" kind="note">
+text: The example closes its if block with curly brackets. The editor expects $endif on its own line instead, so take the shape of the if block from its own page.
 </block>
 </dash>
 

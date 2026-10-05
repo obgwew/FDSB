@@ -1,10 +1,19 @@
 <dash>
 name: $httpAddHeader
-desc: Adds a custom HTTP header sent with the next HTTP request.
+desc: Attaches an extra header to the web request your command makes next.
 category: HTTP
 
 <block type="text" title="How does the command work?">
-text: $httpAddHeader registers a header (name and value) that will be attached to the next HTTP request made with $httpGet, $httpPost, $httpPut, $httpPatch or $httpDelete. Headers are cleared automatically after the request.
+text: Give it a header name and a value, and both ride along with the next request your command makes, whether that turns out to be a GET, a POST, a PUT, a patch or a delete. That is how you slip in an API key or a bearer token without building it into the address. Once the request has gone out the headers are cleared, so each one applies to a single call and no more.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !lookup
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,16 +22,16 @@ text: $httpAddHeader[name; value]
 
 <block type="code" title="Ready-to-copy Example">
 text: $httpAddHeader[Authorization; Bearer token123]
-$httpGet[https://api.example.com/data]
+text: $httpGet[https://api.example.com/data]
 </block>
 
 <block type="callout" kind="note">
-text: Adding the same name twice overwrites the previous value. The stored headers are cleared after the request is sent.
+text: Set the same header name twice and the second value replaces the first. Both parts have to be there: leave either out and the bot stops with an error telling you what is missing.
 </block>
 </dash>
 
 <details>
 syntax: $httpAddHeader[name; value]
-param: name|text|Required|The header name (e.g. Authorization)
-param: value|text|Required|The header value
+param: name|text|Required|What the header is called, such as Authorization
+param: value|text|Required|What to send as its value
 </details>

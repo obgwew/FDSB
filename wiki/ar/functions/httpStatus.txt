@@ -1,10 +1,20 @@
 <dash>
 name: $httpStatus
-desc: يعيد رمز حالة HTTP لآخر طلب.
+desc: يخبرك برقم الحالة الذي عاد به آخر طلب ويب.
 category: HTTP
 
-<block type="text" title="كيف تعمل الدالة؟">
-text: يعيد $httpStatus رمز الحالة المخزَّن بواسطة آخر طلب HTTP. يعيد "0" عندما لم يُنفَّذ أي طلب بعد.
+<block type="text" title="كيف يعمل الأمر؟">
+text: يعيد $httpStatus الرقم الذي عاد به آخر طلب ويب، وهو 200 أو 404 نفسه الذي تراه في شريط عنوان المتصفح. ولم يُطلب شيء بعد فيبلّغ عن 0. ولأنه يستقر على قيمة، يمكنك وضعه داخل كتلة if لتقرر ما يحدث بعد ذلك.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة على $httpStatus
+item: اكتب سكربتك في المحرر
+item: الصق السطر أدناه في المكان الذي تحتاجه
+item: اضغط على حفظ
 </block>
 
 <block type="code" title="الصيغة">
@@ -13,13 +23,21 @@ text: $httpStatus
 
 <block type="code" title="مثال جاهز للنسخ">
 text: $httpGet[https://api.example.com/data]
-$if[$httpStatus == 200] {
-  $reply[Request succeeded]
-}
+text: $if[$httpStatus == 200] {
+text:   $reply[Request succeeded]
+text: }
 </block>
 
 <block type="callout" kind="note">
-text: عند فشل الطلب يُضبط رمز الحالة على 500.
+text: الطلب الذي لم يبلغ الموقع يُبلّغ عنه بحالة 500، والطلب الذي رفض البوت إجراءه بحالة 400. اقرأه بعد سطر الطلب لا قبله.
+</block>
+
+<block type="callout" kind="warning">
+text: في البناء الذي تشغّله، يوقف طلبه الأمر كله بخطأ داخلي قبل أن يصل أي شيء إلى القناة. واتركه خارجًا حتى يُحل ذلك.
+</block>
+
+<block type="callout" kind="note">
+text: يغلق المثال كتلة if بأقواس معقوفة، بينما يتوقع المحرر $endif في سطر وحده بدلًا من ذلك، فخذ شكل كتلة if من صفحتها الخاصة.
 </block>
 </dash>
 

@@ -1,0 +1,47 @@
+<dash>
+name: $onlyIn
+desc: Lets the command run only inside the listed channels or servers, and shows your own message anywhere else.
+category: Access Control
+
+<block type="text" title="How does the command work?">
+text: $onlyIn checks where the command was used before running anything. List the channels and servers that are allowed, then finish with the message everyone else should see. If the command was used in one of them, nothing happens and the rest of your command continues. Anywhere else, the message is sent and the rest of the command is dropped right there.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field
+item: Paste the code below into the editor
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: $onlyIn[channel or server ID or name; ...; error message]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $onlyIn[123456789012345678; general; Use this command in #general.]
+text: $sendMessage[Welcome!]
+</block>
+
+<block type="options" title="What you can list">
+option: channel ID|A channel ID such as 123456789012345678, with or without the # marks
+option: channel name|A channel name such as general
+option: server ID or name|The ID or the name of a server, so the command also works in that server's matching channel
+</block>
+
+<block type="callout" kind="note">
+text: Put the message last — everything after the entries counts as one message. Listing a server name lets the command run in any channel of that server.
+</block>
+
+<block type="callout" kind="important">
+text: The check looks at the channel the command was typed in. In a direct message there is no channel or server to match, so the command is always blocked there.
+</block>
+</dash>
+
+<details>
+syntax: $onlyIn[channel or server ID or name; ...; error message]
+param: channel or server ID or name|text|Required|One or more channel IDs, channel names, server IDs or server names that are allowed.
+param: error message|text|Required|Message sent to the channel when the command was used somewhere else. Everything after the entries counts as this message.
+</details>

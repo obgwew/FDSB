@@ -1,10 +1,20 @@
 <dash>
 name: $return
-desc: Retrieves a value stored by a $returnXxx command and sends it to the channel.
+desc: Fetches a value stored earlier by a command like $returnGuildUsersID and puts it where you use it.
 category: Variables
 
 <block type="text" title="How does the command work?">
-text: $return takes a variable name and looks up its value in the return variables storage. This storage is populated by commands like $returnGuildUsersID, $returnGuildChannelsID, etc. Used on its own, the retrieved value is sent to the channel; used inline inside another command's arguments, the value is substituted directly into the text.
+text: A few commands gather a list of results and park it under a short name, and $return is how you ask for that name back. On its own line it prints the stored value in the channel. Written inside another command it is swapped in as plain text before that command runs, so you can drop it mid-sentence. Ask for a name nothing has put aside yet and the bot reports an error rather than inventing a value.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !lookup
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,15 +23,15 @@ text: $return[var]
 
 <block type="code" title="Ready-to-copy Example">
 text: $returnGuildUsersID[$guildID; cache; userIDs; ,]
-$sendMessage[User IDs: $return[userIDs]]
+text: $sendMessage[User IDs: $return[userIDs]]
 </block>
 
 <block type="callout" kind="note">
-text: If the variable name doesn't exist in the return storage, an error is returned. Make sure to call the appropriate $returnXxx command before using $return.
+text: The matching command has to run first — $returnGuildUsersID before userIDs, $returnGuildChannelsID before channelIDs, and so on. The name is matched exactly, so watch the capital letters.
 </block>
 </dash>
 
 <details>
 syntax: $return[var]
-param: var|text|Required|The name of the return variable to retrieve (e.g., userIDs, channelIDs, roleIDs)
+param: var|text|Required|The name to fetch back, such as userIDs, channelIDs or roleIDs
 </details>

@@ -1,10 +1,20 @@
 <dash>
 name: $image
-desc: Sends an image embed to the channel using a URL.
+desc: Adds a picture to the embed card your command is building.
 category: Messaging
 
 <block type="text" title="How does the command work?">
-text: $image takes an image URL, creates an embed with that image, and sends it to the channel. The URL must start with http:// or https://.
+text: Give it a picture address and the bot puts that picture on the card you are building, where it appears once the card is sent at the end of the command. The address has to start with http:// or https://. Add yes at the end and the bot skips the card altogether, posting the bare link as an ordinary message instead.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $image
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,11 +26,15 @@ text: $image[https://example.com/photo.png]
 </block>
 
 <block type="callout" kind="note">
-text: The image is sent as an embed with the image set as the embed image. The bot must have "Embed Links" permission in the channel.
+text: The picture becomes the large image on the card, and the bot has to be allowed to post embeds in that channel. Building more than one card? Add the card number at the end to choose which card gets it.
+</block>
+
+<block type="callout" kind="warning">
+text: An address that does not start with http:// or https:// leaves nothing to fetch, and the bot stops with an error instead of sending a broken card.
 </block>
 </dash>
 
 <details>
 syntax: $image[URL]
-param: URL|text|Required|A direct URL to an image file. Must start with http:// or https://
+param: URL|text|Required|A direct link to the picture, starting with http:// or https://
 </details>

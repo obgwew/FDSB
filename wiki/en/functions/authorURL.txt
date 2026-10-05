@@ -1,10 +1,22 @@
 <dash>
 name: $authorURL
-desc: Makes the embed's author name a clickable link.
+desc: Turns the author name at the top of an embed into a link that opens on tap.
 category: Embed Builder
 
 <block type="text" title="How does the command work?">
-text: $authorURL attaches a link to the embed's author name, so clicking it opens the given address. The optional index selects which embed to edit when building multiple embeds. If no author name is set yet, a blank placeholder name is used so the link still works.
+text: $authorURL makes the author line of an embed open the address you give it when somebody taps the name.
+text: Set the name first with $author and the URL after it, and any icon you already picked stays exactly where it is.
+text: If no name has been set yet a blank placeholder goes in so the link still has something to sit on, and while you are building several embeds you can add the embed number as a second part to pick the right one.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !card
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -17,12 +29,12 @@ text: $authorURL[https://example.com]
 </block>
 
 <block type="callout" kind="note">
-text: The URL must start with http:// or https://. Discord shows no visual hint that the name is clickable, so consider mentioning it in the text.
+text: Start the address with http:// or https://. Discord gives no visible sign that a name is tappable, so it is worth saying so in the embed text.
 </block>
 </dash>
 
 <details>
 syntax: $authorURL[url;(index)]
-param: url|text|Required|Destination link (http:// or https://)
-param: index|number|Optional|Embed number to edit when several embeds are being built (default 1)
+param: url|text|Required|Where the name should lead, starting with http:// or https://
+param: index|number|Optional|Which embed to change when you build several (default 1)
 </details>

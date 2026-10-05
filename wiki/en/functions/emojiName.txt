@@ -1,10 +1,20 @@
 <dash>
 name: $emojiName
-desc: Returns the name of a custom emoji from its ID or mention.
+desc: Gives you the name behind a custom emoji, from its ID or a mention.
 category: Info
 
 <block type="text" title="How does the command work?">
-text: $emojiName takes a custom emoji ID (or a full emoji mention like <:name:id> or <a:name:id>) and returns the emoji's name. This is useful to display an emoji name without hardcoding it, or to compare against known names.
+text: Hand it a custom emoji and the bot replies in the channel with that emoji's name. Both the numeric ID and a full mention such as <:name:id> or <a:name:id> are understood, so you can hand over whatever you copied out of Discord. The name comes back as plain text, ready to drop into a message or to compare against a name you already know.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $emojiName
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,11 +26,11 @@ text: $emojiName[123456789012345678]
 </block>
 
 <block type="callout" kind="note">
-text: The bot must share a server with the emoji, otherwise an error is returned. Built-in Unicode emojis do not have an ID and cannot be used here.
+text: Custom server emojis only — the standard emojis from your keyboard carry no ID to read. If the bot does not share a server with the emoji, it posts an error saying no emoji was found instead of a name.
 </block>
 </dash>
 
 <details>
 syntax: $emojiName[emoji id]
-param: emoji id|snowflake|Required|The numeric ID of the custom emoji, or an emoji mention like <:name:id> / <a:name:id>
+param: emoji id|snowflake|Required|Which custom emoji to name, given as a number or a mention like <:name:id> / <a:name:id>
 </details>

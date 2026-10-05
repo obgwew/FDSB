@@ -1,10 +1,20 @@
 <dash>
 name: $channelExists
-desc: Checks if a channel exists in the server.
+desc: Answers yes or no on whether a channel is really there.
 category: Channel
 
 <block type="text" title="How does the command work?">
-text: $channelExists takes a channel mention or ID and checks whether the bot can find that channel in the server. Returns "true" if the channel exists, "false" otherwise. If no argument is provided, returns "true" by default.
+text: Give it a channel mention or ID and the bot checks whether it can actually find that channel, answering true or false. Worth doing before you send anything there, so a command does not fall over halfway through on a place that no longer exists. Leave the brackets out and it answers true, treating an empty check as nothing to complain about.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $channelExists
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,11 +26,11 @@ text: $channelExists[<#123456789012345678>]
 </block>
 
 <block type="callout" kind="note">
-text: This command can be used inline to check channel existence before performing other actions on that channel.
+text: The answer is always the plain word true or false, so you can test it with an $if before going on to use that channel.
 </block>
 </dash>
 
 <details>
 syntax: $channelExists[channel mention/ID]
-param: channel|text|Optional|The channel mention or numeric ID to check. If empty, returns "true".
+param: channel|text|Optional|The channel mention or ID to check; leave empty and the answer is true
 </details>

@@ -1,10 +1,20 @@
 <dash>
 name: $title
-desc: Sets the title of the embed being built.
+desc: Puts the bold heading at the top of the card your command builds.
 category: Embed Builder
 
 <block type="text" title="How does the command work?">
-text: $title takes a text argument and sets it as the title of the current embed being constructed. The title appears at the top of the embed in larger, bold text.
+text: Whatever you place between the brackets becomes the bold heading across the top of the card, sitting above the description and the coloured bar. Discord's own formatting works inside it, so bold, italics and links all come through. When one command builds more than one card, add the card's number after the text to fill in the second or third instead of the first.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !rules
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,11 +26,11 @@ text: $title[Server Rules]
 </block>
 
 <block type="callout" kind="note">
-text: The title supports Discord markdown formatting. It appears as the main heading at the top of the embed.
+text: The heading only shows up once the card is actually sent, so a $title on its own line does nothing visible until something puts it on screen. Keep it to a single sensible line — a heading Discord turns down stops the whole card from being delivered.
 </block>
 </dash>
 
 <details>
 syntax: $title[text]
-param: text|text|Required|The title text for the embed
+param: text|text|Required|The heading shown across the top of the card
 </details>

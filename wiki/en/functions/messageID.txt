@@ -1,10 +1,20 @@
 <dash>
 name: $messageID
-desc: Returns the Discord message ID of the message that triggered the command.
+desc: Gives you the long number that identifies the message your command just answered.
 category: Info
 
 <block type="text" title="How does the command work?">
-text: When $messageID is called, the bot retrieves the unique Discord message ID of the triggering message and sends it directly as a raw numeric string.
+text: $messageID hands back the number Discord gave the message that set your command running. Every message carries its own, and it never changes, so it is the safest way to point a later command at exactly the message in front of you. It is a value rather than a message, so it drops straight into a sentence where any other number would go.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !messageID
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,6 +26,6 @@ text: Your message ID is $messageID
 </block>
 
 <block type="callout" kind="note">
-text: The returned value is a snowflake ID (e.g., 123456789012345678), which uniquely identifies the message that triggered the script.
+text: The same number sits at the end of the message link in Discord, so you can always check it by hand. It only ever describes the message that set the command running.
 </block>
 </dash>

@@ -1,10 +1,20 @@
 <dash>
 name: $emojiExists
-desc: يتحقق مما إذا كان إيموجي مخصص موجودًا ويُرجع true أو false.
-category: معلومات
+desc: يجيب بـ true أو false حسب ما إذا كان البوت يستطيع استخدام إيموجي مخصص.
+category: المعلومات
 
-<block type="text" title="كيف تعمل الدالة؟">
-text: تأخذ $emojiExists معرّف إيموجي مخصص (أو إيموجي ذكر كامل مثل <:name:id> أو <a:name:id>) وتُرجع true إذا كان البوت يشارك سيرفرًا يحتوي على ذلك الإيموجي، وإلا تُرجع false.
+<block type="text" title="كيف يعمل الأمر؟">
+text: أعطه إيموجي مخصصًا فيجيب البوت بكلمة true أو false في القناة. والبوت يعرف إيموجي الخوادم التي انضم إليها فقط، فمعرّف قادم من خادم ليس فيه يعود false. أما المنشن الكامل مثل <:name:id> أو <a:name:id> فيفككه عنك، بينما إيموجي Unicode اليومي لا معرّف له هنا فيُرفض بخطأ.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة على $emojiExists
+item: اكتب سكربتك في المحرر
+item: الصق السطر أدناه في المكان الذي تحتاجه
+item: اضغط على حفظ
 </block>
 
 <block type="code" title="الصيغة">
@@ -13,20 +23,20 @@ text: $emojiExists[emoji id]
 
 <block type="code" title="مثال جاهز للنسخ">
 text: $if[$emojiExists[123456789012345678]]
- $sendMessage[That emoji exists!]
-$endif
+text:  $sendMessage[That emoji exists!]
+text: $endif
 </block>
 
 <block type="callout" kind="note">
-text: مفيد داخل شروط $if / $onlyIf. الإيموجيات Unicode المدمجة ليس لها معرّف، لذا يمكن فقط التحقق من إيموجيات السيرفر المخصصة.
+text: مفيد كاختبار داخل $if أو $onlyIf، حيث تقرر الإجابة هل تعمل الأسطر تحته أصلًا أم لا.
 </block>
 
 <block type="callout" kind="warning">
-text: يجب أن يكون الإيموجي متاحًا للبوت (يجب أن يشارك البوت سيرفرًا به)، وإلا قد يُرجع الفحص false.
+text: يجب أن يكون لدى البوت خادم مشترك مع الإيموجي. فمعرّف صحيح تمامًا من خادم ليس البوت فيه يظل يجيب false.
 </block>
 </dash>
 
 <details>
 syntax: $emojiExists[emoji id]
-param: emoji id|snowflake|Required|المعرّف الرقمي للإيموجي المخصص، أو ذكر إيموجي مثل <:name:id> / <a:name:id>
+param: emoji id|snowflake|مطلوب|الإيموجي المخصص الذي يُبحث عنه، كرقم أو منشن مثل <:name:id> / <a:name:id>
 </details>

@@ -1,0 +1,52 @@
+<dash>
+name: $userLeaderboard
+desc: Construit un classement qui classe les membres du serveur actuel à partir d'un score enregistré.
+category: Variables
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: ⁨$userLeaderboard⁩ lit une variable qui garde un score par membre dans le serveur où la commande a été utilisée, et aligne les membres du score le plus élevé au plus bas. Il envoie la liste classée dans le salon. Chaque serveur conserve sa propre copie des scores, donc chacun obtient son propre classement distinct.
+</block>
+
+<block type="list" title="Comment l'utiliser dans l'application">
+item: Créez d'abord la variable dans l'onglet Variables
+item: Ouvrez l'onglet Commandes
+item: Touchez + pour créer une nouvelle commande
+item: Donnez-lui un nom dans le champ Nom
+item: Définissez le champ Préfixe
+item: Collez le code ci-dessous dans l'éditeur
+item: Touchez Enregistrer
+</block>
+
+<block type="code" title="Syntaxe">
+text: $userLeaderboard[name; (sort); (limit); (format)]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $userLeaderboard[points; desc; 5; {rank}. {mention} — {value}]
+</block>
+
+<block type="options" title="Types de tri">
+option: desc|Valeur la plus élevée d'abord (utilisé lorsque vous laissez le tri vide)
+option: asc|Valeur la plus basse d'abord
+</block>
+
+<block type="options" title="Espaces réservés de la ligne">
+option: {rank}|La place, à partir de 1
+option: {name}|Nom d'affichage du membre
+option: {mention}|Une mention cliquable du membre
+option: {id}|ID Discord du membre
+option: {value}|Le score enregistré
+</block>
+
+<block type="callout" kind="note">
+text: Seuls les nombres peuvent être classés, donc les entrées contenant du texte sont laissées de côté. La limite va de 1 à 25 et elle est bridée pour vous ; toute valeur supérieure est ramenée à la baisse.
+</block>
+</dash>
+
+<details>
+syntax: $userLeaderboard[name; (sort); (limit); (format)]
+param: name|text|Requis|Nom de la variable qui garde un score par membre dans ce serveur.
+param: sort|text|Optionnel|⁎desc⁎ pour le plus élevé d'abord (par défaut), ou ⁎asc⁎ pour le plus bas d'abord.
+param: limit|number|Optionnel|Combien de lignes afficher, de 1 à 25. Par défaut 10.
+param: format|text|Optionnel|Modèle de ligne. Par défaut ⁎{rank}. {name} — {value}⁎. Vous pouvez utiliser ⁎{rank}⁎, ⁎{name}⁎, ⁎{mention}⁎, ⁎{id}⁎ et ⁎{value}⁎.
+</details>

@@ -1,10 +1,20 @@
 <dash>
 name: $getMessage
-desc: Fetches a message from any channel and sends information about it.
+desc: Reads an old message from any channel the bot can see and prints one piece of it.
 category: Utility
 
 <block type="text" title="How does the command work?">
-text: $getMessage fetches a message from the given channel and extracts a piece of information from it. The type argument chooses what is sent: content (the message text), name (the author's display name), id (the author's user ID), or avatar (the author's avatar URL). If the extracted value is empty, a zero-width space is sent instead.
+text: Give it a channel, a message and it pulls that message up and posts a piece of it in the chat. The last part chooses which piece: the text that was written, the display name of whoever wrote it, their user ID, or a link to their avatar picture. That makes it easy to quote something from earlier in the channel, or to check the name behind a post, without scrolling back.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !read
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,13 +26,17 @@ text: $getMessage[123456789; 987654321; content]
 </block>
 
 <block type="callout" kind="note">
-text: The type argument is optional and defaults to content. Valid types: content, name, id, avatar. The bot must be able to view the channel and have Read Message History permission.
+text: Leave the last part out and you get the message text. When the piece turns out to be empty, as with a post that carries nothing but an attachment, the bot sends an invisible character so the reply still appears.
+</block>
+
+<block type="callout" kind="warning">
+text: The channel has to be a text channel the bot can open with Read Message History switched on. Both IDs come as plain numbers, and when one of them matches nothing you are told which of the two could not be found.
 </block>
 </dash>
 
 <details>
 syntax: $getMessage[channelID; messageID; (type)]
-param: channelID|snowflake|Required|The ID of the channel containing the message
-param: messageID|snowflake|Required|The ID of the message to fetch
-param: type|text|Optional|What to send: content (default), name, id, or avatar
+param: channelID|snowflake|Required|Numeric ID of the channel the message sits in
+param: messageID|snowflake|Required|Numeric ID of the message to read
+param: type|text|Optional|Which part to print: content (default), name, id or avatar
 </details>

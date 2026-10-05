@@ -1,10 +1,20 @@
 <dash>
 name: $syncChannel
-desc: Synchronizes a channel's permissions with its category.
+desc: Puts a channel back on its category's permissions, undoing per-channel changes.
 category: Channel Management
 
 <block type="text" title="How does the command work?">
-text: With no argument, $syncChannel targets the channel where the script was triggered. With one argument, it targets the channel identified by the numeric ID. The channel must be a regular channel that belongs to a category. If permissions are already synchronized, the command logs a no-op.
+text: $syncChannel copies the permissions of the channel's category back onto the channel itself. With nothing after it, the channel the command was used in is the one that changes; give it a channel ID and that channel is used instead. Anything a member or a role was allowed to do differently in that channel goes away, and the category's rules apply again.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !syncChannel
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,15 +26,15 @@ text: $syncChannel[123456789012345678]
 </block>
 
 <block type="callout" kind="warning">
-text: The command must run in a server, and the bot needs permission to manage channel and role permissions. Categories cannot be synchronized directly.
+text: It only works inside a server, and only on a normal channel that sits inside a category. A category itself cannot be synced, a channel from another server is refused, and a channel that already matches its category is left untouched.
 </block>
 
-<block type="callout" kind="note">
-text: In the current interpreter this is a standalone command. Its inline resolver returns an empty value and does not perform the synchronization.
+<block type="callout" kind="important">
+text: In the build you are running, this line is skipped before it can act, so a channel keeps whatever extra permissions it had.
 </block>
 </dash>
 
 <details>
 syntax: $syncChannel[(channel ID or mention)]
-param: channelID|snowflake|Optional|The channel to synchronize; defaults to the current channel
+param: channelID|snowflake|Optional|Which channel to put back on its category's rules; defaults to the current one
 </details>

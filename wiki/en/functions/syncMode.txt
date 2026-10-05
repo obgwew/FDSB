@@ -1,10 +1,20 @@
 <dash>
 name: $syncMode
-desc: Marks a block for synchronized FDScript execution.
+desc: Marks the lines under it as one group that should be sent together.
 category: Flow Control
 
 <block type="text" title="How does the command work?">
-text: $syncMode is intended to run the commands below it, until the end of the current block, as one synchronized batch. The batch engine treats control-flow boundaries, function calls, channel redirects, suppressions, guards, and closing tokens as barriers.
+text: $syncMode marks everything below it as one group, so the lines inside it are meant to go out together instead of one after another. Control blocks, function calls, checks and channel switches mark the edges of the group. In the build you are running, the group runner is not connected yet, so the lines still arrive one by one and nothing in the channel looks different.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !syncMode
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,16 +23,16 @@ text: $syncMode
 
 <block type="code" title="Ready-to-copy Example">
 text: $syncMode
-$sendMessage[First step]
-$sendMessage[Second step]
+text: $sendMessage[First step]
+text: $sendMessage[Second step]
 </block>
 
 <block type="callout" kind="warning">
-text: In the current interpreter $syncMode only sets the execution context flag and logs that synchronization was enabled. The batch runner in sync_mode_ops.py is not connected to the main execution path yet, so commands below it still run sequentially.
+text: Nothing under it runs at the same time yet. Do not rely on the lines landing together, and do not count on the whole group stopping together when one line fails.
 </block>
 
 <block type="callout" kind="note">
-text: Treat this page as the intended interface. Do not rely on concurrent execution or all-or-nothing batch failure until the interpreter integration is completed.
+text: Every new command already opens with $syncMode sitting on the first line, so it is there from the moment you tap + and you can leave it where it is.
 </block>
 </dash>
 

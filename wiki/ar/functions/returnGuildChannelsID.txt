@@ -1,10 +1,20 @@
 <dash>
 name: $returnGuildChannelsID
-desc: يجمع معرّفات القنوات من السيرفر حسب النوع ويخزنها للاسترجاع لاحقًا.
+desc: يجمع معرّفات قنوات الخادم تحت اسم تستطيع قراءته لاحقًا.
 category: أوامر الإرجاع
 
-<block type="text" title="كيف تعمل الدالة؟">
-text: $returnGuildChannelsID يجمع جميع معرّفات القنوات من نوع محدد في سيرفر معين ويخزنها تحت اسم متغير. يمكن استرجاع النتيجة لاحقًا باستخدام $return[variableName]. يمكنك التصفية حسب نوع القناة مثل نصية، صوتية، تصنيفية، منتدى، مرحلة، أو الحصول على جميع القنوات.
+<block type="text" title="كيف يعمل الأمر؟">
+text: اطلب نوعًا واحدًا من القنوات في خادم فيجمع البوت معرّف كل قناة من ذلك النوع، ويلصقها كلها بالفاصل الذي اخترته، ويحفظ السلسلة كاملة تحت اسم تختاره. ثم تقرأ تلك القائمة لاحقًا في الأمر نفسه بـ ⁨$return[name]⁩. ولا يُنشر شيء في القناة حتى ترسله بنفسك.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة على $returnGuildChannelsID
+item: اكتب سكربتك في المحرر
+item: الصق السطر أدناه في المكان الذي تحتاجه
+item: اضغط على حفظ
 </block>
 
 <block type="code" title="الصيغة">
@@ -13,27 +23,31 @@ text: $returnGuildChannelsID[GuildID; ChannelType; var; separator]
 
 <block type="code" title="مثال جاهز للنسخ">
 text: $returnGuildChannelsID[$guildID; text; channelIDs; ,]
-$sendMessage[Text channels: $return[channelIDs]]
+text: $sendMessage[Text channels: $return[channelIDs]]
 </block>
 
 <block type="options" title="أنواع القنوات">
-option: all|جميع أنواع القنوات
+option: all|كل قنوات الخادم
 option: text|القنوات النصية فقط
 option: voice|القنوات الصوتية فقط
-option: category|القنوات التصنيفية فقط
+option: category|صفوف التصنيفات فقط
 option: forum|قنوات المنتدى فقط
-option: stage|قنوات المرحلة فقط
+option: stage|قنوات المسرح فقط
 </block>
 
 <block type="callout" kind="note">
-text: يجب أن يكون البوت عضوًا في السيرفر المستهدف. استخدم $return[variableName] لاسترجاع المعرّفات المخزنة بعد التنفيذ. يحدد الفاصل كيفية ربط المعرّفات المتعددة (مثال: ، أو ؛ أو مسافة).
+text: أعد القائمة بـ ⁨$return[name]⁩ بعد حفظها. والفاصل يقرر كيف تجلس المعرّفات بجانب بعضها — فاصلة، أو فاصلة منقوطة، أو مسافة، أو واحد مسمّى مثل ‎com‎ أو ‎sem‎.
+</block>
+
+<block type="callout" kind="important">
+text: لا يستطيع البوت النظر إلا داخل خادم انضم إليه. وأعطِه خادمًا ليس فيه، أو نوعًا لا يعرفه، فيبلّغ عن المشكلة بدلًا من حفظ أي شيء.
 </block>
 </dash>
 
 <details>
 syntax: $returnGuildChannelsID[GuildID; ChannelType; var; separator]
-param: GuildID|snowflake|مطلوب|معرّف السيرفر الذي سيتم جمع القنوات منه
-param: ChannelType|text|مطلوب|نوع القنوات المراد جمعها: all، text، voice، category، forum، أو stage
-param: المتغير|text|مطلوب|اسم المتغير لتخزين النتيجة فيه (يُستخدم مع $return[])
-param: الفاصل|text|مطلوب|الفاصل بين المعرّفات المتعددة (مثال: ، أو ؛). يمكنك استخدام فواصل مسماة: dot، com، apo، sem، colon
+param: GuildID|snowflake|مطلوب|أي خادم تُقرأ منه القنوات
+param: ChannelType|text|مطلوب|ماذا تُجمع: all, text, voice, category, forum أو stage
+param: var|text|مطلوب|الاسم الذي ستقرأ به القائمة لاحقًا بـ ⁨$return⁩
+param: separator|text|مطلوب|ما الذي يوضع بين المعرّفات، مثل ‎,‎ أو ‎;‎. وتُقبل المسمّاة أيضًا: dot, com, apo, sem, colon
 </details>

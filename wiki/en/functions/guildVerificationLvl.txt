@@ -1,10 +1,20 @@
 <dash>
 name: $guildVerificationLvl
-desc: Returns the server's verification level setting.
+desc: Reads how strict the server is about letting new members talk.
 category: Server
 
 <block type="text" title="How does the command work?">
-text: $guildVerificationLvl returns the security level new members must pass before they can talk, as its internal value from NONE (0) to VERY_HIGH (4): 0 = None, 1 = Low, 2 = Medium, 3 = High, 4 = Highest.
+text: In a server this hands back the verification level Discord uses to decide how much a newcomer has to prove before posting. The word you get is the level itself — none, low, medium, high or highest. Drop it into a message to explain why somebody cannot speak yet, or branch your script on how open the server is.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !serverinfo
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,6 +26,6 @@ text: $sendMessage[Verification level here: $guildVerificationLvl]
 </block>
 
 <block type="callout" kind="important">
-text: Can only be used inside a server - in DMs it raises an environment error and stops the script.
+text: It only works inside a server. Ask for it in a direct message and the bot reports an environment error, which stops your command right there.
 </block>
 </dash>

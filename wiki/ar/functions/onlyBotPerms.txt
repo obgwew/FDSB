@@ -1,0 +1,41 @@
+<dash>
+name: $onlyBotPerms
+desc: يوقف الأمر برسالتك الخاصة إلا إذا كان البوت نفسه مسموحًا له بما يأتي بعد ذلك.
+category: التحكم في الوصول
+
+<block type="text" title="كيف يعمل الأمر؟">
+text: $onlyBotPerms يفحص صلاحيات البوت نفسه قبل أن يعمل الجزء المحمي من أمرك. سجّل الصلاحيات التي تحتاجها، ثم أنهِ بالرسالة التي يجب أن يراها الأعضاء إذا نقصت أي واحدة منها. فإذا كان البوت يملكها كلها فلا يظهر شيء ويستمر أمرك. وإذا نقصت إحداها، تُرسل الرسالة ويُسقط بقية الأمر في مكانه.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة
+item: الصق الكود أدناه في المحرر
+item: اضغط على حفظ
+</block>
+
+<block type="code" title="الصيغة">
+text: $onlyBotPerms[permission; ...; error message]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $onlyBotPerms[kick_members; ban_members; I need permission to kick and ban members.]
+text: $sendMessage[Done!]
+</block>
+
+<block type="callout" kind="note">
+text: أسماء الصلاحيات هي أسماء Discord نفسها بأحرف صغيرة وشرطات سفلية، مثل kick_members أو ban_members أو manage_messages. ضع الرسالة أخيرًا — كل ما بعد الصلاحيات يُعامل كرسالة واحدة.
+</block>
+
+<block type="callout" kind="important">
+text: ينظر هذا الشرط إلى القناة التي استُخدم فيها الأمر، لذا فإن صلاحية يملكها البوت في قناة ولا يملكها في أخرى ستبقى مانعة له. افحص دور البوت في Discord وتأكد أنه يقع فوق الأدوار التي يحتاج للتصرف بشأنها.
+</block>
+</dash>
+
+<details>
+syntax: $onlyBotPerms[permission; ...; error message]
+param: permission|text|مطلوب|اسم صلاحية Discord واحد أو أكثر، مفصولة بفواصل منقوطة، مثل kick_members أو manage_roles.
+param: error message|text|مطلوب|الرسالة التي تُرسل إلى القناة عندما ينقص البوت إحدى الصلاحيات. كل ما بعد الصلاحيات يُحسب هذه الرسالة.
+</details>

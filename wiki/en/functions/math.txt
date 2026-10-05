@@ -1,10 +1,20 @@
 <dash>
 name: $math
-desc: Evaluates a mathematical expression and returns the result.
+desc: Works out a calculation and posts the answer in the channel.
 category: Math & Numbers
 
 <block type="text" title="How does the command work?">
-text: $math takes a mathematical expression, safely evaluates it using Python's AST parser, and sends the result. Supports basic arithmetic, exponents, and common math functions.
+text: Type a calculation between the plus, minus, multiply, divide and power signs and the bot sends back the result. Rounding helpers and the usual trigonometry are in there too, along with the constants pi, e and inf. Only arithmetic is accepted, so nothing else can ride along inside your expression.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $math
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,31 +26,31 @@ text: $math[2 + 2 * 3]
 </block>
 
 <block type="options" title="Supported operators">
-option: +|Addition
-option: -|Subtraction
-option: *|Multiplication
-option: /|Division
-option: //|Floor division
-option: %|Modulo
-option: **|Exponent
+option: +|Adds the two numbers
+option: -|Takes the second number off the first
+option: *|Multiplies
+option: /|Divides
+option: //|Divides and drops the decimal part
+option: %|What is left over after dividing
+option: **|Raises to a power
 </block>
 
 <block type="options" title="Supported functions">
 option: sqrt|Square root
-option: abs|Absolute value
-option: ceil|Round up
-option: floor|Round down
-option: round|Round to nearest
-option: log/log2/log10|Logarithm
-option: sin/cos/tan|Trigonometric functions
+option: abs|How far the number is from zero
+option: ceil|Rounds up to the next whole number
+option: floor|Rounds down to the whole number below
+option: round|Rounds to the nearest whole number
+option: log/log2/log10|Logarithm in base 10, 2 or e
+option: sin/cos/tan|Sine, cosine and tangent
 </block>
 
 <block type="callout" kind="note">
-text: Constants pi, e, and inf are available. The expression is evaluated safely — no arbitrary code execution is possible. Division by zero returns an error.
+text: Dividing by zero comes back as an error rather than a number, and a whole result drops the decimal point — 8 comes back as 8, not 8.0.
 </block>
 </dash>
 
 <details>
 syntax: $math[expression]
-param: expression|text|Required|A mathematical expression to evaluate, e.g., 2 + 2, sqrt(16), pi * 2
+param: expression|text|Required|The calculation to work out, such as 2 + 2, sqrt(16) or pi * 2
 </details>

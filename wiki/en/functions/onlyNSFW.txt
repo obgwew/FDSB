@@ -1,0 +1,40 @@
+<dash>
+name: $onlyNSFW
+desc: Runs the command only in channels marked as age restricted, and shows your own message everywhere else.
+category: Access Control
+
+<block type="text" title="How does the command work?">
+text: $onlyNSFW is a gate for adult content. It looks at whether the channel the command was used in is marked as age restricted in Discord. If it is, nothing happens and the rest of your command continues. If it is not, your message is sent and the rest of the command is dropped right there.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field
+item: Paste the code below into the editor
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: $onlyNSFW[error message]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $onlyNSFW[This command only works in age restricted channels.]
+text: $sendMessage[Here is the adult content.]
+</block>
+
+<block type="callout" kind="note">
+text: You need to mark the channel yourself in Discord: open the channel settings, turn on Age Restricted, then save. The gate does nothing until the channel is set that way.
+</block>
+
+<block type="callout" kind="important">
+text: This gate is for convenience, not real security. Anyone who can read your commands can find out the command exists and remove the gate.
+</block>
+</dash>
+
+<details>
+syntax: $onlyNSFW[error message]
+param: error message|text|Required|Message sent to the channel when it is not marked as age restricted.
+</details>

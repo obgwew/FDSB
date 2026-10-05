@@ -1,10 +1,19 @@
 <dash>
 name: $editSelectMenuOption
-desc: Edits the label, value, description, default state, or emoji of an existing select menu option.
+desc: Rewrites one entry inside a menu that is already sitting on a message the bot posted.
 category: Components
 
 <block type="text" title="How does the command work?">
-text: $editSelectMenuOption finds an option inside a select menu by its current Value, then updates its label, description, default state, and/or emoji. The Value argument must match the value of the option you want to edit. Setting Default to yes makes this option the single pre-selected one.
+text: Menus are put together one option at a time, and this changes a single one of them after the fact. The bot finds the entry by the value you gave it when the option was created, then swaps in a new label, a new small description, a new emoji, or ticks it as the one that starts pre-selected. The menu updates on the message where it already sits, so nobody has to run your command again to see the difference.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !renamecolor
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,27 +22,27 @@ text: $editSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji;
 
 <block type="code" title="Ready-to-copy Example">
 text: $newSelectMenu[color_menu; 1; 1; Pick a color]
-$addSelectMenuOption[color_menu; Red; red; The color red]
-$addSelectMenuOption[color_menu; Blue; blue; The color blue]
-$editSelectMenuOption[color_menu; Crimson; red; A deep red]
+text: $addSelectMenuOption[color_menu; Red; red; The color red]
+text: $addSelectMenuOption[color_menu; Blue; blue; The color blue]
+text: $editSelectMenuOption[color_menu; Crimson; red; A deep red]
 </block>
 
 <block type="callout" kind="note">
-text: This command updates the option live on the target message. Without a Message ID, it looks on the interaction source message first, then on the last message the bot sent.
+text: The value is how the option gets located, so it has to match what you typed when the option was added rather than what you wish it became. Leave the message ID out and the bot checks the interaction's own message first, then its last one.
 </block>
 
 <block type="callout" kind="warning">
-text: If no option with the given Value exists in the menu, an error is returned. The target message must have been sent by this bot and must contain the select menu with the given ID.
+text: No option carrying that value means the command stops with an error. Marking one as the default clears the pre-selection on all the others, since a menu can only start with a single choice.
 </block>
 </dash>
 
 <details>
 syntax: $editSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
-param: Menu ID|text|Required|The ID of the select menu that contains the option
-param: Label|text|Required|The new text shown to the user for this option
-param: Value|text|Required|The current value of the option to edit (used to find it)
-param: Description|text|Emptiable|New small description shown under the label
-param: Default|yes/no|Optional|yes to make this the pre-selected option (default: no)
-param: Emoji|text|Optional|New emoji displayed next to the option label
-param: Message ID|snowflake|Optional|ID of a specific bot message that holds the menu to edit
+param: Menu ID|text|Required|ID of the menu the option belongs to
+param: Label|text|Required|The new text members see in the menu
+param: Value|text|Required|The value the option already has, used to find it
+param: Description|text|Emptiable|The new small line shown under the label
+param: Default|yes/no|Optional|Write yes to start this option already picked (default: no)
+param: Emoji|text|Optional|Show this emoji beside the label
+param: Message ID|snowflake|Optional|Which bot message holds the menu. Leave it out to use the obvious one.
 </details>

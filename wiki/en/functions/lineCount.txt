@@ -1,10 +1,20 @@
 <dash>
 name: $lineCount
-desc: Returns the number of spaces in the given text.
+desc: Counts how many spaces are in a piece of text.
 category: String Utilities
 
 <block type="text" title="How does the command work?">
-text: $lineCount takes a text argument and returns how many space characters ( ) it contains. Variables and placeholders in the argument are resolved before counting.
+text: Feed it some text and the bot replies with how many spaces are in it. Anything you put in the brackets — a message, a variable, a value from another command — is filled in first and then counted. It is a quick way to see how many pieces a space-separated list has.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $lineCount
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,11 +26,11 @@ text: $lineCount[one two three]
 </block>
 
 <block type="callout" kind="note">
-text: The count is based on spaces, not on actual newlines. To split text into parts, use $splitIn together with $splitOut.
+text: Only the gaps between the words are counted, not the line breaks, so a block of text spread over several lines still counts just the spaces. To actually break text into parts, pair $splitIn with $splitOut.
 </block>
 </dash>
 
 <details>
 syntax: $lineCount[text]
-param: text|text|Required|The text to count spaces in. Variables and placeholders are resolved before counting.
+param: text|text|Required|The text to count the spaces in; variables and placeholders are filled in first
 </details>

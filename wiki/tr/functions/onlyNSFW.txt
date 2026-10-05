@@ -1,0 +1,40 @@
+<dash>
+name: $onlyNSFW
+desc: Komutu yalnızca yaş sınırlı olarak işaretlenmiş kanallarda çalıştırır ve başka her yerde kendi mesajınızı gösterir.
+category: Erişim Kontrolü
+
+<block type="text" title="Komut nasıl çalışır?">
+text: ⁨$onlyNSFW⁩ yetişkin içerik için bir geçittir. Komutun kullanıldığı kanalın Discord'da yaş sınırlı olarak işaretlenip işaretlenmediğine bakar. İşaretlenmişse hiçbir şey olmaz ve komutunuzun geri kalanı devam eder. İşaretlenmemişse mesajınız gönderilir ve komutun geri kalanı orada bırakılır.
+</block>
+
+<block type="list" title="Uygulamada nasıl kullanılır">
+item: Komutlar sekmesini açın
+item: Yeni bir komut başlatmak için + düğmesine dokunun
+item: Ad alanına bir ad verin
+item: Önek alanını ayarlayın
+item: Aşağıdaki kodu düzenleyiciye yapıştırın
+item: Kaydet düğmesine dokunun
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $onlyNSFW[error message]
+</block>
+
+<block type="code" title="Kopyalamaya hazır örnek">
+text: $onlyNSFW[This command only works in age restricted channels.]
+text: $sendMessage[Here is the adult content.]
+</block>
+
+<block type="callout" kind="note">
+text: Kanalı Discord'da kendiniz işaretlemeniz gerekir: kanal ayarlarını açın, Yaş Sınırlı seçeneğini açın ve kaydedin. Kanal bu şekilde ayarlanana kadar geçit hiçbir iş yapmaz.
+</block>
+
+<block type="callout" kind="important">
+text: Bu geçit kolaylık içindir, gerçek güvenlik için değil. Komutlarınızı okuyabilen herkes komutun var olduğunu öğrenebilir ve geçidi kaldırabilir.
+</block>
+</dash>
+
+<details>
+syntax: $onlyNSFW[error message]
+param: error message|text|Required|Kanal yaş sınırlı olarak işaretlenmediğinde kanala gönderilen mesaj.
+</details>

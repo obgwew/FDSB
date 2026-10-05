@@ -1,0 +1,41 @@
+<dash>
+name: $onlyBotPerms
+desc: Zatrzymuje polecenie Twoją własną wiadomością, chyba że bot ma zgodę na to, co ma nastąpić dalej.
+category: Kontrola dostępu
+
+<block type="text" title="Jak działa to polecenie?">
+text: ⁨$onlyBotPerms⁩ sprawdza uprawnienia samego bota, zanim uruchomi się chroniona część Twojego polecenia. Wypisz potrzebne uprawnienia i zakończ wiadomością, którą członkowie mają zobaczyć, gdy któregoś brakuje. Jeśli bot ma je wszystkie, nic nie zostanie wyświetlone i Twoje polecenie trwa dalej. Jeśli jednego brakuje, wiadomość zostanie wysłana, a reszta polecenia zostanie w tym miejscu odrzucona.
+</block>
+
+<block type="list" title="Jak używać go w aplikacji">
+item: Otwórz zakładkę Polecenia
+item: Dotknij +, aby rozpocząć nowe polecenie
+item: Nadaj mu nazwę w polu Nazwa
+item: Ustaw pole Prefiks
+item: Wklej poniższy kod do edytora
+item: Dotknij Zapisz
+</block>
+
+<block type="code" title="Składnia">
+text: $onlyBotPerms[permission; ...; error message]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $onlyBotPerms[kick_members; ban_members; I need permission to kick and ban members.]
+text: $sendMessage[Done!]
+</block>
+
+<block type="callout" kind="note">
+text: Nazwy uprawnień to własne nazwy Discorda, pisane małymi literami z podkreśleniami, na przykład ⁎kick_members⁎, ⁎ban_members⁎ lub ⁎manage_messages⁎. Wiadomość umieść na końcu — wszystko po uprawnieniach traktowane jest jako jedna wiadomość.
+</block>
+
+<block type="callout" kind="important">
+text: Sprawdzenie patrzy na kanał, w którym użyto polecenia, więc uprawnienie, które bot ma w jednym kanale, a w drugim nie, i tak go zablokuje. Sprawdź rolę bota na Discordzie i upewnij się, że znajduje się powyżej ról, na które musi działać.
+</block>
+</dash>
+
+<details>
+syntax: $onlyBotPerms[permission; ...; error message]
+param: permission|text|Required|Jedna lub więcej nazw uprawnień Discorda, oddzielonych średnikami, na przykład ⁎kick_members⁎ lub ⁎manage_roles⁎.
+param: error message|text|Required|Wiadomość wysyłana na kanał, gdy botowi brakuje jednego z uprawnień. Wszystko po uprawnieniach wlicza się do tej wiadomości.
+</details>

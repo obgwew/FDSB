@@ -1,10 +1,20 @@
 <dash>
 name: $findRole
-desc: Finds a role by name, ID, or mention and returns its role ID.
+desc: Turns a role name, ID or mention into that role's ID.
 category: Utility
 
 <block type="text" title="How does the command work?">
-text: $findRole looks up a role in the current server using a role mention, a numeric role ID, or a role name (the name match is case-insensitive). It returns the role's ID. Used on its own, the ID is sent to the channel; used inline, the ID is substituted directly into the surrounding text.
+text: Roles go by names people change and spell in all sorts of ways, so this looks one up for you in the current server. Type the name exactly as it appears or in any mix of capitals, or paste a role mention or a role ID, and you get the matching role's ID back. Written on its own it is posted in the channel; dropped inside another line it is filled in there instead.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $findRole
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -18,11 +28,11 @@ text: $findRole[Moderators]
 </block>
 
 <block type="callout" kind="note">
-text: This command can only be used inside a server. If no role is found, an error is returned.
+text: It only works inside a server, since roles belong to one. Ask for a name that does not exist and the bot posts an error saying so, which saves you from handing a wrong ID to whatever comes next.
 </block>
 </dash>
 
 <details>
 syntax: $findRole[query]
-param: query|text|Required|A role mention, a role ID, or a role name to search for (case-insensitive)
+param: query|text|Required|A role mention, a role ID, or the role name to look for
 </details>

@@ -1,0 +1,46 @@
+<dash>
+name: $onlyFor
+desc: Lets only the listed members or roles use the command, and shows everyone else your own message.
+category: Access Control
+
+<block type="text" title="How does the command work?">
+text: $onlyFor is a gate you put at the top of a command. List the people and roles that are allowed through, then finish with the message everyone else should see. If the person who ran the command matches one of the entries, nothing happens and the rest of your command continues. If they do not match, the message is sent and the rest of the command is dropped right there.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field
+item: Paste the code below into the editor
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: $onlyFor[ID or name; ...; error message]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $onlyFor[123456789012345678; Moderator; This command is for moderators only.]
+text: $sendMessage[Here is the secret!]
+</block>
+
+<block type="options" title="What you can list">
+option: ID|A user or role ID such as 123456789012345678, with or without the mention marks
+option: name|A role name such as Moderator, or a username for a single user
+</block>
+
+<block type="callout" kind="note">
+text: Put the message last — everything after the entries counts as one message. A member passes when they are named directly or when they hold one of the listed roles.
+</block>
+
+<block type="callout" kind="important">
+text: This gate is for convenience, not real security. Anyone who can read your commands can find out who is on the list, and anyone who can edit them can remove themselves from it. Keep the genuinely sensitive parts on your side.
+</block>
+</dash>
+
+<details>
+syntax: $onlyFor[ID or name; ...; error message]
+param: ID or name|text|Required|One or more user IDs, role IDs or names that are allowed to continue.
+param: error message|text|Required|Message sent to the channel when the person is not allowed. Everything after the entries counts as this message.
+</details>

@@ -1,10 +1,20 @@
 <dash>
 name: $and
-desc: Evaluates multiple conditions and returns true only if ALL conditions are true.
+desc: Answers true only when every condition you list is true at the same time.
 category: Flow Control
 
 <block type="text" title="How does the command work?">
-text: $and takes multiple condition arguments and evaluates each one. It returns "true" if every single condition is true, and "false" if any condition is false. This is useful for building compound conditional checks.
+text: Put two or more tests next to each other and you get one plain answer back. Every one of them has to hold at once for the word true to come out; a single failing test turns the whole thing into false. That makes it a tidy way to gate an $if on several things together, and it also works on a line of its own, where the answer is posted in the channel as it is.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !check
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,11 +26,11 @@ text: $and[$authorID == 123; $guildName == MyServer]
 </block>
 
 <block type="callout" kind="note">
-text: Each condition uses the same comparison operators as $if (==, !=, >, <, >=, <=). Returns the string "true" or "false".
+text: Every condition is written with the same comparisons $if uses: ==, !=, >, <, >= and <=. The answer is always the bare word true or false, so you can hold on to it and test it again later.
 </block>
 </dash>
 
 <details>
 syntax: $and[condition1; condition2; condition3; ...]
-param: condition|expression|Required|One or more conditions to evaluate. Each can use operators like ==, !=, >, <, >=, <=. All must be true for the result to be "true".
+param: condition|expression|Required|A check to make, using ==, !=, >, <, >= or <=. They all have to hold for true.
 </details>

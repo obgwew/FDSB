@@ -20,6 +20,7 @@ from main_app.langs.translations import Translations
 from main_app.theme.theme_engine import ThemeEngine
 from main_app.load.loading_view import LoadingScreen
 from main_app.status.status_view import BotStatusView
+from main_app.load.token_vault import TokenVault
 
 def is_mobile() -> bool:
     return os.getenv('FLET_PLATFORM', '').lower() in ('android', 'ios')
@@ -75,20 +76,20 @@ _FALLBACKS = {
     'general_section':       'General',
     'language':              'Language',
     'save':                  'Save',
-    'design_section':        'Appearance',
+    'design_section':        'Design',
     'info_section':          'Information',
     'github':                'GitHub',
     'discord':               'Discord',
-    'link':                  '↗ Open link',
+    'link':                  '(Link)',
     'bot_name_hint':         'Bot Name',
     'bot_token_hint':        'Bot Token',
     'token_required':        'Token is required',
     'system_wh':             'System (Light)',
     'system_da':             'System (Dark)',
-    'blue_sky':              'Blue Sky',
-    'yellow_bile':           'Yellow',
+    'blue_sky':              'Blue - Sky',
+    'yellow_bile':           'Yellow - Gold',
     'v2_dark':               'Dark Gold',
-    'export_section':        'Export Bot Data',
+    'export_section':        'Export Data',
     'export_desc':           'Export commands and variables as a ZIP file',
     'export_zip':            'Export ZIP',
     'export_success':        'Exported successfully!',
@@ -96,18 +97,18 @@ _FALLBACKS = {
     'folders_not_found':     'Folders not found!',
     'export_failed':         'Export failed!',
     'danger_zone':           'Danger Zone',
-    'delete_bot_perm':       'Delete This Bot Permanently',
+    'delete_bot_perm':       'Delete this bot permanently',
     'captcha_enter':         'Enter 3 digits',
     'captcha_hint':          'Enter the 3 digits shown above',
-    'confirm_delete':        'Confirm Delete',
-    'captcha_wrong':         'Incorrect code — try again',
+    'confirm_delete':        'Confirm Deletion',
+    'captcha_wrong':         'Wrong code — Try again',
     'status_bot_section':    'Bot Status',
     'status_bot_desc':       "Configure your bot's presence and rotating status messages",
     'open_status_bot':       'Manage Status',
     'search_lang':           'Search language...',
     'select_language':       'Select Language',
     'cancel':                'Cancel',
-    'saved_successfully':    'Settings saved successfully!',
+    'saved_successfully':    'Saved successfully',
     'selfbot_token_blocked': 'User/Self-bot tokens are strictly prohibited for safety and security.',
     'invalid_bot_token':     'Invalid bot token. Please enter an official Discord Bot token.',
 }
@@ -372,7 +373,7 @@ ALL_THEMES = {
     },
 }
 
-_All_THEMES = ['system_wh','system_da', 'blue_sky', 'yellow_bile']
+_All_THEMES = ['system_wh', 'system_da', 'blue_sky', 'yellow_bile']
 _PKEY       = ''.join(k[0] for k in _All_THEMES)
 _PLT_REF    = next((k for k in ALL_THEMES if k not in _All_THEMES), None)
 
@@ -395,37 +396,6 @@ def apply_theme_globally(theme_key: str):
 
     patch['_ul'] = _depth
     save_settings(patch)
-
-def _restart_app(page: ft.Page = None):
-    if is_mobile():
-        return
-
-    if getattr(sys, 'frozen', False):
-        try:
-            subprocess.Popen([sys.executable])
-        except Exception as e:
-            print(f'[Settings] Relaunch failed: {e}')
-    else:
-        base_dir  = get_persistent_base_dir()
-        fdsb_path = os.path.normpath(os.path.join(base_dir, 'FDSB.py'))
-        try:
-            subprocess.Popen([sys.executable, fdsb_path])
-        except Exception as e:
-            print(f'[Settings] Relaunch failed: {e}')
-
-    if page is not None:
-        for _attempt in (
-            lambda: page.window.close(),
-            lambda: page.window.destroy(),
-            lambda: page.window_close(),
-        ):
-            try:
-                _attempt()
-                break
-            except Exception:
-                continue
-
-    os._exit(0)
 
 def _border_all(w: float, color: str) -> ft.Border:
     s = ft.BorderSide(w, color)
@@ -459,7 +429,6 @@ def _icon_chip(icon: str, bgcolor: str = None, icon_color: str = None,
         alignment=ft.Alignment(0, 0),
     )
 
-
 class BotSettingsTab:
     _current_view = property(lambda self: 'editor' if self._status_view else 'list')
 
@@ -480,35 +449,48 @@ class BotSettingsTab:
         self._theme_btns: dict[str, ft.FilledButton] = {}
         self._ext_ui_active = _ui_profile_fixed()
 
-        self._export_status_text = ft.Text('', size=11, color=_c('success'))
         self._export_file_picker = ft.FilePicker()
 
-        self._captcha_code    = ''
-        self._captcha_display = ft.Text(
-            '', size=26, weight=ft.FontWeight.BOLD,
-            color=_c('text'), selectable=False,
-        )
+        self._captcha_code = ''
+        self._captcha_box_display = ft.Container(alignment=ft.Alignment(0, 0))
         self._captcha_field = ft.TextField(
             hint_text=_t('captcha_enter'),
-            dense=True, max_length=3,
+            dense=True,
+            max_length=3,
             keyboard_type=ft.KeyboardType.NUMBER,
+            text_align=ft.TextAlign.CENTER,
             border_color=_c('card_border'),
             focused_border_color=_c('danger'),
             cursor_color=_c('danger'),
             border_radius=10,
-            text_style=ft.TextStyle(color=_c('text'), size=13),
+            width=220,
+            text_style=ft.TextStyle(
+                color=_c('text'),
+                size=18,
+                weight=ft.FontWeight.BOLD,
+                letter_spacing=4,
+            ),
+            bgcolor=_c('input_bg'),
         )
-        self._captcha_section = ft.Column([], spacing=8, visible=False)
+        self._captcha_section = ft.Column([], spacing=12, visible=False)
 
         self._delete_init_btn = ft.FilledButton(
             content=ft.Row(
-                [ft.Icon(ft.Icons.DELETE_FOREVER, color='#FFFFFF'),
-                 ft.Text(_t('delete_bot_perm'), color='#FFFFFF',
-                         weight=ft.FontWeight.BOLD)],
-                spacing=6, tight=True,
+                [
+                    ft.Icon(ft.Icons.DELETE_FOREVER, color='#FFFFFF', size=18),
+                    ft.Text(_t('delete_bot_perm'), color='#FFFFFF', weight=ft.FontWeight.BOLD),
+                ],
+                spacing=8,
+                tight=True,
+                alignment=ft.MainAxisAlignment.CENTER,
             ),
             on_click=self._show_captcha,
-            style=ft.ButtonStyle(bgcolor=_c('danger'), color='#FFFFFF'),
+            style=ft.ButtonStyle(
+                bgcolor=_c('danger'),
+                color='#FFFFFF',
+                shape=ft.RoundedRectangleBorder(radius=10),
+                padding=ft.Padding(left=22, top=14, right=22, bottom=14),
+            ),
         )
 
         self._name_field = ft.TextField(
@@ -544,6 +526,9 @@ class BotSettingsTab:
         
     async def _open_link(self, url: str):
         await self._page.launch_url(url)
+
+    def swipe_blocked(self) -> bool:
+        return self._status_view is not None
 
     def handle_back(self) -> bool:
         if self._status_view is not None:
@@ -585,7 +570,7 @@ class BotSettingsTab:
                         self._build_design_section(),
                         self._build_info_section(),
                         self._build_delete_section(),
-                        ft.Container(height=16),
+                        ft.Container(height=24),
                     ],
                     spacing=22,
                     scroll=ft.ScrollMode.AUTO,
@@ -613,7 +598,7 @@ class BotSettingsTab:
             self._build_design_section(),
             self._build_info_section(),
             self._build_delete_section(),
-            ft.Container(height=16),
+            ft.Container(height=24),
         ]
         self._page.update()
 
@@ -910,7 +895,6 @@ class BotSettingsTab:
                                         on_click=lambda e: self._page.run_task(self._export_bot_data, e),
                                         style=ft.ButtonStyle(bgcolor=_c('accent'), color='#FFFFFF', shape=ft.RoundedRectangleBorder(radius=10)),
                                     ),
-                                    self._export_status_text,
                                 ],
                                 spacing=10, vertical_alignment=ft.CrossAxisAlignment.CENTER,
                             ),
@@ -1002,32 +986,173 @@ class BotSettingsTab:
             spacing=8,
         )
 
+    def _generate_noise_captcha_content(self) -> ft.Control:
+        noise_layers = []
+
+        # 1. Random noise dots distributed inside the box
+        for _ in range(32):
+            left_pos = random.randint(6, 240)
+            top_pos  = random.randint(6, 60)
+            dsize    = random.choice([2, 3, 4])
+            dopacity = random.uniform(0.18, 0.40)
+            noise_layers.append(
+                ft.Container(
+                    left=left_pos,
+                    top=top_pos,
+                    width=dsize,
+                    height=dsize,
+                    border_radius=dsize // 2,
+                    bgcolor=ft.Colors.with_opacity(dopacity, _c('danger')),
+                )
+            )
+
+        # 2. Random scratch noise lines
+        for _ in range(4):
+            l_x = random.randint(5, 70)
+            l_y = random.randint(12, 54)
+            l_w = random.randint(90, 180)
+            l_rot = random.uniform(-0.25, 0.25)
+            noise_layers.append(
+                ft.Container(
+                    left=l_x,
+                    top=l_y,
+                    width=l_w,
+                    height=1.5,
+                    rotate=ft.Rotate(angle=l_rot),
+                    bgcolor=ft.Colors.with_opacity(random.uniform(0.20, 0.35), _c('text')),
+                )
+            )
+
+        # 3. Digits - large, bold, and clearly visible
+        digit_items = []
+        palette = [_c('text'), _c('danger'), _c('accent'), '#D97706']
+        for ch in self._captcha_code:
+            rot = random.uniform(-0.18, 0.18)
+            f_size = random.randint(34, 38)
+            color = random.choice(palette)
+            digit_items.append(
+                ft.Container(
+                    content=ft.Text(
+                        ch,
+                        size=f_size,
+                        weight=ft.FontWeight.W_900,
+                        color=color,
+                        selectable=False,
+                        font_family="monospace",
+                    ),
+                    rotate=ft.Rotate(angle=rot),
+                    padding=ft.Padding(left=8, right=8, top=0, bottom=0),
+                )
+            )
+
+        digits_row = ft.Container(
+            content=ft.Row(
+                digit_items,
+                spacing=16,
+                alignment=ft.MainAxisAlignment.CENTER,
+                vertical_alignment=ft.CrossAxisAlignment.CENTER,
+            ),
+            alignment=ft.Alignment(0, 0),
+            expand=True,
+        )
+        noise_layers.append(digits_row)
+
+        # 4. Foreground cross-cutting line
+        noise_layers.append(
+            ft.Container(
+                left=15,
+                top=34,
+                width=220,
+                height=2,
+                rotate=ft.Rotate(angle=random.uniform(-0.10, 0.10)),
+                bgcolor=ft.Colors.with_opacity(0.35, _c('danger')),
+            )
+        )
+
+        return ft.Stack(
+            controls=noise_layers,
+            width=250,
+            height=70,
+        )
+
+    def _regenerate_captcha(self):
+        self._captcha_code = ''.join(random.choices('0123456789', k=3))
+        self._captcha_box_display.content = self._generate_noise_captcha_content()
+
     def _build_delete_section(self) -> ft.Control:
-        self._captcha_section = ft.Column(
+        self._regenerate_captcha()
+
+        captcha_refresh_row = ft.Row(
             [
                 ft.Container(
-                    content=ft.Column([self._captcha_display], horizontal_alignment=ft.CrossAxisAlignment.CENTER),
+                    content=self._captcha_box_display,
                     bgcolor=_c('card_bg'),
                     border=_border_all(2, _c('danger')),
                     border_radius=8,
-                    padding=ft.Padding(left=10, top=10, right=10, bottom=10),
+                    padding=ft.Padding(left=12, top=6, right=12, bottom=6),
                     alignment=ft.Alignment(0, 0),
                 ),
-                ft.Text(_t('captcha_hint'), size=12, color=_c('text_dim')),
-                self._captcha_field,
-                ft.FilledButton(
-                    content=ft.Row(
-                        [ft.Icon(ft.Icons.WARNING_ROUNDED, color='#FFFFFF'),
-                         ft.Text(_t('confirm_delete'), color='#FFFFFF', weight=ft.FontWeight.BOLD)],
-                        spacing=6, tight=True,
-                    ),
-                    on_click=self._execute_deletion,
-                    expand=True,
-                    style=ft.ButtonStyle(bgcolor='#991B1B', color='#FFFFFF', shape=ft.RoundedRectangleBorder(radius=10)),
+                ft.IconButton(
+                    icon=ft.Icons.REFRESH_ROUNDED,
+                    icon_color=_c('text_dim'),
+                    tooltip='Refresh Code',
+                    on_click=lambda _: (self._regenerate_captcha(), self._page.update()),
                 ),
             ],
-            spacing=10,
+            alignment=ft.MainAxisAlignment.CENTER,
+            vertical_alignment=ft.CrossAxisAlignment.CENTER,
+        )
+
+        self._captcha_section = ft.Column(
+            [
+                captcha_refresh_row,
+                ft.Text(
+                    _t('captcha_hint'),
+                    size=12,
+                    color=_c('text_dim'),
+                    text_align=ft.TextAlign.CENTER,
+                ),
+                ft.Row(
+                    [self._captcha_field],
+                    alignment=ft.MainAxisAlignment.CENTER,
+                ),
+                ft.Row(
+                    [
+                        ft.TextButton(
+                            content=ft.Text(_t('cancel'), color=_c('text_dim'), weight=ft.FontWeight.W_500),
+                            on_click=self._hide_captcha,
+                        ),
+                        ft.FilledButton(
+                            content=ft.Row(
+                                [
+                                    ft.Icon(ft.Icons.WARNING_ROUNDED, color='#FFFFFF', size=18),
+                                    ft.Text(_t('confirm_delete'), color='#FFFFFF', weight=ft.FontWeight.BOLD),
+                                ],
+                                spacing=6,
+                                tight=True,
+                                alignment=ft.MainAxisAlignment.CENTER,
+                            ),
+                            on_click=self._execute_deletion,
+                            style=ft.ButtonStyle(
+                                bgcolor='#991B1B',
+                                color='#FFFFFF',
+                                shape=ft.RoundedRectangleBorder(radius=10),
+                                padding=ft.Padding(left=18, top=12, right=18, bottom=12),
+                            ),
+                        ),
+                    ],
+                    alignment=ft.MainAxisAlignment.CENTER,
+                    spacing=12,
+                ),
+            ],
+            spacing=12,
+            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
             visible=False,
+        )
+
+        delete_init_row = ft.Row(
+            [self._delete_init_btn],
+            alignment=ft.MainAxisAlignment.CENTER,
         )
 
         return ft.Column(
@@ -1043,7 +1168,14 @@ class BotSettingsTab:
                     vertical_alignment=ft.CrossAxisAlignment.CENTER,
                 ),
                 ft.Container(
-                    content=ft.Column([self._delete_init_btn, self._captcha_section], spacing=10),
+                    content=ft.Column(
+                        [
+                            delete_init_row,
+                            self._captcha_section,
+                        ],
+                        spacing=10,
+                        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                    ),
                     bgcolor=_c('card_bg'),
                     border=_border_all(1, _c('danger')),
                     border_radius=14,
@@ -1223,9 +1355,7 @@ class BotSettingsTab:
         bot_dir  = self._bot_data.get('bot_dir', '').strip()
 
         if not bot_name or not bot_dir:
-            self._export_status_text.color = _c('danger')
-            self._export_status_text.value = _t('no_bot_selected')
-            self._page.update()
+            self._notify(_t('no_bot_selected'), _c('danger'))
             return
 
         base_dir   = get_persistent_base_dir()
@@ -1246,15 +1376,13 @@ class BotSettingsTab:
                 sources[folder] = candidate
 
         if not sources:
-            self._export_status_text.color = _c('danger')
-            self._export_status_text.value = _t('folders_not_found')
-            self._page.update()
+            self._notify(_t('folders_not_found'), _c('danger'))
             return
 
         try:
             with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zf:
                 for folder_name, folder_path in sources.items():
-                    for root, _, files in os.walk(folder_path):
+                    for root, _dirs, files in os.walk(folder_path):
                         for file in files:
                             abs_p = os.path.join(root, file)
                             arc   = os.path.join(
@@ -1263,19 +1391,23 @@ class BotSettingsTab:
                             zf.write(abs_p, arc)
         except Exception as e:
             print(f'[Settings] Export failed: {e}')
-            self._export_status_text.color = _c('danger')
-            self._export_status_text.value = _t('export_failed')
-            self._page.update()
+            self._notify(_t('export_failed'), _c('danger'))
             return
 
         try:
             if is_mobile():
+                with open(zip_path, 'rb') as f:
+                    zip_bytes = f.read()
+
                 saved_path = await self._export_file_picker.save_file(
+                    dialog_title=_t('export_zip'),
                     file_name=zip_name,
+                    file_type=ft.FilePickerFileType.CUSTOM,
                     allowed_extensions=['zip'],
+                    src_bytes=zip_bytes,
                 )
-                if saved_path and os.path.normpath(saved_path) != os.path.normpath(zip_path):
-                    shutil.copy2(zip_path, saved_path)
+                if not saved_path:
+                    return
             else:
                 if sys.platform == 'win32':
                     subprocess.Popen(['explorer', '/select,', zip_path])
@@ -1285,49 +1417,76 @@ class BotSettingsTab:
                     subprocess.Popen(['xdg-open', export_dir])
         except Exception as e:
             print(f'[Settings] reveal/save failed: {e}')
+            self._notify(_t('export_failed'), _c('danger'))
+            return
 
-        self._export_status_text.color = _c('success')
-        self._export_status_text.value = _t('export_success')
-        self._page.update()
+        self._notify(_t('export_success'), _c('success'))
 
     def _show_captcha(self, _):
-        self._captcha_code             = ''.join(random.choices('0123456789', k=3))
-        self._captcha_display.value    = self._captcha_code
+        self._regenerate_captcha()
         self._captcha_field.value      = ''
         self._captcha_field.error_text = None
         self._captcha_section.visible  = True
         self._delete_init_btn.visible  = False
         self._page.update()
 
+    def _hide_captcha(self, _=None):
+        self._captcha_field.value      = ''
+        self._captcha_field.error_text = None
+        self._captcha_section.visible  = False
+        self._delete_init_btn.visible  = True
+        self._page.update()
+
     def _execute_deletion(self, _):
         if (self._captcha_field.value or '').strip() != self._captcha_code:
-            self._captcha_code          = ''.join(random.choices('0123456789', k=3))
-            self._captcha_display.value = self._captcha_code
-            self._captcha_field.value   = ''
+            self._regenerate_captcha()
+            self._captcha_field.value      = ''
             self._captcha_field.error_text = _t('captcha_wrong')
             self._page.update()
             return
 
         base_dir = get_persistent_base_dir()
         bot_name = self._bot_data.get('name', '')
+        _bot_dir = self._bot_data.get('bot_dir', '')
 
+        # Remove token from vault
+        if _bot_dir:
+            _bot_id = TokenVault.bot_id_from_dir(_bot_dir)
+            TokenVault.forget_cached(_bot_id)
+            try:
+                self._page.run_task(TokenVault.remove, _bot_id)
+            except Exception as e:
+                print(f'[Settings] token remove failed: {e}')
+
+        # Remove app_data folder for this bot
         if bot_name:
             target = os.path.normpath(os.path.join(base_dir, 'app_data', bot_name))
             if os.path.exists(target):
                 try:
                     shutil.rmtree(target)
-                    print(f'[Settings] Deleted: {target}')
+                    print(f'[Settings] Deleted app_data target: {target}')
                 except Exception as e:
                     print(f'[Settings] Delete failed: {e}')
 
+        # Remove bot_dir if separate
+        if _bot_dir and os.path.exists(_bot_dir) and _bot_dir != base_dir:
+            try:
+                shutil.rmtree(_bot_dir)
+                print(f'[Settings] Deleted bot directory: {_bot_dir}')
+            except Exception as e:
+                print(f'[Settings] Delete bot_dir failed: {e}')
+
+        # Reset bot state cleanly
+        self._bot_data = {}
+        self._name_field.value = ''
+        self._token_field.value = ''
+        self._hide_captcha()
+
+        # Trigger main FDSB interface callback to seamlessly navigate back to dashboard/bot creation
         if self._on_bot_save:
             self._on_bot_save({})
 
-        if is_mobile():
-            self._rebuild_in_place()
-            return
-
-        _restart_app(self._page)
+        self._page.update()
 
     async def _save_bot(self, _):
         new_name  = (self._name_field.value or '').strip()
@@ -1339,8 +1498,11 @@ class BotSettingsTab:
             self._page.update()
             return
 
-        # فحص أمان التوكن ومنع السيلف بوت وتوكنات الحسابات الشخصية
-        old_token = self._bot_data.get('token', '').strip()
+        old_token = (
+            self._bot_data.get('token')
+            or TokenVault.get_cached_for_dir(self._bot_data.get('bot_dir', ''))
+            or ''
+        ).strip()
         if new_token != old_token:
             is_valid, reason = _inspect_bot_token(new_token)
             if not is_valid:
@@ -1358,8 +1520,11 @@ class BotSettingsTab:
             try:
                 with open(config_path, 'r', encoding='utf-8') as f:
                     cfg = json.load(f)
-                cfg['name']  = new_name or cfg.get('name', 'Bot')
-                cfg['token'] = new_token
+                cfg['name'] = new_name or cfg.get('name', 'Bot')
+                cfg.pop('token', None)
+                cfg['token_storage'] = 'secure'
+                if new_token != old_token:
+                    await TokenVault.set(TokenVault.bot_id_from_dir(bot_dir), new_token)
                 with open(config_path, 'w', encoding='utf-8') as f:
                     json.dump(cfg, f, ensure_ascii=False, indent=2)
                 self._bot_data.update({'name': cfg['name'], 'token': new_token})
@@ -1378,4 +1543,9 @@ class BotSettingsTab:
     def load_bot(self, bot_data: dict):
         self._bot_data          = bot_data
         self._name_field.value  = bot_data.get('name',  '')
-        self._token_field.value = bot_data.get('token', '')
+        self._token_field.value = (
+            bot_data.get('token')
+            or TokenVault.get_cached_for_dir(bot_data.get('bot_dir', ''))
+            or ''
+        )
+        self._hide_captcha()

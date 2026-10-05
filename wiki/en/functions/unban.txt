@@ -1,10 +1,20 @@
 <dash>
 name: $unban
-desc: Unbans a previously banned user from the server.
+desc: Lifts a ban so the person is able to come back to the server.
 category: Moderation
 
 <block type="text" title="How does the command work?">
-text: $unban takes a user ID, looks up the user in the server's ban list, and removes the ban. The user must have been previously banned to use this command.
+text: $unban takes the ID of a banned person, finds that ID in the server's ban list and takes the ban off. The person is able to rejoin with an invite straight away, and the entry is gone from the ban list for good. An ID that is not on the list is left alone, and the bot says the ban list had no such person.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !unban
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,11 +26,15 @@ text: $unban[123456789]
 </block>
 
 <block type="callout" kind="warning">
-text: The bot must have "Ban Members" permission. The user ID must be a raw numeric ID (mentions and symbols are not supported). The user must currently be banned.
+text: The bot needs Ban Members in that server. Only the raw number works here, so a mention or a name is refused, and so is a server where nobody under that ID is banned.
+</block>
+
+<block type="callout" kind="important">
+text: In the build you are running, this line is skipped before it can act, so a ban stays in place until you lift it yourself in Discord.
 </block>
 </dash>
 
 <details>
 syntax: $unban[userID]
-param: userID|snowflake|Required|The numeric user ID of the banned user to unban
+param: userID|snowflake|Required|The numeric ID of the banned person to let back in
 </details>

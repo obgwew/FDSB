@@ -1,0 +1,41 @@
+<dash>
+name: $repeatMessage
+desc: Wiederholt ein Textstück eine feste Anzahl von Malen und sendet das Ergebnis in einer Nachricht.
+category: Mathematik & Zahlen
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: ⁨$repeatMessage⁩ nimmt eine ganze Zahl und ein Textstück und sendet den Text dann so oft hintereinander. Ohne Kontext gibt er das Wiederholte aus, innerhalb eines anderen Befehls wird der wiederholte Text an der Stelle eingesetzt — praktisch, um Muster und Trenner zu bauen. Schreibe ⁎\s⁎ dort, wo zwischen den Wiederholungen ein Leerzeichen sein soll.
+</block>
+
+<block type="list" title="So verwendest du es in der App">
+item: Öffne den Befehle-Tab
+item: Tippe auf +, um einen neuen Befehl zu beginnen
+item: Gib ihm im Feld Name einen Namen
+item: Setze das Feld Prefix
+item: Füge den folgenden Code in den Editor ein
+item: Tippe auf Speichern
+</block>
+
+<block type="code" title="Syntax">
+text: $repeatMessage[amount; message]
+</block>
+
+<block type="code" title="Fertiges Beispiel zum Kopieren">
+text: $repeatMessage[5; ★]
+</block>
+
+<block type="options" title="Regeln">
+option: amount|Eine ganze Zahl von 1 oder mehr. Für 0 wird nichts gesendet.
+option: message|Der zu wiederholende Text. Schreibe ⁎\s⁎ für ein Leerzeichen.
+</block>
+
+<block type="callout" kind="note">
+text: Discord begrenzt eine einzelne Nachricht auf 2000 Zeichen, deshalb werden die Wiederholungen geprüft, bevor etwas gesendet wird. Wenn amount mal der Textlänge über dem Limit liegt, stoppt der Befehl und teilt dir mit, weniger Wiederholungen oder kürzeren Text zu verwenden.
+</block>
+</dash>
+
+<details>
+syntax: $repeatMessage[amount; message]
+param: amount|number|Erforderlich|Wie oft der Text wiederholt wird. Muss eine ganze Zahl von 1 oder mehr sein.
+param: message|text|Erforderlich|Der zu wiederholende Text. Schreibe ⁎\s⁎ für ein Leerzeichen.
+</details>

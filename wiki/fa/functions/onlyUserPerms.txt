@@ -1,0 +1,51 @@
+<dash>
+name: $onlyUserPerms
+desc: با پیام خودت دستور را متوقف می‌کند، مگر آنکه کسی که آن را اجرا کرده اجازه انجام ادامهٔ کار را داشته باشد.
+category: ⁨⁨کنترل دسترسی⁩⁩
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: ⁨$onlyUserPerms⁩ پیش از اجرای بخش محافظت‌شده، مجوزهای عضوی را بررسی می‌کند که دستور را اجرا کرده است. مجوزهایی را که او نیاز دارد فهرست کنید و سپس با پیامی پایان دهید که هنگام نبودِ یکی از آن‌ها فرستاده شود. اگر همهٔ آن‌ها را داشته باشد، چیزی نمایش داده نمی‌شود و دستور شما ادامه می‌یابد. اگر یکی از آن‌ها نباشد، پیام ارسال می‌شود و بقیهٔ دستور همان‌جا کنار گذاشته می‌شود.
+</block>
+
+<block type="list" title="چگونه در برنامه استفاده‌اش کنید">
+item: تب دستورها را باز کنید
+item: برای شروع یک دستور تازه روی + بزنید
+item: در فیلد نام، نامی برایش بگذارید
+item: فیلد پیشوند را تنظیم کنید
+item: کد زیر را در ویرایشگر بچسبانید
+item: روی ذخیره بزنید
+</block>
+
+<block type="code" title="نحو">
+text: $onlyUserPerms[permission; ...; error message]
+</block>
+
+<block type="code" title="نمونهٔ آمادهٔ کپی">
+text: $onlyUserPerms[manage_messages; You need Manage Messages to do that.]
+text: $onlyAdmin
+text: $sendMessage[Message deleted.]
+</block>
+
+<block type="options" title="مجوزهای پرکاربرد">
+option: manage_messages|حذف و سنجاق‌کردن پیام‌ها
+option: kick_members|بیرون‌انداختن اعضا
+option: ban_members|محکوم‌کردن اعضا
+option: timeout_members|سکوت‌کردن موقت اعضا
+option: manage_roles|دادن و برداشتن نقش‌ها
+option: moderate_members|سکوت‌کردن موقت و بیرون‌انداختن اعضا
+</block>
+
+<block type="callout" kind="note">
+text: نام مجوزها همان نام‌های خود دیسکورد با حروف کوچک و زیرخط است. پیام را در پایان بگذارید — هر چه پس از مجوزها بیاید یک پیام به شمار می‌رود.
+</block>
+
+<block type="callout" kind="important">
+text: این با ⁨$onlyAdmin⁩ یکی نیست. مجوزهای خودِ آن شخص را می‌بیند، یعنی نقشی که مجوزهای اضافه به آن داده‌ای از این بررسی رد می‌شود، حتی اگر نقش مدیر نباشد.
+</block>
+</dash>
+
+<details>
+syntax: $onlyUserPerms[permission; ...; error message]
+param: permission|text|⁨الزامی⁩|یک یا چند نام مجوز دیسکورد، جداشده با سمی‌کالن، مانند ⁎manage_messages⁎ یا ⁎kick_members⁎.
+param: error message|text|⁨الزامی⁩|پیامی که وقتی عضو یکی از مجوزها را ندارد به کانال فرستاده می‌شود. هر چه پس از مجوزها بیاید بخشی از این پیام است.
+</details>

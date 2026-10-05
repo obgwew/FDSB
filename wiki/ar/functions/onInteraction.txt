@@ -1,10 +1,20 @@
 <dash>
 name: $onInteraction
-desc: حدث يُطلق عند حدوث تفاعل مكوّن (زر/قائمة اختيار).
+desc: يشغّل سكربتك عندما يضغط أحدهم زرًا أو يختار خيارًا من قائمة.
 category: الحدث
 
-<block type="text" title="كيف تعمل الدالة؟">
-text: $onInteraction هو بادئة حدث تُطلق سكربت FDScript عندما يتفاعل مستخدم مع مكوّن (نقرة زر، قائمة اختيار، إلخ). يمكنك اختياريًا تحديد معرّف مخصص للتفعيل فقط لمكوّنات محددة. بدون معرّف، يتم التفعيل لجميع تفاعلات المكوّنات.
+<block type="text" title="كيف يعمل الحدث؟">
+text: أعطِ أمرًا حقل البادئة $onInteraction فيضع عليه التطبيق علامة حدث نيابةً عنك. ومنذ ذلك الحين يشغّل كل ضغط زر وكل اختيار في إحدى قوائمك الأسطر في الأسفل، ومعك الشخص الذي ضغط ومعرّف المكوّن الذي لمسه معًا. واحذف الأقواس يغطي الحدث كل مكوّن في كل رسالة، أو سمِّ معرّفًا واحدًا بداخلها فيستيقظ الأمر وحده.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة على $onInteraction
+item: يضع التطبيق عليه علامة حدث نيابةً عنك
+item: الصق الكود أدناه في المحرر
+item: اضغط على حفظ
 </block>
 
 <block type="code" title="الصيغة">
@@ -14,19 +24,19 @@ text: #PREFIX:$onInteraction[button_custom_id]
 
 <block type="code" title="مثال جاهز للنسخ">
 text: #PREFIX:$onInteraction[confirm_btn]
- sendMessage[You clicked the confirm button!]
+text:  sendMessage[You clicked the confirm button!]
 </block>
 
 <block type="callout" kind="note">
-text: استخدم $onInteraction بدون أقواس للتعامل مع جميع التفاعلات، أو مع custom_id محدد للتعامل مع ذلك المكوّن فقط.
+text: المعرّف الذي تضعه بين الأقواس هو الذي اخترته حين بنيت الزر أو القائمة. والحروف الكبيرة تُتجاهل في الطرفين، فيوقظ confirm_btn وCONFIRM_BTN الأمر نفسه.
 </block>
 
 <block type="callout" kind="important">
-text: يعمل هذا الحدث في مجلد bot_events وليس bot_commands. أنشئ ملف .fds الخاص بك هناك.
+text: لا رسالة مكتوبة خلف الضغط، فـ $authorID و$authorName و$mention و$customID هي قطع المعلومات المفيدة هنا. والضغط يكون قد جوب عليه قبل أن تبدأ أسطرك، فأمر بطيء لن يجعل الزر يبدو متجمّدًا.
 </block>
 </dash>
 
 <details>
-syntax: #PREFIX:$onInteraction[(custom_id)]
-param: customID|text|اختياري|معرّف custom_id لمكوّن محدد للاستماع إليه. إذا كان فارغًا، يُفعَّل لجميع التفاعلات.
+syntax: $onInteraction[(custom_id)]
+param: customID|text|اختياري|اتركه فارغًا لالتقاط كل المكوّنات، أو سمِّ المعرّف الواحد الذي تريد الاستماع إليه
 </details>

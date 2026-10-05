@@ -89,16 +89,51 @@ def get_app_data_dir() -> str:
     return path
 
 
+def _server_running() -> bool:
+    """Safe wrapper: if the state is unknown, assume RUNNING so nothing is deleted."""
+    fn = getattr(Server, 'is_running', None)
+    if not callable(fn):
+        print('[FDSB] Server.is_running missing - update Server.py and fgs_service.py')
+        return True
+    try:
+        return bool(fn())
+    except Exception as ex:
+        print(f'[FDSB] Server.is_running failed: {ex}')
+        return True
+
+
+def clear_app_cache():
+    """Deletes disposable cache only. Never touches persistent data (app_data)."""
+    protected = os.path.abspath(get_persistent_base_dir())
+    cache_dir = os.getenv('FLET_APP_STORAGE_TEMP')
+    if not cache_dir:
+        return
+    cache_dir = os.path.abspath(cache_dir)
+    if (not os.path.isdir(cache_dir) or cache_dir == protected
+            or protected.startswith(cache_dir + os.sep)):
+        return
+    for e in os.scandir(cache_dir):
+        try:
+            if e.is_dir(follow_symlinks=False):
+                shutil.rmtree(e.path)
+            else:
+                os.remove(e.path)
+        except Exception as ex:
+            print(f'[Cache] could not remove {e.path}: {ex}')
+
+
 def get_resource_path(*parts: str) -> str:
     base = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
     return os.path.join(base, *parts)
 
 
 from main_app.langs.translations import Translations
-from main_app.settings import get_current_lang, get_current_theme, apply_theme_globally
+from main_app.settings import get_current_lang, get_current_theme, apply_theme_globally, ALL_THEMES
 from main_app.theme.theme_engine import ThemeEngine
 from main_app.main import BotDashboardScreen
+from main_app.load.motion import SlideStack
 from main_app.load.updater import check_for_updates
+from main_app.load.token_vault import TokenVault
 
 logging.getLogger('discord').setLevel(logging.INFO)
 
@@ -112,6 +147,17 @@ icon_path = get_resource_path('main_app', 'icons', 'FDSB.png')
 
 def _t(key: str) -> str:
     return Translations.get(key, get_current_lang())
+
+
+def _tr(key: str, ar: str, en: str) -> str:
+    """Translation with inline fallback when the key is missing from translations."""
+    try:
+        val = Translations.get(key, get_current_lang())
+        if val and val != key:
+            return val
+    except Exception:
+        pass
+    return ar if str(get_current_lang()).startswith('ar') else en
 
 def _ar(text: str) -> str:
     return text
@@ -127,14 +173,58 @@ def ensure_app_data_dir():
     os.makedirs(APP_DATA_DIR, exist_ok=True)
 
 
+COUNTER_FILE = os.path.join(APP_DATA_DIR, 'counter.json')
+
+
 def get_bot_dir(bot_name: str) -> str:
+    """Legacy: folder derived from the name (only for bots made before IDs)."""
     safe = "".join(c for c in bot_name if c.isalnum() or c in (' ', '-', '_')).strip()
     return os.path.join(APP_DATA_DIR, safe.replace(' ', '_') or 'bot')
 
 
+def get_bot_dir_by_id(bot_id: int) -> str:
+    return os.path.join(APP_DATA_DIR, f'bot_{int(bot_id):04d}')
+
+
+def _next_bot_number() -> int:
+    """Ever-increasing bot number. Never decreases, even if bots are deleted."""
+    ensure_app_data_dir()
+    last = 0
+    try:
+        with open(COUNTER_FILE, 'r', encoding='utf-8') as f:
+            last = int(json.load(f).get('last_id', 0))
+    except Exception:
+        last = 0
+    for e in os.scandir(APP_DATA_DIR):
+        m = re.fullmatch(r'bot_(\d+)', e.name)
+        if e.is_dir() and m:
+            last = max(last, int(m.group(1)))
+    n = last + 1
+    tmp = COUNTER_FILE + '.tmp'
+    with open(tmp, 'w', encoding='utf-8') as f:
+        json.dump({'last_id': n}, f)
+    os.replace(tmp, COUNTER_FILE)
+    return n
+
+
+def rename_bot(bot_dir: str, new_name: str) -> bool:
+    path = os.path.join(bot_dir, 'bot_files', 'config.json')
+    try:
+        with open(path, 'r', encoding='utf-8') as f:
+            config = json.load(f)
+        config['name'] = new_name.strip() or config.get('name', 'My Bot')
+        with open(path, 'w', encoding='utf-8') as f:
+            json.dump(config, f, ensure_ascii=False, indent=2)
+        return True
+    except Exception as e:
+        print(f'[Storage] rename failed {path}: {e}')
+        return False
+
+
 def save_bot_data(bot_data: dict) -> dict:
     ensure_app_data_dir()
-    bot_dir       = get_bot_dir(bot_data.get('name', 'bot'))
+    bot_id        = _next_bot_number()
+    bot_dir       = get_bot_dir_by_id(bot_id)
     bot_files_dir = os.path.join(bot_dir, 'bot_files')
     os.makedirs(bot_dir,       exist_ok=True)
     os.makedirs(bot_files_dir, exist_ok=True)
@@ -148,12 +238,14 @@ def save_bot_data(bot_data: dict) -> dict:
         saved_image_path = dest
 
     config = {
-        'name':  bot_data.get('name', 'My Bot'),
-        'token': bot_data.get('token', ''),
-        'image': saved_image_path,
+        'id':            bot_id,
+        'name':          bot_data.get('name', 'My Bot'),
+        'image':         saved_image_path,
+        'token_storage': 'secure',
     }
     with open(os.path.join(bot_files_dir, 'config.json'), 'w', encoding='utf-8') as f:
         json.dump(config, f, ensure_ascii=False, indent=2)
+    config['_dir'] = bot_dir
     return config
 
 
@@ -171,6 +263,7 @@ def load_all_bots() -> list:
                 config = json.load(f)
             if config.get('image') and not os.path.isfile(config['image']):
                 config['image'] = ''
+            config['_dir'] = entry.path
             bots.append(config)
         except Exception as e:
             print(f"[Storage] error {config_path}: {e}")
@@ -220,7 +313,8 @@ def _nav_push(back_fn):
 
 def _nav_pop() -> bool:
     if _NAV_STACK:
-        _NAV_STACK.pop()()
+        fn = _NAV_STACK.pop()
+        fn()
         return True
     return False
 
@@ -229,50 +323,202 @@ def _nav_clear():
     _NAV_STACK.clear()
 
 
-_ROOT_SWITCHER = ft.AnimatedSwitcher(
-    content=None,
-    transition=ft.AnimatedSwitcherTransition.FADE,
-    duration=260,
-    switch_in_curve=ft.AnimationCurve.EASE_OUT_CUBIC,
-    switch_out_curve=ft.AnimationCurve.EASE_IN_CUBIC,
-    expand=True,
-)
+def _dashboard_back(dashboard) -> bool:
+    """Ask the open dashboard to go back one level internally
+    (editor -> commands list, sub-page -> tab root, ...).
+    Returns True if something was handled.
+
+    1. Uses dashboard.handle_back() when the dashboard defines it.
+    2. Otherwise scans its attributes for any child (tab) exposing handle_back(),
+       so the editor's back step works even if the dashboard does not forward it.
+    """
+    if dashboard is None:
+        return False
+
+    handler = getattr(dashboard, 'handle_back', None)
+    if callable(handler):
+        try:
+            return bool(handler())
+        except Exception as ex:
+            print(f'[FDSB] dashboard.handle_back failed: {ex}')
+            return False
+
+    try:
+        children = list(vars(dashboard).values())
+    except TypeError:
+        children = []
+    for child in children:
+        if child is dashboard or isinstance(child, (str, int, float, bool, dict, list, tuple, set)):
+            continue
+        child_handler = getattr(child, 'handle_back', None)
+        if callable(child_handler):
+            try:
+                if child_handler():
+                    return True
+            except Exception as ex:
+                print(f'[FDSB] child.handle_back failed: {ex}')
+    return False
+
+
+# حالة نافذة الخروج.
+# على أندرويد: عند الضغط على رجوع النظام، يرسل Flet الحدث on_confirm_pop ثم ينتظر
+# (حتى 5 دقائق) أن نستدعي view.confirm_pop(True/False):
+#   False -> يبقى التطبيق      True -> يغلق التطبيق فعلياً (SystemNavigator.pop)
+# لذلك أثناء ظهور نافذة الخروج نترك هذا الطلب "معلّقاً" ونحسمه حسب اختيار المستخدم.
+_EXIT_STATE = {'dialog': None, 'view': None, 'asking': False}
+
+
+async def _resolve_pop(should_pop: bool):
+    view = _EXIT_STATE.get('view')
+    if view is None:
+        return
+    try:
+        await view.confirm_pop(should_pop)
+    except Exception as ex:
+        print(f'[FDSB] confirm_pop({should_pop}) failed: {ex}')
+
+
+def _show_exit_confirm(page: ft.Page):
+    """Small 'are you sure you want to exit?' dialog shown at the root screen."""
+    if _EXIT_STATE['asking']:
+        return                                   # لا نفتح نافذتين فوق بعض
+    _EXIT_STATE['asking'] = True
+
+    async def _stay(_=None):
+        _EXIT_STATE['asking'] = False
+        page.pop_dialog()
+        await _resolve_pop(False)                # إلغاء الإغلاق
+
+    async def _exit(_=None):
+        _EXIT_STATE['asking'] = False
+        page.pop_dialog()
+        await _resolve_pop(True)                 # إغلاق التطبيق بالكامل
+
+    async def _dismissed(_=None):
+        # أُغلقت النافذة بزر الرجوع أو بالضغط خارجها = البقاء
+        if _EXIT_STATE['asking']:
+            _EXIT_STATE['asking'] = False
+            await _resolve_pop(False)
+
+    dlg = ft.AlertDialog(
+        modal=False,                             # الرجوع مرة أخرى يغلق النافذة (= البقاء)
+        title=ft.Text(
+            _tr('exit_title', 'الخروج من التطبيق', 'Exit app'),
+            color=_c('text'),
+            weight=ft.FontWeight.BOLD,
+            text_align=ft.TextAlign.CENTER,
+        ),
+        content=ft.Text(
+            _tr('exit_message', 'هل أنت متأكد أنك تريد الخروج؟',
+                'Are you sure you want to exit?'),
+            color=_c('text'),
+            text_align=ft.TextAlign.CENTER,
+        ),
+        actions=[
+            ft.TextButton(
+                content=ft.Text(_tr('exit_stay', 'البقاء', 'Stay'), color=_c('text')),
+                on_click=_stay,
+            ),
+            ft.TextButton(
+                content=ft.Text(_tr('exit_confirm', 'خروج', 'Exit'), color=_c('danger')),
+                on_click=_exit,
+            ),
+        ],
+        actions_alignment=ft.MainAxisAlignment.CENTER,
+        bgcolor=_c('popup_bg'),
+        shape=ft.RoundedRectangleBorder(radius=16),
+        on_dismiss=_dismissed,
+    )
+    _EXIT_STATE['dialog'] = dlg
+    page.show_dialog(dlg)
+
+
+def _perform_back(page: ft.Page = None, ask_exit: bool = True) -> bool:
+    """One 'back' step, deepest level first:
+
+        dialog  ->  editor (inside dashboard)  ->  commands/tabs  ->  bot list  ->  exit prompt
+
+    Always returns True: the app never closes by itself, we either navigate
+    one level back or ask the user to confirm exit.
+    """
+    try:
+        # 0. نافذة حوارية مفتوحة؟ أغلقها فقط. (pop_dialog لا يرمي خطأ عند عدم وجود نافذة
+        #    بل يرجع None، لذلك يجب فحص القيمة المرجعة وإلا يُعتبر الرجوع "تم" دائماً.)
+        if page is not None and page.pop_dialog() is not None:
+            return True
+
+        # 1. داخل لوحة تحكم البوت: دع المحرر/التبويب يعالج الرجوع أولاً
+        if _CURRENT_SCREEN.get('kind') == 'dashboard':
+            if _dashboard_back(_CURRENT_SCREEN.get('dashboard')):
+                return True
+
+        # 2. الرجوع للشاشة السابقة (لوحة التحكم -> واجهة البوتات)
+        if _nav_pop():
+            return True
+
+        # 3. نحن في الواجهة الرئيسية: اسأل المستخدم عن الخروج
+        if page is not None and ask_exit:
+            _show_exit_confirm(page)
+        return True
+    except Exception as ex:
+        print(f'[FDSB] back failed: {ex}')
+        return True
+
+
+_ROOT = {'stack': None, 'prev_kind': None}
+
+
+def _root_stack(page: ft.Page) -> SlideStack:
+    if _ROOT['stack'] is None:
+        _ROOT['stack'] = SlideStack(page)
+    return _ROOT['stack']
+
 
 def _set_body(page: ft.Page, content: ft.Control):
     body = ft.SafeArea(content=content, expand=True) if is_mobile() else content
-    
+
     body.key = f"screen_{_CURRENT_SCREEN['kind']}_{time.time()}"
-    _ROOT_SWITCHER.content = body
 
-    async def _handle_back(e):
-        view = page.views[0]
+    root = _root_stack(page)
+    prev, kind = _ROOT['prev_kind'], _CURRENT_SCREEN['kind']
+    _ROOT['prev_kind'] = kind
+    if prev == 'main' and kind == 'dashboard':
+        direction = 1         # dashboard slides in from the right
+    elif prev == 'dashboard' and kind == 'main':
+        direction = -1        # bot list slides back in from the left
+    else:
+        direction = 0         # first screen / same screen
 
-        if _CURRENT_SCREEN['kind'] == 'dashboard':
-            dashboard = _CURRENT_SCREEN['dashboard']
-            if dashboard is not None and hasattr(dashboard, 'handle_back'):
-                if dashboard.handle_back():
-                    await view.confirm_pop(False)
-                    return
-
-        if _nav_pop():
-            await view.confirm_pop(False)
-        else:
-            await view.confirm_pop(True)
+    async def _handle_view_pop(e):
+        # يصل هنا كل ضغطة على زر الرجوع في أندرويد.
+        view = page.views[0] if page.views else None
+        _EXIT_STATE['view'] = view
+        _perform_back(page)
+        # إن تمّ التنقل داخلياً نلغي الإغلاق فوراً. أما إن ظهرت نافذة الخروج
+        # فنترك الطلب معلّقاً ليحسمه زر "خروج" أو "البقاء".
+        if not _EXIT_STATE['asking'] and view is not None:
+            try:
+                await view.confirm_pop(False)
+            except Exception:
+                pass
 
     if not page.views:
         page.views.append(
             ft.View(
                 route='/',
-                controls=[_ROOT_SWITCHER],
+                controls=[root.control],
                 padding=0,
                 can_pop=False,
-                on_confirm_pop=_handle_back,
+                on_confirm_pop=_handle_view_pop,
             )
         )
     else:
-        if page.views[0].controls != [_ROOT_SWITCHER]:
-            page.views[0].controls = [_ROOT_SWITCHER]
+        if page.views[0].controls != [root.control]:
+            page.views[0].controls = [root.control]
+        page.views[0].can_pop = False
+        page.views[0].on_confirm_pop = _handle_view_pop
 
+    root.show(body, direction, push=False)
     page.update()
 
 
@@ -610,7 +856,7 @@ class CreateBotDialog:
         self._import_clear_btn.visible = False
         self._refresh_import_availability()
 
-    def _submit(self, _):
+    async def _submit(self, _):
         name  = self._name_field.value.strip() or 'My Bot'
         token = self._token_field.value.strip()
 
@@ -629,7 +875,7 @@ class CreateBotDialog:
 
         self._token_field.error_text = None
         self._page.pop_dialog()
-        self._on_create({
+        await self._on_create({
             'name': name,
             'token': token,
             'image': self._img_path,
@@ -650,7 +896,6 @@ class MainView:
         self._page              = page
         self._on_open_dashboard = on_open_dashboard
 
-        # العداد المخصص
         self._count_label = ft.Text(
             value="",
             size=11,
@@ -720,20 +965,6 @@ class MainView:
                         ),
                         on_click=lambda _: self._page.run_task(self._open_link, 'https://discord.gg/JngaJRC6Y9'),
                     ),
-                    ft.FilledButton(
-                        content=ft.Row(
-                            [ft.Icon(ft.Icons.CODE, color='#FFFFFF', size=16),
-                             ft.Text(_t('github'), color='#FFFFFF', size=13)],
-                            spacing=5, tight=True,
-                        ),
-                        style=ft.ButtonStyle(
-                            bgcolor=_c('github'),
-                            color='#FFFFFF',
-                            shape=ft.RoundedRectangleBorder(radius=20),
-                            padding=ft.Padding(left=12, top=8, right=12, bottom=8),
-                        ),
-                        on_click=lambda _: self._page.run_task(self._open_link, 'https://github.com/obgwew/FDSB'),
-                    ),
                     ft.Container(expand=True),
                     ft.FilledButton(
                         content=ft.Row(
@@ -771,17 +1002,27 @@ class MainView:
         for bot_data in load_all_bots():
             self._push_card(bot_data)
 
-    def _add_bot(self, data: dict):
+    async def _add_bot(self, data: dict):
         name = data.get('name', 'My Bot')
-        if bot_exists(name):
-            _show_warning(self._page, _t('name_taken'))
-            return
+        token = data.get('token', '')
 
-        config = save_bot_data(data)
+        config  = save_bot_data(data)
+        bot_dir = config['_dir']
+
+        try:
+            await TokenVault.set(TokenVault.bot_id_from_dir(bot_dir), token)
+        except Exception as e:
+            print(f'[MainView] secure token storage failed: {e}')
+            shutil.rmtree(bot_dir, ignore_errors=True)
+            _show_warning(
+                self._page,
+                'Could not store the token securely on this device.',
+            )
+            return
 
         import_zip = data.get('import_zip', '')
         if import_zip and os.path.isfile(import_zip):
-            self._restore_bot_backup(get_bot_dir(config.get('name', name)), import_zip)
+            self._restore_bot_backup(bot_dir, import_zip)
 
         self._push_card(config)
         self._refresh_content_area()
@@ -818,7 +1059,19 @@ class MainView:
 #  NAVIGATION HELPERS
 # ══════════════════════════════════════════════════════════════════════════════
 
+def _dispose_current_dashboard():
+    old = _CURRENT_SCREEN.get('dashboard')
+    if old is not None:
+        try:
+            old.dispose()
+        except Exception as e:
+            print(f'[FDSB] dashboard dispose failed: {e}')
+    _CURRENT_SCREEN['dashboard'] = None
+
+
 def _show_main(page: ft.Page):
+    _dispose_current_dashboard()
+
     def open_dashboard(bot_data: dict):
         _show_dashboard(page, bot_data)
 
@@ -832,12 +1085,8 @@ def _show_main(page: ft.Page):
 
 
 def _show_dashboard(page: ft.Page, bot_data: dict):
-    bot_name  = bot_data.get('name', 'bot')
-    safe_name = "".join(
-        c for c in bot_name if c.isalnum() or c in (' ', '-', '_')
-    ).strip().replace(' ', '_') or 'bot'
-
-    bot_dir = os.path.join(get_app_data_dir(), safe_name)
+    _dispose_current_dashboard()
+    bot_dir = bot_data.get('_dir') or get_bot_dir(bot_data.get('name', 'bot'))
 
     dashboard = BotDashboardScreen(page=page, bot_dir=bot_dir, on_back=lambda: _show_main(page))
 
@@ -852,7 +1101,7 @@ def _show_dashboard(page: ft.Page, bot_data: dict):
 #  ENTRY POINT
 # ══════════════════════════════════════════════════════════════════════════════
 
-def main(page: ft.Page):
+async def main(page: ft.Page):
     page.title   = 'FDSB'
     page.padding = 0
 
@@ -860,6 +1109,9 @@ def main(page: ft.Page):
         page.window.icon = icon_path
 
     _configure_window(page)
+
+    if not _server_running():
+        clear_app_cache()
 
     try:
         Server.ensure_background_mode(page)
@@ -874,14 +1126,14 @@ def main(page: ft.Page):
                 name = os.path.splitext(file)[0]
                 fonts[name] = os.path.join(fonts_dir, file)
 
-    page.fonts = fonts if fonts else {
-        "Cairo": "https://github.com/google/fonts/raw/main/ofl/cairo/Cairo-Regular.ttf"
-    }
-    default_font = next(iter(page.fonts), "Cairo")
+    page.fonts = fonts
+    default_font = "Cairo" if "Cairo" in fonts else next(iter(fonts), "Cairo")
     page.theme = ft.Theme(font_family=default_font)
     page.dark_theme = ft.Theme(font_family=default_font)
 
-    saved_theme = get_current_theme()
+    saved_theme = get_current_theme() or 'system_wh'
+    if saved_theme not in ALL_THEMES:
+        saved_theme = 'system_wh'
 
     page.theme_mode = (
         ft.ThemeMode.DARK if saved_theme in ('system_da', 'v2_dark')
@@ -898,7 +1150,34 @@ def main(page: ft.Page):
     ThemeEngine.subscribe(page._bg_sync)
     page.bgcolor = ThemeEngine.hex('bg')
 
+    migration_failed: list[str] = []
+    try:
+        TokenVault.attach(page)
+        _, migration_failed = await TokenVault.migrate_plaintext(APP_DATA_DIR)
+        await TokenVault.preload(APP_DATA_DIR)
+    except Exception as e:
+        print(f'[FDSB] token vault init failed: {e}')
+
     _show_main(page)
+
+    if migration_failed:
+        _show_warning(
+            page,
+            'Some bot tokens could not be moved to secure storage: '
+            + ', '.join(migration_failed),
+        )
+
+    def _on_lifecycle(e: ft.AppLifecycleStateChangeEvent):
+        if e.state == ft.AppLifecycleState.DETACH and not _server_running():
+            clear_app_cache()
+
+    page.on_app_lifecycle_state_change = _on_lifecycle
+
+    def _on_key(e: ft.KeyboardEvent):
+        if e.key in ('Escape', 'Back', 'Go Back'):
+            _perform_back(page, ask_exit=False)
+
+    page.on_keyboard_event = _on_key
 
     page.run_task(check_for_updates, page, APP_DATA_DIR, get_platform())
 

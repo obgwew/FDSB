@@ -1,0 +1,46 @@
+<dash>
+name: $onlyFor
+desc: Yalnızca listelenen üyelerin veya rollerin komutu kullanmasına izin verir, herkese kendi mesajını gösterir.
+category: Erişim Kontrolü
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $onlyFor, bir komutun başına koyduğunuz bir geçittir. Geçmesine izin verilen kişileri ve rolleri listeleyin, ardından herkesin görmesi gereken mesajla bitirin. Komutu çalıştıran kişi girdilerden biriyle eşleşirse hiçbir şey olmaz ve komutun geri kalanı devam eder. Eşleşmezse mesaj gönderilir ve komutun geri kalanı orada bırakılır.
+</block>
+
+<block type="list" title="Uygulamada nasıl kullanılır">
+item: Komutlar sekmesini aç
+item: Yeni bir komut başlatmak için + düğmesine dokun
+item: Ad alanına bir ad ver
+item: Önek alanını ayarla
+item: Aşağıdaki kodu düzenleyiciye yapıştır
+item: Kaydet düğmesine dokun
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $onlyFor[ID or name; ...; error message]
+</block>
+
+<block type="code" title="Kopyalanmaya hazır örnek">
+text: $onlyFor[123456789012345678; Moderator; This command is for moderators only.]
+text: $sendMessage[Here is the secret!]
+</block>
+
+<block type="options" title="Listeleyebilecekleriniz">
+option: ID|123456789012345678 gibi bir kullanıcı veya rol ID'si, bahsetme işaretleriyle ya da onsuz
+option: name|Moderator gibi bir rol adı ya da tek bir kullanıcı için kullanıcı adı
+</block>
+
+<block type="callout" kind="note">
+text: Mesajı en sona koyun — girdilerden sonraki her şey tek bir mesaj sayılır. Bir üye, doğrudan adı geçtiğinde ya da listelenen rollerden birine sahip olduğunda geçer.
+</block>
+
+<block type="callout" kind="important">
+text: Bu geçit kolaylık içindir, gerçek güvenlik için değil. Komutlarınızı okuyabilen herkes listede kimlerin olduğunu öğrenebilir, onları düzenleyebilen herkes de kendini listeden çıkarabilir. Gerçekten hassas kısımları kendi tarafınızda tutun.
+</block>
+</dash>
+
+<details>
+syntax: $onlyFor[ID or name; ...; error message]
+param: ID or name|text|Zorunlu|Devam etmeye izin verilen bir veya daha fazla kullanıcı ID'si, rol ID'si ya da ad.
+param: error message|text|Zorunlu|Kişiye izin verilmediğinde kanala gönderilen mesaj. Girdilerden sonraki her şey bu mesaj sayılır.
+</details>

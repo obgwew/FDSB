@@ -1,10 +1,20 @@
 <dash>
 name: $clear
-desc: Bulk deletes a specified number of messages from the current channel.
+desc: Wipes a batch of recent messages out of the current channel in one sweep.
 category: Moderation
 
 <block type="text" title="How does the command work?">
-text: When $clear is called without arguments, it deletes the default number of messages (10). When called with a number, it deletes that many messages. The bot uses Discord's bulk delete API to remove messages efficiently.
+text: Run it bare and the ten newest messages disappear; put a number inside and that many go instead. The bot clears them in a single request, so the channel empties at once instead of message by message. The count has to sit somewhere between 1 and 100.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !welcome
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,6 +26,6 @@ text: $clear[50]
 </block>
 
 <block type="callout" kind="warning">
-text: Discord's bulk delete limit is 100 messages per request. Messages older than 14 days cannot be bulk deleted. The bot must have "Manage Messages" permission in the channel.
+text: Discord only lets a bot bulk-delete messages younger than two weeks, and the bot needs the Manage Messages permission in this channel. Anything outside 1 to 100 comes back as an error, and so does a number that is not a whole number.
 </block>
 </dash>

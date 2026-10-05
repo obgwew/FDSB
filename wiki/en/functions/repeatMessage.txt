@@ -1,0 +1,41 @@
+<dash>
+name: $repeatMessage
+desc: Repeats a piece of text a fixed number of times and sends the result in one message.
+category: String Utilities
+
+<block type="text" title="How does the command work?">
+text: $repeatMessage takes a whole number and a piece of text, then sends the text that many times in a row. On its own it prints the repeated result, and inside another command the repeated text is inserted in place, which is handy for building patterns and separators. Write \s where you want a space between the repeats.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field
+item: Paste the code below into the editor
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: $repeatMessage[amount; message]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $repeatMessage[5; ★]
+</block>
+
+<block type="options" title="Rules">
+option: amount|A whole number of 1 or more. Nothing is sent for 0.
+option: message|The text to repeat. Write \s for a space.
+</block>
+
+<block type="callout" kind="note">
+text: Discord caps a single message at 2000 characters, so the repeats are checked before anything is sent. If amount multiplied by the length of the text goes over that, the command stops and tells you to use fewer repeats or shorter text.
+</block>
+</dash>
+
+<details>
+syntax: $repeatMessage[amount; message]
+param: amount|number|Required|How many times to repeat the text. Must be a whole number of 1 or more.
+param: message|text|Required|The text to repeat. Write \s for a space.
+</details>

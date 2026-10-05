@@ -1,10 +1,20 @@
 <dash>
 name: $replaceRegex
-desc: Replaces text matching a character rule with new text.
+desc: Swaps runs of matching characters in a piece of text for something you choose.
 category: String Utilities
 
 <block type="text" title="How does the command work?">
-text: $replaceRegex scans the input text for runs of characters described by the rule and swaps every match for the replacement. A rule written as [abc] targets those characters, -[abc] targets everything except them, and any other rule is treated as literal text. A matching run can cover several consecutive characters at once.
+text: Hand it some text, a character rule and a replacement, and the bot prints the text back with every match swapped for the replacement. A rule in square brackets such as [aeiou] catches any of those letters, -[aeiou] catches everything that is not one of them, and any other rule is matched as plain text exactly as you typed it. Because a rule catches whole runs, Banana with the vowels rule becomes B*n*n* rather than six separate stars.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !shout
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,13 +26,13 @@ text: $replaceRegex[Banana; [aeiou]; *]
 </block>
 
 <block type="callout" kind="note">
-text: Matching is greedy: consecutive matching characters collapse into one replacement. To remove characters entirely, use an empty replacement.
+text: Runs are matched greedily, so several characters in a row collapse into a single copy of your replacement. Leave the replacement empty to strip characters out completely, and remember that a result which ends up entirely blank is never posted to the chat.
 </block>
 </dash>
 
 <details>
 syntax: $replaceRegex[text; rule; replacement]
-param: text|text|Required|The original text to process
-param: rule|text|Required|Character rule: [chars] matches the listed characters, -[chars] matches everything else, otherwise literal text
-param: replacement|text|Required|Text inserted in place of every match
+param: text|text|Required|The text to work on
+param: rule|text|Required|Character rule. [chars] matches those characters, -[chars] matches everything else, anything else is matched literally
+param: replacement|text|Required|What to put in place of each match
 </details>

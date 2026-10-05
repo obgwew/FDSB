@@ -175,6 +175,13 @@ This project uses its own versioning convention, which differs from Semantic Ver
 - Revised the UI and notifications
 - Achieved stability on Android 13 and earlier
 
+### 2.4.3 — Stability, UI Architecture, and Leaderboards
+- Added leaderboard commands
+- Added new variables
+- Improved the UI architecture for a smoother, more fluid experience
+- Improved long-term stability and overall performance
+- Fixed several commands
+
 ---
 
 ## Contributors

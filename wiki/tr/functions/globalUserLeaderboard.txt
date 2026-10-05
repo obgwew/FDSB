@@ -1,0 +1,52 @@
+<dash>
+name: $globalUserLeaderboard
+desc: Botun bulunduğu her sunucunun paylaştığı tek bir puan tablosundan bir liderlik tablosu kurar.
+category: Değişkenler
+
+<block type="text" title="Komut nasıl çalışır?">
+text: ⁨$globalUserLeaderboard⁩, her sunucu için ayrı değil de botun tamamı boyunca her kullanıcı için bir puan saklayan tek bir değişkeni okur ve üyeleri en yüksek puandan en düşüğe doğru sıralar. Sıralanan bir listeyi kanala gönderir. Her sunucuda ayrı bir puan tablosu yerine tüm sunucular arasında tek bir yarışma istediğinizde kullanın.
+</block>
+
+<block type="list" title="Uygulamada nasıl kullanılır">
+item: Önce Değişkenler sekmesinde değişkeni oluşturun
+item: Komutlar sekmesini açın
+item: Yeni bir komut başlatmak için + düğmesine dokunun
+item: Ad alanına bir ad verin
+item: Önek alanını ayarlayın
+item: Aşağıdaki kodu düzenleyiciye yapıştırın
+item: Kaydet düğmesine dokunun
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $globalUserLeaderboard[name; (sort); (limit); (format)]
+</block>
+
+<block type="code" title="Kopyalamaya hazır örnek">
+text: $globalUserLeaderboard[points; desc; 5]
+</block>
+
+<block type="options" title="Sıralama türleri">
+option: desc|Önce en yüksek değer (sıralamayı boş bıraktığınızda kullanılır)
+option: asc|Önce en düşük değer
+</block>
+
+<block type="options" title="Satır yer tutucuları">
+option: {rank}|Sıra, 1'den başlayarak
+option: {name}|Üyenin görünen adı
+option: {mention}|Üyenin tıklanabilir bahsi
+option: {id}|Üyenin Discord kimliği
+option: {value}|Kaydedilmiş puan
+</block>
+
+<block type="callout" kind="note">
+text: Yalnızca sayılar sıralanabildiği için metin tutan kayıtlar dışarıda bırakılır. limit 1 ile 25 arasında olabilir ve sizin için zaten sınırlıdır; daha yüksek olanlar kısaltılır.
+</block>
+</dash>
+
+<details>
+syntax: $globalUserLeaderboard[name; (sort); (limit); (format)]
+param: name|text|Required|Tüm sunucular boyunca kullanıcı başına bir puan tutan değişkenin adı.
+param: sort|text|Optional|En yüksek önce için ⁎desc⁎ (varsayılan), en düşük önce için ⁎asc⁎.
+param: limit|number|Optional|Kaç satır gösterileceği, 1 ile 25 arası. Varsayılan 10.
+param: format|text|Optional|Satır şablonu. Varsayılan ⁎{rank}. {name} — {value}⁎. ⁎{rank}⁎, ⁎{name}⁎, ⁎{mention}⁎, ⁎{id}⁎ ve ⁎{value}⁎ kullanabilirsiniz.
+</details>

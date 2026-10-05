@@ -1,0 +1,51 @@
+<dash>
+name: $onlyUserPerms
+desc: Zatrzymuje polecenie Twoją własną wiadomością, chyba że osoba, która je uruchomiła, ma zgodę na to, co ma nastąpić dalej.
+category: Kontrola dostępu
+
+<block type="text" title="Jak działa to polecenie?">
+text: ⁨$onlyUserPerms⁩ sprawdza uprawnienia członka, który uruchomił polecenie, zanim uruchomi się chroniona część. Wypisz potrzebne tej osobie uprawnienia i zakończ wiadomością, która ma zostać wysłana, gdy jednego brakuje. Jeśli ma je wszystkie, nic nie zostanie wyświetlone i Twoje polecenie trwa dalej. Jeśli jednego brakuje, wiadomość zostanie wysłana, a reszta polecenia zostanie w tym miejscu odrzucona.
+</block>
+
+<block type="list" title="Jak używać go w aplikacji">
+item: Otwórz zakładkę Polecenia
+item: Dotknij +, aby rozpocząć nowe polecenie
+item: Nadaj mu nazwę w polu Nazwa
+item: Ustaw pole Prefiks
+item: Wklej poniższy kod do edytora
+item: Dotknij Zapisz
+</block>
+
+<block type="code" title="Składnia">
+text: $onlyUserPerms[permission; ...; error message]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $onlyUserPerms[manage_messages; You need Manage Messages to do that.]
+text: $onlyAdmin
+text: $sendMessage[Message deleted.]
+</block>
+
+<block type="options" title="Częste uprawnienia">
+option: manage_messages|Usuwanie i przypinanie wiadomości
+option: kick_members|Wyrzucanie członków
+option: ban_members|Banowanie członków
+option: timeout_members|Wyciszanie członków
+option: manage_roles|Nadawanie i odbieranie ról
+option: moderate_members|Wyciszanie i wyrzucanie członków
+</block>
+
+<block type="callout" kind="note">
+text: Nazwy uprawnień to własne nazwy Discorda, pisane małymi literami z podkreśleniami. Wiadomość umieść na końcu — wszystko po uprawnieniach traktowane jest jako jedna wiadomość.
+</block>
+
+<block type="callout" kind="important">
+text: To nie jest to samo co ⁨$onlyAdmin⁩. Sprawdza uprawnienia samej osoby, co oznacza, że rola, której nadałeś dodatkowe uprawnienia, przejdzie, nawet jeśli nie jest rolą administratora.
+</block>
+</dash>
+
+<details>
+syntax: $onlyUserPerms[permission; ...; error message]
+param: permission|text|Required|Jedna lub więcej nazw uprawnień Discorda, oddzielonych średnikami, na przykład ⁎manage_messages⁎ lub ⁎kick_members⁎.
+param: error message|text|Required|Wiadomość wysyłana na kanał, gdy członkowi brakuje jednego z uprawnień. Wszystko po uprawnieniach wlicza się do tej wiadomości.
+</details>

@@ -1,10 +1,19 @@
 <dash>
 name: $editSelectMenuOption
-desc: يُعدّل النص أو القيمة أو الوصف أو الحالة الافتراضية أو الإيموجي لخيار قائمة اختيار موجود.
-category: المكوّنات
+desc: يعيد كتابة إدخال واحد داخل قائمة تقع بالفعل على رسالة نشرها البوت.
+category: المكونات
 
-<block type="text" title="كيف تعمل الدالة؟">
-text: تجد $editSelectMenuOption خيارًا داخل قائمة اختيار عبر قيمته الحالية (Value)، ثم تُحدّث نصه و/أو وصفه و/أو حالته الافتراضية و/أو إيموجيه. يجب أن يتطابق معامل Value مع قيمة الخيار المراد تعديله. تعيين Default بـ yes يجعل هذا الخيار هو OPTION المحدد مسبقًا الوحيد.
+<block type="text" title="كيف يعمل الأمر؟">
+text: تُبنى القوائم خيارًا تلو الآخر، وهذا يغيّر واحدًا منها بعد بنائها. يجد البوت الإدخال بالقيمة التي أعطيتها إياه عند إنشاء الخيار، ثم يستبدل تسمية جديدة أو وصفًا صغيرًا جديدًا أو رمزًا تعبيريًا جديدًا، أو يعلّمه بأنه الخيار الذي يبدأ محددًا. وتتحدث القائمة على الرسالة التي تقع عليها بالفعل، فلا يحتاج أحد إلى تشغيل أمرك من جديد ليرى الفرق.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة على !renamecolor
+item: الصق الكود أدناه في المحرر
+item: اضغط على حفظ
 </block>
 
 <block type="code" title="الصيغة">
@@ -13,27 +22,27 @@ text: $editSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji;
 
 <block type="code" title="مثال جاهز للنسخ">
 text: $newSelectMenu[color_menu; 1; 1; Pick a color]
-$addSelectMenuOption[color_menu; Red; red; The color red]
-$addSelectMenuOption[color_menu; Blue; blue; The color blue]
-$editSelectMenuOption[color_menu; Crimson; red; A deep red]
+text: $addSelectMenuOption[color_menu; Red; red; The color red]
+text: $addSelectMenuOption[color_menu; Blue; blue; The color blue]
+text: $editSelectMenuOption[color_menu; Crimson; red; A deep red]
 </block>
 
 <block type="callout" kind="note">
-text: تُحدّث هذه الدالة الخيار مباشرةً على الرسالة المستهدفة. بدون Message ID، تبحث أولًا في رسالة مصدر التفاعل، ثم في آخر رسالة أرسلها البوت.
+text: القيمة هي ما يُعثر به على الخيار، لذا يجب أن تطابق ما كتبته عند إضافة الخيار لا ما تتمنى أن يصير. واحذف معرّف الرسالة فيفحص البوت رسالة التفاعل أولًا، ثم آخر رسالة له.
 </block>
 
 <block type="callout" kind="warning">
-text: إذا لم يكن هناك خيار بالقيمة المحددة في القائمة، يتم إرجاع خطأ. يجب أن تكون الرسالة المستهدفة مرسلة بواسطة هذا البوت وتحتوي على قائمة الاختيار بالمعرّف المحدد.
+text: عدم وجود خيار بهذه القيمة يوقف الأمر بخطأ. وتعليم أحدها كافتراضي يلغي التحديد المسبق عن بقية الخيارات، لأن القائمة لا يمكن أن تبدأ إلا بخيار واحد.
 </block>
 </dash>
 
 <details>
 syntax: $editSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
-param: Menu ID|text|Required|معرّف قائمة الاختيار التي تحتوي على الخيار
-param: Label|text|Required|النص الجديد المعروض للمستخدم لهذا الخيار
-param: Value|text|Required|القيمة الحالية للخيار المراد تعديلها (تُستخدم للعثور عليه)
-param: Description|text|Emptiable|الوصف القصير الجديد المعروض تحت النص
-param: Default|yes/no|Optional|yes لجعل هذا الخيار هو المحدد مسبقًا (الافتراضي: no)
-param: Emoji|text|Optional|الإيموجي الجديد المعروض بجانب نص الخيار
-param: Message ID|snowflake|Optional|معرّف رسالة بوت محددة تحتوي على القائمة المراد تعديلها
+param: Menu ID|text|مطلوب|معرّف القائمة التي ينتمي إليها الخيار
+param: Label|text|مطلوب|النص الجديد الذي يراه الأعضاء في القائمة
+param: Value|text|مطلوب|القيمة التي يملكها الخيار بالفعل، وتُستخدم للعثور عليه
+param: Description|text|يمكن إفراغه|سطر صغير جديد يظهر تحت التسمية
+param: Default|yes/no|اختياري|اكتب yes ليبدأ هذا الخيار محددًا (الافتراضي: no)
+param: Emoji|text|اختياري|أظهر هذا الرمز التعبيري بجانب التسمية
+param: Message ID|snowflake|اختياري|أي رسالة من رسائل البوت تحمل القائمة. واتركه فارغًا لاستخدام الرسالة الواضحة.
 </details>

@@ -1,10 +1,20 @@
 <dash>
 name: $onlyIf
-desc: Evaluates a condition and aborts the script if the condition is false.
+desc: Stops your command dead unless the condition holds.
 category: Access Control
 
 <block type="text" title="How does the command work?">
-text: $onlyIf evaluates a condition. If the condition is true, the script continues normally. If false, the provided error message is displayed and the script is immediately aborted.
+text: Write a condition and the command carries straight on when it comes out true. When it comes out false, the message you wrote after the semicolon is sent and every line after that is dropped — the whole command stops there, not just the block around it. Leave the message out and the bot posts its own condition-failed note instead.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,12 +26,12 @@ text: $onlyIf[$authorID == 123456789; You are not authorized!]
 </block>
 
 <block type="callout" kind="note">
-text: This is stricter than $if — it doesn't just skip code, it completely stops the entire script. Use this for access control checks that must pass for the script to run.
+text: Harsher than $if, which simply steps over the lines it does not need and comes back afterwards. Reach for this one when a command has to refuse to run at all.
 </block>
 </dash>
 
 <details>
 syntax: $onlyIf[condition; error message]
-param: condition|expression|Required|The condition to evaluate. Uses the same operators as $if (==, !=, >, <, >=, <=).
-param: error message|text|Required|Message displayed to the user if the condition fails. The script is aborted after sending this.
+param: condition|expression|Required|What to test, using the same operators as $if (==, !=, >, <, >=, <=)
+param: error message|text|Required|What the person sees when the test fails; the command stops after sending it
 </details>

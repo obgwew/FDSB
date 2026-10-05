@@ -1,10 +1,20 @@
 <dash>
 name: $endfor
-desc: Marks the end of a $for loop block.
+desc: Marks where a $for loop ends so the bot knows where to stop repeating.
 category: Flow Control
 
 <block type="text" title="How does the command work?">
-text: $endfor signals the closing boundary of a $for loop. After each iteration, execution returns to the top of the loop body. Every $for must have a matching $endfor.
+text: $endfor closes a $for loop. Everything you wrote between the two runs again once for every count you asked for, and then the bot moves on to the lines underneath. So a loop of 5 posts the same message five times before the rest of the command carries on.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !welcome
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,11 +23,11 @@ text: $endfor
 
 <block type="code" title="Ready-to-copy Example">
 text: $for[5]
-  $sendMessage[Iteration!]
-$endfor
+text:   $sendMessage[Iteration!]
+text: $endfor
 </block>
 
 <block type="callout" kind="warning">
-text: Every $for block must be properly closed with $endfor. Missing $endfor will cause a script error.
+text: Every $for needs its $endfor. Leave the closing line out and the bot hits a script error as soon as it runs past the end of your loop.
 </block>
 </dash>

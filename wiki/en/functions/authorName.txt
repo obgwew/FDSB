@@ -1,10 +1,20 @@
 <dash>
 name: $authorName
-desc: Returns the username of the person who triggered the command.
+desc: Gives you the account username of whoever typed the command.
 category: Info
 
 <block type="text" title="How does the command work?">
-text: When $authorName is called, the bot retrieves the username of the command author and sends it directly to the channel as a plain text string.
+text: The bot reads the name off the account that sent the message and hands it over as ordinary text. Alone on a line it is posted in the channel; inside a sentence it is filled in where you wrote it. Because it reads the live name, a member who renames themselves shows the new one straight away.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $authorName
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,6 +26,6 @@ text: Hello, $authorName!
 </block>
 
 <block type="callout" kind="note">
-text: This returns the user's current username (not their display/nickname). If the user changes their username, the next call will reflect the updated name.
+text: This is the account's own username, not the nickname someone has chosen for this server. For the per-server name, ask for $displayName instead.
 </block>
 </dash>

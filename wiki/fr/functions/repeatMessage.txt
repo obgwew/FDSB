@@ -1,0 +1,41 @@
+<dash>
+name: $repeatMessage
+desc: Répète un morceau de texte un nombre fixe de fois et envoie le résultat dans un seul message.
+category: Mathématiques & Nombres
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: ⁨$repeatMessage⁩ prend un nombre entier et un morceau de texte, puis envoie le texte ce nombre de fois d'affilée. Seul, il affiche le résultat répété ; à l'intérieur d'une autre commande, le texte répété est inséré à la place, ce qui est pratique pour construire des motifs et des séparateurs. Écrivez ⁎\s⁎ là où vous voulez une espace entre les répétitions.
+</block>
+
+<block type="list" title="Comment l'utiliser dans l'application">
+item: Ouvrez l'onglet Commandes
+item: Touchez + pour créer une nouvelle commande
+item: Donnez-lui un nom dans le champ Nom
+item: Définissez le champ Préfixe
+item: Collez le code ci-dessous dans l'éditeur
+item: Touchez Enregistrer
+</block>
+
+<block type="code" title="Syntaxe">
+text: $repeatMessage[amount; message]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $repeatMessage[5; ★]
+</block>
+
+<block type="options" title="Règles">
+option: amount|Un nombre entier de 1 ou plus. Rien n'est envoyé pour 0.
+option: message|Le texte à répéter. Écrivez ⁎\s⁎ pour une espace.
+</block>
+
+<block type="callout" kind="note">
+text: Discord limite un seul message à 2000 caractères, donc les répétitions sont vérifiées avant tout envoi. Si amount multiplié par la longueur du texte dépasse ce plafond, la commande s'arrête et vous demande d'utiliser moins de répétitions ou un texte plus court.
+</block>
+</dash>
+
+<details>
+syntax: $repeatMessage[amount; message]
+param: amount|number|Requis|Combien de fois répéter le texte. Doit être un nombre entier de 1 ou plus.
+param: message|text|Requis|Le texte à répéter. Écrivez ⁎\s⁎ pour une espace.
+</details>

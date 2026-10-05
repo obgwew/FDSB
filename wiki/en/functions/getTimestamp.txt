@@ -1,10 +1,20 @@
 <dash>
 name: $getTimestamp
-desc: Returns the current time as a Unix timestamp.
+desc: Gives you the current time as seconds counted from 1 January 1970.
 category: Timing & Delays
 
 <block type="text" title="How does the command work?">
-text: $getTimestamp returns the number of seconds elapsed since January 1, 1970 (UTC) as plain digits - the classic Unix epoch time. It is refreshed every time the script runs, so it always reflects the exact moment of execution.
+text: Every time your command runs this reads the clock and hands back the number of seconds since 1 January 1970, the time format most programming languages and web APIs expect. Put it inside a line of text and the bot prints those digits in place. It is measured fresh on each run, so two commands a minute apart give two different numbers.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !age
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,6 +26,10 @@ text: $sendMessage[Now in Unix time: $getTimestamp]
 </block>
 
 <block type="callout" kind="note">
-text: Combine it with <t:$getTimestamp> in your message text to let Discord render a live local date and time for every reader.
+text: Write it inside your message as <t:$getTimestamp> and Discord takes over, showing each reader the date and time in their own timezone rather than a row of digits.
+</block>
+
+<block type="callout" kind="important">
+text: It only works inside another command. Set on a line of its own there is nowhere to print into, so the bot says it is a value-only command and nothing appears in the chat.
 </block>
 </dash>

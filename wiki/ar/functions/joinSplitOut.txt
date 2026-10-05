@@ -1,10 +1,22 @@
 <dash>
 name: $joinSplitOut
-desc: يدمج جميع عناصر نتيجة القسمة الحالية ($splitIn) مرة أخرى في نص واحد.
+desc: يلصق القطع التي أنتجها $splitIn من جديد مع فاصل بينها.
 category: أدوات النصوص
 
-<block type="text" title="كيف تعمل الدالة؟">
-text: يدمج $joinSplitOut كل عنصر مخزّن بواسطة $splitIn في سلسلة واحدة، مع إدراج الفاصل المحدد بينها. تُرسل النتيجة إلى القناة.
+<block type="text" title="كيف يعمل الأمر؟">
+text: يأخذ $joinSplitOut كل ما قطعه $splitIn ويعيده قطعة نص واحدة، مع فاصل تختاره في المنتصف.
+text: واحذف الفاصل فيُستخدم بدلًا منه مسافة واحدة، فأسرع صيغة هي $joinSplitOut وحده بلا شيء بعده.
+text: والسطر النهائي ينضم إلى أي شيء آخر البوت على وشك قوله، مما يجعل بناء جملة من أجزاء مقطعة أمرًا سهلًا.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة على !join
+item: اكتب سكربتك في المحرر
+item: الصق السطر أدناه في المكان الذي تحتاجه
+item: اضغط على حفظ
 </block>
 
 <block type="code" title="الصيغة">
@@ -13,15 +25,15 @@ text: $joinSplitOut[separator]
 
 <block type="code" title="مثال جاهز للنسخ">
 text: $splitIn[apple,banana,cherry; ,]
-$joinSplitOut[ + ]
+text: $joinSplitOut[ + ]
 </block>
 
 <block type="callout" kind="note">
-text: يجب استدعاء $splitIn قبل $joinSplitOut حتى يتوفر ما يمكن دمجه.
+text: لا بد أن يعمل $splitIn أولًا، وإلا فلا شيء يُضم. وأعطِ $joinSplitOut فاصلًا فارغًا فتُضم القطع بمسافة بينها كل واحدة.
 </block>
 </dash>
 
 <details>
 syntax: $joinSplitOut[separator]
-param: separator|text|مطلوب|النص المُدرج بين كل عنصرين
+param: separator|text|مطلوب|النص الذي يوضع بين كل قطعتين
 </details>

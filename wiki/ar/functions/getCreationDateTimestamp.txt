@@ -1,10 +1,20 @@
 <dash>
 name: $getCreationDateTimestamp
-desc: يحوّل أي معرّف إلى تاريخ إنشائه كطابع زمني Unix.
+desc: يحوّل أي معرّف Discord إلى اللحظة التي أُنشئ فيها ذلك الشيء.
 category: التوقيت والتأخير
 
-<block type="text" title="كيف تعمل الدالة؟">
-text: كل كائن في Discord (مستخدم، قناة، دور، رسالة...) يحمل وقت إنشائه داخل معرّف snowflake الخاص به. تفك $getCreationDateTimestamp هذا الترميز وتعيد لحظة الإنشاء كطابع زمني Unix (الثواني منذ 1 يناير 1970). تُقبل المنشنز وتُنظف تلقائيًا.
+<block type="text" title="كيف يعمل الأمر؟">
+text: يحتفظ كل مستخدم وخادم وقناة ودور ورسالة بوقت إنشائه مخفيًا داخل معرّفه. أعطِ هذا الأمر أحد تلك المعرّفات، أو منشنًا مثل <@123>، فيعيد تلك اللحظة كطابع زمني Unix: ثوانٍ محسوبة منذ 1 يناير 1970. ضع الرقم داخل أقواس <t:...> في Discord فيتحول إلى تاريخ يراه كل قارئ في منطقته الزمنية.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة على $getCreationDateTimestamp
+item: اكتب سكربتك في المحرر
+item: الصق السطر أدناه في المكان الذي تحتاجه
+item: اضغط على حفظ
 </block>
 
 <block type="code" title="الصيغة">
@@ -16,11 +26,11 @@ text: $sendMessage[Your account was created on <t:$getCreationDateTimestamp[$aut
 </block>
 
 <block type="callout" kind="note">
-text: تعمل مع أي معرّف snowflake: مستخدمين، أعضاء، قنوات، أدوار، سيرفرات ورسائل. ادمجها مع صيغة <t:TIMESTAMP> في Discord لعرض تاريخ مقروء.
+text: ينطبق أي شيء له معرّف Discord — المستخدمون والخوادم والقنوات والأدوار والرسائل. وأي شيء ليس رقمًا ولا منشنًا يُرفض بخطأ بدلًا من إعطاء تاريخ خاطئ.
 </block>
 </dash>
 
 <details>
 syntax: $getCreationDateTimestamp[idOrMention]
-param: idOrMention|text|مطلوب|معرّف snowflake أو منشن (<@id>، <#id>، <@&id>) لأي كائن في Discord
+param: idOrMention|text|مطلوب|معرّف Discord، أو منشن لأحدها مثل <@id> أو <#id> أو <@&id>
 </details>

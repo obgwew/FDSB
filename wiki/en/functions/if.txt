@@ -1,10 +1,20 @@
 <dash>
 name: $if
-desc: Evaluates a condition and executes the enclosed code block if the condition is true.
+desc: Runs the lines below it only when a condition you write comes out true.
 category: Flow Control
 
 <block type="text" title="How does the command work?">
-text: $if takes a condition expression and evaluates it. If the condition is true, the code between $if and the next $elif, $else, or $endif is executed. If false, execution skips to the next matching branch.
+text: $if takes a condition and checks it before your bot does anything else. When the condition holds, the lines between $if and the closing $endif run and members see what you wrote there. When it does not, those lines are skipped in silence and the bot carries on below, which is how the same command can give one member a reply and everybody else another.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !welcome
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,27 +23,27 @@ text: $if[condition]
 
 <block type="code" title="Ready-to-copy Example">
 text: $if[$authorID == 123456789]
-  Hello Admin!
-$else
-  You are not an admin.
-$endif
+text:   Hello Admin!
+text: $else
+text:   You are not an admin.
+text: $endif
 </block>
 
 <block type="options" title="Comparison operators">
-option: ==|Equal to (compares numerically when both sides are numbers)
-option: !=|Not equal to
-option: >|Greater than
-option: <|Less than
-option: >=|Greater than or equal to
-option: <=|Less than or equal to
+option: ==|The same as — numbers are compared as numbers
+option: !=|Not the same as
+option: >|Bigger than
+option: <|Smaller than
+option: >=|Bigger than, or the same
+option: <=|Smaller than, or the same
 </block>
 
 <block type="callout" kind="note">
-text: Supports nested $if blocks. You can use $elif for additional conditions and $else for a fallback. Always close with $endif.
+text: One $if can sit inside another. Add $elif for a second condition and $else for the case where none of them matched, then always finish the block with $endif so the bot knows where it ends.
 </block>
 </dash>
 
 <details>
 syntax: $if[condition]
-param: condition|expression|Required|A condition to evaluate, e.g., $authorID == 123, $var[score] >= 90, $isNumber[int; $message]. Supports ==, !=, >, <, >=, <= operators.
+param: condition|expression|Required|What to test, such as $authorID == 123 or $var[score] >= 90. Works with the six comparison operators.
 </details>

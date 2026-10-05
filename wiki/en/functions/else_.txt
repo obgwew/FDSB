@@ -1,10 +1,21 @@
 <dash>
 name: $else
-desc: Provides an alternative code block when the preceding $if condition is false.
+desc: Runs a second set of lines when the check above it did not match.
 category: Flow Control
 
 <block type="text" title="How does the command work?">
-text: When used inside an $if block, $else defines a fallback code path. If the $if condition evaluates to false, the code after $else (and before $endif) is executed instead.
+text: $else gives your command a fallback. Put it after an $if, or after the last $elif, and before the $endif that closes the block, then write the lines that should run when none of the checks matched.
+text: The member only ever sees one side of it: the first branch when a check is true, the fallback branch when none of them are.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !branch
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,13 +24,13 @@ text: $else
 
 <block type="code" title="Ready-to-copy Example">
 text: $if[$authorID == 123456789]
-  Hello Admin!
-$else
-  You are not an admin.
-$endif
+text:   Hello Admin!
+text: $else
+text:   You are not an admin.
+text: $endif
 </block>
 
 <block type="callout" kind="note">
-text: $else must be placed between an $if and an $endif. Using $else outside of an $if block will result in an error.
+text: $else only means something between an $if and its $endif. On its own, outside a condition block, it is an error.
 </block>
 </dash>

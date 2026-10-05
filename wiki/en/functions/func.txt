@@ -1,10 +1,20 @@
 <dash>
 name: $func
-desc: Starts a reusable FDScript function definition.
+desc: Opens a named block of your own lines that you can run again later.
 category: Flow Control
 
 <block type="text" title="How does the command work?">
-text: $func starts a named function block. The interpreter collects the function body before running the main script and skips the definition block during normal execution. Use $endfunc to close the block and $call to execute it later.
+text: $func marks the start of a reusable piece of your script and gives it a name of your choosing. Everything you write between it and $endfunc is set aside, and it only runs at the moment you ask for it with $call[name]. The bot reads the whole block without acting on it, so you can reuse the same lines as often as you like inside one command.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !welcome
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,16 +23,16 @@ text: $func[name]
 
 <block type="code" title="Ready-to-copy Example">
 text: $func[sendWelcome]
-$sendMessage[Welcome!]
-$endfunc
+text: $sendMessage[Welcome!]
+text: $endfunc
 </block>
 
 <block type="callout" kind="important">
-text: Function names must be unique within a script. Every $func must have a matching $endfunc, and a function can be called only after its definition is collected.
+text: Give every block a name of its own and never reuse that name twice in the same command. Each $func needs a matching $endfunc, and $call only reaches a block the bot has already read, so put the definition above the line that calls it.
 </block>
 </dash>
 
 <details>
 syntax: $func[name]
-param: name|text|Required|A unique, non-empty function name
+param: name|text|Required|The name you will hand to $call later to run this block
 </details>

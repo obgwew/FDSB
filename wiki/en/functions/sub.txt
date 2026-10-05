@@ -1,10 +1,20 @@
 <dash>
 name: $sub
-desc: Subtracts numbers sequentially from the first value and returns the result.
+desc: Takes the first number and subtracts the rest one after another.
 category: Math & Numbers
 
 <block type="text" title="How does the command work?">
-text: $sub takes two or more numeric arguments. It starts with the first value and subtracts each subsequent value from it. Works both as a standalone command and inline.
+text: $sub needs two or more numbers. It starts at the first one and takes each following number away from it, so $sub[10; 3; 2] leaves you with 5. The answer is a value rather than a message, so you can stand it on its own or drop it straight into the middle of a sentence.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !sub
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,12 +26,12 @@ text: $sendMessage[Result is $sub[10; 3]]
 </block>
 
 <block type="callout" kind="note">
-text: $sub[10; 3; 2] evaluates to 10 - 3 - 2 = 5. If a non-numeric value is provided, an error is returned.
+text: Two numbers at the very least, and a letter anywhere in the list stops the whole thing with an error. An empty slot counts as zero, which quietly shifts your result.
 </block>
 </dash>
 
 <details>
 syntax: $sub[a; b; ...]
-param: a|number|Required|The starting value (minuend)
-param: b|number|Required|The value to subtract (additional values are also subtracted sequentially)
+param: a|number|Required|The number you start counting down from
+param: b|number|Required|The first number to take away; every later part is taken away as well
 </details>

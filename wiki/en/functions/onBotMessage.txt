@@ -1,10 +1,20 @@
 <dash>
 name: $onBotMessage
-desc: Event triggered on every message sent by a bot (including other bots).
+desc: Runs your command whenever a bot posts a message in the server.
 category: Event
 
 <block type="text" title="How does the event work?">
-text: $onBotMessage is an event prefix that triggers an FDScript whenever a bot sends a message. By default the script ignores messages sent by the bot itself and only reacts to other bots. Set the argument to yes to also run the script on the bot's own messages, or no to skip its own messages (this is also the default when the argument is empty).
+text: Give this command the $onBotMessage prefix and the bot picks it up as soon as any bot account posts a message in a server it is in. Messages your own bot sends are skipped by default, so it reacts to other bots only; put yes in the prefix and it follows its own messages too. Anything else there, including leaving it empty, keeps the bot's own messages out.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $onBotMessage
+item: The app marks it as an Event for you
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,19 +23,19 @@ text: #PREFIX:$onBotMessage[yes/no]
 
 <block type="code" title="Ready-to-copy Example">
 text: #PREFIX:$onBotMessage[no]
-$sendMessage[Another bot said: $message]
+text: $sendMessage[Another bot said: $message]
 </block>
 
 <block type="callout" kind="note">
-text: Use yes to follow the bot's own messages, or no to only react to other bots. The example above uses $message to read the bot message content.
+text: Inside the command, $message holds whatever the other bot wrote, so you can quote it, count it or pick it apart.
 </block>
 
 <block type="callout" kind="important">
-text: This event runs in the bot_events folder, not bot_commands. Create your .fds file there.
+text: Nobody has to type anything to set this off. The app marks the command as an Event for you and runs it on its own every time another bot posts.
 </block>
 </dash>
 
 <details>
-syntax: #PREFIX:$onBotMessage[(yes/no)]
-param: yes/no|text|Optional|yes to also run on the bot's own messages, no (default) to only react to other bots
+syntax: $onBotMessage[(yes/no)]
+param: yes/no|text|Optional|yes to follow the bot's own messages as well, no to react only to other bots
 </details>

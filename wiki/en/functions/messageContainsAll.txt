@@ -1,10 +1,20 @@
 <dash>
 name: $messageContainsAll
-desc: Event triggered when a message contains ALL of the specified words.
+desc: Runs your command only when a message carries every one of the words you list.
 category: Event
 
 <block type="text" title="How does the event work?">
-text: $messageContainsAll is an event prefix that triggers an FDScript only when a message contains ALL of the specified trigger words. Words are separated by semicolons inside the brackets. The match is case-insensitive.
+text: Put your words in the Prefix field, separated by semicolons, and the app marks the command as an Event for you. Whenever a chat message happens to contain all of those words, the lines underneath run by themselves; capitals make no difference. Leave out even one word and nothing fires at all.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $messageContainsAll[bot;help]
+item: The app marks it as an Event for you
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,19 +23,19 @@ text: #PREFIX:$messageContainsAll[word1;word2;word3]
 
 <block type="code" title="Ready-to-copy Example">
 text: #PREFIX:$messageContainsAll[bot;help]
- sendMessage[Need help with the bot? Here's how...]
+text:  sendMessage[Need help with the bot? Here's how...]
 </block>
 
 <block type="callout" kind="note">
-text: Unlike $messageContains, this requires ALL listed words to be present in the message. If any word is missing, the script will not run.
+text: Every listed word has to appear in that one message. If a single word should be enough on its own, use $messageContains instead.
 </block>
 
 <block type="callout" kind="important">
-text: This event runs in the bot_events folder, not bot_commands. Create your .fds file there.
+text: Words are matched as plain stretches of text, so help also fires on a message saying helpful. Order does not matter, but keep each word a single unbroken string.
 </block>
 </dash>
 
 <details>
-syntax: #PREFIX:$messageContainsAll[word1;word2;...]
-param: words|text|Required|Semicolon-separated list of trigger words. ALL must match to trigger the script.
+syntax: $messageContainsAll[word1;word2;...]
+param: words|text|Required|The trigger words, separated by semicolons. All of them must match.
 </details>

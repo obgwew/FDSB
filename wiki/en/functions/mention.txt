@@ -1,10 +1,20 @@
 <dash>
 name: $mention
-desc: Returns a mention of the user who triggered the command.
+desc: Gives you a clickable tag for the member who ran the command.
 category: Info
 
 <block type="text" title="How does the command work?">
-text: When $mention is called, the bot retrieves the Discord mention format of the user who executed the command and sends it directly to the channel. This creates a clickable mention that pings the user.
+text: $mention hands you the tag of the member whose message triggered your command. Put it inside your own line of text and the bot posts a name that lights up in the channel and pings that person. Nothing else is needed to make it work, which makes it the shortest way to greet whoever is standing in front of you right now.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !greet
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,6 +26,6 @@ text: Hello $mention!
 </block>
 
 <block type="callout" kind="note">
-text: The returned value is a Discord mention format (e.g., <@123456789>), which renders as a clickable blue mention in the chat that notifies the user.
+text: What gets sent is the real Discord tag, which looks like this in your script: <@123456789>. In the channel it shows up as the member's name, clicking it opens their profile, and the person also gets a notification.
 </block>
 </dash>

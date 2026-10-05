@@ -1,0 +1,38 @@
+<dash>
+name: $checkContains
+desc: Bir metinde listelediğiniz ifadelerden en az biri varsa true, yoksa false döndürür.
+category: Dize İşlemleri
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $checkContains bir metin parçasına ve bir ya da daha fazla ifadeye bakar, ardından true ya da false kelimesiyle yanıt verir. Metin içinde tek bir ifade görünür görünmez true yanıtı verir, böylece her ifadeyi kendiniz test etmenize hiç gerek kalmaz. Boş ifade yalnızca boş metinle eşleşir. Tek başına kullanıldığında yanıtı kanala yazdırır, başka bir komutun içinde ise yanıt yerine konur.
+</block>
+
+<block type="list" title="Uygulamada nasıl kullanılır">
+item: Komutlar sekmesini aç
+item: Yeni bir komut başlatmak için + düğmesine dokun
+item: Ad alanına bir ad ver
+item: Önek alanını ayarla
+item: Aşağıdaki kodu düzenleyiciye yapıştır
+item: Kaydet düğmesine dokun
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $checkContains[text; phrase; ...]
+</block>
+
+<block type="code" title="Kopyalanmaya hazır örnek">
+text: $if[$checkContains[$message; hello; hi; hey]]
+text:   $sendMessage[Say hello back!]
+text: $endif
+</block>
+
+<block type="callout" kind="note">
+text: Yanıt her zaman düz true ya da false kelimesidir ve $if ile $onlyIf tam olarak bunu bekler. En az iki argümana ihtiyacınız var — metin ve bir ifade.
+</block>
+</dash>
+
+<details>
+syntax: $checkContains[text; phrase; ...]
+param: text|text|Zorunlu|Aramanın yapılacağı metin. $message gibi iç içe komutlar önce çözülür.
+param: phrase|text|Zorunlu|Aranacak bir ya da daha fazla ifade. Bunlardan herhangi biri metinde geçerse sonuç true olur.
+</details>

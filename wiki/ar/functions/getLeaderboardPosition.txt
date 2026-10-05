@@ -1,0 +1,50 @@
+<dash>
+name: $getLeaderboardPosition
+desc: يعيد رتبة عضو أو خادم داخل لوحة متصدرين، أو 0 إذا لم يكن مصنّفًا.
+category: المتغيرات
+
+<block type="text" title="كيف يعمل الأمر؟">
+text: $getLeaderboardPosition يبني الترتيب نفسه الذي تبنيه أوامر لوحة المتصدرين ثم يبلّغ عن موقع عنصر واحد. يعيد الموقع رقمًا يبدأ من 1، ويعيد 0 عندما لا يكون لهذا العنصر قيمة مخزنة أو كانت قيمته ليست رقمًا. رتّب القائمة بالطريقة نفسها في كل مرة، لأن الموقع يتغير عند الانتقال بين الترتيب تنازليًا وتصاعديًا.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: أنشئ المتغير أولًا في تبويب المتغيرات
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة
+item: الصق الكود أدناه في المحرر
+item: اضغط على حفظ
+</block>
+
+<block type="code" title="الصيغة">
+text: $getLeaderboardPosition[type; name; sort; id]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $sendMessage[You are #$getLeaderboardPosition[user; points; desc]]
+</block>
+
+<block type="options" title="أنواع المتغيرات">
+option: user|قيمة واحدة لكل عضو، تُحفظ بشكل منفصل في كل خادم
+option: globaluser|قيمة واحدة لكل عضو، مشتركة بين كل الخوادم التي فيها البوت
+option: server|قيمة واحدة لكل خادم
+</block>
+
+<block type="options" title="أنواع الفرز">
+option: desc|الأعلى قيمة أولًا (يُستخدم عندما تترك الفرز فارغًا)
+option: asc|الأدنى قيمة أولًا
+</block>
+
+<block type="callout" kind="note">
+text: اترك المعرّف فارغًا لترتّب الشخص الذي شغّل الأمر. أما في نوع server يصبح هذا الافتراضي هو الخادم الحالي. وتُتجاهل القيم التي ليست أرقامًا.
+</block>
+</dash>
+
+<details>
+syntax: $getLeaderboardPosition[type; name; sort; (id)]
+param: type|text|مطلوب|أي مجموعة تُرتَّب: user أو globaluser أو server.
+param: name|text|مطلوب|اسم المتغير الذي يتم الترتيب حسبه.
+param: sort|text|مطلوب|desc للأعلى أولًا، أو asc للأدنى أولًا.
+param: id|snowflake|اختياري|أي عضو أو خادم يُبحث عنه. الافتراضي هو الشخص الذي شغّل الأمر، أو الخادم الحالي في نوع server.
+</details>

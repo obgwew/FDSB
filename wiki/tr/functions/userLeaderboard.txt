@@ -1,0 +1,52 @@
+<dash>
+name: $userLeaderboard
+desc: Kaydedilmiş bir puana göre içinde bulunulan sunucudaki üyeleri sıralayan bir liderlik tablosu kurar.
+category: Değişkenler
+
+<block type="text" title="Komut nasıl çalışır?">
+text: ⁨$userLeaderboard⁩, komutun kullanıldığı sunucuda üye başına bir puan tutan bir değişkeni okur ve üyeleri en yüksek puandan en düşüğe doğru sıralar. Sıralanan listeyi kanala gönderir. Her sunucu puanların kendi kopyasını tutar, dolayısıyla her biri kendi ayrı sıralamasını alır.
+</block>
+
+<block type="list" title="Uygulamada nasıl kullanılır">
+item: Önce Değişkenler sekmesinde değişkeni oluşturun
+item: Komutlar sekmesini açın
+item: Yeni bir komut başlatmak için + düğmesine dokunun
+item: Ad alanına bir ad verin
+item: Önek alanını ayarlayın
+item: Aşağıdaki kodu düzenleyiciye yapıştırın
+item: Kaydet düğmesine dokunun
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $userLeaderboard[name; (sort); (limit); (format)]
+</block>
+
+<block type="code" title="Kopyalamaya hazır örnek">
+text: $userLeaderboard[points; desc; 5; {rank}. {mention} — {value}]
+</block>
+
+<block type="options" title="Sıralama türleri">
+option: desc|Önce en yüksek değer (sıralamayı boş bıraktığınızda kullanılır)
+option: asc|Önce en düşük değer
+</block>
+
+<block type="options" title="Satır yer tutucuları">
+option: {rank}|Sıra, 1'den başlayarak
+option: {name}|Üyenin görünen adı
+option: {mention}|Üyenin tıklanabilir bahsi
+option: {id}|Üyenin Discord kimliği
+option: {value}|Kaydedilmiş puan
+</block>
+
+<block type="callout" kind="note">
+text: Yalnızca sayılar sıralanabildiği için metin tutan kayıtlar dışarıda bırakılır. limit 1 ile 25 arasında olabilir ve sizin için zaten sınırlıdır; daha yüksek olanlar kısaltılır.
+</block>
+</dash>
+
+<details>
+syntax: $userLeaderboard[name; (sort); (limit); (format)]
+param: name|text|Required|Bu sunucuda üye başına bir puan tutan değişkenin adı.
+param: sort|text|Optional|En yüksek önce için ⁎desc⁎ (varsayılan), en düşük önce için ⁎asc⁎.
+param: limit|number|Optional|Kaç satır gösterileceği, 1 ile 25 arası. Varsayılan 10.
+param: format|text|Optional|Satır şablonu. Varsayılan ⁎{rank}. {name} — {value}⁎. ⁎{rank}⁎, ⁎{name}⁎, ⁎{mention}⁎, ⁎{id}⁎ ve ⁎{value}⁎ kullanabilirsiniz.
+</details>

@@ -1,10 +1,19 @@
 <dash>
 name: $addBotReactions
-desc: Adds one or more emoji reactions to the last message the bot sent during this script's execution.
+desc: Stamps emoji onto the message your command just sent.
 category: Components
 
 <block type="text" title="How does the command work?">
-text: $addBotReactions takes one or more emoji arguments, resolves any variables/placeholders inside them, and adds each resulting emoji as a reaction to the last message sent by the bot in the current script run. It reacts to arguments in order, with a short delay between each reaction to avoid rate limits.
+text: The bot takes the emoji you list, finds them wherever they appear in the text you passed, and reacts to the last message it sent during this run. They go on one after another, in the order you wrote them, with a short pause between each so Discord does not object. Nothing happens at all if your command has not sent a message yet, so put this below the line that does the talking.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !vote
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -15,26 +24,20 @@ text: $addBotReactions[emoji1; emoji2; emoji3; ...]
 text: $addBotReactions[✅; ❌; 🎉]
 </block>
 
-<block type="list" title="Requirements">
-item: A bot message must have already been sent earlier in the same script execution.
-item: At least one valid emoji must be extracted from the given arguments.
-item: The bot must have the "Add Reactions" permission in the channel.
-</block>
-
 <block type="callout" kind="note">
-text: Rate limits are handled automatically — if Discord returns a 429 (Too Many Requests), the command waits and retries that specific emoji once before moving on.
+text: The bot needs the Add Reactions permission in that channel. If Discord tells it to slow down, it waits and gives that one emoji a second try before carrying on with the rest.
 </block>
 
 <block type="callout" kind="warning">
-text: There is a maximum of 20 emojis allowed per call. Exceeding this limit will cause the command to fail with an error instead of adding any reactions.
+text: Twenty emoji is the ceiling for one line. Go past it and the command stops with an error rather than reacting to anything at all.
 </block>
 
 <block type="callout" kind="important">
-text: If no bot message was sent yet, or none of the given arguments resolve to valid emojis, the command fails immediately and no reactions are added.
+text: No bot message earlier in the run, or no recognisable emoji anywhere in what you passed, and the command fails on the spot with nothing added to the message.
 </block>
 </dash>
 
 <details>
 syntax: $addBotReactions[emoji1; emoji2; emoji3; ...]
-param: emoji|text|Required|One or more emoji values to react with. All arguments are resolved (variables/placeholders supported) and merged, then every emoji found inside the resulting text is added as a reaction, in order.
+param: emoji|text|Required|Which emoji to react with. Every emoji hiding in the text you pass is added, in order.
 </details>

@@ -1,10 +1,20 @@
 <dash>
 name: $randomint
-desc: Returns a random integer between a minimum and maximum value.
+desc: Rolls a random whole number between two limits that you set.
 category: Randomness
 
 <block type="text" title="How does the command work?">
-text: $randomint takes two numbers (min and max) and generates a random integer within that inclusive range, then sends it to the channel.
+text: Choose a lowest and a highest value and the bot picks one whole number in that range, both ends included, then posts it. Swap the two by accident and it sorts them out for you, so 100 and 1 behave the same as 1 and 100. The result is a plain number you can print on its own or drop straight into another command.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !dice
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,12 +26,12 @@ text: $randomint[1; 100]
 </block>
 
 <block type="callout" kind="note">
-text: Both min and max are inclusive. If min is greater than max, the values are automatically swapped. The result is a whole number between the two bounds.
+text: Both limits have to be there. Leave one out and the bot posts an error asking for the pair, and anything that is not a number earns the same treatment.
 </block>
 </dash>
 
 <details>
 syntax: $randomint[min; max]
-param: min|number|Required|The minimum value (inclusive)
-param: max|number|Required|The maximum value (inclusive)
+param: min|number|Required|The smallest number it can land on
+param: max|number|Required|The largest number it can land on
 </details>

@@ -1,10 +1,20 @@
 <dash>
 name: $author
-desc: Sets or updates the author name at the top of an embed.
+desc: Names the person or team shown along the top of a card.
 category: Embed Builder
 
 <block type="text" title="How does the command work?">
-text: $author sets the author name shown at the top of an embed, next to its icon. The optional index selects which embed to edit when building multiple embeds in one message. The existing author icon and link are preserved.
+text: Type a name and it takes the place of the byline at the top of the card your command is building. Whatever icon and link you already gave that byline stay exactly as they were, so you can set the picture or the clickable address first and the name afterwards. Add a second part and you choose which card is affected when your message carries more than one.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $author
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,12 +26,12 @@ text: $author[Server Staff Team]
 </block>
 
 <block type="callout" kind="note">
-text: Combine it with $authorIcon to add a picture and $authorURL to make the name clickable.
+text: Set the name first, then add a picture with $authorIcon and a link with $authorURL, and all three come together at the top of the card.
 </block>
 </dash>
 
 <details>
 syntax: $author[name;(index)]
-param: name|text|Required|The author name displayed at the top of the embed
-param: index|number|Optional|Number of the embed to edit when several embeds are being built (default 1)
+param: name|text|Required|The name to show in the card's byline
+param: index|number|Optional|Which card to change when you are building several (1 by default)
 </details>

@@ -1,10 +1,20 @@
 <dash>
 name: $randomRoleID
-desc: Returns the ID of a random role from the server.
+desc: Picks one of the server's roles at random and hands back its ID.
 category: Randomness
 
 <block type="text" title="How does the command work?">
-text: When $randomRoleID is called, the bot collects all roles in the current server (excluding the default @everyone role), picks one at random, and sends its role ID as a raw numeric string.
+text: The bot gathers every role in the current server, sets one of them aside at random and gives you that role's ID. The @everyone role never comes up, since it belongs to everybody and picking it would tell you nothing. What you get is a bare run of digits, ready to drop into another line that needs a role.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $randomRoleID
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,6 +26,6 @@ text: Random role ID: $randomRoleID
 </block>
 
 <block type="callout" kind="note">
-text: This command only works inside a server (not in DMs). The @everyone role is always excluded. If the server has no custom roles, the command will fail with an error.
+text: Roles only exist inside a server, so this cannot be used in a private message. A server with no roles of its own gets an error rather than a result.
 </block>
 </dash>

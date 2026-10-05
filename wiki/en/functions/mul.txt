@@ -1,10 +1,20 @@
 <dash>
 name: $mul
-desc: Multiplies two or more numbers together and returns the result.
+desc: Multiplies the numbers you give it and hands the product back.
 category: Math & Numbers
 
 <block type="text" title="How does the command work?">
-text: $mul takes two or more numeric arguments and returns their product. Works both as a standalone command and inline inside other commands.
+text: Hand it two or more numbers separated by semicolons and the bot works out their product. Two numbers multiplied together, or a whole column of them, give one answer back, so $mul[3; 4] comes out as 12 and $mul[2; 3; 4] as 24. It fits neatly inside a message, a title or a card body, which means a running total or a price can be written in a single line.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !calc
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,12 +26,16 @@ text: $sendMessage[$mul[3; 4]]
 </block>
 
 <block type="callout" kind="note">
-text: Supports any number of arguments. $mul[2; 3; 4] evaluates to 24. The result is an integer if the product has no decimal part.
+text: You need at least two numbers and every part has to be a real number, otherwise the command stops with an error. An answer landing on a whole number comes back without a decimal point, and anything else keeps its decimals.
+</block>
+
+<block type="callout" kind="important">
+text: It has to sit inside another command rather than on a line of its own, the way the example shows. Standalone there is nowhere for the answer to go, so the bot reports it as an unknown command.
 </block>
 </dash>
 
 <details>
 syntax: $mul[a; b; ...]
-param: a|number|Required|First number to multiply
-param: b|number|Required|Second number to multiply (additional numbers are also accepted)
+param: a|number|Required|The first number to multiply
+param: b|number|Required|The second number to multiply. Add as many more as you like.
 </details>

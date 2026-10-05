@@ -1,0 +1,36 @@
+<dash>
+name: $ephemeral
+desc: Macht die Antwort des Bots privat, sodass nur die Person sie sieht, die den Befehl ausgeführt hat.
+category: Nachrichten
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: $ephemeral schaltet die Antwort des Bots in den privaten Modus. Ohne Argument oder mit einem beliebigen anderen Wert als false wird die Antwort nur dem Benutzer angezeigt, der sie ausgelöst hat. Mit false, no, 0 oder off schaltest du den privaten Modus für den Rest des Skripts wieder ab. Wenn du es weiter oben im Befehl platzierst, bleibt danach auch alles, was der Bot sendet, privat.
+</block>
+
+<block type="list" title="So verwenden Sie es in der App">
+item: Öffnen Sie den Tab Befehle
+item: Tippen Sie auf +, um einen neuen Befehl zu starten
+item: Geben Sie im Feld Name einen Namen ein
+item: Legen Sie das Feld Präfix fest
+item: Fügen Sie den folgenden Code in den Editor ein
+item: Tippen Sie auf Speichern
+</block>
+
+<block type="code" title="Syntax">
+text: $ephemeral[(false)]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $ephemeral
+text: $sendMessage[Only you can see this.]
+</block>
+
+<block type="callout" kind="note">
+text: Private Antworten funktionieren nur, wenn der Befehl über einen Slash-Befehl oder über einen Button beziehungsweise ein Auswahlmenü gestartet wurde. Löst jemand ihn durch eine normale Nachricht aus, wird die Einstellung ignoriert und die Antwort bleibt öffentlich.
+</block>
+</dash>
+
+<details>
+syntax: $ephemeral[(false)]
+param: false|yes/no|Optional|Leer lassen, um Antworten privat zu machen. false, no, 0 oder off übergeben, um Antworten wieder öffentlich zu machen.
+</details>

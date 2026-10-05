@@ -1,10 +1,22 @@
 <dash>
 name: $customID
-desc: يعيد custom_id لتفاعل الزر أو المكوّن الذي شغّل السكربت.
-category: معلومات
+desc: يخبرك أي زر أو عنصر قائمة ضغطه العضو للتو.
+category: المعلومات
 
-<block type="text" title="كيف تعمل الدالة؟">
-text: عندما ينقر مستخدم على زر أو يتفاعل مع مكوّن، يعيد $customID سلسلة custom_id المخصصة لذلك المكوّن. هذا مفيد لتحديد الزر الذي ضُغط في حدث onInteraction.
+<block type="text" title="كيف يعمل الأمر؟">
+text: $customID يقرأ التسمية التي أعطيتها زرًا أو عنصر قائمة عند بنائه، فيستطيع سكربت واحد أن يتصرف بصورة مختلفة حسب ما ضُغط.
+text: ولا تُملأ القيمة إلا إذا بدأ السكربت لأن أحدهم ضغط مكوّنًا، وتعود فارغة في أي مكان آخر.
+text: وهذا يجعله الشيء الطبيعي للمقارنة به داخل $if عندما تقدّم أكثر من خيار.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة على !buttons
+item: اكتب سكربتك في المحرر
+item: الصق السطر أدناه في المكان الذي تحتاجه
+item: اضغط على حفظ
 </block>
 
 <block type="code" title="الصيغة">
@@ -13,13 +25,13 @@ text: $customID
 
 <block type="code" title="مثال جاهز للنسخ">
 text: $if[$customID == btn_confirm]
-  You confirmed!
-$elif[$customID == btn_cancel]
-  You cancelled!
-$endif
+text:   You confirmed!
+text: $elif[$customID == btn_cancel]
+text:   You cancelled!
+text: $endif
 </block>
 
 <block type="callout" kind="note">
-text: هذا المتغير ذو معنى فقط داخل السكربتات المُشغَّلة بالتفاعلات (مثل onInteraction). عند استخدامه في سياق رسالة عادية، يعيد سلسلة فارغة.
+text: الضغط وحده هو ما يملأ هذا. وعندما يأتي الأمر من محادثة عادية تكون القيمة فارغة، فلن يطابق أي فحص لها أبدًا.
 </block>
 </dash>

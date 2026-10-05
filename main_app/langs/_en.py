@@ -281,15 +281,31 @@ ENGLISH_DICT = {
     'server_status_stopped':      (1258, 'Server stopped'),
     'fgs_limit_reached':          (1259, 'Android background limit reached (6 hours). Open the app to restart the server.'),
     'fgs_start_failed':           (1260, 'Failed to start background service: {error}'),
+    'fgs_background_notice':      (1277, 'The bot keeps running in the background. Do not swipe the app away from recents.'),
+    'fgs_background_unprotected': (1278, 'Background service could not start; the bot may stop. Open the app and try again.'),
+    'fgs_limit_warning':          (1279, 'Android background limit is about to be reached. Open the app to keep the bot running.'),
+    'fgs_alert_channel_name':     (1280, 'FDSB Alerts'),
+    'fgs_alert_channel_desc':     (1281, 'Bot background status'),
+    'fgs_default_title':          (1282, 'FDSB Bot Server'),
 
     # ── Privileged Gateway Intents Warning ────────────────────────────────
     'intents_warning_title':      (1261, 'Privileged Intents Disabled'),
     'intents_warning_msg':        (1262, 'Warning: Privileged Gateway Intents (Presence, Members, Message Content) are not enabled in Discord Developer Portal. Commands and events may not work correctly.'),
     'open_dev_portal':            (1263, 'Enable in Portal'),
+    'intents_missing_msg':        (1276, 'Warning: The following privileged intents are not enabled in Discord Developer Portal:\n({missing})\nPlease enable them under the Bot section.'),
 
     'syntax_switch_tooltip': (1264, 'Toggle syntax highlighting'),
     'new_command_file':      (1265, 'New.fds'),
     'wiki_events_tooltip':   (1266, 'Wiki: Events'),
     'new_variable_file':     (1267, 'new.json'),
     'scoped_json_title':     (1268, '{name} — Scoped JSON Data'),
+
+    # ── Change Bot Avatar (long-press on the bot image) ───────────────────
+    'avatar_change_title':   (1269, 'Change Bot Image'),
+    'avatar_change_body':    (1270, 'Choose a new image for your bot. It will replace the current one.'),
+    'avatar_choose_btn':     (1271, 'Choose Image'),
+    'avatar_pick_title':     (1272, 'Select an image'),
+    'avatar_changed':        (1273, 'Bot image updated successfully!'),
+    'avatar_change_failed':  (1274, 'Failed to update the bot image'),
+    'avatar_invalid_type':   (1275, 'Unsupported file. Choose a PNG, JPG, WEBP or GIF image.'),
 }

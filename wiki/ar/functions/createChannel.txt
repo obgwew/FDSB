@@ -1,10 +1,19 @@
 <dash>
 name: $createChannel
-desc: ينشئ قناة جديدة في السيرفر.
+desc: ينشئ قناة نص أو صوت أو فئة أو منتدى أو مسرح جديدة في الخادم.
 category: إدارة القنوات
 
-<block type="text" title="كيف تعمل الدالة؟">
-text: $createChannel تنشئ قناة جديدة في السيرفر بالاسم والنوع المحددين. تدعم أنواع القنوات: النصية، الصوتية، الفئة، المنتدى، والمسرح. يمكن تقديم معرّف فئة اختياري لوضع القناة تحت فئة محددة. يجب أن يمتلك البوت صلاحية "إدارة القنوات".
+<block type="text" title="كيف يعمل الأمر؟">
+text: أعطِ البوت اسمًا ونوع قناة فيظهر في الخادم فورًا. والنوع هو ما يحدد ما تحصل عليه: قناة نص، أو قناة صوت، أو فئة لتجميع غيرها، أو منتدى، أو مسرح. وأضف معرّف فئة كجزء ثالث فتُحفظ القناة الجديدة داخلها.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة على !ping
+item: الصق الكود أدناه في المحرر
+item: اضغط على حفظ
 </block>
 
 <block type="code" title="الصيغة">
@@ -16,17 +25,17 @@ text: $createChannel[my-channel; text]
 </block>
 
 <block type="callout" kind="warning">
-text: يجب أن يمتلك البوت صلاحية "إدارة القنوات". الأنواع المدعومة: text، voice، category، forum، stage.
+text: لا يعمل هذا إلا داخل الخادم، ويحتاج البوت إلى صلاحية Manage Channels هناك. وأي نوع غير text أو voice أو category أو forum أو stage يُرفض بخطأ.
 </block>
 
 <block type="callout" kind="note">
-text: معرّف الفئة اختياري. إذا قُدِّم، ستُأنشأ القناة الجديدة تحت تلك الفئة.
+text: جزء الفئة اختياري. ووجّهه إلى شيء ليس فئة فيتوقف البوت بخطأ بدلًا من التخمين.
 </block>
 </dash>
 
 <details>
 syntax: $createChannel[name; type; (category ID)]
-param: الاسم|text|مطلوب|اسم القناة الجديدة.
-param: النوع|text|مطلوب|نوع القناة: text، voice، category، forum، أو stage.
-param: معرّف الفئة|text|اختياري|معرّف الفئة التي ستوضع تحتها القناة.
+param: name|text|مطلوب|ما الذي تسمّي به القناة الجديدة.
+param: type|text|مطلوب|أي نوع يُنشأ: text أو voice أو category أو forum أو stage.
+param: categoryID|text|اختياري|الفئة التي تُحفظ تحتها القناة الجديدة.
 </details>

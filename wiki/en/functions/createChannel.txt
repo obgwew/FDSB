@@ -1,10 +1,19 @@
 <dash>
 name: $createChannel
-desc: Creates a new channel in the server.
+desc: Makes a new text, voice, category, forum or stage channel in the server.
 category: Channel Management
 
 <block type="text" title="How does the command work?">
-text: $createChannel creates a new channel in the server with the specified name and type. Supports text, voice, category, forum, and stage channel types. An optional category ID can be provided to place the channel under a specific category. The bot must have "Manage Channels" permission.
+text: Give the bot a name and a kind of channel and it appears in the server straight away. The kind decides what you get: a text channel, a voice channel, a category for grouping others, a forum, or a stage. Add the ID of a category as a third part and the new channel is filed inside it.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !ping
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,17 +25,17 @@ text: $createChannel[my-channel; text]
 </block>
 
 <block type="callout" kind="warning">
-text: The bot must have "Manage Channels" permission. Supported types: text, voice, category, forum, stage.
+text: This only works inside a server, and the bot needs the Manage Channels permission there. Any kind other than text, voice, category, forum or stage is refused with an error.
 </block>
 
 <block type="callout" kind="note">
-text: The category ID is optional. If provided, the new channel will be created under that category.
+text: The category part is optional. Point it at something that is not a category and the bot stops with an error instead of guessing.
 </block>
 </dash>
 
 <details>
 syntax: $createChannel[name; type; (category ID)]
-param: name|text|Required|The name of the new channel.
-param: type|text|Required|The channel type: text, voice, category, forum, or stage.
-param: categoryID|text|Optional|The ID of the category to place the channel under.
+param: name|text|Required|What the new channel should be called.
+param: type|text|Required|Which kind to make: text, voice, category, forum or stage.
+param: categoryID|text|Optional|Category to file the new channel under.
 </details>

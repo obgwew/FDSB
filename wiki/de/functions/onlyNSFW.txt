@@ -1,0 +1,40 @@
+<dash>
+name: $onlyNSFW
+desc: Führt den Befehl nur in als alterschutzmarkierten Kanälen aus und zeigt überall sonst deine eigene Nachricht.
+category: Zugriffskontrolle
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: ⁨$onlyNSFW⁩ ist ein Tor für Erwachseneninhalte. Es prüft, ob der Kanal, in dem der Befehl verwendet wurde, in Discord als alterschutzmarkiert gilt. Ist er es, passiert nichts und der Rest deines Befehls läuft weiter. Ist er es nicht, wird deine Nachricht gesendet und der Rest des Befehls wird genau dort verworfen.
+</block>
+
+<block type="list" title="So verwendest du es in der App">
+item: Öffne den Befehle-Tab
+item: Tippe auf +, um einen neuen Befehl zu beginnen
+item: Gib ihm im Feld Name einen Namen
+item: Setze das Feld Prefix
+item: Füge den folgenden Code in den Editor ein
+item: Tippe auf Speichern
+</block>
+
+<block type="code" title="Syntax">
+text: $onlyNSFW[error message]
+</block>
+
+<block type="code" title="Fertiges Beispiel zum Kopieren">
+text: $onlyNSFW[This command only works in age restricted channels.]
+text: $sendMessage[Here is the adult content.]
+</block>
+
+<block type="callout" kind="note">
+text: Du musst den Kanal selbst in Discord markieren: Öffne die Kanaleinstellungen, schalte Altersschutz ein und speichere. Das Tor tut nichts, solange der Kanal nicht so eingestellt ist.
+</block>
+
+<block type="callout" kind="important">
+text: Dieses Tor dient der Bequemlichkeit, nicht echter Sicherheit. Wer deine Befehle lesen kann, herausfinden kann, dass der Befehl existiert, und das Tor entfernen kann.
+</block>
+</dash>
+
+<details>
+syntax: $onlyNSFW[error message]
+param: error message|text|Erforderlich|Nachricht, die in den Kanal gesendet wird, wenn er nicht als alterschutzmarkiert gilt.
+</details>

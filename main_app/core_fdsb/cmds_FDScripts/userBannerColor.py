@@ -1,72 +1,88 @@
 # cmds_FDScripts/userBannerColor.py
-import re
+import re, json, time, urllib.request
 import discord
 from FDScript import (
     ExecutionContext, Command,
-    FDLogicError, FDEnvironmentError,
-    _send_error,
+    FDLogicError, FDEnvironmentError, _send_error,
 )
 
+_CACHE: dict[int, tuple[float, str | None]] = {}
+_TTL = 300
 
-def _format_hex(color: discord.Color) -> str:
-    return f"#{color.value:06X}"
+
+def _to_hex(data: dict) -> str | None:
+    accent = data.get("accent_color")
+    if accent is not None:
+        return f"#{int(accent):06X}"
+    banner_color = data.get("banner_color")
+    return banner_color.upper() if banner_color else None
 
 
-def _get_cached_color(user_id: int, ctx: ExecutionContext) -> str | None:
-    user = ctx.bot.get_user(user_id)
-    if user and getattr(user, "accent_color", None):
-        return _format_hex(user.accent_color)
-    return None
+def _fetch_sync(user_id: int, ctx: ExecutionContext) -> str | None:
+    cached = _CACHE.get(user_id)
+    if cached and time.time() - cached[0] < _TTL:
+        return cached[1]
+
+    req = urllib.request.Request(
+        f"https://discord.com/api/v10/users/{user_id}",
+        headers={
+            "Authorization": f"Bot {ctx.bot.http.token}",
+            "User-Agent": "DiscordBot (FDScript, 1.0)",
+        },
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=5) as r:
+            data = json.load(r)
+    except Exception:
+        return None
+
+    color = _to_hex(data)
+    _CACHE[user_id] = (time.time(), color)
+    return color
+
+
+def _parse_id(args, ctx):
+    raw = ctx.resolve(args[0]).strip() if args and args[0].strip() else str(ctx.bot.user.id)
+    digits = re.sub(r"\D", "", raw)
+    return (int(digits), raw) if digits else (None, raw)
 
 
 def resolve_inline(args: list[str], ctx: ExecutionContext) -> str:
+    fallback = ctx.resolve(args[1]).strip() if len(args) > 1 else ""
+
     if not ctx.bot or not ctx.bot.user:
-        return ""
+        return fallback
 
-    raw_id = ctx.resolve(args[0]).strip() if args and args[0].strip() else str(ctx.bot.user.id)
-    clean_id = re.sub(r"\D", "", raw_id)
+    user_id, _ = _parse_id(args, ctx)
+    if user_id is None:
+        return fallback
 
-    if not clean_id.isdigit():
-        return ""
-
-    user_id = int(clean_id)
-    return _get_cached_color(user_id, ctx) or ""
+    return _fetch_sync(user_id, ctx) or fallback
 
 
 async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: discord.abc.Messageable) -> None:
     if not ctx.bot or not ctx.bot.user:
-        await _send_error(ch, FDEnvironmentError("`$clientBannerColor` — bot user is not ready or unavailable"))
+        await _send_error(ch, FDEnvironmentError("`$userBannerColor` — bot user is not ready or unavailable"))
         return
 
-    raw_id = ctx.resolve(args[0]).strip() if args and args[0].strip() else str(ctx.bot.user.id)
-    clean_id = re.sub(r"\D", "", raw_id)
-
-    if not clean_id.isdigit():
-        await _send_error(ch, FDLogicError(
-            f"`$clientBannerColor` — user ID or mention must be a numeric snowflake (got `{raw_id}`)"
-        ))
+    user_id, raw = _parse_id(args, ctx)
+    if user_id is None:
+        await _send_error(ch, FDLogicError(f"`$userBannerColor` — invalid user ID (got `{raw}`)"))
         return
-
-    user_id = int(clean_id)
 
     try:
         user = await ctx.bot.fetch_user(user_id)
     except (discord.NotFound, discord.HTTPException):
-        await _send_error(ch, FDLogicError(
-            f"`$clientBannerColor` — no user found with ID `{user_id}`"
-        ))
+        await _send_error(ch, FDLogicError(f"`$userBannerColor` — no user found with ID `{user_id}`"))
         return
 
-    if getattr(user, "accent_color", None) is None:
-        await _send_error(ch, FDLogicError(
-            f"`$clientBannerColor` — user `{user.name}` has no banner color or accent color set"
-        ))
+    if user.accent_color is None:
+        await _send_error(ch, FDLogicError(f"`$userBannerColor` — user `{user.name}` has no banner color set"))
         return
 
-    hex_color = _format_hex(user.accent_color)
+    hex_color = f"#{user.accent_color.value:06X}"
 
     ctx.stop_typing()
     dest = await ctx.get_dest()
-    sent = await dest.send(hex_color)
-    ctx.last_bot_message = sent
-    ctx.log_event(f"clientBannerColor → {hex_color} (user {user.id})")
+    ctx.last_bot_message = await dest.send(hex_color)
+    ctx.log_event(f"userBannerColor → {hex_color} (user {user.id})")

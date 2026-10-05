@@ -1,0 +1,38 @@
+<dash>
+name: $checkContains
+desc: بسته به اینکه یک متن دست‌کم یکی از عبارت‌هایی را که فهرست می‌کنید داشته باشد یا نه، true یا false برمی‌گرداند.
+category: ابزارهای متنی
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $checkContains به یک قطعه متن و یک یا چند عبارت نگاه می‌کند و سپس با واژه true یا false پاسخ می‌دهد. به‌محض اینکه حتی یک عبارت در متن پیدا شود پاسخ true می‌دهد، بنابراین هرگز لازم نیست خودتان هر عبارت را جداگانه آزمایش کنید. عبارت خالی فقط با متن خالی مطابقت می‌کند. به‌تنهایی پاسخ را در کانال چاپ می‌کند و درون دستوری دیگر پاسخ در جای خود درج می‌شود.
+</block>
+
+<block type="list" title="نحوه استفاده در برنامه">
+item: زبانه دستورها را باز کنید
+item: برای شروع یک دستور جدید روی + بزنید
+item: در فیلد نام، نامی برای آن بگذارید
+item: فیلد پیشوند را تنظیم کنید
+item: کد زیر را در ویرایشگر بچسبانید
+item: روی ذخیره بزنید
+</block>
+
+<block type="code" title="سینتکس">
+text: $checkContains[text; phrase; ...]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $if[$checkContains[$message; hello; hi; hey]]
+text:   $sendMessage[Say hello back!]
+text: $endif
+</block>
+
+<block type="callout" kind="note">
+text: پاسخ همیشه همان واژه ساده true یا false است، و همین چیزی است که $if و $onlyIf انتظار دارند. دست‌کم به دو آرگومان نیاز دارید — متن به‌علاوه یک عبارت.
+</block>
+</dash>
+
+<details>
+syntax: $checkContains[text; phrase; ...]
+param: text|text|الزامی|متنی که در آن جست‌وجو می‌شود. دستورهای تودرتو مانند $message نخست حل می‌شوند.
+param: phrase|text|الزامی|یک یا چند عبارت برای یافتن. اگر حتی یکی از آن‌ها در متن ظاهر شود نتیجه true است.
+</details>

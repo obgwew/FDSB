@@ -1,10 +1,20 @@
 <dash>
 name: $editSplitOut
-desc: Replaces one element of the current split result ($splitIn) with a new value.
+desc: Swaps one piece of a split-up text for something else.
 category: String Utilities
 
 <block type="text" title="How does the command work?">
-text: $editSplitOut modifies the split result stored by $splitIn. The index is 1-based. The selected element is replaced by the new value, and everything else stays unchanged. $splitIn must be called before this command.
+text: Once $splitIn has broken a text into pieces, this reaches into those pieces and replaces one of them. Count from 1, give the number and the new text, and every other piece stays exactly where it was. Finish with $joinSplitOut to glue the corrected list back together. Split a text first: with no pieces waiting there is nothing to edit, and the command reports an error.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $editSplitOut
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,17 +23,17 @@ text: $editSplitOut[index; value]
 
 <block type="code" title="Ready-to-copy Example">
 text: $splitIn[apple,banana,cherry; ,]
-$editSplitOut[2; mango]
-$joinSplitOut[; ]
+text: $editSplitOut[2; mango]
+text: $joinSplitOut[; ]
 </block>
 
 <block type="callout" kind="note">
-text: The index must be a positive integer within the current split length (1 to total elements), otherwise an error is raised.
+text: The number has to be a whole number pointing at a piece that really exists, counting from 1 up to however many there are. Zero, a negative number or one past the end stops the command with an error.
 </block>
 </dash>
 
 <details>
 syntax: $editSplitOut[index; value]
-param: index|number|Required|1-based position of the element to replace
-param: value|text|Required|The new value for that element
+param: index|number|Required|Which piece to replace, counting from 1
+param: value|text|Required|What that piece should say instead
 </details>

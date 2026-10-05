@@ -1,10 +1,19 @@
 <dash>
 name: $editChannelPerms
-desc: Edits permission overwrites for a role or member on a channel.
+desc: Turns individual permissions on or off for one role or one member in a single channel.
 category: Moderation
 
 <block type="text" title="How does the command work?">
-text: $editChannelPerms modifies the permission overwrites for a specific role or member on a channel. Use +perm to allow, -perm to deny, or /perm to reset a permission. The bot must have "Manage Channels" permission.
+text: Name a channel, name a role or a member, then list the permissions you want to change and the bot rewrites that channel's permission list for them alone. A plus sign in front of a permission allows it, a minus sign blocks it, and a slash puts it back to whatever the server-wide role says. Nothing else about the channel changes, so this is the way to open a voice channel to a handful of people or lock a text channel down without touching server roles.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !lock
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,17 +25,17 @@ text: $editChannelPerms[123456789; 987654321; +send_messages; -connect]
 </block>
 
 <block type="callout" kind="warning">
-text: The bot must have "Manage Channels" or "Manage Permissions" permission. Target can be a role or member ID/mention.
+text: The bot needs Manage Channels or Manage Permissions in that channel, and the change has to happen inside a server rather than a direct message. If the target's role sits above the bot's own highest role, Discord refuses the whole command.
 </block>
 
 <block type="callout" kind="note">
-text: Permission names use Discord's snake_case format: send_messages, view_channel, connect, manage_roles, etc. Use + to allow, - to deny, / or ~ to reset.
+text: Permission names are Discord's own, written in snake_case: send_messages, view_channel, connect, manage_roles. A name the bot does not recognise stops the command outright rather than being quietly skipped.
 </block>
 </dash>
 
 <details>
 syntax: $editChannelPerms[channel ID; target ID; perm1; perm2; ...]
-param: channelID|text|Required|The channel ID or mention to edit permissions on.
-param: targetID|text|Required|The role or member ID/mention to set permissions for.
-param: permissions|text|Required|One or more permissions with +/- prefix (e.g., +send_messages, -connect).
+param: channelID|text|Required|Numeric ID of the channel to change
+param: targetID|text|Required|Which role or member to change it for, as an ID or a mention
+param: permissions|text|Required|One or more permissions, with + to allow, - to deny or / to reset
 </details>

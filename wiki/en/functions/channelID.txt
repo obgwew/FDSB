@@ -1,10 +1,22 @@
 <dash>
 name: $channelID
-desc: Returns the Discord channel ID where the command was used.
+desc: Gives you the ID number of the channel the command was used in.
 category: Info
 
 <block type="text" title="How does the command work?">
-text: When $channelID is called, the bot retrieves the unique Discord channel ID of the channel where the command was executed and sends it directly as a raw numeric string.
+text: $channelID hands you the long number Discord uses to identify the channel your command was typed in.
+text: Drop it anywhere in a message and the bot prints it as plain digits, with nothing wrapped around it.
+text: That number is what other commands expect when they need to be pointed at a specific channel, so it saves you copying it out of a Discord menu by hand.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !where
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,6 +28,7 @@ text: This command was used in channel $channelID
 </block>
 
 <block type="callout" kind="note">
-text: The returned value is a snowflake ID (e.g., 123456789012345678), which uniquely identifies the channel where the message was sent.
+text: What comes back is Discord's own channel ID, a long run of digits such as 123456789012345678.
+text: It is the same number you get when you turn on Developer Mode in Discord and copy a channel link.
 </block>
 </dash>

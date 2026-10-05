@@ -1,10 +1,20 @@
 <dash>
 name: $onInteraction
-desc: Event triggered when a component interaction (button/select) occurs.
+desc: Runs your script when somebody clicks a button or picks an option from a menu.
 category: Event
 
 <block type="text" title="How does the event work?">
-text: $onInteraction is an event prefix that triggers an FDScript when a user interacts with a component (button click, select menu, etc.). You can optionally specify a custom ID to only trigger for specific components. Without an ID, it triggers for ALL component interactions.
+text: Give a command the Prefix field $onInteraction and the app marks it as an Event for you. From then on every button press and every choice made in one of your menus runs the lines underneath, with the person who pressed and the ID of the component they touched both on hand. Leave the brackets off and the event covers every component on every message, or name a single ID inside them and only that one button or menu wakes the command up.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $onInteraction
+item: The app marks it as an Event for you
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -14,19 +24,19 @@ text: #PREFIX:$onInteraction[button_custom_id]
 
 <block type="code" title="Ready-to-copy Example">
 text: #PREFIX:$onInteraction[confirm_btn]
- sendMessage[You clicked the confirm button!]
+text:  sendMessage[You clicked the confirm button!]
 </block>
 
 <block type="callout" kind="note">
-text: Use $onInteraction without brackets to handle all interactions, or with a specific custom_id to handle only that component.
+text: The ID you put in the brackets is the one you chose when you built the button or menu. Capital letters are ignored on both sides, so confirm_btn and CONFIRM_BTN wake the same command.
 </block>
 
 <block type="callout" kind="important">
-text: This event runs in the bot_events folder, not bot_commands. Create your .fds file there.
+text: No typed message sits behind a click, so $authorID, $authorName, $mention and $customID are the pieces of information worth reaching for. The press is already answered by the time your lines start, so a slow command will not make the button look frozen.
 </block>
 </dash>
 
 <details>
-syntax: #PREFIX:$onInteraction[(custom_id)]
-param: customID|text|Optional|The custom_id of a specific component to listen for. If empty, triggers for all interactions.
+syntax: $onInteraction[(custom_id)]
+param: customID|text|Optional|Leave it empty to catch every component, or name the one ID you want to listen for
 </details>

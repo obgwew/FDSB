@@ -1,10 +1,20 @@
 <dash>
 name: $div
-desc: Divides the first number by each subsequent number and returns the result.
+desc: Divides the first number by each of the others, working left to right.
 category: Math & Numbers
 
 <block type="text" title="How does the command work?">
-text: $div takes two or more numeric arguments. It starts with the first value and divides it by each subsequent value. Works both as a standalone command and inline.
+text: Give it two numbers and it divides the first by the second. Add a third or a fourth and the running result is divided again, in the order you wrote them. On its own it prints the answer; inside a line it is filled in wherever you typed it.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !welcome
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,12 +26,16 @@ text: $sendMessage[$div[10; 2]]
 </block>
 
 <block type="callout" kind="warning">
-text: Division by zero returns an error. $div[10; 2; 5] evaluates to 10 / 2 / 5 = 1. The result is an integer if the quotient has no decimal part.
+text: Dividing by zero stops your command with an error, and so does asking for fewer than two numbers. Text where a number belongs is refused the same way.
+</block>
+
+<block type="callout" kind="note">
+text: Answers that land on a whole number come back without decimals, so 10 divided by 2 is 5 and not 5.0. Everything is applied left to right: 10 divided by 2 and then by 5 gives you 1.
 </block>
 </dash>
 
 <details>
 syntax: $div[a; b; ...]
-param: a|number|Required|The dividend (number to divide)
-param: b|number|Required|The divisor (cannot be 0). Additional divisors are applied sequentially.
+param: a|number|Required|The number you start dividing from
+param: b|number|Required|What to divide it by; zero is refused. Extra numbers keep dividing the running total.
 </details>

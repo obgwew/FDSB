@@ -1,10 +1,19 @@
 <dash>
 name: $newSelectMenu
-desc: Creates and registers a new select menu for a message.
+desc: Builds the dropdown menu that sits under one of your bot messages.
 category: Components
 
 <block type="text" title="How does the command work?">
-text: $newSelectMenu starts building a select dropdown menu identified by a unique Menu ID. You define the minimum and maximum number of options a user must/may pick. Use $addSelectMenuOption afterwards to fill the menu with options, and it will be attached to the message you are building. You can also pass a message ID to attach the menu to an already-sent bot message.
+text: Start a menu with an ID you invent yourself, then say how many choices a member must make and how many they are allowed to make. That ID is how every later line refers to it. The choices themselves come later, added with $addSelectMenuOption, and the finished dropdown rides along with the message you send. Hand it the ID of a bot message you have already posted and the menu lands on that message instead.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !colors
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,32 +22,32 @@ text: $newSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
 
 <block type="code" title="Ready-to-copy Example">
 text: $newSelectMenu[color_menu; 1; 1; Pick a color]
-$addSelectMenuOption[color_menu; Red; red; The color red]
-$addSelectMenuOption[color_menu; Blue; blue; The color blue]
-$sendMessage[Choose your favorite color!]
+text: $addSelectMenuOption[color_menu; Red; red; The color red]
+text: $addSelectMenuOption[color_menu; Blue; blue; The color blue]
+text: $sendMessage[Choose your favorite color!]
 </block>
 
 <block type="options" title="Behavior details">
-option: Min|The minimum number of options the user must select (0 to 25)
-option: Max|The maximum number of options the user may select (1 to 25)
-option: Placeholder|The grey hint text shown before the user picks anything
-option: Message ID|Optional ID of an already-sent bot message to attach the menu to
+option: Min|How many choices somebody has to make before it accepts
+option: Max|How many choices somebody may make at once
+option: Placeholder|Grey hint resting in the closed menu
+option: Message ID|An already-posted bot message to drop the menu onto
 </block>
 
 <block type="callout" kind="note">
-text: A menu is ready only after you add at least one option with $addSelectMenuOption. Use $editSelectMenu to change Min/Max/Placeholder of an existing menu, and $editSelectMenuOption to edit an individual option.
+text: A menu only becomes visible once at least one choice has been added with $addSelectMenuOption. Afterwards, $editSelectMenu changes the limits or the hint and $editSelectMenuOption changes a single choice.
 </block>
 
 <block type="callout" kind="warning">
-text: Min cannot be greater than Max. A message can hold at most 25 components in total. If the given message is not from this bot, an error is returned.
+text: Min may never sit above Max. One message can carry 25 dropdowns and buttons together at the very most, and pointing at a message your bot did not send is refused.
 </block>
 </dash>
 
 <details>
 syntax: $newSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
-param: Menu ID|text|Required|A unique ID used to refer to this select menu later ($addSelectMenuOption, $editSelectMenu, $editSelectMenuOption)
-param: Min|number|Required|Minimum number of options the user must select (0 to 25)
-param: Max|number|Required|Maximum number of options the user may select (1 to 25)
-param: Placeholder|text|Optional|The hint text shown inside the menu before a choice is made
-param: Message ID|snowflake|Optional|ID of an already-sent bot message to attach this menu to instead of the current message
+param: Menu ID|text|Required|The name you will use for this menu later on
+param: Min|number|Required|How many choices have to be made
+param: Max|number|Required|The most choices that may be made
+param: Placeholder|text|Optional|Grey hint seen before anything is picked
+param: Message ID|snowflake|Optional|One of your own bot messages to attach this menu to
 </details>

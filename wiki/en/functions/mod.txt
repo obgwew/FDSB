@@ -1,10 +1,20 @@
 <dash>
 name: $mod
-desc: Returns the remainder of dividing the first number by each subsequent number.
+desc: Hands back what is left over after dividing one number by another.
 category: Math & Numbers
 
 <block type="text" title="How does the command work?">
-text: $mod takes two or more numeric arguments. It computes the modulo (remainder) of the first value divided by each subsequent value sequentially. Works both as a standalone command and inline.
+text: Give it two or more numbers and the bot divides the first by the second, then reports what is left over. Add a third number and it is applied to the answer in turn, so several divisions can be chained in one go. $mod[10; 3] comes back as 1, which is the remainder of 10 divided by 3.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $mod
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,12 +26,12 @@ text: $sendMessage[$mod[10; 3]]
 </block>
 
 <block type="callout" kind="warning">
-text: Modulo by zero returns an error. $mod[10; 3] evaluates to 1 (the remainder of 10 / 3).
+text: Dividing by zero stops the command with an error, and anything that is not a number in the brackets is refused the same way.
 </block>
 </dash>
 
 <details>
 syntax: $mod[a; b; ...]
-param: a|number|Required|The dividend (number to divide)
-param: b|number|Required|The divisor (cannot be 0). Additional divisors are applied sequentially.
+param: a|number|Required|The number being divided
+param: b|number|Required|The number to divide by, never 0. Any extra numbers are applied one after another
 </details>

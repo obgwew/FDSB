@@ -1,10 +1,20 @@
 <dash>
 name: $charCount
-desc: Returns the number of alphanumeric characters in the given text.
+desc: Counts the letters and digits in a text, ignoring the rest.
 category: Math & Numbers
 
 <block type="text" title="How does the command work?">
-text: $charCount takes a text argument and counts only alphanumeric characters (letters and digits), ignoring spaces, symbols, and punctuation. It returns the count as a number.
+text: Feed it a text and you get back how many letters and digits it holds, as a plain number. Spaces, punctuation and symbols are stepped over entirely, so Hello World! comes to ten rather than twelve. Letters from any alphabet count the same as English ones. Written inline the number is filled in for you instead of being posted on its own.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $charCount
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,11 +26,11 @@ text: $charCount[Hello World!]
 </block>
 
 <block type="callout" kind="note">
-text: Only letters (from any language) and digits (0-9) are counted. Spaces, punctuation, and special characters are excluded from the count.
+text: Leave the text out and the bot posts an error rather than guessing. Anything you have already filled in is read first, so you can count a message or a saved value.
 </block>
 </dash>
 
 <details>
 syntax: $charCount[text]
-param: text|text|Required|The text to count alphanumeric characters in. Variables and placeholders are resolved before counting.
+param: text|text|Required|The text to count through
 </details>

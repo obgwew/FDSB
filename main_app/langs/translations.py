@@ -30,8 +30,13 @@ class Translations:
     }
 
     @staticmethod
+    def _dict_key(lang: str) -> str:
+        lang = (lang or 'en').lower()
+        return lang if lang.startswith('_') else '_' + lang
+
+    @staticmethod
     def get(key: str, lang: str = 'en') -> str:
-        val = Translations.translations.get(lang, {}).get(key)
+        val = Translations.translations.get(Translations._dict_key(lang), {}).get(key)
         if val is None:
             val = ENGLISH_DICT.get(key, key)
         

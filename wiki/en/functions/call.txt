@@ -1,10 +1,20 @@
 <dash>
 name: $call
-desc: Calls a previously defined FDScript function.
+desc: Runs a named block of your own lines at the point where you ask for it.
 category: Flow Control
 
 <block type="text" title="How does the command work?">
-text: $call executes a function defined with $func. Function bodies are collected before normal execution, and the call runs the body using the current script context. A literal function name is checked before execution; a dynamic name is checked when the call runs.
+text: Anything you put between $func[greet] and $endfunc is set aside as a named block, and $call[greet] runs that block right where you typed it. The lines inside play out against whatever is already going on, so anything they send or build turns up in the channel at that exact spot. Ask for a name that was never given a block and the bot posts an error and stops there.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !welcome
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -13,21 +23,21 @@ text: $call[name]
 
 <block type="code" title="Ready-to-copy Example">
 text: $func[greet]
-$sendMessage[Hello from the function]
-$endfunc
-$call[greet]
+text: $sendMessage[Hello from the function]
+text: $endfunc
+text: $call[greet]
 </block>
 
 <block type="callout" kind="important">
-text: Calls share the current execution context and do not create a local variable scope. The maximum call depth is 50; recursive calls beyond that limit are rejected.
+text: A called block never gets a fresh set of variables to work with — it uses the ones already in play. Calls stack fifty deep, and anything deeper is refused as runaway recursion.
 </block>
 
 <block type="callout" kind="note">
-text: A function must be defined with a matching $endfunc. $call can also be expanded inside other command arguments when it is part of a larger FDScript expression.
+text: Name the block, close it with $endfunc, then call it by that same name. You can also drop $call straight into another command's brackets to pull the block's output into a line.
 </block>
 </dash>
 
 <details>
 syntax: $call[name]
-param: name|text|Required|The name of a function defined with $func and closed with $endfunc
+param: name|text|Required|Name of a block opened with $func and closed with $endfunc
 </details>

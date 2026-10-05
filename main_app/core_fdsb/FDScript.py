@@ -53,6 +53,11 @@ from .FDCore import (
     _load_data,
     _save_data,
     _scan_suppress_errors,
+    _scan_remove_links,
+    _scan_ephemeral,
+    script_wants_ephemeral,
+    _strip_links,
+    _apply_remove_links,
     _BOT_START_TIME,
     _format_uptime,
     _build_timestamp,
@@ -66,7 +71,7 @@ from .FDCore import (
     register_command_loader,
 )
 
-from .engine_FDScript.control_flow import ControlFlowMixin
+from .engine_FDScript.control_flow_ops import ControlFlowMixin
 from .engine_FDScript.functions_ops import FunctionsMixin
 from .engine_FDScript.sync_mode_ops import SyncModeMixin
 
@@ -190,12 +195,42 @@ def evaluate_condition(expr: str, ctx: ExecutionContext) -> bool:
 class _PreScanDirectives:
 
     @staticmethod
-    async def apply(interpreter: 'Interpreter', ctx: ExecutionContext) -> None:
+    async def apply(interpreter: 'Interpreter', ctx: ExecutionContext, tokens: list | None = None) -> None:
         _PreScanDirectives._suppress_errors(interpreter, ctx)
+        _PreScanDirectives._remove_links(interpreter, ctx)
+        _PreScanDirectives._ephemeral(interpreter, ctx, tokens=tokens)
 
     @staticmethod
     def _suppress_errors(interpreter: 'Interpreter', ctx: ExecutionContext) -> None:
         ctx.suppress_errors, ctx.suppress_errors_message = _scan_suppress_errors(interpreter.script_text)
+
+    @staticmethod
+    def _remove_links(interpreter: 'Interpreter', ctx: ExecutionContext) -> None:
+        ctx.remove_links = _scan_remove_links(interpreter.script_text)
+
+    @staticmethod
+    def _ephemeral(interpreter: 'Interpreter', ctx: ExecutionContext, tokens: list | None = None) -> None:
+        if tokens is None:
+            tokens = interpreter._tokenise_all()
+
+        depth = 0
+        is_root_ephemeral = False
+
+        for tok in tokens:
+            if isinstance(tok, Command):
+                if tok.name in ("if", "while", "for", "func"):
+                    depth += 1
+                elif tok.name in ("endif", "endwhile", "endfor", "endfunc"):
+                    depth = max(0, depth - 1)
+                elif tok.name == "ephemeral" and depth == 0:
+                    is_root_ephemeral = True
+                    break
+            elif isinstance(tok, str):
+                if depth == 0 and "$ephemeral" in tok:
+                    is_root_ephemeral = True
+                    break
+
+        ctx.ephemeral = is_root_ephemeral
 
 # ─────────────────────────────────────────────
 # Interpreter
@@ -212,10 +247,10 @@ class Interpreter(ControlFlowMixin, FunctionsMixin, SyncModeMixin):
 
     # ── Main entry point ──────────────────────────────────────
     async def run(self, ctx: ExecutionContext):
-        await _PreScanDirectives.apply(self, ctx)
-
         tokens = self._tokenise_all()
         errors = self._validate(tokens)
+
+        await _PreScanDirectives.apply(self, ctx, tokens=tokens)
 
         ctx.is_global_reply = False
         
@@ -242,6 +277,11 @@ class Interpreter(ControlFlowMixin, FunctionsMixin, SyncModeMixin):
                 print(f"[Error] {err._category}: {err.msg}")
             return
 
+        if ctx.ephemeral and ctx.interaction is not None:
+            await ctx._prepare_ephemeral()
+        elif ctx.ephemeral:
+            ctx.log_event("ephemeral → ignored (only works for slash commands / component interactions)")
+
         self.functions = self._collect_functions(tokens)
         self._active_tokens = tokens
 
@@ -266,7 +306,10 @@ class Interpreter(ControlFlowMixin, FunctionsMixin, SyncModeMixin):
 
     # ── Flush final message (Text + Embed(s) + Buttons) ────────
     async def _flush_message(self, ctx: ExecutionContext):
-        text_content = getattr(ctx, 'text_buffer', "").strip()
+        text_content = getattr(ctx, 'text_buffer', "")
+        if ctx.remove_links:
+            text_content = _strip_links(text_content)
+        text_content = text_content.strip()
         embeds = [
             builder.build()
             for _, builder in sorted(ctx.embed_builders.items())
@@ -291,11 +334,13 @@ class Interpreter(ControlFlowMixin, FunctionsMixin, SyncModeMixin):
 
         try:
             if getattr(ctx, "is_global_reply", False):
-                sent = await ctx.message.reply(**kwargs)
+                _, kwargs, _ok = _apply_remove_links(ctx, (), kwargs, has_view=has_view)
+                sent = await ctx.message.reply(**kwargs) if _ok else None
             else:
                 sent = await ch.send(**kwargs)
-            ctx.last_bot_message = sent
-            ctx.log_event("buffered message → sent")
+            if sent is not None:
+                ctx.last_bot_message = sent
+                ctx.log_event("buffered message → sent")
         except discord.HTTPException as e:
             ctx.log_event(f"Failed to send buffered message: {e}")
             print(f"[FDScript] Buffered message send error: {e}")
@@ -543,6 +588,15 @@ class Interpreter(ControlFlowMixin, FunctionsMixin, SyncModeMixin):
 
     # ── Send a bare-text token now, same shape as $sendMessage ─────────
     async def _send_text_now(self, ctx: ExecutionContext, resolved_text: str) -> None:
+        if ctx.remove_links:
+            resolved_text = _strip_links(resolved_text)
+            if not resolved_text.strip():
+                ctx.log_event("removeLinks → text contained only links; nothing left to send")
+                if ctx.view and ctx.view.children:
+                    await self._flush_view_only(ctx)
+                else:
+                    ctx.view = None
+                return
         ctx.stop_typing()
         ch = await ctx.get_dest()
         view = ctx.view if ctx.view is not None else discord.utils.MISSING
@@ -552,7 +606,8 @@ class Interpreter(ControlFlowMixin, FunctionsMixin, SyncModeMixin):
                 sent = await ctx.message.reply(content=resolved_text, view=view)
             else:
                 sent = await ch.send(resolved_text, view=view)
-            ctx.last_bot_message = sent
+            if sent is not None:
+                ctx.last_bot_message = sent
             ctx.log_event(f"text → sent as message: {_truncate(resolved_text)!r}")
         except discord.HTTPException as e:
             ctx.log_event(f"Failed to send text message: {e}")

@@ -1,10 +1,19 @@
 <dash>
 name: $log
-desc: Takes a snapshot of all script events and sends them to a specified channel.
+desc: Sends a report of everything the command has done so far to a channel you choose.
 category: Utilities
 
 <block type="text" title="How does the command work?">
-text: $log captures all event logs generated during the current script execution so far and sends them to the specified channel. An optional name code can be provided to label the log entry.
+text: Name a channel and the bot gathers a running record of what your command has been doing, which conditions passed, which values it read and what it sent, then posts it there once the run finishes. Add a short name after the channel ID and that label sits at the top of the report so several traces stay apart. It is the quickest way to find out why a long command stopped where it did.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !trace
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,12 +25,16 @@ text: $log[123456789; myCommand]
 </block>
 
 <block type="callout" kind="note">
-text: The log is sent as a message to the specified channel. The name_code parameter is optional and helps label different log entries.
+text: The report arrives as one grey code block. A run with a lot in it does not fit in a single message, so anything over about 2,000 characters is sent on as a text file attachment instead.
+</block>
+
+<block type="callout" kind="warning">
+text: The channel has to be one the bot can actually open. When it cannot, the failure is reported back where the command was typed rather than dropped without a word.
 </block>
 </dash>
 
 <details>
 syntax: $log[channelID; name_code]
-param: channelID|snowflake|Required|The ID of the channel to send the log to
-param: name_code|text|Optional|A label/name for this log entry
+param: channelID|snowflake|Required|Numeric ID of the channel the report goes to
+param: name_code|text|Optional|A short label to put at the top of the report
 </details>

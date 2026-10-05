@@ -1,10 +1,19 @@
 <dash>
 name: $addButton
-desc: Adds a button (Button) to the message being built, or to a previously sent message via its ID.
+desc: Puts a tappable button under the message your command sends.
 category: Components
 
 <block type="text" title="How does the command work?">
-text: $addButton adds one button per call. You can control the button type (link or interactive), style, state (enabled/disabled), and position (same row or new row).
+text: Each call adds one button, and you decide what it looks like and where it sits. Give it a label and a colour and it appears under the message once your command posts it. A button in any style other than link carries an ID of your choosing, which is how you recognise the press later inside an $onInteraction event; a link button instead just opens the address you hand it.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !menu
+item: Paste the code below into the editor
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,29 +25,33 @@ text: $addButton[no; btn_confirm; Confirm; success]
 </block>
 
 <block type="options" title="Button styles (style)">
-option: primary|Blue button (default color)
+option: primary|Blue button
 option: secondary|Grey button
 option: success|Green button
 option: danger|Red button
-option: link|External link button (no custom_id, does not trigger a bot interaction)
+option: link|Opens a web address instead of firing an event
 </block>
 
 <block type="callout" kind="note">
-text: When style = link, the second argument (ID/URL) must be a full URL starting with http:// or https://.
+text: Choose link and the second part has to be a full address starting with http:// or https://. Every other style wants a short ID instead, and no two buttons on the same message may share one.
 </block>
 
 <block type="callout" kind="warning">
-text: Maximum 25 buttons per message (5 rows × 5 buttons per row). When the current row is full, the button automatically moves to a new row.
+text: A message can carry 25 buttons at most, five to a row and five rows deep. When a row fills up the next button drops onto a fresh one by itself, and running out of room stops the command with an error.
+</block>
+
+<block type="callout" kind="important">
+text: Fill in the last part with the ID of a message the bot already sent and the button lands on that message instead of the next one, which is how you grow a menu after the fact.
 </block>
 </dash>
 
 <details>
 syntax: $addButton[newLine; ID/URL; label; style; (disabled; emoji; messageID)]
-param: newLine|yes/no|Required|Does the button start on a new row? yes = new row, no = same row next to the last button
-param: ID/URL|text|Required|Custom ID for the interactive button, or a full URL if style = link
-param: label|text|Emptiable|The text displayed on the button
+param: newLine|yes/no|Required|yes starts a fresh row, no tucks it in beside the last button
+param: ID/URL|text|Required|The short ID your event matches on, or a full address when style is link
+param: label|text|Emptiable|The words shown on the button
 param: style|text|Required|primary / secondary / success / danger / link
-param: disabled|yes/no|Optional|yes to disable the button (default: no)
-param: emoji|text|Optional|An emoji to display inside the button
-param: messageID|snowflake|Optional|ID of a previously sent bot message to add the button to instead of the current message
+param: disabled|yes/no|Optional|yes greys the button out so it cannot be pressed (default: no)
+param: emoji|text|Optional|An emoji to show on the button
+param: messageID|snowflake|Optional|Which message the bot already sent to add the button to instead
 </details>

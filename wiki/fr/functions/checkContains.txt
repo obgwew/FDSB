@@ -1,0 +1,38 @@
+<dash>
+name: $checkContains
+desc: Renvoie true ou false selon qu'un texte contient au moins une des phrases que vous listez.
+category: Utilitaires de texte
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: $checkContains examine un morceau de texte et une ou plusieurs phrases, puis répond par le mot true ou false. Il répond true dès qu'une seule phrase apparaît dans le texte, vous n'avez donc jamais à tester chaque phrase vous-même. Une phrase vide ne correspond qu'à un texte vide. Utilisé seul, il imprime la réponse dans le salon ; à l'intérieur d'une autre commande, la réponse est insérée sur place.
+</block>
+
+<block type="list" title="Comment l'utiliser dans l'application">
+item: Ouvrez l'onglet Commandes
+item: Appuyez sur + pour créer une nouvelle commande
+item: Donnez-lui un nom dans le champ Nom
+item: Renseignez le champ Préfixe
+item: Collez le code ci-dessous dans l'éditeur
+item: Appuyez sur Enregistrer
+</block>
+
+<block type="code" title="Syntaxe">
+text: $checkContains[text; phrase; ...]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $if[$checkContains[$message; hello; hi; hey]]
+text:   $sendMessage[Say hello back!]
+text: $endif
+</block>
+
+<block type="callout" kind="note">
+text: La réponse est toujours le mot simple true ou false, ce qu'attendent $if et $onlyIf. Vous avez besoin d'au moins deux arguments — le texte plus une phrase.
+</block>
+</dash>
+
+<details>
+syntax: $checkContains[text; phrase; ...]
+param: text|text|Obligatoire|Le texte dans lequel chercher. Les commandes imbriquées comme $message sont d'abord résolues.
+param: phrase|text|Obligatoire|Une ou plusieurs phrases à rechercher. Le résultat est true si l'une d'elles apparaît dans le texte.
+</details>

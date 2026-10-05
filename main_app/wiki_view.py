@@ -102,6 +102,9 @@ _HL_FONT_FAMILY = 'Consolas'
 def _t(key: str) -> str:
     return Translations.get(key, get_current_lang() or 'en')
 
+def _wiki_lang() -> str:
+    return (get_current_lang() or 'en').lstrip('_')
+
 def _t_or_fallback(key: str, fallback: str = '') -> str:
     try:
         val = _t(key)
@@ -110,6 +113,28 @@ def _t_or_fallback(key: str, fallback: str = '') -> str:
     if not val or val == key:
         return fallback
     return val
+
+def _theme_unsub(cb):
+    """Remove a ThemeEngine subscription (works even without ThemeEngine.unsubscribe)."""
+    fn = getattr(ThemeEngine, 'unsubscribe', None)
+    if callable(fn):
+        try:
+            fn(cb)
+            return
+        except Exception:
+            pass
+    for holder in (ThemeEngine, getattr(ThemeEngine, '_instance', None)):
+        if holder is None:
+            continue
+        for val in list(vars(holder).values()):
+            try:
+                if isinstance(val, list) and cb in val:
+                    val.remove(cb)
+                elif isinstance(val, set) and cb in val:
+                    val.discard(cb)
+            except Exception:
+                pass
+
 
 @dataclass
 class WikiParam:
@@ -280,7 +305,6 @@ class WikiParser:
                             notes=notes, warnings=warnings,
                             importants=importants, questions=questions)
 
-    # ⚡ محلل خفيف للغاية للواجهة: يقرأ الاسم، الوصف، والتاق فقط ويتجاهل كل شيء آخر
     @classmethod
     def parse_light(cls, text: str, file_name: str = '') -> Optional[WikiEntry]:
         dash_start = text.find('<dash>')
@@ -324,7 +348,6 @@ class WikiParser:
             has_details=has_details,
         )
 
-    # ⚡ قراءة كاملة للملف الفردي فقط عند ضغط المستخدم عليه
     @classmethod
     def parse_full(cls, text: str, file_name: str = '') -> Optional[WikiEntry]:
         try:
@@ -530,8 +553,6 @@ class WikiRemote:
         url = f'{GITHUB_RAW_BASE}/{lang}/functions/{file_name}'
         return cls._get(url)
 
-
-# ── عناصر الواجهة الأصلية 100% ──────────────────────────
 def _ink_btn(content: ft.Control, bgcolor: str, on_click,
              border_radius: int = 10, padding=None, width=None,
              disabled: bool = False) -> ft.Container:
@@ -565,14 +586,13 @@ class BotWikiTab:
     def __init__(self, page: ft.Page, on_open_dashboard: Optional[Callable[[str], None]] = None):
         self._page              = page
         self._on_open_dashboard = on_open_dashboard
-        self._lang              = get_current_lang() or 'en'
+        self._lang              = _wiki_lang()
         
         self._entries: List[WikiEntry] = []
         self._filtered: List[WikiEntry] = []
         self._view_mode  = 'list'
         self._current: Optional[WikiEntry] = None
         
-        # كاش في الذاكرة لتفاصيل الأوامر التي يفتحها المستخدم لحظياً
         self._full_cache: Dict[str, WikiEntry] = {}
 
         self._active_filters: Set[str] = set()
@@ -680,6 +700,12 @@ class BotWikiTab:
         self._build_sub_views()
         self._root = ft.Container(expand=True)
         ThemeEngine.subscribe(self._on_theme)
+
+    def dispose(self):
+        task = getattr(self, '_search_debounce_task', None)
+        if task:
+            task.cancel()
+        _theme_unsub(self._on_theme)
 
     def _build_sub_views(self):
         self._dash_back_btn = ft.IconButton(
@@ -833,6 +859,9 @@ class BotWikiTab:
         self._apply_filters()
         self._page.update()
 
+    def swipe_blocked(self) -> bool:
+        return self._busy or self._view_mode != 'list'
+
     def handle_back(self) -> bool:
         if self._view_mode != 'list':
             self._back_to_list(None)
@@ -884,7 +913,7 @@ class BotWikiTab:
             self._page.update()
 
     def build(self) -> ft.Control:
-        self._lang = get_current_lang() or 'en'
+        self._lang = _wiki_lang()
         if not self._busy:
             self._render()
         return self._root
@@ -935,7 +964,6 @@ class BotWikiTab:
         self._update_wiki_count()
         self._rebuild_list()
 
-    # ⚡ إلغاء الـ 15 دفعة: يتم بناء جميع العناصر كاملة ومباشرة كما طلبت
     def _rebuild_list(self):
         self._list_view.controls.clear()
 
@@ -953,7 +981,6 @@ class BotWikiTab:
         for entry in self._filtered:
             self._list_view.controls.append(self._build_card(entry))
 
-    # ⚡ التصميم الأصلي 100% كما كان من قبل دون أي تبسيط
     def _build_card(self, entry: WikiEntry) -> ft.Container:
         header_children = [
             ft.Text(entry.name, size=15, weight=ft.FontWeight.BOLD, color=_c('text')),
@@ -1075,7 +1102,6 @@ class BotWikiTab:
     def _pill(self, text: str) -> ft.Container:
         return ft.Container(content=ft.Text(text, size=12, color=_c('accent'), font_family='monospace', weight=ft.FontWeight.W_600), bgcolor=_tint(_c('accent'), 24), border_radius=6, padding=ft.Padding(10, 4, 10, 4))
 
-    # ⚡ قراءة واستدعاء محتوى الملف الواحد فورياً عند الضغط عليه فقط
     async def _get_full_entry(self, entry: WikiEntry) -> WikiEntry:
         if entry.file_name in self._full_cache:
             return self._full_cache[entry.file_name]
@@ -1111,7 +1137,7 @@ class BotWikiTab:
             self._back_to_list(None)
             return
 
-        self._detail_title.value = f'${full_entry.name}'
+        self._detail_title.value = f'{full_entry.name}'
         self._build_detail_body(full_entry)
         self._render()
         self._page.update()

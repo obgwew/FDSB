@@ -1,0 +1,51 @@
+<dash>
+name: $onlyUserPerms
+desc: اگر کمانڈ چلانے والے شخص کو آگے کا کام کرنے کی اجازت نہ ہو تو اپنے پیغام سے کمانڈ روک دیتا ہے۔
+category: ⁨رسائی کنٹرول⁩
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: ⁨$onlyUserPerms⁩ محفوظ حصہ چلنے سے پہلے اس رکن کے اجازے دیکھتا ہے جس نے کمانڈ چلائی۔ جن اجازوں کی اسے ضرورت ہے انہیں لکھیں، پھر اُس پیغام کے ساتھ ختم کریں جو کوئی ایک اجازہ غائب ہونے پر بھیجا جانا چاہیے۔ اگر اس کے پاس سب اجازے موجود ہوں تو کچھ نہیں دکھایا جاتا اور آپ کی کمانڈ جاری رہتی ہے۔ اگر کوئی ایک اجازہ غائب ہو تو پیغام بھیج دیا جاتا ہے اور کمانڈ کا باقی حصہ وہیں چھوڑ دیا جاتا ہے۔
+</block>
+
+<block type="list" title="ایپ میں اسے کیسے استعمال کریں">
+item: کمانڈز کا ٹیب کھولیں
+item: نئی کمانڈ شروع کرنے کے لیے + پر دبائیں
+item: نام کے خانے میں اسے کوئی نام دیں
+item: پریفکس کا خانہ مقرر کریں
+item: نیچے دیا گیا کوڈ ایڈیٹر میں چسپاں کریں
+item: محفوظ پر دبائیں
+</block>
+
+<block type="code" title="ترتیب">
+text: $onlyUserPerms[permission; ...; error message]
+</block>
+
+<block type="code" title="کاپی کے لیے تیار مثال">
+text: $onlyUserPerms[manage_messages; You need Manage Messages to do that.]
+text: $onlyAdmin
+text: $sendMessage[Message deleted.]
+</block>
+
+<block type="options" title="عام اجازے">
+option: manage_messages|پیغامات حذف کرنا اور پن کرنا
+option: kick_members|رکنوں کو باہر نکالنا
+option: ban_members|رکنوں پر پابندی لگانا
+option: timeout_members|رکنوں کو عارضی خاموش کرنا
+option: manage_roles|رول دینا اور ہٹانا
+option: moderate_members|رکنوں کو عارضی خاموش کرنا اور باہر نکالنا
+</block>
+
+<block type="callout" kind="note">
+text: اجازوں کے نام ڈسکارڈ کے اپنے نام ہیں، چھوٹے حروف اور انڈر سکور کے ساتھ۔ پیغام کو آخر میں رکھیں — اجازوں کے بعد کا سب کچھ ایک ہی پیغام سمجھا جاتا ہے۔
+</block>
+
+<block type="callout" kind="important">
+text: یہ ⁨$onlyAdmin⁩ سے برابر نہیں۔ یہ اُس شخص کے اپنے اجازے دیکھتا ہے، یعنی ایسا کوئی رول جسے آپ نے اضافی اجازے دیے ہوں گزر جائے گا، چاہے وہ ایڈمن رول نہ ہو۔
+</block>
+</dash>
+
+<details>
+syntax: $onlyUserPerms[permission; ...; error message]
+param: permission|text|⁨لازمی⁩|ایک یا زیادہ ڈسکارڈ اجازوں کے نام، سیمی کالن سے الگ کیے ہوئے، جیسے ⁎manage_messages⁎ یا ⁎kick_members⁎۔
+param: error message|text|⁨لازمی⁩|رکن کو ان اجازوں میں سے کوئی ایک نہ ہو تو چینل میں بھیجا جانے والا پیغام۔ اجازوں کے بعد کا سب کچھ اسی پیغام میں شمار ہوتا ہے۔
+</details>

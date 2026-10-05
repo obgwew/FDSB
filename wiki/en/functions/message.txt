@@ -1,10 +1,20 @@
 <dash>
 name: $message
-desc: Returns the arguments/words from the user's command message.
+desc: Hands you back the words a member typed after your command, all of them or one at a time.
 category: Info
 
 <block type="text" title="How does the command work?">
-text: When $message is called without arguments, it returns everything the user typed after the command name (the full argument string). When called with an index number, it returns the specific word at that position.
+text: $message looks at what the member typed after your command name. Used on its own it hands back every word that followed, and with a number it hands back that single word, counting from 1. Inside an event there is no command name to skip, so there it hands back the whole text the event received instead.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !message
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,6 +26,6 @@ text: $sendMessage[You said: $message]
 </block>
 
 <block type="callout" kind="note">
-text: Without arguments, returns all text after the command. With $message[1], returns the first word, $message[2] returns the second, and so on. Returns an empty string if the index is out of range.
+text: Ask for a word that is not there and the line comes out empty, so nothing at all appears in the channel. Any $ a member typed is shown as plain text and never runs as a command of its own.
 </block>
 </dash>

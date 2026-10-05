@@ -1,0 +1,50 @@
+<dash>
+name: $getLeaderboardValue
+desc: Zwraca zapisany wynik członka lub serwera na liście rankingowej, albo 0, gdy nic dla niego nie zapisano.
+category: Zmienne
+
+<block type="text" title="Jak działa ta komenda?">
+text: $getLeaderboardValue sprawdza ten sam ranking, który tworzą komendy rankingu, i zwraca wynik pojedynczego członka lub serwera. Brak wpisu, brak wartości albo wartość, która nie jest liczbą, dają w wyniku 0.
+</block>
+
+<block type="list" title="Jak używać go w aplikacji">
+item: Najpierw utwórz zmienną w zakładce Zmienne
+item: Otwórz zakładkę Polecenia
+item: Dotknij +, aby rozpocząć nowe polecenie
+item: Nadaj mu nazwę w polu Nazwa
+item: Ustaw pole Prefiks
+item: Wklej poniższy kod w edytorze
+item: Dotknij Zapisz
+</block>
+
+<block type="code" title="Składnia">
+text: $getLeaderboardValue[type; name; sort; id]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $sendMessage[You have #$getLeaderboardValue[user; points; desc] points.]
+</block>
+
+<block type="options" title="Typy zmiennych">
+option: user|Jedna wartość na członka, przechowywana osobno w każdym serwerze
+option: globaluser|Jedna wartość na członka, wspólna dla wszystkich serwerów, w których jest bot
+option: server|Jedna wartość na serwer
+</block>
+
+<block type="options" title="Typy sortowania">
+option: desc|Najwyższa wartość najpierw (używane, gdy sortowanie zostawisz puste)
+option: asc|Najniższa wartość najpierw
+</block>
+
+<block type="callout" kind="note">
+text: Zostaw ID puste, aby odczytać osobę, która uruchomiła polecenie. Dla typu server domyślnie stanie się nim bieżący serwer. Wartości, które nie są liczbami, dają w wyniku 0.
+</block>
+</dash>
+
+<details>
+syntax: $getLeaderboardValue[type; name; sort; (id)]
+param: type|text|Wymagane|Który zbiór rankować: user, globaluser czy server.
+param: name|text|Wymagane|Nazwa zmiennej, według której sortujemy.
+param: sort|text|Wymagane|desc dla najwyższej najpierw lub asc dla najniższej najpierw.
+param: id|snowflake|Opcjonalne|Którego członka lub serwera szukać. Domyślnie osoba, która uruchomiła polecenie, albo bieżący serwer dla typu server.
+</details>

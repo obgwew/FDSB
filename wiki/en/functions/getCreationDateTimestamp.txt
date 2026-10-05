@@ -1,10 +1,20 @@
 <dash>
 name: $getCreationDateTimestamp
-desc: Converts any ID into its creation date as a Unix timestamp.
+desc: Turns any Discord ID into the moment that thing was created.
 category: Timing & Delays
 
 <block type="text" title="How does the command work?">
-text: Every Discord object (user, channel, role, message...) contains its creation time inside its snowflake ID. $getCreationDateTimestamp decodes it and returns the creation moment as a Unix timestamp (seconds since January 1, 1970). Mentions are accepted and cleaned automatically.
+text: Every user, server, channel, role and message keeps its creation time hidden inside its ID. Hand this command one of those IDs, or a mention such as <@123>, and it gives back that moment as a Unix timestamp: seconds counted from 1 January 1970. Put the number inside Discord's <t:...> brackets and it turns into a date each reader sees in their own timezone.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $getCreationDateTimestamp
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,11 +26,11 @@ text: $sendMessage[Your account was created on <t:$getCreationDateTimestamp[$aut
 </block>
 
 <block type="callout" kind="note">
-text: Works with any snowflake ID: users, members, channels, roles, servers and messages. Combine with Discord's <t:TIMESTAMP> format to display a readable date.
+text: Anything with a Discord ID works — users, servers, channels, roles, messages. Anything that is not a number or a mention is turned down with an error rather than a wrong date.
 </block>
 </dash>
 
 <details>
 syntax: $getCreationDateTimestamp[idOrMention]
-param: idOrMention|text|Required|A snowflake ID or mention (<@id>, <#id>, <@&id>) of any Discord object
+param: idOrMention|text|Required|A Discord ID, or a mention of one such as <@id>, <#id> or <@&id>
 </details>

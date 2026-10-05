@@ -1,0 +1,51 @@
+<dash>
+name: $onlyUserPerms
+desc: Stops the command with your own message unless the person who ran it is allowed to do what comes next.
+category: Access Control
+
+<block type="text" title="How does the command work?">
+text: $onlyUserPerms checks the permissions of the member who ran the command before the protected part runs. List the permissions they need, then finish with the message to send when one is missing. If they have all of them, nothing is shown and your command carries on. If one is missing, the message is sent and the rest of the command is dropped right there.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field
+item: Paste the code below into the editor
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: $onlyUserPerms[permission; ...; error message]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $onlyUserPerms[manage_messages; You need Manage Messages to do that.]
+text: $onlyAdmin
+text: $sendMessage[Message deleted.]
+</block>
+
+<block type="options" title="Common permissions">
+option: manage_messages|Delete and pin messages
+option: kick_members|Kick members
+option: ban_members|Ban members
+option: timeout_members|Time out members
+option: manage_roles|Assign and remove roles
+option: moderate_members|Time out and kick members
+</block>
+
+<block type="callout" kind="note">
+text: Permission names are Discord's own names in lowercase with underscores. Put the message last — everything after the permissions counts as one message.
+</block>
+
+<block type="callout" kind="important">
+text: This is not the same as $onlyAdmin. It looks at the person's own permissions, which means a role you gave extra permissions will pass even if it is not an admin role.
+</block>
+</dash>
+
+<details>
+syntax: $onlyUserPerms[permission; ...; error message]
+param: permission|text|Required|One or more Discord permission names, separated by semicolons, such as manage_messages or kick_members.
+param: error message|text|Required|Message sent to the channel when the member is missing one of the permissions. Everything after the permissions counts as this message.
+</details>

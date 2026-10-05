@@ -1,10 +1,20 @@
 <dash>
 name: $return
-desc: يسترجع قيمة مخزنة بواسطة دالة $returnXxx ويرسلها إلى القناة.
+desc: يجلب قيمة خزّنها سابقًا أمر مثل ⁨$returnGuildUsersID⁩ ويضعها حيث تستخدمها.
 category: المتغيرات
 
-<block type="text" title="كيف تعمل الدالة؟">
-text: $return يأخذ اسم متغير ويبحث عن قيمته في مخزن متغيرات الإرجاع. يتم ملء هذا المخزن بواسطة دوال مثل $returnGuildUsersID و$returnGuildChannelsID وغيرها. عند استخدامها منفردة، تُرسل القيمة المسترجعة إلى القناة؛ وعند استخدامها داخل وسائط دالة أخرى، تُستبدل القيمة مباشرة داخل النص.
+<block type="text" title="كيف يعمل الأمر؟">
+text: بعض الأوامر تجمع قائمة نتائج وتوقفها تحت اسم قصير، و⁨$return⁩ هو كيف تطلب ذلك الاسم عائدًا. وفي سطر وحده يطبع القيمة المخزَّنة في القناة. وكتبته داخل أمر آخر يُستبدل كنص مجرد قبل أن يعمل ذلك الأمر، فتندرجه في وسط جملة. وطلبت اسمًا لم يضعه شيء بعد فيبلّغ البوت عن خطأ بدلًا من اختلاق قيمة.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة على !lookup
+item: اكتب سكربتك في المحرر
+item: الصق السطر أدناه في المكان الذي تحتاجه
+item: اضغط على حفظ
 </block>
 
 <block type="code" title="الصيغة">
@@ -13,15 +23,15 @@ text: $return[var]
 
 <block type="code" title="مثال جاهز للنسخ">
 text: $returnGuildUsersID[$guildID; cache; userIDs; ,]
-$sendMessage[User IDs: $return[userIDs]]
+text: $sendMessage[User IDs: $return[userIDs]]
 </block>
 
 <block type="callout" kind="note">
-text: إذا كان اسم المتغير غير موجود في مخزن الإرجاع، يتم إرجاع خطأ. تأكد من استدعاء دالة $returnXxx المناسبة قبل استخدام $return.
+text: يجب أن يعمل الأمر المقابل أولًا — ⁨$returnGuildUsersID⁩ قبل userIDs، و⁨$returnGuildChannelsID⁩ قبل channelIDs، وهكذا. والاسم يُطابَق بدقة، فانتبه للحروف الكبيرة.
 </block>
 </dash>
 
 <details>
 syntax: $return[var]
-param: المتغير|text|مطلوب|اسم متغير الإرجاع المراد استرجاعه (مثال: userIDs، channelIDs، roleIDs)
+param: var|text|مطلوب|الاسم الذي تجلبه، مثل userIDs أو channelIDs أو roleIDs
 </details>

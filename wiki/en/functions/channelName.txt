@@ -1,10 +1,22 @@
 <dash>
 name: $channelName
-desc: Returns the name of the channel where the command was used.
+desc: Gives you the name of the channel the command was used in.
 category: Info
 
 <block type="text" title="How does the command work?">
-text: When $channelName is called, the bot retrieves the name of the current channel and sends it directly to the channel as a plain text string.
+text: $channelName prints the name of the channel the command came from, so your reply can talk about the room it happened in.
+text: It always reports the current channel, never one you name yourself, which makes it a safe thing to drop into any message.
+text: If somebody renames the channel, the very next run already shows the new name.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !here
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
 </block>
 
 <block type="code" title="Syntax">
@@ -16,6 +28,6 @@ text: You are chatting in #$channelName
 </block>
 
 <block type="callout" kind="note">
-text: This returns the channel's current name without the # prefix. If the channel is renamed, the next call will reflect the updated name.
+text: The # sign is not part of the answer, so add it yourself as in the example when you want the name to look like a channel in the chat.
 </block>
 </dash>

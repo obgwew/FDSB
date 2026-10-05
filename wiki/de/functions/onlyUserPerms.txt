@@ -1,0 +1,51 @@
+<dash>
+name: $onlyUserPerms
+desc: Stoppt den Befehl mit deiner eigenen Nachricht, sofern der ausführenden Person das Folgende nicht erlaubt ist.
+category: Zugriffskontrolle
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: ⁨$onlyUserPerms⁩ prüft die Berechtigungen des Mitglieds, das den Befehl ausgeführt hat, bevor der geschützte Teil läuft. Liste die Berechtigungen auf, die diese Person braucht, und beende die Zeile mit der Nachricht, die gesendet werden soll, wenn eine fehlt. Hat sie alle, wird nichts angezeigt und dein Befehl läuft weiter. Fehlt eine, wird die Nachricht gesendet und der Rest des Befehls wird genau dort verworfen.
+</block>
+
+<block type="list" title="So verwendest du es in der App">
+item: Öffne den Befehle-Tab
+item: Tippe auf +, um einen neuen Befehl zu beginnen
+item: Gib ihm im Feld Name einen Namen
+item: Setze das Feld Prefix
+item: Füge den folgenden Code in den Editor ein
+item: Tippe auf Speichern
+</block>
+
+<block type="code" title="Syntax">
+text: $onlyUserPerms[permission; ...; error message]
+</block>
+
+<block type="code" title="Fertiges Beispiel zum Kopieren">
+text: $onlyUserPerms[manage_messages; You need Manage Messages to do that.]
+text: $onlyAdmin
+text: $sendMessage[Message deleted.]
+</block>
+
+<block type="options" title="Häufige Berechtigungen">
+option: manage_messages|Nachrichten löschen und anpinnen
+option: kick_members|Mitglieder kicken
+option: ban_members|Mitglieder bannen
+option: timeout_members|Mitglieder stummschalten
+option: manage_roles|Rollen zuweisen und entfernen
+option: moderate_members|Mitglieder stummschalten und kicken
+</block>
+
+<block type="callout" kind="note">
+text: Berechtigungsnamen sind die eigenen Namen von Discord in Kleinbuchstaben mit Unterstrichen. Setze die Nachricht ans Ende — alles nach den Berechtigungen gilt als eine Nachricht.
+</block>
+
+<block type="callout" kind="important">
+text: Das ist nicht dasselbe wie ⁨$onlyAdmin⁩. Es sieht die Berechtigungen der Person selbst an, weshalb eine Rolle mit zusätzlichen Berechtigungen durchgeht, auch wenn es keine Administratorrolle ist.
+</block>
+</dash>
+
+<details>
+syntax: $onlyUserPerms[permission; ...; error message]
+param: permission|text|Erforderlich|Ein oder mehrere Discord-Berechtigungsnamen, durch Semikolons getrennt, etwa ⁎manage_messages⁎ oder ⁎kick_members⁎.
+param: error message|text|Erforderlich|Nachricht, die in den Kanal gesendet wird, wenn dem Mitglied eine der Berechtigungen fehlt. Alles nach den Berechtigungen gilt als diese Nachricht.
+</details>
