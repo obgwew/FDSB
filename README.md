@@ -5,6 +5,7 @@
   <img src="https://img.shields.io/badge/Source-AGPL--3.0-blue?style=for-the-badge" alt="License" />
   <img src="https://img.shields.io/badge/Status-Alpha-orange?style=for-the-badge" alt="Status" />
   <img src="https://img.shields.io/badge/Languages-10-brightgreen?style=for-the-badge" alt="Languages" />
+  <img src="https://img.shields.io/badge/Commands-200+-brightred?style=for-the-badge" alt="Commands" />
 </p>
 
 # FDSB — Free Design Studio Bot
