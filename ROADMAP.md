@@ -1,9 +1,13 @@
 # Roadmap
 
+## v2.4.x
+- [X] Developing FDScript Gen 2.5
+- [X] Use synchronized notifications and configure the app to run in the background.
+- [X] Reach 200+ total commands
+
 ## v2.5.x
 - [ ] Use a real code editor
 - [ ] Sync the bot with the Discord Developer Portal
-- [ ] Add 200+ commands
 
 ## v2.6.x
 - [ ] Slash commands support
