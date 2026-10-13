@@ -1,5 +1,6 @@
 # Copyright (C) 2026 obgwew
 # SPDX-License-Identifier: AGPL-3.0-or-later
+
 # -*- coding: utf-8 -*-
 # main_app/core_fdsb/server_FDScript/fgs_service.py
 
@@ -20,6 +21,11 @@ try:
     import flet_permission_handler as fph
 except ImportError:
     fph = None
+
+try:
+    from flet_android_background import BackgroundTask
+except ImportError:
+    BackgroundTask = None
 
 _current_lang = 'en'
 
@@ -50,6 +56,10 @@ _permission_handler = None
 _flet_page = None
 _flet_session_loop = None
 _fgs_running = False
+_bg_task = None
+# Serialises start/stop: the permission dialogs fire pause/resume lifecycle events
+# that used to trigger a second concurrent start.
+_fgs_lock = asyncio.Lock()
 
 _FGS_NOTIFICATION_ID = 101
 _FGS_MAX_SECONDS = 5 * 3600 + 50 * 60
@@ -166,7 +176,11 @@ def ensure_background_mode(page: ft.Page):
     if _wakelock is None:
         try:
             _wakelock = ft.Wakelock()
+            # Flet services must be attached to the page, otherwise enable()/disable() fail.
+            if hasattr(page, 'services') and _wakelock not in page.services:
+                page.services.append(_wakelock)
         except Exception as e:
+            _wakelock = None
             print(f"[Background] Wakelock unavailable: {e}")
     if _permission_handler is None and fph is not None:
         try:
@@ -235,41 +249,25 @@ async def _cancel_alert(notification_id: int):
     except Exception:
         pass
 
-async def _fgs_notification_visible() -> bool:
-    n = _android_notifications
-    if n is None:
-        return False
-    try:
-        active = await n.get_active_notifications()
-        return any(int(a.get('id', -1)) == _FGS_NOTIFICATION_ID for a in active)
-    except Exception:
-        return True
+def _fgs_task_alive() -> bool:
+    t = _bg_task
+    return t is not None and t.running
 
 # ══════════════════════════════════════════════════════════════
 # Foreground service
 # ══════════════════════════════════════════════════════════════
-async def _push_fgs_notification(notifications, title: str, image_path: str = ""):
-    fgs_types = ["data_sync"]
-    kwargs = dict(
-        notification_id=_FGS_NOTIFICATION_ID,
-        title=title,
-        body=_t('fgs_state_working'),
-        foreground_service_types=fgs_types,
-        start_type="start_sticky",
-        ongoing=True,
-        visibility="public",
-        auto_cancel=False,
-        silent=True,
-        only_alert_once=True,
-        show_when=True,
-        uses_chronometer=True,
-        chronometer_count_down=False,
-        when=_fgs_start_time if _fgs_start_time else datetime.now(),
-    )
-    if image_path and os.path.isfile(image_path):
-        kwargs['large_icon'] = image_path
-        kwargs['large_icon_type'] = 'file_path'
-    await notifications.start_foreground_service(**kwargs)
+async def _keepalive():
+    while _bot_should_run:
+        await asyncio.sleep(5)
+
+async def _on_fgs_stopped():
+    global _fgs_running, _fgs_start_time, _fgs_timeout_task
+    _fgs_running = False
+    _fgs_start_time = None
+    t = _fgs_timeout_task
+    if t is not None and not t.done() and t is not asyncio.current_task():
+        t.cancel()
+    _fgs_timeout_task = None
 
 def set_fgs_state(state: str, detail: str = ""):
     pass
@@ -307,36 +305,46 @@ async def _fgs_timeout_loop():
         pass
 
 async def start_android_foreground_service(bot_name: str, bot_image: str = ""):
-    global _fgs_running, _fgs_bot_name, _fgs_bot_image, _fgs_start_time
+    async with _fgs_lock:
+        await _start_android_foreground_service_locked(bot_name, bot_image)
+
+async def _start_android_foreground_service_locked(bot_name: str, bot_image: str = ""):
+    global _fgs_running, _fgs_bot_name, _fgs_bot_image, _fgs_start_time, _bg_task
     if not _is_android():
         return
-    if _android_notifications is None and _flet_page is not None:
-        ensure_background_mode(_flet_page)
-    notifications = _android_notifications
-    if not notifications:
-        print("[FGS] notifications plugin unavailable - bot will NOT survive leaving the app")
+    if BackgroundTask is None:
+        print("[FGS] flet_android_background unavailable - bot will NOT survive leaving the app")
         return
     title = bot_name or _title()
-
-    if _fgs_running:
-        _fgs_bot_name = title
-        _fgs_bot_image = bot_image or _fgs_bot_image
-        try:
-            await _push_fgs_notification(notifications, title, _fgs_bot_image)
-        except Exception as e:
-            print(f"[FGS] refresh failed: {e}")
-        return
-
     _fgs_bot_name = title
-    _fgs_bot_image = bot_image or ''
-    _fgs_start_time = datetime.now()
+    _fgs_bot_image = bot_image or _fgs_bot_image
+
     try:
-        if hasattr(notifications, 'request_permissions'):
-            await notifications.request_permissions()
+        if _bg_task is None:
+            _bg_task = BackgroundTask()
+        if _bg_task.running:
+            _fgs_running = True
+            return
+
+        _fgs_start_time = datetime.now()
+        if not await _bg_task.service.request_permissions():
+            _fgs_running = False
+            _fgs_start_time = None
+            print("[FGS] notification permission denied")
+            send_flet_notification(_t('fgs_start_failed', error="notification permission denied"))
+            return
         await request_background_permissions()
-        await _push_fgs_notification(notifications, title, _fgs_bot_image)
-        _fgs_running = True
-        _restart_timeout_task()
+        started = await _bg_task.start(
+            _keepalive,
+            on_stop=_on_fgs_stopped,
+            notification_id=_FGS_NOTIFICATION_ID,
+            title=title,
+            body=_t('fgs_state_working'),
+            enable_wifi_lock=True,
+        )
+        _fgs_running = bool(started) or _bg_task.running
+        if _fgs_running:
+            _restart_timeout_task()
     except Exception as e:
         _fgs_running = False
         _fgs_start_time = None
@@ -344,19 +352,23 @@ async def start_android_foreground_service(bot_name: str, bot_image: str = ""):
         send_flet_notification(_t('fgs_start_failed', error=e))
 
 async def stop_android_foreground_service():
+    async with _fgs_lock:
+        await _stop_android_foreground_service_locked()
+
+async def _stop_android_foreground_service_locked():
     global _fgs_running, _fgs_timeout_task, _fgs_start_time
     if not _is_android():
         return
-    notifications = _android_notifications
-    if not notifications:
-        return
     _fgs_running = False
     _fgs_start_time = None
-    if _fgs_timeout_task and not _fgs_timeout_task.done():
+    if (_fgs_timeout_task and not _fgs_timeout_task.done()
+            and _fgs_timeout_task is not asyncio.current_task()):
         _fgs_timeout_task.cancel()
     _fgs_timeout_task = None
+    if _bg_task is None:
+        return
     try:
-        await notifications.stop_foreground_service()
+        await _bg_task.stop()
     except Exception as e:
         print(f"[FGS] stop failed: {e}")
 
@@ -384,13 +396,8 @@ async def _handle_user_leaving():
     _app_in_background = True
     if not _is_android() or not _bot_should_run:
         return
-    if not _fgs_running:
+    if not _fgs_running or not _fgs_task_alive():
         await start_android_foreground_service(_title(), _fgs_bot_image)
-    elif not await _fgs_notification_visible():
-        try:
-            await _push_fgs_notification(_android_notifications, _title(), _fgs_bot_image)
-        except Exception as ex:
-            print(f"[FGS] re-push failed: {ex}")
     if _fgs_running:
         await _show_alert(
             _LEAVE_NOTIFICATION_ID,
@@ -413,16 +420,10 @@ async def _handle_user_returning():
     await _cancel_alert(_LIMIT_NOTIFICATION_ID)
     if not _bot_should_run:
         return
-    if not _fgs_running:
+    if not _fgs_running or not _fgs_task_alive():
         await start_android_foreground_service(_title(), _fgs_bot_image)
-    else:
-        if _fgs_timeout_task is not None:
-            _restart_timeout_task()
-        if not await _fgs_notification_visible():
-            try:
-                await _push_fgs_notification(_android_notifications, _title(), _fgs_bot_image)
-            except Exception as ex:
-                print(f"[FGS] re-push failed: {ex}")
+    elif _fgs_timeout_task is not None:
+        _restart_timeout_task()
 
 # ══════════════════════════════════════════════════════════════
 # Wakelock + combined start/stop used by server.start_bot/stop_bot
@@ -433,8 +434,8 @@ async def _enable_wakelock():
         return
     try:
         await w.enable()
-    except Exception:
-        pass
+    except Exception as e:
+        print(f"[Background] wakelock enable failed: {e}")
 
 async def _disable_wakelock():
     w = _wakelock
@@ -442,8 +443,8 @@ async def _disable_wakelock():
         return
     try:
         await w.disable()
-    except Exception:
-        pass
+    except Exception as e:
+        print(f"[Background] wakelock disable failed: {e}")
 
 async def start_background_mode(bot_name: str, bot_image: str = ""):
     global _bot_should_run

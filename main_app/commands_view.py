@@ -3,11 +3,21 @@
 
 # -*- coding: utf-8 -*-
 # main_app/commands_view.py . migrated to Flet 0.85.2+ / v1 API
+#
+# The editor is now flet-code-editor-dsl's EditorRegex (regex-based engine)
 
 import os
-import flet as ft
 import re
+import flet as ft
 import asyncio
+
+from flet_code_editor_dsl import (
+    EditorRegex,
+    HighlightRule,
+    ErrorPattern,
+    FoldRule,
+    VerticalMode,
+)
 
 from main_app.theme.theme_engine import ThemeEngine
 from main_app.langs.translations import Translations
@@ -50,46 +60,74 @@ def _c(key: str) -> str:
 
 _HL_FUNC_COLOR    = '#F1C40F'
 _HL_FONT_SIZE     = 16
-_HL_LINE_HEIGHT   = 1.45
-_HL_FONT_FAMILY   = "Consolas, 'Noto Color Emoji', 'Apple Color Emoji', 'Segoe UI Emoji', monospace"
-_HL_FONT_WEIGHT   = ft.FontWeight.W_400
-_HL_LETTER_SPACE  = 0
-_HL_LINE_PX       = _HL_FONT_SIZE * _HL_LINE_HEIGHT
 
 _MOBILE_MIN_LINES = 14
 _DESKTOP_MIN_LINES = 18
 
-_MAX_SYNTAX_CHARS = 2000
+_MAX_VISIBLE_LINES = 40
+_EDITOR_DEBOUNCE_MS = 100
+_SHOW_ERRORS = True
 
-_COMPILED_PATTERN = None
+_FOLD_PAIRS = (
+    ("if", "endif"),
+    ("while", "endwhile"),
+    ("for", "endfor"),
+    ("func", "endfunc"),
+)
 
-def _get_compiled_pattern():
-    global _COMPILED_PATTERN
-    if _COMPILED_PATTERN is not None:
-        return _COMPILED_PATTERN
 
-    known_cmds = set(KNOWN_COMMANDS) if KNOWN_COMMANDS else set()
-    control_flow_escaped = '|'.join(sorted(CONTROL_FLOW_COMMANDS, key=len, reverse=True))
-    func_escaped = '|'.join(sorted(FUNCTION_COMMANDS - CONTROL_FLOW_COMMANDS, key=len, reverse=True)) if FUNCTION_COMMANDS else ''
-    known_escaped = '|'.join(sorted(known_cmds - CONTROL_FLOW_COMMANDS - FUNCTION_COMMANDS, key=len, reverse=True))
+def _safe_hex(key: str, default: str) -> str:
+    try:
+        value = ThemeEngine.hex(key)
+        return value or default
+    except Exception:
+        return default
 
-    control_part = rf'\$(?:{control_flow_escaped})\b' if control_flow_escaped else r'(?!x)x'
-    func_part    = rf'\$(?:{func_escaped})\b'         if func_escaped        else r'(?!x)x'
-    known_part   = rf'\$(?:{known_escaped})\b'        if known_escaped       else r'(?!x)x'
 
-    master_pattern = (
-        r'(?P<comment>#.*)'
-        r'|(?P<string>".*?"|\'.*?\')'
-        rf'|(?P<control>{control_part})'
-        rf'|(?P<func>{func_part})'
-        rf'|(?P<known>{known_part})'
-        r'|(?P<token>\$\w*)'
-        r'|(?P<punct>[\[\];])'
-        r'|(?P<text>[^#"\'$\[\];\n]+)'
-        r'|(?P<nl>\n)'
-    )
-    _COMPILED_PATTERN = re.compile(master_pattern)
-    return _COMPILED_PATTERN
+def _hl_colors_from(g) -> dict:
+    base = g('success', '#2ECC71')
+    return {
+        'base':    base,
+        'control': g('syntax_control_flow',  '#9B59B6'),
+        'func':    g('syntax_func',          _HL_FUNC_COLOR),
+        'known':   g('syntax_cmd',           '#3498DB'),
+        'bracket': g('syntax_brackets',      '#FC2323'),
+        'semi':    g('syntax_semicolon',     '#8A200D'),
+        'comment': g('text_dim',             '#7F8C8D'),
+        'string':  g('syntax_string',        base),
+    }
+
+
+def _build_regex_rules(colors: dict) -> list:
+    """قواعد التلوين عبر محرك Regex لتلوين $ مع الأمر الصحيح فقط."""
+    control_set = set(CONTROL_FLOW_COMMANDS)
+    func_set    = set(FUNCTION_COMMANDS) - control_set
+    known_set   = set(KNOWN_COMMANDS) - control_set - set(FUNCTION_COMMANDS)
+
+    rules = []
+
+    rules.append(HighlightRule(r"#.*", colors['comment']))
+
+    rules.append(HighlightRule(r'"[^"\n]*"', colors['string']))
+    rules.append(HighlightRule(r"'[^'\n]*'", colors['string']))
+
+    if control_set:
+        pat = r"\$(?:" + "|".join(re.escape(w) for w in sorted(control_set, key=len, reverse=True)) + r")\b"
+        rules.append(HighlightRule(pat, colors['control']))
+
+    if func_set:
+        pat = r"\$(?:" + "|".join(re.escape(w) for w in sorted(func_set, key=len, reverse=True)) + r")\b"
+        rules.append(HighlightRule(pat, colors['func']))
+
+    if known_set:
+        pat = r"\$(?:" + "|".join(re.escape(w) for w in sorted(known_set, key=len, reverse=True)) + r")\b"
+        rules.append(HighlightRule(pat, colors['known']))
+
+    rules.append(HighlightRule(r";", colors['semi']))
+
+    rules.append(HighlightRule(r"[\[\]]", colors['bracket']))
+
+    return rules
 
 
 def _bot_root_from_dir(bot_dir: str) -> str:
@@ -119,7 +157,6 @@ def _ensure_cmds_dir(bot_dir: str) -> str:
     return path
 
 def _theme_unsub(cb):
-    """Remove a ThemeEngine subscription (works even without ThemeEngine.unsubscribe)."""
     fn = getattr(ThemeEngine, 'unsubscribe', None)
     if callable(fn):
         try:
@@ -140,8 +177,6 @@ def _theme_unsub(cb):
                 pass
 
 
-# Spaces in a command name are kept as spaces in the UI, but stored / handled
-# in code as '_' (file name). Reading a file name back turns '_' into ' '.
 NEW_FILE_TEMPLATE = '$syncMode\n\n'
 
 
@@ -385,7 +420,7 @@ class CommandEditorView:
         self._is_dirty = False
         self._snapshot: dict = {}
 
-        self._hl_colors = {}
+        self._hl_colors = _hl_colors_from(_safe_hex)
         self._kb_spacer = ft.Container(height=0, visible=True)
         self._last_kb_inset = 0.0
         self._media_handler_bound = False
@@ -441,97 +476,38 @@ class CommandEditorView:
             on_change=self._on_syntax_switch_change,
         )
 
-        self._syntax_warning_banner = ft.Container(
-            content=ft.Row(
-                [
-                    ft.Icon(ft.Icons.WARNING_AMBER_ROUNDED, size=16, color=_c('warning')),
-                    ft.Text(
-                        _t('syntax_warn_banner'),
-                        size=11,
-                        color=_c('warning'),
-                        weight=ft.FontWeight.W_500,
-                        expand=True,
-                    ),
-                ],
-                spacing=8,
-                vertical_alignment=ft.CrossAxisAlignment.CENTER,
-            ),
-            bgcolor=_c('warning') + '15',
-            border=ft.Border(
-                left=ft.BorderSide(3, _c('warning')),
-                top=ft.BorderSide(1, _c('warning') + '35'),
-                right=ft.BorderSide(1, _c('warning') + '35'),
-                bottom=ft.BorderSide(1, _c('warning') + '35'),
-            ),
-            border_radius=8,
-            padding=ft.Padding(left=10, right=10, top=6, bottom=6),
-            visible=False, 
-        )
+        control_set = set(CONTROL_FLOW_COMMANDS)
+        func_set    = set(FUNCTION_COMMANDS) - control_set
+        openers_closers = control_set | func_set
+        folds = [
+            FoldRule(f'${a}', f'${b}')
+            for a, b in _FOLD_PAIRS
+            if a in openers_closers and b in openers_closers
+        ]
 
-        self._line_nums = ft.Text(
-            "1",
-            size=_HL_FONT_SIZE,
-            font_family=_HL_FONT_FAMILY,
-            color=_c('text_dim'),
-            text_align=ft.TextAlign.RIGHT,
-            style=ft.TextStyle(
-                height=_HL_LINE_HEIGHT,
-                font_family=_HL_FONT_FAMILY,
-                size=_HL_FONT_SIZE,
-                weight=_HL_FONT_WEIGHT,
-                letter_spacing=_HL_LETTER_SPACE,
-            )
-        )
+        error_rules = [ErrorPattern(r'"[^"\n]*$', "Unterminated string")] if _SHOW_ERRORS else []
 
-        # Was a single multi-line ft.Text (spans spanning embedded '\n's).
-        # Now a Column of independent per-line boxes: each line is its own
-        # fresh Text layout instead of a continuation of one growing
-        # paragraph, so line-height drift can no longer accumulate down
-        # the document.
-        self._highlighter = ft.Column(
-            controls=[self._build_highlight_line([])],
-            spacing=0,
-            tight=True,
-        )
-
-        self._code_edit = ft.TextField(
-            multiline=True,
-            text_align=ft.TextAlign.LEFT,         
-            rtl=False,                  
-            dense=True,    
-            expand=True,                   
-            text_style=ft.TextStyle(
-                color=ft.Colors.TRANSPARENT,
-                font_family=_HL_FONT_FAMILY,
-                size=_HL_FONT_SIZE,
-                height=_HL_LINE_HEIGHT,
-                weight=_HL_FONT_WEIGHT,
-                letter_spacing=_HL_LETTER_SPACE,
-            ),
-            cursor_color=_c('syntax_cmd'),
-            cursor_width=2,
-            border=ft.InputBorder.NONE,
-            content_padding=0,                 
+        self._editor = EditorRegex(
+            value='',
+            rules=_build_regex_rules(self._hl_colors),
+            error_rules=error_rules,
+            folds=folds,
+            fold_by_indent=False,
+            line_numbers=True,
+            syntax_highlighting=True,
+            show_errors=_SHOW_ERRORS,
+            code_folding=True,
+            wrap=False,
+            vertical_mode=VerticalMode.BOUNDED,
             min_lines=min_lines,
-            max_lines=99999,
-            keyboard_type=ft.KeyboardType.MULTILINE,
-            enable_suggestions=True,
-            autocorrect=False,            
-            smart_dashes_type=False,
-            smart_quotes_type=False,
+            max_lines=_MAX_VISIBLE_LINES,
+            width_level=30,
+            font_family='monospace' if self._is_mobile else 'Consolas',
+            font_size=_HL_FONT_SIZE,
+            default_color=self._hl_colors['base'],
+            background_color=_c('card_bg'),
+            debounce_ms=_EDITOR_DEBOUNCE_MS,
             on_change=self._on_code_change,
-            on_focus=self._on_code_focus,
-        )
-
-        self._code_container = ft.Container(
-            content=ft.Stack(
-                controls=[
-                    self._highlighter,
-                    self._code_edit,
-                ],
-            ),
-            width=1000,
-            padding=8,
         )
 
         self._title_text = ft.Text(
@@ -568,53 +544,13 @@ class CommandEditorView:
         _theme_unsub(self._on_theme)
 
     def _on_syntax_switch_change(self, e):
-        new_val = e.control.value
-        current_len = len(self._code_edit.value or '')
-
-        if new_val and current_len > _MAX_SYNTAX_CHARS:
-            self._syntax_switch.value = False
-            self._syntax_enabled = False
-            self._syntax_switch.update()
-
-            if self._page:
-                self._page.show_dialog(
-                    ft.SnackBar(
-                        content=ft.Row(
-                            [
-                                ft.Icon(ft.Icons.WARNING_AMBER_ROUNDED, color="#FFFFFF", size=20),
-                                ft.Text(
-                                    _t('syntax_limit_refusal'),
-                                    color="#FFFFFF",
-                                    size=13,
-                                )
-                            ],
-                            spacing=8,
-                        ),
-                        bgcolor=_c('danger'),
-                        duration=3500,
-                    )
-                )
-                self._page.update()
-            return
-
-        self._syntax_enabled = new_val
+        self._syntax_enabled = bool(e.control.value)
         self._update_syntax_mode()
 
     def _update_syntax_mode(self):
-        current_len = len(self._code_edit.value or '')
-        if self._syntax_enabled:
-            self._highlighter.visible = True
-            self._code_edit.text_style.color = ft.Colors.TRANSPARENT
-            self._syntax_warning_banner.visible = (current_len > _MAX_SYNTAX_CHARS)
-            self._apply_highlights()
-        else:
-            self._highlighter.visible = False
-            self._highlighter.controls = [self._build_highlight_line([])]
-            self._code_edit.text_style.color = _c('text')
-            self._syntax_warning_banner.visible = False
-
-        if self._page:
-            self._page.update()
+        self._editor.syntax_highlighting = self._syntax_enabled
+        if self._editor.page:
+            self._editor.update()
 
     def _set_name_error(self):
         self._name_field.error                = _t('name_required')
@@ -658,7 +594,7 @@ class CommandEditorView:
         cur = {
             'name':    self._name_field.value   or '',
             'prefix':  self._prefix_field.value or '',
-            'content': self._code_edit.value    or '',
+            'content': self._editor.value       or '',
         }
         dirty = cur != self._snapshot
         state_changed = dirty != self._is_dirty
@@ -673,7 +609,7 @@ class CommandEditorView:
         self._snapshot = {
             'name':    self._name_field.value   or '',
             'prefix':  self._prefix_field.value or '',
-            'content': self._code_edit.value    or '',
+            'content': self._editor.value       or '',
         }
         self._is_dirty          = False
         self._dirty_dot.visible = False
@@ -707,9 +643,6 @@ class CommandEditorView:
         self.guard_navigation(self._on_back)
 
     def _on_theme(self, data: dict):
-        global _COMPILED_PATTERN
-        _COMPILED_PATTERN = None
-
         g = lambda k, default='#888888': data.get(k, default)
 
         for field in (self._name_field, self._prefix_field):
@@ -720,10 +653,6 @@ class CommandEditorView:
             field.label_style          = ft.TextStyle(color=g('text_dim'), size=11)
             field.text_style           = ft.TextStyle(color=g('text'), size=12)
 
-        self._code_edit.cursor_color = g('syntax_cmd')
-        if not self._syntax_enabled:
-            self._code_edit.text_style.color = g('text')
-
         self._lines_lbl.color           = g('text')
         self._chars_lbl.color           = g('text')
         self._syntax_switch_label.color = g('text_dim')
@@ -732,33 +661,19 @@ class CommandEditorView:
         self._title_text.color          = g('text')
         self._save_btn.style            = _btn_style(g('success'))
         self._dirty_dot.bgcolor         = g('warning')
-        self._line_nums.color           = g('text_dim')
-
-        self._syntax_warning_banner.bgcolor = g('warning') + '15'
-        self._syntax_warning_banner.border = ft.Border(
-            left=ft.BorderSide(3, g('warning')),
-            top=ft.BorderSide(1, g('warning') + '35'),
-            right=ft.BorderSide(1, g('warning') + '35'),
-            bottom=ft.BorderSide(1, g('warning') + '35'),
-        )
 
         if self._name_field.error:
             err_color = g('danger', '#FC2323')
             self._name_field.border_color         = err_color
             self._name_field.focused_border_color = err_color
 
-        self._hl_colors = {
-            'base':    g('success',              '#2ECC71'),
-            'control': g('syntax_control_flow',  '#9B59B6'),
-            'func':    g('syntax_func',          _HL_FUNC_COLOR),
-            'known':   g('syntax_cmd',            '#3498DB'),
-            'bracket': g('syntax_brackets',       '#FC2323'),
-            'semi':    g('syntax_semicolon',      '#8A200D'),
-            'comment': g('text_dim',              '#7F8C8D'),
-        }
+        self._hl_colors = _hl_colors_from(g)
 
-        if self._syntax_enabled:
-            self._apply_highlights()
+        self._editor.rules            = _build_regex_rules(self._hl_colors)
+        self._editor.default_color    = self._hl_colors['base']
+        self._editor.background_color = g('card_bg')
+        if self._editor.page:
+            self._editor.update()
 
     def _bind_media_handler(self):
         if self._media_handler_bound or not self._page:
@@ -904,38 +819,19 @@ class CommandEditorView:
             padding=ft.Padding(left=10, right=10, top=10, bottom=10),
         )
 
-        code_scroll_area = ft.Row(
-            controls=[self._code_container],
-            scroll=ft.ScrollMode.AUTO,
-            expand=True,
-            vertical_alignment=ft.CrossAxisAlignment.START,
-        )
-
         editor_area = ft.Container(
             key="cmd_editor_area",
-            content=ft.Row(
-                controls=[
-                    ft.Container(
-                        content=self._line_nums,
-                        padding=ft.Padding(left=8, right=8, top=8, bottom=8),
-                        bgcolor=_c('card_bg'),
-                        border=ft.Border(right=ft.BorderSide(1, _c('card_border'))),
-                    ),
-                    code_scroll_area,
-                ],
-                spacing=0,
-                vertical_alignment=ft.CrossAxisAlignment.START,
-            ),
+            content=self._editor,
             bgcolor=_c('card_bg'),
             border=_border_all(1, _c('card_border')),
             border_radius=10,
+            clip_behavior=ft.ClipBehavior.HARD_EDGE,
         )
 
         body_col = ft.Column(
             [
                 ft.Text(_t('info_command'), size=11, weight=ft.FontWeight.BOLD, color=_c('text_dim')),
                 info_card,
-                self._syntax_warning_banner,
                 ft.Text(_t('command_editor'), size=12, weight=ft.FontWeight.BOLD, color=_c('text')),
                 editor_area,
                 self._kb_spacer,
@@ -997,139 +893,29 @@ class CommandEditorView:
             except Exception:
                 pass
 
-    def _on_code_focus(self, e):
-        self._apply_kb_inset()
-        if self._page:
-            self._page.run_task(self._scroll_to_editor_async)
-
-    @staticmethod
-    def _make_hl_span(val: str, col: str) -> ft.TextSpan:
-        return ft.TextSpan(
-            val,
-            ft.TextStyle(
-                color=col,
-                size=_HL_FONT_SIZE,
-                height=1.0,
-                font_family=_HL_FONT_FAMILY,
-                weight=_HL_FONT_WEIGHT,
-                letter_spacing=_HL_LETTER_SPACE,
-            ),
-        )
-
-    def _build_highlight_line(self, raw_spans: list) -> ft.Container:
-        spans = [self._make_hl_span(v, c) for v, c in raw_spans]
-        return ft.Container(
-            height=_HL_LINE_PX,
-            content=ft.Text(
-                spans=spans,
-                font_family=_HL_FONT_FAMILY,
-                size=_HL_FONT_SIZE,
-                selectable=False,
-                no_wrap=True,
-                text_align=ft.TextAlign.LEFT,
-                rtl=False,
-                style=ft.TextStyle(
-                    height=1.0,
-                    font_family=_HL_FONT_FAMILY,
-                    size=_HL_FONT_SIZE,
-                    weight=_HL_FONT_WEIGHT,
-                    letter_spacing=_HL_LETTER_SPACE,
-                ),
-            ),
-        )
-
-    def _apply_highlights(self):
-        if not self._syntax_enabled:
-            return
-
-        try:
-            text = self._code_edit.value or ''
-
-            if not text:
-                self._highlighter.controls = [self._build_highlight_line([])]
-                if self._highlighter.page:
-                    self._highlighter.update()
-                return
-
-            pattern = _get_compiled_pattern()
-            colors     = self._hl_colors
-            base_color = colors.get('base', '#2ECC71')
-
-            lines_raw_spans = [[]]
-
-            for match in pattern.finditer(text):
-                val = match.group()
-                grp = match.lastgroup
-
-                if grp == 'nl':
-                    lines_raw_spans.append([])
-                    continue
-
-                if grp == 'comment':   col = colors.get('comment', base_color)
-                elif grp == 'string':  col = colors.get('string', base_color)
-                elif grp == 'control': col = colors.get('control', base_color)
-                elif grp == 'func':    col = colors.get('func', _HL_FUNC_COLOR)
-                elif grp == 'known':   col = colors.get('known', base_color)
-                elif grp == 'punct':
-                    col = colors.get('semi', base_color) if val == ';' else colors.get('bracket', base_color)
-                else:
-                    col = base_color
-
-                line = lines_raw_spans[-1]
-                if line and line[-1][1] == col:
-                    line[-1] = (line[-1][0] + val, col)
-                else:
-                    line.append((val, col))
-
-            self._highlighter.controls = [
-                self._build_highlight_line(raw_spans) for raw_spans in lines_raw_spans
-            ]
-            if self._highlighter.page:
-                self._highlighter.update()
-
-        except Exception:
-            pass
-
-    def _on_code_change(self, e):
-        value = e.control.value or ''
+    def _update_stats(self, value: str):
         lines = value.count('\n') + 1
-        current_len = len(value)
-        
         if lines != self._last_lines_count:
             self._last_lines_count = lines
             self._lines_lbl.value = str(lines)
-            self._line_nums.value = '\n'.join(str(i) for i in range(1, lines + 1))
-            if self._line_nums.page:
-                self._line_nums.update()
             if self._lines_lbl.page:
                 self._lines_lbl.update()
 
-        self._chars_lbl.value = str(current_len)
+        self._chars_lbl.value = str(len(value))
         if self._chars_lbl.page:
             self._chars_lbl.update()
 
-        split_lines = value.split('\n') if value else ['']
-        max_line_len = max((len(l) for l in split_lines), default=0)
-        dynamic_width = max(1000.0, float((max_line_len + 20) * 11.5))
-        if dynamic_width != self._code_container.width:
-            self._code_container.width = dynamic_width
-            if self._code_container.page:
-                self._code_container.update()
+    def _on_code_change(self, e):
+        data = getattr(e, 'data', None)
+        value = data if isinstance(data, str) else (self._editor.value or '')
+
+        self._update_stats(value)
 
         if not self._is_dirty:
             self._is_dirty = True
             self._dirty_dot.visible = True
             if self._dirty_dot.page:
                 self._dirty_dot.update()
-
-        should_show_banner = (current_len > _MAX_SYNTAX_CHARS) and self._syntax_enabled
-        if self._syntax_warning_banner.visible != should_show_banner:
-            self._syntax_warning_banner.visible = should_show_banner
-            if self._syntax_warning_banner.page:
-                self._syntax_warning_banner.update()
-
-        if self._syntax_enabled:
-            self._apply_highlights()
 
         if self._is_mobile:
             self._apply_kb_inset()
@@ -1141,49 +927,28 @@ class CommandEditorView:
         if cmd_data:
             self._name_field.value   = cmd_data.get('name', '')
             self._prefix_field.value = cmd_data.get('prefix', '')
-            self._code_edit.value    = cmd_data.get('content', '')
+            self._editor.value       = cmd_data.get('content', '')
             self._title_text.value   = _ar(cmd_data.get('name', 'command') + '.fds')
         else:
             self._name_field.value   = ''
             self._prefix_field.value = ''
-            self._code_edit.value    = NEW_FILE_TEMPLATE
+            self._editor.value       = NEW_FILE_TEMPLATE
             self._title_text.value   = _t('new_command_file')
 
         self._clear_name_error()
 
-        content = self._code_edit.value or ''
+        content = self._editor.value or ''
         lines   = content.count('\n') + 1
-        current_len = len(content)
         self._last_lines_count = lines
         self._lines_lbl.value = str(lines)
-        self._chars_lbl.value = str(current_len)
-
-        self._line_nums.value = '\n'.join(str(i) for i in range(1, lines + 1))
-
-        split_lines = content.split('\n') if content else ['']
-        max_line_len = max((len(l) for l in split_lines), default=0)
-        self._code_container.width = max(1000.0, float((max_line_len + 20) * 11.5))
+        self._chars_lbl.value = str(len(content))
 
         self._update_dest_indicator((self._prefix_field.value or '').strip())
         self._clear_dirty()
 
-        if current_len > _MAX_SYNTAX_CHARS:
-            self._syntax_enabled = False
-            self._syntax_switch.value = False
-            self._syntax_warning_banner.visible = False
-        else:
-            self._syntax_enabled = True
-            self._syntax_switch.value = True
-            self._syntax_warning_banner.visible = False
-
-        if self._syntax_enabled:
-            self._highlighter.visible = True
-            self._code_edit.text_style.color = ft.Colors.TRANSPARENT
-            self._apply_highlights()
-        else:
-            self._highlighter.visible = False
-            self._highlighter.controls = [self._build_highlight_line([])]
-            self._code_edit.text_style.color = _c('text')
+        self._syntax_enabled = True
+        self._syntax_switch.value = True
+        self._editor.syntax_highlighting = True
 
         self._last_kb_inset = -1
         self._apply_kb_inset(0)
@@ -1191,7 +956,7 @@ class CommandEditorView:
     def _save(self, _) -> bool:
         name    = (self._name_field.value or '').strip()
         prefix  = (self._prefix_field.value or '').strip()
-        content = self._code_edit.value or ''
+        content = self._editor.value or ''
 
         if not name:
             self._set_name_error()
@@ -1512,9 +1277,7 @@ class BotCommandsTab:
         
         self._container = ft.Container(content=None, expand=True)
 
-    def _list_ui(self) -> ft.Control:
-        # Build a fresh tree on every swap between list and editor. Re-using one
-        # cached instance across editor <-> list swaps left the tab body blank.
+    def _list_ui(self, *args) -> ft.Control:
         content = self._list_view.build()
         content.key = "cmds_list"
         return content

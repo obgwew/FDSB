@@ -28,7 +28,7 @@ def _c(key: str) -> str:
 
 # ── Config ───────────────────────────────────────────────────────────
 
-APP_VERSION = "2.4.3"
+APP_VERSION = "2.5.0"
 GITHUB_REPO = "obgwew/FDSB"
 GITHUB_API_URL = f"https://api.github.com/repos/{GITHUB_REPO}/releases/latest"
 

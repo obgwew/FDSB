@@ -1,14 +1,9 @@
-welcome to update 2.4.3
+welcome to update 2.5.0
 
 # add:
-- add more commands
+- code editor dsl
+
+- 
 
 # fixes:
-
-- fix some commands
-
-- fix animation
-
-- fix change bot or token
-
-- fix some ui
+-

@@ -1105,18 +1105,30 @@ async def main(page: ft.Page):
     page.title   = 'FDSB'
     page.padding = 0
 
+    # Earliest diagnostic frame: if this is visible, Python main() was entered.
+    # Flet already creates a default View in page.views, so reuse it instead of
+    # appending a second one (two stacked Views caused the duplicate Navigator
+    # GlobalKey error at startup).
+    page.views[0].padding = 0
+    page.views[0].controls = [
+        ft.Container(
+            content=ft.Column(
+                [ft.ProgressRing(), ft.Text('Starting FDSB…')],
+                alignment=ft.MainAxisAlignment.CENTER,
+                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                spacing=16,
+            ),
+            expand=True,
+            alignment=ft.Alignment(0, 0),
+        )
+    ]
+    page.update()
+    await asyncio.sleep(0.2)
+
     if is_desktop():
         page.window.icon = icon_path
 
     _configure_window(page)
-
-    if not _server_running():
-        clear_app_cache()
-
-    try:
-        Server.ensure_background_mode(page)
-    except Exception as e:
-        print(f'[FDSB] background mode failed: {e}')
 
     fonts_dir = get_resource_path('main_app', 'langs', 'fonts')
     fonts = {}
@@ -1150,22 +1162,43 @@ async def main(page: ft.Page):
     ThemeEngine.subscribe(page._bg_sync)
     page.bgcolor = ThemeEngine.hex('bg')
 
-    migration_failed: list[str] = []
-    try:
-        TokenVault.attach(page)
-        _, migration_failed = await TokenVault.migrate_plaintext(APP_DATA_DIR)
-        await TokenVault.preload(APP_DATA_DIR)
-    except Exception as e:
-        print(f'[FDSB] token vault init failed: {e}')
-
+    # Render the usable UI first. Secure storage may be slow or unavailable
+    # on some Android versions; it must not hold the first frame hostage.
     _show_main(page)
 
-    if migration_failed:
-        _show_warning(
-            page,
-            'Some bot tokens could not be moved to secure storage: '
-            + ', '.join(migration_failed),
-        )
+    async def _initialize_background_mode():
+        # Start after the main screen has been sent to the client.
+        await asyncio.sleep(0.2)
+        try:
+            if not _server_running():
+                clear_app_cache()
+            Server.ensure_background_mode(page)
+        except Exception as e:
+            print(f'[FDSB] background mode failed: {e}')
+
+    page.run_task(_initialize_background_mode)
+
+    try:
+        TokenVault.attach(page)
+    except Exception as e:
+        print(f'[FDSB] token vault attach failed: {e}')
+
+    async def _initialize_token_vault():
+        migration_failed: list[str] = []
+        try:
+            _, migration_failed = await TokenVault.migrate_plaintext(APP_DATA_DIR)
+            await TokenVault.preload(APP_DATA_DIR)
+        except Exception as e:
+            print(f'[FDSB] token vault init failed: {e}')
+
+        if migration_failed:
+            _show_warning(
+                page,
+                'Some bot tokens could not be moved to secure storage: '
+                + ', '.join(migration_failed),
+            )
+
+    page.run_task(_initialize_token_vault)
 
     def _on_lifecycle(e: ft.AppLifecycleStateChangeEvent):
         if e.state == ft.AppLifecycleState.DETACH and not _server_running():
