@@ -1,10 +1,11 @@
 ![FDSB](./main_app/icons/FDSB.png)
 
 <p>
-  <img src="https://img.shields.io/badge/Version-2.4.2-blue?style=for-the-badge" alt="Version" />
+  <img src="https://img.shields.io/badge/Version-2.4.3-blue?style=for-the-badge" alt="Version" />
   <img src="https://img.shields.io/badge/Source-AGPL--3.0-blue?style=for-the-badge" alt="License" />
   <img src="https://img.shields.io/badge/Status-Alpha-orange?style=for-the-badge" alt="Status" />
   <img src="https://img.shields.io/badge/Languages-10-brightgreen?style=for-the-badge" alt="Languages" />
+  <img src="https://img.shields.io/badge/Commands-200+-red?style=for-the-badge" alt="Commands" />
 </p>
 
 # FDSB — Free Design Studio Bot
@@ -174,6 +175,13 @@ This project uses its own versioning convention, which differs from Semantic Ver
 - Fixed several commands
 - Revised the UI and notifications
 - Achieved stability on Android 13 and earlier
+
+### 2.4.3 — Stability, UI Architecture, and Leaderboards
+- Added leaderboard commands
+- Added new variables
+- Improved the UI architecture for a smoother, more fluid experience
+- Improved long-term stability and overall performance
+- Fixed several commands
 
 ---
 
