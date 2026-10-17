@@ -49,7 +49,7 @@ FDSB is a cross-platform application for creating and running Discord bots local
 > The application can run in the background, provided that battery optimization is disabled for it and no network restrictions are applied to it.
 
 > [!CAUTION]
-> The background-execution settings described above are documented for Android 13 and earlier. Support for Android 14 and later is under development and may be provided in a future update.
+> The background execution settings described above are documented for Android 13 and earlier versions. For Android 14 and later, background operation is not supported (the only workaround is to convert the application into an "app bubble" and keep it visible on the foreground interface).
 
 ---
 
