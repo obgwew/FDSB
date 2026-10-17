@@ -106,13 +106,6 @@ FDSB is a cross-platform application for creating and running Discord bots local
 - Added Indonesian and Spanish
 - Fixed several UI issues and commands
 
-### 2.4.3 — Stability, UI Architecture, and Leaderboards
-- Added leaderboard commands
-- Added new variables
-- Improved the UI architecture for a smoother, more fluid experience
-- Improved long-term stability and overall performance
-- Fixed several commands
-
 ---
 
 ## Contributors
