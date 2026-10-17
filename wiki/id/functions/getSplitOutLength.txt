@@ -1,0 +1,36 @@
+<dash>
+name: $getSplitOutLength
+desc: Memberi tahu Anda berapa banyak bagian yang dihasilkan pemisahan terakhir.
+category: Utilitas Teks
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Setelah Anda memecah sebuah baris, ini menghitung bagian-bagiannya untuk Anda. Angka itu berguna untuk memeriksa apakah ada cukup bagian untuk dikerjakan sebelum Anda mengambil bagian tertentu. Sendirian, ia mencetak hitungannya di kanal; di dalam sebuah kondisi, angka itu menjadi nilai yang Anda bandingkan.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $getSplitOutLength
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $getSplitOutLength
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $splitIn[apple,banana,cherry; ,]
+text: $getSplitOutLength
+</block>
+
+<block type="callout" kind="note">
+text: Sebelum pemisahan apa pun terjadi, jawabannya adalah 0. Bandingkan di dalam $if ketika sebuah pesan mungkin tidak membawa pemisah yang Anda andalkan.
+</block>
+</dash>
+
+<details>
+syntax: $getSplitOutLength
+</details>

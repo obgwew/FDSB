@@ -1,0 +1,42 @@
+<dash>
+name: $addUserReactions
+desc: Pone reacciones con emoji en el mensaje que activó tu comando.
+category: Componentes
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $addUserReactions pega tus emojis elegidos en el mensaje que el miembro acaba de enviar, así que la reacción aparece justo debajo de lo que escribió.
+text: Enumera tantos como quieras, separados por punto y coma, y todo lo que el bot pueda resolver dentro de ellos se rellena primero, lo que significa que los valores guardados también funcionan como emoji.
+text: Cada emoji se pone de uno en uno con una breve pausa entre medias, y puedes tener hasta 20 en una sola llamada.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !react en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $addUserReactions[emoji1; emoji2; emoji3; ...]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $addUserReactions[👍; ❤️]
+</block>
+
+<block type="callout" kind="note">
+text: Si Discord está ocupado y responde con un límite de velocidad, el bot espera y le da a ese emoji un segundo intento antes de continuar con el resto.
+</block>
+
+<block type="callout" kind="warning">
+text: Veinte emojis es el límite, y todo lo que lo supere se rechaza con un error.
+text: Si tu texto no contiene ningún emoji, el comando simplemente no hace nada y no dice nada, y el bot necesita Add Reactions en ese canal.
+</block>
+</dash>
+
+<details>
+syntax: $addUserReactions[emoji1; emoji2; emoji3; ...]
+param: emoji|text|Obligatorio|Uno o más emoji con los que reaccionar, separados por punto y coma. Los valores dentro de ellos se rellenan primero y luego se añade cada emoji encontrado en orden.
+</details>

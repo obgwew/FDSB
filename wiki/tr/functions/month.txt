@@ -1,0 +1,25 @@
+<dash>
+name: $month
+desc: Geçerli ay numarasını, her zaman iki haneli olarak 01'den 12'ye kadar verir.
+category: Zamanlama ve Gecikmeler
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $month saate bakar ve içinde bulunduğumuz ayı, her zaman iki haneli genişlikte geri verir; Ocak 01, Aralık 12 olarak okunur. Bir metin satırına yerleştirirseniz rakamlar koyduğunuz yere düşer; satırda tek başına bırakırsanız bot bu rakamı kanala gönderir. Kendi tarihinizi kurmak için onu $day ile $year arasına yerleştirin.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $month
+</block>
+
+<block type="code" title="Kopyalamaya Hazır Örnek">
+text: $sendMessage[Today is $day/$month/$year]
+</block>
+
+<block type="callout" kind="note">
+text: Sayı 01'den 12'ye kadar değişir ve her zaman iki hanelidir; böylece $day/$month/$year birleşimi 17/10/2026 gibi bir değer alır.
+</block>
+
+<block type="callout" kind="important">
+text: $day, $month ve $year botun kendi yerel saatini okur. $time ile ayarlanan saat dilimini yalnızca $hour, $minute ve $second takip eder.
+</block>
+</dash>

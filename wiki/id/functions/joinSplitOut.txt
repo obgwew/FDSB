@@ -1,0 +1,39 @@
+<dash>
+name: $joinSplitOut
+desc: Menempel kembali bagian-bagian yang dihasilkan $splitIn dengan pemisah di antaranya.
+category: Utilitas Teks
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $joinSplitOut mengambil semua yang dipecah oleh $splitIn dan menyatukannya kembali menjadi satu teks, dengan pemisah pilihan Anda di antaranya.
+text: Biarkan pemisahnya kosong dan sebuah spasi tunggal digunakan sebagai gantinya, sehingga bentuk tercepat hanyalah $joinSplitOut tanpa apa pun sesudahnya.
+text: Baris yang selesai bergabung dengan apa pun yang akan dikatakan bot berikutnya, yang memudahkan membangun sebuah kalimat dari bagian-bagian yang dipecah.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !join
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $joinSplitOut[separator]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $splitIn[apple,banana,cherry; ,]
+text: $joinSplitOut[ + ]
+</block>
+
+<block type="callout" kind="note">
+text: $splitIn harus dijalankan terlebih dahulu, jika tidak tidak ada apa pun untuk digabungkan. Berikan $joinSplitOut sebuah pemisah kosong dan bagian-bagian itu digabungkan dengan satu spasi masing-masing.
+</block>
+</dash>
+
+<details>
+syntax: $joinSplitOut[separator]
+param: separator|text|Wajib|Teks yang ditempatkan di antara setiap dua bagian
+</details>

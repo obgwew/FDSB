@@ -1,0 +1,40 @@
+<dash>
+name: $image
+desc: Menambahkan sebuah gambar ke kartu embed yang sedang dibangun perintah Anda.
+category: Pesan
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Berikan sebuah alamat gambar dan bot menempatkan gambar itu di kartu yang sedang Anda bangun, di mana gambar itu muncul begitu kartu dikirim di akhir perintah. Alamat harus dimulai dengan http:// atau https://. Tambahkan yes di akhir dan bot melewatkan kartu sepenuhnya, mengirim tautan telanjang sebagai pesan biasa sebagai gantinya.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $image
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $image[URL]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $image[https://example.com/photo.png]
+</block>
+
+<block type="callout" kind="note">
+text: Gambar menjadi gambar besar di kartu, dan bot harus diizinkan mengirim embed di kanal tersebut. Membangun lebih dari satu kartu? Tambahkan nomor kartu di akhir untuk memilih kartu mana yang menerimanya.
+</block>
+
+<block type="callout" kind="warning">
+text: Alamat yang tidak dimulai dengan http:// atau https:// tidak menyisakan apa pun untuk diambil, dan bot berhenti dengan kesalahan alih-alih mengirim kartu yang rusak.
+</block>
+</dash>
+
+<details>
+syntax: $image[URL]
+param: URL|text|Wajib|Tautan langsung ke gambar, dimulai dengan http:// atau https://
+</details>

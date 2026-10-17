@@ -1,0 +1,39 @@
+<dash>
+name: $lastBotMessageID
+desc: Memberi Anda ID dari pesan terakhir yang dikirim bot saat menjalankan perintah Anda.
+category: Variabel
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Begitu bot mengirim sesuatu, $lastBotMessageID memberi Anda ID pesan itu sebagai angka biasa.
+text: Setiap pesan yang dikirim bot selama perintah Anda berjalan menggeser nilainya, sehingga baris yang lebih lambat dapat menunjuk kembali ke pesan yang baru saja ditulisnya.
+text: Sebelum apa pun dikirim, Anda mendapatkan string kosong sebagai gantinya, dan dalam skrip yang dimulai dengan ketukan tombol, ia jatuh kembali ke pesan tempat tombol itu berada.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !edit
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $lastBotMessageID
+text: $lastBotMessageID[]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $sendMessage[Look at this!]
+text: $editIn[10s; The last message ID was $lastBotMessageID]
+</block>
+
+<block type="callout" kind="note">
+text: Yang ini hanya bekerja di dalam perintah lain, tidak pernah pada barisnya sendiri. Berikan sebuah kurung, atau langsung jatuhkan ke dalam kalimat.
+</block>
+</dash>
+
+<details>
+syntax: $lastBotMessageID
+</details>

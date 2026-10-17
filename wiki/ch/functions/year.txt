@@ -1,0 +1,25 @@
+<dash>
+name: $year
+desc: 返回当前年份，为四位数字，例如 2026。
+category: 计时与延迟
+
+<block type="text" title="命令如何工作？">
+text: $year 读取时钟并交回完整的当前年份，四位数字宽，因此显示 2026 而不是缩写的 26。把它放进一行文本里，数字就会落在你放置的位置；让它独占一行时，机器人会把这个数字发送到频道中。它每年只变化一次，是构建日期的稳定组成部分。
+</block>
+
+<block type="code" title="语法">
+text: $year
+</block>
+
+<block type="code" title="可复制示例">
+text: $sendMessage[Welcome to $year!]
+</block>
+
+<block type="callout" kind="note">
+text: 年份始终返回四位数字，因此把它放在由 $day 和 $month 拼成的日期末尾总是安全的。
+</block>
+
+<block type="callout" kind="important">
+text: $day、$month 和 $year 都读取机器人自身的本地时钟。只有 $hour、$minute 和 $second 会遵循用 $time 设置的时区。
+</block>
+</dash>

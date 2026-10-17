@@ -1,0 +1,40 @@
+<dash>
+name: $cloneChannel
+desc: Copia un canal existente, con su tema y toda su configuración, en un segundo canal.
+category: Gestión de canales
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Señálale un canal y el bot hace un duplicado, llevándose su tema, su configuración y su ubicación en el servidor. Los canales de texto, voz, categoría, escenario y foro se pueden copiar todos. Añade una segunda parte y la copia recibe ese nombre en lugar del original, y luego el bot publica una mención del nuevo canal para que esté a un clic en el chat.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !clone en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $cloneChannel[channel ID or channel mention; (new name)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $cloneChannel[<#123456789012345678>; Archive]
+</block>
+
+<block type="callout" kind="warning">
+text: El bot necesita el permiso Manage Channels y el comando solo funciona dentro de un servidor. Menciona el canal que quieres copiar — un nombre simple por sí solo no basta.
+</block>
+
+<block type="callout" kind="note">
+text: Dale una línea propia en lugar de meterlo en medio de una frase: copia el canal como efecto secundario y no devuelve nada que imprimir.
+</block>
+</dash>
+
+<details>
+syntax: $cloneChannel[channel ID or channel mention; (new name)]
+param: channelID|text|Obligatorio|Qué canal copiar, por su mención o su ID
+param: newName|text|Opcional|Cómo llamar a la copia; déjalo vacío para reutilizar el nombre original
+</details>

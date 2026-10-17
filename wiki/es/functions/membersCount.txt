@@ -1,0 +1,38 @@
+<dash>
+name: $membersCount
+desc: Te da el número de miembros de un servidor.
+category: Info
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Por sí solo $membersCount cuenta los miembros humanos del servidor en el que se envió el mensaje y el bot publica ese número en el canal. Pon dentro de los paréntesis un ID de servidor y un yes y cuenta un servidor distinto en su lugar, esta vez con las cuentas de bot incluidas en el total. Deja fuera el yes y solo se cuentan personas reales, así que la cifra que ves es la membresía que citaría el propietario de un servidor.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !info en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $membersCount
+text: $membersCount[guildID; includeBots]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: We have $membersCount members!
+</block>
+
+<block type="callout" kind="note">
+text: Las cuentas de bot quedan fuera del recuento a menos que las pidas escribiendo yes después del ID del servidor. La versión simple solo funciona dentro de un servidor, y para contar otro el bot también tiene que ser miembro de él.
+</block>
+</dash>
+
+<details>
+syntax: $membersCount[(guildID; includeBots)]
+param: guildID|snowflake|Opcional|Qué servidor contar. Déjalo fuera para usar el que se usó para enviar el mensaje.
+param: includeBots|yes/no|Opcional|Escribe yes para contar también las cuentas de bot. Déjalo fuera y solo se cuentan los miembros humanos.
+</details>

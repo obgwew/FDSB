@@ -1,0 +1,40 @@
+<dash>
+name: $onVoiceJoined
+desc: Menjalankan baris-baris Anda sendiri setiap kali seseorang bergabung ke kanal suara.
+category: Peristiwa
+
+<block type="text" title="Bagaimana cara kerja peristiwa?">
+text: $onVoiceJoined adalah Peristiwa, jadi aplikasi memulai baris-baris Anda di saat anggota mana pun terhubung ke kanal suara, tanpa ada yang mengetik apa pun. Di dalamnya $mention dan $authorID menunjuk ke anggota yang baru tiba. Agar balasan mendarat di tempat lain selain kanal suara, letakkan ID kanal teks itu dalam kurung siku setelah awalan, seperti yang dilakukan $onVoiceJoined[123456789012345678].
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $onVoiceJoined
+item: Aplikasi menandainya sebagai Peristiwa untuk Anda
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: #PREFIX:$onVoiceJoined
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: #PREFIX:$onVoiceJoined
+text:  sendMessage[$mention joined a voice channel!]
+</block>
+
+<block type="callout" kind="note">
+text: Lepaskan kurung siku dari kolom Awalan dan peristiwa itu tidak memiliki kanal sendiri untuk mengirim, sehingga apa pun yang Anda kirim darinya tidak pernah tiba. Menambahkan ID di sana adalah bagian yang membuatnya bekerja.
+</block>
+
+<block type="callout" kind="important">
+text: Bot harus menjadi anggota server dan dimulai dari tab Utama, kalau tidak tidak ada yang bergabung dan tidak terjadi apa-apa. Baris-baris Anda berjalan sekali per anggota per kanal suara, jadi server yang sibuk akan menjalankannya sering.
+</block>
+</dash>
+
+<details>
+syntax: $onVoiceJoined
+</details>

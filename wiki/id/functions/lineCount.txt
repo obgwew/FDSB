@@ -1,0 +1,36 @@
+<dash>
+name: $lineCount
+desc: Menghitung berapa banyak spasi dalam sebuah teks.
+category: Utilitas Teks
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Berikan teks apa pun dan bot membalas dengan berapa banyak spasi di dalamnya. Apa pun yang Anda masukkan ke dalam kurung — sebuah pesan, sebuah variabel, sebuah nilai dari perintah lain — diisi terlebih dahulu lalu dihitung. Ini adalah cara cepat untuk melihat berapa banyak bagian yang dimiliki sebuah daftar yang dipisahkan spasi.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $lineCount
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $lineCount[text]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $lineCount[one two three]
+</block>
+
+<block type="callout" kind="note">
+text: Hanya jarak di antara kata-kata yang dihitung, bukan jeda baris, sehingga blok teks yang tersebar di beberapa baris tetap hanya menghitung spasi. Untuk benar-benar memecah teks menjadi bagian-bagian, pasangkan $splitIn dengan $splitOut.
+</block>
+</dash>
+
+<details>
+syntax: $lineCount[text]
+param: text|text|Wajib|Teks yang spasinya dihitung; variabel dan placeholder diisi terlebih dahulu
+</details>

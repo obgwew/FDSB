@@ -1,0 +1,31 @@
+<dash>
+name: $blackListRoles
+desc: Empêche la commande pour toute personne détenant l'un des rôles listés.
+category: Contrôle d'accès
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: $blackListRoles est un point de contrôle que vous pouvez insérer dans une commande. Le bot regarde les rôles détenus par la personne qui l'a déclenchée et les compare à ceux que vous avez listés. Si une correspondance est trouvée, il affiche votre message de refus, ou un message par défaut si vous l'avez omis, et le reste de la commande est abandonné. Si personne ne correspond, rien n'est affiché et le script continue simplement.
+</block>
+
+<block type="code" title="Syntaxe">
+text: $blackListRoles[role; ...; message]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $blackListRoles[Admin; Moderator; Sorry, this command is for another group of people!]
+</block>
+
+<block type="callout" kind="note">
+text: Un rôle peut s'écrire sous forme de mention, d'ID ou de nom, et le nom est comparé sans tenir compte des majuscules. Listez-en plusieurs en les séparant par des points-virgules. Tout ce qui précède le dernier argument est traité comme un rôle, donc c'est dans le dernier argument que va votre refus personnalisé.
+</block>
+
+<block type="callout" kind="warning">
+text: Quand la vérification réussit, la commande s'arrête là — aucune ligne en dessous ne s'exécute. Omettez le message personnalisé et le bot se rabat sur sa propre formulation.
+</block>
+</dash>
+
+<details>
+syntax: $blackListRoles[role; ...; message]
+param: role|text|Requis|Les rôles bloqués, sous forme de mentions, d'ID ou de noms, séparés par des points-virgules
+param: message|text|Optionnel|Un message à afficher à la place du refus par défaut lorsqu'un rôle correspond
+</details>

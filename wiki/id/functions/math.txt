@@ -1,0 +1,56 @@
+<dash>
+name: $math
+desc: Menghitung sebuah perhitungan dan mengirim jawabannya ke kanal.
+category: Matematika & Angka
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Ketik sebuah perhitungan di antara tanda tambah, kurang, kali, bagi dan pangkat dan bot mengirim balik hasilnya. Pembantu pembulatan dan trigonometri biasa juga ada di sana, bersama dengan konstanta pi, e dan inf. Hanya aritmetika yang diterima, sehingga tidak ada yang lain dapat ikut melompat di dalam ekspresi Anda.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $math
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $math[expression]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $math[2 + 2 * 3]
+</block>
+
+<block type="options" title="Operator yang didukung">
+option: +|Menambahkan kedua angka
+option: -|Mengurangkan angka kedua dari angka pertama
+option: *|Mengalikan
+option: /|Membagi
+option: //|Membagi dan membuang bagian desimal
+option: %|Sisa setelah membagi
+option: **|Menaikkan ke pangkat
+</block>
+
+<block type="options" title="Fungsi yang didukung">
+option: sqrt|Akar kuadrat
+option: abs|Jarak angka dari nol
+option: ceil|Membulatkan ke atas ke bilangan bulat berikutnya
+option: floor|Membulatkan ke bawah ke bilangan bulat di bawahnya
+option: round|Membulatkan ke bilangan bulat terdekat
+option: log/log2/log10|Logaritma basis 10, 2 atau e
+option: sin/cos/tan|Sinus, cosinus dan tangen
+</block>
+
+<block type="callout" kind="note">
+text: Membagi dengan nol kembali sebagai kesalahan alih-alih sebuah angka, dan hasil bulat membuang tanda desimal — 8 kembali sebagai 8, bukan 8.0.
+</block>
+</dash>
+
+<details>
+syntax: $math[expression]
+param: expression|text|Wajib|Perhitungan yang dihitung, misalnya 2 + 2, sqrt(16) atau pi * 2
+</details>

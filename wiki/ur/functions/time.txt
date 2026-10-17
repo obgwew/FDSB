@@ -1,0 +1,31 @@
+<dash>
+name: $time
+desc: اس کمانڈ کے باقی حصے کے لیے جس ٹائم زون میں گھڑی پڑھی جائے وہ مقرر کرتا ہے۔
+category: وقت اور تاخیر
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $time دنیا بھر کی فہرست سے ٹائم زون کا نام لیتا ہے، جیسے Asia/Amman یا Europe/London، اور چلنے والی کمانڈ کے لیے رکھ لیتا ہے۔ جیسے ہی یہ مقرر ہو جائے، $hour، $minute اور $second اسی ٹائم زون میں گھڑی پڑھتے ہیں، اس کے بجائے جہاں بوٹ کہیں ہوسٹ ہوا ہے۔ یہ کچھ پرنٹ نہیں کرتا — یہ ایک ترتیب دینے والی لائن ہے جو آپ ان لائنوں کے اوپر رکھتے ہیں جو واقعی وقت پڑھتی ہیں۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $time[timezone]
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $time[Asia/Amman]
+text: $sendMessage[Right now it is $hour:$minute]
+</block>
+
+<block type="callout" kind="note">
+text: ٹائم زون کو خطوط اور شہر کے طور پر سلیش کے ساتھ لکھیں، جیسے Asia/Amman، Europe/London یا America/New_York۔ فہرست وہی معیاری فہرست ہے جو باقی دنیا استعمال کرتی ہے، اس لیے کوئی بھی جانا پہچاننا نام قبول ہے۔
+</block>
+
+<block type="callout" kind="important">
+text: اگر نام تسلیم نہ ہو تو بوٹ گھڑی بدلنے کے بجائے خرابی سے جواب دیتا ہے۔ یہ ترتیب صرف اسی رن کی ہے، اس لیے $time کو گھنٹہ پڑھنے والی لائنوں سے پہلے رکھیں، اور یاد رکھیں کہ $day، $month اور $year اس کے باوجود بوٹ کی اپنی مقامی گھڑی پڑھتے رہتے ہیں۔
+</block>
+</dash>
+
+<details>
+syntax: $time[timezone]
+param: timezone|text|لازمی|IANA ٹائم زون کا نام، جیسے Asia/Amman یا Europe/London
+</details>

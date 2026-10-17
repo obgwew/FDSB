@@ -1,0 +1,44 @@
+<dash>
+name: $strictArgs
+desc: Detiene el comando a menos que la persona escriba un número concreto de palabras.
+category: Control de acceso
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Pon esto cerca del inicio de un comando y cuenta las palabras que llegaron después de tu prefijo. Si el número no coincide con la regla que fijaste, el bot publica tu mensaje de error y abandona el resto del comando, así que nada de lo que hay debajo se ejecuta. Cuando el conteo sí coincide, no se imprime nada en absoluto y el comando continúa sin más.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !quote en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $strictArgs[comparison; error_message]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $strictArgs[>2; Please provide more than 2 words!]
+</block>
+
+<block type="options" title="Operadores de comparación">
+option: >|Más que — la persona debe escribir más de N palabras
+option: <|Menos que — la persona debe escribir menos de N palabras
+option: (none)|Igual a, como por ejemplo solo 2 — la persona debe escribir exactamente N palabras
+option: !|Distinto de — la persona no debe escribir exactamente N palabras
+</block>
+
+<block type="callout" kind="note">
+text: Tu prefijo y el nombre del comando no forman parte del conteo, así que !quote hello world cuenta como dos palabras. La regla tiene que ser un número con un >, < o ! opcional delante, y cualquier otra cosa se rechaza antes incluso de mirar el conteo.
+</block>
+</dash>
+
+<details>
+syntax: $strictArgs[comparison; error_message]
+param: comparison|text|Obligatorio|La regla contra la que comprobar el conteo de palabras, como >2, <2, 2 o !2
+param: error_message|text|Obligatorio|Lo que publica el bot cuando el conteo no coincide, antes de detenerse
+</details>

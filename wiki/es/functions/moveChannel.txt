@@ -1,0 +1,40 @@
+<dash>
+name: $moveChannel
+desc: Mueve un canal bajo una categoría diferente en el servidor.
+category: Gestión de canales
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $moveChannel toma un canal que ya existe y lo archiva bajo la categoría que nombres, así que la barra lateral se reorganiza delante de todos. Ambas partes son simples IDs numéricos tomados del servidor donde se envió el mensaje, y la primera tiene que ser un canal de texto o de voz normal en lugar de una categoría. Si el canal ya está en esa categoría, el bot lo deja exactamente donde está y no hace nada.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !move en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $moveChannel[channel ID; new category ID]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $moveChannel[123456789012345678; 987654321012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: Este solo funciona dentro de un servidor, nunca en un chat privado. El primer ID tiene que ser un canal normal y el segundo una categoría real, el bot necesita Manage Channels para moverlo, y las menciones no se entienden aquí, así que pega los números tal cual.
+</block>
+
+<block type="callout" kind="note">
+text: Una categoría no puede moverse dentro de otra categoría, así que solo se mueven los canales que están bajo ellas. Mantén esto en una línea propia, porque ponerlo dentro de otro comando no ejecuta el movimiento.
+</block>
+</dash>
+
+<details>
+syntax: $moveChannel[channel ID; new category ID]
+param: channelID|snowflake|Obligatorio|El ID numérico del canal que quieres mover
+param: categoryID|snowflake|Obligatorio|El ID numérico de la categoría bajo la que debe terminar
+</details>

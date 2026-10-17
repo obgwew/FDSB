@@ -1,0 +1,25 @@
+<dash>
+name: $year
+desc: Gibt das aktuelle Jahr an, als vierstellige Zahl wie 2026.
+category: Timing & Verzögerungen
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: $year liest die Uhr und gibt das aktuelle Jahr vollständig zurück, vier Stellen breit, sodass 2026 und nicht die Kurzform 26 erscheint. Fügen Sie es in eine Textzeile ein und die Ziffern landen, wo Sie sie platzieren, oder lassen Sie es auf einer eigenen Zeile stehen, dann postet der Bot die Zahl im Kanal. Es ändert sich nur einmal im Jahr, was es zu einem stabilen Baustein für Daten macht.
+</block>
+
+<block type="code" title="Syntax">
+text: $year
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $sendMessage[Welcome to $year!]
+</block>
+
+<block type="callout" kind="note">
+text: Das Jahr wird immer vierstellig zurückgegeben, sodass Sie es am Ende eines aus $day und $month zusammengesetzten Datums immer sicher platzieren können.
+</block>
+
+<block type="callout" kind="important">
+text: $day, $month und $year lesen jeweils die lokale Uhr des Bots. Die mit $time gesetzte Zeitzone wird nur von $hour, $minute und $second berücksichtigt.
+</block>
+</dash>

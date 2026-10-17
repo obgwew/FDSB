@@ -1,0 +1,39 @@
+<dash>
+name: $botLeave
+desc: Saca al bot de un servidor.
+category: Servidor
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Ejecútalo sin nada después y el bot se sale del servidor en el que se usó el comando, al instante.
+text: Dale en cambio un ID de servidor y ese servidor es el que abandona, lo que incluso funciona desde un chat privado siempre que el bot siga siendo miembro allí.
+text: Un ID de servidor que no sea solo dígitos, o uno al que el bot no se haya unido, se rechaza con un error en el canal.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !leave en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $botLeave
+text: $botLeave[guildID]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $botLeave
+</block>
+
+<block type="callout" kind="warning">
+text: No hay forma de deshacerlo desde dentro del chat — traer de vuelta al bot significa invitarlo otra vez a través de la aplicación.
+text: Fuera de un servidor pasa siempre el ID del servidor, y recuerda que tiene que ser solo dígitos.
+</block>
+</dash>
+
+<details>
+syntax: $botLeave[(guildID)]
+param: guildID|snowflake|Opcional|Qué servidor abandonar. Déjalo fuera y el bot sale del servidor en el que se usó el comando.
+</details>

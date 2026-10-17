@@ -1,0 +1,33 @@
+<dash>
+name: $channelName
+desc: Memberikan nama kanal tempat perintah dijalankan.
+category: Info
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $channelName mencetak nama kanal asal perintah, sehingga balasan Anda dapat membicarakan ruang tempat kejadian berlangsung.
+text: Perintah ini selalu melaporkan kanal yang sedang aktif, tidak pernah satu yang Anda sebut sendiri, yang membuatnya aman untuk diselipkan ke pesan mana pun.
+text: Bila seseorang mengganti nama kanal, pemanggilan berikutnya sudah menampilkan nama yang baru.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !here
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $channelName
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: You are chatting in #$channelName
+</block>
+
+<block type="callout" kind="note">
+text: Tanda # bukan bagian dari jawabannya, jadi tambahkan sendiri seperti pada contoh ketika Anda ingin namanya terlihat seperti sebuah kanal di obrolan.
+</block>
+</dash>

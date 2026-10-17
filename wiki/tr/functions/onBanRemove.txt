@@ -1,0 +1,32 @@
+<dash>
+name: $onBanRemove
+desc: Yasak kaldırılıp bir kullanıcının yasağı düşürüldüğü anda satırlarınızı çalıştırır.
+category: Olay
+
+<block type="text" title="Olay nasıl çalışır?">
+text: Prefix alanı $onBanRemove olan bir komutu kaydettiğinizde uygulama onu sizin için bir Olay olarak işaretler. Yasak kaldırıldığı anda — bir moderatör tarafından veya denetim günlüğü aracılığıyla — o önekin altındaki satırlar, kimse bir şey yazmadan çalışmaya başlar.
+text: Yasağı kaldırılan kişi burada yazarıdır; bu yüzden $mention, $authorID ve $authorName onu gösterir, $guildID ve $guildName ise yasağın kaldırıldığı sunucuyu anlatır.
+text: Yasaklamanın kendine ait bir kanalı yoktur; siz bir tane belirtmeden mesaj kanalı boş bırakılır. Önekin hemen ardına köşeli parantez içine bir kanal kimliği yazdığınızda yanıtlarınız oraya gider.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: #PREFIX:$onBanRemove[channelID]
+</block>
+
+<block type="code" title="Kopyalamaya Hazır Örnek">
+text: #PREFIX:$onBanRemove[123456789012345678]
+text:  sendMessage[$mention is no longer banned from $guildName]
+</block>
+
+<block type="callout" kind="note">
+text: $onBanRemove'ı ilk satırda tutun. Aşağı kaydırdığınızda uygulama komutu bir olay olarak işlemeyi bırakır ve bu kez herhangi bir komut gibi birinin öneki yazmasını bekleyip durur.
+</block>
+
+<block type="callout" kind="important">
+text: Önekin ardına bir kanal kimliği yazın; çünkü yasaklama hiçbir kanala bağlı değildir ve botun aksi halde konuşacak yeri yoktur. Yasak kaldırıldığında kişi henüz sunucunun üyesi değildir; bu yüzden rollerini okuyan şeylere değil $mention, $authorID ve $authorName'e güvenin.
+</block>
+</dash>
+
+<details>
+syntax: $onBanRemove
+</details>

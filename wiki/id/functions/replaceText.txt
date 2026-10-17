@@ -1,0 +1,39 @@
+<dash>
+name: $replaceText
+desc: Menukar sepotong teks dengan teks lain di dalam sebuah pesan.
+category: Utilitas Teks
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Berikan teks aslinya, bagian yang ingin Anda hilangkan, dan apa yang harus menggantikannya, lalu versi yang sudah diedit kembali. Setiap kecocokan ditukar kecuali Anda menambahkan bagian keempat berisi angka, yang membatasi berapa banyak yang diubah. Berdiri di barisnya sendiri, teks yang ditulis ulang langsung diposting ke kanal.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !clean
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $replaceText[message; old; new; (amount)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $replaceText[Hello World; World; FDScript]
+</block>
+
+<block type="callout" kind="note">
+text: Biarkan bagian keempat kosong, atau atur ke -1, untuk menangkap setiap kemunculan. Sesuatu yang bukan angka di posisi itu menghentikan perintah dengan kesalahan alih-alih bot menebak berapa banyak yang Anda maksud.
+</block>
+</dash>
+
+<details>
+syntax: $replaceText[message; old; new; (amount)]
+param: message|text|Wajib|Teks yang ingin Anda proses
+param: old|text|Wajib|Bagian persis yang dicari
+param: new|text|Wajib|Apa yang harus menempati tempatnya
+param: amount|number|Opsional|Berapa banyak kecocokan yang diubah; -1 atau kosong mengambil semuanya
+</details>

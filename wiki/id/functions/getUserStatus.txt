@@ -1,0 +1,37 @@
+<dash>
+name: $getUserStatus
+desc: Memberi tahu Anda apakah seorang anggota sedang daring, menganggur, sibuk, atau luring.
+category: Info
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Gunakan tanpa argumen dan bot melaporkan status orang yang menjalankan perintah. Tambahkan ID pengguna atau @mention dan ia justru memeriksa anggota server itu. Siapa pun yang tidak berada di server dihitung luring, dan jawaban yang sama kembali jika Anda mencoba menggunakannya di obrolan pribadi.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $getUserStatus
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $getUserStatus
+text: $getUserStatus[(userID/mention)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: Your status is: $getUserStatus
+</block>
+
+<block type="callout" kind="note">
+text: Jawabannya adalah online, idle, dnd, dan offline. Discord hanya membagikan ini untuk anggota sebuah server, jadi perintahnya harus berjalan di dalam satu server.
+</block>
+</dash>
+
+<details>
+syntax: $getUserStatus[(userID/mention)]
+param: userID/mention|text|Opsional|Siapa yang diperiksa. Biarkan kosong dan bot melihat orang yang menjalankan perintah
+</details>

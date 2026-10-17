@@ -1,0 +1,46 @@
+<dash>
+name: $roleAssign
+desc: Otorga roles a un miembro, quita roles o hace ambas cosas a la vez.
+category: Moderación
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $roleAssign cambia los roles que lleva un miembro. Pon primero al miembro y luego lista los roles que quieres tocar, cada uno empezando por + para dárselo o - para quitárselo. El bot aplica la lista entera de una vez, así que la barra de roles del miembro cambia de golpe y el resto de tu script continúa con los roles nuevos ya en su sitio.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !role en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $roleAssign[user; +role1; -role2; ...]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $roleAssign[$authorID; +&123456789; -&987654321]
+</block>
+
+<block type="options" title="Prefijos de rol">
+option: +|Dar el rol — escríbelo como +&123456789 o +@RoleName
+option: -|Quitar el rol — escríbelo como -&123456789 o -@RoleName
+</block>
+
+<block type="callout" kind="note">
+text: Puedes añadir y quitar todos los roles que quieras en una línea, y el miembro siempre es la primera parte. El bot necesita Manage Roles en ese servidor, y su propio rol tiene que estar por encima de los roles que reparte.
+</block>
+
+<block type="callout" kind="warning">
+text: El miembro ya tiene que estar en el servidor; si no, recibes un error y no cambia nada. Un rol que no existe se omite sin más, y si el rol del bot está por debajo del que intentas cambiar, Discord rechaza toda la petición.
+</block>
+</dash>
+
+<details>
+syntax: $roleAssign[user; +role1; -role2; ...]
+param: user|text|Obligatorio|El miembro cuyos roles cambian, como ID de usuario o mención
+param: +role1|text|Obligatorio|Un rol a dar: un + seguido de la ID o mención del rol, como +&123456789
+param: -role2|text|Opcional|Un rol a quitar: un - seguido de la ID o mención del rol. Añade tantas partes + y - como necesites.
+</details>

@@ -1,0 +1,31 @@
+<dash>
+name: $randomRoleID
+desc: Elige al azar uno de los roles del servidor y devuelve su ID.
+category: Aleatorio
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: El bot reúne todos los roles del servidor actual, aparta uno de ellos al azar y te da el ID de ese rol. El rol @everyone nunca sale, ya que pertenece a todos y elegirlo no te diría nada. Lo que obtienes es una simple cadena de dígitos, lista para meterse en otra línea que necesite un rol.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $randomRoleID en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $randomRoleID
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: Random role ID: $randomRoleID
+</block>
+
+<block type="callout" kind="note">
+text: Los roles solo existen dentro de un servidor, así que esto no puede usarse en un mensaje directo. Un servidor sin roles propios obtiene un error en lugar de un resultado.
+</block>
+</dash>

@@ -1,0 +1,39 @@
+<dash>
+name: $joinSplitOut
+desc: Vuelve a unir las piezas producidas por $splitIn con un separador entre ellas.
+category: Utilidades de texto
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $joinSplitOut toma todo lo que $splitIn separó y lo vuelve a juntar en una sola pieza de texto, con un separador que tú eliges en medio.
+text: Deja fuera el separador y se usa un solo espacio en su lugar, así que la forma más rápida es solo $joinSplitOut sin nada detrás.
+text: La línea terminada se une a todo lo demás que el bot esté a punto de decir, lo que facilita construir una frase a partir de piezas separadas.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !join en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $joinSplitOut[separator]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $splitIn[apple,banana,cherry; ,]
+text: $joinSplitOut[ + ]
+</block>
+
+<block type="callout" kind="note">
+text: $splitIn tiene que ejecutarse primero, si no no hay nada que unir. Dale a $joinSplitOut un separador vacío y las piezas se unen con un espacio cada una.
+</block>
+</dash>
+
+<details>
+syntax: $joinSplitOut[separator]
+param: separator|text|Obligatorio|El texto colocado entre cada dos piezas
+</details>

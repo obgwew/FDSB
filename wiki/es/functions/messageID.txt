@@ -1,0 +1,31 @@
+<dash>
+name: $messageID
+desc: Te da el número largo que identifica el mensaje al que tu comando acaba de responder.
+category: Info
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $messageID devuelve el número que Discord le dio al mensaje que puso en marcha tu comando. Cada mensaje lleva el suyo, y nunca cambia, así que es la forma más segura de apuntar un comando posterior exactamente al mensaje que tienes delante. Es un valor y no un mensaje, así que entra directamente en una frase donde iría cualquier otro número.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !messageID en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $messageID
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: Your message ID is $messageID
+</block>
+
+<block type="callout" kind="note">
+text: El mismo número está al final del enlace del mensaje en Discord, así que siempre puedes comprobarlo a mano. Solo describe el mensaje que puso en marcha el comando.
+</block>
+</dash>

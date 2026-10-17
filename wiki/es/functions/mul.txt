@@ -1,0 +1,41 @@
+<dash>
+name: $mul
+desc: Multiplica los números que le das y devuelve el producto.
+category: Matemática y números
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Dale dos o más números separados por punto y coma y el bot calcula su producto. Dos números multiplicados entre sí, o toda una columna de ellos, devuelven una sola respuesta, así que $mul[3; 4] da 12 y $mul[2; 3; 4] da 24. Encaja perfectamente dentro de un mensaje, un título o el cuerpo de una tarjeta, lo que significa que un total acumulado o un precio puede escribirse en una sola línea.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !calc en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $mul[a; b; ...]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $sendMessage[$mul[3; 4]]
+</block>
+
+<block type="callout" kind="note">
+text: Necesitas al menos dos números y cada parte tiene que ser un número real, de lo contrario el comando se detiene con un error. Una respuesta que sea un número entero vuelve sin punto decimal, y cualquier otra conserva sus decimales.
+</block>
+
+<block type="callout" kind="important">
+text: Tiene que estar dentro de otro comando en lugar de en una línea propia, como muestra el ejemplo. Por sí solo no hay a dónde ir con la respuesta, así que el bot la reporta como un comando desconocido.
+</block>
+</dash>
+
+<details>
+syntax: $mul[a; b; ...]
+param: a|number|Obligatorio|El primer número a multiplicar
+param: b|number|Obligatorio|El segundo número a multiplicar. Añade tantos más como quieras.
+</details>

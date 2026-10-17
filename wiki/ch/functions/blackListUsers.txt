@@ -1,0 +1,31 @@
+<dash>
+name: $blackListUsers
+desc: 对名单上的用户中止该命令。
+category: 访问控制
+
+<block type="text" title="命令如何工作？">
+text: $blackListUsers 会查看触发命令的人，并与你列出的用户进行比较。如果匹配，机器人会显示你提供的拒绝消息（未提供时则显示默认消息），命令的其余部分将被丢弃。如果不在名单上，就不会输出任何内容，脚本继续执行。这是把特定的人挡在命令之外、又不必对所有人收紧限制的直接做法。
+</block>
+
+<block type="code" title="语法">
+text: $blackListUsers[user; ...; message]
+</block>
+
+<block type="code" title="可复制示例">
+text: $blackListUsers[@user; Sorry, you are not allowed to use this command!]
+</block>
+
+<block type="callout" kind="note">
+text: 用户可以写成提及、ID 或名称，按名称匹配时不区分大小写，其服务器昵称和全局名称也会一并检查。多个用户之间用分号分隔。最后一个参数之前的所有内容都视为用户，所以最后一个参数用来放你自定义的拒绝消息。
+</block>
+
+<block type="callout" kind="warning">
+text: 检查命中时命令会立即中止——其下方的任何一行都不会执行。省略自定义消息时，机器人会退回使用自己的默认措辞。
+</block>
+</dash>
+
+<details>
+syntax: $blackListUsers[user; ...; message]
+param: user|text|Required|被禁止的用户，可写成提及、ID 或名称，用分号分隔
+param: message|text|Optional|用户匹配时用来代替默认拒绝消息的显示内容
+</details>

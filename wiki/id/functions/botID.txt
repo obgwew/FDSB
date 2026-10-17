@@ -1,0 +1,31 @@
+<dash>
+name: $botID
+desc: Memberikan ID pengguna Discord bot itu sendiri sebagai angka panjang.
+category: Info
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Minta perintah ini, dan bot memposting ID akunnya sendiri ke kanal, tidak lebih dari deret angka. Bila sendirian, angka itulah satu-satunya yang dilihat orang di obrolan; bila diselipkan ke dalam sebuah baris, ia justru diisi di mana pun Anda mengetiknya. Nilai ini tidak pernah berubah untuk akun bot tertentu.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $botID
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $botID
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: My bot ID is $botID
+</block>
+
+<block type="callout" kind="note">
+text: ID Discord adalah sebuah snowflake — deret panjang angka seperti 123456789012345678. Nyalakan Developer Mode di pengaturan Discord, dan Anda dapat menyalin ID siapa pun dengan cara yang sama.
+</block>
+</dash>

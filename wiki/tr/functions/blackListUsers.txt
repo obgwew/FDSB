@@ -1,0 +1,31 @@
+<dash>
+name: $blackListUsers
+desc: Listede adı geçen herkes için komutu durdurur.
+category: Erişim Kontrolü
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $blackListUsers, komutu tetikleyen kişiye bakar ve sizin listelediğiniz kullanıcılarla karşılaştırır. Eşleşme olursa bot sizin ret mesajınızı gösterir (mesajı boş bıraktıysanız varsayılan birini) ve komutun geri kalanı yok sayılır. Kişi listede değilse hiçbir şey yazdırılmaz ve betik olduğu gibi devam eder. Bu, komutu herkes için sıkılaştırmadan belirli kişileri dışarıda tutmanın doğrudan yoludur.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $blackListUsers[user; ...; message]
+</block>
+
+<block type="code" title="Kopyalamaya Hazır Örnek">
+text: $blackListUsers[@user; Sorry, you are not allowed to use this command!]
+</block>
+
+<block type="callout" kind="note">
+text: Bir kullanıcı etiket olarak, kimliği olarak veya adıyla yazılabilir ve ad eşleştirmesi büyük/küçük harf fark etmez. Görünen adı ve global adı da kontrol edilir. Birden fazlasını noktalı virgülle ayırarak listeleyebilirsiniz. Son argümana kadar olan her şey kullanıcı olarak kabul edilir; özel ret mesajınız ise son argümanda yer alır.
+</block>
+
+<block type="callout" kind="warning">
+text: Kontrol başarılı olduğunda komut tam orada durur — altındaki hiçbir satır çalışmaz. Özel mesajı boş bırakırsanız bot kendi varsayılan ifadesine döner.
+</block>
+</dash>
+
+<details>
+syntax: $blackListUsers[user; ...; message]
+param: user|text|Required|Noktalı virgülle ayrılmış, etiket, kimlik veya ad olarak yazılan engellenen kullanıcılar
+param: message|text|Optional|Kullanıcı eşleştiğinde varsayılan ret mesajı yerine gösterilecek mesaj
+</details>

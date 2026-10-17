@@ -1,0 +1,39 @@
+<dash>
+name: $untimeout
+desc: Mencabut timeout yang sedang aktif pada anggota, sehingga mereka kembali memiliki izin normal.
+category: Moderasi
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Berikan mention atau ID anggota, lalu bot akan mencabut timeout yang sedang mereka jalani. Mereka bisa langsung mengirim pesan, memberikan reaksi, dan bergabung ke kanal suara lagi. Jika anggota tersebut tidak sedang dalam timeout, tidak ada perubahan yang terjadi dan perintah akan selesai tanpa pesan tambahan. Bot membutuhkan izin yang tepat untuk bisa melakukan ini: izin "Moderate Members" dan role tertinggi bot harus berada di atas anggota yang ditargetkan.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !untimeout
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $untimeout[user]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $untimeout[@user]
+</block>
+
+<block type="callout" kind="note">
+text: Jika anggota tidak sedang dalam timeout, perintah ini tidak akan mengubah apa-apa dan bot tidak akan mengirim konfirmasi. Cocok dipadukan dengan $timeout bila Anda ingin menambahkan pembatalan di dalam perintah yang sama.
+</block>
+
+<block type="callout" kind="warning">
+text: Tanpa izin "Moderate Members", atau jika role tertinggi bot berada di bawah role target, Discord akan menolak permintaan dan bot akan mengirim kesalahan ke kanal. Perintah ini hanya bisa digunakan di dalam server — kalau dipakai di DM, akan terjadi kesalahan.
+</block>
+</dash>
+
+<details>
+syntax: $untimeout[user]
+param: user|text|Wajib|Anggota yang ingin dicabut timeout-nya, bisa berupa mention (@) atau ID pengguna
+</details>

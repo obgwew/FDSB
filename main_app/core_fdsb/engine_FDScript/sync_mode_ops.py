@@ -3,183 +3,110 @@
 
 # main_app/core_fdsb/engine_FDScript/sync_mode_ops.py
 
-from .errors import FDAbortScript
-from .tokenizer import Command
+import discord
+
+print(f"[sync_mode_ops] loaded: {__file__} | syncMode single-message build 3")
 
 
-import asyncio
+def _given(value) -> bool:
+    return value is not None and value is not discord.utils.MISSING
+
+
+def sync_add_text(ctx, text: str, line_no: int | None = None) -> None:
+    if not text or not text.strip():
+        return
+    buf = ctx.text_buffer
+    if buf and not buf.endswith("\n"):
+        same_line = line_no is not None and getattr(ctx, "_last_text_line", None) == line_no
+        if same_line:
+            buf += "" if buf.endswith((" ", "\t")) else " "
+        else:
+            buf += "\n"
+    ctx.text_buffer = buf + text
+    ctx._last_text_line = line_no
+    ctx._sync_used = True
+
+
+def sync_merge_view(ctx, view) -> None:
+    if not _given(view) or not getattr(view, "children", None):
+        return
+    base = ctx._sync_view
+    if base is None or base is view:
+        ctx._sync_view = view
+        return
+    for item in list(view.children):
+        try:
+            view.remove_item(item)
+            base.add_item(item)
+        except Exception as e:
+            ctx.log_event(f"warning: syncMode could not merge a component: {e}")
+    ctx._sync_used = True
+
+
+class _SyncPlaceholder:
+    id = 0
+    embeds: list = []
+    attachments: list = []
+    author = None
+
+    def __init__(self, dest, content):
+        self.content = content or ""
+        self.channel = getattr(dest, "channel", dest)
+        self.guild = getattr(self.channel, "guild", None)
+
+    def __getattr__(self, name):
+        if name.startswith("__"):
+            raise AttributeError(name)
+
+        async def _noop(*_a, **_k):
+            return self
+        return _noop
+
+
+class _SyncCollector:
+    _SILENT = {"ephemeral", "allowed_mentions", "delete_after", "reference",
+               "mention_author", "silent", "suppress_embeds", "tts", "wait"}
+
+    def __init__(self, dest, ctx):
+        self._dest = dest
+        self._ctx = ctx
+
+    def __getattr__(self, name):
+        return getattr(self._dest, name)
+
+    async def send(self, content=None, *, embed=None, embeds=None, view=None,
+                   file=None, files=None, **kwargs):
+        ctx = self._ctx
+        if _given(content):
+            sync_add_text(ctx, str(content))
+        if _given(embed):
+            ctx._sync_embeds.append(embed)
+        if _given(embeds):
+            ctx._sync_embeds.extend(embeds)
+        if _given(file):
+            ctx._sync_files.append(file)
+        if _given(files):
+            ctx._sync_files.extend(files)
+        sync_merge_view(ctx, view)
+        ignored = [k for k in kwargs if k not in self._SILENT]
+        if ignored:
+            ctx.log_event(f"syncMode → ignored send option(s): {', '.join(ignored)}")
+        ctx._sync_used = True
+        ctx.log_event("syncMode → added to the single message")
+        return _SyncPlaceholder(self._dest, content if _given(content) else "")
 
 
 class SyncModeMixin:
-    _SYNC_CLOSERS  = ("endif", "elif", "else", "endwhile", "endfor", "break")
-    _SYNC_GUARDS   = ("onlyAdmin", "onlyIf")
-    _SYNC_BARRIERS = ("useChannel", "suppressErrors", "syncMode")
+    _SYNC_TIMERS = ("wait", "replyIn")
 
-    async def _exec_sync_mode(self, cmd, ctx) -> None:
-        ctx.log_event("syncMode → (no commands below it in this block)")
-
-    async def _exec_sync_block(self, tokens: list, start: int, ctx) -> int:
-
-        ctx.log_event("syncMode → commands below run together as one batch")
-
-        steps: list[tuple[int, int]] = []  
-
-        async def flush():
-            nonlocal steps
-            batch, steps = steps, []
-            await self._sync_run_batch(tokens, batch, ctx)
-
-        i = start
-        n = len(tokens)
-        while i < n:
-            tok = tokens[i]
-
-            if isinstance(tok, str):
-                end = self._sync_step_end(tokens, i)
-                steps.append((i, end))
-                i = end
-                continue
-
-            name = tok.name
-
-            if name in self._SYNC_CLOSERS:
-                break
-
-            if name in self._SYNC_GUARDS:
-                i = await self._exec_command_with_lookahead(tok, tokens, i + 1, ctx)
-                continue
-
-            if name in ("if", "while", "for"):
-                await flush()
-                handler = {"if": self._exec_if, "while": self._exec_while, "for": self._exec_for}[name]
-                i = await handler(tokens, i, ctx)
-                continue
-
-            if name == "func":
-                i = self._find_closer(tokens, i + 1, "func", "endfunc") + 1
-                continue
-            if name == "endfunc":
-                i += 1
-                continue
-            if name == "call":
-                await flush()
-                await self._exec_call(tok, tokens, ctx)
-                i += 1
-                continue
-
-            if name in self._SYNC_BARRIERS:
-                await flush()
-                i = await self._exec_command_with_lookahead(tok, tokens, i + 1, ctx)
-                continue
-
-            end = self._sync_step_end(tokens, i)
-            steps.append((i, end))
-            i = end
-
-        await flush()
-        return i
-
-    def _sync_step_end(self, tokens: list, i: int) -> int:
-
-        head = tokens[i]
-        end = i + 1
-
-        if isinstance(head, str):
-            follow = "addButton"
-        elif head.name in self._SEND_COMMANDS or head.name == "addButton":
-            follow = "addButton"
-        elif head.name == "editButton":
-            follow = "editButton"
-        else:
-            return end
-
-        j = end
-        got_wait = False
-        while j < len(tokens):
-            t = tokens[j]
-            if isinstance(t, str):
-                if not t.strip():
-                    j += 1
-                    continue
-                break
-            if isinstance(t, Command):
-                if t.name == follow:
-                    end = j + 1
-                    j += 1
-                    continue
-                if t.name == "wait" and not got_wait:
-                    got_wait = True
-                    end = j + 1
-                    break
-            break
-        return end
-
-    async def _sync_run_step(self, tokens: list, head: int, end: int, ctx, serialize_view: bool = False) -> None:
-        tok = tokens[head]
-        uses_view = serialize_view and (
-            isinstance(tok, str)
-            or tok.name in self._SEND_COMMANDS
-            or tok.name in ("addButton", "editButton")
-        )
-
-        async def _go():
-            if isinstance(tok, str):
-                await self._process_text_token(tokens, tok, head + 1, ctx)
-            else:
-                await self._exec_command_with_lookahead(tok, tokens, head + 1, ctx)
-
-        if uses_view:
-            lock = getattr(ctx, "_sync_view_lock", None)
-            if lock is None:
-                lock = ctx._sync_view_lock = asyncio.Lock()
-            async with lock:
-                await _go()
-        else:
-            await _go()
-
-    async def _sync_guard(self, tokens, head, end, ctx, serialize_view=False) -> None:
-        try:
-            await self._sync_run_step(tokens, head, end, ctx, serialize_view)
-        except (FDAbortScript, asyncio.CancelledError):
-            raise
-        except Exception as e:
-            ctx.log_event(f"warning: syncMode step failed: {e}")
-
-    async def _sync_run_batch(self, tokens: list, steps: list, ctx) -> None:
-
-        if not steps:
+    async def _flush_sync_batch(self, ctx) -> None:
+        if not ctx._sync_used:
             return
-
-        ctx.log_event(f"syncMode → launching {len(steps)} step(s) together")
-        serialize_view = any(
-            isinstance(t, Command) and t.name in ("addButton", "editButton")
-            for h, e in steps for t in tokens[h:e]
-        )
-        tasks = [asyncio.create_task(self._sync_guard(tokens, h, e, ctx, serialize_view)) for h, e in steps]
-
+        ctx._sync_flushing = True
         try:
-            _, pending = await asyncio.wait(tasks, return_when=asyncio.FIRST_EXCEPTION)
-        except asyncio.CancelledError:
-            for t in tasks:
-                t.cancel()
-            raise
-
-        if pending:
-            for t in pending:
-                t.cancel()
-            await asyncio.gather(*pending, return_exceptions=True)
-
-        abort = None
-        for t in tasks:
-            if t.cancelled():
-                continue
-            exc = t.exception()
-            if isinstance(exc, FDAbortScript) and abort is None:
-                abort = exc
-        if abort is not None:
-            raise abort
-
-        await self._drain_pending_inline(ctx)
+            await self._flush_sync_message(ctx)
+        finally:
+            ctx._sync_flushing = False
 
     async def await_sync_tasks(self, ctx) -> None:
         return

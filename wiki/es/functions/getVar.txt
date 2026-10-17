@@ -1,0 +1,38 @@
+<dash>
+name: $getVar
+desc: Lee una variable guardada, ya sea el valor compartido o el propio de un miembro.
+category: Variables
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Dale un nombre y recibes de vuelta lo que esté guardado bajo él. Un nombre devuelve el valor compartido por todos, mientras que un nombre más un ID de usuario devuelve el valor propio de esa persona para el mismo nombre y recurre al compartido cuando no tiene ninguno. El resultado aparece en el canal, o se rellena en línea donde lo hayas escrito.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Crea la variable primero en la pestaña de Variables
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !welcome en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $getVar[name]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $getVar[mySetting]
+</block>
+
+<block type="callout" kind="note">
+text: Las variables guardadas conservan su valor entre reinicios del bot. Si pides un nombre que nunca se guardó, el bot lo crea vacío, publica un aviso y detiene tu comando, así que revisa la ortografía.
+</block>
+</dash>
+
+<details>
+syntax: $getVar[name; (userID)]
+param: name|text|Obligatorio|La variable guardada que leer
+param: userID|snowflake|Opcional|De qué miembro leer su propio valor; déjalo vacío para el compartido
+</details>

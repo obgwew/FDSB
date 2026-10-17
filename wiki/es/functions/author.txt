@@ -1,0 +1,37 @@
+<dash>
+name: $author
+desc: Nombra a la persona o al equipo que se muestra en la parte superior de una tarjeta.
+category: Constructor de embed
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Escribe un nombre y ocupa el lugar de la firma en la parte superior de la tarjeta que construye tu comando. El icono y el enlace que ya le diste a esa firma se quedan exactamente como estaban, así que puedes establecer primero la imagen o la dirección clicable y después el nombre. Añade una segunda parte y eliges qué tarjeta se ve afectada cuando tu mensaje lleva más de una.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $author en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $author[name;(index)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $author[Server Staff Team]
+</block>
+
+<block type="callout" kind="note">
+text: Establece primero el nombre, luego añade una imagen con $authorIcon y un enlace con $authorURL, y los tres se juntan en la parte superior de la tarjeta.
+</block>
+</dash>
+
+<details>
+syntax: $author[name;(index)]
+param: name|text|Obligatorio|El nombre que mostrar en la firma de la tarjeta
+param: index|number|Opcional|Qué tarjeta cambiar cuando construyes varias (1 de forma predeterminada)
+</details>

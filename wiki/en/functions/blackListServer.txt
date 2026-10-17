@@ -1,0 +1,41 @@
+<dash>
+name: $blackListServer
+desc: Blocks this command from running in any server on the list.
+category: Access Control
+
+<block type="text" title="How does the command work?">
+text: $blackListServer checks which server the command is being run in and compares it against the ones you listed. If the current server is a match the bot shows your refusal message, or a default one if you left it out, and the rest of the command is thrown away. If it is not on the list, nothing is printed and the script simply carries on. It is the clean way to keep a command away from particular places while leaving it open everywhere else.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !servers
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: $blackListServer[server; ...; message]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $blackListServer[123456789012345678; Sorry, this server cannot use the command!]
+</block>
+
+<block type="callout" kind="note">
+text: A server can be written as its ID or as its name, and the name is matched without worrying about capital letters. List several by separating them with semicolons. Everything up to the last argument is treated as a server, so the final argument is where your custom refusal goes.
+</block>
+
+<block type="callout" kind="warning">
+text: When the check succeeds the command stops right there — no line below it runs at all. Leave the custom message out and the bot falls back to wording of its own.
+</block>
+</dash>
+
+<details>
+syntax: $blackListServer[server; ...; message]
+param: server|text|Required|The blocked servers, as IDs or names, separated by semicolons
+param: message|text|Optional|A message to show instead of the default refusal when the server matches
+</details>

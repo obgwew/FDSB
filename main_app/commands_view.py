@@ -3,8 +3,6 @@
 
 # -*- coding: utf-8 -*-
 # main_app/commands_view.py . migrated to Flet 0.85.2+ / v1 API
-#
-# The editor is now flet-code-editor-dsl's EditorRegex (regex-based engine)
 
 import os
 import re
@@ -17,11 +15,12 @@ from flet_code_editor_dsl import (
     ErrorPattern,
     FoldRule,
     VerticalMode,
+    ScrollMode,
 )
 
 from main_app.theme.theme_engine import ThemeEngine
-from main_app.langs.translations import Translations
-from main_app.settings import get_current_lang, is_mobile
+from main_app.langs._translations import Translations
+from main_app.settings_app import get_current_lang, is_mobile
 
 try:
     from main_app.core_fdsb.FDCore import (
@@ -36,21 +35,13 @@ except ImportError:
     FUNCTION_COMMANDS = {"func", "endfunc", "call"}
 
 from main_app.core_fdsb.Server import EVENT_PREFIXES
-    
+
+
 def _t(key: str) -> str:
     return Translations.get(key, get_current_lang())
 
 def _wiki_lang() -> str:
     return (get_current_lang() or 'en').lstrip('_')
-
-def _t_or(key: str, fallback: str = '') -> str:
-    try:
-        val = _t(key)
-    except Exception:
-        val = None
-    if not val or val == key:
-        return fallback
-    return val
 
 def _ar(text: str) -> str:
     return text
@@ -68,12 +59,22 @@ _MAX_VISIBLE_LINES = 40
 _EDITOR_DEBOUNCE_MS = 100
 _SHOW_ERRORS = True
 
+_SELECTION_MENU_ITEMS = ["cut", "copy", "paste", "select_all", "undo", "redo"]
+_MAGNIFIER_SIZE   = 110.0
+_MAGNIFIER_ZOOM   = 1.6
+_SCROLL_MODE      = ScrollMode.PAGE_FIRST
+
+_UNDERLINE_UNKNOWN_DOLLAR = False
+
 _FOLD_PAIRS = (
     ("if", "endif"),
     ("while", "endwhile"),
     ("for", "endfor"),
     ("func", "endfunc"),
 )
+
+_NAME_END  = r"(?![\w\u0080-\uFFFF])"
+_NAME_BODY = r"[A-Za-z_][\w\u0080-\uFFFF]*"
 
 
 def _safe_hex(key: str, default: str) -> str:
@@ -98,36 +99,57 @@ def _hl_colors_from(g) -> dict:
     }
 
 
+def _alt(words) -> str:
+    return "|".join(re.escape(w) for w in sorted(words, key=len, reverse=True))
+
+
+def _command_sets():
+    control = set(CONTROL_FLOW_COMMANDS)
+    func    = set(FUNCTION_COMMANDS) - control
+    known   = set(KNOWN_COMMANDS) - control - set(FUNCTION_COMMANDS)
+    return control, func, known
+
+
+def _dollar_rule(words, color):
+    if not words:
+        return None
+    return HighlightRule(r"\$(?:" + _alt(words) + r")" + _NAME_END, color)
+
+
 def _build_regex_rules(colors: dict) -> list:
-    """قواعد التلوين عبر محرك Regex لتلوين $ مع الأمر الصحيح فقط."""
-    control_set = set(CONTROL_FLOW_COMMANDS)
-    func_set    = set(FUNCTION_COMMANDS) - control_set
-    known_set   = set(KNOWN_COMMANDS) - control_set - set(FUNCTION_COMMANDS)
+    control, func, known = _command_sets()
 
-    rules = []
+    rules = [
+        HighlightRule(r"#.*", colors['comment']),
+        HighlightRule(r'"[^"\n]*"', colors['string']),
+        HighlightRule(r"'[^'\n]*'", colors['string']),
+    ]
 
-    rules.append(HighlightRule(r"#.*", colors['comment']))
-
-    rules.append(HighlightRule(r'"[^"\n]*"', colors['string']))
-    rules.append(HighlightRule(r"'[^'\n]*'", colors['string']))
-
-    if control_set:
-        pat = r"\$(?:" + "|".join(re.escape(w) for w in sorted(control_set, key=len, reverse=True)) + r")\b"
-        rules.append(HighlightRule(pat, colors['control']))
-
-    if func_set:
-        pat = r"\$(?:" + "|".join(re.escape(w) for w in sorted(func_set, key=len, reverse=True)) + r")\b"
-        rules.append(HighlightRule(pat, colors['func']))
-
-    if known_set:
-        pat = r"\$(?:" + "|".join(re.escape(w) for w in sorted(known_set, key=len, reverse=True)) + r")\b"
-        rules.append(HighlightRule(pat, colors['known']))
+    for words, key in ((control, 'control'), (func, 'func'), (known, 'known')):
+        rule = _dollar_rule(words, colors[key])
+        if rule:
+            rules.append(rule)
 
     rules.append(HighlightRule(r";", colors['semi']))
-
     rules.append(HighlightRule(r"[\[\]]", colors['bracket']))
-
     return rules
+
+
+def _build_error_rules() -> list:
+    if not _SHOW_ERRORS:
+        return []
+
+    errors = [ErrorPattern(r'"[^"\n]*$', "Unterminated string")]
+
+    if _UNDERLINE_UNKNOWN_DOLLAR:
+        control, func, known = _command_sets()
+        valid = control | func | known
+        if valid:
+            errors.append(ErrorPattern(
+                r"\$(?!(?:" + _alt(valid) + r")" + _NAME_END + r")" + _NAME_BODY,
+                "Unknown command",
+            ))
+    return errors
 
 
 def _bot_root_from_dir(bot_dir: str) -> str:
@@ -410,7 +432,7 @@ class CommandEditorView:
         self._on_wiki_request = on_wiki_request
         self._bot_dir  = ''
         self._cmd_path = ''
-        
+
         self._last_lines_count = 1
         self._body_col = None
         self._is_mobile = is_mobile()
@@ -485,12 +507,10 @@ class CommandEditorView:
             if a in openers_closers and b in openers_closers
         ]
 
-        error_rules = [ErrorPattern(r'"[^"\n]*$', "Unterminated string")] if _SHOW_ERRORS else []
-
         self._editor = EditorRegex(
             value='',
             rules=_build_regex_rules(self._hl_colors),
-            error_rules=error_rules,
+            error_rules=_build_error_rules(),
             folds=folds,
             fold_by_indent=False,
             line_numbers=True,
@@ -498,9 +518,9 @@ class CommandEditorView:
             show_errors=_SHOW_ERRORS,
             code_folding=True,
             wrap=False,
-            vertical_mode=VerticalMode.BOUNDED,
+            vertical_mode=VerticalMode.UNBOUNDED if self._is_mobile else VerticalMode.BOUNDED,
             min_lines=min_lines,
-            max_lines=_MAX_VISIBLE_LINES,
+            max_lines=None if self._is_mobile else _MAX_VISIBLE_LINES,
             width_level=30,
             font_family='monospace' if self._is_mobile else 'Consolas',
             font_size=_HL_FONT_SIZE,
@@ -508,12 +528,20 @@ class CommandEditorView:
             background_color=_c('card_bg'),
             debounce_ms=_EDITOR_DEBOUNCE_MS,
             on_change=self._on_code_change,
+            selection_menu=True,                       
+            selection_menu_items=_SELECTION_MENU_ITEMS,
+            mobile_controls=False,
+            cursor_pad=False,
+            magnifier=None,                            
+            magnifier_size=_MAGNIFIER_SIZE,
+            magnifier_zoom=_MAGNIFIER_ZOOM,
+            scroll_mode=_SCROLL_MODE,
         )
 
         self._title_text = ft.Text(
             _t('new_command_file'), size=13, weight=ft.FontWeight.BOLD, color=_c('text')
         )
-        
+
         self._dirty_dot = ft.Container(
             width=7, height=7,
             bgcolor=_c('warning'),
@@ -558,7 +586,7 @@ class CommandEditorView:
         self._name_field.focused_border_color = _c('danger')
 
     def _set_name_taken_error(self):
-        self._name_field.error                = _t_or('name_taken')
+        self._name_field.error                = _t('name_taken')
         self._name_field.border_color         = _c('danger')
         self._name_field.focused_border_color = _c('danger')
 
@@ -775,9 +803,9 @@ class CommandEditorView:
 
         side_controls = ft.Row(
             [
-                switch_block, 
+                switch_block,
                 ft.Container(width=1, height=44, bgcolor=_c('card_border')),
-                stats_col,    
+                stats_col,
             ],
             spacing=6,
             vertical_alignment=ft.CrossAxisAlignment.CENTER,
@@ -835,7 +863,7 @@ class CommandEditorView:
                 ft.Text(_t('command_editor'), size=12, weight=ft.FontWeight.BOLD, color=_c('text')),
                 editor_area,
                 self._kb_spacer,
-                ft.Container(height=70), 
+                ft.Container(height=70),
             ],
             spacing=10,
             expand=True,
@@ -1110,19 +1138,20 @@ class CommandsListView:
             expand=True,
         )
 
-    def load(self, bot_dir: str):
+    def load(self, bot_dir: str, show_loading: bool = True):
         self._bot_dir  = bot_dir
-        self._list_col.controls.clear()
-        self._list_col.controls.append(
-            ft.Container(
-                content=ft.ProgressRing(color=_c('accent')),
-                alignment=ft.Alignment(0, 0),
-                padding=ft.Padding(0, 40, 0, 0)
+        if show_loading or not self._all_cmds:
+            self._list_col.controls.clear()
+            self._list_col.controls.append(
+                ft.Container(
+                    content=ft.ProgressRing(color=_c('accent')),
+                    alignment=ft.Alignment(0, 0),
+                    padding=ft.Padding(0, 40, 0, 0)
+                )
             )
-        )
-        self._count_label.value = _t('loading')
-        if self._page:
-            self._page.update()
+            self._count_label.value = _t('loading')
+            if self._page:
+                self._page.update()
 
         self._page.run_task(self._async_load_task)
 
@@ -1266,7 +1295,7 @@ class BotCommandsTab:
         self._bot_dir     = ''
         self._in_editor   = False
         self._on_wiki_events_req = on_wiki_events_req
-        
+
         self._list_view   = CommandsListView(page, on_open=self._open_editor)
         self._editor_view = CommandEditorView(
             page,
@@ -1274,13 +1303,15 @@ class BotCommandsTab:
             on_saved=self._on_editor_saved,
             on_wiki_request=self._on_wiki_events_req
         )
-        
+
         self._container = ft.Container(content=None, expand=True)
+        self._list_content = None
 
     def _list_ui(self, *args) -> ft.Control:
-        content = self._list_view.build()
-        content.key = "cmds_list"
-        return content
+        if self._list_content is None:
+            self._list_content = self._list_view.build()
+            self._list_content.key = "cmds_list"
+        return self._list_content
 
     def dispose(self):
         self._list_view.dispose()
@@ -1295,8 +1326,15 @@ class BotCommandsTab:
             return True
         return False
 
+    def on_show(self):
+        if not self._in_editor and self._bot_dir and not self._list_view._all_cmds:
+            self._list_view.load(self._bot_dir, show_loading=True)
+
+    def on_hide(self):
+        pass
+
     def _on_editor_saved(self):
-        self._list_view.load(self._bot_dir)
+        self._list_view.load(self._bot_dir, show_loading=False)
 
     def build(self) -> ft.Control:
         content = self._list_ui()
@@ -1306,7 +1344,7 @@ class BotCommandsTab:
     def load_bot(self, bot_dir: str):
         self._bot_dir   = bot_dir
         self._in_editor = False
-        self._list_view.load(bot_dir)
+        self._list_view.load(bot_dir, show_loading=True)
         content = self._list_ui()
         self._container.content = content
         if self._page:
@@ -1327,24 +1365,24 @@ class BotCommandsTab:
 
     def _close_editor(self):
         self._in_editor = False
-        self._list_view.load(self._bot_dir)
         content = self._list_ui()
         self._container.content = content
         if self._page:
             self._page.update()
 
     def guard_tab_change(self, on_proceed: callable, on_cancel: callable = None):
-        if self._in_editor and self._editor_view.is_dirty:
-            def _proceed_with_refresh():
-                self._list_view.load(self._bot_dir)
-                self._in_editor = False
-                content = self._list_ui()
-                self._container.content = content
-                on_proceed and on_proceed()
-
-            self._editor_view.guard_navigation(_proceed_with_refresh, on_cancel)
-        else:
+        def _reset_then_proceed():
+            self._in_editor = False
+            content = self._list_ui()
+            self._container.content = content
+            if self._page:
+                self._page.update()
             on_proceed and on_proceed()
+
+        if self._in_editor and self._editor_view.is_dirty:
+            self._editor_view.guard_navigation(_reset_then_proceed, on_cancel)
+        else:
+            _reset_then_proceed()
 
 
 def _stat_col(heading: str, value_ctrl: ft.Text) -> ft.Column:

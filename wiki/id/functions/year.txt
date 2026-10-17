@@ -1,0 +1,35 @@
+<dash>
+name: $year
+desc: Mengembalikan tahun saat ini dalam bentuk 4 digit, seperti 2026.
+category: Waktu & Jeda
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $year membaca jam saat ini dan mengembalikan tahun dalam format 4 digit. Bisa disisipkan langsung ke dalam teks, atau ditulis di baris sendiri dan bot akan mengirim angka tahun tersebut ke kanal. Nilainya hanya berubah sekali setahun, jadi cocok dipakai untuk membentuk tanggal.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !year
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $year
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $sendMessage[Welcome to $year!]
+</block>
+
+<block type="callout" kind="note">
+text: Selalu dikembalikan dalam 4 digit, jadi aman untuk dipadukan dengan $day dan $month saat membentuk tanggal lengkap.
+</block>
+
+<block type="callout" kind="important">
+text: $day, $month, dan $year mengikuti jam lokal bot. Zona waktu yang diatur lewat $time hanya berpengaruh pada $hour, $minute, dan $second.
+</block>
+</dash>

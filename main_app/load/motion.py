@@ -12,18 +12,16 @@ import flet as ft
 
 # ─────────────────────────────  tuning knobs  ─────────────────────────────
 
-SLIDE_MS          = 220                     # مدة حركة الانزلاق بالمللي ثانية
+SLIDE_MS          = 220                    
 SLIDE_CURVE       = ft.AnimationCurve.EASE_OUT_CUBIC
 
-SWIPE_ENABLED     = True                    # تفعيل السحب للتنقل
-SWIPE_ALLOW_MOUSE = True                    # دعم السحب بالفأرة أيضاً
-DRAG_INTERVAL_MS  = 16                      # معدل تحديث حركة السحب
-DEAD_ZONE_PX      = 12                      # منطقة الموت لتفادي اللمسات العرضية
-COMMIT_FRACTION   = 0.25                    # نسبة السحب المطلوبة لتأكيد التبديل
-FLING_VELOCITY    = 500.0                   # سرعة النفضة السريعة للتبديل
+SWIPE_ENABLED     = True                    
+SWIPE_ALLOW_MOUSE = True                    
+DRAG_INTERVAL_MS  = 16                      
+DEAD_ZONE_PX      = 12                      
+COMMIT_FRACTION   = 0.25                    
+FLING_VELOCITY    = 500.0                   
 FLING_MIN_PX      = 25.0
-
-# ──────────────────────────────────────────────────────────────────────────
 
 _ids = itertools.count(1)
 
@@ -33,11 +31,6 @@ def _instant_anim() -> ft.Animation:
 
 
 class SlideStack:
-    """
-    يعرض واجهة واحدة في كل مرة مع حركة انزلاق أفقية سلسة (Slide Animation)،
-    متوافق تماماً مع Flet 0.85+ بدون مشاكل تجميد العناصر.
-    """
-
     def __init__(self, page: ft.Page, duration: int = SLIDE_MS):
         self._page     = page
         self._duration = int(duration)
@@ -49,17 +42,12 @@ class SlideStack:
         self._side     = 0
         self._dragging = False
 
-        # Stack أساسي يحوي الطبقات المعروضة
         self.control = ft.Stack(
             [], expand=True, clip_behavior=ft.ClipBehavior.HARD_EDGE
         )
 
     @staticmethod
     def make_slot(content: ft.Control, key: str = None) -> ft.Container:
-        """
-        إنشاء حاوية جديدة مجهزة للأنيميشن.
-        """
-        # في Flet v1 لا نضع key إجباري على الحاوية لتفادي التجميد
         return ft.Container(
             content=content,
             key=key,
@@ -134,8 +122,6 @@ class SlideStack:
             self._finish_locked()
             self._push()
 
-    # ── التبديل البرمجي مع أنيميشن الانزلاق ──────────────────────────
-
     def show(self, content: ft.Control, direction: int = 0, push: bool = True):
         with self._lock:
             if self._cur is not None and getattr(self._cur, 'content', None) is content:
@@ -154,7 +140,6 @@ class SlideStack:
                     self._push()
                 return
 
-            # حالة البداية أو بدون أنيميشن
             if cur is None or direction == 0:
                 try:
                     slot.animate_offset = _instant_anim()
@@ -167,13 +152,10 @@ class SlideStack:
                     self._push()
                 return
 
-            # تجهيز أنيميشن الانزلاق:
-            # 1. وضع الشاشة الجديدة خارج مجال الرؤية بناءً على الاتجاه (يمين أو يسار)
             try:
                 slot.animate_offset = _instant_anim()
                 slot.offset = ft.Offset(float(direction), 0.0)
             except Exception:
-                # إذا كانت الحاوية مجمدة من Flet، نغلف محتواها في حاوية جديدة تماماً
                 slot = self.make_slot(slot.content)
                 slot.offset = ft.Offset(float(direction), 0.0)
 
@@ -181,7 +163,6 @@ class SlideStack:
             self._cur = slot
             self._push()
 
-            # 2. إطلاق أنيميشن الانزلاق في الإطار التالي
             def _start_slide():
                 with self._lock:
                     if self._cur is not slot:
@@ -194,14 +175,11 @@ class SlideStack:
                         slot.offset         = ft.Offset(0.0, 0.0)
                         self._push(cur, slot)
                     except Exception:
-                        # في حال تعثر الأنيميشن، يتم إظهار الشاشة فوراً
                         self._finish()
                         return
                     self._start_timer(self._duration / 1000.0 + 0.05, self._finish)
 
             self._start_timer(0.025, _start_slide)
-
-    # ── التبديل التفاعلي عبر السحب باللمس (Swipe) ─────────────────────
 
     def drag_begin(self, neighbour, side: int) -> bool:
         with self._lock:
@@ -269,7 +247,6 @@ class SlideStack:
 
 
 class SwipeController:
-    """متحكم السحب باللمس لتبديل التبويبات بالانزلاق"""
 
     def __init__(self, page: ft.Page, stack: SlideStack, neighbour, can_swipe, on_commit):
         self._page      = page

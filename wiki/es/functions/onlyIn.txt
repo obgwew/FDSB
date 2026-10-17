@@ -1,0 +1,47 @@
+<dash>
+name: $onlyIn
+desc: Permite que el comando se ejecute solo dentro de los canales o servidores listados, y muestra tu propio mensaje en cualquier otro sitio.
+category: Control de acceso
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $onlyIn comprueba dónde se usó el comando antes de ejecutar nada. Lista los canales y servidores permitidos, y termina con el mensaje que deberían ver todos los demás. Si el comando se usó en uno de ellos, no pasa nada y el resto de tu comando continúa. En cualquier otro sitio, el mensaje se envía y el resto del comando se descarta justo ahí.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $onlyIn[channel or server ID or name; ...; error message]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $onlyIn[123456789012345678; general; Use this command in #general.]
+text: $sendMessage[Welcome!]
+</block>
+
+<block type="options" title="Lo que puedes listar">
+option: channel ID|Un ID de canal como 123456789012345678, con o sin las marcas #
+option: channel name|Un nombre de canal como general
+option: server ID or name|El ID o el nombre de un servidor, para que el comando también funcione en el canal correspondiente de ese servidor
+</block>
+
+<block type="callout" kind="note">
+text: Pon el mensaje al final — todo lo que va después de las entradas cuenta como un solo mensaje. Listar el nombre de un servidor permite que el comando se ejecute en cualquier canal de ese servidor.
+</block>
+
+<block type="callout" kind="important">
+text: La comprobación mira el canal donde se escribió el comando. En un mensaje directo no hay canal ni servidor con el que comparar, así que el comando siempre se bloquea ahí.
+</block>
+</dash>
+
+<details>
+syntax: $onlyIn[channel or server ID or name; ...; error message]
+param: channel or server ID or name|text|Obligatorio|Uno o más IDs de canal, nombres de canal, IDs de servidor o nombres de servidor permitidos.
+param: error message|text|Obligatorio|Mensaje enviado al canal cuando el comando se usó en otro sitio. Todo lo que va después de las entradas cuenta como este mensaje.
+</details>

@@ -1,0 +1,38 @@
+<dash>
+name: $checkContains
+desc: Devuelve true o false según si un texto contiene al menos una de las frases que enumeras.
+category: Utilidades de texto
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $checkContains mira un texto y una o más frases, y responde con la palabra true o false. Responde true en cuanto una sola frase aparece dentro del texto, así que nunca necesitas comprobar cada frase por tu cuenta. Una frase vacía solo coincide con un texto vacío. Por sí solo imprime la respuesta en el canal, y dentro de otro comando la respuesta se inserta en su lugar.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $checkContains[text; phrase; ...]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $if[$checkContains[$message; hello; hi; hey]]
+text:   $sendMessage[Say hello back!]
+text: $endif
+</block>
+
+<block type="callout" kind="note">
+text: La respuesta es siempre la palabra simple true o false, que es lo que esperan $if y $onlyIf. Necesitas al menos dos argumentos — el texto más una frase.
+</block>
+</dash>
+
+<details>
+syntax: $checkContains[text; phrase; ...]
+param: text|text|Obligatorio|El texto en el que buscar. Los comandos anidados como $message se resuelven primero.
+param: phrase|text|Obligatorio|Una o más frases que buscar. El resultado es true si alguna de ellas aparece en el texto.
+</details>

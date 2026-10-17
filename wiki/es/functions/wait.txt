@@ -1,0 +1,42 @@
+<dash>
+name: $wait
+desc: Detiene tu comando un rato para que las siguientes líneas lleguen más tarde.
+category: Tiempos y esperas
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $wait está pensado para pausar todo durante un lapso determinado, de modo que las líneas que tiene debajo solo empiezan cuando se cumple el tiempo. Una duración es un número más una unidad: s para segundos, m para minutos, h para horas, d para días. Todo lo que ya hayas escrito por encima de la pausa se envía antes de que empiece, que es como una línea corta llega enseguida y el resto llega después.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !wait en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $wait[time]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $sendMessage[Starting...]
+text: $wait[5s]
+text: $sendMessage[Done after 5 seconds!]
+</block>
+
+<block type="callout" kind="note">
+text: Mientras la pausa transcurre, solo se retrasa el comando que la pidió, y los comandos de los demás siguen con normalidad.
+</block>
+
+<block type="callout" kind="important">
+text: En la versión que estás ejecutando la pausa no se aplica. La línea se omite y las líneas de debajo empiezan de inmediato, así que en realidad no se retiene nada por ti.
+</block>
+</dash>
+
+<details>
+syntax: $wait[time]
+param: time|text|Obligatorio|Cuánto esperar, como un número más s, m, h o d, por ejemplo 5s, 10m o 1h
+</details>

@@ -1,0 +1,47 @@
+<dash>
+name: $onlyIn
+desc: Mengizinkan perintah berjalan hanya di dalam kanal atau server yang tercantum, dan menampilkan pesan Anda sendiri di mana pun lagi.
+category: Kontrol Akses
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $onlyIn memeriksa di mana perintah digunakan sebelum menjalankan apa pun. Cantumkan kanal-kanal dan server-server yang diizinkan, lalu akhiri dengan pesan yang harus dilihat semua orang lain. Jika perintah digunakan di salah satu dari mereka, tidak terjadi apa-apa dan sisa perintah Anda berlanjut. Di mana pun lagi, pesan dikirim dan sisa perintah dibuang tepat di situ.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $onlyIn[channel or server ID or name; ...; error message]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $onlyIn[123456789012345678; general; Use this command in #general.]
+text: $sendMessage[Welcome!]
+</block>
+
+<block type="options" title="Apa yang bisa Anda cantumkan">
+option: channel ID|ID kanal seperti 123456789012345678, dengan atau tanpa tanda #
+option: channel name|Nama kanal seperti general
+option: server ID or name|ID atau nama sebuah server, sehingga perintah juga berfungsi di kanal yang sesuai di server itu
+</block>
+
+<block type="callout" kind="note">
+text: Letakkan pesannya di akhir — semua yang setelah entri dihitung sebagai satu pesan. Mencantumkan nama server membuat perintah berjalan di kanal mana pun server itu.
+</block>
+
+<block type="callout" kind="important">
+text: Pemeriksaan melihat kanal tempat perintah diketik. Dalam pesan langsung tidak ada kanal atau server untuk dicocokkan, sehingga perintah selalu diblokir di sana.
+</block>
+</dash>
+
+<details>
+syntax: $onlyIn[channel or server ID or name; ...; error message]
+param: channel or server ID or name|text|Wajib|Satu atau lebih ID kanal, nama kanal, ID server atau nama server yang diizinkan.
+param: error message|text|Wajib|Pesan yang dikirim ke kanal saat perintah digunakan di tempat lain. Semua yang setelah entri dihitung sebagai pesan ini.
+</details>

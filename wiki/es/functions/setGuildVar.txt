@@ -1,0 +1,38 @@
+<dash>
+name: $setGuildVar
+desc: Recuerda un valor para un servidor y lo mantiene ahí hasta que lo cambies.
+category: Variables
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $setGuildVar escribe un valor bajo un nombre que elijas y lo conserva para un solo servidor, así que todos los demás servidores donde está el bot siguen con su propia copia aparte. Dale un nombre y un valor y lo guarda para el servidor donde se usó el comando. Añade un ID de servidor como tercera parte y el valor se registra bajo ese servidor en su lugar, lo que permite que un solo comando alimente toda una lista de servidores en una única ejecución.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Crea la variable primero en la pestaña de Variables
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !welcome en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $setGuildVar[name; value; (guild_id)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $setGuildVar[welcomeMessage; Welcome!; 123456789012345678]
+</block>
+
+<block type="callout" kind="important">
+text: El valor se escribe de inmediato, pero si el nombre aún no está en la pestaña de Variables, el comando igualmente se detiene con un error después. Crea la variable ahí primero y la siguiente ejecución la guardará sin complicaciones.
+</block>
+</dash>
+
+<details>
+syntax: $setGuildVar[name; value; (guild_id)]
+param: name|text|Obligatorio|El nombre bajo el que se registra el valor
+param: value|text|Obligatorio|Qué recordar
+param: guildID|text|Opcional|A qué servidor pertenece. Omítelo para usar el actual.
+</details>

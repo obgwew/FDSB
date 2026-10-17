@@ -1,0 +1,33 @@
+<dash>
+name: $endif
+desc: Cierra un bloque de condición y le dice al bot que siga con las líneas de debajo.
+category: Control de flujo
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $endif cierra una prueba que abriste con $if, $elif o $else. El bot lee la condición, ejecuta las líneas de debajo solo cuando la respuesta es sí, y luego llega a $endif y pasa a lo que venga después en tu comando. Anida tantas pruebas unas dentro de otras como quieras, siempre que cada una tenga su propia línea de cierre.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !check en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $endif
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $if[$authorID == 123456789]
+text:   Hello Admin!
+text: $endif
+</block>
+
+<block type="callout" kind="warning">
+text: Empareja cada $if con su propio $endif. Si dejas fuera la línea de cierre, el bot no se detiene con un error: simplemente sigue tratando todo lo que va después de la prueba como parte del bloque, así que comandos que esperabas que se ejecutaran siempre pueden saltarse sin avisar.
+</block>
+</dash>

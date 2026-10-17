@@ -1,0 +1,38 @@
+<dash>
+name: $for
+desc: Ejecuta el bloque de líneas que tiene debajo un número de veces determinado.
+category: Control de flujo
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Dale un número entero y cada línea que coloques antes de $endfor se ejecuta exactamente ese número de veces, una tras otra. Ponlo en cero o por debajo y se salta todo el bloque. En cualquier parte de dentro, $break corta el bucle y continúa con el resto de tu comando.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !countdown en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $for[count]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $for[5]
+text:   $sendMessage[Iteration!]
+text: $endfor
+</block>
+
+<block type="callout" kind="note">
+text: La cuenta tiene que ser un número entero, de lo contrario el bot publica un error y trata el bucle como si se hubiera ejecutado cero veces. $for y $endfor siempre van en pareja, y un bucle puede anidarse dentro de otro tan profundo como quieras.
+</block>
+</dash>
+
+<details>
+syntax: $for[count]
+param: count|number|Obligatorio|Cuántas veces ejecutar el bloque; cualquier valor por debajo de cero lo salta
+</details>

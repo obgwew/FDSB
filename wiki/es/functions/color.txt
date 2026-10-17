@@ -1,0 +1,36 @@
+<dash>
+name: $color
+desc: Pinta la franja de color a un lado de tu tarjeta de embed.
+category: Constructor de embed
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: La tarjeta que tu comando está construyendo toma su color de esta línea, que se muestra como la franja del borde izquierdo cuando la tarjeta se envía al final. Usa un valor hexadecimal como #FF5733 o uno de los nombres de color y ese es el tono que obtienes. Cualquier cosa que el bot no pueda interpretar vuelve tranquilamente a la barra gris oscura habitual.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !welcome en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $color[hex or name]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $color[#FF5733]
+</block>
+
+<block type="callout" kind="note">
+text: Déjalo fuera y la tarjeta mantiene la franja oscura predeterminada. ¿Estás construyendo varias tarjetas a la vez? Añade el número de tarjeta después del color para pintarlas una por una.
+</block>
+</dash>
+
+<details>
+syntax: $color[hex or name]
+param: hex or name|text|Obligatorio|Un valor hexadecimal como #FF5733, o un nombre de color
+</details>

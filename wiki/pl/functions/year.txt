@@ -1,0 +1,25 @@
+<dash>
+name: $year
+desc: Zwraca bieżący rok, jako cztery cyfry, np. 2026.
+category: Czas i opóźnienia
+
+<block type="text" title="Jak działa komenda?">
+text: $year odczytuje zegar i zwraca bieżący rok w całości, na czterech cyfrach, więc pokazuje 2026, a nie skrócone 26. Wstaw go w linijkę tekstu, a cyfry wylądują tam, gdzie je umieścisz, albo zostaw go w osobnej linii, a bot opublikuje tę liczbę na kanale. Zmienia się tylko raz w roku, co czyni go stabilnym budulcem dat.
+</block>
+
+<block type="code" title="Składnia">
+text: $year
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $sendMessage[Welcome to $year!]
+</block>
+
+<block type="callout" kind="note">
+text: Rok zawsze wraca jako cztery cyfry, więc zawsze można go bezpiecznie umieścić na końcu daty złożonej z $day i $month.
+</block>
+
+<block type="callout" kind="important">
+text: $day, $month i $year odczytują własny zegar lokalny bota. Strefa czasowa ustawiona przez $time jest przestrzegana tylko przez $hour, $minute i $second.
+</block>
+</dash>

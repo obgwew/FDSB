@@ -1,0 +1,31 @@
+<dash>
+name: $blackListRoles
+desc: Zatrzymuje komendę dla każdej osoby posiadającej jedną z wymienionych ról.
+category: Kontrola dostępu
+
+<block type="text" title="Jak działa komenda?">
+text: $blackListRoles to punkt kontrolny, który wstawiasz do komendy. Bot sprawdza role osoby, która wywołała komendę, i porównuje je z listą, którą podałeś. Jeśli znajdzie dopasowanie, wyświetla podany przez ciebie komunikat odmowy — albo domyślny, jeśli go pominąłeś — a reszta komendy zostaje odrzucona. Jeśli nikt nie pasuje, nic nie zostaje wyświetlone i skrypt po prostu działa dalej.
+</block>
+
+<block type="code" title="Składnia">
+text: $blackListRoles[role; ...; message]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $blackListRoles[Admin; Moderator; Sorry, this command is for another group of people!]
+</block>
+
+<block type="callout" kind="note">
+text: Rolę można zapisać jako wzmiankę, jako jej ID albo jako nazwę, a nazwa jest dopasowywana bez względu na wielkość liter. Wypisz kilka, rozdzielając je średnikami. Wszystko do ostatniego argumentu jest traktowane jako rola, więc w ostatnim argumencie umieszczasz własny komunikat odmowy.
+</block>
+
+<block type="callout" kind="warning">
+text: Gdy warunek zostanie spełniony, komenda zatrzymuje się w tym miejscu — żadna linia poniżej nie zostanie wykonana. Pominięcie własnej wiadomości sprawia, że bot sięga po własne sformułowanie.
+</block>
+</dash>
+
+<details>
+syntax: $blackListRoles[role; ...; message]
+param: role|text|Required|Zablokowane role, jako wzmianki, ID lub nazwy, rozdzielone średnikami
+param: message|text|Optional|Wiadomość wyświetlana zamiast domyślnej odmowy, gdy rola pasuje
+</details>

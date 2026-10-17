@@ -1,0 +1,36 @@
+<dash>
+name: $ceil
+desc: Redondea un número hacia arriba al siguiente número entero.
+category: Matemática y números
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Dale un solo número y obtienes ese número redondeado hacia arriba, así que 3.1 vuelve como 4 y 3.9 también da 4. Un número que ya es entero se devuelve intacto, y redondear un valor negativo hacia arriba lo mueve hacia cero, poniendo -2.5 en -2. Encaja directamente en una línea de texto donde necesites una cifra sin decimales.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $ceil en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $ceil[number]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $sendMessage[Result is $ceil[3.2]]
+</block>
+
+<block type="callout" kind="note">
+text: Entra un número y sale un número entero: 3.1 da 4, -2.5 da -2, y 5.0 se queda en 5. Todo lo que no sea un número se rechaza con un error.
+</block>
+</dash>
+
+<details>
+syntax: $ceil[number]
+param: number|number|Obligatorio|El número que redondear hacia arriba, como 3.1, -2.5 o 10
+</details>

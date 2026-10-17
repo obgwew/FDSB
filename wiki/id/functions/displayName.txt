@@ -1,0 +1,36 @@
+<dash>
+name: $displayName
+desc: Memberikan nama yang dikenal seorang anggota di server ini.
+category: Pengguna
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Jika seseorang telah mengatur julukan untuk server, itulah nama yang Anda dapat; tanpa julukan, nama akunnya yang berperan sebagai penggantinya. Dipakai tanpa kurung, perintah ini menyebut siapa pun yang mengetik perintah tersebut, sehingga menjadi cara yang ramah untuk menyapa orang. Tambahkan sebuah mention atau ID, dan perintah menjawab untuk anggota itu sebagai gantinya. Dalam kedua kasusnya, nama itu mendarat di kanal atau diisi ke dalam baris Anda sendiri.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $displayName
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $displayName[(user mention/ID)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: Hello, $displayName!
+</block>
+
+<block type="callout" kind="note">
+text: Ini adalah julukan per-server bila ada, dan jika tidak ada, nama pengguna akun yang dipakai. Jika Anda selalu menginginkan nama akun dan tidak pernah julukannya, mintalah $authorName.
+</block>
+</dash>
+
+<details>
+syntax: $displayName[(user mention/ID)]
+param: user|text|Opsional|Anggota mana yang akan disebut namanya; kosongkan untuk siapa pun yang mengetik perintah
+</details>

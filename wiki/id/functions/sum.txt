@@ -1,0 +1,41 @@
+<dash>
+name: $sum
+desc: Menjumlahkan semua angka yang diberikan dan mengembalikan totalnya.
+category: Matematika & Angka
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Masukkan dua angka atau lebih, dan bot akan menjumlahkannya semua — sebanyak yang Anda inginkan. Bot mengembalikan hasil berupa angka, dan akan menghapus titik desimal bila totalnya merupakan bilangan bulat. Karena hasilnya berupa nilai (bukan pesan), Anda bisa langsung menyisipkannya ke dalam tanda kurung perintah lain atau ke tengah kalimat.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !cart
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $sum[a; b; ...]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $sendMessage[$sum[8; 2]]
+</block>
+
+<block type="callout" kind="note">
+text: Sangat cocok dipadukan dengan $sub, $mul, dan $div saat menghitung total keranjang atau nilai skor. Jika ditulis sendiri dalam baris, totalnya akan dikirim langsung oleh bot; jika disisipkan ke dalam $sendMessage, hasilnya akan muncul di tengah kata-kata Anda.
+</block>
+
+<block type="callout" kind="warning">
+text: Diperlukan minimal dua angka. Jika ada huruf di dalam daftar, seluruh penjumlahan akan menghasilkan kesalahan. Bagian yang kosong akan dianggap sebagai 0, sehingga tidak mengganggu perhitungan.
+</block>
+</dash>
+
+<details>
+syntax: $sum[a; b; ...]
+param: a|number|Wajib|Angka pertama yang dijumlahkan
+param: b|number|Wajib|Angka kedua yang dijumlahkan; Anda bisa menambahkan lebih banyak angka lagi
+</details>

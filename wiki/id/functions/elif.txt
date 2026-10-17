@@ -1,0 +1,40 @@
+<dash>
+name: $elif
+desc: Menambahkan satu cabang "atau jika lagi" ke blok $if, diperiksa secara berurutan.
+category: Kontrol Alur
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Setelah sebuah $if, $elif memungkinkan Anda meletakkan satu kondisi lagi beserta baris-baris yang dibukanya. Setiap kondisi dicoba sesuai urutan Anda menuliskannya, dan hanya yang pertama berakhir benar yang dijalankan — setiap cabang setelahnya dilewati. Akhiri dengan $else untuk kasus cadangan semuanya, dan tutup seluruh rantai dengan $endif.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !welcome
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $elif[condition]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $if[$message == hello]
+text:   Hi there!
+text: $elif[$message == bye]
+text:   Goodbye!
+text: $endif
+</block>
+
+<block type="callout" kind="note">
+text: Sebuah $elif berada di antara sebuah $if dan sebuah $endif. Rantai sebanyak yang Anda butuhkan, urutkan dari yang paling spesifik ke yang paling umum supaya yang lebih awal mendapat giliran pertama.
+</block>
+</dash>
+
+<details>
+syntax: $elif[condition]
+param: condition|expression|Wajib|Apa yang diuji, memakai operator yang sama dengan $if
+</details>

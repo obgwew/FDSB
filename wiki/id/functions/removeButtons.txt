@@ -1,0 +1,41 @@
+<dash>
+name: $removeButtons
+desc: Menghapus tombol-tombol dari sebuah pesan sehingga tidak ada yang bisa menekannya lagi.
+category: Komponen
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $removeButtons mengambil tombol-tombolnya dan meninggalkan pesannya tetap di tempat. Berikan ID sebuah pesan yang dikirim bot dan setiap tombol di pesan itu menghilang; biarkan ID lepas dan ia bekerja pada tombol-tombol yang masih menunggu untuk dikirim bersama pesan berikutnya Anda, atau pada pesan di balik sebuah penekanan tombol. Anggota kemudian melihat kata-kata yang sama dengan baris kosong di bawahnya.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !removeButtons
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $removeButtons
+text: $removeButtons[(messageID)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $removeButtons[123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: ID harus menunjuk ke pesan yang dikirim bot di kanal tempat perintah digunakan. Jika ada tombol yang menunggu untuk dikirim, tombol-tombol itu dibuang sebelum pesan pernah dikirim.
+</block>
+
+<block type="callout" kind="important">
+text: Dalam versi yang Anda jalankan, baris ini dilewati sebelum sempat bertindak, sehingga tombol-tombol tetap di tempatnya dan masih bisa ditekan.
+</block>
+</dash>
+
+<details>
+syntax: $removeButtons[(messageID)]
+param: messageID|snowflake|Opsional|Pesan mana yang akan dilepas. Biarkan lepas untuk menghapus tombol-tombol yang masih menunggu untuk dikirim.
+</details>

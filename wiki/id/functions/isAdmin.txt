@@ -1,0 +1,36 @@
+<dash>
+name: $isAdmin
+desc: Menjawab benar atau salah tergantung pada apakah seorang anggota mengelola server.
+category: Info
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Berikan sebuah anggota lewat mention atau ID dan Anda mendapatkan kembali kata benar atau salah. Pemilik server selalu dihitung sebagai admin, begitu pula siapa pun yang memiliki izin Administrator aktif. Anggota yang tidak dapat ditemukan di server, atau siapa pun yang ditanyakan di obrolan pribadi, kembali sebagai salah.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !checkadmin
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $isAdmin[userID]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $isAdmin[$authorID]
+</block>
+
+<block type="callout" kind="note">
+text: Hanya izin Administrator yang dihitung di sini. Anggota yang dapat mem-ban, membisukan, dan mengelola pesan tetapi tanpa Administrator tetap mendapatkan salah, jadi pasangkan dengan pemeriksaan lain bila Anda butuh kendali yang lebih halus.
+</block>
+</dash>
+
+<details>
+syntax: $isAdmin[userID]
+param: userID|text|Wajib|Anggota yang diuji, lewat @mention atau ID-nya
+</details>

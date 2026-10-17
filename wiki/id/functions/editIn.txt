@@ -1,0 +1,38 @@
+<dash>
+name: $editIn
+desc: Menunggu waktu tertentu, lalu menukar teks pesan terakhir yang dikirim bot.
+category: Waktu & Jeda
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Bot menjeda selama durasi yang Anda berikan — detik, menit, jam, atau hari — lalu menulis ulang pesan terkininya sendiri. Dengan begitu, mudah sekali memosting sebuah placeholder seperti Loading... dan menggantinya begitu pekerjaan selesai. Pesan yang diubahnya harus merupakan pesan yang diposting bot dalam pelaksanaan yang sama.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !welcome
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $editIn[time; newMessage]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $sendMessage[Loading...]
+text: $editIn[5s; Done!]
+</block>
+
+<block type="callout" kind="note">
+text: Waktu tunggu ditulis sebagai sebuah angka dan sebuah satuan: 5s, 10m, 2h, 1d. Apa pun dengan bentuk lain ditolak. Hanya teksnya yang diganti — embed atau tombol yang sudah berada di pesan dibiarkan apa adanya.
+</block>
+</dash>
+
+<details>
+syntax: $editIn[time; newMessage]
+param: time|text|Wajib|Berapa lama menunggu, sebagai angka dan satuan: 5s, 10m, 2h, 1d
+param: newMessage|text|Wajib|Teks yang seharusnya ada di sana setelah waktu tunggu selesai
+</details>

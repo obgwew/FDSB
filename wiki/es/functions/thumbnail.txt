@@ -1,0 +1,38 @@
+<dash>
+name: $thumbnail
+desc: Coloca la imagen pequeña en la esquina de la tarjeta que construye tu comando.
+category: Constructor de embed
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $thumbnail establece la imagen que va en la esquina superior derecha de una tarjeta. Pásale cualquier texto que contenga una dirección web y se usa la primera dirección que haya dentro, así que un enlace que construiste antes puede meterse directamente. Añade un número al final cuando un comando construya varias tarjetas y la quieras en la segunda o la tercera.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !thumbnail en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $thumbnail[url;(index)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $title[Server stats]
+text: $thumbnail[https://example.com/chart.png]
+</block>
+
+<block type="callout" kind="note">
+text: La dirección tiene que empezar por http:// o https://, y la puntuación que quede después se recorta por ti. Si no hay nada utilizable en el texto, el bot se detiene con un error en lugar de enviar una tarjeta sin imagen.
+</block>
+</dash>
+
+<details>
+syntax: $thumbnail[url;(index)]
+param: url|text|Obligatorio|Texto que contiene la dirección de la imagen, que empieza por http:// o https://
+param: index|number|Opcional|A qué tarjeta añadirla cuando construyas varias; por defecto se usa la primera
+</details>

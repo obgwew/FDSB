@@ -1,0 +1,46 @@
+<dash>
+name: $onlyFor
+desc: Permite que solo los miembros o roles listados usen el comando, y muestra a todos los demás tu propio mensaje.
+category: Control de acceso
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $onlyFor es una puerta que pones en la parte superior de un comando. Lista las personas y los roles a los que se les permite pasar, y termina con el mensaje que deberían ver todos los demás. Si la persona que ejecutó el comando coincide con una de las entradas, no pasa nada y el resto de tu comando continúa. Si no coincide, el mensaje se envía y el resto del comando se descarta justo ahí.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $onlyFor[ID or name; ...; error message]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $onlyFor[123456789012345678; Moderator; This command is for moderators only.]
+text: $sendMessage[Here is the secret!]
+</block>
+
+<block type="options" title="Lo que puedes listar">
+option: ID|Un ID de usuario o rol como 123456789012345678, con o sin las marcas de mención
+option: name|Un nombre de rol como Moderator, o un nombre de usuario para un solo usuario
+</block>
+
+<block type="callout" kind="note">
+text: Pon el mensaje al final — todo lo que va después de las entradas cuenta como un solo mensaje. Un miembro pasa cuando se le nombra directamente o cuando tiene uno de los roles listados.
+</block>
+
+<block type="callout" kind="important">
+text: Esta puerta es por comodidad, no es seguridad real. Cualquiera que pueda leer tus comandos puede averiguar quién está en la lista, y cualquiera que pueda editarlos puede quitarse de ella. Mantén las partes verdaderamente sensibles de tu lado.
+</block>
+</dash>
+
+<details>
+syntax: $onlyFor[ID or name; ...; error message]
+param: ID or name|text|Obligatorio|Uno o más IDs de usuario, IDs de rol o nombres a los que se les permite continuar.
+param: error message|text|Obligatorio|Mensaje enviado al canal cuando a la persona no se le permite. Todo lo que va después de las entradas cuenta como este mensaje.
+</details>

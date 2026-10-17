@@ -1,0 +1,37 @@
+<dash>
+name: $resetGuildVar
+desc: Borra el valor que un servidor guarda de una variable.
+category: Variables
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Cada servidor puede conservar su propio valor para una variable que creaste en la pestaña de Variables. $resetGuildVar tira ese valor por servidor, de modo que la variable vuelve al valor por defecto que ven todos los demás, y la variable en sí se queda exactamente donde estaba. Nómbrala por sí sola y el servidor donde se ejecutó el comando es el que se limpia; pon tras un punto y coma la ID de un servidor y ese es el que se limpia.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Crea la variable primero en la pestaña de Variables
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $resetGuildVar en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $resetGuildVar[name; (guild_id)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $resetGuildVar[welcomeMessage; 123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: Si ese servidor nunca tuvo su propio valor no hay nada que quitar, y el bot anota el estado y sigue en lugar de detenerse.
+</block>
+</dash>
+
+<details>
+syntax: $resetGuildVar[name; (guild_id)]
+param: name|text|Obligatorio|La variable cuyo valor para ese servidor debe borrarse
+param: guildID|text|Opcional|Para qué servidor limpiarla; por defecto, el servidor en el que estás
+</details>

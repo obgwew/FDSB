@@ -1,0 +1,50 @@
+<dash>
+name: $getLeaderboardPosition
+desc: Mengembalikan peringkat sebuah anggota atau server di dalam papan peringkat, atau 0 bila tidak masuk peringkat.
+category: Variabel
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $getLeaderboardPosition membangun peringkat yang sama dengan perintah papan peringkat, lalu melaporkan posisi satu entri tertentu. Ia mengembalikan posisi sebagai angka yang dihitung dari 1, dan 0 ketika entri itu tidak memiliki nilai tersimpan atau nilainya bukan angka. Urutkan daftarnya dengan cara yang sama setiap kali, karena posisinya berubah ketika Anda berpindah antara tertinggi dahulu dan terendah dahulu.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buat variabelnya terlebih dahulu di tab Variabel
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $getLeaderboardPosition[type; name; sort; id]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $sendMessage[You are #$getLeaderboardPosition[user; points; desc]]
+</block>
+
+<block type="options" title="Jenis variabel">
+option: user|Satu nilai per anggota, disimpan terpisah di setiap server
+option: globaluser|Satu nilai per anggota, dibagikan ke semua server tempat bot berada
+option: server|Satu nilai per server
+</block>
+
+<block type="options" title="Jenis pengurutan">
+option: desc|Nilai tertinggi dahulu (dipakai saat Anda mengosongkan pengurutan)
+option: asc|Nilai terendah dahulu
+</block>
+
+<block type="callout" kind="note">
+text: Biarkan ID kosong untuk memberi peringkat orang yang menjalankan perintah. Untuk jenis server, bawaannya justru menjadi server saat ini. Nilai yang bukan angka dilewati.
+</block>
+</dash>
+
+<details>
+syntax: $getLeaderboardPosition[type; name; sort; (id)]
+param: type|text|Wajib|Kolam mana yang diberi peringkat: user, globaluser, atau server.
+param: name|text|Wajib|Nama variabel yang menjadi dasar peringkat.
+param: sort|text|Wajib|desc untuk tertinggi dahulu, atau asc untuk terendah dahulu.
+param: id|snowflake|Opsional|Anggota atau server mana yang dicari. Bawaan ke orang yang menjalankan perintah, atau server saat ini untuk jenis server.
+</details>

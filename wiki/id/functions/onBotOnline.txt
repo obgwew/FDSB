@@ -1,0 +1,40 @@
+<dash>
+name: $onBotOnline
+desc: Menjalankan skrip Anda sendiri setiap kali bot selesai masuk.
+category: Peristiwa
+
+<block type="text" title="Bagaimana cara kerja peristiwa?">
+text: Atur kolom Awalan sebuah perintah ke $onBotOnline dan aplikasi menandainya sebagai Peristiwa untuk Anda. Tidak ada yang perlu mengetik apa pun, karena baris-baris di bawahnya mulai berjalan dengan sendirinya saat bot terhubung dan siap, yang menjadikan ini tempat yang tepat untuk penyiapan sekali jalan seperti mencatat waktu mulai. Tidak ada pesan di belakangnya, jadi tidak ada informasi apa pun tentang orang itu atau kata-kata yang ia tulis yang tersedia.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $onBotOnline
+item: Aplikasi menandainya sebagai Peristiwa untuk Anda
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: #PREFIX:$onBotOnline
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: #PREFIX:$onBotOnline
+text: $setVar[botStartupTime; $addTimestamp]
+</block>
+
+<block type="callout" kind="note">
+text: Tanpa pesan, tidak ada tempat untuk mengirim pun. Letakkan ID kanal dalam kurung tepat setelah awalan, seperti $onBotOnline[123456789], dan segala sesuatu yang baris-baris Anda kirim mendarat di kanal itu.
+</block>
+
+<block type="callout" kind="important">
+text: Ini menyala pada setiap proses masuk yang berhasil, bukan hanya yang sangat pertama, sehingga proses mulai ulang atau koneksi terputus yang pulih kembali akan menjalankan baris-baris Anda lagi.
+</block>
+</dash>
+
+<details>
+syntax: $onBotOnline
+</details>

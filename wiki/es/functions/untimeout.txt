@@ -1,0 +1,39 @@
+<dash>
+name: $untimeout
+desc: Levanta un aislamiento activo de un miembro y le devuelve sus permisos normales de inmediato.
+category: Moderación
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Dale una mención o un ID de usuario y el bot quita cualquier aislamiento bajo el que esté ese miembro en ese momento, así que puede hablar, reaccionar y entrar en voz otra vez de inmediato. A alguien que no estaba aislado simplemente se le deja en paz, y el comando termina en silencio. El bot tiene que tener permiso para hacerlo, lo que significa el permiso Moderate Members y un rol situado por encima de la persona a la que estás quitando el aislamiento.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !untimeout en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $untimeout[user]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $untimeout[@user]
+</block>
+
+<block type="callout" kind="note">
+text: Un miembro sin aislamiento activo sale de esto sin cambios, y el bot no publica ninguna confirmación en ningún caso. Combínalo con $timeout si quieres el par de acciones correspondiente en el mismo comando.
+</block>
+
+<block type="callout" kind="warning">
+text: Sin Moderate Members, o con el rol más alto del bot por debajo del de la persona objetivo, Discord rechaza la solicitud y el bot lo reporta en el canal. Solo funciona dentro de un servidor, así que intentarlo en un mensaje directo acaba en un error.
+</block>
+</dash>
+
+<details>
+syntax: $untimeout[user]
+param: user|text|Obligatorio|El miembro al que quitar el aislamiento, escrito como @mención o como ID de usuario
+</details>

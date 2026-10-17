@@ -1,0 +1,40 @@
+<dash>
+name: $suppressErrors
+desc: Oculta los mensajes de error del bot y muestra en su lugar uno tuyo.
+category: Control de acceso
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $suppressErrors le dice al bot que se guarde sus errores para el resto del comando. Una vez que la línea está en cualquier punto de tu script, un fallo de sintaxis, un valor incorrecto o una acción fallida ya no imprime su explicación habitual en el canal. Pon un mensaje corto entre los paréntesis y eso es lo que verán los miembros en su lugar, o déjalo vacío y el fallo pasará en silencio.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !welcome en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $suppressErrors[custom message]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $suppressErrors[Something went wrong! Please try again.]
+</block>
+
+<block type="callout" kind="note">
+text: El bot detecta esta línea antes incluso de que tu comando empiece, así que puede ir en cualquier sitio y no tiene que ir primero. Lo que haya salido mal sigue quedando registrado del lado del bot, simplemente ya no llega al canal.
+</block>
+
+<block type="callout" kind="warning">
+text: Es genial cuando quieres un canal ordenado, pero hace que los problemas reales sean mucho más difíciles de rastrear. El comando sigue deteniéndose donde falló, solo que se detiene en silencio.
+</block>
+</dash>
+
+<details>
+syntax: $suppressErrors[(custom message)]
+param: custom message|text|Opcional|Qué enviar al canal cuando algo salga mal. Omítelo y no se muestra nada en absoluto.
+</details>

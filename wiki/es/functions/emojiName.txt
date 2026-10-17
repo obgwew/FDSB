@@ -1,0 +1,36 @@
+<dash>
+name: $emojiName
+desc: Te da el nombre que hay detrás de un emoji personalizado, a partir de su ID o de una mención.
+category: Info
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Pásale un emoji personalizado y el bot responde en el canal con el nombre de ese emoji. Entiende tanto el ID numérico como una mención completa como <:name:id> o <a:name:id>, así que puedes darle lo que hayas copiado de Discord. El nombre vuelve como texto plano, listo para meterlo en un mensaje o para compararlo con un nombre que ya conozcas.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $emojiName en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $emojiName[emoji id]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $emojiName[123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: Solo emojis personalizados de servidor: los emojis estándar de tu teclado no llevan ningún ID que leer. Si el bot no comparte servidor con el emoji, publica un error diciendo que no se encontró ningún emoji en lugar de un nombre.
+</block>
+</dash>
+
+<details>
+syntax: $emojiName[emoji id]
+param: emoji id|snowflake|Obligatorio|Qué emoji personalizado nombrar, dado como número o como mención <:name:id> / <a:name:id>
+</details>

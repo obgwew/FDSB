@@ -1,0 +1,32 @@
+<dash>
+name: $onBanAdd
+desc: Uruchamia twoje linie w chwili, gdy ktoś zostanie zbanowany z serwera.
+category: Zdarzenie
+
+<block type="text" title="Jak działa to zdarzenie?">
+text: Zapisz komendę, której pole Prefix to $onBanAdd, a aplikacja sama oznaczy ją jako zdarzenie. W chwili, gdy członek zostanie zbanowany — przez moderatora, jedną z twoich komend albo przez dziennik audytu — linie pod tym prefiksem zaczynają działać, bez tego, żeby ktoś cokolwiek wpisał.
+text: Zbanowana osoba jest tutaj autorem, więc $mention, $authorID i $authorName wskazują na nią, a $guildID i $guildName opisują serwer, na którym doszło do bana.
+text: Ban nie ma własnego kanału, więc kanał wiadomości pozostaje pusty, o ile nie podasz żadnego. Umieść ID kanału w nawiasach bezpośrednio po prefiksie, a twoje odpowiedzi trafią właśnie tam.
+</block>
+
+<block type="code" title="Składnia">
+text: #PREFIX:$onBanAdd[channelID]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: #PREFIX:$onBanAdd[123456789012345678]
+text:  sendMessage[$mention has been banned from $guildName]
+</block>
+
+<block type="callout" kind="note">
+text: Zostaw $onBanAdd w pierwszej linii. Przesunięcie go niżej sprawi, że aplikacja przestanie traktować komendę jako zdarzenie, więc będzie czekać, aż ktoś wpisze jej prefiks, jak każda inna komenda.
+</block>
+
+<block type="callout" kind="important">
+text: Podaj ID kanału po prefiksie, ponieważ ban nie jest przypisany do żadnego kanału i bot nie miałby gdzie mówić. Odbiorca musi mieć dostęp do tego kanału, a zbanowany członek nigdy nie zobaczy tej wiadomości — co czyni z tego dobre miejsce na zapis tego, co się wydarzyło.
+</block>
+</dash>
+
+<details>
+syntax: $onBanAdd
+</details>

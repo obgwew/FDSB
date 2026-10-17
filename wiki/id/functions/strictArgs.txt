@@ -1,0 +1,44 @@
+<dash>
+name: $strictArgs
+desc: Membatalkan perintah jika jumlah kata yang dimasukkan tidak sesuai ketentuan.
+category: Kontrol Akses
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Taruh perintah ini di dekat awal perintah, lalu ia akan menghitung kata yang diketik setelah awalan. Jika jumlahnya tidak sesuai aturan yang Anda tentukan, bot akan mengirim pesan kesalahan dan menghentikan seluruh sisa perintah (tidak ada baris setelahnya yang akan dijalankan). Jika jumlahnya sudah sesuai, bot tidak akan menampilkan apa-apa dan perintah akan terus berjalan.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !quote
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $strictArgs[comparison; error_message]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $strictArgs[>2; Please provide more than 2 words!]
+</block>
+
+<block type="options" title="Operator perbandingan">
+option: >|Lebih dari — pengguna harus mengetik lebih dari N kata
+option: <|Kurang dari — pengguna harus mengetik kurang dari N kata
+option: (none)|Sama dengan — pengguna harus mengetik tepat N kata
+option: !|Tidak sama dengan — pengguna tidak boleh mengetik tepat N kata
+</block>
+
+<block type="callout" kind="note">
+text: Awalan dan nama perintah tidak ikut dihitung. Contohnya, !quote hello world dihitung sebagai dua kata. Aturan harus berupa angka dengan opsional >, <, atau ! di depannya; kalau tidak, perintah akan langsung ditolak sebelum penghitungan dilakukan.
+</block>
+</dash>
+
+<details>
+syntax: $strictArgs[comparison; error_message]
+param: comparison|text|Wajib|Aturan untuk jumlah kata, misalnya >2, <2, 2, atau !2
+param: error_message|text|Wajib|Pesan yang dikirim bot jika jumlah kata tidak sesuai, sebelum menghentikan perintah
+</details>

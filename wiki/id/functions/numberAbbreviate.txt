@@ -1,0 +1,40 @@
+<dash>
+name: $numberAbbreviate
+desc: Memangkas angka bulat besar menjadi bentuk ringkas dengan satu huruf di ujungnya.
+category: Matematika & Angka
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Berikan sebuah angka bulat dan ia kembali dalam bentuk yang lebih ringkas dan mudah dibaca, dengan satu huruf menempel di ujungnya: 1500 menjadi 1.5k, 1000000 menjadi 1m dan 2500000 menjadi 2.5m. Angka di bawah seribu dikembalikan apa adanya, dan tanda minus di depan tetap bertahan. Cocok untuk jumlah anggota dan total lain yang kalau tidak akan memenuhi seluruh layar.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !views
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $numberAbbreviate[number]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $numberAbbreviate[1523487]
+</block>
+
+<block type="callout" kind="note">
+text: Huruf yang dipakai berurutan k, m, b, t, qa, qi, sx, sp, oc, no dan dc. Angka yang terlalu panjang bahkan untuk huruf terakhir dicetak utuh alih-alih dipangkas lebih jauh.
+</block>
+
+<block type="callout" kind="warning">
+text: Angka bulat saja. Tanda desimal atau huruf apa pun membuat bot mengirim kesalahan alih-alih memangkas sebagiannya.
+</block>
+</dash>
+
+<details>
+syntax: $numberAbbreviate[number]
+param: number|number|Wajib|Angka bulat yang dipangkas; tanda - di depan tetap dipertahankan
+</details>

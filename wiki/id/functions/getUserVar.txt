@@ -1,0 +1,43 @@
+<dash>
+name: $getUserVar
+desc: Membaca kembali nilai yang disimpan seorang anggota untuk sebuah nama variabel.
+category: Variabel
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Setiap anggota mendapat kotaknya sendiri di bawah nama variabel yang sama, dan inilah yang membacanya. Dengan hanya sebuah nama, Anda mendapatkan kotak milik siapa pun yang mengetik perintah; tambahkan ID anggota dan Anda justru membaca miliknya. Selama kotak itu masih kosong, nilai bersama dari tab Variabel yang dikembalikan, jadi tidak ada yang pernah dibiarkan tanpa apa pun sama sekali.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buat variabelnya terlebih dahulu di tab Variabel
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !profile
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $getUserVar[name; (user_id); (guild_id)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $getUserVar[points; 123456789012345678]
+</block>
+
+<block type="callout" kind="important">
+text: Sebut nama variabel yang tidak pernah dibuat di tab Variabel dan bot menambahkan yang kosong, memperingatkan Anda tentang itu, dan menghentikan perintah Anda. Siapkan variabelnya terlebih dahulu.
+</block>
+
+<block type="callout" kind="note">
+text: Anggota yang Anda dapat secara bawaan adalah siapa pun yang mengetik perintah, dan server-nya bawaan ke tempat perintah dijalankan. Tidak ada yang sampai ke obrolan kecuali Anda menempatkan baris itu sendirian.
+</block>
+</dash>
+
+<details>
+syntax: $getUserVar[name; (user_id); (guild_id)]
+param: name|text|Wajib|Variabel mana yang dibaca
+param: userID|text|Opsional|Nilai milik siapa yang dibaca; biarkan kosong untuk orang yang mengetik perintah
+param: guildID|text|Opsional|Server mana yang dicari; biarkan kosong untuk server tempat perintah dijalankan
+</details>

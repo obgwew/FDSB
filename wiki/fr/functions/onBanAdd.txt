@@ -1,0 +1,32 @@
+<dash>
+name: $onBanAdd
+desc: Exécute vos lignes au moment où quelqu'un est banni du serveur.
+category: Événement
+
+<block type="text" title="Comment fonctionne l'événement ?">
+text: Enregistrez une commande dont le champ Prefix est $onBanAdd et l'application la marque comme Événement pour vous. À l'instant où un membre est banni — par un modérateur, par l'une de vos propres commandes ou via le journal d'audit — les lignes sous ce préfixe commencent à s'exécuter sans que personne ne tape quoi que ce soit.
+text: La personne bannie est l'auteur ici, donc $mention, $authorID et $authorName pointent vers elle, tandis que $guildID et $guildName décrivent le serveur où le bannissement a eu lieu.
+text: Un bannissement n'a pas de canal propre, donc le canal de message est laissé vide sauf si vous en nommez un. Mettez un ID de canal entre crochets juste après le préfixe et vos réponses y arriveront à la place.
+</block>
+
+<block type="code" title="Syntaxe">
+text: #PREFIX:$onBanAdd[channelID]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: #PREFIX:$onBanAdd[123456789012345678]
+text:  sendMessage[$mention has been banned from $guildName]
+</block>
+
+<block type="callout" kind="note">
+text: Gardez $onBanAdd sur la première ligne. Déplacez-le plus bas et l'application cesse de traiter la commande comme un événement, elle restera donc à attendre que quelqu'un tape son préfixe comme n'importe quelle autre commande.
+</block>
+
+<block type="callout" kind="important">
+text: Nommez un ID de canal après le préfixe, car un bannissement n'est lié à aucun canal et le bot n'a sinon nulle part où parler. Celui qui le lit doit avoir accès à ce canal, et le membre banni ne verra jamais le message — ce qui en fait un bon endroit pour consigner ce qui s'est passé.
+</block>
+</dash>
+
+<details>
+syntax: $onBanAdd
+</details>

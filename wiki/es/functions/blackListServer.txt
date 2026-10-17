@@ -1,0 +1,41 @@
+<dash>
+name: $blackListServer
+desc: Bloquea que este comando se ejecute en cualquier servidor de la lista.
+category: Control de acceso
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $blackListServer comprueba en qué servidor se está ejecutando el comando y lo compara con los que enumeraste. Si el servidor actual coincide, el bot muestra tu mensaje de rechazo, o uno predeterminado si lo dejaste fuera, y el resto del comando se descarta. Si no está en la lista, no se imprime nada y el script simplemente continúa. Es la forma limpia de mantener un comando lejos de sitios concretos mientras lo dejas abierto en todos los demás.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !servers en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $blackListServer[server; ...; message]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $blackListServer[123456789012345678; Sorry, this server cannot use the command!]
+</block>
+
+<block type="callout" kind="note">
+text: Un servidor puede escribirse como su ID o como su nombre, y el nombre se empareja sin preocuparse por las mayúsculas. Enumera varios separándolos con punto y coma. Todo hasta el último argumento se trata como un servidor, así que el argumento final es donde va tu rechazo personalizado.
+</block>
+
+<block type="callout" kind="warning">
+text: Cuando la comprobación tiene éxito, el comando se detiene justo ahí — no se ejecuta ninguna línea por debajo. Deja fuera el mensaje personalizado y el bot recurre a un texto propio.
+</block>
+</dash>
+
+<details>
+syntax: $blackListServer[server; ...; message]
+param: server|text|Obligatorio|Los servidores bloqueados, como IDs o nombres, separados por punto y coma
+param: message|text|Opcional|Un mensaje que mostrar en lugar del rechazo predeterminado cuando coincide el servidor
+</details>

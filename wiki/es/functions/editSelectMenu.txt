@@ -1,0 +1,46 @@
+<dash>
+name: $editSelectMenu
+desc: Cambia cuántas opciones exige un menú y qué pista muestra antes de que alguien elija.
+category: Componentes
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Señálale el ID que le diste a un menú cuando lo construiste y el bot reescribe ese menú en su sitio, en el mensaje donde ya está. Puedes aflojar o apretar cuántas opciones tiene que elegir alguien, y cambiar el texto gris de pista sobre el menú cerrado. Las opciones en sí se quedan exactamente como estaban, así que una línea convierte un menú de una elección en uno de dos.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !colors en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $editSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+text: $addSelectMenuOption[color_menu; Red; red; The color red]
+text: $addSelectMenuOption[color_menu; Blue; blue; The color blue]
+text: $editSelectMenu[color_menu; 1; 2; Pick one or two colors]
+</block>
+
+<block type="callout" kind="note">
+text: Deja el ID del mensaje fuera y el bot busca el menú primero en el mensaje del que vino la interacción, luego en el último que envió. En cualquier caso, ese mensaje tiene que ser uno que el bot publicó él mismo.
+</block>
+
+<block type="callout" kind="warning">
+text: Min va de 0 a 25, Max de 1 a 25, y Min nunca puede estar por encima de Max. Si el mensaje no lleva ningún menú con el ID que nombraste, el bot lo dice en lugar de editar otra cosa.
+</block>
+</dash>
+
+<details>
+syntax: $editSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+param: Menu ID|text|Obligatorio|El ID que le diste al menú cuando lo construiste
+param: Min|number|Obligatorio|Cuántas opciones debe elegir el usuario, de 0 a 25
+param: Max|number|Obligatorio|Cuántas opciones puede elegir el usuario, de 1 a 25
+param: Placeholder|text|Opcional|Nuevo texto de pista que se muestra sobre el menú antes de hacer una elección
+param: Message ID|snowflake|Opcional|Qué mensaje del bot contiene el menú. Déjalo fuera para usar el evidente.
+</details>

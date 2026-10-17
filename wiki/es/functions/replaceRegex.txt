@@ -1,0 +1,38 @@
+<dash>
+name: $replaceRegex
+desc: Cambia en un texto las series de caracteres que coinciden por lo que tú elijas.
+category: Utilidades de texto
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Dale un texto, una regla de caracteres y un reemplazo, y el bot devuelve el texto con cada coincidencia cambiada por el reemplazo. Una regla entre corchetes como [aeiou] coge cualquiera de esas letras, -[aeiou] coge todo lo que no sea una de ellas, y cualquier otra regla se compara como texto simple tal como la escribiste. Como una regla coge series completas, Banana con la regla de las vocales se convierte en B*n*n* en lugar de seis asteriscos separados.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !shout en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $replaceRegex[text; rule; replacement]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $replaceRegex[Banana; [aeiou]; *]
+</block>
+
+<block type="callout" kind="note">
+text: Las series se comparan de forma golosa, así que varios caracteres seguidos se contraen en una sola copia de tu reemplazo. Deja el reemplazo vacío para quitar los caracteres por completo, y recuerda que un resultado que acabe completamente en blanco nunca se publica en el chat.
+</block>
+</dash>
+
+<details>
+syntax: $replaceRegex[text; rule; replacement]
+param: text|text|Obligatorio|El texto sobre el que actuar
+param: rule|text|Obligatorio|Regla de caracteres. [chars] coincide con esos caracteres, -[chars] coincide con todo lo demás, cualquier otra cosa se compara literalmente
+param: replacement|text|Obligatorio|Qué poner en lugar de cada coincidencia
+</details>

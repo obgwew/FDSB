@@ -1,0 +1,52 @@
+<dash>
+name: $userLeaderboard
+desc: Menampilkan papan peringkat anggota server ini berdasarkan nilai yang tersimpan di suatu variabel.
+category: Variabel
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $userLeaderboard membaca variabel yang berisi satu nilai per anggota di server tempat perintah dijalankan, lalu mengurutkan anggota dari nilai tertinggi ke terendah (atau sebaliknya). Hasil peringkat akan dikirim langsung ke kanal. Setiap server memiliki salinan nilainya sendiri, jadi peringkatnya terpisah per server.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buat variabelnya terlebih dahulu di tab Variabel
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $userLeaderboard[name; (sort); (limit); (format)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $userLeaderboard[points; desc; 5; {rank}. {mention} — {value}]
+</block>
+
+<block type="options" title="Jenis pengurutan">
+option: desc|Nilai tertinggi di atas (bawaan jika dibiarkan kosong)
+option: asc|Nilai terendah di atas
+</block>
+
+<block type="options" title="Placeholder baris">
+option: {rank}|Urutan peringkat, dimulai dari 1
+option: {name}|Nama tampilan anggota
+option: {mention}|Mention yang bisa diklik
+option: {id}|ID Discord anggota
+option: {value}|Nilai yang tersimpan
+</block>
+
+<block type="callout" kind="note">
+text: Hanya nilai angka yang bisa dirangking. Entri dengan teks akan dilewatkan. Batas maksimal adalah 25 baris — jika lebih tinggi, akan dipotong otomatis.
+</block>
+</dash>
+
+<details>
+syntax: $userLeaderboard[name; (sort); (limit); (format)]
+param: name|text|Wajib|Nama variabel yang menyimpan nilai per anggota di server ini
+param: sort|text|Opsional|desc untuk tertinggi di atas (bawaan), atau asc untuk terendah di atas
+param: limit|number|Opsional|Jumlah baris yang ditampilkan, 1–25 (bawaan: 10)
+param: format|text|Opsional|Tata letak baris. Bawaan: {rank}. {name} — {value}. Bisa pakai {rank}, {name}, {mention}, {id}, dan {value}
+</details>

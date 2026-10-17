@@ -1,0 +1,35 @@
+<dash>
+name: $hour
+desc: Gives the current hour of the day, from 00 to 23.
+category: Timing & Delays
+
+<block type="text" title="How does the command work?">
+text: $hour reads the clock and hands back the current hour on a twenty-four hour dial, always two digits, so the early afternoon reads 15 rather than 3. Drop it into a line of text and the digits land where you put them, or leave it on a line of its own and the bot reads the hour out to the channel. It is measured fresh on each run, so two commands a minute apart can give two different numbers.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !hour
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: $hour
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $sendMessage[The hour here is $hour]
+</block>
+
+<block type="callout" kind="note">
+text: The value runs from 00 to 23 on a twenty-four hour clock, so three in the afternoon comes back as 15. Pair it with $minute and $second to build a full clock reading such as 15:04:09.
+</block>
+
+<block type="callout" kind="important">
+text: $hour follows the timezone you set with $time. If you never set one, it falls back to the bot's own local clock.
+</block>
+</dash>

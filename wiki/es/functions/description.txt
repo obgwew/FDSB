@@ -1,0 +1,36 @@
+<dash>
+name: $description
+desc: Rellena el párrafo principal del cuerpo de la tarjeta que el bot está construyendo.
+category: Constructor de embed
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Una tarjeta enviada con $sendEmbedMessage empieza vacía, y aquí es donde va el párrafo principal. Lo que le entregues se coloca debajo del título en el orden de lectura que usa Discord, así que es lo primero que un miembro lee bajo el titular. Añade un número después del texto y esa línea rellena la segunda, tercera o posterior tarjeta de la misma ejecución en lugar de la primera, lo que permite que un solo comando envíe varias tarjetas a la vez.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !announce en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $description[text]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $description[This is the embed body text]
+</block>
+
+<block type="callout" kind="note">
+text: El markdown propio de Discord funciona aquí, así que lo que escribas en negrita, cursiva, código en línea o en forma de cita se ve tal como lo escribiste. El propio Discord rechaza un cuerpo de mucho más de 4.000 caracteres, así que deja las explicaciones largas en un mensaje siguiente.
+</block>
+</dash>
+
+<details>
+syntax: $description[text]
+param: text|text|Obligatorio|El párrafo del cuerpo de la tarjeta. El markdown de Discord funciona aquí.
+</details>

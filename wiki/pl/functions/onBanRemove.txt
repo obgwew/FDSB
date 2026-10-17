@@ -1,0 +1,32 @@
+<dash>
+name: $onBanRemove
+desc: Uruchamia twoje linie w chwili, gdy ban zostanie zdjęty, a użytkownik odblokowany.
+category: Zdarzenie
+
+<block type="text" title="Jak działa to zdarzenie?">
+text: Zapisz komendę, której pole Prefix to $onBanRemove, a aplikacja sama oznaczy ją jako zdarzenie. W chwili, gdy ban zostanie zdjęty — przez moderatora albo przez dziennik audytu — linie pod tym prefiksem zaczynają działać, bez tego, żeby ktoś cokolwiek wpisał.
+text: Odblokowana osoba jest tutaj autorem, więc $mention, $authorID i $authorName wskazują na nią, a $guildID i $guildName opisują serwer, z którego zdjęto bana.
+text: Ban nie ma własnego kanału, więc kanał wiadomości pozostaje pusty, o ile nie podasz żadnego. Umieść ID kanału w nawiasach bezpośrednio po prefiksie, a twoje odpowiedzi trafią właśnie tam.
+</block>
+
+<block type="code" title="Składnia">
+text: #PREFIX:$onBanRemove[channelID]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: #PREFIX:$onBanRemove[123456789012345678]
+text:  sendMessage[$mention is no longer banned from $guildName]
+</block>
+
+<block type="callout" kind="note">
+text: Zostaw $onBanRemove w pierwszej linii. Przesunięcie go niżej sprawi, że aplikacja przestanie traktować komendę jako zdarzenie, więc będzie czekać, aż ktoś wpisze jej prefiks, jak każda inna komenda.
+</block>
+
+<block type="callout" kind="important">
+text: Podaj ID kanału po prefiksie, ponieważ ban nie jest przypisany do żadnego kanału i bot nie miałby gdzie mówić. W chwili zdjęcia bana osoba jeszcze nie jest członkiem serwera, więc polegaj na $mention, $authorID i $authorName, a nie na czymkolwiek, co czyta jej role.
+</block>
+</dash>
+
+<details>
+syntax: $onBanRemove
+</details>

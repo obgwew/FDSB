@@ -1,0 +1,37 @@
+<dash>
+name: $getServerInvite
+desc: Menghasilkan tautan undangan untuk sebuah server.
+category: Utilitas
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Sendirian, ia membuat undangan untuk server tempat perintah dijalankan; berikan ID server dan ia justru melakukannya untuk server itu. Ketika server sudah memiliki alamat vanity, itulah yang kembali, dan jika tidak bot membuat undangan permanen di kanal teks pertama tempat ia diizinkan. Dalam kedua kasus, tautan jadi diposting di kanal siap untuk disalin.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $getServerInvite
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $getServerInvite
+text: $getServerInvite[(guildID)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: Join our server: $getServerInvite
+</block>
+
+<block type="callout" kind="note">
+text: Bot harus menjadi anggota server dan bisa membuat undangan di sana, jika tidak ia memberi tahu Anda bahwa ia tidak bisa membuatnya. Biarkan kurungnya kosong dan server tempat Anda berada akan digunakan.
+</block>
+</dash>
+
+<details>
+syntax: $getServerInvite[(guildID)]
+param: guildID|snowflake|Opsional|Server mana yang dibuatkan undangannya. Hilangkan dan server saat ini yang digunakan.
+</details>

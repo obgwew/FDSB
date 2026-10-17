@@ -1,0 +1,31 @@
+<dash>
+name: $guildVerificationLvl
+desc: Lee lo estricto que es el servidor para dejar hablar a los nuevos miembros.
+category: Servidor
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: En un servidor, esto devuelve el nivel de verificación que Discord usa para decidir cuánto tiene que demostrar un recién llegado antes de publicar. La palabra que obtienes es el nivel en sí: none, low, medium, high o highest. Mézclalo en un mensaje para explicar por qué alguien todavía no puede hablar, o ramifica tu script según lo abierto que sea el servidor.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !serverinfo en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $guildVerificationLvl
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $sendMessage[Verification level here: $guildVerificationLvl]
+</block>
+
+<block type="callout" kind="important">
+text: Solo funciona dentro de un servidor. Si lo pides en un mensaje directo, el bot informa de un error de entorno, que detiene tu comando ahí mismo.
+</block>
+</dash>

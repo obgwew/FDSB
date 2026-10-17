@@ -1,0 +1,36 @@
+<dash>
+name: $ceil
+desc: Membulatkan sebuah angka ke atas menuju bilangan bulat berikutnya.
+category: Matematika & Angka
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Berikan satu angka, lalu Anda mendapatkan angka itu digerakkan ke atas, sehingga 3.1 kembali sebagai 4 dan 3.9 juga memberikan 4. Angka yang sudah bulat dikembalikan apa adanya, dan membulatkan sebuah nilai negatif ke atas menggerakkannya menuju nol, mengangkat -2.5 menjadi -2. Angka itu langsung jatuh ke dalam baris teks di mana pun Anda membutuhkan angka tanpa desimal tersisa.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $ceil
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $ceil[number]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $sendMessage[Result is $ceil[3.2]]
+</block>
+
+<block type="callout" kind="note">
+text: Satu angka masuk dan satu bilangan bulat keluar: 3.1 memberikan 4, -2.5 memberikan -2, dan 5.0 tetap 5. Apa pun yang sama sekali bukan angka ditolak dengan sebuah kesalahan.
+</block>
+</dash>
+
+<details>
+syntax: $ceil[number]
+param: number|number|Wajib|Angka yang dibulatkan ke atas, seperti 3.1, -2.5 atau 10
+</details>

@@ -1,0 +1,36 @@
+<dash>
+name: $channelExists
+desc: Responde sí o no sobre si un canal existe realmente.
+category: Canal
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Dale una mención o un ID de canal y el bot comprueba si puede encontrar realmente ese canal, respondiendo true o false. Merece la pena hacerlo antes de enviar algo allí, para que un comando no se caiga a mitad de camino por un sitio que ya no existe. Deja los paréntesis fuera y responde true, tratando una comprobación vacía como nada de lo que quejarse.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $channelExists en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $channelExists[channel mention/ID]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $channelExists[<#123456789012345678>]
+</block>
+
+<block type="callout" kind="note">
+text: La respuesta es siempre la palabra simple true o false, así que puedes probarla con un $if antes de pasar a usar ese canal.
+</block>
+</dash>
+
+<details>
+syntax: $channelExists[channel mention/ID]
+param: channel|text|Opcional|La mención o el ID del canal que comprobar; déjalo vacío y la respuesta es true
+</details>

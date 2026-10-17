@@ -1,0 +1,41 @@
+<dash>
+name: $blackListUsers
+desc: Stops the command for anyone named on the list of users.
+category: Access Control
+
+<block type="text" title="How does the command work?">
+text: $blackListUsers looks at the person who triggered the command and compares them against the users you listed. If they are a match the bot shows your refusal message, or a default one if you left it out, and the rest of the command is thrown away. If they are not on the list, nothing is printed and the script simply carries on. It is the direct way to keep particular people out of a command without tightening it for everyone.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !users
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: $blackListUsers[user; ...; message]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $blackListUsers[@user; Sorry, you are not allowed to use this command!]
+</block>
+
+<block type="callout" kind="note">
+text: A user can be written as a mention, as their ID or as their name, and names are matched without worrying about capital letters. Their display name and global name are checked too. List several by separating them with semicolons. Everything up to the last argument is treated as a user, so the final argument is where your custom refusal goes.
+</block>
+
+<block type="callout" kind="warning">
+text: When the check succeeds the command stops right there — no line below it runs at all. Leave the custom message out and the bot falls back to wording of its own.
+</block>
+</dash>
+
+<details>
+syntax: $blackListUsers[user; ...; message]
+param: user|text|Required|The blocked users, as mentions, IDs or names, separated by semicolons
+param: message|text|Optional|A message to show instead of the default refusal when the user matches
+</details>

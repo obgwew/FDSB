@@ -1,0 +1,41 @@
+<dash>
+name: $blackListUsers
+desc: Menghentikan perintah bagi siapa pun yang tercantum dalam daftar pengguna.
+category: Kontrol Akses
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $blackListUsers melihat orang yang menjalankan perintah lalu membandingkannya dengan pengguna yang Anda daftarkan. Jika ia cocok, bot menampilkan pesan penolakan Anda — atau pesan bawaan jika Anda tidak menuliskannya — dan sisa perintah dibuang begitu saja. Jika ia tidak ada dalam daftar, tidak ada apa pun yang dicetak dan skrip hanya lanjut berjalan. Inilah cara langsung untuk mengeluarkan orang-orang tertentu dari sebuah perintah tanpa memperketatnya bagi semua orang.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !users
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $blackListUsers[user; ...; message]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $blackListUsers[@user; Sorry, you are not allowed to use this command!]
+</block>
+
+<block type="callout" kind="note">
+text: Seorang pengguna bisa ditulis sebagai mention, sebagai ID-nya, atau sebagai namanya, dan penamaan dicocokkan tanpa memperhatikan huruf besar atau kecil. Nama tampilan dan nama global mereka juga ikut diperiksa. Daftarkan beberapa pengguna dengan memisahkannya lewat titik koma. Semua isi sampai argumen terakhir diperlakukan sebagai pengguna, jadi argumen terakhir adalah tempat pesan penolakan khusus Anda.
+</block>
+
+<block type="callout" kind="warning">
+text: Saat pemeriksaan cocok, perintah berhenti di situ juga — tidak ada baris di bawahnya yang dijalankan sama sekali. Jika pesan khusus tidak Anda tuliskan, bot jatuh ke kalimat bawaannya sendiri.
+</block>
+</dash>
+
+<details>
+syntax: $blackListUsers[user; ...; message]
+param: user|text|Wajib|Pengguna yang diblokir, sebagai mention, ID, atau nama, dipisahkan lewat titik koma
+param: message|text|Opsional|Pesan yang ditampilkan sebagai pengganti penolakan bawaan saat pengguna cocok
+</details>

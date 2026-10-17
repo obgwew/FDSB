@@ -1,0 +1,41 @@
+<dash>
+name: $onlyBotPerms
+desc: Detiene el comando con tu propio mensaje a menos que el bot tenga permiso para hacer lo que viene después.
+category: Control de acceso
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $onlyBotPerms comprueba los propios permisos del bot antes de que se ejecute la parte protegida de tu comando. Lista los permisos que necesitas y termina con el mensaje que deberían ver los miembros si falta alguno. Si el bot los tiene todos, no se muestra nada y tu comando continúa. Si falta uno, el mensaje se envía y el resto del comando se descarta justo ahí.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $onlyBotPerms[permission; ...; error message]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $onlyBotPerms[kick_members; ban_members; I need permission to kick and ban members.]
+text: $sendMessage[Done!]
+</block>
+
+<block type="callout" kind="note">
+text: Los nombres de permisos son los propios nombres de Discord en minúsculas con guiones bajos, como kick_members, ban_members o manage_messages. Pon el mensaje al final — todo lo que va después de los permisos se trata como un solo mensaje.
+</block>
+
+<block type="callout" kind="important">
+text: La comprobación mira el canal donde se usó el comando, así que un permiso que el bot tenga en un canal pero no en otro seguirá bloqueándolo. Comprueba el rol del bot en Discord y asegúrate de que esté por encima de los roles sobre los que necesita actuar.
+</block>
+</dash>
+
+<details>
+syntax: $onlyBotPerms[permission; ...; error message]
+param: permission|text|Obligatorio|Uno o más nombres de permiso de Discord, separados por punto y coma, como kick_members o manage_roles.
+param: error message|text|Obligatorio|Mensaje enviado al canal cuando al bot le falta uno de los permisos. Todo lo que va después de los permisos cuenta como este mensaje.
+</details>

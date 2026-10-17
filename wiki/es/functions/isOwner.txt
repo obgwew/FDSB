@@ -1,0 +1,36 @@
+<dash>
+name: $isOwner
+desc: Te dice si un miembro es el propietario del servidor.
+category: Info
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $isOwner toma un miembro como ID de usuario o mención y lo compara con el propietario del servidor en el que se envió el mensaje. El bot responde con la palabra true o false, así que puedes colocarlo directamente en una condición y dejar que decida qué pasa después. Cualquiera que no sea el propietario, y cualquier miembro que el bot no encuentre en ese servidor, vuelve false.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !check en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $isOwner[userID]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $isOwner[$authorID]
+</block>
+
+<block type="callout" kind="note">
+text: Solo la única persona que posee el servidor recibe true. Los administradores que están en lo más alto de la lista de roles igual reciben false, así que usa esto cuando te refieras al propietario y no al equipo de moderación.
+</block>
+</dash>
+
+<details>
+syntax: $isOwner[userID]
+param: userID|text|Obligatorio|El miembro a consultar, como un ID de usuario o una mención
+</details>

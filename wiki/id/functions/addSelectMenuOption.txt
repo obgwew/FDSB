@@ -1,0 +1,53 @@
+<dash>
+name: $addSelectMenuOption
+desc: Menambahkan satu pilihan ke daftar tarik yang Anda mulai sebelumnya dalam perintah yang sama.
+category: Komponen
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Setiap baris yang Anda tulis menempatkan entri baru ke dropdown bernama Menu ID, yang dicocokkan dengan yang Anda mulai lewat $newSelectMenu. Orang melihat label dengan deskripsi Anda di bawahnya dan sebuah emoji opsional di sebelahnya, sementara kode Anda hanya menerima nilai itu. Tandai sebuah entri sebagai default, dan menu terbuka dengan pilihan itu sudah terpilih.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !ping
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $addSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+text: $addSelectMenuOption[color_menu; Red; red; The color red]
+text: $addSelectMenuOption[color_menu; Blue; blue; The color blue; yes]
+</block>
+
+<block type="options" title="Detail">
+option: Default|diatur ke yes dan pilihan ini sudah terpilih saat menu terbuka
+option: Emoji|emoji yang ditampilkan di samping label pilihan
+option: Message ID|ID pesan yang sudah dikirim bot, agar menunya diperbarui langsung
+</block>
+
+<block type="callout" kind="note">
+text: Nilai di dalam satu dropdown harus saling berbeda, dan label atau nilai yang kosong ditolak. Biarkan Message ID kosong agar menu ikut bersama pesan yang sedang dikirim; berikan satu, dan menu pada pesan lama itu dibangun ulang saat itu juga.
+</block>
+
+<block type="callout" kind="warning">
+text: Sebuah dropdown menampung paling banyak 25 pilihan dan hanya satu di antaranya yang boleh menjadi default. Bila Menu ID tidak cocok dengan apa pun yang Anda mulai dalam perintah yang sama ini, bot melaporkan kesalahan.
+</block>
+</dash>
+
+<details>
+syntax: $addSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+param: Menu ID|text|Wajib|Dropdown dari $newSelectMenu mana yang menjadi milik pilihan ini
+param: Label|text|Wajib|Kata yang dilihat orang di daftar itu
+param: Value|text|Wajib|Teks unik yang dikembalikan ketika pilihan ini dipilih
+param: Description|text|Boleh kosong|Baris lebih kecil yang ditampilkan di bawah label
+param: Default|yes/no|Opsional|yes agar pilihan ini sudah terpilih
+param: Emoji|text|Opsional|Emoji yang ditampilkan di samping label
+param: Message ID|snowflake|Opsional|Pesan yang sudah dikirim bot, untuk membangun ulang menunya secara langsung
+</details>

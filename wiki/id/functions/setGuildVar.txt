@@ -1,0 +1,38 @@
+<dash>
+name: $setGuildVar
+desc: Mengingat sebuah nilai untuk satu server dan menyimpannya di sana sampai Anda mengubahnya.
+category: Variabel
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $setGuildVar menulis sebuah nilai di bawah nama yang Anda pilih dan menyimpannya untuk satu server, sehingga setiap server lain tempat bot berada tetap membawa salinannya sendiri yang terpisah. Berikan nama dan nilai dan ia menyimpan terhadap server tempat perintah digunakan. Tambahkan ID server sebagai bagian ketiga dan nilainya disimpan di bawah server itu sebagai gantinya, yang memungkinkan satu perintah mengisi seluruh daftar server dalam satu kali jalan.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buat variabelnya terlebih dahulu di tab Variabel
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !welcome
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $setGuildVar[name; value; (guild_id)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $setGuildVar[welcomeMessage; Welcome!; 123456789012345678]
+</block>
+
+<block type="callout" kind="important">
+text: Nilainya langsung ditulis, tetapi jika namanya belum ada di tab Variabel perintah tetap berhenti dengan kesalahan setelahnya. Buat variabelnya di sana dulu dan jalannya berikutnya menyimpannya tanpa kerumitan.
+</block>
+</dash>
+
+<details>
+syntax: $setGuildVar[name; value; (guild_id)]
+param: name|text|Wajib|Nama tempat nilainya disimpan
+param: value|text|Wajib|Apa yang diingat
+param: guildID|text|Opsional|Server mana tempatnya berada. Biarkan kosong untuk memakai yang saat ini.
+</details>

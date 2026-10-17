@@ -1,0 +1,40 @@
+<dash>
+name: $userBanner
+desc: Mengambil tautan ke banner profil seorang anggota, sehingga bisa ditampilkan di kanal.
+category: Info
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Jika kurung dikosongkan, perintah ini akan mengembalikan tautan banner profil bot itu sendiri. Jika Anda memberikan ID atau mention anggota, ia akan mengembalikan tautan banner profil orang tersebut. Banner yang animasi akan dikembalikan dalam format .gif, sedangkan banner statis dalam format .png. Jika ditulis di baris sendiri, bot akan mengirim tautan tersebut langsung ke kanal.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !profilecard
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $userBanner[(user_id)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $userBanner[123456789012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: Anggota yang ditargetkan harus memiliki banner profil, dan bot harus bisa menemukannya. Karakter non-digit dalam ID akan diabaikan secara otomatis, jadi mention juga bisa dipakai seperti ID biasa.
+</block>
+
+<block type="callout" kind="note">
+text: Jika disisipkan ke dalam baris lain, pencariannya terbatas pada anggota yang sudah bisa diakses bot. Jika ditulis di baris sendiri, bot bisa mencari anggota yang belum pernah berinteraksi dengannya.
+</block>
+</dash>
+
+<details>
+syntax: $userBanner[(user_id)]
+param: userID|snowflake|Opsional|Anggota yang ingin dilihat bannernya, bisa berupa ID atau mention. Biarkan kosong untuk banner bot sendiri.
+</details>

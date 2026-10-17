@@ -1,0 +1,25 @@
+<dash>
+name: $day
+desc: Bugünün gün numarasını, her zaman iki haneli olarak 01'den 31'e kadar verir.
+category: Zamanlama ve Gecikmeler
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $day saate bakar ve ayın gününü, her zaman iki haneli genişlikte geri verir; yedinci gün 07, yirmi dördüncü gün 24 olarak döner. Bir metin satırına yerleştirirseniz rakamlar tam koyduğunuz yere düşer. Satırda tek başına bırakırsanız bot bu numarayı kanala kendi kendine gönderir.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $day
+</block>
+
+<block type="code" title="Kopyalamaya Hazır Örnek">
+text: $sendMessage[Day $day of this month]
+</block>
+
+<block type="callout" kind="note">
+text: Sayı her zaman 01'den 31'e kadar iki haneyle doldurulur; böylece $day, $month ve $year ile kendiniz kurduğunuz bir tarihte düzgünce hizalanır.
+</block>
+
+<block type="callout" kind="important">
+text: $day, $month ve $year botun kendi yerel saatini okur. $time ile ayarlanan saat dilimini yalnızca $hour, $minute ve $second takip eder; sunucunuz dünyanın başka bir yerindeyse bunu aklınızda tutun.
+</block>
+</dash>

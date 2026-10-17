@@ -1,0 +1,38 @@
+<dash>
+name: $resetUserVar
+desc: Membuang nilai pribadi seorang anggota untuk sebuah variabel sehingga ia kembali ke nilai bawaan.
+category: Variabel
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Setiap anggota dapat membawa salinan variabelnya sendiri, dan perintah ini membuang salinan pribadi itu untuk selamanya. Variabel itu sendiri tetap persis seperti di tab Variabel, bersama nilai bawaannya, sehingga hanya orang itu yang kembali ke titik awal bersama sementara yang lain tetap mempertahankan miliknya. Sebut anggota sendiri dan Anda membersihkan skor orang lain; tambahkan juga ID server dan Anda membersihkannya hanya di server itu.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buat variabelnya terlebih dahulu di tab Variabel
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !resetpoints
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $resetUserVar[name; (user_id); (guild_id)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $resetUserVar[points; 123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: Tanpa apa pun setelah nama, bot membersihkan nilai milik siapa pun yang menjalankan perintah, di server tempat ia mengetiknya. Mengatur ulang seseorang yang tidak pernah punya nilai pribadi tidak berbahaya dan tidak mengubah apa pun.
+</block>
+</dash>
+
+<details>
+syntax: $resetUserVar[name; (user_id); (guild_id)]
+param: name|text|Wajib|Variabel yang salinan pribadinya harus dibuang
+param: userID|text|Opsional|Anggota mana yang dibersihkan. Biarkan kosong untuk memakai orang yang menjalankan perintah.
+param: guildID|text|Opsional|Server mana yang dibersihkan. Biarkan kosong untuk memakai yang saat ini.
+</details>

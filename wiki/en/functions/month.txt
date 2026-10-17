@@ -1,0 +1,35 @@
+<dash>
+name: $month
+desc: Gives the current month number, always two digits, from 01 to 12.
+category: Timing & Delays
+
+<block type="text" title="How does the command work?">
+text: $month reads the clock and hands back the month we are in, always two digits wide, so January reads 01 and December reads 12. Drop it into a line of text and the digits land where you put them, or leave it on a line of its own and the bot posts the figure in the channel. Sit it between $day and $year to build a date of your own.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !month
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: $month
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $sendMessage[Today is $day/$month/$year]
+</block>
+
+<block type="callout" kind="note">
+text: The number runs from 01 to 12 and is always two digits wide, so $day/$month/$year lines up as something like 17/10/2026.
+</block>
+
+<block type="callout" kind="important">
+text: $day, $month and $year all read the bot's own local clock. The timezone set with $time is followed only by $hour, $minute and $second.
+</block>
+</dash>

@@ -1,0 +1,31 @@
+<dash>
+name: $authorID
+desc: Memposting ID Discord berupa deret panjang angka dari siapa pun yang mengetik perintah.
+category: Info
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Setiap kali perintah Anda berjalan, bot mencari akun di balik pesan itu dan mengirimkan ID akun tersebut kembali sebagai deret angka biasa. Bila dibiarkan pada barisnya sendiri, ID itu mendarat di kanal sebagai pesan tersendiri. Bila ditulis di dalam sebuah baris teks, ia justru diisi di sana, sehingga Anda dapat membangun kalimat utuh di sekitarnya.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $authorID
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $authorID
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: Your ID is $authorID
+</block>
+
+<block type="callout" kind="note">
+text: Yang Anda dapatkan tampak seperti 123456789012345678 — deret angka itulah satu-satunya pengidentifikasi untuk akun tersebut, dan ia tetap sama meski orang itu mengganti nama.
+</block>
+</dash>

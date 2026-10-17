@@ -1,0 +1,25 @@
+<dash>
+name: $month
+desc: Zwraca numer bieżącego miesiąca, zawsze dwucyfrowy, od 01 do 12.
+category: Czas i opóźnienia
+
+<block type="text" title="Jak działa komenda?">
+text: $month odczytuje zegar i zwraca bieżący miesiąc, zawsze w formacie dwucyfrowym, więc styczeń pokazuje 01, a grudzień 12. Wstaw go w linijkę tekstu, a cyfry wylądują tam, gdzie je umieścisz, albo zostaw go w osobnej linii, a bot opublikuje tę liczbę na kanale. Umieść go między $day a $year, żeby złożyć własną datę.
+</block>
+
+<block type="code" title="Składnia">
+text: $month
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $sendMessage[Today is $day/$month/$year]
+</block>
+
+<block type="callout" kind="note">
+text: Liczba waha się od 01 do 12 i zawsze ma dwie cyfry, więc zapis $day/$month/$year układa się w coś w rodzaju 17/10/2026.
+</block>
+
+<block type="callout" kind="important">
+text: $day, $month i $year odczytują własny zegar lokalny bota. Strefa czasowa ustawiona przez $time jest przestrzegana tylko przez $hour, $minute i $second.
+</block>
+</dash>

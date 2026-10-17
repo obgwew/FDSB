@@ -1,0 +1,40 @@
+<dash>
+name: $cloneChannel
+desc: Menyalin kanal yang ada beserta pengaturannya ke kanal kedua.
+category: Manajemen Kanal
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Arahkan perintah ini ke sebuah kanal, dan bot membuat salinannya, membawa serta topiknya, pengaturannya, dan letaknya di dalam server. Kanal teks, suara, kategori, panggung, dan forum semuanya dapat disalin. Tambahkan bagian kedua, dan salinan itu mendapatkan nama itu alih-alih nama aslinya, lalu bot memposting mention kanal baru tersebut sehingga ia hanya satu klik jauhnya di obrolan.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !clone
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $cloneChannel[channel ID or channel mention; (new name)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $cloneChannel[<#123456789012345678>; Archive]
+</block>
+
+<block type="callout" kind="warning">
+text: Bot memerlukan izin Manage Channels dan perintah ini hanya berfungsi di dalam sebuah server. Sebutkan kanal yang ingin Anda salin — nama polos saja tidak akan cukup.
+</block>
+
+<block type="callout" kind="note">
+text: Berikan perintah ini barisnya sendiri alih-alih menyelipkannya ke tengah kalimat: ia menyalin kanal sebagai efek samping dan tidak mengembalikan apa pun untuk dicetak.
+</block>
+</dash>
+
+<details>
+syntax: $cloneChannel[channel ID or channel mention; (new name)]
+param: channelID|text|Wajib|Kanal mana yang disalin, lewat mention atau ID-nya
+param: newName|text|Opsional|Nama yang dipanggil untuk salinan; biarkan kosong untuk memakai nama asli
+</details>

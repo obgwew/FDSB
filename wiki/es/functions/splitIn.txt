@@ -1,0 +1,38 @@
+<dash>
+name: $splitIn
+desc: Corta un texto en partes separadas que puedes sacar una a una.
+category: Utilidades de texto
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $splitIn rompe un texto allá donde aparezca el delimitador que le des y guarda las partes para el resto del comando. No se imprime nada por sí solo, las partes simplemente esperan hasta que pidas una de ellas con $splitOut. Desde ahí puedes tomar la primera parte, la última, o cualquier parte numerada intermedia y usarla donde usarías cualquier otro valor.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !welcome en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $splitIn[text; delimiter]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $splitIn[apple,banana,cherry; ,]
+text: $splitOut[1]
+</block>
+
+<block type="callout" kind="note">
+text: Las partes se cuentan desde 1: dale a $splitOut un número, o < para la primera parte y > para la última. Los espacios alrededor de cada parte se recortan mientras se corta el texto, y un delimitador vacío se rechaza.
+</block>
+</dash>
+
+<details>
+syntax: $splitIn[text; delimiter]
+param: text|text|Obligatorio|El texto que cortar en partes
+param: delimiter|text|Obligatorio|Entre qué cortar las partes, por ejemplo una coma. No puede quedar vacío.
+</details>

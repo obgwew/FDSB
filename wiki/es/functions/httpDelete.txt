@@ -1,0 +1,37 @@
+<dash>
+name: $httpDelete
+desc: Envía una solicitud DELETE a una dirección web y guarda la respuesta para que la leas.
+category: HTTP
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: El bot llama por HTTP DELETE a la dirección que le des y espera hasta diez segundos una respuesta. Un cuerpo que añadas viaja con la llamada, enviado como JSON cuando se puede interpretar como JSON y como texto plano cuando no. El cuerpo de la respuesta llega a $httpResult y el código a $httpStatus, y el bot no imprime nada por su cuenta.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !ping en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $httpDelete[URL; (Body)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $httpDelete[https://api.example.com/users/1]
+text: $httpStatus
+</block>
+
+<block type="callout" kind="note">
+text: Las cabeceras que añadiste con $httpAddHeader salen con esta llamada y luego se borran, listas para la siguiente solicitud. Una dirección bloqueada aparece como estado 400, y una llamada fallida como estado 500 con el motivo en $httpResult.
+</block>
+</dash>
+
+<details>
+syntax: $httpDelete[URL; (Body)]
+param: URL|text|Obligatorio|La dirección a la que enviar la llamada DELETE
+param: Body|text|Opcional|Contenido extra que enviar junto con ella, como JSON o texto plano
+</details>

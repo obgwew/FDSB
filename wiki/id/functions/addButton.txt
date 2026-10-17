@@ -1,0 +1,57 @@
+<dash>
+name: $addButton
+desc: Menempatkan tombol yang dapat diketuk di bawah pesan yang dikirim perintah Anda.
+category: Komponen
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Setiap pemanggilan menambahkan satu tombol, dan Anda yang menentukan tampilannya serta letaknya. Beri sebuah label dan sebuah warna, lalu tombol muncul di bawah pesan begitu perintah Anda mengirimnya. Tombol dengan gaya apa pun selain link membawa ID pilihan Anda, dan ID itulah yang mengenali penekanan tombol nanti di dalam peristiwa $onInteraction; tombol link justru membuka alamat yang Anda berikan padanya.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !menu
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $addButton[newLine; ID/URL; label; style; (disabled; emoji; messageID)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $addButton[no; btn_confirm; Confirm; success]
+</block>
+
+<block type="options" title="Gaya tombol (style)">
+option: primary|Tombol biru
+option: secondary|Tombol abu-abu
+option: success|Tombol hijau
+option: danger|Tombol merah
+option: link|Membuka alamat web alih-alih memicu peristiwa
+</block>
+
+<block type="callout" kind="note">
+text: Pilih link dan bagian keduanya harus berupa alamat lengkap yang diawali http:// atau https://. Gaya lainnya membutuhkan ID pendek, dan dua tombol pada pesan yang sama tidak boleh berbagi ID yang sama.
+</block>
+
+<block type="callout" kind="warning">
+text: Satu pesan dapat memuat paling banyak 25 tombol, lima untuk tiap baris dan lima baris. Ketika satu baris penuh, tombol berikutnya otomatis jatuh ke baris baru, dan kehabisan ruang menghentikan perintah dengan kesalahan.
+</block>
+
+<block type="callout" kind="important">
+text: Isi bagian terakhir dengan ID pesan yang sudah dikirim bot, lalu tombol mendarat di pesan itu alih-alih pesan berikutnya — itulah cara memperbesar sebuah menu setelahnya.
+</block>
+</dash>
+
+<details>
+syntax: $addButton[newLine; ID/URL; label; style; (disabled; emoji; messageID)]
+param: newLine|yes/no|Wajib|yes memulai baris baru, no menyelipkannya di samping tombol terakhir
+param: ID/URL|text|Wajib|ID pendek yang dicocokkan oleh peristiwa Anda, atau alamat lengkap bila gayanya link
+param: label|text|Boleh kosong|Kata yang ditampilkan pada tombol
+param: style|text|Wajib|primary / secondary / success / danger / link
+param: disabled|yes/no|Opsional|yes menjadikan tombol abu-abu agar tidak dapat ditekan (bawaan: no)
+param: emoji|text|Opsional|Emoji yang ditampilkan pada tombol
+param: messageID|snowflake|Opsional|Pesan mana yang sudah dikirim bot untuk tombol ini ditambahkan ke sana
+</details>

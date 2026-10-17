@@ -1,0 +1,39 @@
+<dash>
+name: $lastBotMessageID
+desc: Te da el ID del último mensaje que el bot envió mientras ejecutaba tu comando.
+category: Variables
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Una vez que el bot ha publicado algo, $lastBotMessageID te da el ID de ese mensaje como dígitos simples.
+text: Cada mensaje que el bot envía mientras se ejecuta tu comando avanza el valor, así que una línea posterior puede apuntar al mensaje que acaba de escribir.
+text: Antes de que se haya enviado nada obtienes una cadena vacía en su lugar, y en un script iniciado por el toque de un botón recurre al mensaje sobre el que está el botón.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !edit en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $lastBotMessageID
+text: $lastBotMessageID[]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $sendMessage[Look at this!]
+text: $editIn[10s; The last message ID was $lastBotMessageID]
+</block>
+
+<block type="callout" kind="note">
+text: Este solo funciona dentro de otro comando, nunca en una línea por sí solo. Dale un paréntesis, o colócalo directamente en una frase.
+</block>
+</dash>
+
+<details>
+syntax: $lastBotMessageID
+</details>

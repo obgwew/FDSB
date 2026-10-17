@@ -1,0 +1,39 @@
+<dash>
+name: $returnGuildBansID
+desc: Mengumpulkan ID setiap anggota yang diblokir dari sebuah server ke dalam satu daftar yang bisa Anda baca nanti.
+category: Perintah Pengembalian
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Sebut sebuah server, nama penyimpanan, dan pemisah, lalu bot menelusuri daftar blokir server itu. ID setiap anggota yang diblokir digabung dengan pemisah Anda dan disimpan di bawah nama penyimpanan, sehingga tidak ada yang dicetak di kanal pada titik ini. Nanti, $return dengan nama yang sama membawa seluruh daftar keluar sebagai satu baris teks.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !welcome
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $returnGuildBansID[GuildID; var; separator]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $returnGuildBansID[$guildID; bannedIDs; ,]
+text: $sendMessage[Banned users: $return[bannedIDs]]
+</block>
+
+<block type="callout" kind="important">
+text: Bot butuh izin Ban Members di server itu atau pembacaan gagal dengan kesalahan izin. Server yang tidak punya anggota terblokir juga dilaporkan sebagai kesalahan, jadi jangan membacanya sebagai daftar kosong.
+</block>
+</dash>
+
+<details>
+syntax: $returnGuildBansID[GuildID; var; separator]
+param: GuildID|snowflake|Wajib|Server mana yang daftar blokirnya dibaca
+param: var|text|Wajib|Di bawah apa daftarnya disimpan, dibaca kembali nanti dengan $return[]
+param: separator|text|Wajib|Apa yang berada di antara ID. Kata juga bisa: dot, com, apo, sem, colon
+</details>

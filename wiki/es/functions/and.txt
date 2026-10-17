@@ -1,0 +1,36 @@
+<dash>
+name: $and
+desc: Responde true solo cuando cada condición que enumeras es verdadera al mismo tiempo.
+category: Control de flujo
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Pon dos o más pruebas juntas y obtienes una única respuesta simple. Todas ellas tienen que cumplirse a la vez para que salga la palabra true; una sola prueba fallida convierte todo en false. Eso lo hace una forma ordenada de condicionar un $if a varias cosas a la vez, y también funciona en una línea propia, donde la respuesta se publica en el canal tal cual.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !check en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $and[condition1; condition2; condition3; ...]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $and[$authorID == 123; $guildName == MyServer]
+</block>
+
+<block type="callout" kind="note">
+text: Cada condición se escribe con las mismas comparaciones que usa $if: ==, !=, >, <, >= y <=. La respuesta es siempre la palabra desnuda true o false, así que puedes guardarla y volver a probarla más tarde.
+</block>
+</dash>
+
+<details>
+syntax: $and[condition1; condition2; condition3; ...]
+param: condition|expression|Obligatorio|Una comprobación que hacer, usando ==, !=, >, <, >= o <=. Todas tienen que cumplirse para true.
+</details>

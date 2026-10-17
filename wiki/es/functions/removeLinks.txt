@@ -1,0 +1,35 @@
+<dash>
+name: $removeLinks
+desc: Quita todos los enlaces web del mensaje que el bot está a punto de enviar.
+category: Utilidades
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $removeLinks activa la eliminación de enlaces para el resto del comando. Donde el bot envíe un mensaje a partir de ahí, cualquier dirección http o www se quita y el resto de las palabras se conserva. No toma argumentos, solo colócalo antes del texto que quieras limpiar.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $removeLinks
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $removeLinks
+text: $sendMessage[Check https://example.com and www.example.org for details.]
+</block>
+
+<block type="callout" kind="note">
+text: Afecta a todos los mensajes que el bot envíe a partir de ese punto en el comando, incluido el texto procedente de una variable. Colócalo lo más tarde posible si solo quieres limpiar un solo mensaje.
+</block>
+</dash>
+
+<details>
+syntax: $removeLinks
+</details>

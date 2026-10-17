@@ -1,0 +1,40 @@
+<dash>
+name: $removeComponent
+desc: Quita de un mensaje los botones que nombres y deja el resto en pantalla.
+category: Componentes
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Nombra los botones por las IDs que les diste cuando los añadiste y el bot los quita del mensaje, dejando todo lo demás en su sitio. Puedes limpiar varios de una vez y añadir al final una ID de mensaje cuando quieras ordenar un mensaje antiguo en lugar del actual. El mensaje se vuelve a publicar con la fila recortada, así que el cambio se ve enseguida.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !tidybuttons en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $removeComponent[customID1; customID2; ...; (messageID)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $removeComponent[btn_cancel; btn_confirm]
+</block>
+
+<block type="callout" kind="note">
+text: Los botones de enlace se identifican por su dirección web en lugar de por una ID, así que puedes quitarlos con la misma línea. Los menús que añadiste con una ID personalizada se pueden quitar exactamente igual que los botones.
+</block>
+
+<block type="callout" kind="warning">
+text: Si lo último entre corchetes es un número simple y delante hay al menos una ID, ese número se lee como el mensaje sobre el que actuar. Déjalo fuera y el bot usa el mensaje que está construyendo ahora, o el que la persona pulsó; y si no hay ninguna de tus IDs, lo dice en lugar de quedarse callado sin hacer nada.
+</block>
+</dash>
+
+<details>
+syntax: $removeComponent[customID1; customID2; ...; (messageID)]
+param: customID|text|Obligatorio|La ID o dirección web que le diste al botón o al menú cuando lo añadiste
+param: messageID|snowflake|Opcional|ID de un mensaje antiguo del bot para recortar en lugar del actual
+</details>

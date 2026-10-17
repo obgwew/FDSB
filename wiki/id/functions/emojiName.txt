@@ -1,0 +1,36 @@
+<dash>
+name: $emojiName
+desc: Memberikan nama di balik sebuah emoji khusus, dari ID- atau mention-nya.
+category: Info
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Berikan sebuah emoji khusus, dan bot membalas di kanal dengan nama emoji itu. Baik ID numerik maupun mention lengkap seperti <:name:id> atau <a:name:id> dipahami, sehingga Anda bisa menyerahkan apa pun yang Anda salin dari Discord. Namanya kembali sebagai teks biasa, siap diselipkan ke dalam sebuah pesan atau dibandingkan dengan nama yang sudah Anda ketahui.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $emojiName
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $emojiName[emoji id]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $emojiName[123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: Hanya emoji server khusus — emoji standar dari papan ketik Anda tidak membawa ID yang bisa dibaca. Jika bot tidak berbagi server dengan emoji itu, ia memosting kesalahan yang menyatakan emoji tidak ditemukan, alih-alih sebuah nama.
+</block>
+</dash>
+
+<details>
+syntax: $emojiName[emoji id]
+param: emoji id|snowflake|Wajib|Emoji khusus mana yang akan disebut namanya, diberikan sebagai angka atau mention seperti <:name:id> / <a:name:id>
+</details>

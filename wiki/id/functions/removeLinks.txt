@@ -1,0 +1,35 @@
+<dash>
+name: $removeLinks
+desc: Menghapus setiap tautan web dari pesan yang akan dikirim bot.
+category: Utilitas
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $removeLinks menyalakan penghapusan tautan untuk sisa perintah. Ke mana pun bot mengirim pesan setelahnya, setiap alamat http atau www diangkat keluar dan kata-kata lainnya tetap dipertahankan. Perintah ini tidak butuh argumen, Anda cukup meletakkannya sebelum teks yang ingin dibersihkan.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $removeLinks
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $removeLinks
+text: $sendMessage[Check https://example.com and www.example.org for details.]
+</block>
+
+<block type="callout" kind="note">
+text: Ini memengaruhi setiap pesan yang dikirim bot setelah titik itu dalam perintah, termasuk teks yang datang dari sebuah variabel. Letakkan seakhir mungkin jika Anda hanya ingin satu pesan dibersihkan.
+</block>
+</dash>
+
+<details>
+syntax: $removeLinks
+</details>

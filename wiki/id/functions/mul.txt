@@ -1,0 +1,41 @@
+<dash>
+name: $mul
+desc: Mengalikan angka-angka yang Anda berikan dan menyerahkan kembali hasil perkaliannya.
+category: Matematika & Angka
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Serahkan dua angka atau lebih yang dipisahkan dengan titik koma dan bot menghitung hasil perkaliannya. Dua angka yang dikalikan bersama, atau seluruh kolom angka, memberikan satu jawaban kembali, sehingga $mul[3; 4] menghasilkan 12 dan $mul[2; 3; 4] menghasilkan 24. Ia muat rapi di dalam sebuah pesan, sebuah judul, atau isi kartu, yang berarti total berjalan atau sebuah harga dapat ditulis dalam satu baris.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !calc
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $mul[a; b; ...]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $sendMessage[$mul[3; 4]]
+</block>
+
+<block type="callout" kind="note">
+text: Anda memerlukan setidaknya dua angka dan setiap bagian harus berupa angka sungguhan, jika tidak perintah berhenti dengan kesalahan. Jawaban yang jatuh pada bilangan bulat kembali tanpa tanda desimal, dan apa pun yang lain mempertahankan desimalnya.
+</block>
+
+<block type="callout" kind="important">
+text: Ia harus berada di dalam perintah lain alih-alih pada barisnya sendiri, seperti yang ditunjukkan contoh. Berdiri sendiri, tidak ada tempat bagi jawaban untuk pergi, sehingga bot melaporkannya sebagai perintah yang tidak dikenal.
+</block>
+</dash>
+
+<details>
+syntax: $mul[a; b; ...]
+param: a|number|Wajib|Angka pertama yang dikalikan
+param: b|number|Wajib|Angka kedua yang dikalikan. Tambahkan sebanyak yang Anda suka.
+</details>

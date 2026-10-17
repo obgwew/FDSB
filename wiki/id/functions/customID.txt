@@ -1,0 +1,37 @@
+<dash>
+name: $customID
+desc: Memberi tahu tombol atau entri menu mana yang baru saja ditekan anggota.
+category: Info
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $customID membacakan kembali label yang Anda berikan pada sebuah tombol atau entri menu ketika Anda membangunnya, sehingga satu skrip dapat bereaksi berbeda tergantung apa yang disentuh.
+text: Nilai ini hanya terisi ketika skrip dimulai oleh seseorang yang menekan sebuah komponen, dan ia kembali kosong di tempat lain.
+text: Itulah yang membuatnya hal wajar untuk dibandingkan di dalam sebuah $if ketika Anda menawarkan lebih dari satu pilihan.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !buttons
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $customID
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $if[$customID == btn_confirm]
+text:   You confirmed!
+text: $elif[$customID == btn_cancel]
+text:   You cancelled!
+text: $endif
+</block>
+
+<block type="callout" kind="note">
+text: Hanya sebuah ketukan yang dapat mengisi ini. Ketika perintah datang dari obrolan biasa, nilainya kosong, sehingga pemeriksaan terhadapnya tidak akan pernah cocok.
+</block>
+</dash>

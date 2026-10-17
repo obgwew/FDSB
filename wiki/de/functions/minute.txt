@@ -1,0 +1,25 @@
+<dash>
+name: $minute
+desc: Gibt die aktuelle Minute der Stunde an, von 00 bis 59.
+category: Timing & Verzögerungen
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: $minute liest die Uhr und gibt die aktuelle Minute zurück, immer zweistellig, sodass die neunte Minute einer Stunde als 09 erscheint. Fügen Sie es in eine Textzeile ein und die Ziffern landen, wo Sie sie platzieren, oder lassen Sie es auf einer eigenen Zeile stehen, dann postet der Bot die Zahl im Kanal. Der Wert wird bei jedem Durchgang neu ermittelt und ändert sich mit fortschreitenden Minuten.
+</block>
+
+<block type="code" title="Syntax">
+text: $minute
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $sendMessage[It is now $hour:$minute]
+</block>
+
+<block type="callout" kind="note">
+text: Der Wert reicht von 00 bis 59 und ist immer zweistellig breit, sodass er sich sauber einfügt, wenn Sie ihn zwischen $hour und $second platzieren.
+</block>
+
+<block type="callout" kind="important">
+text: $minute folgt der Zeitzone, die Sie mit $time gesetzt haben. Wenn Sie nie eine gesetzt haben, greift die lokale Uhr des Bots.
+</block>
+</dash>

@@ -1,0 +1,37 @@
+<dash>
+name: $authorIcon
+desc: Meletakkan gambar kecil di samping nama penulis di bagian atas sebuah embed.
+category: Pembuat Embed
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Berikan sebuah tautan gambar, dan embed tumbuh menjadi gambar bulat di sudut atasnya, tepat di tempat nama penulis berada. Sedang membangun beberapa embed dalam satu pesan? Bagian kedua yang opsional menentukan mana yang disentuh, dan bawaannya adalah yang pertama. Datang ke perintah ini sebelum mengatur nama, dan sebuah tempat kosong polos dipakai, sehingga gambar tetap punya sesuatu untuk bersebelahan.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !welcome
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $authorIcon[url;(index)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $authorIcon[https://example.com/bot.png]
+</block>
+
+<block type="callout" kind="note">
+text: Tautan harus diawali http:// atau https://, jika tidak Discord menampilkan gambar yang rusak. Pasangkan dengan $author untuk mengatur nama yang muncul di samping gambar.
+</block>
+</dash>
+
+<details>
+syntax: $authorIcon[url;(index)]
+param: url|text|Wajib|Tautan gambar yang ditampilkan, diawali http:// atau https://
+param: index|number|Opsional|Embed mana yang disentuh ketika beberapa sedang dibangun (bawaan 1)
+</details>

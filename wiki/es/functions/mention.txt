@@ -1,0 +1,31 @@
+<dash>
+name: $mention
+desc: Te da una etiqueta en la que se puede hacer clic para el miembro que ejecutó el comando.
+category: Info
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $mention te entrega la etiqueta del miembro cuyo mensaje activó tu comando. Ponlo dentro de tu propia línea de texto y el bot publica un nombre que se ilumina en el canal y notifica a esa persona. No hace falta nada más para que funcione, lo que lo convierte en la forma más corta de saludar a quien tienes delante ahora mismo.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !greet en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $mention
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: Hello $mention!
+</block>
+
+<block type="callout" kind="note">
+text: Lo que se envía es la etiqueta real de Discord, que se ve así en tu script: <@123456789>. En el canal aparece como el nombre del miembro, al hacer clic en ella se abre su perfil, y la persona también recibe una notificación.
+</block>
+</dash>

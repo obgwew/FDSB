@@ -1,0 +1,37 @@
+<dash>
+name: $authorIcon
+desc: Pone una pequeña imagen junto al nombre del autor en la parte superior de un embed.
+category: Constructor de embed
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Dale un enlace de imagen y el embed gana una imagen redonda en su esquina superior, justo donde se sitúa el nombre del autor. ¿Construyes varios embeds en un solo mensaje? La segunda parte opcional dice cuál tocar, y de forma predeterminada es el primero. Si llegas a esto antes de establecer un nombre, se usa un marcador de posición en blanco, así que la imagen todavía tiene algo junto a lo que ponerse.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !welcome en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $authorIcon[url;(index)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $authorIcon[https://example.com/bot.png]
+</block>
+
+<block type="callout" kind="note">
+text: El enlace tiene que empezar por http:// o https://, si no Discord muestra una imagen rota. Combínalo con $author para establecer el nombre que aparece junto a la imagen.
+</block>
+</dash>
+
+<details>
+syntax: $authorIcon[url;(index)]
+param: url|text|Obligatorio|Enlace de imagen que mostrar, empezando por http:// o https://
+param: index|number|Opcional|Qué embed tocar cuando se construyen varios (predeterminado 1)
+</details>

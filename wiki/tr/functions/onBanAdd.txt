@@ -1,0 +1,32 @@
+<dash>
+name: $onBanAdd
+desc: Birisi sunucudan yasaklandığı anda satırlarınızı çalıştırır.
+category: Olay
+
+<block type="text" title="Olay nasıl çalışır?">
+text: Prefix alanı $onBanAdd olan bir komutu kaydettiğinizde uygulama onu sizin için bir Olay olarak işaretler. Bir üye yasaklandığı anda — bir moderatör tarafından, kendi komutlarınızdan biriyle veya denetim günlüğü aracılığıyla — o önekin altındaki satırlar, kimse bir şey yazmadan çalışmaya başlar.
+text: Yasaklanan kişi burada yazarıdır; bu yüzden $mention, $authorID ve $authorName onu gösterir, $guildID ve $guildName ise yasağın gerçekleştiği sunucuyu anlatır.
+text: Yasaklamanın kendine ait bir kanalı yoktur; siz bir tane belirtmeden mesaj kanalı boş bırakılır. Önekin hemen ardına köşeli parantez içine bir kanal kimliği yazdığınızda yanıtlarınız oraya gider.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: #PREFIX:$onBanAdd[channelID]
+</block>
+
+<block type="code" title="Kopyalamaya Hazır Örnek">
+text: #PREFIX:$onBanAdd[123456789012345678]
+text:  sendMessage[$mention has been banned from $guildName]
+</block>
+
+<block type="callout" kind="note">
+text: $onBanAdd'ı ilk satırda tutun. Aşağı kaydırdığınızda uygulama komutu bir olay olarak işlemeyi bırakır ve bu kez herhangi bir komut gibi birinin öneki yazmasını bekleyip durur.
+</block>
+
+<block type="callout" kind="important">
+text: Önekin ardına bir kanal kimliği yazın; çünkü yasaklama hiçbir kanala bağlı değildir ve botun aksi halde konuşacak yeri yoktur. O mesajı okuyan kişinin o kanala erişimi olmalıdır ve yasaklanan üye onu asla göremez — bu da onu olanların kaydı için iyi bir yer yapar.
+</block>
+</dash>
+
+<details>
+syntax: $onBanAdd
+</details>

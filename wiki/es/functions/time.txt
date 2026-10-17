@@ -1,0 +1,41 @@
+<dash>
+name: $time
+desc: Establece la zona horaria en la que se lee el reloj para el resto de este comando.
+category: Tiempos y esperas
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $time toma un nombre de zona horaria de la lista mundial, como Asia/Amman o Europe/London, y lo mantiene para el comando que se está ejecutando. Una vez establecido, $hour, $minute y $second leen el reloj en esa zona horaria en lugar de donde resulte que está alojado el bot. No imprime nada por sí solo — es una línea de configuración que colocas encima de las que realmente leen la hora.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !clock en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $time[timezone]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $time[Asia/Amman]
+text: $sendMessage[Right now it is $hour:$minute]
+</block>
+
+<block type="callout" kind="note">
+text: Escribe la zona horaria como una región y una ciudad separadas por una barra, como Asia/Amman, Europe/London o America/New_York. La lista es la misma estándar que usa el resto del mundo, así que se acepta cualquier nombre conocido.
+</block>
+
+<block type="callout" kind="important">
+text: Si el nombre no se reconoce, el bot responde con un error en lugar de cambiar el reloj. El ajuste pertenece solo a esta ejecución, así que coloca $time antes de las líneas que leen la hora, y recuerda que $day, $month y $year siguen leyendo el reloj local propio del bot independientemente de ello.
+</block>
+</dash>
+
+<details>
+syntax: $time[timezone]
+param: timezone|text|Obligatorio|Un nombre de zona horaria IANA, como Asia/Amman o Europe/London
+</details>

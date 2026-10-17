@@ -1,0 +1,35 @@
+<dash>
+name: $hour
+desc: Memberikan jam saat ini, dari 00 hingga 23.
+category: Waktu & Jeda
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $hour membaca jam dan mengembalikan jam saat ini pada putaran dua puluh empat jam, selalu dua digit, jadi sore hari membaca 15, bukan 3. Letakkan di dalam baris teks dan digit-digit itu mendarat di tempat Anda meletakkannya, atau biarkan di barisnya sendiri dan bot membacakan jam itu ke kanal. Ia diukur ulang setiap kali berjalan, jadi dua perintah yang berjarak satu menit bisa memberikan dua angka yang berbeda.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !hour
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $hour
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $sendMessage[The hour here is $hour]
+</block>
+
+<block type="callout" kind="note">
+text: Nilainya berjalan dari 00 hingga 23 pada jam dua puluh empat jam, jadi pukul tiga sore kembali sebagai 15. Padukan dengan $minute dan $second untuk membentuk pembacaan jam penuh seperti 15:04:09.
+</block>
+
+<block type="callout" kind="important">
+text: $hour mengikuti zona waktu yang Anda setel dengan $time. Jika Anda tidak pernah menyetelnya, ia jatuh ke jam setempat bot itu sendiri.
+</block>
+</dash>

@@ -1,0 +1,31 @@
+<dash>
+name: $botID
+desc: Te da el propio ID de usuario de Discord del bot como un número largo.
+category: Info
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Pídelo y el bot publica su propio ID de cuenta en el canal, nada más que dígitos. Por sí solo, ese número es todo lo que la gente ve en el chat; mételo en cambio dentro de una línea y se rellena donde lo escribiste. El valor nunca cambia para una cuenta de bot dada.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $botID en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $botID
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: My bot ID is $botID
+</block>
+
+<block type="callout" kind="note">
+text: Un ID de Discord es un snowflake — una larga ristra de dígitos como 123456789012345678. Activa el modo desarrollador en los ajustes de Discord y puedes copiar el de cualquier miembro de la misma forma.
+</block>
+</dash>

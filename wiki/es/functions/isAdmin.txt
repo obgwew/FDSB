@@ -1,0 +1,36 @@
+<dash>
+name: $isAdmin
+desc: Responde true o false según si un miembro administra el servidor.
+category: Info
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Dale un miembro como mención o ID y recibes la palabra true o false. El propietario del servidor siempre cuenta como administrador, y también cualquiera que tenga activado el permiso Administrator. Un miembro que no se puede encontrar en el servidor, o cualquiera por el que se pregunte en un chat privado, vuelve false.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !checkadmin en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $isAdmin[userID]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $isAdmin[$authorID]
+</block>
+
+<block type="callout" kind="note">
+text: Aquí solo cuenta el permiso Administrator. Un miembro que puede banear, silenciar y gestionar mensajes pero carece de Administrator igual recibe false, así que combínalo con otras comprobaciones si necesitas un control más fino.
+</block>
+</dash>
+
+<details>
+syntax: $isAdmin[userID]
+param: userID|text|Obligatorio|El miembro a comprobar, como una @mención o su ID
+</details>

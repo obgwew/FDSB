@@ -1,0 +1,37 @@
+<dash>
+name: $serverIcon
+desc: Te da la imagen del icono de un servidor.
+category: Servidor
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $serverIcon obtiene el icono de un servidor y devuelve la dirección de esa imagen. Usado por sí solo toma el servidor en el que se envió el mensaje; dale la ID de un servidor y usa esa en su lugar, siempre que el bot sea miembro allí. La dirección se mete directamente en una tarjeta o sale como enlace simple, y un icono animado llega en su forma en movimiento.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !welcome en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $serverIcon
+text: $serverIcon[(guildID)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: Server icon: $serverIcon
+</block>
+
+<block type="callout" kind="note">
+text: Un servidor sin icono configurado te da un error en lugar de una dirección en blanco. El resultado funciona en cualquier parte donde quepa una imagen, como tarjetas, miniaturas e iconos de pie, o simplemente puedes publicar el enlace por sí solo.
+</block>
+</dash>
+
+<details>
+syntax: $serverIcon[(guildID)]
+param: guildID|snowflake|Opcional|De qué servidor tomar el icono. Déjalo fuera para usar el del servidor donde se envió el mensaje.
+</details>

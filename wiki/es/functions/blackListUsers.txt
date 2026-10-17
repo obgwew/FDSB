@@ -1,0 +1,41 @@
+<dash>
+name: $blackListUsers
+desc: Detiene el comando para cualquiera nombrado en la lista de usuarios.
+category: Control de acceso
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $blackListUsers mira a la persona que activó el comando y la compara con los usuarios que enumeraste. Si coincide, el bot muestra tu mensaje de rechazo, o uno predeterminado si lo dejaste fuera, y el resto del comando se descarta. Si no está en la lista, no se imprime nada y el script simplemente continúa. Es la forma directa de dejar fuera de un comando a personas concretas sin restringirlo para todos.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !users en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $blackListUsers[user; ...; message]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $blackListUsers[@user; Sorry, you are not allowed to use this command!]
+</block>
+
+<block type="callout" kind="note">
+text: Un usuario puede escribirse como mención, como su ID o como su nombre, y los nombres se emparejan sin preocuparse por las mayúsculas. También se comprueban su nombre visible y su nombre global. Enumera varios separándolos con punto y coma. Todo hasta el último argumento se trata como un usuario, así que el argumento final es donde va tu rechazo personalizado.
+</block>
+
+<block type="callout" kind="warning">
+text: Cuando la comprobación tiene éxito, el comando se detiene justo ahí — no se ejecuta ninguna línea por debajo. Deja fuera el mensaje personalizado y el bot recurre a un texto propio.
+</block>
+</dash>
+
+<details>
+syntax: $blackListUsers[user; ...; message]
+param: user|text|Obligatorio|Los usuarios bloqueados, como menciones, IDs o nombres, separados por punto y coma
+param: message|text|Opcional|Un mensaje que mostrar en lugar del rechazo predeterminado cuando coincide el usuario
+</details>

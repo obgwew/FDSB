@@ -1,0 +1,41 @@
+<dash>
+name: $editChannelPerms
+desc: Activa o desactiva permisos individuales para un rol o un miembro en un solo canal.
+category: Moderación
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Nombra un canal, nombra un rol o un miembro, y luego enumera los permisos que quieres cambiar; el bot reescribe la lista de permisos de ese canal solo para ellos. Un signo más delante de un permiso lo permite, un signo menos lo bloquea, y una barra lo devuelve a lo que diga el rol de todo el servidor. Nada más del canal cambia, así que esta es la forma de abrir un canal de voz a unas pocas personas o de cerrar un canal de texto sin tocar los roles del servidor.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !lock en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $editChannelPerms[channel ID; target ID; perm1; perm2; ...]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $editChannelPerms[123456789; 987654321; +send_messages; -connect]
+</block>
+
+<block type="callout" kind="warning">
+text: El bot necesita Manage Channels o Manage Permissions en ese canal, y el cambio tiene que ocurrir dentro de un servidor en lugar de un mensaje directo. Si el rol del objetivo está por encima del rol más alto del propio bot, Discord rechaza todo el comando.
+</block>
+
+<block type="callout" kind="note">
+text: Los nombres de permiso son los propios de Discord, escritos en snake_case: send_messages, view_channel, connect, manage_roles. Un nombre que el bot no reconozca detiene el comando por completo en lugar de omitirse en silencio.
+</block>
+</dash>
+
+<details>
+syntax: $editChannelPerms[channel ID; target ID; perm1; perm2; ...]
+param: channelID|text|Obligatorio|ID numérico del canal que cambiar
+param: targetID|text|Obligatorio|Qué rol o miembro cambiar, como un ID o una mención
+param: permissions|text|Obligatorio|Uno o más permisos, con + para permitir, - para denegar o / para restablecer
+</details>

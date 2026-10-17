@@ -1,0 +1,48 @@
+<dash>
+name: $editSelectMenuOption
+desc: Menulis ulang satu entri di dalam sebuah menu yang sudah berada di pesan yang diposting bot.
+category: Komponen
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Menu disusun satu opsi demi satu opsi, dan perintah ini mengubah salah satunya setelahnya. Bot menemukan entri itu lewat nilai yang Anda berikan saat opsi dibuat, lalu menukarnya dengan label baru, deskripsi kecil baru, emoji baru, atau menandainya sebagai opsi yang sudah terpilih di awal. Menu diperbarui di pesan tempat ia sudah berada, sehingga tidak ada yang perlu menjalankan perintah Anda lagi untuk melihat perbedaannya.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !renamecolor
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $editSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+text: $addSelectMenuOption[color_menu; Red; red; The color red]
+text: $addSelectMenuOption[color_menu; Blue; blue; The color blue]
+text: $editSelectMenuOption[color_menu; Crimson; red; A deep red]
+</block>
+
+<block type="callout" kind="note">
+text: Nilai itulah cara sebuah opsi ditemukan, sehingga nilainya harus cocok dengan yang Anda ketik saat opsi ditambahkan, bukan dengan yang Anda inginkan menjadi nilainya. Kosongkan ID pesan, dan bot memeriksa pesan milik interaksi itu terlebih dahulu, lalu pesan terakhirnya.
+</block>
+
+<block type="callout" kind="warning">
+text: Tidak adanya opsi yang membawa nilai itu membuat perintah berhenti dengan kesalahan. Menandai sebuah opsi sebagai default menghapus prapemilihan pada semua opsi lainnya, sebab sebuah menu hanya bisa diawali dengan satu pilihan.
+</block>
+</dash>
+
+<details>
+syntax: $editSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+param: Menu ID|text|Wajib|ID menu tempat opsi itu berada
+param: Label|text|Wajib|Teks baru yang dilihat anggota di menu
+param: Value|text|Wajib|Nilai yang sudah dimiliki opsi itu, dipakai untuk menemukannya
+param: Description|text|Boleh kosong|Baris kecil baru yang ditampilkan di bawah label
+param: Default|yes/no|Opsional|Tulis yes agar opsi ini sudah terpilih di awal (bawaan: no)
+param: Emoji|text|Opsional|Tampilkan emoji ini di samping label
+param: Message ID|snowflake|Opsional|Pesan bot mana yang memuat menunya. Kosongkan untuk memakai pesan yang jelas dimaksud.
+</details>

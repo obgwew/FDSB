@@ -1,0 +1,31 @@
+<dash>
+name: $getBotInvent
+desc: Memberikan Anda tautan siap pakai untuk menambahkan bot ke server lain.
+category: Utilitas
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Bot membangun tautan tambahnya sendiri saat itu juga dan mempostingnya di kanal. Siapa pun yang mengikuti tautan itu diminta semua izin sekaligus, jadi tidak ada layar kedua berisi centang yang harus dicentang. Tulis di dalam kalimat jika Anda lebih suka ia tidak muncul sendiri.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $getBotInvent
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $getBotInvent
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: Invite me: $getBotInvent
+</block>
+
+<block type="callout" kind="note">
+text: Tautan itu meminta semua izin, bukan hanya beberapa pilihan, yang lebih banyak daripada yang sebenarnya dibutuhkan kebanyakan server. Jika bot tidak bisa membaca ID aplikasinya sendiri, pesannya menyatakan hal itu alih-alih menampilkan tautan.
+</block>
+</dash>

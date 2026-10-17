@@ -1,0 +1,41 @@
+<dash>
+name: $blackListServer
+desc: Mencegah perintah ini berjalan di server mana pun yang ada dalam daftar.
+category: Kontrol Akses
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $blackListServer memeriksa server tempat perintah dijalankan lalu membandingkannya dengan daftar yang Anda buat. Jika server saat ini cocok, bot menampilkan pesan penolakan Anda — atau pesan bawaan jika Anda tidak menuliskannya — dan sisa perintah dibuang begitu saja. Jika tidak ada dalam daftar, tidak ada apa pun yang dicetak dan skrip hanya lanjut berjalan. Inilah cara yang rapi untuk menjauhkan sebuah perintah dari tempat-tempat tertentu sambil tetap membukanya di mana pun.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !servers
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $blackListServer[server; ...; message]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $blackListServer[123456789012345678; Sorry, this server cannot use the command!]
+</block>
+
+<block type="callout" kind="note">
+text: Sebuah server bisa ditulis sebagai ID-nya atau sebagai namanya, dan penamaan dicocokkan tanpa memperhatikan huruf besar atau kecil. Daftarkan beberapa server dengan memisahkannya lewat titik koma. Semua isi sampai argumen terakhir diperlakukan sebagai server, jadi argumen terakhir adalah tempat pesan penolakan khusus Anda.
+</block>
+
+<block type="callout" kind="warning">
+text: Saat pemeriksaan cocok, perintah berhenti di situ juga — tidak ada baris di bawahnya yang dijalankan sama sekali. Jika pesan khusus tidak Anda tuliskan, bot jatuh ke kalimat bawaannya sendiri.
+</block>
+</dash>
+
+<details>
+syntax: $blackListServer[server; ...; message]
+param: server|text|Wajib|Server yang diblokir, sebagai ID atau nama, dipisahkan lewat titik koma
+param: message|text|Opsional|Pesan yang ditampilkan sebagai pengganti penolakan bawaan saat server cocok
+</details>

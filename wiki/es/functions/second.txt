@@ -1,0 +1,35 @@
+<dash>
+name: $second
+desc: Da el segundo actual del minuto, de 00 a 59.
+category: Tiempos y esperas
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $second lee el reloj y te devuelve el segundo actual, siempre con dos dígitos, así que el segundo inicial de cada minuto marca 00. Mételo en una línea de texto y los dígitos caen donde los pongas, o déjalo en una línea propia y el bot publica la cifra en el canal. Como se lee de nuevo en cada ejecución, es una forma cómoda de dar a un comando un resultado ligeramente distinto cada vez.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !second en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $second
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $sendMessage[The time is $hour:$minute:$second]
+</block>
+
+<block type="callout" kind="note">
+text: El valor va de 00 a 59 y siempre ocupa dos dígitos, lo que mantiene una lectura completa de $hour:$minute:$second con el espaciado uniforme.
+</block>
+
+<block type="callout" kind="important">
+text: $second sigue la zona horaria que establezcas con $time. Si nunca estableces ninguna, recurre al reloj local del propio bot.
+</block>
+</dash>

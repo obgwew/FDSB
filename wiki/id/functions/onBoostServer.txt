@@ -1,0 +1,39 @@
+<dash>
+name: $onBoostServer
+desc: Menjalankan baris-baris Anda ketika seseorang melakukan boost server atau mendorongnya ke level boost berikutnya.
+category: Peristiwa
+
+<block type="text" title="Bagaimana cara kerja peristiwa?">
+text: Discord mengirim pesan sistem singkat setiap kali sebuah boost tiba atau server naik ke Level 1, 2 atau 3, dan peristiwa ini menjalankan baris-baris Anda terhadap pesan itu.
+text: Orang yang melakukan boost adalah penulisnya di sini, jadi $mention dan $authorID menunjuk kepadanya, dan kanalnya adalah di mana pun Discord menempatkan pemberitahuan boost.
+text: Ucapkan sesuatu sebagai balasan, dan memasangkannya dengan $boostCount atau $boostLevel memungkinkan Anda memberi tahu mereka berapa nilai boost mereka.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $onBoostServer
+item: Aplikasi menandainya sebagai Peristiwa untuk Anda
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: #PREFIX:$onBoostServer
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: #PREFIX:$onBoostServer
+text:  sendMessage[Thanks $mention for boosting! This server now has $boostCount boosts]
+</block>
+
+<block type="callout" kind="note">
+text: Hanya pesan sistem boost sungguhan yang memicu ini, tidak pernah obrolan biasa. Ini tempat yang tepat untuk ucapan terima kasih di saat seseorang melakukan boost.
+</block>
+
+<block type="callout" kind="important">
+text: Bot harus online dan masih menjadi anggota server saat boost tiba.
+text: Baris-baris Anda kemudian muncul di kanal yang Discord gunakan untuk pemberitahuan boost, yang biasanya berupa kanal sistem atau boost alih-alih tempat orang-orang berbicara.
+</block>
+</dash>

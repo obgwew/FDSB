@@ -1,0 +1,37 @@
+<dash>
+name: $httpAddHeader
+desc: Añade una cabecera extra a la solicitud web que tu comando haga después.
+category: HTTP
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Dale un nombre de cabecera y un valor, y ambos viajan con la siguiente solicitud que haga tu comando, ya sea una GET, una POST, una PUT, un patch o un delete. Así es como cuelas una clave de API o un token bearer sin integrarlo en la dirección. Una vez que la solicitud ha salido, las cabeceras se borran, así que cada una se aplica a una sola llamada y nada más.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !lookup en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $httpAddHeader[name; value]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $httpAddHeader[Authorization; Bearer token123]
+text: $httpGet[https://api.example.com/data]
+</block>
+
+<block type="callout" kind="note">
+text: Establece el mismo nombre de cabecera dos veces y el segundo valor reemplaza al primero. Ambas partes tienen que estar: si dejas fuera cualquiera de ellas, el bot se detiene con un error que te dice qué falta.
+</block>
+</dash>
+
+<details>
+syntax: $httpAddHeader[name; value]
+param: name|text|Obligatorio|Cómo se llama la cabecera, por ejemplo Authorization
+param: value|text|Obligatorio|Qué enviar como su valor
+</details>

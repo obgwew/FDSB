@@ -1,0 +1,35 @@
+<dash>
+name: $second
+desc: Gives the current second of the minute, from 00 to 59.
+category: Timing & Delays
+
+<block type="text" title="How does the command work?">
+text: $second reads the clock and hands back the current second, always two digits, so the opening second of each minute reads 00. Drop it into a line of text and the digits land where you put them, or leave it on a line of its own and the bot posts the figure in the channel. Because it is read fresh on every run, it is a handy way to give a command a slightly different result each time.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !second
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: $second
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $sendMessage[The time is $hour:$minute:$second]
+</block>
+
+<block type="callout" kind="note">
+text: The value runs from 00 to 59 and is always two digits wide, which keeps a full $hour:$minute:$second reading evenly spaced.
+</block>
+
+<block type="callout" kind="important">
+text: $second follows the timezone you set with $time. If you never set one, it falls back to the bot's own local clock.
+</block>
+</dash>

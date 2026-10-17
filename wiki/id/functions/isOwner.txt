@@ -1,0 +1,36 @@
+<dash>
+name: $isOwner
+desc: Memberi tahu Anda apakah seorang anggota adalah pemilik server.
+category: Info
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $isOwner mengambil sebuah anggota sebagai user ID atau mention dan membandingkannya dengan pemilik server tempat pesan dikirim. Bot menjawab dengan kata benar atau salah, sehingga Anda dapat langsung memasukkannya ke dalam sebuah kondisi dan membiarkannya memutuskan apa yang terjadi selanjutnya. Siapa pun yang bukan pemilik, dan anggota mana pun yang tidak dapat ditemukan bot di server itu, kembali sebagai salah.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !check
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $isOwner[userID]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $isOwner[$authorID]
+</block>
+
+<block type="callout" kind="note">
+text: Hanya satu orang yang memiliki server yang mendapatkan benar. Admin yang duduk di urutan teratas daftar peran tetap mendapatkan salah, jadi gunakan ini ketika yang Anda maksud adalah pemilik, bukan tim moderasi.
+</block>
+</dash>
+
+<details>
+syntax: $isOwner[userID]
+param: userID|text|Wajib|Anggota yang dicari, sebagai user ID atau mention
+</details>

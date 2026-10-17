@@ -1,0 +1,31 @@
+<dash>
+name: $uptime
+desc: Menampilkan berapa lama bot telah online sejak terakhir kali dinyalakan.
+category: Utilitas
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $uptime menghitung waktu sejak bot online dan mengembalikannya dalam bentuk yang mudah dibaca, contohnya 2d 5h 30m 12s. Satuan yang bernilai 0 akan otomatis dihilangkan, jadi bot yang baru dinyalakan bisa hanya menampilkan 45s. Hitungan ini direset setiap kali bot dinyalakan ulang.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !uptime
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $uptime
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: Bot has been up for $uptime
+</block>
+
+<block type="callout" kind="note">
+text: $uptime mengembalikan nilai, bukan pesan. Jadi Anda bisa langsung menyisipkannya ke dalam kalimat, atau menulisnya sendiri di baris terpisah dan bot akan mengirim hasilnya.
+</block>
+</dash>

@@ -9,7 +9,7 @@ import json
 import os
 from urllib.parse import urlparse
 
-from main_app.langs.translations import Translations
+from main_app.langs._translations import Translations
 
 # ══════════════════════════════════════════════════════════════════════════════
 #  Helpers (mirrors main_app/settings.py styling helpers)
@@ -39,9 +39,6 @@ _PRESENCE_COLORS = {
     'invisible':  '#80848E',
 }
 
-# Real Discord activity types (discord.py ActivityType). 'streaming' is the
-# only one Discord actually renders with a clickable link, so it's the only
-# one that needs — and is allowed — a URL.
 _ACTIVITY_ICONS = {
     'playing':    ft.Icons.SPORTS_ESPORTS_ROUNDED,
     'streaming':  ft.Icons.LIVE_TV_ROUNDED,
@@ -68,14 +65,10 @@ class BotStatusView:
     def __init__(self, page: ft.Page, theme_hex, bot_data: dict = None,
                  lang: str = 'en', on_back=None):
         self._page      = page
-        self._c         = theme_hex          # callable: theme color lookup, e.g. settings._c
+        self._c         = theme_hex
         self._bot_data  = bot_data or {}
         self._lang      = lang
-        self._on_back   = on_back            # called when leaving this view entirely
-
-        # Bot folder on disk, so status_config.json can be saved/loaded next
-        # to config.json (see _get_token in local_server.py). Tries the
-        # common key names — adjust here if settings.py uses a different one.
+        self._on_back   = on_back
         self._bot_dir = (
             self._bot_data.get('dir')
             or self._bot_data.get('path')
@@ -86,7 +79,6 @@ class BotStatusView:
 
         self._container: ft.Container | None = None
 
-        # ── list-screen state ───────────────────────────────────────────────
         self._status_value   = 'online'
         self._loop_unit_value = 'second'
         self._loop_time_field = ft.TextField(
@@ -110,13 +102,11 @@ class BotStatusView:
         )
         self._entries_col = ft.Column(spacing=8)
 
-        # demo placeholder entries — purely visual, matches the wireframe (2 rows)
         self._entries: list[dict] = [
             {'prefix': '', 'status': '', 'details': self._tt('sv_entry_details_ph')},
             {'prefix': '', 'status': '', 'details': self._tt('sv_entry_details_ph')},
         ]
 
-        # ── editor-screen state ─────────────────────────────────────────────
         self._editing_index: int | None = None
         self._activity_type_value = 'playing'
         self._activity_dropdown = ft.Dropdown(
@@ -173,10 +163,8 @@ class BotStatusView:
             border=_border_all(2, '#232428'),
         )
 
-        # Pull in whatever was saved from a previous session (if any).
         self._load_status_config()
 
-    # ── translation shortcut ────────────────────────────────────────────────
     def _tt(self, key: str) -> str:
         return _t(key, self._lang)
 
@@ -683,7 +671,6 @@ class BotStatusView:
                     vertical_alignment=ft.CrossAxisAlignment.CENTER,
                 ),
 
-                # ── Status Data card ─────────────────────────────────────────
                 ft.Column(
                     [
                         ft.Text(self._tt('sv_status_data'), size=15,

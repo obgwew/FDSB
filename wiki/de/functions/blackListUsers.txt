@@ -1,0 +1,31 @@
+<dash>
+name: $blackListUsers
+desc: Hält den Befehl für jeden an, der auf der Benutzerliste steht.
+category: Zugriffskontrolle
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: $blackListUsers sieht sich die Person an, die den Befehl ausgelöst hat, und vergleicht sie mit den von Ihnen aufgeführten Benutzern. Ist sie ein Treffer, zeigt der Bot Ihre Ablehnungsnachricht — oder eine Standardnachricht, falls Sie keine angegeben haben — und der Rest des Befehls wird verworfen. Steht sie nicht auf der Liste, wird nichts ausgegeben und das Skript läuft einfach weiter. So halten Sie bestimmte Personen fern, ohne den Befehl für alle zu verschärfen.
+</block>
+
+<block type="code" title="Syntax">
+text: $blackListUsers[user; ...; message]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $blackListUsers[@user; Sorry, you are not allowed to use this command!]
+</block>
+
+<block type="callout" kind="note">
+text: Ein Benutzer kann als Erwähnung, als ID oder als Name angegeben werden, wobei Namen ohne Beachtung der Groß-/Kleinschreibung erkannt werden. Auch Anzeigename und globaler Name werden geprüft. Mehrere Personen trennen Sie durch Semikolons. Alles bis zum letzten Argument gilt als Benutzer, das letzte Argument ist daher für Ihre eigene Ablehnungsnachricht bestimmt.
+</block>
+
+<block type="callout" kind="warning">
+text: Wenn die Prüfung erfolgreich ist, stoppt der Befehl an dieser Stelle — keine Zeile darunter wird ausgeführt. Lassen Sie die eigene Nachricht weg, greift der Bot auf eine eigene Formulierung zurück.
+</block>
+</dash>
+
+<details>
+syntax: $blackListUsers[user; ...; message]
+param: user|text|Erforderlich|Die gesperrten Benutzer als Erwähnungen, IDs oder Namen, durch Semikolons getrennt
+param: message|text|Optional|Eine Nachricht, die statt der Standard-Ablehnung angezeigt wird, wenn der Benutzer zutrifft
+</details>

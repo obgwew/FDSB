@@ -1,0 +1,45 @@
+<dash>
+name: $returnGetReactions
+desc: Menghitung reaksi manusia pada sebuah pesan atau mendaftar siapa yang bereaksi, siap dibaca kembali.
+category: Perintah Pengembalian
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Arahkan ke sebuah pesan dan sebuah emoji, lalu bot membuka pesan itu untuk melihat siapa yang menekan emoji tersebut. Anda memilih apakah ia menghitung orangnya atau menuliskan ID mereka sebagai satu daftar tergabung, dan apa pun pilihannya jawabannya disimpan di bawah nama penyimpanan yang Anda berikan, sehingga tidak ada yang muncul di chat pada titik ini. Nanti, $return dengan nama yang sama membawa hasilnya keluar sebagai teks. Akun bot tidak pernah dihitung, dengan cara apa pun Anda memintanya.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $returnGetReactions
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $returnGetReactions[channelID; messageID; type; var; separator; emoji]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $returnGetReactions[$channelID; 123456789; usersID; reactors; ,; 👍]
+</block>
+
+<block type="callout" kind="note">
+text: Minta hitungan dan pesan yang tidak seorang pun memakai emoji itu cukup menyimpan 0. Minta daftar ID sebagai gantinya dan situasi yang sama memposting kesalahan, begitu pula pesan yang hanya bereaksi bot.
+</block>
+
+<block type="callout" kind="important">
+text: Bot butuh Read Message History di kanal itu, jika tidak ia tidak dapat membuka pesan dan perintah Anda berhenti dengan kesalahan izin.
+</block>
+</dash>
+
+<details>
+syntax: $returnGetReactions[channelID; messageID; type; var; separator; emoji]
+param: channelID|snowflake|Wajib|Kanal tempat pesan itu berada
+param: messageID|snowflake|Wajib|Pesan mana yang dilihat
+param: type|text|Wajib|usersID untuk menyimpan siapa yang bereaksi, atau tr untuk menyimpan berapa banyak orang yang melakukannya
+param: var|text|Wajib|Di bawah apa hasilnya disimpan, dibaca kembali nanti dengan $return[]
+param: separator|text|Wajib|Apa yang berada di antara ID. Kata juga bisa: dot, com, apo, sem, colon
+param: emoji|text|Wajib|Emoji mana yang dicari, diketik seperti tampilannya di pesan
+</details>

@@ -1,0 +1,40 @@
+<dash>
+name: $userBanner
+desc: Te da el enlace a la imagen del banner de perfil de un miembro para que puedas mostrarla en tu canal.
+category: Info
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Deja los paréntesis vacíos y obtienes el propio banner de perfil del bot; mete un ID de usuario o una mención y obtienes el banner de esa persona en su lugar. Los banners que se mueven vuelven como un enlace .gif y los fijos como .png. En su propia línea el bot publica la dirección en el canal, así que lo que ves es el propio enlace de la imagen y no la imagen.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !profilecard en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $userBanner[(user_id)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $userBanner[123456789012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: El miembro necesita tener un banner de perfil configurado, y el bot tiene que poder encontrarlo. Cualquier cosa que no sea un dígito en el ID se descarta en silencio antes de que ocurra la búsqueda, así que una mención funciona igual de bien que un ID en bruto.
+</block>
+
+<block type="callout" kind="note">
+text: Anidado dentro de otra línea solo puede llegar a miembros que el bot ya tenga a mano. En su propia línea es libre de ir a buscar a alguien a quien nunca haya conocido antes.
+</block>
+</dash>
+
+<details>
+syntax: $userBanner[(user_id)]
+param: userID|snowflake|Opcional|El miembro a buscar, como ID o mención; omítelo y obtienes el propio banner del bot
+</details>

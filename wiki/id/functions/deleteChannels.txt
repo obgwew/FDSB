@@ -1,0 +1,38 @@
+<dash>
+name: $deleteChannels
+desc: Menghapus satu atau beberapa kanal dari server.
+category: Manajemen Kanal
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $deleteChannels menerima ID kanal atau mention kanal lalu menghapusnya dari server, satu per satu, sesuai urutan yang Anda daftarkan.
+text: Setiap nilainya harus berupa deretan angka biasa atau mention kanal seperti <#123456789012345678>, dan apa pun selain itu menghentikan proses dengan kesalahan yang menyebut nilai yang salah.
+text: Jika bot tidak diizinkan menghapus salah satunya, proses berhenti di situ dan bot menyatakannya di kanal, jadi periksa hasilnya sebelum Anda merencanakan batch kedua.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !clean
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $deleteChannels[channel ID/mention; ...]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $deleteChannels[<#123456789012345678>]
+</block>
+
+<block type="callout" kind="warning">
+text: Penghapusan kanal tidak bisa dibatalkan dari dalam chat, dan pesan-pesan di dalamnya ikut hilang.
+text: Bot memerlukan izin Manage Channels untuk setiap kanal yang Anda daftarkan, dan kegagalan di tengah jalan membuat kanal-kanal sebelumnya sudah terlanjur hilang.
+</block>
+</dash>
+
+<details>
+syntax: $deleteChannels[channel ID/mention; ...]
+param: channels|text|Wajib|Satu atau beberapa ID kanal atau mention kanal, dipisahkan lewat titik koma.
+</details>

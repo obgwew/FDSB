@@ -1,0 +1,34 @@
+<dash>
+name: $ban
+desc: Mengeluarkan seorang anggota dari server secara permanen.
+category: Moderasi
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Berikan ID atau mention seorang anggota, dan bot langsung memblokir akun itu, tanpa langkah konfirmasi di antaranya. Hilangkan kurung sama sekali, dan perintah justru menyerang orang yang mengetik perintah — sebuah kesalahan yang sangat mudah terjadi. Tidak ada yang dicetak ketika berhasil, sehingga anggota itu hanya diam sejak titik tersebut.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !ban
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $ban
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $ban[123456789]
+</block>
+
+<block type="callout" kind="warning">
+text: Bot memerlukan izin Ban Members, dan peran tertingginya harus berada di atas peran tertinggi anggota tersebut. Ingat bahwa sebuah $ban tanpa kurung justru memblokir orang yang mengetiknya.
+</block>
+
+<block type="callout" kind="note">
+text: Perintah ini hanya berfungsi di dalam server. Di percakapan pribadi, bot memposting kesalahan dan perintah berhenti di sana tanpa memblokir siapa pun.
+</block>
+</dash>

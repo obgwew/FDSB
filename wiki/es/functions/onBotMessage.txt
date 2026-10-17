@@ -1,0 +1,41 @@
+<dash>
+name: $onBotMessage
+desc: Ejecuta tu comando cada vez que un bot publica un mensaje en el servidor.
+category: Evento
+
+<block type="text" title="¿Cómo funciona el evento?">
+text: Dale a este comando el prefijo $onBotMessage y el bot lo recoge en cuanto cualquier cuenta de bot publica un mensaje en un servidor donde está. Los mensajes que envía tu propio bot se omiten por defecto, así que reacciona solo a otros bots; pon yes en el prefijo y también sigue sus propios mensajes. Cualquier otra cosa ahí, incluido dejarlo vacío, mantiene fuera los mensajes del propio bot.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $onBotMessage en el campo Prefijo
+item: La aplicación lo marca como evento por ti
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: #PREFIX:$onBotMessage[yes/no]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: #PREFIX:$onBotMessage[no]
+text: $sendMessage[Another bot said: $message]
+</block>
+
+<block type="callout" kind="note">
+text: Dentro del comando, $message contiene lo que escribió el otro bot, así que puedes citarlo, contarlo o desmenuzarlo.
+</block>
+
+<block type="callout" kind="important">
+text: Nadie tiene que escribir nada para activarlo. La aplicación marca el comando como evento por ti y lo ejecuta por sí sola cada vez que otro bot publica.
+</block>
+</dash>
+
+<details>
+syntax: $onBotMessage[(yes/no)]
+param: yes/no|text|Opcional|yes para seguir también los mensajes del propio bot, no para reaccionar solo a otros bots
+</details>

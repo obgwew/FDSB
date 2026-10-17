@@ -1,0 +1,25 @@
+<dash>
+name: $year
+desc: Returns the current year, four digits, from 2000 to 9999.
+category: زمان‌بندی و تاخیر
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $year تاریخ را بررسی می‌کند و سال کامل فعلی را برمی‌گرداند؛ برای مثال 2026. می‌توانید آن را در داخل متن قرار دهید تا در جای دقیق خود نمایش داده شود. اگر آن را در یک خط جداگانه بنویسید، ربات عدد را به‌تنهایی در کانال ارسال خواهد کرد.
+</block>
+
+<block type="code" title="سینتکس">
+text: $year
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $sendMessage[Welcome to $year!]
+</block>
+
+<block type="callout" kind="note">
+text: سال همیشه با چهار رقم نمایش داده می‌شود. این مقدار بر پایه ساعت محلی ربات است، مگر اینکه منطقه زمانی با $time تنظیم شده باشد.
+</block>
+
+<block type="callout" kind="important">
+text: $day، $month و $year همگی ساعت محلی ربات را می‌خوانند. منطقه زمانی تعیین‌شده با $time فقط توسط $hour، $minute و $second رعایت می‌شود، بنابراین اگر سرور شما در منطقه زمانی متفاوتی قرار دارد به این موضوع توجه داشته باشید.
+</block>
+</dash>

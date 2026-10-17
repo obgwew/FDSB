@@ -1,0 +1,40 @@
+<dash>
+name: $onVoiceLeave
+desc: Ejecuta tu comando por sí solo cada vez que alguien se desconecta de un canal de voz.
+category: Evento
+
+<block type="text" title="¿Cómo funciona el evento?">
+text: Pon $onVoiceLeave en el campo Prefijo y la aplicación etiqueta el comando como evento, así que nadie tiene que escribir nada para activarlo. En cuanto un miembro sale de cualquier canal de voz, las líneas de abajo se ejecutan con esa persona como $author, y todo lo que envíes aterriza en el canal de sistema de tu servidor. Añade un ID de canal entre corchetes después del prefijo, como $onVoiceLeave[123456789012345678], y todo va a ese canal en su lugar.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $onVoiceLeave en el campo Prefijo
+item: La aplicación lo marca como evento por ti
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: #PREFIX:$onVoiceLeave
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: #PREFIX:$onVoiceLeave
+text:  sendMessage[$authorName left a voice channel.]
+</block>
+
+<block type="callout" kind="note">
+text: Una vez que tocas Guardar, el comando espera por sí solo y se activa en cada desconexión de voz del servidor. $authorName y $mention se refieren a la persona que acaba de irse, así que puedes nombrarla o etiquetarla como quieras.
+</block>
+
+<block type="callout" kind="important">
+text: Como la aplicación archiva esto como evento, nunca aparece en la lista normal de comandos y nadie puede activarlo escribiéndolo. Un miembro que pasa de un canal de voz directamente a otro cuenta como haber salido del primero, así que el comando se ejecuta aunque en realidad no se haya ido a ningún sitio.
+</block>
+</dash>
+
+<details>
+syntax: $onVoiceLeave
+</details>

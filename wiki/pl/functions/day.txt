@@ -1,0 +1,25 @@
+<dash>
+name: $day
+desc: Zwraca numer dzisiejszego dnia, zawsze dwucyfrowy, od 01 do 31.
+category: Czas i opóźnienia
+
+<block type="text" title="Jak działa komenda?">
+text: $day odczytuje zegar i zwraca dzień miesiąca, zawsze w formacie dwucyfrowym, więc 7. dzień wraca jako 07, a 24. jako 24. Wstaw go w linijkę tekstu, a cyfry wylądują dokładnie tam, gdzie je umieścisz. Zostaw go w osobnej linii, a bot sam opublikuje tę liczbę na kanale.
+</block>
+
+<block type="code" title="Składnia">
+text: $day
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $sendMessage[Day $day of this month]
+</block>
+
+<block type="callout" kind="note">
+text: Liczba jest zawsze dopełniana do dwóch cyfr, od 01 do 31, więc ładnie się układa w dacie, którą sam składasz z $day, $month i $year.
+</block>
+
+<block type="callout" kind="important">
+text: $day, $month i $year odczytują własny zegar lokalny bota. Strefa czasowa ustawiona przez $time jest przestrzegana tylko przez $hour, $minute i $second, więc miej to na uwadze, jeśli twój serwer znajduje się w innej części świata.
+</block>
+</dash>

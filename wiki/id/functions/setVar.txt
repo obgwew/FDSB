@@ -1,0 +1,44 @@
+<dash>
+name: $setVar
+desc: Menyimpan sebuah nilai di bawah sebuah nama agar perintah lain Anda bisa membacanya kembali nanti.
+category: Variabel
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $setVar menyimpan sebuah nilai di bawah nama yang Anda pilih, sehingga perintah mana pun setelahnya bisa membacanya kembali dengan $getVar. Berikan nama dan nilai dan nilainya dibagikan ke semua orang; tambahkan ID anggota sebagai bagian ketiga dan nilainya disimpan hanya untuk orang itu. Apa yang Anda simpan tetap tersimpan saat bot dimulai ulang.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Variabel
+item: Ketuk + dan tulis nama yang ingin Anda gunakan
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !setVar
+item: Tulis skrip Anda di editor
+item: Tambahkan nama dan nilainya, lalu ID anggota bila nilainya untuk satu orang
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $setVar[name; value]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $setVar[greeting; Hello World!]
+</block>
+
+<block type="callout" kind="note">
+text: Ini butuh barisnya sendiri, jadi Anda tidak bisa menyelipkan $setVar di dalam teks perintah lain. Baca nilainya kembali dengan $getVar, memakai nama yang sama dan, untuk nilai pribadi, ID anggota yang sama.
+</block>
+
+<block type="callout" kind="important">
+text: Jika nama itu belum ada di daftar, bot tetap menyimpan nilainya lalu menghentikan perintah Anda dengan peringatan. Buat variabelnya di tab Variabel dulu dan nilainya mendarat sesuai yang Anda maksud.
+</block>
+</dash>
+
+<details>
+syntax: $setVar[name; value; (userID)]
+param: name|text|Wajib|Nama tempat nilainya disimpan, persis seperti tampilannya di tab Variabel
+param: value|text|Wajib|Nilai yang disimpan sampai Anda mengubahnya lagi
+param: userID|snowflake|Opsional|Jika diberikan, nilainya disimpan untuk anggota itu alih-alih untuk semua orang
+</details>

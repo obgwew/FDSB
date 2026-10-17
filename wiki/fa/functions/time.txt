@@ -1,0 +1,31 @@
+<dash>
+name: $time
+desc: Sets the bot's timezone for time-related functions.
+category: زمان‌بندی و تاخیر
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $time منطقه زمانی را برای محاسبه $hour، $minute و $second تنظیم می‌کند. با تغییر منطقه زمانی، خروجی این توابع بر اساس منطقه زمانی تعیین‌شده محاسبه می‌شود. توابع $day، $month و $year مستقل از این تنظیم هستند و همواره از ساعت محلی ربات استفاده می‌کنند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $time[timezone]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $time[Asia/Amman]
+text: $sendMessage[Right now it is $hour:$minute]
+</block>
+
+<block type="callout" kind="note">
+text: می‌توانید از فرمت‌های مختلف منطقه زمانی مانند UTC، UTC+3، Europe/Istanbul یا America/New_York استفاده کنید. این تنظیم فقط بر روی $hour، $minute و $second تأثیر می‌گذارد.
+</block>
+
+<block type="callout" kind="important">
+text: $day، $month و $year همواره از ساعت سیستم ربات استفاده می‌کنند و تحت تأثیر $time قرار نمی‌گیرند.
+</block>
+</dash>
+
+<details>
+syntax: $time[timezone]
+param: timezone|text|الزامی|The timezone to set for $hour, $minute and $second. Example: UTC+3, Europe/Istanbul, America/New_York
+</details>

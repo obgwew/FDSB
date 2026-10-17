@@ -1,0 +1,38 @@
+<dash>
+name: $removeSplitOutElement
+desc: Mengeluarkan satu entri dari daftar yang Anda pisahkan sebelumnya.
+category: Utilitas Teks
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Setelah $splitIn memecah sebaris teks menjadi bagian-bagian terpisah, perintah ini membuang salah satunya dari daftar. Semua yang Anda pertahankan tetap dalam urutan semula, sehingga menghapus bagian kedua dari tiga menyisakan bagian pertama dan ketiga. Kirim kembali daftar yang sudah dipangkas itu dengan $joinSplitOut setelah selesai.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !clean
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $removeSplitOutElement[index]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $splitIn[apple,banana,cherry; ,]
+text: $removeSplitOutElement[2]
+text: $joinSplitOut[; ]
+</block>
+
+<block type="callout" kind="note">
+text: Penghitungan dimulai dari 1, bukan 0. Posisi yang bukan bilangan bulat, atau yang berada di luar daftar yang Anda pisahkan, menghentikan perintah dengan kesalahan alih-alih diam-diam tidak melakukan apa pun.
+</block>
+</dash>
+
+<details>
+syntax: $removeSplitOutElement[index]
+param: index|number|Wajib|Bagian mana yang dibuang, dihitung dari 1
+</details>

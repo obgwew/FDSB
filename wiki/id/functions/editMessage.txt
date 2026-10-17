@@ -1,0 +1,45 @@
+<dash>
+name: $editMessage
+desc: Menulis ulang teks sebuah pesan yang sudah dikirim bot, di kanal mana pun yang bisa dijangkaunya.
+category: Pesan
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Sebutkan sebuah kanal dan sebuah pesan, dan bot menarik pesan itu lalu menukar teksnya dengan apa pun yang Anda berikan. Pesan tersebut harus merupakan pesan yang diposting bot itu sendiri. Tambahkan judul, deskripsi, warna, atau footer sesudahnya, dan pesan bertumbuh dengan sebuah kartu di bawah teks yang baru.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !ping
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $editMessage[channelID; messageID; content; (title; description; color; footer)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $editMessage[$channelID; 123456789; Updated content!]
+</block>
+
+<block type="callout" kind="note">
+text: Kanal dan pesan keduanya datang sebagai angka biasa, bukan mention. Jika salah satunya tidak cocok dengan apa pun yang bisa dilihat bot, bot menyebut mana di antara keduanya yang gagal, alih-alih gagal diam-diam.
+</block>
+
+<block type="callout" kind="warning">
+text: Bot harus bisa melihat kanal tersebut dan mengedit pesan di dalamnya. Warna diberikan sebagai nilai heksadesimal seperti #FF0000.
+</block>
+</dash>
+
+<details>
+syntax: $editMessage[channelID; messageID; content; (title; description; color; footer)]
+param: channelID|snowflake|Wajib|ID numerik kanal yang memuat pesan tersebut
+param: messageID|snowflake|Wajib|ID numerik pesan bot yang akan ditulis ulang
+param: content|text|Wajib|Teks yang seharusnya ditampilkan pesan sesudahnya
+param: title|text|Opsional|Judul untuk sebuah kartu di bawah teks
+param: description|text|Opsional|Teks isi untuk kartu tersebut
+param: color|text|Opsional|Warna heksadesimal untuk kartu tersebut
+param: footer|text|Opsional|Baris footer kecil untuk kartu tersebut
+</details>

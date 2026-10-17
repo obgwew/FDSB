@@ -1,0 +1,38 @@
+<dash>
+name: $footerIcon
+desc: Meletakkan gambar bundar kecil di samping kaki kartu yang sedang Anda bangun.
+category: Pembuat Embed
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $footerIcon menempelkan gambar ke baris bawah kartu yang sedang Anda bangun, lingkaran kecil yang duduk di samping teks kaki. Berikan potongan teks apa pun yang memuat alamat web dan bot memilih tautan pertama yang ia temukan, jadi Anda boleh meninggalkan tanda baca di sekitarnya. Jika beberapa kartu dikirim bersamaan, akhiri dengan nomor kartu agar gambar jatuh ke kartu yang Anda maksud.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !welcome
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $footerIcon[url;(index)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $footer[(c) My Community]
+text: $footerIcon[https://example.com/logo.png]
+</block>
+
+<block type="callout" kind="note">
+text: Alamatnya harus diawali http:// atau https://. Apa pun yang menempel di ujungnya, titik atau kurung tutup misalnya, akan dipangkas untuk Anda, dan teks yang sama sekali tidak memiliki tautan valid ditolak.
+</block>
+</dash>
+
+<details>
+syntax: $footerIcon[url;(index)]
+param: url|text|Wajib|Teks yang memuat alamat gambar, diawali http:// atau https://
+param: index|number|Opsional|Kartu mana yang diberi gambar saat Anda membangun beberapa kartu sekaligus (bawaan 1)
+</details>

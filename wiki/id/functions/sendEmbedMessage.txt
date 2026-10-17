@@ -1,0 +1,43 @@
+<dash>
+name: $sendEmbedMessage
+desc: Memposting kartu berwarna ke sebuah kanal dengan judul, teks, warna, dan footer.
+category: Pesan
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $sendEmbedMessage menyusun kartu dari bagian-bagian yang Anda berikan dan mempostingnya di kanal yang Anda sebut. Bagian-bagiannya datang dalam urutan tetap, kanal, judul, deskripsi, warna, lalu footer, dan anggota melihat judul di atas, isi di tengah, dan baris footer kecil di bawah. Setelah footer Anda bisa lanjut dengan lebih banyak bagian, penulis, ikon penulis, ikon footer, thumbnail, gambar, kata ya untuk menambahkan waktu, dan ya terakhir yang menambahkan ID pesan baru.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !embed
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $sendEmbedMessage[channelID; title; description; color; footer]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $sendEmbedMessage[$channelID; Welcome!; Thanks for joining; #00FF00; Enjoy your stay]
+</block>
+
+<block type="callout" kind="note">
+text: Bagian warna menerima nilai heks seperti #FF5733 dan mewarnai garis di sisi kiri kartu. Apa pun yang Anda biarkan kosong cukup tidak disertakan pada kartu, dan hanya kanal yang benar-benar dibutuhkan untuk mengeluarkan satu kartu.
+</block>
+
+<block type="callout" kind="warning">
+text: Bot butuh Send Messages dan Embed Links di kanal itu, dan ia harus bisa melihat kanalnya sama sekali. Kanal yang tidak dapat dijangkau memberi kesalahan alih-alih kartu yang diposting di tempat lain.
+</block>
+</dash>
+
+<details>
+syntax: $sendEmbedMessage[channelID; title; description; color; footer]
+param: channelID|snowflake|Wajib|Kanal tempat kartunya diposting
+param: title|text|Opsional|Judul di bagian atas kartu
+param: description|text|Opsional|Teks isi kartu
+param: color|text|Opsional|Warna garisnya, sebagai nilai heks seperti #FF5733
+param: footer|text|Opsional|Baris kecil di bagian bawah kartu
+</details>

@@ -1,0 +1,40 @@
+<dash>
+name: $syncChannel
+desc: Menyelaraskan izin sebuah kanal dengan izin kategori induknya, membatalkan perubahan izin khusus kanal.
+category: Manajemen Kanal
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $syncChannel menyalin izin kategori tempat kanal tersebut berada ke dalam kanal itu sendiri. Bila dikosongkan, kanal tempat perintah dijalankan yang akan disinkronkan. Bila Anda memberikan ID atau mention kanal, kanal tersebut yang akan disinkronkan. Semua perubahan izin khusus kanal untuk role atau anggota akan dibatalkan, dan izin kategori akan kembali berlaku.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !syncChannel
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $syncChannel[(channel ID or mention)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $syncChannel[123456789012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: Perintah ini hanya bisa digunakan di server dan hanya untuk kanal biasa yang berada di dalam sebuah kategori. Kategori tidak bisa disinkronkan, kanal dari server lain tidak bisa ditargetkan, dan kanal yang izin-haknya sudah sesuai dengan kategorinya tidak akan diubah.
+</block>
+
+<block type="callout" kind="important">
+text: Pada versi yang sedang Anda gunakan, baris ini dilewati sebelum dijalankan, jadi kanal akan tetap mempertahankan izin khusus yang dimilikinya.
+</block>
+</dash>
+
+<details>
+syntax: $syncChannel[(channel ID or mention)]
+param: channelID|snowflake|Opsional|Kanal yang ingin disinkronkan dengan izin kategorinya; jika dikosongkan, kanal saat ini yang digunakan.
+</details>

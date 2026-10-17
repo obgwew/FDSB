@@ -1,0 +1,36 @@
+<dash>
+name: $description
+desc: Mengisi paragraf isi utama dari kartu yang sedang disusun bot.
+category: Pembuat Embed
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Sebuah kartu yang dikirim lewat $sendEmbedMessage dimulai dalam keadaan kosong, dan di sinilah paragraf utama diletakkan. Apa pun yang Anda berikan ditempatkan di bawah judul sesuai urutan baca yang dipakai Discord, sehingga itu adalah hal pertama yang dibaca seorang anggota di bawah kepala berita. Tambahkan sebuah angka setelah teksnya, dan baris itu mengisi kartu kedua, ketiga, atau berikutnya dalam pelaksanaan yang sama alih-alih yang pertama, yang membuat satu perintah bisa mengirim beberapa kartu sekaligus.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !announce
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $description[text]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $description[This is the embed body text]
+</block>
+
+<block type="callout" kind="note">
+text: Markdown milik Discord sendiri berfungsi di sini, sehingga tebal, miring, kode inline, dan baris kutipan semuanya tampil persis seperti yang Anda ketik. Discord sendiri menolak isi yang jauh melampaui 4.000 karakter, jadi simpan penjelasan panjang di pesan berikutnya.
+</block>
+</dash>
+
+<details>
+syntax: $description[text]
+param: text|text|Wajib|Paragraf isi untuk kartu. Markdown Discord berfungsi di sini.
+</details>

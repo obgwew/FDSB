@@ -1,0 +1,36 @@
+<dash>
+name: $sendMessage
+desc: Publica una línea de texto en el canal donde se usó el comando.
+category: Mensajes
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $sendMessage pone en el canal lo que escribas entre corchetes, y cualquier valor o marcador de posición que haya dentro se rellena primero. Acepta un solo texto, y esa es la línea que los miembros ven aparecer. Los botones que hayas preparado con $addButton viajan en el mismo mensaje.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !sendMessage en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $sendMessage[text]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $sendMessage[Hello, $authorName!]
+</block>
+
+<block type="callout" kind="note">
+text: Un solo texto: un punto y coma dentro de tu mensaje lo parte en dos y el bot se detiene con un error, así que déjalos fuera. El formato de Discord como **negrita**, cursivas y enlaces pasa como siempre.
+</block>
+</dash>
+
+<details>
+syntax: $sendMessage[text]
+param: text|text|Obligatorio|Las palabras a publicar. Los valores que contienen se rellenan primero.
+</details>

@@ -1,0 +1,40 @@
+<dash>
+name: $slowmode
+desc: Mengatur seberapa sering anggota diizinkan memposting di sebuah kanal.
+category: Moderasi
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $slowmode memberi jeda antar pesan di kanal yang Anda sebut. Berikan sebuah kanal dan durasi seperti 10s dan anggota kemudian harus menunggu selama itu sebelum memposting lagi, yang meredakan kanal yang sibuk tanpa menguncinya. Gunakan 0s untuk mencabut batasnya dan membiarkan semua orang mengetik sesering yang mereka mau, sama seperti saat Anda menemukannya.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !slowmode
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $slowmode[channelID; time]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $slowmode[$channelID; 10s]
+</block>
+
+<block type="callout" kind="note">
+text: Durasi adalah angka plus satuan: s untuk detik, m untuk menit, h untuk jam. Enam jam adalah batas atasnya, jadi apa pun yang lebih lama ditolak, dan 0s mematikan slowmode lagi dalam satu kali.
+</block>
+
+<block type="callout" kind="warning">
+text: Bot butuh Manage Channels di kanal itu sebelum perubahannya berlaku. Jenis kanal yang sama sekali tidak punya pengaturan slowmode, misalnya kategori, ditolak dengan kesalahan alih-alih diubah.
+</block>
+</dash>
+
+<details>
+syntax: $slowmode[channelID; time]
+param: channelID|snowflake|Wajib|Kanal mana yang diberi jeda
+param: time|text|Wajib|Berapa lama jedanya berlangsung, sebagai angka plus s, m atau h. 0s mematikan slowmode.
+</details>

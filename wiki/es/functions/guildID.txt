@@ -1,0 +1,31 @@
+<dash>
+name: $guildID
+desc: Te da el largo número de ID que Discord usa para el servidor en el que se escribió el comando.
+category: Info
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $guildID devuelve el número que identifica el servidor en el que se escribió tu comando, sin nada alrededor. Colócalo en cualquier parte de una línea de texto y el bot imprime los dígitos en medio de la frase. Es la misma cifra que Discord muestra una vez activas el Modo desarrollador, y es lo que otros comandos esperan cuando necesitas apuntarlos a un servidor.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !serverid en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $guildID
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: Server ID: $guildID
+</block>
+
+<block type="callout" kind="note">
+text: Escribe el comando en un mensaje directo y no hay ningún servidor del que informar, así que el bot imprime DM en lugar del número.
+</block>
+</dash>

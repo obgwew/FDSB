@@ -1,0 +1,25 @@
+<dash>
+name: $hour
+desc: Renvoie l'heure actuelle de la journée, de 00 à 23.
+category: Minutage & Délais
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: $hour lit l'horloge et renvoie l'heure actuelle sur un cadran de vingt-quatre heures, toujours sur deux chiffres, donc le début d'après-midi affiche 15 plutôt que 3. Insérez-le dans une ligne de texte et les chiffres se placent là où vous les mettez, ou laissez-le sur une ligne à part et le bot énonce l'heure dans le canal. Il est mesuré à nouveau à chaque exécution, donc deux commandes séparées d'une minute peuvent donner deux nombres différents.
+</block>
+
+<block type="code" title="Syntaxe">
+text: $hour
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $sendMessage[The hour here is $hour]
+</block>
+
+<block type="callout" kind="note">
+text: La valeur va de 00 à 23 sur une horloge de vingt-quatre heures, donc trois heures de l'après-midi revient sous la forme 15. Associez-le à $minute et $second pour construire une lecture d'horloge complète comme 15:04:09.
+</block>
+
+<block type="callout" kind="important">
+text: $hour suit le fuseau horaire que vous définissez avec $time. Si vous n'en définissez jamais, il se rabat sur l'horloge locale propre au bot.
+</block>
+</dash>

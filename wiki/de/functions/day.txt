@@ -1,0 +1,25 @@
+<dash>
+name: $day
+desc: Gibt die Tageszahl des heutigen Datums an, immer zweistellig, von 01 bis 31.
+category: Timing & Verzögerungen
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: $day liest die Uhr und gibt den Tag des Monats zurück, immer zweistellig breit, sodass der 7. als 07 und der 24. als 24 erscheint. Fügen Sie es in eine Textzeile ein und die Ziffern landen genau dort, wo Sie sie platzieren. Lassen Sie es auf einer eigenen Zeile stehen, postet der Bot die Zahl von selbst im Kanal.
+</block>
+
+<block type="code" title="Syntax">
+text: $day
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $sendMessage[Day $day of this month]
+</block>
+
+<block type="callout" kind="note">
+text: Die Zahl wird immer auf zwei Stellen aufgefüllt, von 01 bis 31, sodass sie sich sauber in ein Datum einfügt, das Sie selbst aus $day, $month und $year zusammensetzen.
+</block>
+
+<block type="callout" kind="important">
+text: $day, $month und $year lesen jeweils die lokale Uhr des Bots. Die mit $time gesetzte Zeitzone wird nur von $hour, $minute und $second berücksichtigt — nehmen Sie das zur Kenntnis, wenn sich Ihr Server in einem anderen Teil der Welt befindet.
+</block>
+</dash>

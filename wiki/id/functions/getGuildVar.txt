@@ -1,0 +1,42 @@
+<dash>
+name: $getGuildVar
+desc: Membaca kembali nilai yang disimpan sebuah server untuk sebuah nama variabel.
+category: Variabel
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Berikan sebuah nama dan bot mencari nilai yang disediakan server ini khusus di bawah nama itu. Ketika server belum menyetelnya, Anda tetap mendapatkan jawaban: nilai bersama dari tab Variabel menjadi penggantinya. Hilangkan bagian kedua dan ia membaca server tempat perintah dijalankan; tambahkan ID server dan ia justru membaca server itu.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buat variabelnya terlebih dahulu di tab Variabel
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !rules
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $getGuildVar[name; (guild_id)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $getGuildVar[welcomeMessage]
+</block>
+
+<block type="callout" kind="important">
+text: Minta nama yang tidak pernah dibuat di tab Variabel dan bot membuatnya kosong, memposting peringatan tentang itu, dan menghentikan perintah Anda di situ juga. Pastikan namanya benar terlebih dahulu.
+</block>
+
+<block type="callout" kind="note">
+text: Apa pun yang Anda simpan dari sebuah perintah tetap ada setelah bot dimulai ulang, jadi beginilah cara Anda mengingat sesuatu per server, bukan per orang.
+</block>
+</dash>
+
+<details>
+syntax: $getGuildVar[name; (guild_id)]
+param: name|text|Wajib|Variabel mana yang dibaca
+param: guildID|text|Opsional|Nilai milik server mana yang dibaca; biarkan kosong untuk server tempat perintah dijalankan
+</details>

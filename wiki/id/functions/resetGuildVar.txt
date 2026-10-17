@@ -1,0 +1,37 @@
+<dash>
+name: $resetGuildVar
+desc: Menghapus nilai yang disimpan satu server untuk sebuah variabel.
+category: Variabel
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Setiap server dapat menyimpan nilainya sendiri untuk variabel yang Anda buat di tab Variabel. $resetGuildVar membuang nilai per-server itu, sehingga variabel kembali ke nilai bawaan yang dilihat semua orang lain, dan variabel itu sendiri tetap persis di tempatnya. Beri namanya sendiri dan server tempat perintah dijalankan yang dibersihkan; letakkan ID server setelah titik koma dan server itulah yang dibersihkan.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buat variabelnya terlebih dahulu di tab Variabel
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $resetGuildVar
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $resetGuildVar[name; (guild_id)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $resetGuildVar[welcomeMessage; 123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: Jika server itu tidak pernah punya nilai sendiri, tidak ada yang perlu dihapus, dan bot mencatat keadaannya lalu lanjut alih-alih berhenti.
+</block>
+</dash>
+
+<details>
+syntax: $resetGuildVar[name; (guild_id)]
+param: name|text|Wajib|Variabel yang nilainya untuk server itu harus dibersihkan
+param: guildID|text|Opsional|Server mana yang dibersihkan; bawaannya server tempat Anda berada
+</details>

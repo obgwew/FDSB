@@ -1,0 +1,50 @@
+<dash>
+name: $getLeaderboardPosition
+desc: Devuelve la posición de un miembro o servidor dentro de una tabla de clasificación, o 0 si no está clasificado.
+category: Variables
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $getLeaderboardPosition construye la misma clasificación que los comandos de tabla de clasificación y luego informa de la posición de una sola entrada. Devuelve la posición como un número que empieza en 1, y 0 cuando esa entrada no tiene valor guardado o su valor no es un número. Ordena la lista siempre de la misma forma, porque la posición cambia al alternar entre el valor más alto primero y el más bajo primero.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Crea la variable primero en la pestaña de Variables
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $getLeaderboardPosition[type; name; sort; id]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $sendMessage[You are #$getLeaderboardPosition[user; points; desc]]
+</block>
+
+<block type="options" title="Tipos de variable">
+option: user|Un valor por miembro, guardado por separado en cada servidor
+option: globaluser|Un valor por miembro, compartido entre todos los servidores en los que está el bot
+option: server|Un valor por servidor
+</block>
+
+<block type="options" title="Tipos de orden">
+option: desc|El valor más alto primero (se usa cuando dejas el orden vacío)
+option: asc|El valor más bajo primero
+</block>
+
+<block type="callout" kind="note">
+text: Deja el ID vacío para clasificar a la persona que ejecutó el comando. Para el tipo server, ese valor por defecto pasa a ser el servidor actual. Los valores que no son números se omiten.
+</block>
+</dash>
+
+<details>
+syntax: $getLeaderboardPosition[type; name; sort; (id)]
+param: type|text|Obligatorio|Qué grupo clasificar: user, globaluser o server.
+param: name|text|Obligatorio|Nombre de la variable por la que clasificar.
+param: sort|text|Obligatorio|desc para el más alto primero, o asc para el más bajo primero.
+param: id|snowflake|Opcional|Qué miembro o servidor consultar. Por defecto es la persona que ejecutó el comando, o el servidor actual para el tipo server.
+</details>

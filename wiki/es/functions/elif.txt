@@ -1,0 +1,40 @@
+<dash>
+name: $elif
+desc: Añade otra rama "o si no, si" a un bloque $if, comprobada en orden.
+category: Control de flujo
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Después de un $if, $elif te permite plantear una condición más junto con las líneas que desbloquea. Cada condición se prueba en el orden en que la escribiste, y solo la primera que sale verdadera se ejecuta — cada rama posterior se salta. Termina con $else para el caso general y cierra toda la cadena con $endif.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !welcome en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $elif[condition]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $if[$message == hello]
+text:   Hi there!
+text: $elif[$message == bye]
+text:   Goodbye!
+text: $endif
+</block>
+
+<block type="callout" kind="note">
+text: Un $elif va entre un $if y un $endif. Encadena todos los que necesites, ordenándolos de lo más específico a lo más general para que los primeros tengan preferencia.
+</block>
+</dash>
+
+<details>
+syntax: $elif[condition]
+param: condition|expression|Obligatorio|Qué probar, usando los mismos operadores que $if
+</details>

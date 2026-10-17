@@ -1,0 +1,41 @@
+<dash>
+name: $switch
+desc: Escoge una sola opción de la lista que escribas, usando su número de posición.
+category: Utilidades de texto
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Escribe tus opciones en el orden en que quieras numerarlas, y luego termina con el número de la que quieras — 1 es la primera, 2 la segunda, y así sucesivamente. El bot publica ese elemento solo, así que la elección que hizo queda a la vista en el canal. Como el número puede venir de cualquier sitio, $randomint o una variable pueden elegir por ti.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !pick en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $switch[item1; item2; ... ; index]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $switch[Red; Green; Blue; $randomint[1; 3]]
+</block>
+
+<block type="callout" kind="note">
+text: Úsalo para ofrecer un conjunto de opciones ya hechas — colores, respuestas, una lista de mapas — sin repetir las mismas líneas una y otra vez. Anidarlo dentro de $sendMessage coloca el elemento elegido directamente en una frase en lugar de en una línea propia.
+</block>
+
+<block type="callout" kind="warning">
+text: El número tiene que ser lo último de los paréntesis, y tiene que ser un número entero entre 1 y cuántos elementos hayas enumerado. Un cero, un número demasiado grande, o cualquier cosa que no sea un número, y el bot lo reporta en lugar de adivinar por ti.
+</block>
+</dash>
+
+<details>
+syntax: $switch[item1; item2; ... ; index]
+param: item|text|Obligatorio|Una de las opciones, escrita en el orden en que deben numerarse
+param: index|number|Obligatorio|Cuál tomar, contando desde 1; siempre lo último de los paréntesis
+</details>

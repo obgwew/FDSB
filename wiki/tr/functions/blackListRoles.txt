@@ -1,0 +1,31 @@
+<dash>
+name: $blackListRoles
+desc: Listede yer alan rollere sahip herkes için komutu durdurur.
+category: Erişim Kontrolü
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $blackListRoles, bir komutun içine yerleştirebileceğiniz bir kontrol noktasıdır. Bot, komutu tetikleyen kişinin sahip olduğu rolleri alır ve sizin listelediğiniz rollerle karşılaştırır. Eşleşme bulunursa sizin ret mesajınız görüntülenir (mesajı boş bıraktıysanız varsayılan bir mesaj) ve komutun geri kalanı yok sayılır. Kimse eşleşmezse hiçbir şey yazdırılmaz ve betik normal şekilde devam eder.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $blackListRoles[role; ...; message]
+</block>
+
+<block type="code" title="Kopyalamaya Hazır Örnek">
+text: $blackListRoles[Admin; Moderator; Sorry, this command is for another group of people!]
+</block>
+
+<block type="callout" kind="note">
+text: Bir rol etiket olarak, kimliği olarak veya adıyla yazılabilir ve ad eşleştirmesi büyük/küçük harf fark etmez. Birden fazla rolü noktalı virgülle ayırarak listeleyebilirsiniz. Son argümana kadar olan her şey rol olarak kabul edilir; özel ret mesajınız ise son argümanda yer alır.
+</block>
+
+<block type="callout" kind="warning">
+text: Kontrol başarılı olduğunda komut tam orada durur — altındaki hiçbir satır çalışmaz. Özel mesajı boş bırakırsanız bot kendi varsayılan ifadesine döner.
+</block>
+</dash>
+
+<details>
+syntax: $blackListRoles[role; ...; message]
+param: role|text|Required|Noktalı virgülle ayrılmış, etiket, kimlik veya ad olarak yazılan engellenen roller
+param: message|text|Optional|Bir rol eşleştiğinde varsayılan ret mesajı yerine gösterilecek mesaj
+</details>

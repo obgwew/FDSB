@@ -1,0 +1,31 @@
+<dash>
+name: $messageID
+desc: Memberi Anda angka panjang yang mengidentifikasi pesan yang baru saja dijawab perintah Anda.
+category: Info
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $messageID menyerahkan kembali angka yang diberikan Discord kepada pesan yang menjalankan perintah Anda. Setiap pesan membawa angkanya sendiri, dan angka itu tidak pernah berubah, sehingga ini adalah cara teraman untuk menunjuk perintah berikutnya tepat ke pesan di depan Anda. Ini adalah nilai, bukan sebuah pesan, sehingga ia langsung jatuh ke dalam kalimat di mana angka lain pun akan diletakkan.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !messageID
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $messageID
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: Your message ID is $messageID
+</block>
+
+<block type="callout" kind="note">
+text: Angka yang sama duduk di ujung tautan pesan di Discord, sehingga Anda selalu dapat memeriksanya secara manual. Ia hanya menggambarkan pesan yang menjalankan perintah.
+</block>
+</dash>

@@ -1,0 +1,42 @@
+<dash>
+name: $getMessage
+desc: Lee un mensaje antiguo de cualquier canal que el bot pueda ver e imprime una parte de él.
+category: Utilidad
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Dale un canal y un mensaje, y recupera ese mensaje y publica una parte de él en el chat. La última parte elige qué porción: el texto que se escribió, el nombre visible de quien lo escribió, su ID de usuario o un enlace a la imagen de su avatar. Eso facilita citar algo de antes en el canal, o comprobar el nombre que hay detrás de una publicación, sin tener que desplazarte hacia arriba.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !read en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $getMessage[channelID; messageID; (type)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $getMessage[123456789; 987654321; content]
+</block>
+
+<block type="callout" kind="note">
+text: Si omites la última parte, obtienes el texto del mensaje. Cuando la porción resulta estar vacía, como en una publicación que solo lleva un archivo adjunto, el bot envía un carácter invisible para que la respuesta siga apareciendo.
+</block>
+
+<block type="callout" kind="warning">
+text: El canal tiene que ser un canal de texto que el bot pueda abrir con la opción de Leer historial de mensajes activada. Ambos ID llegan como números simples, y cuando uno de ellos no coincide con nada se te dice cuál de los dos no se pudo encontrar.
+</block>
+</dash>
+
+<details>
+syntax: $getMessage[channelID; messageID; (type)]
+param: channelID|snowflake|Obligatorio|ID numérico del canal en el que está el mensaje
+param: messageID|snowflake|Obligatorio|ID numérico del mensaje que leer
+param: type|text|Opcional|Qué parte imprimir: content (por defecto), name, id o avatar
+</details>

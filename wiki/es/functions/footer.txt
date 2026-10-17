@@ -1,0 +1,36 @@
+<dash>
+name: $footer
+desc: Añade una línea de texto pequeño y gris en la parte inferior de una tarjeta embed.
+category: Constructor de embed
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Lo que le pases se convierte en la línea de pie de la tarjeta que estás creando, situada debajo de todo lo demás con una letra más pequeña y clara. Ese es el sitio natural para un crédito, una fecha o un comentario breve sobre lo que muestra la tarjeta. Como solo da forma a la tarjeta, no aparece nada hasta que envíes el embed.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !card en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $footer[text]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $footer[Requested by $authorName]
+</block>
+
+<block type="callout" kind="note">
+text: Añade $footerIcon cuando quieras una pequeña imagen junto a esa línea. Llamar a $footer por segunda vez simplemente sobrescribe las palabras que pusiste la primera vez.
+</block>
+</dash>
+
+<details>
+syntax: $footer[text]
+param: text|text|Obligatorio|Las palabras que imprimir en el pie de la tarjeta
+</details>

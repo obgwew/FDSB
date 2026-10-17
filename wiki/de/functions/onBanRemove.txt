@@ -1,0 +1,32 @@
+<dash>
+name: $onBanRemove
+desc: Führt Ihre Zeilen genau dann aus, wenn ein Bann aufgehoben und ein Benutzer entbannt wird.
+category: Ereignis
+
+<block type="text" title="Wie funktioniert das Ereignis?">
+text: Speichern Sie einen Befehl, dessen Präfix-Feld $onBanRemove lautet, und die App markiert ihn automatisch als Ereignis. Sobald ein Bann aufgehoben wird — durch einen Moderator oder über das Audit-Log — beginnen die Zeilen unter diesem Präfix zu laufen, ohne dass jemand etwas tippt.
+text: Die entbannte Person ist hier der Autor, sodass $mention, $authorID und $authorName auf sie zeigen, während $guildID und $guildName den Server beschreiben, auf dem der Bann aufgehoben wurde.
+text: Ein Bann hat keinen eigenen Kanal, sodass der Nachrichtenkanal leer bleibt, wenn Sie keinen angeben. Setzen Sie eine Kanal-ID in Klammern direkt hinter das Präfix, und Ihre Antworten landen dort stattdessen.
+</block>
+
+<block type="code" title="Syntax">
+text: #PREFIX:$onBanRemove[channelID]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: #PREFIX:$onBanRemove[123456789012345678]
+text:  sendMessage[$mention is no longer banned from $guildName]
+</block>
+
+<block type="callout" kind="note">
+text: Behalten Sie $onBanRemove in der ersten Zeile. Verschieben Sie es weiter nach unten und die App behandelt den Befehl nicht mehr als Ereignis, sodass er wie jeder andere Befehl darauf wartet, dass jemand sein Präfix tippt.
+</block>
+
+<block type="callout" kind="important">
+text: Nennen Sie eine Kanal-ID hinter dem Präfix, denn ein Bann ist an keinen Kanal gebunden und der Bot hat sonst nirgendwo, wo er sprechen könnte. Im Moment, in dem der Bann aufgehoben wird, ist die Person noch kein Mitglied des Servers, verlassen Sie sich daher auf $mention, $authorID und $authorName statt auf alles, das ihre Rollen ausliest.
+</block>
+</dash>
+
+<details>
+syntax: $onBanRemove
+</details>

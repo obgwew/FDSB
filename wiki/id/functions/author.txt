@@ -1,0 +1,37 @@
+<dash>
+name: $author
+desc: Menamai orang atau tim yang ditampilkan di sepanjang bagian atas sebuah kartu.
+category: Pembuat Embed
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Ketik sebuah nama, dan nama itu menggantikan byline di bagian atas kartu yang sedang dibangun perintah Anda. Ikon dan tautan apa pun yang sudah Anda berikan pada byline itu tetap persis seperti semula, sehingga Anda dapat mengatur gambar atau alamat yang dapat diklik lebih dulu dan menyusul dengan nama. Tambahkan bagian kedua, dan Anda memilih kartu mana yang terpengaruh ketika pesan Anda membawa lebih dari satu kartu.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $author
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $author[name;(index)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $author[Server Staff Team]
+</block>
+
+<block type="callout" kind="note">
+text: Atur nama lebih dulu, lalu tambahkan gambar dengan $authorIcon dan tautan dengan $authorURL, dan ketiganya bersatu di bagian atas kartu.
+</block>
+</dash>
+
+<details>
+syntax: $author[name;(index)]
+param: name|text|Wajib|Nama yang ditampilkan pada byline kartu
+param: index|number|Opsional|Kartu mana yang diubah ketika Anda membangun beberapa kartu sekaligus (1 secara bawaan)
+</details>

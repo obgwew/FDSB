@@ -1,0 +1,41 @@
+<dash>
+name: $div
+desc: Membagi angka pertama dengan setiap angka lainnya, bekerja dari kiri ke kanan.
+category: Matematika & Angka
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Berikan dua angka, dan angka pertama dibagi dengan angka kedua. Tambahkan angka ketiga atau keempat, dan hasil berjalan itu dibagi lagi, sesuai urutan Anda menuliskannya. Sendirian, perintah ini mencetak jawabannya; di dalam sebuah baris, hasilnya diisi di mana pun Anda mengetiknya.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !welcome
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $div[a; b; ...]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $sendMessage[$div[10; 2]]
+</block>
+
+<block type="callout" kind="warning">
+text: Pembagian dengan nol menghentikan perintah Anda dengan kesalahan, begitu pula permintaan dengan kurang dari dua angka. Teks di tempat yang seharusnya berisi angka ditolak dengan cara yang sama.
+</block>
+
+<block type="callout" kind="note">
+text: Jawaban yang menghasilkan bilangan bulat kembali tanpa desimal, sehingga 10 dibagi 2 menjadi 5, bukan 5.0. Semua dihitung dari kiri ke kanan: 10 dibagi 2 lalu dibagi 5 memberi Anda 1.
+</block>
+</dash>
+
+<details>
+syntax: $div[a; b; ...]
+param: a|number|Wajib|Angka tempat Anda mulai membagi
+param: b|number|Wajib|Apa yang membaginya; nol ditolak. Angka-angka ekstra terus membagi hasil berjalan.
+</details>

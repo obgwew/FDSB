@@ -1,0 +1,40 @@
+<dash>
+name: $userBannerColor
+desc: Mengembalikan warna aksen di balik banner profil anggota dalam format hex (#RRGGBB).
+category: Info
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Berikan ID atau mention anggota, lalu bot akan mengembalikan warna aksen yang ada di balik banner mereka. Jika dikosongkan, yang dikembalikan adalah warna aksen banner bot sendiri. Hasilnya berupa kode warna #RRGGBB dalam huruf kapital, yang bisa langsung dipakai untuk mengatur warna garis embed.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !themecolor
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $userBannerColor[(user_id)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $userBannerColor[123456789012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: Hanya anggota yang telah mengatur warna aksen di banner mereka yang akan menghasilkan nilai. Bot juga harus bisa menemukan anggota tersebut terlebih dahulu. Jika tidak ada warna yang ditemukan, bot akan memberitahukannya di kanal.
+</block>
+
+<block type="callout" kind="note">
+text: Jika disisipkan ke dalam baris lain, pencariannya hanya akan menjangkau anggota yang sudah dikenal bot. Warna bernilai 0 dianggap tidak ada. Jika tidak diberi argumen, hasilnya selalu warna aksen bot, bukan warna pemicu perintah.
+</block>
+</dash>
+
+<details>
+syntax: $userBannerColor[(user_id)]
+param: userID|snowflake|Opsional|Anggota yang ingin dilihat warna aksen bannernya, bisa berupa ID atau mention. Biarkan kosong untuk warna aksen bot sendiri.
+</details>

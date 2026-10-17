@@ -1,0 +1,43 @@
+<dash>
+name: $useChannel
+desc: Mengarahkan semua pesan, balasan, dan embed yang ditulis setelahnya ke kanal lain.
+category: Kontrol Akses
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $useChannel mengambil ID server dan ID kanal, lalu semua output perintah yang ditulis setelah baris ini akan dikirim ke kanal tersebut. Baris yang ditulis sebelum $useChannel tetap dikirim ke kanal asli. Perintah ini bisa mengarahkan pesan ke kanal di server yang berbeda, selama bot berada di server itu dan bisa melihat kanal tersebut.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !useChannel
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $useChannel[guildID; channelID]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $sendMessage[This goes to the current channel]
+text: $useChannel[1234567890; 9876543210]
+text: $sendMessage[This goes to the specified channel!]
+</block>
+
+<block type="callout" kind="note">
+text: Kedua ID harus berupa angka. Bot juga harus menjadi anggota server target dan memiliki akses untuk melihat kanal target. Jika target tidak ditemukan, perpindahan akan dilewati dan log akan mencatatnya — sisa perintah tetap dikirim ke kanal semula.
+</block>
+
+<block type="callout" kind="warning">
+text: Setelah $useChannel dipanggil, semua baris selanjutnya akan terus dikirim ke kanal baru. Perpindahan ini tidak bisa dibatalkan. Saat dipakai dalam interaksi tombol, penanganan jawaban Discord bisa terpengaruh, sehingga respons dikirim ke kanal target alih-alih di bawah tombol.
+</block>
+</dash>
+
+<details>
+syntax: $useChannel[guildID; channelID]
+param: guildID|number|Wajib|ID server tempat kanal target berada
+param: channelID|number|Wajib|ID kanal tujuan pengiriman pesan selanjutnya
+</details>

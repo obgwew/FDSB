@@ -1,0 +1,37 @@
+<dash>
+name: $httpResult
+desc: Membaca kembali jawaban yang diterima bot dari permintaan web terakhirnya.
+category: HTTP
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $httpResult mengambil apa pun yang dibawa pulang oleh permintaan web terakhir dan menyerahkannya kepada Anda. Dengan kurung yang kosong, Anda mendapatkan seluruh jawaban, ditampilkan sebagai teks bila itu objek atau daftar. Tambahkan bagian untuk masuk ke dalamnya: sebuah nama memilih sebuah kolom, sebuah angka memilih sebuah item dari daftar, dan Anda dapat menautkan sebanyak yang Anda butuhkan untuk menggali lebih dalam.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !weather
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $httpResult[(key1; key2; ...)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $httpGet[https://api.example.com/users]
+text: $httpResult[0; username]
+</block>
+
+<block type="callout" kind="note">
+text: Angka memilih sebuah posisi dalam daftar, nama memilih sebuah kolom dalam objek. Minta sesuatu yang tidak ada di sana dan Anda hanya mendapatkan hasil kosong alih-alih kesalahan, sehingga tidak ada apa pun yang muncul di pesan.
+</block>
+</dash>
+
+<details>
+syntax: $httpResult[(key1; key2; ...)]
+param: key|text|Opsional|Kolom atau posisi mana yang ingin dimasuki dalam jawaban. Ulangi untuk nilai yang lebih dalam.
+</details>

@@ -1,0 +1,31 @@
+<dash>
+name: $botName
+desc: Membacakan kembali nama pengguna yang sedang dipakai bot untuk masuk.
+category: Info
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Bot memposting nama tampilan yang ia pakai untuk masuk, dieja persis seperti Discord menampilkannya. Bila dipakai sendirian, nama itu muncul dengan sendirinya di kanal; bila diletakkan di dalam sebuah baris, ia dimasukkan sebagai teks biasa. Nama dibaca segar pada setiap pemanggilan, sehingga sebuah perubahan nama langsung muncul.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $botName
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $botName
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: I am $botName!
+</block>
+
+<block type="callout" kind="note">
+text: Ini mengikuti nama yang berlaku, bukan sebuah salinan. Ubah nama bot dari Developer Portal, atau dengan $changeUsername, dan pemanggilan berikutnya mengembalikan nama yang baru.
+</block>
+</dash>

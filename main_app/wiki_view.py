@@ -7,6 +7,7 @@
 import os
 import re
 import json
+import time
 import asyncio
 import urllib.request
 import urllib.error
@@ -16,9 +17,14 @@ from typing import Optional, List, Dict, Tuple, Callable, Set
 import flet as ft
 
 from main_app.theme.theme_engine import ThemeEngine
-from main_app.settings import get_current_lang
-from main_app.langs.translations import Translations
+from main_app.settings_app import get_current_lang
+from main_app.langs._translations import Translations
 from main_app.load.loading_view import LoadingScreen
+
+try:
+    from main_app.core_fdsb.server_FDScript import fgs_service as _fgs
+except Exception:
+    _fgs = None
 
 
 def _c(key: str) -> str:
@@ -26,16 +32,17 @@ def _c(key: str) -> str:
 
 
 GITHUB_RAW_BASE = "https://raw.githubusercontent.com/obgwew/FDSB/main/wiki"
+GITHUB_API_BASE = "https://api.github.com/repos/obgwew/FDSB/contents/wiki"
 REQUEST_TIMEOUT = 10 
 
 _BLOCK_TAG_RE  = re.compile(r'<block([^>]*)>(.*?)</block>', re.DOTALL | re.IGNORECASE)
 _BLOCK_ATTR_RE = re.compile(r'(\w+)\s*=\s*"?([^"\s]+)"?')
 
-_CALLOUT_STYLES: Dict[str, Tuple[str, str, str, str]] = {
-    'note':      ('#3B82F6', 'EDIT_OUTLINED',                    'callout_note',        'Note'),
-    'warning':   ('#F59E0B', 'WARNING_AMBER_ROUNDED',             'callout_limit',       'Limit'),
-    'important': ('#EF4444', 'CLOSE_ROUNDED',                    'callout_important',   "It's important!"),
-    'question':  ('#22C55E', 'QUESTION_MARK_ROUNDED',             'callout_question',   'What is this?'),
+_CALLOUT_STYLES: Dict[str, Tuple[str, str, str]] = {
+    'note':      ('#3B82F6', 'EDIT_OUTLINED',                    'callout_note'),
+    'warning':   ('#F59E0B', 'WARNING_AMBER_ROUNDED',             'callout_limit'),
+    'important': ('#EF4444', 'CLOSE_ROUNDED',                    'callout_important'),
+    'question':  ('#22C55E', 'QUESTION_MARK_ROUNDED',             'callout_question'),
 }
 _CALLOUT_DEFAULT_ICON = 'INFO_OUTLINE_ROUNDED'
 
@@ -49,30 +56,34 @@ _CATEGORY_META: Dict[str, Tuple[str, str, str]] = {
 _CATEGORY_DEFAULT_ICON  = 'LABEL_ROUNDED'
 _CATEGORY_DEFAULT_COLOR = '#6B7280'
 
-_CATEGORY_ALIASES: Dict[str, str] = {
-    'event':                   'event',
-    'الحدث':                   'event',
-    'événement':               'event',
-    'ereignis':                'event',
-    'variables':               'variable',
-    'المتغيرات':               'variable',
-    'variablen':               'variable',
-    'timing & delays':         'time',
-    'التوقيت والتأخير':         'time',
-    'minutage & délais':       'time',
-    'timing & verzögerungen':  'time',
-}
+# {language: {normalized category name from the wiki data: canonical key}}
+# Names come from the translation file (wiki_cat_<key>), nothing is hard-coded here.
+_CATEGORY_NAME_CACHE: Dict[str, Dict[str, str]] = {}
 
 
 def _normalize_category(cat: Optional[str]) -> str:
     return (cat or '').strip().lower()
 
 
+def _category_names() -> Dict[str, str]:
+    lang = get_current_lang() or 'en'
+    names = _CATEGORY_NAME_CACHE.get(lang)
+    if names is None:
+        names = {}
+        for key in _CATEGORY_META:
+            label_key = f'wiki_cat_{key}'
+            label = _normalize_category(_t(label_key))
+            if label and label != label_key:
+                names[label] = key
+        _CATEGORY_NAME_CACHE[lang] = names
+    return names
+
+
 def _canonical_category(cat: Optional[str]) -> str:
     key = _normalize_category(cat)
     if key in _CATEGORY_META:
         return key
-    return _CATEGORY_ALIASES.get(key, key)
+    return _category_names().get(key, key)
 
 
 def _category_label(cat: str) -> str:
@@ -102,20 +113,17 @@ _HL_FONT_FAMILY = 'Consolas'
 def _t(key: str) -> str:
     return Translations.get(key, get_current_lang() or 'en')
 
+
+def _fmt_size(n: int) -> str:
+    n = max(int(n or 0), 0)
+    if n >= 1024 * 1024:
+        return f'{n / (1024 * 1024):.2f} MB'
+    return f'{n / 1024:.1f} KB'
+
 def _wiki_lang() -> str:
     return (get_current_lang() or 'en').lstrip('_')
 
-def _t_or_fallback(key: str, fallback: str = '') -> str:
-    try:
-        val = _t(key)
-    except Exception:
-        val = None
-    if not val or val == key:
-        return fallback
-    return val
-
 def _theme_unsub(cb):
-    """Remove a ThemeEngine subscription (works even without ThemeEngine.unsubscribe)."""
     fn = getattr(ThemeEngine, 'unsubscribe', None)
     if callable(fn):
         try:
@@ -434,6 +442,19 @@ class WikiCache:
             return []
 
     @classmethod
+    def local_size(cls, lang: str) -> int:
+        folder = os.path.join(cls.lang_dir(lang), 'functions')
+        total = 0
+        try:
+            with os.scandir(folder) as it:
+                for entry in it:
+                    if entry.is_file():
+                        total += entry.stat().st_size
+        except Exception:
+            pass
+        return total
+
+    @classmethod
     def save_function_file_only(cls, lang: str, file_name: str, text: str) -> Optional[Dict]:
         folder = os.path.join(cls.lang_dir(lang), 'functions')
         os.makedirs(folder, exist_ok=True)
@@ -549,6 +570,18 @@ class WikiRemote:
         return json.loads(cls._get(url))
 
     @classmethod
+    def fetch_sizes(cls, lang: str) -> Dict[str, int]:
+        """{file_name: size_in_bytes} for the whole wiki folder in ONE request."""
+        url = f'{GITHUB_API_BASE}/{lang}/functions'
+        req = urllib.request.Request(url, headers={
+            'User-Agent': 'FDScriptDashboard',
+            'Accept': 'application/vnd.github+json',
+        })
+        with urllib.request.urlopen(req, timeout=REQUEST_TIMEOUT) as resp:
+            items = json.loads(resp.read().decode('utf-8'))
+        return {it['name']: int(it.get('size', 0)) for it in items if it.get('type') == 'file'}
+
+    @classmethod
     def fetch_function(cls, lang: str, file_name: str) -> str:
         url = f'{GITHUB_RAW_BASE}/{lang}/functions/{file_name}'
         return cls._get(url)
@@ -624,7 +657,7 @@ class BotWikiTab:
                 icon=ft.Icons.CLEAR_ROUNDED,
                 icon_size=16,
                 icon_color=_c('text_dim'),
-                tooltip=_t('clear_search') or "مسح البحث",
+                tooltip=_t('clear_search'),
                 on_click=self._clear_search,
             ),
         )
@@ -632,7 +665,7 @@ class BotWikiTab:
         self._filter_btn = ft.IconButton(
             icon=ft.Icons.FILTER_LIST_ROUNDED,
             icon_color=_c('accent'),
-            tooltip=_t('filter_tooltip') or "Filter",
+            tooltip=_t('filter_tooltip'),
             on_click=self._open_filter_sheet,
             on_long_press=self._reset_all_filters,
         )
@@ -662,7 +695,29 @@ class BotWikiTab:
         )
 
         self._status_text = ft.Text(self._status_label(), size=12, color=_c('text_dim'))
-        self._list_view = ft.ListView(expand=True, spacing=10, padding=ft.Padding(0, 0, 0, 70))
+        # Virtual (windowed) list: only a small window of cards exists at any time
+        # (12 on first paint, never more than ~24). Everything above / below the
+        # window is replaced by one empty spacer of the exact same height, so the
+        # scrollbar and scroll position behave as if all cards were there.
+        self._win_lo = 0
+        self._win_hi = 0
+        self._card_cache: Dict[int, ft.Control] = {}
+        self._resetting   = False    # True while a search/filter redraw is scrolling to its target
+        self._saved_offset = 0.0     # list scroll position remembered while a wiki page is open
+        self._scroll_pix  = 0.0      # latest scroll position reported by Flutter
+        self._scroll_view = 600.0    # latest viewport height
+        self._last_pix    = 0.0
+        self._going_down  = True
+        self._sync_running = False
+        # item_extent makes Flutter use a FIXED-extent list: every slot is exactly
+        # _ITEM_EXT tall, so scroll extent / scrollbar thumb are exact (no estimating
+        # from whichever children happen to be built). The cards that are not alive
+        # are represented by the list's top/bottom padding, never by huge children.
+        self._list_view = ft.ListView(
+            expand=True, spacing=0, padding=ft.Padding(0, 0, 0, 70),
+            item_extent=self._ITEM_EXT,
+            on_scroll=self._on_list_scroll, scroll_interval=50,
+        )
 
         self._list_root = ft.Column(
             [
@@ -705,6 +760,8 @@ class BotWikiTab:
         task = getattr(self, '_search_debounce_task', None)
         if task:
             task.cancel()
+        self._view_mode = 'list'
+        self._saved_offset = 0.0
         _theme_unsub(self._on_theme)
 
     def _build_sub_views(self):
@@ -768,7 +825,7 @@ class BotWikiTab:
         if not found_cats:
             filter_col.controls.append(
                 ft.Container(
-                    content=ft.Text(_t('no_categories') or "لا توجد تصنيفات بعد",
+                    content=ft.Text(_t('no_categories'),
                                      color=_c('text_dim'), size=13),
                     padding=ft.Padding(0, 10, 0, 10),
                 )
@@ -790,11 +847,11 @@ class BotWikiTab:
 
         header_row = ft.Row(
             [
-                ft.Text(_t('filter_title') or "Categories / التصنيفات",
+                ft.Text(_t('filter_title'),
                         size=16, weight=ft.FontWeight.BOLD, color=_c('text')),
                 ft.Container(expand=True),
                 ft.TextButton(
-                    content=ft.Text(_t('reset') or "إعادة تعيين", size=13,
+                    content=ft.Text(_t('reset'), size=13,
                                      color=_c('accent'), weight=ft.FontWeight.W_600),
                     on_click=_reset_filters,
                     disabled=not found_cats,
@@ -803,7 +860,7 @@ class BotWikiTab:
                     icon=ft.Icons.CLOSE_ROUNDED,
                     icon_color=_c('text_dim'),
                     icon_size=18,
-                    tooltip=_t('close') or "إغلاق",
+                    tooltip=_t('close'),
                     on_click=_close_sheet,
                 ),
             ],
@@ -812,7 +869,7 @@ class BotWikiTab:
         )
 
         apply_btn = _ink_btn(
-            content=ft.Text(_t('done') or "تم", size=13, color='#FFFFFF',
+            content=ft.Text(_t('done'), size=13, color='#FFFFFF',
                              weight=ft.FontWeight.W_600),
             bgcolor=_c('accent'),
             on_click=_close_sheet,
@@ -868,6 +925,41 @@ class BotWikiTab:
             return True
         return False
 
+    def guard_tab_change(self, on_proceed: callable, on_cancel: callable = None):
+        # Leaving the Wiki for another tab (Settings, Variables, ...) keeps it exactly
+        # as it is: the list at its scroll position, or the open dashboard / detail
+        # page. It is only reset when the bot dashboard itself is left for the main
+        # FDSB view (dispose() + a brand-new BotWikiTab next time).
+        self._remember_list_position()
+        on_proceed and on_proceed()
+
+    def _remember_list_position(self):
+        if self._view_mode == 'list' and self._filtered and not self._resetting:
+            self._saved_offset = self._scroll_pix
+
+    def on_show(self):
+        if not self._entries:
+            self._page.run_task(self._async_load_bot_task)
+            return
+        self._render()
+        if self._page:
+            self._page.update()
+            if self._view_mode == 'list' and self._filtered:
+                # The dashboard calls on_show BEFORE it slides this tab's slot in, so
+                # the list is not mounted yet. Flutter also lost its scroll offset while
+                # the tab was hidden. Re-apply the saved offset a few times, spread over
+                # the slide animation, so at least one attempt lands on a mounted list.
+                self._restore_list_position(delay=0.05, settle=(0.0, 0.2, 0.4))
+            else:
+                self._resetting = False
+
+    def on_hide(self):
+        self._remember_list_position()
+        if self._view_mode == 'list' and self._filtered:
+            # ignore scroll events while the list is detached / being re-mounted, so a
+            # bogus position can never move the card window away from the saved one
+            self._resetting = True
+
     def _is_rtl(self) -> bool:
         return (self._lang or '').lower() in ('ar', 'fa', 'ur')
 
@@ -875,7 +967,11 @@ class BotWikiTab:
         v = WikiCache.get_local_version(self._lang)
         if v == 0 and not self._entries:
             return _t('no_cache')
-        return _t('up_to_date').format(v=v)
+        label = _t('up_to_date').format(v=v)
+        size = WikiCache.local_size(self._lang)
+        if size > 0:
+            label = f'{label} • {_fmt_size(size)}'
+        return label
 
     def _card_border(self) -> ft.Border:
         return ft.Border(
@@ -908,6 +1004,9 @@ class BotWikiTab:
             'string':  get('warning'),
             'comment': get('text_dim'),
         }
+        if self._filtered:
+            self._card_cache.clear()
+            self._apply_window()
         self._render()
         if self._page:
             self._page.update()
@@ -964,68 +1063,234 @@ class BotWikiTab:
         self._update_wiki_count()
         self._rebuild_list()
 
-    def _rebuild_list(self):
-        self._list_view.controls.clear()
+    # ── windowed list ────────────────────────────────────────────────────────
+    _CARD_H   = 152                 # fixed card height  -> exact scroll maths
+    _GAP      = 12                  # space between cards
+    _ITEM_EXT = _CARD_H + _GAP      # height one slot takes in the list
+    _WIN_STEP = 12                  # cards added/removed per step
+    _WIN_MAX  = 24                  # max cards alive at once
 
-        if not self._filtered:
-            self._list_view.controls.append(
+    def _rebuild_list(self, target: int = 0):
+        """Search / filter changed: delete every live card, then redraw only the
+        window around `target` (12 cards above it, 12 below). target=0 is the
+        first result, so a new search starts with its first 12 matches."""
+        self._card_cache.clear()
+        self._list_view.controls = []
+        n = len(self._filtered)
+
+        self._last_pix = 0.0
+        self._scroll_pix = 0.0
+        self._going_down = True
+
+        if n == 0:
+            self._win_lo = self._win_hi = 0
+            self._list_view.item_extent = None
+            self._list_view.padding = ft.Padding(0, 0, 0, 70)
+            self._list_view.controls = [
                 ft.Container(
                     content=ft.Text(_t('no_results'), color=_c('text_dim'), size=13,
                                      text_align=ft.TextAlign.CENTER),
                     padding=40,
                     alignment=ft.Alignment(0, 0),
                 )
-            )
+            ]
             return
 
-        for entry in self._filtered:
-            self._list_view.controls.append(self._build_card(entry))
+        target = max(0, min(target, n - 1))
+        self._win_lo = max(0, target - self._WIN_STEP)
+        self._win_hi = min(n, target + self._WIN_STEP)
+        self._apply_window()
+        self._saved_offset = target * self._ITEM_EXT
+        self._scroll_list_to(self._saved_offset)
 
-    def _build_card(self, entry: WikiEntry) -> ft.Container:
-        header_children = [
-            ft.Text(entry.name, size=15, weight=ft.FontWeight.BOLD, color=_c('text')),
-        ]
-        if entry.category:
-            header_children.append(_badge(_category_label(entry.category), _category_color(entry.category)))
+    def _scroll_list_to(self, offset: float, delay: float = 0.0, settle: tuple = (0.0,)):
+        self._resetting = True
 
-        dash_btn = _ink_btn(
-            content=ft.Row(
-                [ft.Icon(ft.Icons.SPACE_DASHBOARD_ROUNDED, color='#FFFFFF', size=14),
-                 ft.Text(_t('open_dashboard'), color='#FFFFFF', size=12)],
-                spacing=6, alignment=ft.MainAxisAlignment.CENTER,
-            ),
-            bgcolor=_c('accent'),
-            on_click=(lambda e, en=entry: self._page.run_task(self._async_open_dash, en)),
+        async def _go():
+            try:
+                if delay:
+                    await asyncio.sleep(delay)
+                for pause in settle:
+                    if pause:
+                        await asyncio.sleep(pause)
+                    for _attempt in range(5):
+                        try:
+                            await self._list_view.scroll_to(offset=offset, duration=0)
+                            break
+                        except Exception:
+                            # list may not be mounted yet right after a view switch
+                            await asyncio.sleep(0.06)
+            finally:
+                self._scroll_pix = offset
+                self._last_pix = offset
+                self._resetting = False
+        try:
+            self._page.run_task(_go)
+        except Exception:
+            self._resetting = False
+
+    def _apply_window(self):
+        """Materialise cards [lo, hi); stand in for all the others with padding."""
+        n, lo, hi = len(self._filtered), self._win_lo, self._win_hi
+        ext = self._ITEM_EXT
+
+        # drop cards that left the window (this is what frees the UI objects)
+        for idx in [i for i in self._card_cache if i < lo or i >= hi]:
+            del self._card_cache[idx]
+
+        controls: List[ft.Control] = []
+        for idx in range(lo, hi):
+            card = self._card_cache.get(idx)
+            if card is None:
+                card = self._build_slot(self._filtered[idx])
+                self._card_cache[idx] = card
+            controls.append(card)
+
+        # total extent = top + cards + bottom is ALWAYS n * ext (+70 bottom margin)
+        self._list_view.item_extent = ext
+        self._list_view.padding = ft.Padding(0, lo * ext, 0, (n - hi) * ext + 70)
+        self._list_view.controls = controls
+
+    def _on_list_scroll(self, e):
+        """Only record the newest position; one worker applies it.
+
+        Scroll events can arrive faster than the UI can be patched. Handling each
+        one directly lets old positions overwrite newer ones (the up/down desync),
+        so events are coalesced and the window always follows the LATEST position.
+        """
+        if self._resetting:
+            return
+        self._scroll_pix  = max(0.0, float(e.pixels or 0))
+        self._scroll_view = float(getattr(e, 'viewport_dimension', 0) or 600)
+        if self._sync_running or len(self._filtered) <= self._WIN_STEP:
+            return
+        self._sync_running = True
+        try:
+            self._page.run_task(self._sync_window_task)
+        except Exception:
+            self._sync_running = False
+
+    async def _sync_window_task(self):
+        try:
+            while True:
+                pix = self._scroll_pix
+                if self._move_window(pix, self._scroll_view):
+                    self._list_view.update()
+                await asyncio.sleep(0.04)
+                if self._scroll_pix == pix:     # position settled -> done
+                    break
+        except Exception as ex:
+            print(f'[Wiki] window sync failed: {ex}')
+        finally:
+            self._sync_running = False
+
+    _AHEAD_MIN  = 5    # cards that must exist in the direction of travel
+    _BEHIND_MIN = 2    # and behind it
+    _BEHIND_KEEP = 4   # cards kept behind the viewport when the window is moved
+
+    def _move_window(self, pix: float, view: float) -> bool:
+        n = len(self._filtered)
+        if n <= self._WIN_STEP:
+            return False
+
+        ext   = self._ITEM_EXT
+        first = min(n - 1, int(pix // ext))
+        last  = min(n - 1, int((pix + view) // ext))
+        vis   = last - first + 1
+
+        delta = pix - self._last_pix
+        if abs(delta) >= 2:
+            self._going_down = delta > 0
+        self._last_pix = pix
+        down = self._going_down
+
+        lo, hi = self._win_lo, self._win_hi
+        cap = max(self._WIN_MAX, vis + self._WIN_STEP)
+
+        below = (hi - 1 - last) if hi < n else 10 ** 6   # cards ready under the viewport
+        above = (first - lo)    if lo > 0 else 10 ** 6   # cards ready over the viewport
+        ahead, behind = (below, above) if down else (above, below)
+
+        covered = first >= lo and last < hi
+        if covered and ahead >= self._AHEAD_MIN and behind >= self._BEHIND_MIN:
+            return False
+
+        # Move the window so most of its 24 slots lie in the direction of travel.
+        keep = self._BEHIND_KEEP if down else cap - vis - self._BEHIND_KEEP
+        new_lo = max(0, min(first - keep, n - cap))
+        new_hi = min(n, new_lo + cap)
+        if (new_lo, new_hi) == (lo, hi):
+            return False
+
+        self._win_lo, self._win_hi = new_lo, new_hi
+        self._apply_window()
+        return True
+
+    def _build_slot(self, entry: WikiEntry) -> ft.Container:
+        """Fixed-height slot = card + gap, so positions are exact multiples of _ITEM_EXT."""
+        return ft.Container(
+            content=self._build_card(entry),
+            height=self._ITEM_EXT,
+            padding=ft.Padding(0, 0, 0, self._GAP),
         )
 
-        card_buttons = [dash_btn]
+    def _build_card(self, entry: WikiEntry) -> ft.Container:
+        rtl = self._is_rtl()
 
-        if entry.has_details:
-            info_btn = _ink_btn(
+        title_row = [
+            ft.Text(entry.name, size=15, weight=ft.FontWeight.BOLD, color=_c('text'),
+                    max_lines=1, overflow=ft.TextOverflow.ELLIPSIS, expand_loose=True),
+        ]
+        if entry.category:
+            title_row.append(_badge(_category_label(entry.category), _category_color(entry.category)))
+
+        def _action(icon, label, handler) -> ft.Container:
+            return _ink_btn(
                 content=ft.Row(
-                    [ft.Icon(ft.Icons.INFO_OUTLINE_ROUNDED, color='#FFFFFF', size=14),
-                     ft.Text(_t('function_info'), color='#FFFFFF', size=12)],
-                    spacing=6, alignment=ft.MainAxisAlignment.CENTER,
+                    [ft.Icon(icon, color='#FFFFFF', size=16),
+                     ft.Text(label, color='#FFFFFF', size=12.5, weight=ft.FontWeight.W_600)],
+                    spacing=7, tight=True,
+                    alignment=ft.MainAxisAlignment.CENTER,
+                    vertical_alignment=ft.CrossAxisAlignment.CENTER,
                 ),
                 bgcolor=_c('accent'),
-                on_click=(lambda e, en=entry: self._page.run_task(self._async_open_detail, en)),
+                on_click=handler,
+                border_radius=10,
+                padding=ft.Padding(left=14, top=9, right=14, bottom=9),
             )
-            card_buttons.append(info_btn)
+
+        buttons = [
+            _action(ft.Icons.SPACE_DASHBOARD_ROUNDED, _t('open_dashboard'),
+                    lambda e, en=entry: self._page.run_task(self._async_open_dash, en)),
+        ]
+        if entry.has_details:
+            buttons.append(
+                _action(ft.Icons.INFO_OUTLINE_ROUNDED, _t('function_info'),
+                        lambda e, en=entry: self._page.run_task(self._async_open_detail, en))
+            )
 
         return ft.Container(
             content=ft.Column(
                 [
-                    ft.Row(header_children, spacing=8),
-                    ft.Text(entry.desc, size=13, color=_c('text_dim'), rtl=self._is_rtl()),
-                    ft.Row(card_buttons, spacing=8),
+                    ft.Row(title_row, spacing=8,
+                           vertical_alignment=ft.CrossAxisAlignment.CENTER),
+                    ft.Container(
+                        content=ft.Text(entry.desc, size=13, color=_c('text_dim'), rtl=rtl,
+                                        max_lines=2, overflow=ft.TextOverflow.ELLIPSIS),
+                        height=42,
+                    ),
+                    ft.Row(buttons, spacing=10),
                 ],
-                spacing=8,
+                spacing=4,
+                expand=True,
+                alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
             ),
+            height=self._CARD_H,
             bgcolor=_c('card_bg'),
             border=self._card_border(),
-            border_radius=12,
-            padding=16,
-            rtl=self._is_rtl(),
+            border_radius=14,
+            padding=ft.Padding(left=16, top=12, right=16, bottom=12),
+            rtl=rtl,
         )
 
     def _rich_paragraph(self, text: str, size: int = 14, color: Optional[str] = None) -> ft.Text:
@@ -1093,8 +1358,8 @@ class BotWikiTab:
         return ft.Container()
 
     def _callout_style(self, kind: str) -> Tuple[str, str, str]:
-        color, icon_name, key, fallback = _CALLOUT_STYLES.get(kind, ('#3B82F6', _CALLOUT_DEFAULT_ICON, 'callout_note', 'Info'))
-        return color, getattr(ft.Icons, icon_name, ft.Icons.INFO_OUTLINE_ROUNDED), _t(key) or fallback
+        color, icon_name, key = _CALLOUT_STYLES.get(kind, ('#3B82F6', _CALLOUT_DEFAULT_ICON, 'callout_note'))
+        return color, getattr(ft.Icons, icon_name, ft.Icons.INFO_OUTLINE_ROUNDED), _t(key)
 
     def _callout(self, title: str, text: str, color: str, icon) -> ft.Container:
         return ft.Container(content=ft.Column([ft.Row([ft.Icon(icon, color=color, size=18), ft.Text(title, size=13, weight=ft.FontWeight.BOLD, color=color)], spacing=8), ft.Text(text, size=13, color=_c('text'), rtl=self._is_rtl())], spacing=6), bgcolor=_tint(color, 24), border=ft.Border(left=ft.BorderSide(4, color)), border_radius=10, padding=12, rtl=self._is_rtl())
@@ -1114,6 +1379,7 @@ class BotWikiTab:
         return resolved
 
     async def _async_open_dash(self, entry: WikiEntry):
+        self._saved_offset = self._scroll_pix
         self._view_mode = 'dash'
         self._render()
         self._page.update()
@@ -1128,6 +1394,7 @@ class BotWikiTab:
         self._page.update()
 
     async def _async_open_detail(self, entry: WikiEntry):
+        self._saved_offset = self._scroll_pix
         self._view_mode = 'detail'
         self._render()
         self._page.update()
@@ -1145,7 +1412,16 @@ class BotWikiTab:
     def _back_to_list(self, _):
         self._view_mode = 'list'
         self._render()
-        self._page.update()
+        if self._page:
+            self._page.update()
+            self._restore_list_position()
+
+    def _restore_list_position(self, delay: float = 0.0, settle: tuple = (0.0,)):
+        """The list is removed from the page while a wiki page is open, so Flutter
+        forgets its scroll offset. Put it back exactly where the user left it
+        (the card window / padding in memory already match that position)."""
+        if self._filtered:
+            self._scroll_list_to(self._saved_offset, delay, settle)
 
     def _build_detail_body(self, entry: WikiEntry):
         det = entry.details
@@ -1180,6 +1456,14 @@ class BotWikiTab:
             self._render()
         self._page.update()
 
+    async def _notify(self, title: str, body: str, done: bool = False):
+        if _fgs is None:
+            return
+        try:
+            await _fgs.show_download_notification(title, body, done=done, page=self._page)
+        except Exception as ex:
+            print(f'[Wiki] notification failed: {ex}')
+
     async def _check_updates(self, e):
         if self._busy:
             return
@@ -1192,21 +1476,59 @@ class BotWikiTab:
             remote_version = await loop.run_in_executor(None, WikiRemote.fetch_version, lang)
         except Exception as ex:
             print(f'[Wiki] fetch_version failed: {ex}')
-            self._set_busy(False, _t_or_fallback('update_failed', 'Failed to check for updates'))
+            self._set_busy(False, _t('update_failed'))
             return
 
         local_version = WikiCache.get_local_version(lang)
 
         if remote_version <= local_version:
-            self._set_busy(False, _t('up_to_date').format(v=local_version))
+            self._set_busy(False, self._status_label())
             return
+
+        try:
+            index = await loop.run_in_executor(None, WikiRemote.fetch_index, lang)
+        except Exception as ex:
+            print(f'[Wiki] fetch_index failed: {ex}')
+            self._set_busy(False, _t('update_failed'))
+            return
+        index.sort()
+
+        # Total download size (one GitHub API request). If it fails we just hide the size.
+        try:
+            sizes = await loop.run_in_executor(None, WikiRemote.fetch_sizes, lang)
+        except Exception as ex:
+            print(f'[Wiki] fetch_sizes failed: {ex}')
+            sizes = {}
+        total_bytes = sum(sizes.get(fn, 0) for fn in index)
+        total_txt = _fmt_size(total_bytes) if total_bytes > 0 else ''
+
+        base_title = _t('downloading')
+        title = f'{base_title} ({total_txt})' if total_txt else base_title
+
+        total = len(index) or 1
+        stats = {'bytes': 0, 'done': 0, 'last_notif': 0.0}
+
+        def _progress_text() -> str:
+            txt = f'{stats["done"]}/{total} • {_fmt_size(stats["bytes"])}'
+            return f'{txt} / {total_txt}' if total_txt else txt
+
+        def _notif_text() -> str:
+            pct = int(stats['done'] * 100 / total)
+            txt = f'{pct}% • {_fmt_size(stats["bytes"])}'
+            return f'{txt} / {total_txt}' if total_txt else txt
+
+        # Android: ask for notification permission, then show the first notification
+        if _fgs is not None:
+            _fgs.ensure_background_mode(self._page)
+            await _fgs.ensure_notification_permission()
+        await self._notify(base_title, _notif_text())
 
         self._page.show_dialog(
             ft.SnackBar(
                 content=ft.Row(
                     [
                         ft.Icon(ft.Icons.CLOUD_DOWNLOAD_ROUNDED, color='#FFFFFF', size=20),
-                        ft.Text(_t('downloading'), color='#FFFFFF', size=14, weight=ft.FontWeight.W_600),
+                        ft.Text(title, color='#FFFFFF', size=14, weight=ft.FontWeight.W_600),
                     ],
                     spacing=10,
                     vertical_alignment=ft.CrossAxisAlignment.CENTER,
@@ -1216,22 +1538,23 @@ class BotWikiTab:
             )
         )
 
-        loader = LoadingScreen(container=self._root, page=self._page, title=_t('downloading'))
+        loader = LoadingScreen(container=self._root, page=self._page, title=title)
 
         async def _do_download(screen: LoadingScreen):
-            index = await loop.run_in_executor(None, WikiRemote.fetch_index, lang)
-            index.sort()
-
-            total = len(index) or 1
-            done_count = 0
-            screen.set_progress(0.0, f'0/{total}')
+            screen.set_progress(0.0, _progress_text())
 
             async def _fetch_one(file_name: str):
-                nonlocal done_count
                 text = await loop.run_in_executor(None, WikiRemote.fetch_function, lang, file_name)
                 await loop.run_in_executor(None, WikiCache.save_function_file_only, lang, file_name, text)
-                done_count += 1
-                screen.set_progress(done_count / total, f'{done_count}/{total}')
+                stats['done'] += 1
+                stats['bytes'] += len(text.encode('utf-8'))
+                screen.set_progress(stats['done'] / total, _progress_text())
+
+                # throttle: at most one notification update per second
+                now = time.monotonic()
+                if now - stats['last_notif'] >= 1.0:
+                    stats['last_notif'] = now
+                    await self._notify(base_title, _notif_text())
 
             chunk_size = 45
             for i in range(0, len(index), chunk_size):
@@ -1251,13 +1574,20 @@ class BotWikiTab:
             )
         except Exception as ex:
             print(f'[Wiki] update download failed: {ex}')
-            self._set_busy(False, _t_or_fallback('update_failed', 'Update failed'))
+            await self._notify(base_title, _t('update_failed'), done=True)
+            self._set_busy(False, _t('update_failed'))
             return
 
         self._full_cache.clear()
         self._entries = WikiCache.load_light_entries(lang)
         self._apply_filters()
-        self._set_busy(False, _t('up_to_date').format(v=remote_version))
+        self._set_busy(False, self._status_label())
+
+        await self._notify(
+            _t('wiki_download_done'),
+            f'{_t("up_to_date").format(v=remote_version)} • {_fmt_size(stats["bytes"])}',
+            done=True,
+        )
 
         self._page.show_dialog(
             ft.SnackBar(content=ft.Text(_t('up_to_date').format(v=remote_version)), duration=2500)

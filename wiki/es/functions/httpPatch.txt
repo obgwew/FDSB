@@ -1,0 +1,38 @@
+<dash>
+name: $httpPatch
+desc: Envía una solicitud PATCH a una dirección web desde tu comando.
+category: HTTP
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Dale una dirección web y el bot hace una llamada PATCH allí y espera hasta diez segundos la respuesta, opcionalmente con un cuerpo en el segundo hueco. Todo lo que se pueda leer como JSON sale como JSON, y todo lo demás se envía como texto plano. Cuando la llamada vuelve, la respuesta queda en $httpResult y el código de estado en $httpStatus, listos para las líneas de abajo.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $httpPatch en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $httpPatch[URL; (Body)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $httpAddHeader[Content-Type; application/json]
+text: $httpPatch[https://api.example.com/users/1; {"name": "FDScript"}]
+text: $httpStatus
+</block>
+
+<block type="callout" kind="note">
+text: Las cabeceras que añadiste con $httpAddHeader salen con esta solicitud y luego se borran, así que la siguiente llamada empieza limpia. Si no se puede alcanzar el sitio, el estado baja a 500 y el motivo queda en $httpResult para que lo leas. Las direcciones en redes privadas o internas se rechazan antes de que la solicitud salga, y eso aparece como estado 400.
+</block>
+</dash>
+
+<details>
+syntax: $httpPatch[URL; (Body)]
+param: URL|text|Obligatorio|La dirección web a la que enviar la solicitud PATCH
+param: Body|text|Opcional|Qué enviar con ella, ya sea JSON o texto plano
+</details>

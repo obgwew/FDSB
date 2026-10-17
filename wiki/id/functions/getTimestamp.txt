@@ -1,0 +1,35 @@
+<dash>
+name: $getTimestamp
+desc: Memberikan Anda waktu saat ini sebagai detik yang dihitung dari 1 Januari 1970.
+category: Waktu & Jeda
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Setiap kali perintah Anda berjalan, ini membaca jam dan mengembalikan jumlah detik sejak 1 Januari 1970, format waktu yang diharapkan sebagian besar bahasa pemrograman dan API web. Letakkan di dalam baris teks dan bot mencetak digit-digit itu di tempatnya. Ia diukur ulang setiap kali berjalan, jadi dua perintah yang berjarak satu menit memberikan dua angka yang berbeda.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !age
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $getTimestamp
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $sendMessage[Now in Unix time: $getTimestamp]
+</block>
+
+<block type="callout" kind="note">
+text: Tuliskan di dalam pesan Anda sebagai <t:$getTimestamp> dan Discord mengambil alih, menampilkan tanggal dan waktu kepada setiap pembaca di zona waktu mereka masing-masing alih-alih deretan digit.
+</block>
+
+<block type="callout" kind="important">
+text: Ia hanya bekerja di dalam perintah lain. Ditempatkan di barisnya sendiri, tidak ada tempat untuk mencetak, jadi bot menyatakan bahwa ini perintah khusus nilai dan tidak ada yang muncul di obrolan.
+</block>
+</dash>

@@ -1,0 +1,45 @@
+<dash>
+name: $deleteIn
+desc: Espera un tiempo determinado y luego elimina las propias respuestas del bot del canal.
+category: Tiempos y esperas
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $deleteIn toma una cantidad de tiempo y le pide al bot que se lleve su propia salida cuando ese tiempo se agota. Coge el mensaje que el bot ya publicó en esta ejecución y cualquier otro que publique después, los mantiene durante la espera que indicaste y luego los elimina para que el canal quede limpio. Así es fácil repartir una nota temporal o un resultado único que no debería quedarse en el chat para siempre.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !temp en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $deleteIn[duration]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $deleteIn[5s]
+text: $sendMessage[This message is removed after 5 seconds]
+</block>
+
+<block type="callout" kind="note">
+text: Una duración es un número más una unidad: ms para milisegundos, s para segundos, m para minutos, h para horas, d para días y w para semanas. Puedes unir varias, así que 1h30m es una hora y treinta minutos, y la espera más larga permitida es de 14 días.
+</block>
+
+<block type="callout" kind="warning">
+text: El bot necesita permiso para eliminar mensajes en ese canal, y cada mensaje que elimina tiene que ser uno que él mismo publicó. Si la espera transcurre con el bot desconectado, el mensaje se queda donde está, ya que la cuenta atrás vive con el bot.
+</block>
+
+<block type="callout" kind="important">
+text: Aquí solo se acepta una duración — exactamente un argumento, con un valor mayor que cero. Una espera demasiado larga, una unidad que falte o un número sin nada detrás se rechazan con un error.
+</block>
+</dash>
+
+<details>
+syntax: $deleteIn[duration]
+param: duration|text|Obligatorio|Cuánto esperar antes de eliminar, como un número con una unidad — 5s, 10m, 2h, 1d — y hasta 14 días
+</details>

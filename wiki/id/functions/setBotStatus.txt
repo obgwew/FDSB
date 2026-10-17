@@ -1,0 +1,40 @@
+<dash>
+name: $setBotStatus
+desc: Mengubah titik di samping nama bot menjadi online, idle, do not disturb atau invisible.
+category: Server
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $setBotStatus mengubah tampilan bot bagi semua orang di server Anda. Titik di samping namanya bisa terbaca online, idle, dnd, atau invisible, yang membuat bot tampak offline padahal masih bekerja. Tampilan barunya bertahan sampai Anda mengubahnya lagi, dan disimpan bersama pengaturan Status Bot Anda.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !setBotStatus
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $setBotStatus[online|idle|dnd|invisible]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $setBotStatus[idle]
+</block>
+
+<block type="callout" kind="important">
+text: Discord mengizinkan satu perubahan setiap 12 detik. Coba lagi di dalam jendela itu dan bot menjawab dengan jumlah detik yang tersisa untuk menunggu, dan offline hanyalah cara lain menulis invisible.
+</block>
+
+<block type="callout" kind="warning">
+text: Dalam build yang Anda jalankan, baris ini dilewati sebelum bisa bertindak, sehingga bot mempertahankan tampilan yang sudah dimilikinya.
+</block>
+</dash>
+
+<details>
+syntax: $setBotStatus[online|idle|dnd|invisible]
+param: status|text|Wajib|Salah satu dari online, idle, dnd atau invisible. offline berfungsi sebagai cara lain menulis invisible.
+</details>

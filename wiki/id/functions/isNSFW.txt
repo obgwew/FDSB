@@ -1,0 +1,36 @@
+<dash>
+name: $isNSFW
+desc: Menjawab benar atau salah tergantung pada apakah sebuah kanal dibatasi usia.
+category: Kanal
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Arahkan ke sebuah mention kanal atau ID dan ia melaporkan apakah kanal itu membawa pengaturan batas usia. Kata benar atau salah muncul di kanal, dan di dalam perintah lain ia langsung jatuh sebagai teks. Berguna untuk menahan balasan secara diam-diam setiap kali percakapan telah pindah ke tempat khusus dewasa.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !channelcheck
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $isNSFW[channel mention/ID]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $isNSFW[<#123456789012345678>]
+</block>
+
+<block type="callout" kind="note">
+text: Kanal yang tidak diizinkan bot untuk dilihat kembali sebagai kesalahan alih-alih salah biasa, jadi pastikan bot telah diberi akses ke kanal yang Anda sebutkan.
+</block>
+</dash>
+
+<details>
+syntax: $isNSFW[channel mention/ID]
+param: channel|text|Wajib|Kanal yang diperiksa, lewat mention @channel atau ID-nya
+</details>

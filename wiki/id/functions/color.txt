@@ -1,0 +1,36 @@
+<dash>
+name: $color
+desc: Mewarnai strip di sepanjang sisi kartu embed Anda.
+category: Pembuat Embed
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Kartu yang sedang dibangun perintah Anda mengambil warnanya dari baris ini, yang tampil sebagai strip di tepi kiri begitu kartu dikirim di akhir. Pakai nilai heksadesimal seperti #FF5733 atau salah satu nama warna, dan itulah rona yang Anda dapatkan. Apa pun yang tidak dapat diuraikan bot akan diam-diam kembali ke strip abu-abu gelap biasa.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !welcome
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $color[hex or name]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $color[#FF5733]
+</block>
+
+<block type="callout" kind="note">
+text: Tanpa ini, kartu mempertahankan strip gelap bawaan. Sedang membangun beberapa kartu sekaligus? Tambahkan nomor kartu setelah warnanya untuk mewarnainya satu per satu.
+</block>
+</dash>
+
+<details>
+syntax: $color[hex or name]
+param: hex or name|text|Wajib|Nilai heksadesimal seperti #FF5733, atau sebuah nama warna
+</details>

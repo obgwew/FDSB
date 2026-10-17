@@ -1,0 +1,31 @@
+<dash>
+name: $guildName
+desc: Te da el nombre del servidor en el que se escribió el comando.
+category: Info
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $guildName pone el nombre del servidor en el que se escribió el comando directamente en tu línea de texto. Ponlo en medio de una frase y el bot coloca el nombre entre medias, lo que hace que los saludos y los anuncios del canal se lean como si hubieras escrito tú el nombre del servidor. No se le añade nada más, así que sale como una única pieza de texto plano.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !welcome en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $guildName
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: Welcome to $guildName!
+</block>
+
+<block type="callout" kind="note">
+text: Envía el comando en un mensaje directo y no hay ningún servidor que nombrar, así que el bot escribe DM donde normalmente aparecería el nombre.
+</block>
+</dash>

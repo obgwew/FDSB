@@ -1,0 +1,31 @@
+<dash>
+name: $addTimestamp
+desc: Menempatkan tanggal dan waktu saat ini pada kartu yang dibangun perintah Anda.
+category: Waktu & Jeda
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Tambahkan ini selagi Anda menyusun sebuah kartu, dan bot menulis tanggal serta waktu sekarang ke kartu itu, pada baris kecil di tepi bawahnya. Discord merender baris itu di zona waktu setiap pembaca, sehingga tulisannya benar bagi semua orang tanpa peduli di mana pun mereka berada. Perintah ini hanya menyentuh kartu, jadi pastikan sebuah kartu sedang dibangun sebelum Anda memintanya.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $addTimestamp
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $addTimestamp
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $addTimestamp
+</block>
+
+<block type="callout" kind="note">
+text: Semua orang melihat momen yang sama, ditulis dalam zona waktu perangkat mereka sendiri, sehingga kartu Anda tidak perlu pernah menjelaskan asal tanggalnya.
+</block>
+</dash>

@@ -1,0 +1,31 @@
+<dash>
+name: $guildID
+desc: Memberikan Anda panjang nomor ID yang dipakai Discord untuk server tempat perintah diketik.
+category: Info
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $guildID mengembalikan angka yang mengidentifikasi server tempat perintah Anda diketik, tanpa apa pun yang membungkusnya. Letakkan di mana pun dalam baris teks dan bot mencetak digit-digit itu di tengah kalimat. Itu adalah angka yang sama dengan yang ditampilkan Discord setelah Anda menyalakan Mode Pengembang, dan itulah yang diharapkan perintah lain ketika Anda perlu menunjukkannya ke sebuah server.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !serverid
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $guildID
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: Server ID: $guildID
+</block>
+
+<block type="callout" kind="note">
+text: Ketik perintah di pesan langsung dan tidak ada server untuk dilaporkan, jadi bot mencetak DM sebagai ganti angka itu.
+</block>
+</dash>

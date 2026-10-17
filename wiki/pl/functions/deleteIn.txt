@@ -1,0 +1,35 @@
+<dash>
+name: $deleteIn
+desc: Czeka przez zadanym czas, a następnie usuwa odpowiedzi bota z kanału.
+category: Czas i opóźnienia
+
+<block type="text" title="Jak działa komenda?">
+text: $deleteIn przyjmuje długość czasu i prosi bota, żeby po jej upływie posprzątał własne wiadomości. Wychwytuje wiadomość, którą bot już wysłał w tym uruchomieniu, oraz te, które wyśle później, trzyma je przez podane opóźnienie, a potem je usuwa, dzięki czemu kanał pozostaje czysty. Dzięki temu łatwo wręczyć tymczasową notatkę albo jednorazowy wynik, który nie powinien na stałe zostać w czacie.
+</block>
+
+<block type="code" title="Składnia">
+text: $deleteIn[duration]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $deleteIn[5s]
+text: $sendMessage[This message is removed after 5 seconds]
+</block>
+
+<block type="callout" kind="note">
+text: Długość to liczba z jednostką: ms (milisekundy), s (sekundy), m (minuty), h (godziny), d (dni) i w (tygodnie). Możesz je łączyć, więc 1h30m to godzina i trzydzieści minut, a najdłuższe dozwolone opóźnienie to 14 dni.
+</block>
+
+<block type="callout" kind="warning">
+text: Bot musi mieć uprawnienie do usuwania wiadomości na tym kanale, a każda usuwana wiadomość musi być jego własną. Jeśli opóźnienie wypada, gdy bot jest offline, wiadomość zostaje na miejscu, ponieważ odliczanie zależy od bota.
+</block>
+
+<block type="callout" kind="important">
+text: Przyjmuje się tu wyłącznie długość — dokładnie jeden argument, o wartości większej od zera. Zbyt długie oczekiwanie, brakująca jednostka albo liczba bez jednostki są odrzucane błędem.
+</block>
+</dash>
+
+<details>
+syntax: $deleteIn[duration]
+param: duration|text|Required|Jak długo czekać przed usunięciem, jako liczba z jednostką — 5s, 10m, 2h, 1d — maksymalnie 14 dni
+</details>

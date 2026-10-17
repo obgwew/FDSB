@@ -1,0 +1,35 @@
+<dash>
+name: $month
+desc: Memberi nomor bulan saat ini, selalu dua digit, dari 01 sampai 12.
+category: Waktu & Jeda
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $month membaca jam dan menyerahkan kembali bulan tempat kita berada, selalu selebar dua digit, sehingga Januari terbaca 01 dan Desember terbaca 12. Jatuhkan ke dalam baris teks dan angka-angka mendarat di tempat Anda meletakkannya, atau tinggalkan pada barisnya sendiri dan bot memposting angka itu di kanal. Letakkan di antara $day dan $year untuk membangun tanggal Anda sendiri.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !month
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $month
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $sendMessage[Today is $day/$month/$year]
+</block>
+
+<block type="callout" kind="note">
+text: Angkanya berjalan dari 01 sampai 12 dan selalu selebar dua digit, sehingga $day/$month/$year sejajar sebagai sesuatu seperti 17/10/2026.
+</block>
+
+<block type="callout" kind="important">
+text: $day, $month dan $year semuanya membaca jam lokal milik bot itu sendiri. Zona waktu yang diatur dengan $time hanya diikuti oleh $hour, $minute dan $second.
+</block>
+</dash>

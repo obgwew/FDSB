@@ -1,0 +1,43 @@
+<dash>
+name: $call
+desc: Menjalankan sebuah blok bernama dari baris-baris Anda sendiri di titik tempat Anda memintanya.
+category: Kontrol Alur
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Apa pun yang Anda letakkan di antara $func[greet] dan $endfunc disisihkan sebagai sebuah blok bernama, dan $call[greet] menjalankan blok itu tepat di tempat Anda mengetiknya. Baris-baris di dalamnya berjalan terhadap apa pun yang sedang berlangsung, sehingga apa pun yang mereka kirim atau bangun muncul di kanal pada titik persis itu. Minta sebuah nama yang tidak pernah diberi blok, dan bot memposting kesalahan serta berhenti di sana.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !welcome
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $call[name]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $func[greet]
+text: $sendMessage[Hello from the function]
+text: $endfunc
+text: $call[greet]
+</block>
+
+<block type="callout" kind="important">
+text: Sebuah blok yang dipanggil tidak pernah mendapatkan set variabel yang baru untuk bekerja — ia memakai yang sudah berlaku. Panggilan menumpuk sedalam lima puluh, dan yang lebih dalam ditolak sebagai rekursi yang lolos kendali.
+</block>
+
+<block type="callout" kind="note">
+text: Beri nama blok itu, tutup dengan $endfunc, lalu panggil dengan nama yang sama. Anda juga dapat menjatuhkan $call langsung ke dalam kurung perintah lain untuk menarik keluaran blok ke dalam sebuah baris.
+</block>
+</dash>
+
+<details>
+syntax: $call[name]
+param: name|text|Wajib|Nama blok yang dibuka dengan $func dan ditutup dengan $endfunc
+</details>

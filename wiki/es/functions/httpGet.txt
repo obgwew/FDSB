@@ -1,0 +1,41 @@
+<dash>
+name: $httpGet
+desc: Obtiene una dirección web y guarda la respuesta lista para el resto de tu comando.
+category: HTTP
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $httpGet pide a un sitio web su contenido y espera hasta diez segundos la respuesta.
+text: Lo que vuelva se conserva durante el resto de la ejecución, con $httpStatus dando el código de estado y $httpResult dando el cuerpo, leído como JSON cuando la página es JSON y dejado como texto plano en caso contrario.
+text: Las cabeceras que añadiste antes con $httpAddHeader viajan con esta solicitud y luego se borran, así que cada solicitud empieza limpia.
+text: No aparece nada en el canal hasta que tú mismo envíes un mensaje con la respuesta.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !api en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $httpGet[URL]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $httpGet[https://api.example.com/users]
+text: $httpStatus
+text: $httpResult[0; name]
+</block>
+
+<block type="callout" kind="note">
+text: Si la solicitud falla, el estado se establece en 500 y $httpResult contiene el texto del error en lugar de una página.
+text: Las direcciones que la aplicación se niega a abrir vuelven con un estado 400 y una breve explicación.
+</block>
+</dash>
+
+<details>
+syntax: $httpGet[URL]
+param: URL|text|Obligatorio|La dirección web que quieres obtener
+</details>

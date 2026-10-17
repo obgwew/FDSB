@@ -1,0 +1,31 @@
+<dash>
+name: $time
+desc: 设置本命令后续读取时钟所使用的时区。
+category: 计时与延迟
+
+<block type="text" title="命令如何工作？">
+text: $time 接受一个来自全球列表的时区名称，例如 Asia/Amman 或 Europe/London，并把它保存给正在运行的命令。设置之后，$hour、$minute 和 $second 就会按照该时区读取时钟，而不是按照机器人恰好托管的地方。它本身不输出任何内容——它是一行设置，放在真正读取时间的那些命令之上。
+</block>
+
+<block type="code" title="语法">
+text: $time[timezone]
+</block>
+
+<block type="code" title="可复制示例">
+text: $time[Asia/Amman]
+text: $sendMessage[Right now it is $hour:$minute]
+</block>
+
+<block type="callout" kind="note">
+text: 时区写成地区和城市，用斜杠分隔，例如 Asia/Amman、Europe/London 或 America/New_York。这份列表与全世界使用的标准列表相同，因此任何熟悉的名称都会被接受。
+</block>
+
+<block type="callout" kind="important">
+text: 如果名称无法识别，机器人会返回错误而不会更改时钟。该设置只属于本次运行，因此请把 $time 放在读取小时的那些行之前，并记住 $day、$month 和 $year 无论如何都读取机器人自身的本地时钟。
+</block>
+</dash>
+
+<details>
+syntax: $time[timezone]
+param: timezone|text|Required|IANA 时区名称，例如 Asia/Amman 或 Europe/London
+</details>

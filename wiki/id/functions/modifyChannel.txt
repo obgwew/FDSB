@@ -1,0 +1,44 @@
+<dash>
+name: $modifyChannel
+desc: Menamai ulang, menyusun ulang, atau memindahkan sebuah kanal di server saat ini.
+category: Manajemen Kanal
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Bagian pertama memilih kanal, dan semua yang mengikutinya dalam satu urutan tetap: nama, topik, sakelar batas usia, posisi, lalu kategori. Biarkan salah satunya kosong dan pengaturan itu dibiarkan sendiri, yang berarti Anda dapat mengubah satu hal per panggilan. Tidak ada yang dikirim ketika selesai, sehingga konfirmasinya adalah kanal itu sendiri yang tampak berbeda.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !tidy
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $modifyChannel[Channel ID; (Channel Name; Topic; Make NSFW?; Position; Category ID)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $modifyChannel[123456789012345678; Announcements; Welcome messages; no; 2; 987654321012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: Ia memerlukan sebuah server di sekelilingnya, dan bot Anda memerlukan Manage Channels di kanal yang diubah. Nama berhenti di 100 karakter dan topik di 1024, dan sebuah kategori tidak pernah dapat diselipkan di dalam kategori lain.
+</block>
+
+<block type="callout" kind="note">
+text: Jawab slot batas usia dengan yes, no, true atau false. Menulis none sebagai topik menghapus topik saat ini, sementara none, 0 atau null di slot kategori mengeluarkan kanal dari kategorinya. Berikan tidak ada yang untuk diubah dan bot memberi tahu Anda bahwa tidak ada perubahan yang diberikan.
+</block>
+</dash>
+
+<details>
+syntax: $modifyChannel[Channel ID; (Channel Name; Topic; Make NSFW?; Position; Category ID)]
+param: channelID|snowflake|Wajib|Kanal yang diubah, lewat mention @channel atau ID-nya
+param: name|text|Opsional|Nama baru untuk kanal
+param: topic|text|Opsional|Topik baru; tulis none untuk menghapus yang saat ini
+param: nsfw|text|Opsional|Sakelar batas usia: yes, no, true atau false
+param: position|integer|Opsional|Posisi baru untuk kanal di bilah samping
+param: categoryID|snowflake|Opsional|Kategori untuk menempatkan kanal; none, 0 atau null mengeluarkannya
+</details>

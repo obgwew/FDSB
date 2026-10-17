@@ -1,0 +1,45 @@
+<dash>
+name: $timeout
+desc: Aísla temporalmente a un miembro durante un tiempo determinado, de modo que no puede publicar, reaccionar ni entrar en voz.
+category: Moderación
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $timeout toma una duración y un miembro, y luego pone a ese miembro bajo un aislamiento temporal exactamente por ese tiempo. Mientras dura no pueden enviar mensajes, reaccionar ni entrar en un canal de voz, y Discord los marca como aislados. El reloj es del propio Discord, así que sigue corriendo aunque el bot se vaya.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !timeout en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $timeout[time; user]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $timeout[1h; @user]
+</block>
+
+<block type="callout" kind="note">
+text: Una duración es un número más una unidad: s para segundos, m para minutos, h para horas, d para días. Lo máximo que permite Discord son 28 días, y $untimeout levanta el aislamiento antes de tiempo.
+</block>
+
+<block type="callout" kind="warning">
+text: El bot necesita Moderate Members, y su rol más alto tiene que estar por encima del miembro que indiques.
+</block>
+
+<block type="callout" kind="important">
+text: En la versión que estás ejecutando, esta línea se omite antes de que pueda actuar, así que nadie acaba aislado. El resto de tu comando continúa como si se hubiera ejecutado.
+</block>
+</dash>
+
+<details>
+syntax: $timeout[time; user]
+param: time|text|Obligatorio|Cuánto dura el aislamiento, como un número más s, m, h o d, por ejemplo 1h, 30m o 7d
+param: user|text|Obligatorio|El miembro a aislar, por ID o por mención
+</details>

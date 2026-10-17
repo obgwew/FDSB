@@ -1,0 +1,37 @@
+<dash>
+name: $splitOut
+desc: Mengambil satu potongan dari teks yang telah dipotong dengan $splitIn.
+category: Utilitas Teks
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $splitOut mengambil satu potongan teks yang telah dipotong oleh $splitIn sebelumnya dalam eksekusi yang sama. Beri nomor untuk mengambil potongan tersebut (dimulai dari 1), atau gunakan < untuk potongan pertama dan > untuk potongan terakhir. Hasilnya bisa disisipkan ke dalam kalimat, atau bila ditulis sendiri akan langsung dikirim bot.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !splitOut
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $splitOut[index]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $splitIn[apple,banana,cherry; ,]
+text: $splitOut[2]
+</block>
+
+<block type="callout" kind="note">
+text: $splitIn harus dijalankan terlebih dahulu dalam perintah yang sama, karena kalau tidak ada yang bisa diambil, baris akan menjadi kosong. Nomor yang melebihi jumlah potongan juga akan menghasilkan nilai kosong.
+</block>
+</dash>
+
+<details>
+syntax: $splitOut[index]
+param: index|text|Wajib|Potongan mana yang diambil: angka mulai dari 1, < untuk potongan pertama, atau > untuk potongan terakhir
+</details>

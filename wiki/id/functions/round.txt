@@ -1,0 +1,36 @@
+<dash>
+name: $round
+desc: Membulatkan angka ke bilangan bulat terdekat.
+category: Matematika & Angka
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $round menerima satu angka dan mengembalikan bilangan bulat terdekat, sehingga 1.7 menjadi 2 dan 1.4 menjadi 1. Di barisnya sendiri bot memposting angka yang sudah dibulatkan, dan di dalam perintah lain angkanya menyelip di tengah kalimat di tempat nilai lain akan berada.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !round
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $round[number]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $round[1.7]
+</block>
+
+<block type="callout" kind="note">
+text: Tepat satu angka dibutuhkan, dan apa pun yang bukan angka menghentikan perintah dengan kesalahan. Nilai yang berakhir .5 menuju bilangan genap terdekat, yang berarti 2.5 menjadi 2 dan 3.5 menjadi 4.
+</block>
+</dash>
+
+<details>
+syntax: $round[number]
+param: number|number|Wajib|Angka yang dibulatkan ke bilangan bulat
+</details>

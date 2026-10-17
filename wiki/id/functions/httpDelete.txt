@@ -1,0 +1,37 @@
+<dash>
+name: $httpDelete
+desc: Mengirim permintaan DELETE ke alamat web dan menyimpan jawaban untuk Anda baca.
+category: HTTP
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Bot memanggil alamat yang Anda berikan melalui HTTP DELETE dan menunggu hingga sepuluh detik untuk balasan. Body yang Anda tambahkan ikut serta dengan panggilan itu, dikirim sebagai JSON bila bisa diuraikan sebagai JSON dan sebagai teks biasa bila tidak. Body balasan jatuh ke $httpResult dan kode ke $httpStatus, dan bot tidak mencetak apa pun dengan sendirinya.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !ping
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $httpDelete[URL; (Body)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $httpDelete[https://api.example.com/users/1]
+text: $httpStatus
+</block>
+
+<block type="callout" kind="note">
+text: Header yang Anda tambahkan dengan $httpAddHeader ikut terkirim dengan panggilan ini lalu dibersihkan, siap untuk permintaan berikutnya. Alamat yang diblokir muncul sebagai status 400, dan panggilan yang gagal sebagai status 500 dengan alasannya duduk di $httpResult.
+</block>
+</dash>
+
+<details>
+syntax: $httpDelete[URL; (Body)]
+param: URL|text|Wajib|Alamat yang dikirim panggilan DELETE
+param: Body|text|Opsional|Konten tambahan yang dikirim bersama, sebagai JSON atau teks biasa
+</details>

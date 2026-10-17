@@ -1,0 +1,25 @@
+<dash>
+name: $month
+desc: موجودہ ماہ کا نمبر دیتا ہے، ہمیشہ دو ہندسوں میں، 01 سے 12 تک۔
+category: وقت اور تاخیر
+
+<block type="text" title="یہ کمانڈ کیسے کام کرتی ہے؟">
+text: $month گھڑی پڑھتا ہے اور جس ماہ میں ہم ہیں وہ واپس دیتا ہے، ہمیشہ دو ہندسوں کی چوڑائی میں، اس لیے جنوری 01 اور دسمبر 12 لکھا جاتا ہے۔ اسے متن کی لائن میں ڈال دیں تو ہندسے اسی جگہ آتے ہیں جہاں آپ رکھیں، یا اسے اکیلی لائن پر چھوڑ دیں تو بوٹ رقم چینل میں پوسٹ کر دیتا ہے۔ $day اور $year کے درمیان رکھ کر اپنی تاریخ بنائیں۔
+</block>
+
+<block type="code" title="سینٹیکس">
+text: $month
+</block>
+
+<block type="code" title="کاپی کرنے کے لیے تیار مثال">
+text: $sendMessage[Today is $day/$month/$year]
+</block>
+
+<block type="callout" kind="note">
+text: نمبر 01 سے 12 تک جاتا ہے اور ہمیشہ دو ہندسوں کا ہوتا ہے، اس لیے $day/$month/$year کچھ ایسا 17/10/2026 بنتا ہے۔
+</block>
+
+<block type="callout" kind="important">
+text: $day، $month اور $year سب بوٹ کی اپنی مقامی گھڑی پڑھتے ہیں۔ $time سے مقررہ ٹائم زون صرف $hour، $minute اور $second پیروی کرتے ہیں۔
+</block>
+</dash>

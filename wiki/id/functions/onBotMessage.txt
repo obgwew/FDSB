@@ -1,0 +1,41 @@
+<dash>
+name: $onBotMessage
+desc: Menjalankan perintah Anda setiap kali bot mengirim pesan di server.
+category: Peristiwa
+
+<block type="text" title="Bagaimana cara kerja peristiwa?">
+text: Berikan perintah ini awalan $onBotMessage dan bot mengambilnya begitu pun akun bot mana pun mengirim pesan di server tempatnya berada. Pesan yang dikirim bot Anda sendiri dilewati secara bawaan, jadi ia hanya bereaksi terhadap bot lain; tulis yes di awalan dan ia juga mengikuti pesannya sendiri. Apa pun yang lain di sana, termasuk membiarkannya kosong, menjaga pesan bot itu sendiri di luar.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $onBotMessage
+item: Aplikasi menandainya sebagai Peristiwa untuk Anda
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: #PREFIX:$onBotMessage[yes/no]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: #PREFIX:$onBotMessage[no]
+text: $sendMessage[Another bot said: $message]
+</block>
+
+<block type="callout" kind="note">
+text: Di dalam perintah, $message berisi apa pun yang ditulis bot lain, jadi Anda bisa mengutipnya, menghitungnya atau mengupasnya.
+</block>
+
+<block type="callout" kind="important">
+text: Tidak ada yang perlu mengetik apa pun untuk memicu ini. Aplikasi menandai perintah itu sebagai Peristiwa untuk Anda dan menjalankannya sendiri setiap kali bot lain mengirim pesan.
+</block>
+</dash>
+
+<details>
+syntax: $onBotMessage[(yes/no)]
+param: yes/no|text|Opsional|yes untuk mengikuti pesan bot itu sendiri juga, no untuk bereaksi hanya terhadap bot lain
+</details>

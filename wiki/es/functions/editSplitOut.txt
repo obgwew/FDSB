@@ -1,0 +1,39 @@
+<dash>
+name: $editSplitOut
+desc: Cambia una parte de un texto dividido por otra cosa.
+category: Utilidades de texto
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Una vez que $splitIn ha roto un texto en piezas, esto se mete en esas piezas y reemplaza una de ellas. Cuenta desde 1, da el número y el texto nuevo, y todas las demás piezas se quedan exactamente donde estaban. Termina con $joinSplitOut para pegar la lista corregida de nuevo. Divide un texto primero: sin piezas esperando no hay nada que editar, y el comando informa de un error.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $editSplitOut en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $editSplitOut[index; value]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $splitIn[apple,banana,cherry; ,]
+text: $editSplitOut[2; mango]
+text: $joinSplitOut[; ]
+</block>
+
+<block type="callout" kind="note">
+text: El número tiene que ser un número entero que apunte a una pieza que exista de verdad, contando desde 1 hasta tantas como haya. Cero, un número negativo o uno más allá del final detienen el comando con un error.
+</block>
+</dash>
+
+<details>
+syntax: $editSplitOut[index; value]
+param: index|number|Obligatorio|Qué pieza reemplazar, contando desde 1
+param: value|text|Obligatorio|Qué debería decir esa pieza en su lugar
+</details>

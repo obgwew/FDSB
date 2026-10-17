@@ -1,0 +1,40 @@
+<dash>
+name: $onlyNSFW
+desc: Menjalankan perintah hanya di kanal yang ditandai berbatas usia, dan menampilkan pesan Anda sendiri di mana pun lagi.
+category: Kontrol Akses
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $onlyNSFW adalah gerbang untuk konten dewasa. Ia melihat apakah kanal tempat perintah digunakan ditandai berbatas usia di Discord. Jika ya, tidak terjadi apa-apa dan sisa perintah Anda berlanjut. Jika tidak, pesan Anda dikirim dan sisa perintah dibuang tepat di situ.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $onlyNSFW[error message]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $onlyNSFW[This command only works in age restricted channels.]
+text: $sendMessage[Here is the adult content.]
+</block>
+
+<block type="callout" kind="note">
+text: Anda perlu menandai kanalnya sendiri di Discord: buka pengaturan kanal, nyalakan Berbatas Usia, lalu simpan. Gerbang tidak melakukan apa pun sampai kanal diatur dengan cara itu.
+</block>
+
+<block type="callout" kind="important">
+text: Gerbang ini untuk kenyamanan, bukan keamanan sungguhan. Siapa pun yang bisa membaca perintah Anda dapat mengetahui bahwa perintah itu ada dan menghapus gerbangnya.
+</block>
+</dash>
+
+<details>
+syntax: $onlyNSFW[error message]
+param: error message|text|Wajib|Pesan yang dikirim ke kanal saat kanal tidak ditandai berbatas usia.
+</details>

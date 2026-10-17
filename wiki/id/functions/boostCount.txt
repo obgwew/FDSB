@@ -1,0 +1,36 @@
+<dash>
+name: $boostCount
+desc: Memberi tahu berapa banyak boost yang dimiliki sebuah server saat ini.
+category: Server
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Minta tanpa isi apa pun, dan bot menghitung boost yang bertengger di server tempat perintah dijalankan. Tambahkan sebuah ID server, dan ia menghitung server itu sebagai gantinya, selama bot menjadi anggota di sana. Yang kembali adalah angka polos tanpa apa pun lagi, sehingga ia menyelinap rapi ke dalam kalimat yang Anda susun di sekitarnya. Server yang tidak dapat dilihat bot dilaporkan sebagai kesalahan, bukan sebagai nol.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $boostCount
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $boostCount[(guildID)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $sendMessage[This server has $boostCount boosts!]
+</block>
+
+<block type="callout" kind="note">
+text: Ini adalah jumlah boost, bukan tingkat yang telah dicapai server. Untuk tingkatnya, minta $boostLevel sebagai gantinya.
+</block>
+</dash>
+
+<details>
+syntax: $boostCount[(guildID)]
+param: guildID|snowflake|Opsional|Server mana yang boost-nya dihitung; biarkan kosong untuk server saat ini
+</details>

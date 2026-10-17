@@ -1,0 +1,35 @@
+<dash>
+name: $second
+desc: Memberikan detik saat ini dari satu menit, dari 00 hingga 59.
+category: Waktu & Jeda
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $second membaca jam dan mengembalikan detik saat ini, selalu dua digit, sehingga detik pembuka setiap menit terbaca 00. Sisipkan ke dalam sebaris teks dan digitnya mendarat di tempat Anda meletakkannya, atau biarkan di barisnya sendiri dan bot memposting angkanya di kanal. Karena dibaca segar pada setiap jalannya, ini cara praktis untuk memberi perintah hasil yang sedikit berbeda tiap kali.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !second
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $second
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $sendMessage[The time is $hour:$minute:$second]
+</block>
+
+<block type="callout" kind="note">
+text: Nilainya berkisar dari 00 hingga 59 dan selalu dua digit, yang menjaga bacaan $hour:$minute:$second tetap berjarak rapi.
+</block>
+
+<block type="callout" kind="important">
+text: $second mengikuti zona waktu yang Anda atur dengan $time. Jika Anda tidak pernah mengaturnya, ia kembali ke jam lokal bot sendiri.
+</block>
+</dash>

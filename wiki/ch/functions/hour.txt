@@ -1,0 +1,25 @@
+<dash>
+name: $hour
+desc: 返回当前的小时数，范围从 00 到 23。
+category: 计时与延迟
+
+<block type="text" title="命令如何工作？">
+text: $hour 读取时钟并交回当前的小时数，采用二十四小时制且始终为两位数，因此下午三点显示为 15 而不是 3。把它放进一行文本里，数字就会落在你放置的位置；让它独占一行时，机器人会把这个小时数发送到频道中。每次运行都会重新取值，因此相隔一分钟的两条命令可能得到不同的数字。
+</block>
+
+<block type="code" title="语法">
+text: $hour
+</block>
+
+<block type="code" title="可复制示例">
+text: $sendMessage[The hour here is $hour]
+</block>
+
+<block type="callout" kind="note">
+text: 取值范围是 00 到 23（二十四小时制），所以下午三点返回 15。与 $minute 和 $second 搭配，可以拼出 15:04:09 这样完整的时间读数。
+</block>
+
+<block type="callout" kind="important">
+text: $hour 遵循你用 $time 设置的时区。如果从未设置过，它会退回机器人自身的本地时钟。
+</block>
+</dash>

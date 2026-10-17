@@ -1,0 +1,45 @@
+<dash>
+name: $deleteIn
+desc: Waits a set time, then removes the bot's own replies from the channel.
+category: Timing & Delays
+
+<block type="text" title="How does the command work?">
+text: $deleteIn takes a length of time and asks the bot to clear away its own output once that time is up. It catches the message the bot has already posted in this run and any it posts afterwards, holds them for the delay you named, then deletes them so the channel is left clean. That makes it easy to hand out a temporary note or a one-off result that should not sit in the chat for good.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !temp
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: $deleteIn[duration]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $deleteIn[5s]
+text: $sendMessage[This message is removed after 5 seconds]
+</block>
+
+<block type="callout" kind="note">
+text: A length is a number plus a unit: ms for milliseconds, s for seconds, m for minutes, h for hours, d for days and w for weeks. You can join several together, so 1h30m is one hour and thirty minutes, and the longest delay allowed is 14 days.
+</block>
+
+<block type="callout" kind="warning">
+text: The bot needs permission to delete messages in that channel, and every message it removes has to be one it posted itself. If the delay runs while the bot is offline, the message stays put, since the countdown lives with the bot.
+</block>
+
+<block type="callout" kind="important">
+text: Only a length is accepted here — exactly one argument, with a value greater than zero. Too long a wait, a missing unit or a number with nothing behind it is refused with an error instead.
+</block>
+</dash>
+
+<details>
+syntax: $deleteIn[duration]
+param: duration|text|Required|How long to wait before deleting, as a number with a unit — 5s, 10m, 2h, 1d — and up to 14 days
+</details>

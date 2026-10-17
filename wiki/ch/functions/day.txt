@@ -1,0 +1,25 @@
+<dash>
+name: $day
+desc: 返回今天的日期数字，始终为两位数，范围从 01 到 31。
+category: 计时与延迟
+
+<block type="text" title="命令如何工作？">
+text: $day 读取时钟并交回一个月中的第几天，始终为两位数，因此 7 号返回 07，24 号返回 24。把它放进一行文本里，数字就会准确落在你放置的位置。让它独占一行时，机器人会把这个数字直接发送到频道中。
+</block>
+
+<block type="code" title="语法">
+text: $day
+</block>
+
+<block type="code" title="可复制示例">
+text: $sendMessage[Day $day of this month]
+</block>
+
+<block type="callout" kind="note">
+text: 这个数字始终补足为两位数，从 01 一直到 31，因此在你用 $day、$month 和 $year 自行拼出的日期里，它能整齐对齐。
+</block>
+
+<block type="callout" kind="important">
+text: $day、$month 和 $year 都读取机器人自身的本地时钟。只有 $hour、$minute 和 $second 会遵循用 $time 设置的时区，如果你的服务器位于世界上的其他地方，请记住这一点。
+</block>
+</dash>

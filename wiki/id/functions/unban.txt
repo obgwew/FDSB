@@ -1,0 +1,40 @@
+<dash>
+name: $unban
+desc: Membatalkan ban agar orang tersebut bisa kembali bergabung ke server.
+category: Moderasi
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $unban mengambil ID anggota yang telah diban, mencari ID tersebut di daftar ban server, lalu mencabut bannya. Setelah itu, orang tersebut bisa langsung bergabung kembali menggunakan undangan, dan entri ban-nya dihapus permanen. Jika ID tersebut tidak ditemukan di daftar ban, bot akan memberitahu bahwa tidak ada orang dengan ID tersebut yang diban.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !unban
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $unban[userID]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $unban[123456789]
+</block>
+
+<block type="callout" kind="warning">
+text: Bot membutuhkan izin "Ban Members" di server tersebut. Hanya ID berupa angka yang bisa digunakan — mention atau nama tidak akan diterima. Jika tidak ada yang diban dengan ID tersebut, perintah akan memberitahukan hal itu.
+</block>
+
+<block type="callout" kind="important">
+text: Pada versi yang sedang Anda gunakan, baris ini dilewati sebelum dijalankan, jadi ban tetap berlaku sampai Anda cabut sendiri melalui Discord.
+</block>
+</dash>
+
+<details>
+syntax: $unban[userID]
+param: userID|snowflake|Wajib|ID numerik orang yang diban, untuk dibatalkan bannya
+</details>

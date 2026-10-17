@@ -1,0 +1,52 @@
+<dash>
+name: $serverLeaderboard
+desc: Membangun papan peringkat yang mengurutkan server terhadap satu sama lain menggunakan skor tersimpan.
+category: Variabel
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $serverLeaderboard membaca variabel yang menyimpan satu skor per server dan mengurutkan server dari skor tertinggi ke terendah. Ia mengirim daftar berperingkat ke kanal. Gunakan untuk kompetisi antar-server di mana setiap server berusaha mengalahkan yang lain pada ukuran yang sama.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buat variabelnya terlebih dahulu di tab Variabel
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $serverLeaderboard[name; (sort); (limit); (format)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $serverLeaderboard[serverPoints; desc; 10]
+</block>
+
+<block type="options" title="Jenis pengurutan">
+option: desc|Nilai tertinggi lebih dulu (dipakai saat Anda membiarkan sort kosong)
+option: asc|Nilai terendah lebih dulu
+</block>
+
+<block type="options" title="Placeholder baris">
+option: {rank}|Peringkatnya, dimulai dari 1
+option: {name}|Nama server
+option: {mention}|ID server
+option: {id}|ID Discord server
+option: {value}|Skor tersimpan
+</block>
+
+<block type="callout" kind="note">
+text: Hanya angka yang bisa diberi peringkat, jadi entri yang berisi teks dilewati. Limitnya bisa dari 1 hingga 25 dan dibatasi untuk Anda; apa pun yang lebih tinggi dipangkas.
+</block>
+</dash>
+
+<details>
+syntax: $serverLeaderboard[name; (sort); (limit); (format)]
+param: name|text|Wajib|Nama variabel yang menyimpan satu skor per server.
+param: sort|text|Opsional|desc untuk tertinggi lebih dulu (bawaan), atau asc untuk terendah lebih dulu.
+param: limit|number|Opsional|Berapa baris yang ditampilkan, dari 1 hingga 25. Bawaannya 10.
+param: format|text|Opsional|Templat baris. Bawaannya {rank}. {name} — {value}. Anda bisa memakai {rank}, {name}, {mention}, {id} dan {value}.
+</details>

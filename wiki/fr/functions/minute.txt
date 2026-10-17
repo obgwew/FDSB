@@ -1,0 +1,25 @@
+<dash>
+name: $minute
+desc: Renvoie la minute actuelle de l'heure, de 00 à 59.
+category: Minutage & Délais
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: $minute lit l'horloge et renvoie la minute actuelle, toujours sur deux chiffres, donc la neuvième minute de l'heure revient sous la forme 09. Insérez-le dans une ligne de texte et les chiffres se placent là où vous les mettez, ou laissez-le sur une ligne à part et le bot publie le chiffre dans le canal. Il est mesuré à nouveau à chaque exécution, donc il change au fil des minutes.
+</block>
+
+<block type="code" title="Syntaxe">
+text: $minute
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $sendMessage[It is now $hour:$minute]
+</block>
+
+<block type="callout" kind="note">
+text: La valeur va de 00 à 59 et fait toujours deux chiffres, ce qui l'aligne bien lorsque vous le placez entre $hour et $second.
+</block>
+
+<block type="callout" kind="important">
+text: $minute suit le fuseau horaire que vous définissez avec $time. Si vous n'en définissez jamais, il se rabat sur l'horloge locale propre au bot.
+</block>
+</dash>

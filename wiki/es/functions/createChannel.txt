@@ -1,0 +1,41 @@
+<dash>
+name: $createChannel
+desc: Crea un canal nuevo de texto, voz, categoría, foro o escenario en el servidor.
+category: Gestión de canales
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Dale al bot un nombre y un tipo de canal y aparece en el servidor al instante. El tipo decide qué obtienes: un canal de texto, un canal de voz, una categoría para agrupar a otros, un foro o un escenario. Añade el ID de una categoría como tercera parte y el nuevo canal queda archivado dentro de ella.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !ping en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $createChannel[name; type; (category ID)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $createChannel[my-channel; text]
+</block>
+
+<block type="callout" kind="warning">
+text: Esto solo funciona dentro de un servidor, y el bot necesita allí el permiso Manage Channels. Cualquier tipo distinto de texto, voz, categoría, foro o escenario se rechaza con un error.
+</block>
+
+<block type="callout" kind="note">
+text: La parte de la categoría es opcional. Señálale algo que no sea una categoría y el bot se detiene con un error en lugar de adivinar.
+</block>
+</dash>
+
+<details>
+syntax: $createChannel[name; type; (category ID)]
+param: name|text|Obligatorio|Cómo debería llamarse el nuevo canal.
+param: type|text|Obligatorio|Qué tipo crear: texto, voz, categoría, foro o escenario.
+param: categoryID|text|Opcional|Categoría en la que archivar el nuevo canal.
+</details>

@@ -1,0 +1,35 @@
+<dash>
+name: $break
+desc: Mengakhiri perulangan tempat ia berada dan melanjutkan ke baris setelahnya.
+category: Kontrol Alur
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Letakkan ini pada barisnya sendiri di dalam sebuah $for atau $while, dan bot berhenti berulang pada saat ia mencapainya, lalu langsung melanjutkan dari baris pertama setelah $endfor atau $endwhile yang sepadan. Apa pun yang masih tersisa untuk dilakukan perulangan itu tidak pernah terjadi. Perintah ini tidak memakai kurung dan tidak mencetak apa pun dengan sendirinya.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !search
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $break
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $for[10]
+text:   $if[$message == stop]
+text:     $break
+text:   $endif
+text: $endfor
+</block>
+
+<block type="callout" kind="note">
+text: Hanya perulangan tempat Anda sedang berdiri yang berhenti. Bila perulangan bersarang di dalam satu sama lain, yang luar tetap berputar persis seperti sebelumnya.
+</block>
+</dash>

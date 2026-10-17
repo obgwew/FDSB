@@ -1,0 +1,40 @@
+<dash>
+name: $modifyRolePerms
+desc: Mengaktifkan atau menonaktifkan izin-izin individual untuk sebuah peran di server Anda.
+category: Moderasi
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Sebutkan peran terlebih dahulu, lalu daftarkan izin yang ingin Anda ubah, masing-masing dengan + atau - di depannya: + menyerahkan izin tersebut, - mencabutnya. Biarkan tandanya kosong dan Anda mendapatkan +. Apa pun yang tidak Anda sebutkan mempertahankan apa pun yang dimilikinya sebelumnya. Kata tunggal all istimewa, karena + di sebelahnya mengaktifkan seluruh set izin sekaligus. Ketika penyimpanannya berhasil, bot membalas dengan centang hijau yang menyebutkan peran yang diubahnya.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !perms
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $modifyRolePerms[role ID or role mention; permission +/-; ...]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $modifyRolePerms[<@&123456789012345678>; +send_messages; -connect]
+</block>
+
+<block type="callout" kind="warning">
+text: Yang ini hanya bekerja di dalam sebuah server, dan bot memerlukan Manage Roles serta sebuah peran yang berada di bawah peran tertingginya sendiri. Lewatkan salah satunya dan Discord sekadar menolak perubahan itu.
+</block>
+
+<block type="callout" kind="note">
+text: Nama izin adalah ejaan snake_case yang digunakan Discord itu sendiri, misalnya send_messages, kick_members atau manage_channels. Nama yang tidak dikenali aplikasi menghentikan perintah dengan kesalahan sebelum apa pun disimpan.
+</block>
+</dash>
+
+<details>
+syntax: $modifyRolePerms[role ID or role mention; permission +/-; ...]
+param: roleID|snowflake|Wajib|Peran yang diubah, lewat mention @role atau ID-nya
+param: permissions|text|Wajib|Nama izin yang diaktifkan, masing-masing ditandai + atau -; all mencakup seluruh set
+</details>

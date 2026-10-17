@@ -1,0 +1,31 @@
+<dash>
+name: $time
+desc: Bu komutun geri kalanında saatin okunacağı saat dilimini ayarlar.
+category: Zamanlama ve Gecikmeler
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $time, Asia/Amman veya Europe/London gibi dünya listesinden bir saat dilimi adı alır ve o anda çalışan komut için onu saklar. Ayarlandığında $hour, $minute ve $second saati, botun barındırıldığı yere göre değil bu saat diliminde okur. Kendisi hiçbir şey yazdırmaz — gerçek zamanı okuyan satırların üzerine yerleştirdiğiniz bir kurulum satırıdır.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $time[timezone]
+</block>
+
+<block type="code" title="Kopyalamaya Hazır Örnek">
+text: $time[Asia/Amman]
+text: $sendMessage[Right now it is $hour:$minute]
+</block>
+
+<block type="callout" kind="note">
+text: Saat dilimini birbiriyle eğik çizgiyle ayrılmış bir bölge ve bir şehir olarak yazın; örneğin Asia/Amman, Europe/London veya America/New_York. Liste, dünyanın geri kalanının da kullandığı standarttır; bu yüzden tanıdık her ad kabul edilir.
+</block>
+
+<block type="callout" kind="important">
+text: Ad tanınmazsa bot saati değiştirmek yerine bir hata ile yanıt verir. Bu ayar yalnızca bu çalıştırmaya aittir; bu yüzden $time'ı saat okuyan satırların önüne koyun ve $day, $month ile $year'in buna rağmen botun kendi yerel saatini okumaya devam ettiğini unutmayın.
+</block>
+</dash>
+
+<details>
+syntax: $time[timezone]
+param: timezone|text|Required|Asia/Amman veya Europe/London gibi bir IANA saat dilimi adı
+</details>

@@ -1,0 +1,35 @@
+<dash>
+name: $day
+desc: Memberikan angka tanggal hari ini, selalu dua digit, dari 01 sampai 31.
+category: Waktu & Jeda
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $day membaca jam dan mengembalikan tanggal bulan itu, selalu selebar dua digit, sehingga tanggal 7 kembali sebagai 07 dan tanggal 24 sebagai 24. Selipkan ke dalam baris teks, dan angkanya mendarat tepat di tempat Anda menaruhnya. Biarkan sendirian di satu baris, dan bot memosting angka itu di kanal dengan sendirinya.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !date
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $day
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $sendMessage[Day $day of this month]
+</block>
+
+<block type="callout" kind="note">
+text: Angkanya selalu diisi sampai dua digit, dari 01 sampai 31, sehingga tersusun rapi dalam tanggal yang Anda rakit sendiri dari $day, $month, dan $year.
+</block>
+
+<block type="callout" kind="important">
+text: $day, $month, dan $year semuanya membaca jam lokal milik bot itu sendiri. Zona waktu yang diatur lewat $time hanya diikuti oleh $hour, $minute, dan $second, jadi ingat hal itu jika server Anda berada di belahan dunia lain.
+</block>
+</dash>

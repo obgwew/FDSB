@@ -1,0 +1,33 @@
+<dash>
+name: $channelName
+desc: Te da el nombre del canal en el que se usó el comando.
+category: Info
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $channelName imprime el nombre del canal del que vino el comando, para que tu respuesta pueda hablar de la sala en la que ocurrió.
+text: Siempre informa del canal actual, nunca de uno que nombres tú mismo, lo que lo convierte en algo seguro que meter en cualquier mensaje.
+text: Si alguien renombra el canal, la siguiente ejecución ya muestra el nuevo nombre.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !here en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $channelName
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: You are chatting in #$channelName
+</block>
+
+<block type="callout" kind="note">
+text: El signo # no forma parte de la respuesta, así que añádelo tú mismo como en el ejemplo cuando quieras que el nombre parezca un canal en el chat.
+</block>
+</dash>

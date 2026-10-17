@@ -1,0 +1,31 @@
+<dash>
+name: $boostLevel
+desc: Lee el nivel de boosts del servidor como un número simple de 0 a 3.
+category: Servidor
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Cada servidor está en un nivel de boosts, y esto te dice en cuál: 0 mientras nadie ha boosteado, luego 1, 2 o 3 según subes. Discord reparte el nivel 1 a los dos boosts, el nivel 2 a los siete y el nivel 3 a los catorce. Es solo el número, así que puedes meterlo en una frase o compararlo dentro de una condición.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $boostLevel en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $boostLevel
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $sendMessage[Boost level: $boostLevel]
+</block>
+
+<block type="callout" kind="important">
+text: Los niveles de boosts solo existen dentro de un servidor. Pide esto en un mensaje directo y el bot informa de un error y detiene el comando ahí.
+</block>
+</dash>

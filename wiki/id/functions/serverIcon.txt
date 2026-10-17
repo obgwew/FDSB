@@ -1,0 +1,37 @@
+<dash>
+name: $serverIcon
+desc: Memberi Anda gambar ikon sebuah server.
+category: Server
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $serverIcon mengambil ikon sebuah server dan mengembalikan alamat gambar itu. Digunakan sendiri, ia memakai server tempat pesan dikirim; berikan ID server dan ia memakai server itu sebagai gantinya, selama bot menjadi anggota di sana. Alamatnya langsung masuk ke sebuah kartu atau keluar sebagai tautan biasa, dan ikon animasi tiba dalam bentuk bergeraknya.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !welcome
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $serverIcon
+text: $serverIcon[(guildID)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: Server icon: $serverIcon
+</block>
+
+<block type="callout" kind="note">
+text: Server yang tidak menyetel ikon memberi Anda kesalahan alih-alih alamat kosong. Hasilnya bekerja di mana pun gambar bisa diletakkan, termasuk kartu, thumbnail, dan ikon footer, atau Anda bisa langsung memposting tautannya sendiri.
+</block>
+</dash>
+
+<details>
+syntax: $serverIcon[(guildID)]
+param: guildID|snowflake|Opsional|Server mana yang ikonnya diambil. Biarkan kosong untuk memakai server tempat pesan dikirim.
+</details>

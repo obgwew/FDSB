@@ -1,0 +1,40 @@
+<dash>
+name: $image
+desc: Añade una imagen a la tarjeta embed que tu comando está construyendo.
+category: Mensajes
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Dale una dirección de imagen y el bot coloca esa imagen en la tarjeta que estás construyendo, donde aparece una vez que la tarjeta se envía al final del comando. La dirección tiene que empezar por http:// o https://. Añade yes al final y el bot se salta la tarjeta por completo, publicando el enlace pelado como un mensaje normal.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $image en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $image[URL]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $image[https://example.com/photo.png]
+</block>
+
+<block type="callout" kind="note">
+text: La imagen se convierte en la imagen grande de la tarjeta, y el bot tiene que tener permiso para publicar embeds en ese canal. ¿Construyes más de una tarjeta? Añade el número de la tarjeta al final para elegir cuál la recibe.
+</block>
+
+<block type="callout" kind="warning">
+text: Una dirección que no empieza por http:// o https:// no deja nada que obtener, y el bot se detiene con un error en lugar de enviar una tarjeta rota.
+</block>
+</dash>
+
+<details>
+syntax: $image[URL]
+param: URL|text|Obligatorio|Un enlace directo a la imagen, que empiece por http:// o https://
+</details>

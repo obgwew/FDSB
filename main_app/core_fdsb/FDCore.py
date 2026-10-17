@@ -54,7 +54,7 @@ from .engine_FDScript.parse_utils import (
     _strip_inline_comment,
     _split_args,
 )
-from .engine_FDScript.storage_ops import (  # noqa: F401
+from .engine_FDScript.storage_ops import (
     set_vars_dir,
     _load_data,
     _save_data,
@@ -69,7 +69,7 @@ from .engine_FDScript.storage_ops import (  # noqa: F401
     _save_scoped_var,
     _delete_scoped_key,
 )
-from .engine_FDScript.tokenizer import (  # noqa: F401
+from .engine_FDScript.tokenizer import (
     register_command_loader,
     Command,
     TextToken,
@@ -109,6 +109,7 @@ from .engine_FDScript.embed_ops import (
     _EmbedAuthor,
     _EmbedBuilder,
 )
+from .engine_FDScript.sync_mode_ops import _SyncCollector
 from .engine_FDScript.channel_wrappers import (
     InteractionChannelWrapper,
     NormalChannelWrapper,
@@ -127,6 +128,7 @@ def __getattr__(name):
         return getattr(runtime_state, name)
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 
+print(f"[FDCore] loaded: {__file__} | syncMode single-message build 3")
 _cooldowns: dict = {}
 
 
@@ -139,10 +141,11 @@ BUTTON_STYLES = {
 }
 
 class _PendingLog:
-    def __init__(self, channel_id: int, name_code: str, entries: list[str]):
+    def __init__(self, channel_id: int, name_code: str, entries: list[str], prefer_message: bool = False):
         self.channel_id = channel_id
         self.name_code  = name_code
         self.entries    = entries
+        self.prefer_message = prefer_message
 
 
 from .engine_FDScript.math_ops import MathOpsMixin
@@ -168,7 +171,7 @@ class ExecutionContext(ResolverMixin, InlineCmdsMixin, MathOpsMixin):
         self._view_dirty_target: discord.Message | None = None
         self.temp_vars: dict = {}
         self._typing_task: asyncio.Task | None = None
-        self.last_bot_message: discord.Message | None = None
+        self._last_bot_message: discord.Message | None = None
         self.execution_log: list[str] = []
         self._log_step: int = 0
         self._pending_logs: list[_PendingLog] = []
@@ -184,6 +187,11 @@ class ExecutionContext(ResolverMixin, InlineCmdsMixin, MathOpsMixin):
         self._inline_call_values: dict[str, str] = {}
         self.sync_mode: bool = False
         self._sync_tasks: list = []
+        self._sync_flushing: bool = False
+        self._sync_used: bool = False
+        self._sync_embeds: list = []
+        self._sync_files: list = []
+        self._sync_view = None
 
         if interaction is not None:
             self.message = interaction.message or message
@@ -262,6 +270,14 @@ class ExecutionContext(ResolverMixin, InlineCmdsMixin, MathOpsMixin):
         except Exception as e:
             self.log_event(f"warning: could not make the response ephemeral: {e}")
 
+    @property
+    def last_bot_message(self) -> discord.Message | None:
+        return self._last_bot_message
+
+    @last_bot_message.setter
+    def last_bot_message(self, msg: discord.Message | None):
+        self._last_bot_message = msg
+
     def strip_links(self, text: str) -> str:
         return _strip_links(text) if (self.remove_links and text) else text
 
@@ -282,9 +298,9 @@ class ExecutionContext(ResolverMixin, InlineCmdsMixin, MathOpsMixin):
     def embed_builder(self) -> _EmbedBuilder:
         return self.get_embed_builder(1)
 
-    def snapshot_log(self, channel_id: int, name_code: str):
+    def snapshot_log(self, channel_id: int, name_code: str, prefer_message: bool = False):
         slice_entries = self.execution_log[self._last_log_step:]
-        self._pending_logs.append(_PendingLog(channel_id, name_code, list(slice_entries)))
+        self._pending_logs.append(_PendingLog(channel_id, name_code, list(slice_entries), prefer_message))
         self._last_log_step = len(self.execution_log)
 
     def get_var(self, name: str) -> str:
@@ -312,14 +328,28 @@ class ExecutionContext(ResolverMixin, InlineCmdsMixin, MathOpsMixin):
             self._typing_task.cancel()
             self._typing_task = None
 
-    async def get_dest(self) -> discord.abc.Messageable:
+    async def get_dest(self, raw: bool = False, force_default: bool = False) -> discord.abc.Messageable:
+        dest = await self._real_dest(force_default)
+        if (
+            self.sync_mode
+            and not raw
+            and not force_default
+            and not self._sync_flushing
+            and (self.interaction is not None
+                 or (self._channel_override is None and self.dm_target is None))
+        ):
+            return _SyncCollector(dest, self)
+        return dest
+
+    async def _real_dest(self, force_default: bool = False) -> discord.abc.Messageable:
         if self.interaction is not None:
             return InteractionChannelWrapper(self.interaction, self)
-        if self._channel_override is not None:
-            return NormalChannelWrapper(self._channel_override, self)
-        if self.dm_target is not None:
-            dm = await self.dm_target.create_dm()
-            return NormalChannelWrapper(dm, self)
+        if not force_default:
+            if self._channel_override is not None:
+                return NormalChannelWrapper(self._channel_override, self)
+            if self.dm_target is not None:
+                dm = await self.dm_target.create_dm()
+                return NormalChannelWrapper(dm, self)
         if getattr(self, 'is_global_reply', False):
             return _ReplyWrapper(self.message, self)
         return NormalChannelWrapper(self.message.channel, self)

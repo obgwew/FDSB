@@ -1,0 +1,44 @@
+<dash>
+name: $editButton
+desc: Menulis ulang tulisan, warna, atau status sebuah tombol yang sudah ada di pesan Anda.
+category: Komponen
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Tunjuk sebuah tombol lewat ID yang Anda berikan padanya, atau lewat tautan di baliknya, dan bot memasang label, gaya, serta status baru pada pesan tempat tombol itu berada. Sebutkan sebuah ID pesan, dan bot mengedit pesan persis itu; kosongkan, dan bot melihat tombol-tompel yang sudah Anda antre, lalu pesan tempat tombol ditekan, lalu pesan terakhir yang dikirim bot. Tombol tautan mempertahankan tautannya dan hanya tulisannya yang berubah.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $editButton
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $editButton[ID/URL; label; style; (disabled; emoji; messageID)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $editButton[btn_confirm; Confirmed; success]
+</block>
+
+<block type="callout" kind="note">
+text: Berikan ID yang sama dengan yang dipakai saat tombol dibuat. Atur disabled ke yes, dan tombol menjadi abu-abu serta berhenti merespons; kosongkan, dan tombol mempertahankan status apa pun yang ia miliki.
+</block>
+
+<block type="callout" kind="warning">
+text: Hanya pesan yang dikirim bot ini yang bisa diedit, dan tombol harus sudah berada di pesan tersebut. Jika ID tidak cocok dengan apa pun, bot melaporkan bahwa ia tidak menemukan tombol semacam itu.
+</block>
+</dash>
+
+<details>
+syntax: $editButton[ID/URL; label; style; (disabled; emoji; messageID)]
+param: ID/URL|text|Wajib|ID tombol itu sendiri, atau tautan yang ditujukannya
+param: label|text|Wajib|Tulisan yang ditampilkan di tombol
+param: style|text|Wajib|primary, secondary, success, danger, atau link
+param: disabled|yes/no|Opsional|yes membuat tombol menjadi abu-abu, no membuatnya bisa diklik lagi
+param: emoji|text|Opsional|Emoji yang ditampilkan di tombol
+param: messageID|snowflake|Opsional|Pesan bot mana yang memuat tombolnya; kosongkan dan kecocokan terdekat yang dipakai
+</details>

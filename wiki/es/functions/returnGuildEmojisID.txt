@@ -1,0 +1,40 @@
+<dash>
+name: $returnGuildEmojisID
+desc: Reúne los números de ID de los emojis personalizados de un servidor en un valor que puedes leer más tarde.
+category: Comandos de retorno
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Dale al bot la ID de un servidor y recoge el número de ID de cada emoji personalizado que vive allí, los archiva bajo un nombre que eliges y los une con el separador que pides. Elige primero animados o estáticos y solo obtendrás ese tipo. Por sí solo no se escribe nada en el chat, así que lee la lista con $return antes de usarla.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !emojis en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $returnGuildEmojisID[GuildID; type; var; separator]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $returnGuildEmojisID[$guildID; animated; animEmojis; ,]
+text: $sendMessage[Animated emojis: $return[animEmojis]]
+</block>
+
+<block type="callout" kind="note">
+text: El filtro admite all, static o animated. Un servidor que no tenga ningún emoji del tipo que pediste informa de un error en lugar de un resultado vacío, y los números no tienen por qué volver en el mismo orden en que los emojis aparecen en la pantalla de ajustes del servidor.
+</block>
+</dash>
+
+<details>
+syntax: $returnGuildEmojisID[GuildID; type; var; separator]
+param: GuildID|snowflake|Obligatorio|De qué servidor recoger los emojis
+param: type|text|Obligatorio|Qué emoji incluir: all, static o animated
+param: var|text|Obligatorio|Nombre bajo el que se archiva el resultado, que se lee después con $return[]
+param: separator|text|Obligatorio|Qué va entre los números. Los nombres también valen: dot, com, apo, sem, colon
+</details>

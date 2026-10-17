@@ -1,0 +1,39 @@
+<dash>
+name: $editSplitOut
+desc: Menukar satu bagian dari teks yang sudah dipecah dengan sesuatu yang lain.
+category: Utilitas Teks
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Setelah $splitIn memecah sebuah teks menjadi bagian-bagian, perintah ini menjangkau bagian-bagian itu dan mengganti salah satunya. Hitung dari 1, berikan angkanya dan teks barunya, dan setiap bagian lainnya tetap persis di tempatnya. Akhiri dengan $joinSplitOut untuk menyatukan kembali daftar yang sudah diperbaiki. Pecah teks terlebih dahulu: tanpa bagian yang menunggu, tidak ada yang bisa diedit, dan perintah melaporkan kesalahan.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $editSplitOut
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $editSplitOut[index; value]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $splitIn[apple,banana,cherry; ,]
+text: $editSplitOut[2; mango]
+text: $joinSplitOut[; ]
+</block>
+
+<block type="callout" kind="note">
+text: Angkanya harus berupa bilangan bulat yang menunjuk ke sebuah bagian yang benar-benar ada, dihitung dari 1 sampai sebanyak jumlah bagian itu. Nol, bilangan negatif, atau angka yang melewati ujung menghentikan perintah dengan kesalahan.
+</block>
+</dash>
+
+<details>
+syntax: $editSplitOut[index; value]
+param: index|number|Wajib|Bagian mana yang akan diganti, dihitung dari 1
+param: value|text|Wajib|Apa yang seharusnya tertulis di bagian itu sebagai gantinya
+</details>

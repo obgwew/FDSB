@@ -1,0 +1,41 @@
+<dash>
+name: $dm
+desc: Mengirim segala sesuatu yang dikatakan perintah Anda langsung ke pesan pribadi seseorang.
+category: Pesan
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Letakkan baris ini di atas pesan-pesan Anda, dan semua yang dikirimkannya kemudian meninggalkan kanal dan tiba di percakapan pribadi sebagai gantinya. Dipakai tanpa kurung, penerima adalah siapa pun yang mengetik perintah; berikan ID atau mention seorang anggota, dan orang itulah yang menerimanya. Peralihan ini hanya berlaku sampai akhir pelaksanaan ini saja, sehingga tidak pernah bocor ke perintah berikutnya.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !notify
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $dm
+text: $dm[(userID/mention)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $dm
+text: $sendMessage[Check your DMs!]
+</block>
+
+<block type="callout" kind="warning">
+text: Anda berdua harus berbagi sebuah server, dan penerima perlu mengaktifkan pesan pribadi. Jika tidak, bot tidak dapat mengirimkan apa pun, dan orang yang menunggu di kanal tidak pernah mengetahui alasan tidak ada yang sampai.
+</block>
+
+<block type="callout" kind="note">
+text: Letakkan di atas pesan-pesan yang seharusnya bersifat pribadi. Apa pun yang Anda kirim sebelum baris ini tetap berada di kanal publik tempat semua orang bisa membacanya.
+</block>
+</dash>
+
+<details>
+syntax: $dm[(userID/mention)]
+param: userID/mention|text|Opsional|Siapa yang seharusnya menerima pesan pribadi; kosongkan untuk siapa pun yang mengetik perintah
+</details>

@@ -1,0 +1,40 @@
+<dash>
+name: $moveChannel
+desc: Memindahkan sebuah kanal ke bawah kategori berbeda di server.
+category: Manajemen Kanal
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $moveChannel mengambil sebuah kanal yang sudah ada dan mengarsipkannya di bawah kategori yang Anda sebutkan, sehingga bilah samping menyusun ulang dirinya di depan semua orang. Kedua bagian adalah ID numerik biasa yang diambil dari server tempat pesan dikirim, dan yang pertama harus berupa kanal teks atau suara normal, bukan sebuah kategori. Jika kanal sudah duduk di kategori itu, bot membiarkannya persis di tempatnya dan tidak melakukan apa pun.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !move
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $moveChannel[channel ID; new category ID]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $moveChannel[123456789012345678; 987654321012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: Yang ini hanya bekerja di dalam sebuah server, tidak pernah di obrolan pribadi. ID pertama harus berupa kanal biasa dan kedua sebuah kategori sungguhan, bot memerlukan Manage Channels untuk memindahkannya, dan mention tidak dipahami di sini, jadi tempel angka mentahnya.
+</block>
+
+<block type="callout" kind="note">
+text: Sebuah kategori tidak dapat dipindahkan ke kategori lain, sehingga hanya kanal-kanal yang berada di bawahnya yang berpindah. Biarkan ini pada barisnya sendiri, karena menjatuhkannya di dalam perintah lain tidak menjalankan pemindahannya.
+</block>
+</dash>
+
+<details>
+syntax: $moveChannel[channel ID; new category ID]
+param: channelID|snowflake|Wajib|ID numerik kanal yang ingin Anda pindahkan
+param: categoryID|snowflake|Wajib|ID numerik kategori tempat kanal itu berakhir
+</details>

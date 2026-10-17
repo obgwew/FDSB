@@ -1,0 +1,36 @@
+<dash>
+name: $else
+desc: Menjalankan sekumpulan baris kedua saat pemeriksaan di atasnya tidak cocok.
+category: Kontrol Alur
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $else memberi perintah Anda sebuah cadangan. Letakkan setelah sebuah $if, atau setelah $elif terakhir, dan sebelum $endif yang menutup blok itu, lalu tulis baris-baris yang seharusnya dijalankan saat tidak ada pemeriksaan yang cocok.
+text: Anggota hanya pernah melihat salah satu sisinya: cabang pertama saat sebuah pemeriksaan bernilai benar, dan cabang cadangan saat semuanya bernilai salah.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !branch
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $else
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $if[$authorID == 123456789]
+text:   Hello Admin!
+text: $else
+text:   You are not an admin.
+text: $endif
+</block>
+
+<block type="callout" kind="note">
+text: $else hanya bermakna di antara sebuah $if dan $endif-nya. Sendirian, di luar sebuah blok kondisi, ia adalah kesalahan.
+</block>
+</dash>

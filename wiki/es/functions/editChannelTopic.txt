@@ -1,0 +1,40 @@
+<dash>
+name: $editChannelTopic
+desc: Reescribe el tema que se muestra arriba de un canal del servidor.
+category: Gestión de canales
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Dale un tema nuevo por sí solo y reescribe el que está arriba del canal donde se ejecutó el comando. Añade primero un ID o una mención de canal y reescribe el tema de ese canal, siempre que el canal pertenezca al mismo servidor. Un tema vacío borra lo que hubiera ahí, y todo lo que pase de 1024 caracteres se rechaza.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $editChannelTopic en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $editChannelTopic[(channel ID or mention); new topic]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $editChannelTopic[<#123456789012345678>; Welcome to the community!]
+</block>
+
+<block type="callout" kind="warning">
+text: Solo dentro de un servidor, solo en canales de ese servidor y solo donde exista un tema en absoluto. El bot también necesita Manage Channels, o Discord rechaza el cambio. Los temas se detienen en 1024 caracteres.
+</block>
+
+<block type="callout" kind="note">
+text: Funciona como una línea propia. Metido dentro de otro comando no hace nada, así que manténlo en su propia línea.
+</block>
+</dash>
+
+<details>
+syntax: $editChannelTopic[(channel ID or mention); new topic]
+param: channelID|text|Opcional|En qué canal establecer el tema; déjalo fuera y se usa el canal actual
+param: newTopic|text|Obligatorio|El tema de reemplazo, hasta 1024 caracteres. Un valor vacío lo borra
+</details>

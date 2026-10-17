@@ -1,0 +1,42 @@
+<dash>
+name: $getGuildVar
+desc: Lee el valor que un servidor guarda para un nombre de variable.
+category: Variables
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Dale un nombre y el bot busca el valor que este servidor en concreto ha reservado bajo él. Cuando el servidor no ha definido ninguno, igual recibes una respuesta: el valor compartido de la pestaña de Variables ocupa su lugar. Omite la segunda parte y lee el servidor en el que se ejecutó el comando; añade un ID de servidor y lee ese otro en su lugar.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Crea la variable primero en la pestaña de Variables
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !rules en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $getGuildVar[name; (guild_id)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $getGuildVar[welcomeMessage]
+</block>
+
+<block type="callout" kind="important">
+text: Si pides un nombre que nunca se creó en la pestaña de Variables, el bot crea una vacía, publica un aviso sobre ello y detiene tu comando ahí mismo. Acierta con el nombre primero.
+</block>
+
+<block type="callout" kind="note">
+text: Todo lo que guardes desde un comando sigue ahí después de que el bot se reinicie, así que esta es la forma de recordar algo por servidor en lugar de por persona.
+</block>
+</dash>
+
+<details>
+syntax: $getGuildVar[name; (guild_id)]
+param: name|text|Obligatorio|Qué variable leer
+param: guildID|text|Opcional|Qué valor propio de servidor leer; déjalo vacío para el servidor en el que se ejecutó el comando
+</details>

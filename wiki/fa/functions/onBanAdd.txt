@@ -1,0 +1,30 @@
+<dash>
+name: $onBanAdd
+desc: Runs your lines the moment someone is banned from the server.
+category: رویداد
+
+<block type="text" title="این رویداد چگونه کار می‌کند؟">
+text: $onBanAdd یک پیشوند رویداد است که هر زمان یک عضو از سرور مسدود شود یک FDScript را فعال می‌کند. اسکریپت اطلاعات عضو مسدودشده را دریافت می‌کند. مسدودشده فرد نویسنده در اینجا است، بنابراین $mention، $authorID و $authorName به او اشاره دارند. همچنین یک مسدودسازی به هیچ کانالی وابسته نیست، بنابراین کانال پیام خالی خواهد ماند مگر اینکه یک شناسه کانال مشخص کنید.
+</block>
+
+<block type="code" title="سینتکس">
+text: #PREFIX:$onBanAdd[channelID]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: #PREFIX:$onBanAdd[123456789012345678]
+text:  sendMessage[$mention has been banned from $guildName]
+</block>
+
+<block type="callout" kind="note">
+text: این را در خط اول فایل FDScript خود قرار دهید. در غیر این صورت رویداد شناسایی نخواهد شد.
+</block>
+
+<block type="callout" kind="important">
+text: این رویداد در پوشه bot_events اجرا می‌شود، نه bot_commands. فایل .fds خود را آنجا ایجاد کنید. یک شناسه کانال تعیین کنید زیرا مسدودسازی به هیچ کانالی وابسته نیست.
+</block>
+</dash>
+
+<details>
+syntax: $onBanAdd
+</details>

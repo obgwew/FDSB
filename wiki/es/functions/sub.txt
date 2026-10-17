@@ -1,0 +1,37 @@
+<dash>
+name: $sub
+desc: Toma el primer número y resta los demás uno tras otro.
+category: Matemática y números
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $sub necesita dos o más números. Empieza por el primero y le va quitando cada número siguiente, así que $sub[10; 3; 2] te deja con 5. La respuesta es un valor y no un mensaje, así que puedes dejarla sola o meterla directamente en mitad de una frase.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !sub en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $sub[a; b; ...]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $sendMessage[Result is $sub[10; 3]]
+</block>
+
+<block type="callout" kind="note">
+text: Dos números como mínimo, y una letra en cualquier punto de la lista lo detiene todo con un error. Un hueco vacío cuenta como cero, lo que desplaza tu resultado sin que te des cuenta.
+</block>
+</dash>
+
+<details>
+syntax: $sub[a; b; ...]
+param: a|number|Obligatorio|El número desde el que empiezas a restar
+param: b|number|Obligatorio|El primer número que quitar; cada parte posterior también se quita
+</details>

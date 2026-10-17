@@ -1,0 +1,44 @@
+<dash>
+name: $returnGuildRolesID
+desc: Recopila las IDs de rol de un servidor en un valor que puedes reutilizar.
+category: Comandos de retorno
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $returnGuildRolesID reúne las IDs de rol del servidor que nombres y las une bajo una etiqueta de tu elección. Lee esa etiqueta más tarde con $return[label] y la lista entera llega de una pieza, lista para meter en un mensaje o recorrer paso a paso. Deja vacía la parte de permisos o escribe all y vuelven todos los roles; si en cambio nombres un permiso, solo se listan los roles que lo tienen.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !rolelist en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $returnGuildRolesID[GuildID; permission; var; separator]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $returnGuildRolesID[$guildID; all; roleIDs; ,]
+text: $sendMessage[Roles: $return[roleIDs]]
+</block>
+
+<block type="callout" kind="note">
+text: Para la parte de permisos, déjala vacía o escribe all para coger todos los roles, o escribe un nombre de permiso como kick_members o manage_messages, o incluso el número de permiso sin procesar que usa Discord. Un rol cumple cuando tiene ese permiso o algo más fuerte.
+</block>
+
+<block type="callout" kind="warning">
+text: El bot tiene que ser miembro de ese servidor, y el rol @everyone nunca forma parte de la respuesta. Si nada en el servidor coincide con lo que pediste, recibes un error en lugar de una lista vacía.
+</block>
+</dash>
+
+<details>
+syntax: $returnGuildRolesID[GuildID; permission; var; separator]
+param: GuildID|snowflake|Obligatorio|De qué servidor tomar los roles
+param: permission|text|Obligatorio|Qué roles conservar: vacío o all para todos, un nombre de permiso como kick_members, o el número de permiso sin procesar
+param: var|text|Obligatorio|La etiqueta bajo la que se guardan las IDs recogidas, que se lee con $return[]
+param: separator|text|Obligatorio|Qué va entre las IDs, como una coma. Formas con nombre: dot, com, apo, sem, colon
+</details>

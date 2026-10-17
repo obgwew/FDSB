@@ -1,0 +1,41 @@
+<dash>
+name: $httpGet
+desc: Mengambil alamat web dan menyimpan jawaban siap untuk sisa perintah Anda.
+category: HTTP
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $httpGet meminta sebuah situs web isi kontennya dan menunggu hingga sepuluh detik untuk jawaban.
+text: Apa pun yang kembali disimpan untuk sisa jalannya perintah, dengan $httpStatus memberikan kode status dan $httpResult memberikan body, dibaca sebagai JSON ketika halaman itu JSON dan dibiarkan sebagai teks biasa jika tidak.
+text: Header yang Anda tambahkan sebelumnya dengan $httpAddHeader ikut terkirim dengan permintaan ini lalu dibersihkan, jadi setiap permintaan dimulai dalam keadaan bersih.
+text: Tidak ada yang muncul di kanal sampai Anda mengirim pesan dengan jawabannya sendiri.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !api
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $httpGet[URL]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $httpGet[https://api.example.com/users]
+text: $httpStatus
+text: $httpResult[0; name]
+</block>
+
+<block type="callout" kind="note">
+text: Jika permintaan gagal, status diatur ke 500 dan $httpResult memuat teks kesalahan alih-alih halaman.
+text: Alamat yang aplikasi tolak untuk dibuka kembali dengan status 400 dan penjelasan singkat.
+</block>
+</dash>
+
+<details>
+syntax: $httpGet[URL]
+param: URL|text|Wajib|Alamat web yang ingin Anda ambil
+</details>

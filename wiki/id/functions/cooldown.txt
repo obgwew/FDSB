@@ -1,0 +1,40 @@
+<dash>
+name: $cooldown
+desc: Menghentikan anggota yang sama menjalankan perintah Anda lagi untuk beberapa saat.
+category: Kontrol Akses
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Berikan sebuah durasi pada perintah, dan anggota pertama yang memicunya mendapat jalan mulus; siapa pun yang mencoba lagi sebelum waktunya habis dihentikan tepat di pintu dan tidak pernah mencapai baris-baris Anda. Blokadian ini hanya milik perintah ini, sehingga anggota itu tetap bebas memakai perintah Anda yang lain selagi menunggu. Tambahkan bagian kedua, dan itulah pesan yang mereka terima alih-alih keheningan.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !daily
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $cooldown[time; error message]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $cooldown[10s; Please wait {time} before using this again!]
+</block>
+
+<block type="callout" kind="note">
+text: Tulis waktunya sebagai angka dan sebuah huruf: s untuk detik, m untuk menit, h untuk jam, d untuk hari, sehingga 10s atau 5m. Tanpa hurufnya, detik yang diasumsikan, sedangkan apa pun lainnya ditolak dengan sebuah kesalahan.
+</block>
+
+<block type="callout" kind="important">
+text: Tempatkan {time} atau %time% di pesan Anda, dan bot mengisinya dengan sisa waktu, berhitung mundur selagi mereka membacanya. Tanpa pesan sama sekali, upaya berikutnya hanya berhenti tanpa ada yang diposting.
+</block>
+</dash>
+
+<details>
+syntax: $cooldown[time; error message]
+param: time|text|Wajib|Berapa lama penantiannya, sebagai angka ditambah s, m, h, atau d, seperti 10s, 5m, 1h, 1d
+param: error message|text|Wajib|Apa yang dikatakan selagi penantian berlangsung. Pakai {time} atau %time% untuk sisa waktu.
+</details>

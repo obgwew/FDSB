@@ -1,0 +1,37 @@
+<dash>
+name: $endfunc
+desc: Menutup sebuah blok baris bernama sehingga Anda bisa menjalankannya lagi dengan $call.
+category: Kontrol Alur
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $endfunc menandai berakhirnya blok bernama yang Anda buka dengan $func. Baris-baris di dalamnya ditahan alih-alih dijalankan langsung, dan hanya diputar ketika $call[nama itu] memintanya, sehingga satu unit pekerjaan bisa diletakkan dalam sebuah perintah sebanyak yang Anda suka. Beri nama setelah $func dan tutup dengan $endfunc, dan sisa perintah Anda berlanjut seperti biasa.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !welcome
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $endfunc
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $func[ping]
+text: $sendMessage[Pong]
+text: $endfunc
+</block>
+
+<block type="callout" kind="warning">
+text: Sebuah $endfunc tanpa $func yang cocok meninggalkan blok yang tidak seimbang dan bot melaporkan kesalahan skrip. Satu $endfunc menutup satu $func, bahkan jika loop atau kondisi bersarang di dalamnya.
+</block>
+</dash>
+
+<details>
+syntax: $endfunc
+</details>

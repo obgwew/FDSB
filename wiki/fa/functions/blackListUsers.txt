@@ -1,0 +1,31 @@
+<dash>
+name: $blackListUsers
+desc: اجرای دستور را برای افراد مشخص‌شده متوقف می‌کند.
+category: کنترل دسترسی
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $blackListUsers بررسی می‌کند که آیا کاربری که دستور را فراخوانی کرده است در لیست کاربران تعیین‌شده قرار دارد یا خیر. اگر در لیست باشد، ربات پیام رد شما را نمایش می‌دهد (یا در صورت عدم تعیین، پیام پیش‌فرض) و بقیه دستور متوقف می‌شود. اگر در لیست نباشد، هیچ پیامی نمایش داده نمی‌شود و اسکریپت به‌طور عادی ادامه می‌یابد.
+</block>
+
+<block type="code" title="سینتکس">
+text: $blackListUsers[user; ...; message]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $blackListUsers[@user; Sorry, you are not allowed to use this command!]
+</block>
+
+<block type="callout" kind="note">
+text: کاربر را می‌توان به‌صورت منشن، شناسه یا نام وارد کرد و تطبیق نام‌ها بدون حساسیت به حروف بزرگ و کوچک انجام می‌شود. نام نمایشی و نام جهانی کاربر نیز بررسی می‌شوند. می‌توانید چندین کاربر را با نقطه‌ویرگول از هم جدا کنید. همه آرگومان‌ها تا آرگومان آخر به‌عنوان کاربر در نظر گرفته می‌شوند، بنابراین آرگومان آخر پیام رد سفارشی خواهد بود.
+</block>
+
+<block type="callout" kind="warning">
+text: در صورت مطابقت کاربر، اجرای دستور بلافاصله متوقف می‌شود — هیچ خطی بعد از آن اجرا نخواهد شد. اگر پیام سفارشی را ننویسید، ربات از پیام پیش‌فرض خود استفاده می‌کند.
+</block>
+</dash>
+
+<details>
+syntax: $blackListUsers[user; ...; message]
+param: user|text|الزامی|The blocked users, as mentions, IDs or names, separated by semicolons
+param: message|text|اختیاری|A message to show instead of the default refusal when the user matches
+</details>

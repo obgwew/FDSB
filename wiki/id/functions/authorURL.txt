@@ -1,0 +1,40 @@
+<dash>
+name: $authorURL
+desc: Mengubah nama penulis di bagian atas sebuah embed menjadi tautan yang terbuka saat disentuh.
+category: Pembuat Embed
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $authorURL membuat baris penulis sebuah embed membuka alamat yang Anda berikan ketika seseorang menyentuh nama itu.
+text: Atur nama lebih dulu dengan $author dan URL-nya sesudahnya, dan ikon apa pun yang sudah Anda pilih tetap persis di tempatnya.
+text: Bila nama belum diatur, sebuah tempat kosong polos dimasukkan agar tautan tetap punya sesuatu untuk bertumpu, dan selagi Anda membangun beberapa embed, Anda dapat menambahkan nomor embed sebagai bagian kedua untuk memilih yang tepat.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !card
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $authorURL[url;(index)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $author[Visit our site]
+text: $authorURL[https://example.com]
+</block>
+
+<block type="callout" kind="note">
+text: Mulailah alamat dengan http:// atau https://. Discord tidak memberi tanda terlihat bahwa sebuah nama dapat disentuh, jadi ada baiknya menyebutkannya di dalam teks embed.
+</block>
+</dash>
+
+<details>
+syntax: $authorURL[url;(index)]
+param: url|text|Wajib|Ke mana nama itu harus mengarah, diawali http:// atau https://
+param: index|number|Opsional|Embed mana yang diubah ketika Anda membangun beberapa sekaligus (bawaan 1)
+</details>

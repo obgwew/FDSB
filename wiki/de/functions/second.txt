@@ -1,0 +1,25 @@
+<dash>
+name: $second
+desc: Gibt die aktuelle Sekunde der Minute an, von 00 bis 59.
+category: Timing & Verzögerungen
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: $second liest die Uhr und gibt die aktuelle Sekunde zurück, immer zweistellig, sodass die erste Sekunde jeder Minute als 00 erscheint. Fügen Sie es in eine Textzeile ein und die Ziffern landen, wo Sie sie platzieren, oder lassen Sie es auf einer eigenen Zeile stehen, dann postet der Bot die Zahl im Kanal. Da der Wert bei jedem Durchgang neu gelesen wird, ist es eine praktische Möglichkeit, einem Befehl jedes Mal ein leicht anderes Ergebnis zu geben.
+</block>
+
+<block type="code" title="Syntax">
+text: $second
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $sendMessage[The time is $hour:$minute:$second]
+</block>
+
+<block type="callout" kind="note">
+text: Der Wert reicht von 00 bis 59 und ist immer zweistellig breit, sodass eine vollständige Angabe $hour:$minute:$second gleichmäßig gesetzt bleibt.
+</block>
+
+<block type="callout" kind="important">
+text: $second folgt der Zeitzone, die Sie mit $time gesetzt haben. Wenn Sie nie eine gesetzt haben, greift die lokale Uhr des Bots.
+</block>
+</dash>

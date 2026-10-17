@@ -1,0 +1,25 @@
+<dash>
+name: $minute
+desc: Saatin geçerli dakikasını 00'den 59'a kadar verir.
+category: Zamanlama ve Gecikmeler
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $minute saate bakar ve mevcut dakikayı, her zaman iki haneyle geri verir; saatin dokuzuncu dakikası 09 olarak döner. Bir metin satırına yerleştirirseniz rakamlar koyduğunuz yere düşer; satırda tek başına bırakırsanız bot bu rakamı kanala gönderir. Değer her çalıştırmada taze hesaplanır, bu yüzden dakikalar geçtikçe değişir.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $minute
+</block>
+
+<block type="code" title="Kopyalamaya Hazır Örnek">
+text: $sendMessage[It is now $hour:$minute]
+</block>
+
+<block type="callout" kind="note">
+text: Değer 00 ile 59 arasında değişir ve her zaman iki hanelidir; böylece onu $hour ile $second arasına yerleştirdiğinizde düzgün hizalanır.
+</block>
+
+<block type="callout" kind="important">
+text: $minute, $time ile ayarladığınız saat dilimini takip eder. Hiçbir zaman ayarlamadıysanız botun kendi yerel saatine döner.
+</block>
+</dash>

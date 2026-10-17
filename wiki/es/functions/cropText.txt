@@ -1,0 +1,38 @@
+<dash>
+name: $cropText
+desc: Acorta un texto a la longitud que elijas y marca el corte.
+category: Utilidades de texto
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Pásale un texto y una longitud máxima, y lo que vuelve nunca es más largo que eso. Si el original superaba el límite, se corta justo ahí y se añade el final que hayas indicado, siendo los tres puntos la opción habitual. Un texto que ya cabe se devuelve exactamente como estaba, con su final incluido. Es la forma estándar de evitar que una cita larga desborde un campo estrecho.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $cropText en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $cropText[text; max characters; (ending)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $cropText[This is a very long message; 10; ...]
+</block>
+
+<block type="callout" kind="note">
+text: La longitud tiene que ser un número entero de cero o más; cualquier otra cosa detiene el comando con un error. Deja el final fuera y el texto simplemente se corta en el límite sin ninguna marca.
+</block>
+</dash>
+
+<details>
+syntax: $cropText[text; max characters; (ending)]
+param: text|text|Obligatorio|El texto que acortar
+param: max characters|number|Obligatorio|Cuántos caracteres conservar como máximo
+param: ending|text|Opcional|Qué añadir después del corte, como ...
+</details>

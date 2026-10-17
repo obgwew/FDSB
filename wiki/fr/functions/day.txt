@@ -1,0 +1,25 @@
+<dash>
+name: $day
+desc: Renvoie le numéro du jour, toujours sur deux chiffres, de 01 à 31.
+category: Minutage & Délais
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: $day lit l'horloge et renvoie le jour du mois, toujours sur deux chiffres, donc le 7 revient sous la forme 07 et le 24 sous la forme 24. Insérez-le dans une ligne de texte et les chiffres se placent exactement là où vous les mettez. Laissez-le sur une ligne à part et le bot publie le nombre tout seul dans le canal.
+</block>
+
+<block type="code" title="Syntaxe">
+text: $day
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $sendMessage[Day $day of this month]
+</block>
+
+<block type="callout" kind="note">
+text: Le nombre est toujours complété sur deux chiffres, de 01 jusqu'à 31, ce qui l'aligne proprement dans une date que vous composez vous-même à partir de $day, $month et $year.
+</block>
+
+<block type="callout" kind="important">
+text: $day, $month et $year lisent tous l'horloge locale propre au bot. Le fuseau horaire défini avec $time n'est suivi que par $hour, $minute et $second, alors gardez-le en tête si votre serveur se trouve dans une autre partie du monde.
+</block>
+</dash>

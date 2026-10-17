@@ -1,0 +1,41 @@
+<dash>
+name: $power
+desc: Eleva un número a la potencia de otro.
+category: Matemática y números
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $power toma una base y un exponente y calcula la base elevada a esa potencia. Puedes usarlo directamente dentro de una línea de texto y el bot imprime la respuesta en el canal, o mantenerlo en una línea propia mientras estás calculando los números. Una respuesta que sea número entero llega sin cola decimal, así que elevar 2 a la potencia 10 aparece como 1024 a secas.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !calc en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $power[base; exponent]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $sendMessage[$power[2; 10]]
+</block>
+
+<block type="callout" kind="note">
+text: $power[2; 10] da 1024, $power[3; 3] da 27 y $power[5; 0] da 1. Se necesitan exactamente dos números, y texto en cualquiera de los dos espacios detiene el comando con un error.
+</block>
+
+<block type="callout" kind="warning">
+text: Una base negativa elevada a un exponente fraccionario no tiene respuesta real, y un resultado demasiado grande para caber también se rechaza. En ambos casos el comando se detiene en lugar de imprimir un número que no podrías usar.
+</block>
+</dash>
+
+<details>
+syntax: $power[base; exponent]
+param: base|number|Obligatorio|El número que se eleva, como 2, 10 o 3.5
+param: exponent|number|Obligatorio|Cuántas veces elevarlo, como 3, 10 o 0.5
+</details>

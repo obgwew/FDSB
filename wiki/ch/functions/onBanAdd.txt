@@ -1,0 +1,32 @@
+<dash>
+name: $onBanAdd
+desc: 有人被服务器封禁时立即运行你的脚本行。
+category: 事件
+
+<block type="text" title="事件如何工作？">
+text: 保存一个前缀字段为 $onBanAdd 的命令，应用会自动把它标记为事件。当有成员被封禁的那一刻——无论是被管理员封禁、被你自己的某个命令封禁，还是通过审核日志封禁——该前缀下的脚本行就会开始运行，没有任何人输入任何内容。
+text: 这里被封禁的人就是作者，因此 $mention、$authorID 和 $authorName 指向他，而 $guildID 和 $guildName 描述发生封禁的服务器。
+text: 封禁没有自己的频道，因此除非你指定，消息频道会保持为空。在前缀后面直接加上用方括号括起的频道 ID，你的回复就会发送到那里。
+</block>
+
+<block type="code" title="语法">
+text: #PREFIX:$onBanAdd[channelID]
+</block>
+
+<block type="code" title="可复制示例">
+text: #PREFIX:$onBanAdd[123456789012345678]
+text:  sendMessage[$mention has been banned from $guildName]
+</block>
+
+<block type="callout" kind="note">
+text: 请把 $onBanAdd 放在第一行。把它移到更下面，应用就不再把该命令视为事件，它会像普通命令一样坐等有人输入它的前缀。
+</block>
+
+<block type="callout" kind="important">
+text: 请在前缀后写上一个频道 ID，因为封禁不绑定任何频道，否则机器人没有可以发言的地方。读取它的人必须拥有该频道的访问权限，而被封禁的成员永远不会看到这条消息——这让它很适合用来记录发生的事情。
+</block>
+</dash>
+
+<details>
+syntax: $onBanAdd
+</details>

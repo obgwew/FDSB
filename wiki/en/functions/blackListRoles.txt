@@ -1,0 +1,41 @@
+<dash>
+name: $blackListRoles
+desc: Stops the command for anyone who holds one of the listed roles.
+category: Access Control
+
+<block type="text" title="How does the command work?">
+text: $blackListRoles is a checkpoint you can drop into a command. The bot looks at the roles held by whoever triggered it and compares them against the ones you listed. If a match is found it shows your refusal message, or a default one if you left it out, and the rest of the command is thrown away. If nobody matches, nothing is printed and the script simply carries on.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !roles
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: $blackListRoles[role; ...; message]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $blackListRoles[Admin; Moderator; Sorry, this command is for another group of people!]
+</block>
+
+<block type="callout" kind="note">
+text: A role can be written as a mention, as its ID or as its name, and the name is matched without worrying about capital letters. List several by separating them with semicolons. Everything up to the last argument is treated as a role, so the final argument is where your custom refusal goes.
+</block>
+
+<block type="callout" kind="warning">
+text: When the check succeeds the command stops right there — no line below it runs at all. Leave the custom message out and the bot falls back to wording of its own.
+</block>
+</dash>
+
+<details>
+syntax: $blackListRoles[role; ...; message]
+param: role|text|Required|The blocked roles, as mentions, IDs or names, separated by semicolons
+param: message|text|Optional|A message to show instead of the default refusal when a role matches
+</details>

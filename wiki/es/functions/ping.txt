@@ -1,0 +1,31 @@
+<dash>
+name: $ping
+desc: Te dice con qué rapidez habla el bot con Discord, en milisegundos.
+category: Utilidades
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $ping mide el ida y vuelta entre el bot y Discord y devuelve la cifra en milisegundos. Úsalo dentro de una línea de texto y el bot publica ese número en el canal, para que los miembros puedan juzgar la conexión por sí mismos. Un número pequeño significa que el bot reacciona rápido, uno grande significa que algo está frenando el enlace ahora mismo.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !speed en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $ping
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $ping pong!
+</block>
+
+<block type="callout" kind="note">
+text: Cuanto más baja la cifra, más ágil se siente el bot en el canal. Mide la conexión entre el bot y Discord en lugar de algo de tu dispositivo, así que el mismo valor puede cambiar de un minuto a otro.
+</block>
+</dash>

@@ -1,0 +1,36 @@
+<dash>
+name: $footer
+desc: Menambahkan baris teks kecil berwarna abu-abu di bagian bawah sebuah kartu embed.
+category: Pembuat Embed
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Apa pun yang Anda berikan menjadi baris kaki kartu yang sedang Anda bangun, duduk di bawah segala sesuatu dengan huruf yang lebih kecil dan lebih tipis. Itu adalah tempat alami untuk kredit, tanggal, atau catatan singkat tentang isi kartu. Karena ia hanya membentuk kartu, tidak ada yang muncul sampai Anda mengirim embed-nya.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !card
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $footer[text]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $footer[Requested by $authorName]
+</block>
+
+<block type="callout" kind="note">
+text: Tambahkan $footerIcon ketika Anda ingin gambar kecil di samping baris itu. Memanggil $footer untuk kedua kalinya hanya menimpa kata-kata yang Anda atur sebelumnya.
+</block>
+</dash>
+
+<details>
+syntax: $footer[text]
+param: text|text|Wajib|Kata-kata yang dicetak di sepanjang kaki kartu
+</details>

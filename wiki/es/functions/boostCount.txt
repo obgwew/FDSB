@@ -1,0 +1,36 @@
+<dash>
+name: $boostCount
+desc: Te dice cuántos boosts tiene un servidor actualmente.
+category: Servidor
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Pídelo sin nada dentro y el bot cuenta los boosts que hay en el servidor donde se ejecutó el comando. Añade un ID de servidor y cuenta ese en su lugar, siempre que el bot sea miembro allí. Lo que devuelve es el número desnudo y nada más, así que encaja limpiamente en una frase que escribas a su alrededor. Un servidor que el bot no puede ver se informa como un error en lugar de como un cero.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $boostCount en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $boostCount[(guildID)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $sendMessage[This server has $boostCount boosts!]
+</block>
+
+<block type="callout" kind="note">
+text: Este es el número de boosts, no el nivel que ha alcanzado el servidor. Para el nivel, pide $boostLevel en su lugar.
+</block>
+</dash>
+
+<details>
+syntax: $boostCount[(guildID)]
+param: guildID|snowflake|Opcional|De qué servidor contar los boosts; déjalo vacío para el actual
+</details>

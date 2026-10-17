@@ -1,0 +1,31 @@
+<dash>
+name: $randomRoleMention
+desc: Elige al azar un rol de tu servidor y lo menciona.
+category: Aleatorio
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: El bot lee la lista de roles del servidor, elige uno al azar y publica una mención, que llega resaltada y con enlace. El rol que todos los miembros ya tienen por defecto nunca es el elegido. Cada llamada es independiente, así que el mismo rol puede salir dos veces seguidas.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $randomRoleMention en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $randomRoleMention
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: Congrats $randomRoleMention!
+</block>
+
+<block type="callout" kind="note">
+text: Fuera de un servidor, o en un servidor sin roles además del predeterminado, el bot informa de un error en lugar de una mención. Cualquier otro rol del servidor es válido, incluso los que nadie ha recibido.
+</block>
+</dash>

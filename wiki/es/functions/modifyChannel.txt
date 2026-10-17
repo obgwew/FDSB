@@ -1,0 +1,44 @@
+<dash>
+name: $modifyChannel
+desc: Renombra, reorganiza o mueve un canal en el servidor actual.
+category: Gestión de canales
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: La primera parte elige el canal, y todo lo que sigue respeta un orden fijo: nombre, tema, interruptor de restricción de edad, posición y luego categoría. Deja cualquiera de ellos vacío y esa configuración no se toca, lo que significa que puedes cambiar una sola cosa por llamada. No se publica nada al terminar, así que la confirmación es el propio canal viéndose diferente.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !tidy en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $modifyChannel[Channel ID; (Channel Name; Topic; Make NSFW?; Position; Category ID)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $modifyChannel[123456789012345678; Announcements; Welcome messages; no; 2; 987654321012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: Necesita un servidor alrededor, y tu bot necesita Manage Channels en el canal que se cambia. Los nombres se detienen en 100 caracteres y los temas en 1024, y una categoría nunca puede meterse dentro de otra categoría.
+</block>
+
+<block type="callout" kind="note">
+text: Responde al espacio de restricción de edad con yes, no, true o false. Escribir none como tema borra el actual, mientras que none, 0 o null en el espacio de categoría saca el canal de su categoría. No envíes nada que cambiar y el bot te dirá que no se indicaron cambios.
+</block>
+</dash>
+
+<details>
+syntax: $modifyChannel[Channel ID; (Channel Name; Topic; Make NSFW?; Position; Category ID)]
+param: channelID|snowflake|Obligatorio|El canal a cambiar, como una mención @channel o su ID
+param: name|text|Opcional|Nuevo nombre para el canal
+param: topic|text|Opcional|Nuevo tema; escribe none para borrar el actual
+param: nsfw|text|Opcional|Interruptor de restricción de edad: yes, no, true o false
+param: position|integer|Opcional|Nueva posición para el canal en la barra lateral
+param: categoryID|snowflake|Opcional|Categoría en la que colocar el canal; none, 0 o null lo saca de ella
+</details>

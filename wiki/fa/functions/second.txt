@@ -1,0 +1,25 @@
+<dash>
+name: $second
+desc: Returns the current second, always two digits, from 00 to 59.
+category: زمان‌بندی و تاخیر
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $second ساعت را بررسی می‌کند و ثانیه فعلی را با دو رقم برمی‌گرداند؛ برای مثال 5 ثانیه می‌شود 05 و 42 ثانیه می‌شود 42. می‌توانید آن را در داخل متن قرار دهید تا در جای دقیق خود نمایش داده شود. اگر آن را در یک خط جداگانه بنویسید، ربات عدد را به‌تنهایی در کانال ارسال خواهد کرد.
+</block>
+
+<block type="code" title="سینتکس">
+text: $second
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $sendMessage[The time is $hour:$minute:$second]
+</block>
+
+<block type="callout" kind="note">
+text: ثانیه همیشه با دو رقم پد شده نمایش داده می‌شود، از 00 تا 59. این مقدار بر پایه ساعت محلی ربات است، مگر اینکه منطقه زمانی با $time تنظیم شده باشد.
+</block>
+
+<block type="callout" kind="important">
+text: زمان بر پایه منطقه زمانی سرور یا منطقه زمانی تنظیم‌شده با $time محاسبه می‌شود. در صورت عدم تنظیم $time، از زمان محلی ربات استفاده می‌شود.
+</block>
+</dash>

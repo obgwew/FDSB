@@ -1,0 +1,42 @@
+<dash>
+name: $emojiExists
+desc: Responde true o false según el bot pueda usar un emoji personalizado.
+category: Info
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Dale un emoji personalizado y el bot responde con la palabra true o false en el canal. El bot solo conoce emojis de los servidores a los que se ha unido, así que un ID de un servidor en el que no está devuelve false. Una mención completa como <:name:id> o <a:name:id> la desmonta por ti, mientras que los emojis Unicode corrientes no tienen ID aquí y se rechazan con un error.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $emojiExists en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $emojiExists[emoji id]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $if[$emojiExists[123456789012345678]]
+text:  $sendMessage[That emoji exists!]
+text: $endif
+</block>
+
+<block type="callout" kind="note">
+text: Muy útil como prueba dentro de un $if o un $onlyIf, donde la respuesta decide si las líneas de abajo se ejecutan o no.
+</block>
+
+<block type="callout" kind="warning">
+text: El bot tiene que compartir servidor con el emoji. Un ID perfectamente válido de un servidor en el que el bot no está sigue respondiendo false.
+</block>
+</dash>
+
+<details>
+syntax: $emojiExists[emoji id]
+param: emoji id|snowflake|Obligatorio|El emoji personalizado que buscar, como número o como mención <:name:id> / <a:name:id>
+</details>

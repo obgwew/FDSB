@@ -1,0 +1,41 @@
+<dash>
+name: $dm
+desc: Envía todo lo que dice tu comando directamente a los mensajes privados de alguien.
+category: Mensajes
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Coloca esta línea encima de tus mensajes y todo lo que envíen después deja el canal y llega a una conversación privada en su lugar. Usado sin paréntesis, el destinatario es quien escribió el comando; dale el ID o la mención de un miembro y es esa persona. El cambio dura solo hasta el final de esta ejecución, así que nunca se filtra a tu siguiente comando.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !notify en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $dm
+text: $dm[(userID/mention)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $dm
+text: $sendMessage[Check your DMs!]
+</block>
+
+<block type="callout" kind="warning">
+text: Vosotros dos tenéis que compartir un servidor, y el destinatario necesita los mensajes privados activados. De lo contrario el bot no puede entregar nada, y la persona esperando en el canal nunca se entera de por qué no llegó nada.
+</block>
+
+<block type="callout" kind="note">
+text: Mantenlo encima de los mensajes que deberían ir en privado. Cualquier cosa que envíes antes de esta línea se queda en el canal público donde todos pueden leerla.
+</block>
+</dash>
+
+<details>
+syntax: $dm[(userID/mention)]
+param: userID/mention|text|Opcional|Quién debería recibir los mensajes privados; déjalo vacío para quien escribió el comando
+</details>

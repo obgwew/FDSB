@@ -1,0 +1,41 @@
+<dash>
+name: $createChannel
+desc: Membuat kanal teks, suara, kategori, forum, atau panggung baru di server.
+category: Manajemen Kanal
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Beri bot sebuah nama dan sebuah jenis kanal, dan kanal itu langsung muncul di server. Jenisnya menentukan apa yang Anda dapatkan: kanal teks, kanal suara, kategori untuk mengelompokkan yang lain, forum, atau panggung. Tambahkan ID sebuah kategori sebagai bagian ketiga, dan kanal baru itu diarsipkan di dalamnya.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !ping
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $createChannel[name; type; (category ID)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $createChannel[my-channel; text]
+</block>
+
+<block type="callout" kind="warning">
+text: Perintah ini hanya berfungsi di dalam sebuah server, dan bot memerlukan izin Manage Channels di sana. Jenis apa pun selain teks, suara, kategori, forum, atau panggung ditolak dengan sebuah kesalahan.
+</block>
+
+<block type="callout" kind="note">
+text: Bagian kategori bersifat opsional. Arahkan ke sesuatu yang bukan kategori, dan bot berhenti dengan kesalahan alih-alih menebak-nebak.
+</block>
+</dash>
+
+<details>
+syntax: $createChannel[name; type; (category ID)]
+param: name|text|Wajib|Nama untuk kanal baru itu.
+param: type|text|Wajib|Jenis apa yang dibuat: teks, suara, kategori, forum, atau panggung.
+param: categoryID|text|Opsional|Kategori tempat kanal baru diarsipkan.
+</details>

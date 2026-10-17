@@ -1,0 +1,40 @@
+<dash>
+name: $onBotOnline
+desc: Ejecuta tu script por sí solo cada vez que el bot termina de iniciar sesión.
+category: Evento
+
+<block type="text" title="¿Cómo funciona el evento?">
+text: Establece el campo Prefijo de un comando en $onBotOnline y la aplicación lo marca como evento por ti. Nadie tiene que escribir nada, porque las líneas de abajo empiezan a ejecutarse solas en cuanto el bot está conectado y listo, lo que convierte este en el lugar adecuado para una configuración única, como anotar la hora de inicio. No hay ningún mensaje detrás, así que no hay disponible información sobre la persona ni sobre lo que escribió.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $onBotOnline en el campo Prefijo
+item: La aplicación lo marca como evento por ti
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: #PREFIX:$onBotOnline
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: #PREFIX:$onBotOnline
+text: $setVar[botStartupTime; $addTimestamp]
+</block>
+
+<block type="callout" kind="note">
+text: Sin mensaje tampoco hay dónde publicar. Pon un ID de canal entre corchetes justo después del prefijo, como en $onBotOnline[123456789], y todo lo que envíen tus líneas aterriza en ese canal.
+</block>
+
+<block type="callout" kind="important">
+text: Se activa en cada inicio de sesión exitoso, no solo en el primero, así que un reinicio o una conexión perdida que se recupere ejecutará tus líneas de nuevo.
+</block>
+</dash>
+
+<details>
+syntax: $onBotOnline
+</details>

@@ -1,0 +1,36 @@
+<dash>
+name: $voiceUsersLimit
+desc: Menampilkan batas maksimal jumlah anggota yang bisa masuk ke kanal suara atau stage.
+category: Kanal
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $voiceUsersLimit mengambil ID kanal suara atau stage, lalu mengembalikan batas pengguna untuk kanal tersebut. Jika tidak ada batas yang ditetapkan, hasilnya adalah 0 — artinya kanal terbuka tanpa batas. Hasil ini berupa nilai, jadi bisa langsung disisipkan ke dalam pesan atau dipakai untuk keputusan logika.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !voiceUsersLimit
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $voiceUsersLimit[voice channel ID]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $voiceUsersLimit[123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: Perlu diberikan satu ID berupa angka. Jika bot tidak bisa menemukan kanal tersebut, atau kanal itu bukan kanal suara atau stage, perintah akan berhenti dan menampilkan kesalahan.
+</block>
+</dash>
+
+<details>
+syntax: $voiceUsersLimit[voice channel ID]
+param: channelID|text|Wajib|ID kanal suara atau stage yang ingin diperiksa
+</details>

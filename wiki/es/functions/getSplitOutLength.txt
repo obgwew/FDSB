@@ -1,0 +1,36 @@
+<dash>
+name: $getSplitOutLength
+desc: Te dice cuántas piezas produjo la última división.
+category: Utilidades de texto
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Después de dividir una línea, este cuenta las piezas por ti. Ese número resulta útil para comprobar que hay suficiente con lo que trabajar antes de recurrir a una en concreto. Por sí solo imprime la cuenta en el canal; dentro de una condición se convierte en el valor con el que comparas.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $getSplitOutLength en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $getSplitOutLength
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $splitIn[apple,banana,cherry; ,]
+text: $getSplitOutLength
+</block>
+
+<block type="callout" kind="note">
+text: Antes de que haya ocurrido cualquier división, la respuesta es 0. Compárala dentro de un $if cuando un mensaje pueda no llevar los separadores con los que contabas.
+</block>
+</dash>
+
+<details>
+syntax: $getSplitOutLength
+</details>

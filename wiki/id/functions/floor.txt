@@ -1,0 +1,36 @@
+<dash>
+name: $floor
+desc: Membulatkan sebuah angka ke bawah ke bilangan bulat terdekat di bawahnya.
+category: Matematika & Angka
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Berikan sebuah angka desimal dan ia membuang bagian pecahannya, selalu ke bawah. Jadi 3.9 menjadi 3, dan -2.1 menjadi -3, bukan -2. Hasilnya selalu bilangan bulat, dan Anda bisa langsung menuliskannya ke dalam pesan atau perhitungan.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !welcome
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $floor[number]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $sendMessage[Result is $floor[3.9]]
+</block>
+
+<block type="callout" kind="note">
+text: Ia menginginkan tepat satu angka, jadi dua atau nihil ditolak dengan kesalahan. Apa pun yang bukan angka juga ditolak. Ingin arah sebaliknya? Gunakan $ceil.
+</block>
+</dash>
+
+<details>
+syntax: $floor[number]
+param: number|number|Wajib|Angka yang dibulatkan ke bawah, misalnya 3.9 atau -2.1
+</details>

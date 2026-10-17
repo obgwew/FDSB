@@ -1,0 +1,38 @@
+<dash>
+name: $getVar
+desc: Membaca kembali variabel tersimpan, baik nilai bersama maupun milik seorang anggota.
+category: Variabel
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Berikan sebuah nama dan Anda mendapatkan kembali apa pun yang tersimpan di bawahnya. Satu nama mengembalikan nilai yang dibagikan semua orang, sementara nama plus ID pengguna mengembalikan nilai milik orang itu untuk nama yang sama, dan jatuh ke nilai bersama ketika ia tidak punya. Hasilnya muncul di kanal, atau diisikan di tempat Anda menuliskannya.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buat variabelnya terlebih dahulu di tab Variabel
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !welcome
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $getVar[name]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $getVar[mySetting]
+</block>
+
+<block type="callout" kind="note">
+text: Variabel tersimpan mempertahankan nilainya melalui berbagai penyalakan ulang bot. Minta nama yang tidak pernah disimpan dan bot membuatnya kosong, memposting peringatan, dan menghentikan perintah Anda, jadi periksa ejaannya.
+</block>
+</dash>
+
+<details>
+syntax: $getVar[name; (userID)]
+param: name|text|Wajib|Variabel tersimpan yang dibaca
+param: userID|snowflake|Opsional|Nilai milik anggota mana yang dibaca; biarkan kosong untuk nilai bersama
+</details>

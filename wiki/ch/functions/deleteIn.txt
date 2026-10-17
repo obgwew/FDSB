@@ -1,0 +1,35 @@
+<dash>
+name: $deleteIn
+desc: 等待设定的时长，然后从频道中删除机器人自己发出的消息。
+category: 计时与延迟
+
+<block type="text" title="命令如何工作？">
+text: $deleteIn 接受一个时长，并让机器人在时间到后清理自己的输出。它会接住机器人在本次运行中已经发出的消息以及之后发出的消息，保留你设定的延迟时长，然后把它们删除，让频道保持整洁。这样就能很方便地给出一条临时提示或一次性结果，而不必让它永远留在聊天记录里。
+</block>
+
+<block type="code" title="语法">
+text: $deleteIn[duration]
+</block>
+
+<block type="code" title="可复制示例">
+text: $deleteIn[5s]
+text: $sendMessage[This message is removed after 5 seconds]
+</block>
+
+<block type="callout" kind="note">
+text: 时长由数字加单位组成：ms 表示毫秒，s 表示秒，m 表示分钟，h 表示小时，d 表示天，w 表示周。几个单位可以连写，例如 1h30m 表示一小时三十分钟，允许的最长延迟为 14 天。
+</block>
+
+<block type="callout" kind="warning">
+text: 机器人需要在该频道中删除消息的权限，而且它删除的每一条消息都必须是它自己发出的。如果延迟期间机器人处于离线状态，消息会保留下来，因为倒计时随机器人而存在。
+</block>
+
+<block type="callout" kind="important">
+text: 这里只接受时长——恰好一个参数，且取值必须大于零。等待时间过长、缺少单位，或者只有数字而没有单位的写法都会被拒绝并返回错误。
+</block>
+</dash>
+
+<details>
+syntax: $deleteIn[duration]
+param: duration|text|Required|删除前要等待的时长，写成带单位的数字，例如 5s、10m、2h、1d，最长 14 天
+</details>

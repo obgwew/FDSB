@@ -1,0 +1,40 @@
+<dash>
+name: $removeAllComponents
+desc: Quita todos los botones y menús de un mensaje que envió el bot.
+category: Componentes
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $removeAllComponents limpia las partes interactivas de un mensaje, quitando de un solo barrido todos los botones y menús de selección y dejando solo texto simple. Si dejas fuera la ID del mensaje, actúa sobre lo que el bot esté a punto de enviar o acabe de enviar en esta ejecución. Si le das una ID de mensaje, limpia ese mensaje en concreto, y los botones desaparecen del canal delante de todos los que miran.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !clean en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $removeAllComponents
+text: $removeAllComponents[(messageID)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $removeAllComponents[123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: Esta es la versión sin matices del trabajo. $removeButtons y $removeComponent quitan elementos de uno en uno, mientras que este vacía toda la fila de una vez.
+</block>
+
+<block type="callout" kind="warning">
+text: Solo se pueden limpiar mensajes publicados por el propio bot, y la ID tiene que ser solo dígitos. Si no hay nada que limpiar en absoluto, recibes un error que lo dice en lugar de una omisión silenciosa.
+</block>
+</dash>
+
+<details>
+syntax: $removeAllComponents[(messageID)]
+param: messageID|snowflake|Opcional|Qué mensaje del bot limpiar. Déjalo fuera para limpiar la respuesta pendiente, la que hay detrás de un clic de botón o el último mensaje enviado.
+</details>

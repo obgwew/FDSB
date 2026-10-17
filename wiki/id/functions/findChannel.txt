@@ -1,0 +1,36 @@
+<dash>
+name: $findChannel
+desc: Mengubah nama kanal menjadi ID yang bisa Anda gunakan di tempat lain.
+category: Kanal
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Berikan nama kanal, lalu bot menelusuri seluruh kanal di server untuk mencari nama persis itu tanpa memperhatikan huruf besar-kecil, dan mengembalikan ID kanal yang ditemukannya. Tempel mention kanal seperti <#123>, dan ia hanya memastikan kanal itu ada lalu mengembalikan ID-nya. Tidak ditemukan berarti jawaban kosong, jadi sebaiknya periksa dulu sebelum Anda mengirim sesuatu ke sana.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $findChannel
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $findChannel[name/mention]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $findChannel[general]
+</block>
+
+<block type="callout" kind="note">
+text: Namanya harus cocok dari huruf pertama sampai terakhir — general-chat tidak akan menemukan general. Bisa menyebut nama kanal alih-alih menempel ID yang panjang adalah inti semuanya, dan ia hanya mencari di dalam server tempat perintah dijalankan.
+</block>
+</dash>
+
+<details>
+syntax: $findChannel[name/mention/ID]
+param: channel|text|Wajib|Nama kanal atau mention yang dicari.
+</details>

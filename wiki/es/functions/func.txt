@@ -1,0 +1,38 @@
+<dash>
+name: $func
+desc: Abre un bloque con nombre de tus propias líneas que puedes ejecutar más tarde.
+category: Control de flujo
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $func marca el comienzo de una pieza reutilizable de tu script y le da un nombre que tú eliges. Todo lo que escribas entre ella y $endfunc se reserva, y solo se ejecuta en el momento en que lo pides con $call[nombre]. El bot lee todo el bloque sin actuar sobre él, así que puedes reutilizar las mismas líneas tantas veces como quieras dentro de un comando.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !welcome en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $func[name]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $func[sendWelcome]
+text: $sendMessage[Welcome!]
+text: $endfunc
+</block>
+
+<block type="callout" kind="important">
+text: Dale a cada bloque un nombre propio y no reutilices ese nombre dos veces en el mismo comando. Cada $func necesita un $endfunc correspondiente, y $call solo llega a un bloque que el bot ya haya leído, así que pon la definición por encima de la línea que la llama.
+</block>
+</dash>
+
+<details>
+syntax: $func[name]
+param: name|text|Obligatorio|El nombre que le darás a $call más tarde para ejecutar este bloque
+</details>

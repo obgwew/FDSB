@@ -1,0 +1,41 @@
+<dash>
+name: $onlyBotPerms
+desc: Menghentikan perintah dengan pesan Anda sendiri kecuali bot itu sendiri diizinkan melakukan langkah berikutnya.
+category: Kontrol Akses
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $onlyBotPerms memeriksa izin bot itu sendiri sebelum bagian yang dilindungi dari perintah Anda berjalan. Cantumkan izin yang Anda butuhkan, lalu akhiri dengan pesan yang harus dilihat anggota jika ada satu yang hilang. Jika bot memiliki semuanya, tidak ada yang ditampilkan dan perintah Anda berlanjut. Jika satu hilang, pesan dikirim dan sisa perintah dibuang tepat di situ.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $onlyBotPerms[permission; ...; error message]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $onlyBotPerms[kick_members; ban_members; I need permission to kick and ban members.]
+text: $sendMessage[Done!]
+</block>
+
+<block type="callout" kind="note">
+text: Nama izin adalah nama milik Discord sendiri dengan huruf kecil dan garis bawah, seperti kick_members, ban_members atau manage_messages. Letakkan pesannya di akhir — semua yang setelah izin diperlakukan sebagai satu pesan.
+</block>
+
+<block type="callout" kind="important">
+text: Pemeriksaan melihat kanal tempat perintah digunakan, sehingga izin yang dimiliki bot di satu kanal tetapi tidak di kanal lain tetap akan memblokirnya. Periksa peran bot di Discord dan pastikan ia berada di atas peran-peran yang perlu ditindakinya.
+</block>
+</dash>
+
+<details>
+syntax: $onlyBotPerms[permission; ...; error message]
+param: permission|text|Wajib|Satu atau lebih nama izin Discord, dipisahkan dengan titik koma, seperti kick_members atau manage_roles.
+param: error message|text|Wajib|Pesan yang dikirim ke kanal saat bot kehilangan salah satu izin. Semua yang setelah izin dihitung sebagai pesan ini.
+</details>

@@ -1,0 +1,37 @@
+<dash>
+name: $onlyIf
+desc: Menghentikan perintah Anda mati-matian kecuali kondisinya terpenuhi.
+category: Kontrol Akses
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Tulis sebuah kondisi dan perintah berlanjut lurus ketika hasilnya benar. Ketika hasilnya salah, pesan yang Anda tulis setelah titik koma dikirim dan setiap baris setelah itu dibuang — seluruh perintah berhenti di situ, bukan hanya blok di sekitarnya. Biarkan pesannya lepas dan bot mengirim catatan kondisi gagalnya sendiri.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $onlyIf[condition; error message]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $onlyIf[$authorID == 123456789; You are not authorized!]
+</block>
+
+<block type="callout" kind="note">
+text: Lebih keras daripada $if, yang sekadar melewati baris-baris yang tidak ia butuhkan dan kembali sesudahnya. Gunakan yang satu ini ketika sebuah perintah harus menolak berjalan sama sekali.
+</block>
+</dash>
+
+<details>
+syntax: $onlyIf[condition; error message]
+param: condition|expression|Wajib|Apa yang diuji, memakai operator yang sama dengan $if (==, !=, >, <, >=, <=)
+param: error message|text|Wajib|Yang dilihat orang itu ketika ujiannya gagal; perintah berhenti setelah mengirimkannya
+</details>

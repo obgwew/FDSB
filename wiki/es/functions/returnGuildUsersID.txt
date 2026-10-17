@@ -1,0 +1,45 @@
+<dash>
+name: $returnGuildUsersID
+desc: Recopila la ID de cada miembro humano de un servidor para que puedas reutilizar la lista.
+category: Comandos de retorno
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $returnGuildUsersID recorre los miembros del servidor que nombres y recoge la ID de cada persona, dejando fuera las cuentas de bot. Las IDs se unen con un separador que eliges y se archivan bajo un nombre que escoges, y $return saca la lista entera donde la necesites. No se imprime nada en el canal mientras recopila.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !userlist en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $returnGuildUsersID[guildID; cache/chunk; var; separator]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $returnGuildUsersID[$guildID; cache; userIDs; ,]
+text: $sendMessage[Users: $return[userIDs]]
+</block>
+
+<block type="options" title="Modos de obtención">
+option: cache|Usa la lista de miembros que el bot ya tiene, rápido pero a veces incompleta en servidores grandes
+option: chunk|Pide a Discord la lista de miembros completa primero, más lento pero siempre completo
+</block>
+
+<block type="callout" kind="note">
+text: Las cuentas de bot nunca se recogen, y el bot tiene que ser miembro del servidor que nombres. Un servidor que resulta estar vacío se informa como error en lugar de como una lista vacía.
+</block>
+</dash>
+
+<details>
+syntax: $returnGuildUsersID[guildID; cache/chunk; var; separator]
+param: guildID|snowflake|Obligatorio|Qué servidor recorrer
+param: cache/chunk|text|Obligatorio|cache para la lista de miembros que el bot ya tiene, chunk para una lista completa nueva
+param: var|text|Obligatorio|El nombre bajo el que se archiva la lista, que se lee después con $return[]
+param: separator|text|Obligatorio|Qué va entre las IDs, como una coma o un punto y coma. También puedes escribir un nombre: dot, com, apo, sem, colon
+</details>

@@ -1,0 +1,35 @@
+<dash>
+name: $month
+desc: Da el número del mes actual, siempre con dos dígitos, de 01 a 12.
+category: Tiempos y esperas
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $month lee el reloj y devuelve el mes en el que estamos, siempre con dos dígitos, así que enero se lee 01 y diciembre 12. Úsalo dentro de una línea de texto y los dígitos caen donde los pongas, o déjalo en una línea propia y el bot publica la cifra en el canal. Colócalo entre $day y $year para construir tu propia fecha.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !month en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $month
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $sendMessage[Today is $day/$month/$year]
+</block>
+
+<block type="callout" kind="note">
+text: El número va de 01 a 12 y siempre tiene dos dígitos, así que $day/$month/$year se alinea como algo así como 17/10/2026.
+</block>
+
+<block type="callout" kind="important">
+text: $day, $month y $year leen el reloj local del propio bot. La zona horaria establecida con $time solo la siguen $hour, $minute y $second.
+</block>
+</dash>

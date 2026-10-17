@@ -1,0 +1,40 @@
+<dash>
+name: $while
+desc: Mengulangi baris-baris di bawahnya selama kondisi yang diberikan bernilai benar (true).
+category: Kontrol Alur
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $while mengevaluasi kondisinya, menjalankan baris-baris di bawahnya, lalu mengevaluasi kondisinya lagi. Proses ini berulang hingga kondisi akhirnya bernilai salah (false). Pastikan ada sesuatu di dalam loop yang berubah setiap putaran, kalau tidak loop tidak akan berhenti. Akhiri blok dengan $endwhile, dan gunakan $break untuk keluar dari loop lebih awal jika diperlukan.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !countdown
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $while[condition]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $setVar[i; 0]
+text: $while[$getVar[i] < 5]
+text:   $sendMessage[Count: $getVar[i]]
+text:   $setVar[i; $math[$getVar[i] + 1]]
+text: $endwhile
+</block>
+
+<block type="callout" kind="warning">
+text: Kondisi yang tidak pernah menjadi false akan membuat bot terjebak dalam loop dan perintah tidak akan selesai. Selalu ubah nilai yang dicek kondisi di dalam loop, atau gunakan $break untuk keluar.
+</block>
+</dash>
+
+<details>
+syntax: $while[condition]
+param: condition|expression|Wajib|Kondisi yang diuji sebelum setiap putaran, menggunakan operator yang sama seperti $if (==, !=, >, <, >=, <=). Loop akan terus berjalan selama kondisi bernilai true.
+</details>

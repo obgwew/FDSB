@@ -1,0 +1,36 @@
+<dash>
+name: $changeUsername
+desc: Memberi seorang anggota server sebuah nama panggilan baru.
+category: Moderasi
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Berikan ID atau mention seorang anggota, diikuti nama yang Anda inginkan, dan bot menulis nama itu menimpa nama panggilannya khusus untuk server ini. Nama akunnya tetap seperti semula, sementara semua orang di kanal melihat nama panggilan baru itu sejak saat itu. Biarkan bagian kedua kosong, dan nama panggilan itu hilang, mengembalikan nama akun mereka untuk ditampilkan.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !nick
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $changeUsername[user ID/mention; new name]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $changeUsername[123456789; NewNickname]
+</block>
+
+<block type="callout" kind="warning">
+text: Bot memerlukan izin Manage Nicknames, dan peran tertingginya harus berada di atas peran anggota tersebut. Bot tidak dapat mengganti nama dirinya sendiri atau pemilik server, dan perintah ini hanya berfungsi di dalam sebuah server.
+</block>
+</dash>
+
+<details>
+syntax: $changeUsername[user ID/mention; new name]
+param: user ID/mention|text|Wajib|Anggota mana yang diganti namanya
+param: new name|text|Wajib|Nama panggilan yang diberikan padanya. Biarkan kosong untuk menghapusnya dan kembali menampilkan nama akun mereka.
+</details>

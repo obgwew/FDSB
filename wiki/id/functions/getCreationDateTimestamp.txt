@@ -1,0 +1,36 @@
+<dash>
+name: $getCreationDateTimestamp
+desc: Mengubah ID Discord apa pun menjadi saat benda itu dibuat.
+category: Waktu & Jeda
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Setiap pengguna, server, kanal, peran, dan pesan menyimpan waktu pembuatannya tersembunyi di dalam ID-nya. Berikan perintah ini salah satu ID tersebut, atau mention seperti <@123>, dan ia mengembalikan saat itu sebagai stempel Unix: detik yang dihitung dari 1 Januari 1970. Letakkan angka itu di dalam kurung <t:...> Discord dan ia berubah menjadi tanggal yang dilihat setiap pembaca di zona waktu mereka masing-masing.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $getCreationDateTimestamp
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $getCreationDateTimestamp[idOrMention]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $sendMessage[Your account was created on <t:$getCreationDateTimestamp[$authorID]>]
+</block>
+
+<block type="callout" kind="note">
+text: Apa pun yang memiliki ID Discord berfungsi — pengguna, server, kanal, peran, pesan. Apa pun yang bukan angka atau mention ditolak dengan kesalahan, bukan tanggal yang salah.
+</block>
+</dash>
+
+<details>
+syntax: $getCreationDateTimestamp[idOrMention]
+param: idOrMention|text|Wajib|ID Discord, atau mention-nya seperti <@id>, <#id> atau <@&id>
+</details>

@@ -1,0 +1,25 @@
+<dash>
+name: $month
+desc: Renvoie le numéro du mois actuel, toujours sur deux chiffres, de 01 à 12.
+category: Minutage & Délais
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: $month lit l'horloge et renvoie le mois dans lequel nous sommes, toujours sur deux chiffres, donc janvier affiche 01 et décembre affiche 12. Insérez-le dans une ligne de texte et les chiffres se placent là où vous les mettez, ou laissez-le sur une ligne à part et le bot publie le chiffre dans le canal. Placez-le entre $day et $year pour composer une date qui vous est propre.
+</block>
+
+<block type="code" title="Syntaxe">
+text: $month
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $sendMessage[Today is $day/$month/$year]
+</block>
+
+<block type="callout" kind="note">
+text: Le nombre va de 01 à 12 et fait toujours deux chiffres, donc $day/$month/$year s'aligne comme quelque chose du genre 17/10/2026.
+</block>
+
+<block type="callout" kind="important">
+text: $day, $month et $year lisent tous l'horloge locale propre au bot. Le fuseau horaire défini avec $time n'est suivi que par $hour, $minute et $second.
+</block>
+</dash>

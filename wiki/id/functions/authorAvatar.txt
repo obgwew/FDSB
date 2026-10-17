@@ -1,0 +1,37 @@
+<dash>
+name: $authorAvatar
+desc: Memberikan tautan web ke foto profil seorang anggota.
+category: Info
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Minta dengan tangan kosong di dalam kurung, dan Anda mendapatkan gambar di balik profil siapa pun yang mengetik perintah itu. Berikan ID seorang anggota sebagai gantinya, dan Anda mendapatkan gambar miliknya. Yang kembali adalah tautan gambar biasa, siap diselipkan ke pesan, blok gambar, atau kartu.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $authorAvatar
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $authorAvatar
+text: $authorAvatar[(userID/@mention)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: Your avatar: $authorAvatar
+</block>
+
+<block type="callout" kind="note">
+text: Ini adalah gambar dari profil orang itu sendiri, bukan yang ia kenakan di dalam sebuah server — untuk itu gunakan $authorServerAvatar. Gambar bergerak kembali sebagai tautan .gif dan sisanya sebagai .png.
+</block>
+</dash>
+
+<details>
+syntax: $authorAvatar[(userID/@mention)]
+param: userID/@mention|text|Opsional|Gambar profil siapa yang dikembalikan; biarkan kosong untuk orang yang mengetik perintah
+</details>

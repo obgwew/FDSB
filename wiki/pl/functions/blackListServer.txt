@@ -1,0 +1,31 @@
+<dash>
+name: $blackListServer
+desc: Blokuje uruchomienie tej komendy na jakimkolwiek serwerze z listy.
+category: Kontrola dostępu
+
+<block type="text" title="Jak działa komenda?">
+text: $blackListServer sprawdza, na jakim serwerze uruchomiono komendę, i porównuje go z listą, którą podałeś. Jeśli bieżący serwer pasuje, bot wyświetla podany przez ciebie komunikat odmowy — albo domyślny, jeśli go pominąłeś — a reszta komendy zostaje odrzucona. Jeśli nie ma go na liście, nic nie zostaje wyświetlone i skrypt po prostu działa dalej. To czysty sposób, aby komenda nie działała w wybranych miejscach, a wszędzie indziej była dostępna.
+</block>
+
+<block type="code" title="Składnia">
+text: $blackListServer[server; ...; message]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $blackListServer[123456789012345678; Sorry, this server cannot use the command!]
+</block>
+
+<block type="callout" kind="note">
+text: Serwer można zapisać jako jego ID albo nazwę, a nazwa jest dopasowywana bez względu na wielkość liter. Wypisz kilka, rozdzielając je średnikami. Wszystko do ostatniego argumentu jest traktowane jako serwer, więc w ostatnim argumencie umieszczasz własny komunikat odmowy.
+</block>
+
+<block type="callout" kind="warning">
+text: Gdy warunek zostanie spełniony, komenda zatrzymuje się w tym miejscu — żadna linia poniżej nie zostanie wykonana. Pominięcie własnej wiadomości sprawia, że bot sięga po własne sformułowanie.
+</block>
+</dash>
+
+<details>
+syntax: $blackListServer[server; ...; message]
+param: server|text|Required|Zablokowane serwery, jako ID lub nazwy, rozdzielone średnikami
+param: message|text|Optional|Wiadomość wyświetlana zamiast domyślnej odmowy, gdy serwer pasuje
+</details>

@@ -1,0 +1,46 @@
+<dash>
+name: $onlyFor
+desc: Hanya mengizinkan anggota atau peran yang tercantum menggunakan perintah, dan menampilkan pesan Anda sendiri kepada semua orang lain.
+category: Kontrol Akses
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $onlyFor adalah gerbang yang Anda letakkan di atas sebuah perintah. Cantumkan orang-orang dan peran yang diizinkan lewat, lalu akhiri dengan pesan yang harus dilihat semua orang lain. Jika orang yang menjalankan perintah cocok dengan salah satu entri, tidak terjadi apa-apa dan sisa perintah Anda berlanjut. Jika tidak cocok, pesan dikirim dan sisa perintah dibuang tepat di situ.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $onlyFor[ID or name; ...; error message]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $onlyFor[123456789012345678; Moderator; This command is for moderators only.]
+text: $sendMessage[Here is the secret!]
+</block>
+
+<block type="options" title="Apa yang bisa Anda cantumkan">
+option: ID|ID pengguna atau peran seperti 123456789012345678, dengan atau tanpa tanda mention
+option: name|Nama peran seperti Moderator, atau nama pengguna untuk satu pengguna
+</block>
+
+<block type="callout" kind="note">
+text: Letakkan pesannya di akhir — semua yang setelah entri dihitung sebagai satu pesan. Seorang anggota lolos ketika ia disebut secara langsung atau ketika ia memegang salah satu peran yang tercantum.
+</block>
+
+<block type="callout" kind="important">
+text: Gerbang ini untuk kenyamanan, bukan keamanan sungguhan. Siapa pun yang bisa membaca perintah Anda dapat mengetahui siapa yang ada di daftar, dan siapa pun yang bisa mengeditnya dapat menghapus dirinya sendiri dari sana. Simpan bagian yang benar-benar sensitif di pihak Anda.
+</block>
+</dash>
+
+<details>
+syntax: $onlyFor[ID or name; ...; error message]
+param: ID or name|text|Wajib|Satu atau lebih ID pengguna, ID peran atau nama yang diizinkan melanjutkan.
+param: error message|text|Wajib|Pesan yang dikirim ke kanal saat orang itu tidak diizinkan. Semua yang setelah entri dihitung sebagai pesan ini.
+</details>

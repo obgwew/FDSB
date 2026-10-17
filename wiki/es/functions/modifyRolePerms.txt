@@ -1,0 +1,40 @@
+<dash>
+name: $modifyRolePerms
+desc: Activa o desactiva permisos individuales de un rol en tu servidor.
+category: Moderación
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Nombra el rol primero, y luego lista los permisos que quieres cambiar, cada uno con un + o un - delante: + otorga el permiso, - lo quita. Si omites el signo, obtienes un +. Todo lo que no menciones conserva lo que tenía antes. La palabra all es especial, porque un + junto a ella activa el conjunto completo de permisos de una sola vez. Cuando el guardado se completa, el bot responde con una marca verde indicando el rol que cambió.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !perms en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $modifyRolePerms[role ID or role mention; permission +/-; ...]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $modifyRolePerms[<@&123456789012345678>; +send_messages; -connect]
+</block>
+
+<block type="callout" kind="warning">
+text: Este solo funciona dentro de un servidor, y el bot necesita Manage Roles además de un rol que esté por debajo de su rol más alto. Si omites cualquiera de los dos, Discord simplemente rechaza el cambio.
+</block>
+
+<block type="callout" kind="note">
+text: Los nombres de permisos son la escritura en snake_case que usa el propio Discord, por ejemplo send_messages, kick_members o manage_channels. Un nombre que la aplicación no reconoce detiene el comando con un error antes de que se guarde absolutamente nada.
+</block>
+</dash>
+
+<details>
+syntax: $modifyRolePerms[role ID or role mention; permission +/-; ...]
+param: roleID|snowflake|Obligatorio|El rol a cambiar, como una mención @role o su ID
+param: permissions|text|Obligatorio|Nombres de permisos a cambiar, cada uno marcado con + o -; all cubre el conjunto completo
+</details>

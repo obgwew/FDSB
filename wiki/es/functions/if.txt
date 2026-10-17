@@ -1,0 +1,49 @@
+<dash>
+name: $if
+desc: Ejecuta las líneas de debajo solo cuando una condición que escribes resulta verdadera.
+category: Control de flujo
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $if toma una condición y la comprueba antes de que tu bot haga cualquier otra cosa. Cuando la condición se cumple, las líneas entre $if y el $endif de cierre se ejecutan y los miembros ven lo que escribiste allí. Cuando no se cumple, esas líneas se omiten en silencio y el bot continúa debajo, que es como el mismo comando puede dar a un miembro una respuesta y a todos los demás otra.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !welcome en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $if[condition]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $if[$authorID == 123456789]
+text:   Hello Admin!
+text: $else
+text:   You are not an admin.
+text: $endif
+</block>
+
+<block type="options" title="Operadores de comparación">
+option: ==|Lo mismo que — los números se comparan como números
+option: !=|Distinto de
+option: >|Mayor que
+option: <|Menor que
+option: >=|Mayor o igual que
+option: <=|Menor o igual que
+</block>
+
+<block type="callout" kind="note">
+text: Un $if puede ir dentro de otro. Añade $elif para una segunda condición y $else para el caso en que ninguna coincida, y termina siempre el bloque con $endif para que el bot sepa dónde acaba.
+</block>
+</dash>
+
+<details>
+syntax: $if[condition]
+param: condition|expression|Obligatorio|Qué comprobar, como $authorID == 123 o $var[score] >= 90. Funciona con los seis operadores de comparación.
+</details>

@@ -1,0 +1,34 @@
+<dash>
+name: $ban
+desc: Elimina a un miembro del servidor para siempre.
+category: Moderación
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Dale el ID o la mención de un miembro y el bot banea esa cuenta al instante, sin ningún paso de confirmación por medio. Deja los paréntesis del todo fuera y se vuelve contra quien escribió el comando, que es un error fácil de cometer. No se imprime nada cuando funciona, así que el miembro simplemente se queda callado a partir de ese momento.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !ban en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $ban
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $ban[123456789]
+</block>
+
+<block type="callout" kind="warning">
+text: El bot necesita el permiso Ban Members, y su rol más alto tiene que estar por encima del rol más alto del miembro. Ten en cuenta que un $ban desnudo sin paréntesis banea a la persona que lo escribió.
+</block>
+
+<block type="callout" kind="note">
+text: Solo funciona dentro de un servidor. En una conversación privada el bot publica un error y el comando se detiene ahí sin banear a nadie.
+</block>
+</dash>

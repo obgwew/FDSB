@@ -1,0 +1,31 @@
+<dash>
+name: $boostLevel
+desc: Membacakan tingkat boost server sebagai angka biasa dari 0 sampai 3.
+category: Server
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Setiap server berada pada sebuah tingkat boost, dan perintah ini memberi tahu Anda tingkat mana: 0 selama belum ada yang melakukan boost, lalu 1, 2 atau 3 seiring Anda naik. Discord memberikan tingkat 1 pada dua boost, tingkat 2 pada tujuh dan tingkat 3 pada empat belas. Ini hanya angkanya saja, sehingga Anda dapat menyelipkannya ke dalam kalimat atau membandingkannya di dalam sebuah kondisi.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $boostLevel
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $boostLevel
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $sendMessage[Boost level: $boostLevel]
+</block>
+
+<block type="callout" kind="important">
+text: Tingkat boost hanya ada di dalam sebuah server. Mintalah ini di pesan pribadi, dan bot melaporkan kesalahan serta menghentikan perintah di sana.
+</block>
+</dash>

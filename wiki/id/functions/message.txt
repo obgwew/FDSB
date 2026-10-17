@@ -1,0 +1,31 @@
+<dash>
+name: $message
+desc: Menyerahkan kembali kata-kata yang diketik seorang anggota setelah perintah Anda, semuanya atau satu per satu.
+category: Info
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $message melihat apa yang diketik anggota setelah nama perintah Anda. Digunakan pada dirinya sendiri, ia menyerahkan kembali setiap kata yang mengikuti, dan dengan sebuah angka ia menyerahkan kata tunggal itu, dihitung dari 1. Di dalam sebuah peristiwa tidak ada nama perintah untuk dilewati, sehingga di sana ia menyerahkan kembali seluruh teks yang diterima peristiwa sebagai gantinya.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !message
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $message
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $sendMessage[You said: $message]
+</block>
+
+<block type="callout" kind="note">
+text: Minta sebuah kata yang tidak ada dan barisnya keluar kosong, sehingga tidak ada apa pun yang muncul di kanal. Setiap $ yang diketik anggota ditampilkan sebagai teks biasa dan tidak pernah berjalan sebagai perintah tersendiri.
+</block>
+</dash>

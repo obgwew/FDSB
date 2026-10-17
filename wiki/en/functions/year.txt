@@ -1,0 +1,35 @@
+<dash>
+name: $year
+desc: Gives the current year, as four digits such as 2026.
+category: Timing & Delays
+
+<block type="text" title="How does the command work?">
+text: $year reads the clock and hands back the current year in full, four digits wide, so it reads 2026 rather than a shortened 26. Drop it into a line of text and the digits land where you put them, or leave it on a line of its own and the bot posts the figure in the channel. It changes only once a year, which makes it a stable building block for dates.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !year
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: $year
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $sendMessage[Welcome to $year!]
+</block>
+
+<block type="callout" kind="note">
+text: The year always comes back as four digits, so it is always safe to place it at the end of a date built from $day and $month.
+</block>
+
+<block type="callout" kind="important">
+text: $day, $month and $year all read the bot's own local clock. The timezone set with $time is followed only by $hour, $minute and $second.
+</block>
+</dash>

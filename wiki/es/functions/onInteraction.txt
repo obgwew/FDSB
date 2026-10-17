@@ -1,0 +1,42 @@
+<dash>
+name: $onInteraction
+desc: Ejecuta tu script cuando alguien hace clic en un botón o elige una opción de un menú.
+category: Evento
+
+<block type="text" title="¿Cómo funciona el evento?">
+text: Dale a un comando el campo Prefijo $onInteraction y la aplicación lo marca como evento por ti. A partir de ese momento, cada pulsación de un botón y cada elección hecha en uno de tus menús ejecuta las líneas de abajo, con la persona que pulsó y el ID del componente que tocó a mano. Omite los corchetes y el evento cubre cada componente de cada mensaje, o indica un solo ID dentro de ellos y solo ese botón o menú despierta el comando.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $onInteraction en el campo Prefijo
+item: La aplicación lo marca como evento por ti
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: #PREFIX:$onInteraction
+text: #PREFIX:$onInteraction[button_custom_id]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: #PREFIX:$onInteraction[confirm_btn]
+text:  sendMessage[You clicked the confirm button!]
+</block>
+
+<block type="callout" kind="note">
+text: El ID que pones entre corchetes es el que elegiste al construir el botón o el menú. Las mayúsculas se ignoran en ambos lados, así que confirm_btn y CONFIRM_BTN despiertan el mismo comando.
+</block>
+
+<block type="callout" kind="important">
+text: No hay ningún mensaje escrito detrás de un clic, así que $authorID, $authorName, $mention y $customID son los datos que vale la pena consultar. La pulsación ya está respondida para cuando empiezan tus líneas, así que un comando lento no hará que el botón parezca congelado.
+</block>
+</dash>
+
+<details>
+syntax: $onInteraction[(custom_id)]
+param: customID|text|Opcional|Déjalo vacío para capturar cada componente, o indica el único ID que quieres escuchar
+</details>

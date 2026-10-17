@@ -1,0 +1,42 @@
+<dash>
+name: $onInteraction
+desc: Menjalankan skrip Anda ketika seseorang mengklik tombol atau memilih opsi dari sebuah menu.
+category: Peristiwa
+
+<block type="text" title="Bagaimana cara kerja peristiwa?">
+text: Berikan sebuah perintah kolom Awalan $onInteraction dan aplikasi menandainya sebagai Peristiwa untuk Anda. Sejak saat itu setiap penekanan tombol dan setiap pilihan yang dibuat di salah satu menu Anda menjalankan baris-baris di bawahnya, dengan orang yang menekan dan ID komponen yang disentuhnya keduanya siap di tangan. Biarkan kurungnya lepas dan peristiwa mencakup setiap komponen di setiap pesan, atau sebutkan satu ID di dalamnya dan hanya tombol atau menu itu yang membangunkan perintah.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $onInteraction
+item: Aplikasi menandainya sebagai Peristiwa untuk Anda
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: #PREFIX:$onInteraction
+text: #PREFIX:$onInteraction[button_custom_id]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: #PREFIX:$onInteraction[confirm_btn]
+text:  sendMessage[You clicked the confirm button!]
+</block>
+
+<block type="callout" kind="note">
+text: ID yang Anda masukkan dalam kurung adalah yang Anda pilih saat membangun tombol atau menu itu. Huruf besar diabaikan di kedua sisi, jadi confirm_btn dan CONFIRM_BTN membangunkan perintah yang sama.
+</block>
+
+<block type="callout" kind="important">
+text: Tidak ada pesan ketik yang berada di balik sebuah klik, jadi $authorID, $authorName, $mention dan $customID adalah bagian informasi yang layak diambil. Penekanan sudah dijawab pada saat baris-baris Anda mulai berjalan, sehingga perintah yang lambat tidak akan membuat tombol tampak membeku.
+</block>
+</dash>
+
+<details>
+syntax: $onInteraction[(custom_id)]
+param: customID|text|Opsional|Biarkan kosong untuk menangkap setiap komponen, atau sebutkan satu ID yang ingin Anda dengarkan
+</details>

@@ -1,0 +1,45 @@
+<dash>
+name: $editMessage
+desc: Reescribe el texto de un mensaje que el bot ya envió, en cualquier canal al que pueda acceder.
+category: Mensajes
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Nombra un canal y un mensaje y el bot busca ese mensaje y cambia su texto por lo que le des. El mensaje tiene que ser uno que el propio bot publicó. Añade después un título, una descripción, un color o un pie de página y el mensaje crece con una tarjeta debajo del texto nuevo.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !ping en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $editMessage[channelID; messageID; content; (title; description; color; footer)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $editMessage[$channelID; 123456789; Updated content!]
+</block>
+
+<block type="callout" kind="note">
+text: Tanto el canal como el mensaje vienen como números simples, no como menciones. Si alguno de los dos no coincide con nada que el bot pueda ver, dice cuál de los dos falló en lugar de fallar en silencio.
+</block>
+
+<block type="callout" kind="warning">
+text: El bot tiene que poder ver el canal y editar el mensaje que hay dentro. Los colores se dan como valores hexadecimales como #FF0000.
+</block>
+</dash>
+
+<details>
+syntax: $editMessage[channelID; messageID; content; (title; description; color; footer)]
+param: channelID|snowflake|Obligatorio|ID numérico del canal que contiene el mensaje
+param: messageID|snowflake|Obligatorio|ID numérico del mensaje del bot que reescribir
+param: content|text|Obligatorio|El texto que el mensaje debería mostrar después
+param: title|text|Opcional|Titular para una tarjeta bajo el texto
+param: description|text|Opcional|Texto del cuerpo de esa tarjeta
+param: color|text|Opcional|Color hexadecimal para esa tarjeta
+param: footer|text|Opcional|Pequeña línea de pie para esa tarjeta
+</details>

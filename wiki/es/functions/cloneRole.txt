@@ -1,0 +1,36 @@
+<dash>
+name: $cloneRole
+desc: Crea un rol completamente nuevo en el servidor con la misma configuración que uno existente.
+category: Moderación
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Señálale un rol y el bot lee los permisos de ese rol, su color, si se muestra por separado en la lista de miembros y si se permite que los miembros lo mencionen. Luego crea un segundo rol llevándose todo eso. Añade un nombre como segunda parte y la copia se renombra; déjalo fuera y el nuevo rol mantiene el nombre original.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !ping en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $cloneRole[role ID or @mention; (optional new name)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $cloneRole[&123456789; Cloned Role]
+</block>
+
+<block type="callout" kind="note">
+text: El bot necesita el permiso Manage Roles, y el rol que nombres tiene que pertenecer al servidor en el que estás. No se quita nada — el original se queda exactamente donde estaba.
+</block>
+</dash>
+
+<details>
+syntax: $cloneRole[role ID or @mention; (optional new name)]
+param: role ID or @mention|text|Obligatorio|El rol que quieres copiar
+param: optional new name|text|Opcional|Cómo llamar a la copia. Déjalo vacío para reutilizar el nombre original.
+</details>

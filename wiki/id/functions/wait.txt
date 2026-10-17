@@ -1,0 +1,42 @@
+<dash>
+name: $wait
+desc: Menjeda eksekusi perintah selama waktu tertentu, sehingga baris berikutnya dijalankan setelah jeda selesai.
+category: Waktu & Jeda
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $wait menjeda seluruh perintah selama durasi yang ditentukan. Baris-baris di bawahnya baru akan dijalankan setelah jeda berakhir. Durasi ditulis sebagai angka diikuti satuan: s untuk detik, m untuk menit, h untuk jam, d untuk hari. Apa pun yang sudah dikirim di atas jeda akan dikirim terlebih dahulu, jadi pesan pertama bisa muncul langsung dan sisanya menyusul setelah jeda.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !wait
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $wait[time]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $sendMessage[Starting...]
+text: $wait[5s]
+text: $sendMessage[Done after 5 seconds!]
+</block>
+
+<block type="callout" kind="note">
+text: Jeda hanya mempengaruhi perintah yang menjalankannya. Perintah dari orang lain akan berjalan seperti biasa.
+</block>
+
+<block type="callout" kind="important">
+text: Pada versi yang sedang Anda gunakan, jeda ini tidak diterapkan. Baris ini dilewati dan baris di bawahnya langsung dijalankan tanpa menunggu.
+</block>
+</dash>
+
+<details>
+syntax: $wait[time]
+param: time|text|Wajib|Durasi jeda, berupa angka diikuti s, m, h, atau d, contoh: 5s, 10m, 1h
+</details>

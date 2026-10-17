@@ -1,0 +1,37 @@
+<dash>
+name: $mod
+desc: Devuelve lo que sobra al dividir un número entre otro.
+category: Matemática y números
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Dale dos o más números y el bot divide el primero entre el segundo, y luego informa de lo que sobra. Añade un tercer número y se aplica a la respuesta a su vez, así que varias divisiones pueden encadenarse de una sola vez. $mod[10; 3] devuelve 1, que es el resto de dividir 10 entre 3.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $mod en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $mod[a; b; ...]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $sendMessage[$mod[10; 3]]
+</block>
+
+<block type="callout" kind="warning">
+text: Dividir entre cero detiene el comando con un error, y cualquier cosa que no sea un número dentro de los corchetes se rechaza de la misma manera.
+</block>
+</dash>
+
+<details>
+syntax: $mod[a; b; ...]
+param: a|number|Obligatorio|El número que se divide
+param: b|number|Obligatorio|El número entre el que dividir, nunca 0. Cualquier número extra se aplica uno tras otro
+</details>

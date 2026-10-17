@@ -1,0 +1,35 @@
+<dash>
+name: $minute
+desc: Da el minuto actual de la hora, de 00 a 59.
+category: Tiempos y esperas
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $minute lee el reloj y devuelve el minuto actual, siempre con dos dígitos, así que el noveno minuto de la hora vuelve como 09. Colócalo dentro de una línea de texto y los dígitos caen donde los pongas, o déjalo en una línea propia y el bot publica la cifra en el canal. Se mide de nuevo en cada ejecución, así que cambia a medida que pasan los minutos.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !minute en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $minute
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $sendMessage[It is now $hour:$minute]
+</block>
+
+<block type="callout" kind="note">
+text: El valor va de 00 a 59 y siempre tiene dos dígitos, así que queda alineado cuando lo colocas entre $hour y $second.
+</block>
+
+<block type="callout" kind="important">
+text: $minute sigue la zona horaria que establezcas con $time. Si nunca estableces una, recurre al reloj local del propio bot.
+</block>
+</dash>

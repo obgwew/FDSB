@@ -1,0 +1,43 @@
+<dash>
+name: $call
+desc: Ejecuta un bloque con nombre de tus propias líneas en el punto donde lo pides.
+category: Control de flujo
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Todo lo que pongas entre $func[greet] y $endfunc se reserva como un bloque con nombre, y $call[greet] ejecuta ese bloque justo donde lo escribiste. Las líneas de dentro se desarrollan contra lo que ya está ocurriendo, así que todo lo que envíen o construyan aparece en el canal en ese punto exacto. Pide un nombre al que nunca se le dio un bloque y el bot publica un error y se detiene ahí.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !welcome en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $call[name]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $func[greet]
+text: $sendMessage[Hello from the function]
+text: $endfunc
+text: $call[greet]
+</block>
+
+<block type="callout" kind="important">
+text: Un bloque llamado nunca recibe un conjunto nuevo de variables con el que trabajar — usa las que ya están en juego. Las llamadas se apilan cincuenta de profundo, y todo lo más profundo se rechaza como recursión descontrolada.
+</block>
+
+<block type="callout" kind="note">
+text: Nombra el bloque, ciérralo con $endfunc y luego llámalo por ese mismo nombre. También puedes meter $call directamente en los paréntesis de otro comando para llevar la salida del bloque a una línea.
+</block>
+</dash>
+
+<details>
+syntax: $call[name]
+param: name|text|Obligatorio|Nombre de un bloque abierto con $func y cerrado con $endfunc
+</details>

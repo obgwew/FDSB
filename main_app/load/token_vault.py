@@ -2,13 +2,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 # main_app/token_vault.py
-#
-# تخزين توكنات البوتات في مخزن النظام الآمن بدل ملف config.json:
-#   Windows -> Credential Manager   | macOS/iOS -> Keychain
-#   Android -> Keystore             | Linux     -> libsecret
-#
-# لا يوجد هنا مفتاح تشفير مكتوب في الكود ولا خوارزمية مخصصة:
-# التشفير ومفتاحه يديرهما نظام التشغيل نفسه.
 
 import asyncio
 import json
@@ -18,18 +11,15 @@ import flet as ft
 import flet_secure_storage as fss
 
 _KEY_PREFIX = "fdsb.bot_token."
-_TIMEOUT = 5  # ثوانٍ؛ بدل مهلة Flet الافتراضية (10 ثوانٍ) لكل استدعاء
+_TIMEOUT = 5
 
 
 class TokenVault:
     _storage: "fss.SecureStorage | None" = None
-    # نسخة في ذاكرة العملية فقط (وليس على القرص) لتُقرأ من كود متزامن/threads بدون await
     _cache: dict[str, str] = {}
 
-    # ── التهيئة ────────────────────────────────────────────────────────────
     @classmethod
     def attach(cls, page: ft.Page) -> None:
-        """يجب استدعاؤها مرة واحدة عند بدء التطبيق."""
         if cls._storage is not None:
             return
         cls._storage = fss.SecureStorage()
@@ -42,7 +32,6 @@ class TokenVault:
             raise RuntimeError("TokenVault.attach(page) must be called first.")
         return cls._storage
 
-    # ── هوية البوت = اسم مجلده داخل app_data ───────────────────────────────
     @staticmethod
     def bot_id_from_dir(bot_dir: str) -> str:
         return os.path.basename(os.path.normpath(bot_dir))
@@ -51,7 +40,6 @@ class TokenVault:
     def _key(bot_id: str) -> str:
         return f"{_KEY_PREFIX}{bot_id}"
 
-    # ── العمليات الأساسية ──────────────────────────────────────────────────
     @classmethod
     async def set(cls, bot_id: str, token: str) -> None:
         if not token:
@@ -68,16 +56,13 @@ class TokenVault:
 
     @classmethod
     async def get_for_dir(cls, bot_dir: str) -> str:
-        """الطريقة المفضلة لباقي الملفات: token = await TokenVault.get_for_dir(bot_dir)"""
         return await cls.get(cls.bot_id_from_dir(bot_dir))
 
     @classmethod
     async def remove(cls, bot_id: str) -> None:
-        """استدعها عند حذف البوت."""
         cls._cache.pop(bot_id, None)
         await asyncio.wait_for(cls._require().remove(cls._key(bot_id)), _TIMEOUT)
 
-    # ── قراءة متزامنة من الذاكرة (تُستخدم في واجهة المستخدم) ────────────────
     @classmethod
     def get_cached(cls, bot_id: str) -> str:
         return cls._cache.get(bot_id, "")
@@ -94,7 +79,6 @@ class TokenVault:
 
     @classmethod
     async def preload(cls, app_data_dir: str) -> int:
-        """يقرأ توكنات كل البوتات من المخزن الآمن إلى الذاكرة مرة واحدة عند بدء التطبيق."""
         loaded = 0
         if not os.path.isdir(app_data_dir):
             return loaded
@@ -116,14 +100,8 @@ class TokenVault:
     async def has(cls, bot_id: str) -> bool:
         return await asyncio.wait_for(cls._require().contains_key(cls._key(bot_id)), _TIMEOUT)
 
-    # ── ترحيل التوكنات القديمة (النص العادي داخل config.json) ───────────────
     @classmethod
     async def migrate_plaintext(cls, app_data_dir: str) -> tuple[int, list[str]]:
-        """
-        ينقل أي توكن مخزن كنص عادي إلى المخزن الآمن، ثم يحذفه من config.json.
-        لا يحذف النص العادي إلا بعد التأكد أن القراءة من المخزن الآمن تعيد نفس القيمة.
-        يرجع (عدد ما تم ترحيله, أسماء البوتات التي فشل ترحيلها).
-        """
         migrated = 0
         failed: list[str] = []
 
@@ -164,8 +142,6 @@ class TokenVault:
             except Exception as e:
                 print(f"[TokenVault] migration failed for {entry.name}: {e}")
                 failed.append(entry.name)
-                # انتهاء المهلة = المخزن الآمن غير متاح أصلاً (الإضافة غير مبنية في العميل)،
-                # فلا فائدة من تجربة بقية البوتات وانتظار المهلة لكل واحد منها
                 if isinstance(e, TimeoutError) or "Timeout" in str(e):
                     break
 

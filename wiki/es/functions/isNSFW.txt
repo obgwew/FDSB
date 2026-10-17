@@ -1,0 +1,36 @@
+<dash>
+name: $isNSFW
+desc: Responde true o false según si un canal tiene restricción de edad.
+category: Canal
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Apúntalo a una mención de canal o a un ID y te informa de si ese canal lleva el ajuste de restricción de edad. La palabra true o false aparece en el canal, y dentro de otro comando entra directamente como texto. Útil para contener discretamente las respuestas siempre que la conversación se haya movido a un lugar solo para adultos.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !channelcheck en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $isNSFW[channel mention/ID]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $isNSFW[<#123456789012345678>]
+</block>
+
+<block type="callout" kind="note">
+text: Un canal que el bot no tiene permitido ver vuelve como error en lugar de un simple false, así que asegúrate de que se le ha dado acceso al que nombras.
+</block>
+</dash>
+
+<details>
+syntax: $isNSFW[channel mention/ID]
+param: channel|text|Obligatorio|El canal a comprobar, como una mención @canal o su ID
+</details>

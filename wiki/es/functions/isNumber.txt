@@ -1,0 +1,52 @@
+<dash>
+name: $isNumber
+desc: Responde true o false según si un valor es el tipo de número por el que preguntaste.
+category: Matemática y números
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $isNumber mira un valor y te dice si coincide con el tipo de número que nombraste.
+text: Dale una fórmula y un valor y responde con las palabras simples true o false, que es una forma rápida de proteger un comando antes de que haga cualquier aritmética.
+text: El texto que no se puede leer en absoluto, como una palabra o un nombre de fórmula que no conoce, simplemente cuenta como false en lugar de detener la ejecución.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !num en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $isNumber[formula; value]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $isNumber[int; 42]
+</block>
+
+<block type="options" title="Fórmulas disponibles">
+option: int|Un número entero escrito sin punto decimal
+option: nat|Un número entero de 1 o más
+option: pos|Cualquier cosa por encima de cero
+option: neg|Cualquier cosa por debajo de cero
+option: zero|Exactamente cero
+option: even|Un número entero que se divide por dos
+option: odd|Un número entero que no se divide por dos
+option: dec|Un número escrito con punto decimal
+option: frac|Una fracción escrita como 3/4, con un número inferior distinto de cero
+option: num|Cualquier número en absoluto, entero o decimal
+</block>
+
+<block type="callout" kind="note">
+text: La respuesta es siempre la palabra true o la palabra false, nunca un número. Todo lo ilegible cuenta como false, así que tu comando sigue adelante.
+</block>
+</dash>
+
+<details>
+syntax: $isNumber[formula; value]
+param: formula|text|Obligatorio|Qué tipo comprobar: int, nat, pos, neg, zero, even, odd, dec, frac, num
+param: value|text|Obligatorio|El texto que quieres comprobar
+</details>

@@ -1,0 +1,31 @@
+<dash>
+name: $serverOwnerID
+desc: Memberi Anda ID akun yang memiliki server tempat perintah dijalankan.
+category: Info
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $serverOwnerID mencari server tempat perintah digunakan dan mengembalikan ID akun yang menjalankannya. Taruh nomornya dalam pesan untuk menampilkannya, atau berikan ke apa pun yang membutuhkan ID pengguna. Ini nilai, bukan pesan, jadi ia bisa berdiri sendiri di tengah kalimat.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !serverOwnerID
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $serverOwnerID
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: Server owner ID: $serverOwnerID
+</block>
+
+<block type="callout" kind="note">
+text: Ini hanya bekerja di dalam server. Di chat pribadi tidak ada yang bisa dicari, jadi bot menjawab dengan kesalahan alih-alih angka.
+</block>
+</dash>

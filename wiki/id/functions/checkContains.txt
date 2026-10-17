@@ -1,0 +1,38 @@
+<dash>
+name: $checkContains
+desc: Mengembalikan true atau false bergantung pada apakah sebuah teks memuat setidaknya satu dari frasa yang Anda daftarkan.
+category: Utilitas Teks
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $checkContains memeriksa satu teks dan satu frasa atau lebih, lalu menjawab dengan kata true atau false. Ia menjawab true begitu satu frasa pun muncul di dalam teks, sehingga Anda tidak pernah perlu menguji setiap frasa sendirian. Frasa yang kosong hanya cocok dengan teks yang kosong. Bila berdiri sendiri, ia mencetak jawaban di kanal, dan di dalam perintah lain jawabannya disisipkan di tempatnya.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $checkContains[text; phrase; ...]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $if[$checkContains[$message; hello; hi; hey]]
+text:   $sendMessage[Say hello back!]
+text: $endif
+</block>
+
+<block type="callout" kind="note">
+text: Jawabannya selalu kata polos true atau false, dan itulah yang diharapkan $if dan $onlyIf. Anda membutuhkan setidaknya dua argumen — teks ditambah satu frasa.
+</block>
+</dash>
+
+<details>
+syntax: $checkContains[text; phrase; ...]
+param: text|text|Wajib|Teks yang ditelusuri. Perintah bersarang seperti $message diuraikan lebih dulu.
+param: phrase|text|Wajib|Satu frasa atau lebih yang dicari. Hasilnya true bila salah satunya muncul di dalam teks.
+</details>

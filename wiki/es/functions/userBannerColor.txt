@@ -1,0 +1,40 @@
+<dash>
+name: $userBannerColor
+desc: Te da el color de acento detrás del banner de perfil de un miembro como un valor hexadecimal que puedes usar.
+category: Info
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Pon un ID de usuario o una mención entre los paréntesis y el bot reporta el color de acento que está detrás del banner de esa persona; déjalos fuera y obtienes el del propio bot. Lo que devuelve es la forma #RRGGBB que los campos de color y las barras de embed ya esperan, en mayúsculas. Es una forma rápida de teñir una tarjeta para que combine con quien sea de quien estés hablando.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !themecolor en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $userBannerColor[(user_id)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $userBannerColor[123456789012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: Solo los miembros que eligieron un color de acento tienen uno que dar, y el bot además tiene que localizarlos primero. Cuando no vuelve nada, la forma independiente lo dice en el canal en lugar de publicar una línea vacía.
+</block>
+
+<block type="callout" kind="note">
+text: Usado dentro de otra línea funciona solo con miembros que el bot ya conoce, y un color de todo ceros cuenta como nada digno de mostrar. Sin argumento siempre significa el color del propio bot, nunca el del miembro que ejecutó el comando.
+</block>
+</dash>
+
+<details>
+syntax: $userBannerColor[(user_id)]
+param: userID|snowflake|Opcional|El miembro a buscar, como ID o mención; omítelo y obtienes el propio color de acento del bot
+</details>

@@ -1,0 +1,38 @@
+<dash>
+name: $findRole
+desc: Mengubah nama peran, ID, atau mention menjadi ID peran tersebut.
+category: Utilitas
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Peran punya nama yang sering diubah dan dieja dengan berbagai cara, jadi perintah ini mencarikannya untuk Anda di server saat ini. Ketik namanya persis seperti yang muncul atau dengan kombinasi huruf kapital apa pun, atau tempel mention peran atau ID peran, dan Anda akan mendapatkan ID peran yang cocok. Ditulis sendiri, hasilnya diposting di kanal; diletakkan di dalam baris lain, hasilnya justru diisi di sana.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $findRole
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $findRole[name]
+text: $findRole[roleID]
+text: $findRole[@role]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $findRole[Moderators]
+</block>
+
+<block type="callout" kind="note">
+text: Ia hanya bekerja di dalam server, karena peran dimiliki oleh sebuah server. Minta nama yang tidak ada dan bot memposting kesalahan yang menyatakan hal itu, yang menyelamatkan Anda dari memberikan ID yang salah ke apa pun yang menyusul.
+</block>
+</dash>
+
+<details>
+syntax: $findRole[query]
+param: query|text|Wajib|Mention peran, ID peran, atau nama peran yang dicari
+</details>

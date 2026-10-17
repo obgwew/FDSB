@@ -1,0 +1,40 @@
+<dash>
+name: $onJoined
+desc: Menjalankan skrip Anda sendiri setiap kali anggota baru bergabung ke server.
+category: Peristiwa
+
+<block type="text" title="Bagaimana cara kerja peristiwa?">
+text: Simpan sebuah perintah yang kolom Awalannya $onJoined dan aplikasi menandainya sebagai Peristiwa untuk Anda. Detik seorang anggota masuk, baris-baris di bawah awalan itu mulai berjalan tanpa ada yang mengetik apa pun. Gunakan $mention untuk menandai siapa pun yang baru tiba. Jika Anda menaruh ID kanal dalam kurung tepat setelah awalan, balasan mendarat di kanal itu alih-alih di mana pun perintah disiapkan.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $onJoined
+item: Aplikasi menandainya sebagai Peristiwa untuk Anda
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: #PREFIX:$onJoined
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: #PREFIX:$onJoined
+text:  sendMessage[Welcome $mention to the server!]
+</block>
+
+<block type="callout" kind="note">
+text: Pertahankan $onJoined di baris pertama. Geser lebih ke bawah dan aplikasi berhenti memperlakukan perintah itu sebagai peristiwa, sehingga ia akan duduk dan menunggu seseorang mengetik awalannya seperti perintah biasa.
+</block>
+
+<block type="callout" kind="important">
+text: Tidak ada yang pernah mengetik $onJoined di obrolan, jadi apa pun yang mengharapkan kata kunci yang diketik tidak akan pernah menyala. Satu anggota yang tiba memicu satu kali jalankan, dan peristiwa yang sama terus menyala saat orang datang dan pergi.
+</block>
+</dash>
+
+<details>
+syntax: $onJoined
+</details>

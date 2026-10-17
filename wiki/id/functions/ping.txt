@@ -1,0 +1,31 @@
+<dash>
+name: $ping
+desc: Memberi tahu Anda seberapa cepat bot berbicara dengan Discord, dalam milidetik.
+category: Utilitas
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $ping mengukur perjalanan pulang-pergi antara bot dan Discord dan menyerahkan angkanya dalam milidetik. Letakkan di dalam baris teks dan bot mengirim angka itu di kanal, sehingga anggota dapat menilai koneksi sendiri. Angka kecil berarti bot bereaksi cepat, angka besar berarti ada sesuatu yang memperlambat tautan saat ini.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !speed
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $ping
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $ping pong!
+</block>
+
+<block type="callout" kind="note">
+text: Semakin rendah angkanya, semakin responsif bot terasa di kanal. Ia mengukur koneksi antara bot dan Discord, bukan apa pun di perangkat Anda, sehingga nilai yang sama bisa berubah dari satu menit ke menit berikutnya.
+</block>
+</dash>

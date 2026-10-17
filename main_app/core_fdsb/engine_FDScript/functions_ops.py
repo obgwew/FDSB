@@ -4,7 +4,10 @@
 # main_app/core_fdsb/engine_FDScript/functions_ops.py
 
 from .errors import FDLogicError, FDRuntimeError, _send_error
-from .parse_utils import _truncate
+import re
+
+from . import tokenizer as _tokenizer
+from .parse_utils import _truncate, _find_matching_bracket, _split_args
 
 
 _CALL_HEAD = '$call['
@@ -35,6 +38,9 @@ def _find_inline_call_spans(text: str) -> list:
             return spans
         spans.append((start, end))
         i = end + 1
+
+
+_PREFETCH_HEAD_RE = re.compile(r'\$([A-Za-z_][A-Za-z0-9_]*)\[')
 
 
 class FunctionsMixin:
@@ -136,9 +142,46 @@ class FunctionsMixin:
         ctx.log_event(f"call [{name}] → captured {_truncate(captured)!r}")
         return captured
 
+    async def _prefetch_inline_cmds(self, args: list, ctx) -> None:
+        loader = _tokenizer._cmd_loader
+        if not args or loader is None:
+            return
+
+        for arg in args:
+            if not arg or '$' not in arg:
+                continue
+
+            found = []
+            for m in _PREFETCH_HEAD_RE.finditer(arg):
+                module = loader(m.group(1))
+                fn = getattr(module, 'prefetch', None) if module else None
+                if fn is None:
+                    continue
+                open_pos = m.end() - 1
+                close = _find_matching_bracket(arg, open_pos)
+                if close == -1:
+                    continue
+                found.append((fn, _split_args(arg[open_pos + 1:close])))
+
+            for fn, inner_args in reversed(found):
+                dest = await ctx.get_dest(raw=True)
+                await fn(inner_args, ctx, dest)
+
+    async def _expand_inline_text(self, text, tokens, ctx):
+        if not text or '$' not in text:
+            return text
+        original = str(text)
+        box = [original]
+        await self._expand_inline_calls(box, tokens, ctx)
+        if box[0] == original:
+            return text
+        return _tokenizer.TextToken(box[0], getattr(text, 'line_no', None))
+
     async def _expand_inline_calls(self, args: list, tokens, ctx) -> None:
         if not args:
             return
+
+        await self._prefetch_inline_cmds(args, ctx)
 
         for idx, arg in enumerate(args):
             if not arg or '$call[' not in arg:

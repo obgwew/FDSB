@@ -1,0 +1,36 @@
+<dash>
+name: $findChannel
+desc: Convierte el nombre de un canal en el ID que puedes usar en otros sitios.
+category: Canal
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Dale el nombre de un canal y el bot recorre los canales del servidor buscando ese nombre exacto, ignorando las mayúsculas, y te devuelve el ID del que encuentra. Pega una mención de canal como <#123> y simplemente confirma que el canal existe y devuelve su ID. Si no encuentra nada, la respuesta queda vacía, así que conviene comprobarlo antes de enviar algo allí.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $findChannel en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $findChannel[name/mention]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $findChannel[general]
+</block>
+
+<block type="callout" kind="note">
+text: El nombre tiene que coincidir desde la primera letra hasta la última: general-chat no encontrará general. Poder nombrar un canal en lugar de pegar un ID largo es precisamente el objetivo, y solo busca dentro del servidor en el que se ejecutó el comando.
+</block>
+</dash>
+
+<details>
+syntax: $findChannel[name/mention/ID]
+param: channel|text|Obligatorio|El nombre o la mención del canal que buscar.
+</details>

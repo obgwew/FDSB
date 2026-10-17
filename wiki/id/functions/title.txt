@@ -1,0 +1,36 @@
+<dash>
+name: $title
+desc: Menambahkan judul tebal di bagian atas embed (kartu) yang dibuat perintah.
+category: Pembuat Embed
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Isi yang Anda masukkan di dalam kurung akan menjadi judul tebal di bagian paling atas kartu, tepat di atas deskripsi dan garis berwarna. Format Discord seperti tebal, miring, dan tautan tetap bisa dipakai di dalamnya. Jika perintah membuat beberapa kartu sekaligus, Anda bisa menambahkan nomor kartu di akhir teks untuk menerapkan judul ke kartu yang dipilih, alih-alih kartu pertama.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !rules
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $title[text]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $title[Server Rules]
+</block>
+
+<block type="callout" kind="note">
+text: Judul hanya akan muncul saat kartu embed benar-benar dikirim. Jadi, $title hanya akan berpengaruh kalau ada baris lain yang ikut membuat dan mengirim embed tersebut. Usahakan judul tetap singkat dan satu baris — jika terlalu panjang, Discord bisa menolaknya sehingga kartu tidak terkirim.
+</block>
+</dash>
+
+<details>
+syntax: $title[text]
+param: text|text|Wajib|Judul yang ditampilkan di bagian atas kartu embed
+</details>

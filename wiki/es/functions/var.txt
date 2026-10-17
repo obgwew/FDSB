@@ -1,0 +1,38 @@
+<dash>
+name: $var
+desc: Guarda un valor durante una sola ejecución de tu comando y luego lo olvida de nuevo.
+category: Variables
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Dale un nombre y un valor y aparta ese valor para el resto de la ejecución; dale solo el nombre y te devuelve el valor directamente. Eso lo convierte en el lugar idóneo para un total acumulado, un contador de bucle o cualquier cifra de trabajo que no quieras que te llene el canal. Todo lo que almacenó desaparece en el momento en que tu comando termina.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !scoreboard en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $var[name; value]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $var[score; 10]
+text: $sendMessage[Your score is $var[score]]
+</block>
+
+<block type="callout" kind="note">
+text: $setVar y $getVar son los que recuerdan las cosas entre ejecuciones, que es lo que quieres para puntuaciones y ajustes. $var es el borrador para cifras que solo importan mientras este comando se ejecuta, y también puede ir dentro de los paréntesis de otro comando.
+</block>
+</dash>
+
+<details>
+syntax: $var[name; (value)]
+param: name|text|Obligatorio|El nombre que quieres leer o escribir
+param: value|text|Opcional|Añade un valor y se guarda bajo ese nombre; omítelo y en su lugar se devuelve lo que haya almacenado ahí
+</details>

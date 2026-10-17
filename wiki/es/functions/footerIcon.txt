@@ -1,0 +1,38 @@
+<dash>
+name: $footerIcon
+desc: Pone una pequeña imagen redonda junto al pie de una tarjeta que estás creando.
+category: Constructor de embed
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $footerIcon adjunta una imagen a la línea inferior de la tarjeta que estás creando, ese pequeño círculo que va junto al texto del pie. Dale cualquier texto que contenga una dirección web y el bot elige el primer enlace que encuentre, así que puedes dejar signos de puntuación alrededor. Si van a salir varias tarjetas a la vez, termina con el número de tarjeta para que la imagen caiga en la que querías.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !welcome en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $footerIcon[url;(index)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $footer[(c) My Community]
+text: $footerIcon[https://example.com/logo.png]
+</block>
+
+<block type="callout" kind="note">
+text: La dirección tiene que empezar por http:// o https://. Cualquier cosa pegada al final, un punto o un paréntesis de cierre por ejemplo, se recorta por ti, y un texto sin ningún enlace válido se rechaza.
+</block>
+</dash>
+
+<details>
+syntax: $footerIcon[url;(index)]
+param: url|text|Obligatorio|Texto que contiene la dirección de la imagen, empezando por http:// o https://
+param: index|number|Opcional|En qué tarjeta poner la imagen cuando estás creando varias a la vez (por defecto 1)
+</details>

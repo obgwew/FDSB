@@ -1,0 +1,25 @@
+<dash>
+name: $minute
+desc: 返回当前的分钟数，范围从 00 到 59。
+category: 计时与延迟
+
+<block type="text" title="命令如何工作？">
+text: $minute 读取时钟并交回当前的分钟数，始终为两位数，因此一小时中的第 9 分钟返回 09。把它放进一行文本里，数字就会落在你放置的位置；让它独占一行时，机器人会把这个数字发送到频道中。每次运行都会重新取值，因此它会随着分钟的流逝而变化。
+</block>
+
+<block type="code" title="语法">
+text: $minute
+</block>
+
+<block type="code" title="可复制示例">
+text: $sendMessage[It is now $hour:$minute]
+</block>
+
+<block type="callout" kind="note">
+text: 取值范围是 00 到 59，且始终为两位数，因此把它放在 $hour 和 $second 之间时能够整齐对齐。
+</block>
+
+<block type="callout" kind="important">
+text: $minute 遵循你用 $time 设置的时区。如果从未设置过，它会退回机器人自身的本地时钟。
+</block>
+</dash>

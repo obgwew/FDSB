@@ -1,0 +1,31 @@
+<dash>
+name: $time
+desc: Legt die Zeitzone fest, in der die Uhr für den Rest dieses Befehls gelesen wird.
+category: Timing & Verzögerungen
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: $time übernimmt einen Zeitzonennamen aus der weltweiten Liste, etwa Asia/Amman oder Europe/London, und behält ihn für den laufenden Befehl bei. Ist er gesetzt, lesen $hour, $minute und $second die Uhr in dieser Zeitzone statt dort, wo der Bot zufällig gehostet wird. Selbst gibt es nichts aus — es ist eine Einrichtungszeile, die Sie über diejenigen setzen, die die Zeit wirklich lesen.
+</block>
+
+<block type="code" title="Syntax">
+text: $time[timezone]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $time[Asia/Amman]
+text: $sendMessage[Right now it is $hour:$minute]
+</block>
+
+<block type="callout" kind="note">
+text: Schreiben Sie die Zeitzone als Region und Stadt, durch einen Schrägstrich getrennt, etwa Asia/Amman, Europe/London oder America/New_York. Die Liste ist dieselbe Standardliste, die der Rest der Welt verwendet, sodass jeder vertraute Name akzeptiert wird.
+</block>
+
+<block type="callout" kind="important">
+text: Wird der Name nicht erkannt, antwortet der Bot mit einem Fehler, statt die Uhr zu ändern. Die Einstellung gilt nur für diesen Durchgang, setzen Sie $time also vor die Zeilen, die die Stunde lesen, und denken Sie daran, dass $day, $month und $year unabhängig davon weiterhin die lokale Uhr des Bots lesen.
+</block>
+</dash>
+
+<details>
+syntax: $time[timezone]
+param: timezone|text|Erforderlich|Ein IANA-Zeitzonennamen, etwa Asia/Amman oder Europe/London
+</details>

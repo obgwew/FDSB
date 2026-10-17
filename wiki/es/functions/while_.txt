@@ -1,0 +1,40 @@
+<dash>
+name: $while
+desc: Sigue repitiendo las líneas que tiene debajo mientras la condición que das se mantenga verdadera.
+category: Control de flujo
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $while mira su condición, ejecuta las líneas que tiene debajo, luego vuelve a mirar, y así da vueltas hasta que la condición finalmente resulta falsa. Algo dentro del bucle tiene que cambiar en cada pasada, si no nunca termina. Cierra el bloque con $endwhile, y coloca $break donde quieras salir antes de tiempo.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !countdown en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $while[condition]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $setVar[i; 0]
+text: $while[$getVar[i] < 5]
+text:   $sendMessage[Count: $getVar[i]]
+text:   $setVar[i; $math[$getVar[i] + 1]]
+text: $endwhile
+</block>
+
+<block type="callout" kind="warning">
+text: Una condición que nunca se vuelve falsa deja al bot girando y tu comando nunca termina. Cambia siempre dentro del bucle aquello que la condición está observando, y ten $break a mano como tu vía de escape.
+</block>
+</dash>
+
+<details>
+syntax: $while[condition]
+param: condition|expression|Obligatorio|Qué comprobar antes de cada pasada, usando los mismos operadores que $if (==, !=, >, <, >=, <=). El bucle sigue ejecutándose mientras sea verdadera.
+</details>

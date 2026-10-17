@@ -1,0 +1,25 @@
+<dash>
+name: $second
+desc: 返回当前的秒数，范围从 00 到 59。
+category: 计时与延迟
+
+<block type="text" title="命令如何工作？">
+text: $second 读取时钟并交回当前的秒数，始终为两位数，因此每分钟的第一秒显示 00。把它放进一行文本里，数字就会落在你放置的位置；让它独占一行时，机器人会把这个数字发送到频道中。由于每次运行都会重新读取，它可以让命令每次给出略有不同的结果。
+</block>
+
+<block type="code" title="语法">
+text: $second
+</block>
+
+<block type="code" title="可复制示例">
+text: $sendMessage[The time is $hour:$minute:$second]
+</block>
+
+<block type="callout" kind="note">
+text: 取值范围是 00 到 59，且始终为两位数，这让完整的 $hour:$minute:$second 读数保持均匀的间隔。
+</block>
+
+<block type="callout" kind="important">
+text: $second 遵循你用 $time 设置的时区。如果从未设置过，它会退回机器人自身的本地时钟。
+</block>
+</dash>

@@ -1,0 +1,33 @@
+<dash>
+name: $endfor
+desc: Menandai di mana sebuah loop $for berakhir sehingga bot tahu di mana harus berhenti mengulang.
+category: Kontrol Alur
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $endfor menutup sebuah loop $for. Segala sesuatu yang Anda tulis di antara keduanya berjalan lagi sekali untuk setiap pengulangan yang Anda minta, dan kemudian bot lanjut ke baris-baris di bawahnya. Jadi sebuah loop sebanyak 5 memosting pesan yang sama lima kali sebelum sisa perintah dilanjutkan.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !welcome
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $endfor
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $for[5]
+text:   $sendMessage[Iteration!]
+text: $endfor
+</block>
+
+<block type="callout" kind="warning">
+text: Setiap $for memerlukan $endfor-nya. Jika baris penutupnya tidak Anda tuliskan, bot menabrak kesalahan skrip begitu berjalan melewati ujung loop Anda.
+</block>
+</dash>

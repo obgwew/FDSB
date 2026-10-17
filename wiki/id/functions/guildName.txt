@@ -1,0 +1,31 @@
+<dash>
+name: $guildName
+desc: Memberikan Anda nama server tempat perintah diketik.
+category: Info
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $guildName menaruh nama server tempat perintah diketik lurus ke dalam baris teks Anda. Letakkan di tengah kalimat dan bot menempatkan nama itu di antaranya, yang membuat sapaan dan pengumuman kanal terbaca seolah-olah Anda mengetik nama server itu sendiri. Tidak ada yang lain ditambahkan, jadi hasilnya satu potongan teks biasa.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !welcome
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $guildName
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: Welcome to $guildName!
+</block>
+
+<block type="callout" kind="note">
+text: Kirim perintah di pesan langsung dan tidak ada server untuk disebut, jadi bot menulis DM di tempat nama seharusnya muncul.
+</block>
+</dash>

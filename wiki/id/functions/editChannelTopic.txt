@@ -1,0 +1,40 @@
+<dash>
+name: $editChannelTopic
+desc: Menulis ulang topik yang ditampilkan di bagian atas sebuah kanal server.
+category: Manajemen Kanal
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Berikan topik baru dengan sendirinya, dan bot menulis ulang topik di atas kanal tempat perintah dijalankan. Tambahkan ID atau mention kanal terlebih dahulu, dan bot menulis ulang topik kanal itu sebagai gantinya, sepanjang kanal tersebut berada di server yang sama. Topik kosong menghapus apa pun yang ada di sana, dan apa pun yang melampaui 1.024 karakter ditolak.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $editChannelTopic
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $editChannelTopic[(channel ID or mention); new topic]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $editChannelTopic[<#123456789012345678>; Welcome to the community!]
+</block>
+
+<block type="callout" kind="warning">
+text: Hanya di dalam sebuah server, hanya pada kanal server itu, dan hanya pada kanal yang memang memiliki topik. Bot juga memerlukan izin Manage Channels, jika tidak Discord menolak perubahannya. Topik berhenti di 1.024 karakter.
+</block>
+
+<block type="callout" kind="note">
+text: Perintah ini berfungsi sebagai baris tersendiri. Jika diselipkan di dalam perintah lain, ia tidak melakukan apa pun, jadi biarkan tetap di barisnya sendiri.
+</block>
+</dash>
+
+<details>
+syntax: $editChannelTopic[(channel ID or mention); new topic]
+param: channelID|text|Opsional|Kanal mana yang topiknya akan diatur; kosongkan dan kanal saat ini yang dipakai
+param: newTopic|text|Wajib|Topik penggantinya, sampai 1.024 karakter. Nilai kosong menghapusnya
+</details>

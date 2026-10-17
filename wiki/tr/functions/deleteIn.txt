@@ -1,0 +1,35 @@
+<dash>
+name: $deleteIn
+desc: Belirlenen süre kadar bekler, ardından botun kendi yanıtlarını kanaldan kaldırır.
+category: Zamanlama ve Gecikmeler
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $deleteIn bir süre alır ve süre dolduğunda botun kendi çıktılarını temizlemesini ister. Bu çalıştırma sırasında botun daha önce gönderdiği mesajı ve sonrasındaki tüm mesajları yakalar, belirttiğiniz gecikme boyunca tutar ve ardından siler; böylece kanal temiz kalır. Bu sayede sohbette kalıcı olarak durmaması gereken geçici bir notu veya tek seferlik bir sonucu kolayca verebilirsiniz.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $deleteIn[duration]
+</block>
+
+<block type="code" title="Kopyalamaya Hazır Örnek">
+text: $deleteIn[5s]
+text: $sendMessage[This message is removed after 5 seconds]
+</block>
+
+<block type="callout" kind="note">
+text: Süre bir sayı ve bir birimden oluşur: milisaniye için ms, saniye için s, dakika için m, saat için h, gün için d, hafta için w. Birkaçını birleştirebilirsiniz; 1h30m bir saat otuz dakika demektir ve izin verilen en uzun gecikme 14 gündür.
+</block>
+
+<block type="callout" kind="warning">
+text: Botun o kanalda mesaj silme iznine sahip olması gerekir ve sildiği her mesajın botun kendi gönderdiği bir mesaj olması şarttır. Gecikme boyunca bot çevrimdışıysa mesaj yerinde kalır; geri sayım botun yanında yaşar.
+</block>
+
+<block type="callout" kind="important">
+text: Burada yalnızca bir süre kabul edilir — tam olarak bir argüman, sıfırdan büyük bir değerle. Çok uzun bir bekleme, eksik birim veya ardı boş bir sayı, bunun yerine bir hata ile reddedilir.
+</block>
+</dash>
+
+<details>
+syntax: $deleteIn[duration]
+param: duration|text|Required|Silmeden önce beklenecek süre; birimli bir sayı olarak — 5s, 10m, 2h, 1d — ve en fazla 14 gün
+</details>

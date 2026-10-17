@@ -1,0 +1,33 @@
+<dash>
+name: $endif
+desc: Menutup sebuah blok kondisi dan memberi tahu bot untuk melanjutkan ke baris-baris di bawahnya.
+category: Kontrol Alur
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $endif menutup sebuah ujian yang Anda buka dengan $if, $elif, atau $else. Bot membaca kondisinya, menjalankan baris-baris di bawahnya hanya saat jawabannya ya, lalu mencapai $endif dan lanjut ke apa pun yang berikutnya dalam perintah Anda. Sarangkan sebanyak mungkin ujian di dalam satu sama lain sepanjang masing-masing memiliki baris penutupnya sendiri.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !check
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $endif
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $if[$authorID == 123456789]
+text:   Hello Admin!
+text: $endif
+</block>
+
+<block type="callout" kind="warning">
+text: Pasangkan setiap $if dengan $endif-nya sendiri. Jika baris penutupnya tidak Anda tuliskan, bot tidak berhenti dengan kesalahan; ia hanya terus memperlakukan segala sesuatu setelah ujian itu sebagai bagian dari blok, sehingga perintah yang Anda harapkan selalu berjalan bisa terlewat tanpa sepatah kata pun.
+</block>
+</dash>

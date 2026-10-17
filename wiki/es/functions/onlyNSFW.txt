@@ -1,0 +1,40 @@
+<dash>
+name: $onlyNSFW
+desc: Ejecuta el comando solo en canales marcados con restricción de edad, y muestra tu propio mensaje en todos los demás.
+category: Control de acceso
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $onlyNSFW es una puerta para contenido para adultos. Mira si el canal donde se usó el comando está marcado con restricción de edad en Discord. Si lo está, no pasa nada y el resto de tu comando continúa. Si no lo está, tu mensaje se envía y el resto del comando se descarta justo ahí.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $onlyNSFW[error message]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $onlyNSFW[This command only works in age restricted channels.]
+text: $sendMessage[Here is the adult content.]
+</block>
+
+<block type="callout" kind="note">
+text: Tienes que marcar el canal tú mismo en Discord: abre la configuración del canal, activa Age Restricted y guarda. La puerta no hace nada hasta que el canal esté configurado así.
+</block>
+
+<block type="callout" kind="important">
+text: Esta puerta es por comodidad, no es seguridad real. Cualquiera que pueda leer tus comandos puede averiguar que el comando existe y quitar la puerta.
+</block>
+</dash>
+
+<details>
+syntax: $onlyNSFW[error message]
+param: error message|text|Obligatorio|Mensaje enviado al canal cuando no está marcado con restricción de edad.
+</details>

@@ -1,0 +1,53 @@
+<dash>
+name: $returnGuildChannelsID
+desc: Mengumpulkan ID kanal sebuah server di bawah nama yang bisa Anda baca kembali nanti.
+category: Perintah Pengembalian
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Minta satu jenis kanal dalam sebuah server dan bot mengumpulkan ID setiap kanal jenis itu, merekatkannya dengan pemisah yang Anda pilih, dan menyimpan seluruh untai itu di bawah nama pilihan Anda. Nanti di perintah yang sama Anda membaca daftar itu kembali dengan $return[name]. Tidak ada yang diposting di kanal sampai Anda mengirimnya sendiri.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $returnGuildChannelsID
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $returnGuildChannelsID[GuildID; ChannelType; var; separator]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $returnGuildChannelsID[$guildID; text; channelIDs; ,]
+text: $sendMessage[Text channels: $return[channelIDs]]
+</block>
+
+<block type="options" title="Jenis kanal">
+option: all|Setiap kanal di server
+option: text|Kanal teks saja
+option: voice|Kanal suara saja
+option: category|Baris kategori saja
+option: forum|Kanal forum saja
+option: stage|Kanal panggung saja
+</block>
+
+<block type="callout" kind="note">
+text: Bawa daftarnya kembali dengan $return[name] setelah disimpan. Pemisah menentukan bagaimana ID-ID itu bersebelahan — koma, titik koma, spasi, atau yang bernama seperti com atau sem.
+</block>
+
+<block type="callout" kind="important">
+text: Bot hanya bisa melihat ke dalam server yang telah diikutinya. Berikan server yang tidak ia masuki, atau jenis yang tidak ia kenali, dan ia melaporkan masalahnya alih-alih menyimpan apa pun.
+</block>
+</dash>
+
+<details>
+syntax: $returnGuildChannelsID[GuildID; ChannelType; var; separator]
+param: GuildID|snowflake|Wajib|Server mana yang kanalnya dibaca
+param: ChannelType|text|Wajib|Apa yang dikumpulkan: all, text, voice, category, forum atau stage
+param: var|text|Wajib|Nama tempat Anda membaca daftarnya kembali dengan $return
+param: separator|text|Wajib|Apa yang berada di antara ID, seperti , atau ;. Yang bernama juga bisa: dot, com, apo, sem, colon
+</details>

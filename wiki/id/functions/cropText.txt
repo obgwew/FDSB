@@ -1,0 +1,38 @@
+<dash>
+name: $cropText
+desc: Memendekkan sebagian teks ke panjang pilihan Anda dan menandai pemotongannya.
+category: Utilitas Teks
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Berikan sebuah teks dan panjang maksimum, dan yang kembali tidak akan pernah lebih panjang dari itu. Bila aslinya melebihi batas, ia dipotong tepat di situ dan akhiran apa pun yang Anda berikan ditambahkan, dengan tiga titik sebagai pilihan yang biasa. Teks yang sudah muat dikembalikan persis seperti aslinya, akhiran beserta seluruhnya. Ini cara standar mencegah kutipan panjang meluber dari kolom yang sempit.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $cropText
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $cropText[text; max characters; (ending)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $cropText[This is a very long message; 10; ...]
+</block>
+
+<block type="callout" kind="note">
+text: Panjangnya harus berupa bilangan bulat nol atau lebih; apa pun lainnya menghentikan perintah dengan sebuah kesalahan. Tanpa akhiran, teks sekadar dipotong di batas tanpa penanda sama sekali.
+</block>
+</dash>
+
+<details>
+syntax: $cropText[text; max characters; (ending)]
+param: text|text|Wajib|Teks yang dipendekkan
+param: max characters|number|Wajib|Berapa karakter yang dipertahankan paling banyak
+param: ending|text|Opsional|Apa yang ditempelkan setelah potongan, seperti ...
+</details>

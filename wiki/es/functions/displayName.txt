@@ -1,0 +1,36 @@
+<dash>
+name: $displayName
+desc: Te da el nombre por el que se conoce a un miembro en este servidor.
+category: Usuario
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Si alguien ha puesto un apodo para el servidor, ese es el nombre que recibes; sin él, el nombre de su cuenta lo sustituye. Usado sin paréntesis, describe a quien escribió el comando, lo que lo convierte en la forma amable de saludar a la gente. Añade una mención o un ID y responde por ese miembro. En cualquier caso, el nombre aterriza en el canal o se rellena en tu propia línea.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $displayName en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $displayName[(user mention/ID)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: Hello, $displayName!
+</block>
+
+<block type="callout" kind="note">
+text: Este es el apodo por servidor cuando lo hay; si no, el nombre de usuario de la cuenta. Si siempre quieres el nombre de la cuenta y nunca el apodo, pide $authorName.
+</block>
+</dash>
+
+<details>
+syntax: $displayName[(user mention/ID)]
+param: user|text|Opcional|Qué miembro nombrar; déjalo vacío para quien escribió el comando
+</details>

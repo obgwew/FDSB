@@ -1,0 +1,41 @@
+<dash>
+name: $power
+desc: Mengangkat satu angka ke pangkat angka lain.
+category: Matematika & Angka
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $power mengambil sebuah basis dan sebuah eksponen lalu menghitung basis yang diangkat ke pangkat itu. Anda bisa meletakkannya lurus di dalam baris teks dan bot mencetak jawabannya di kanal, atau menyimpannya di barisnya sendiri saat Anda sedang menghitung angka-angka. Jawaban berupa angka bulat datang tanpa ekor desimal, sehingga 2 diangkat ke pangkat 10 muncul sebagai 1024 biasa.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !calc
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $power[base; exponent]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $sendMessage[$power[2; 10]]
+</block>
+
+<block type="callout" kind="note">
+text: $power[2; 10] menghasilkan 1024, $power[3; 3] menghasilkan 27 dan $power[5; 0] menghasilkan 1. Persis dua angka yang dibutuhkan, dan teks di salah satu tempat menghentikan perintah dengan kesalahan.
+</block>
+
+<block type="callout" kind="warning">
+text: Basis negatif yang diangkat ke eksponen pecahan tidak memiliki jawaban nyata, dan hasil yang terlalu besar untuk disimpan juga ditolak. Kedua kasus itu menghentikan perintah alih-alih mencetak angka yang tidak bisa Anda gunakan.
+</block>
+</dash>
+
+<details>
+syntax: $power[base; exponent]
+param: base|number|Wajib|Angka yang diangkat, seperti 2, 10 atau 3.5
+param: exponent|number|Wajib|Berapa kali nilainya diangkat, seperti 3, 10 atau 0.5
+</details>

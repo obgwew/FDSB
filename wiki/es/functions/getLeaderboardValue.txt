@@ -1,0 +1,52 @@
+<dash>
+name: $getLeaderboardValue
+desc: Devuelve el valor, el ID o el nombre de quien ocupa una posición concreta en una tabla de clasificación.
+category: Variables
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $getLeaderboardValue construye una clasificación y luego se mete en ella. Le das una posición y te devuelve lo que hay ahí: la puntuación guardada, el ID o el nombre visible. Por sí solo imprime ese resultado en el canal, y dentro de otro comando el resultado se inserta en su lugar. Si pides una posición más allá del final de la lista, no recibes nada, así que comprueba la longitud primero cuando la lista pueda ser corta.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Crea la variable primero en la pestaña de Variables
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $getLeaderboardValue[type; name; sort; position; return_type]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $sendMessage[Top player: $getLeaderboardValue[user; points; desc; 1; name]]
+</block>
+
+<block type="options" title="Tipos de variable">
+option: user|Un valor por miembro, guardado por separado en cada servidor
+option: globaluser|Un valor por miembro, compartido entre todos los servidores en los que está el bot
+option: server|Un valor por servidor
+</block>
+
+<block type="options" title="Qué devolver">
+option: value|La propia puntuación guardada (se usa cuando dejas esto vacío)
+option: id|El ID de Discord de esa entrada
+option: name|El nombre visible, recurriendo al ID en bruto si no se puede resolver
+</block>
+
+<block type="callout" kind="note">
+text: Ordena la lista igual que lo hiciste cuando leíste la posición, de lo contrario obtendrás una entrada distinta. Los valores que no son números se omiten.
+</block>
+</dash>
+
+<details>
+syntax: $getLeaderboardValue[type; name; sort; position; (return_type)]
+param: type|text|Obligatorio|Qué grupo clasificar: user, globaluser o server.
+param: name|text|Obligatorio|Nombre de la variable por la que clasificar.
+param: sort|text|Obligatorio|desc para el más alto primero, o asc para el más bajo primero.
+param: position|number|Obligatorio|Qué posición leer, empezando en 1. Una posición más allá del final de la lista no devuelve nada.
+param: return_type|text|Opcional|value para la puntuación guardada, id para el ID de Discord o name para el nombre visible.
+</details>

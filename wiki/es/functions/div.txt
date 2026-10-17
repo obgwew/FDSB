@@ -1,0 +1,41 @@
+<dash>
+name: $div
+desc: Divide el primer número entre cada uno de los demás, de izquierda a derecha.
+category: Matemática y números
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Dale dos números y divide el primero entre el segundo. Añade un tercero o un cuarto y el resultado acumulado se divide otra vez, en el orden en que los escribiste. Por sí solo imprime la respuesta; dentro de una línea se rellena donde lo hayas escrito.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !welcome en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $div[a; b; ...]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $sendMessage[$div[10; 2]]
+</block>
+
+<block type="callout" kind="warning">
+text: Dividir entre cero detiene tu comando con un error, y pasa lo mismo al pedir menos de dos números. El texto donde debería ir un número se rechaza de la misma manera.
+</block>
+
+<block type="callout" kind="note">
+text: Las respuestas que dan un número entero vuelven sin decimales, así que 10 dividido entre 2 es 5 y no 5.0. Todo se aplica de izquierda a derecha: 10 dividido entre 2 y luego entre 5 da 1.
+</block>
+</dash>
+
+<details>
+syntax: $div[a; b; ...]
+param: a|number|Obligatorio|El número por el que empiezas a dividir
+param: b|number|Obligatorio|Entre cuánto dividirlo; el cero se rechaza. Los números extra siguen dividiendo el total acumulado.
+</details>

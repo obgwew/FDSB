@@ -77,7 +77,11 @@ _CORE_INLINE_WITH_ARGS: set[str] = {
     'floor', 'ceil', 'power',
 }
 
+_NEVER_INLINE: set[str] = {'wait', 'replyIn', 'sendEmbedMessage', 'log'}
+
 def _is_inline_capable(cmd_name: str, has_args: bool) -> bool:
+    if cmd_name in _NEVER_INLINE:
+        return False
     core_set = _CORE_INLINE_WITH_ARGS if has_args else _CORE_INLINE_NO_ARGS
     if cmd_name in core_set:
         return True

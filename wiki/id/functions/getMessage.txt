@@ -1,0 +1,42 @@
+<dash>
+name: $getMessage
+desc: Membaca pesan lama dari kanal mana pun yang bisa dilihat bot dan mencetak satu bagian darinya.
+category: Utilitas
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Berikan sebuah kanal dan sebuah pesan, lalu ia menarik pesan itu dan memposting sebagian darinya di obrolan. Bagian terakhir memilih bagian mana: teks yang ditulis, nama tampilan penulisnya, ID penggunanya, atau tautan ke gambar avatarnya. Itu membuatnya mudah mengutip sesuatu dari awal kanal, atau memeriksa nama di balik sebuah postingan, tanpa harus menggulir ke belakang.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !read
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $getMessage[channelID; messageID; (type)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $getMessage[123456789; 987654321; content]
+</block>
+
+<block type="callout" kind="note">
+text: Hilangkan bagian terakhir dan Anda mendapatkan teks pesan. Ketika bagian itu ternyata kosong, seperti postingan yang hanya berisi lampiran, bot mengirim karakter tak terlihat agar balasan tetap muncul.
+</block>
+
+<block type="callout" kind="warning">
+text: Kanalnya harus berupa kanal teks yang bisa dibuka bot dengan Read Message History aktif. Kedua ID berupa angka biasa, dan ketika salah satunya tidak cocok dengan apa pun, Anda diberi tahu di antara keduanya mana yang tidak ditemukan.
+</block>
+</dash>
+
+<details>
+syntax: $getMessage[channelID; messageID; (type)]
+param: channelID|snowflake|Wajib|ID numerik kanal tempat pesan berada
+param: messageID|snowflake|Wajib|ID numerik pesan yang dibaca
+param: type|text|Opsional|Bagian mana yang dicetak: content (bawaan), name, id, atau avatar
+</details>

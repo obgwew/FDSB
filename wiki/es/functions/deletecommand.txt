@@ -1,0 +1,31 @@
+<dash>
+name: $deletecommand
+desc: Elimina el mensaje que ejecutó tu comando.
+category: Moderación
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Pon $deletecommand arriba de un comando y el bot elimina el mensaje que lo activó, así que un canal concurrido se mantiene ordenado en lugar de llenarse de líneas de comando. Todo lo que escribiste después sigue ejecutándose y sigue enviándose. Si el bot no tiene permiso para eliminar mensajes ahí, el original se queda donde está y el bot dice por qué.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $deletecommand en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $deletecommand
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $deletecommand
+text: $sendMessage[Command received!]
+</block>
+
+<block type="callout" kind="warning">
+text: El bot necesita Manage Messages en ese canal. Sin ello Discord rechaza la eliminación y el bot publica un error diciendo que le falta el permiso.
+</block>
+</dash>

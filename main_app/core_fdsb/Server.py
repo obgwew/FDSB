@@ -15,32 +15,27 @@ import flet as ft
 
 from main_app.core_fdsb.FDScript import run_script
 from main_app.core_fdsb.FDCore import set_vars_dir, set_bot_start_time
-from main_app.langs.translations import Translations
+from main_app.langs._translations import Translations
 
 from main_app.core_fdsb.server_FDScript.prefix_manager import PrefixManager, prefix_manager
 from main_app.core_fdsb.server_FDScript.flet_permissions import request_flet_permissions
 from main_app.core_fdsb.server_FDScript.fgs_service import (
     STATE_WORKING, STATE_SYNCING, STATE_ERROR,
-    set_language as _fgs_set_language,
     set_flet_page, send_flet_notification, ensure_background_mode,
     schedule_on_flet_loop, set_fgs_state,
     start_background_mode, stop_background_mode,
     update_android_status_notification, is_fgs_running,
 )
 
-_current_lang = 'ar'
+def get_language() -> str:
+    from main_app.settings_app import get_current_lang
+    return get_current_lang()
 
 def set_language(lang: str) -> None:
-    global _current_lang
-    if lang in Translations.translations:
-        _current_lang = lang
-    _fgs_set_language(lang)
-
-def get_language() -> str:
-    return _current_lang
+    return None
 
 def _t(key: str, **kwargs) -> str:
-    text = Translations.get(key, _current_lang)
+    text = Translations.get(key, get_language())
     if kwargs:
         try:
             return text.format(**kwargs)
@@ -60,6 +55,8 @@ EVENT_PREFIXES: set[str] = {
     '$onBotOnline',
     '$onBotMessage',
     '$onBoostServer',
+    '$onBanAdd',
+    '$onBanRemove',
 }
 
 _BOOST_MESSAGE_TYPES = {
@@ -116,7 +113,7 @@ def _build_status_activity(entry: dict):
         url = (entry.get('stream_url') or '').strip()
         if not url:
             return None
-        return discord.Streaming(name=status_text or 'Live', url=url)
+        return discord.Streaming(name=status_text or _t('status_live_default'), url=url)
     if not status_text:
         return None
     activity_enum = _STATUS_ACTIVITY_TYPE.get(
@@ -200,7 +197,6 @@ def _set_error(msg: str) -> None:
     _last_error = msg or ''
 
 def consume_last_error() -> str:
-    """Return the reason of the last failed start (and clear it) so the UI can show it."""
     global _last_error
     msg, _last_error = _last_error, ''
     return msg
@@ -213,10 +209,9 @@ def _clean_token(token) -> str:
 
 def _describe_start_error(e: Exception) -> str:
     if isinstance(e, getattr(discord, 'PrivilegedIntentsRequired', ())):
-        return ('Privileged Gateway Intents are not enabled for this bot. In the Discord '
-                'Developer Portal (Bot tab) enable Presence, Server Members and Message Content intents.')
+        return _t('start_err_intents')
     if isinstance(e, getattr(discord, 'LoginFailure', ())):
-        return 'Login failed: the token used to start the bot is invalid or malformed.'
+        return _t('start_err_login')
     return f'{type(e).__name__}: {e}'
 
 def _notify_state_change(is_online: bool):
@@ -267,14 +262,23 @@ def _get_bot_image(bot_dir: str) -> str:
                 pass
     return ''
 
+class _SafeBot(commands.Bot):
+    async def close(self):
+        loop = asyncio.get_running_loop()
+        try:
+            await super().close()
+        finally:
+            self.loop = loop
+
 def _make_bot(bot_dir: str, bot_image: str = ''):
     intents = discord.Intents.default()
     intents.message_content = True
     intents.members = True
     intents.voice_states = True
     intents.presences = True
+    intents.moderation = True
 
-    bot = commands.Bot(command_prefix="!", intents=intents)
+    bot = _SafeBot(command_prefix="T0a=-12sDwTd$xfO", intents=intents)
 
     @bot.event
     async def on_ready():
@@ -288,8 +292,13 @@ def _make_bot(bot_dir: str, bot_image: str = ''):
         set_fgs_state(STATE_WORKING)
 
         global _status_task
+        if bot.is_closed() or _stopping:
+            return
         if _status_task is None or _status_task.done():
-            _status_task = bot.loop.create_task(_status_rotator(bot, bot_dir))
+            _status_task = asyncio.get_running_loop().create_task(
+                _status_rotator(bot, bot_dir)
+            )
+            
         scripts = prefix_manager.get_event_scripts_with_arg("$onBotOnline")
         if scripts:
             from main_app.core_fdsb.event_FDScripts.onBotOnline import handle_event as handle_bot_online
@@ -301,7 +310,7 @@ def _make_bot(bot_dir: str, bot_image: str = ''):
 
     @bot.event
     async def on_disconnect():
-        set_fgs_state(STATE_ERROR, "انقطع الاتصال" if _current_lang == 'ar' else "Disconnected")
+        set_fgs_state(STATE_ERROR, _t('server_disconnected'))
 
     @bot.event
     async def on_resumed():
@@ -373,6 +382,30 @@ def _make_bot(bot_dir: str, bot_image: str = ''):
                         pass
 
     @bot.event
+    async def on_member_ban(guild: discord.Guild, user: discord.User | discord.Member):
+        scripts = prefix_manager.get_event_scripts("$onBanAdd")
+        if not scripts:
+            return
+        from main_app.core_fdsb.event_FDScripts.onBanAdd import handle_event
+        for script_text in scripts:
+            try:
+                await handle_event(guild, user, bot, script_text)
+            except Exception as e:
+                print(f"[onBanAdd Error] : {e}")
+
+    @bot.event
+    async def on_member_unban(guild: discord.Guild, user: discord.User | discord.Member):
+        scripts = prefix_manager.get_event_scripts("$onBanRemove")
+        if not scripts:
+            return
+        from main_app.core_fdsb.event_FDScripts.onBanRemove import handle_event
+        for script_text in scripts:
+            try:
+                await handle_event(guild, user, bot, script_text)
+            except Exception as e:
+                print(f"[onBanRemove Error] : {e}")
+
+    @bot.event
     async def on_message(message):
         if message.type in _BOOST_MESSAGE_TYPES:
             scripts = prefix_manager.get_event_scripts("$onBoostServer")
@@ -412,7 +445,6 @@ def _make_bot(bot_dir: str, bot_image: str = ''):
         except Exception:
             pass
 
-        # ── تشغيل جميع السكربتات المتطابقة بالتتابع الزمني من الأقدم للأحدث ──
         matching_scripts = prefix_manager.get_scripts_by_message(message.content)
         if matching_scripts:
             for script_text in matching_scripts:
@@ -444,17 +476,14 @@ def _runner(token: str):
         schedule_on_flet_loop(stop_background_mode())
 
 def is_running() -> bool:
-    """True while the Discord client is alive OR the foreground service is active."""
     client_alive = _client is not None and not _client.is_closed()
     return client_alive or is_fgs_running()
 
 def start_bot(bot_dir: str, token: str = '') -> bool:
-    """Start the bot. `token` (e.g. from TokenVault) wins over the one in config.json.
-    On failure returns False and the reason is available via consume_last_error()."""
     global _client, _thread, _stopping, _vars_dir_path
     _set_error('')
     if _stopping:
-        _set_error('The bot is still shutting down, try again in a few seconds.')
+        _set_error(_t('start_err_stopping'))
         return False
     if _client and not _client.is_closed():
         try:
@@ -465,7 +494,7 @@ def start_bot(bot_dir: str, token: str = '') -> bool:
         return True
     token = _clean_token(token) or _clean_token(_get_token(bot_dir))
     if not token:
-        _set_error('No bot token found (not passed by the app and not present in config.json).')
+        _set_error(_t('start_err_no_token'))
         return False
     prefix_manager.set_bot_dir(bot_dir)
     abs_bot_dir = os.path.abspath(bot_dir)
@@ -481,7 +510,7 @@ def start_bot(bot_dir: str, token: str = '') -> bool:
     _thread = threading.Thread(target=_runner, args=(token,), daemon=True)
     _thread.start()
     try:
-        schedule_on_flet_loop(start_background_mode('FDSB Server', bot_image))
+        schedule_on_flet_loop(start_background_mode(_t('fgs_default_title'), bot_image))
     except Exception as e:
         print(f"[Server] background mode failed to start: {e}")
     return True

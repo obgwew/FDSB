@@ -1,0 +1,39 @@
+<dash>
+name: $setUserVar
+desc: Recuerda un valor para un miembro dentro de un servidor.
+category: Variables
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $setUserVar guarda un valor asociado a un nombre que elijas y a un miembro que escojas, así que una puntuación, un conteo de amonestaciones o una nota de última conexión pueden quedar junto a esa persona y en ningún otro sitio. Con solo un nombre y un valor registra la entrada bajo quien ejecutó el comando, en el servidor donde lo escribió. Añade un ID de usuario o un ID de servidor como tercera o cuarta parte y el valor se escribe en un lugar totalmente distinto.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Crea la variable primero en la pestaña de Variables
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !points en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $setUserVar[name; value; (user_id); (guild_id)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $setUserVar[points; 10; 123456789012345678; 987654321012345678]
+</block>
+
+<block type="callout" kind="important">
+text: El valor sí se guarda incluso en la primera ejecución, pero si el nombre aún no está en la pestaña de Variables el comando igualmente se detiene con un error. Crea la variable ahí primero y desde entonces el guardado pasará sin ruido.
+</block>
+</dash>
+
+<details>
+syntax: $setUserVar[name; value; (user_id); (guild_id)]
+param: name|text|Obligatorio|El nombre bajo el que se registra el valor
+param: value|text|Obligatorio|Qué recordar
+param: userID|snowflake|Opcional|A qué miembro pertenece. Omítelo para usar a la persona que ejecutó el comando.
+param: guildID|snowflake|Opcional|A qué servidor pertenece. Omítelo para usar el actual.
+</details>

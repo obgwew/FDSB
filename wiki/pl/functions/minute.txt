@@ -1,0 +1,25 @@
+<dash>
+name: $minute
+desc: Zwraca bieżącą minutę godziny, od 00 do 59.
+category: Czas i opóźnienia
+
+<block type="text" title="Jak działa komenda?">
+text: $minute odczytuje zegar i zwraca bieżącą minutę, zawsze dwucyfrowo, więc dziewiąta minuta godziny wraca jako 09. Wstaw go w linijkę tekstu, a cyfry wylądują tam, gdzie je umieścisz, albo zostaw go w osobnej linii, a bot opublikuje tę liczbę na kanale. Jest mierzona świeżo przy każdym uruchomieniu, więc zmienia się wraz z upływem minut.
+</block>
+
+<block type="code" title="Składnia">
+text: $minute
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $sendMessage[It is now $hour:$minute]
+</block>
+
+<block type="callout" kind="note">
+text: Wartość waha się od 00 do 59 i zawsze ma dwie cyfry, więc układa się ładnie, gdy umieścisz ją między $hour a $second.
+</block>
+
+<block type="callout" kind="important">
+text: $minute podąża za strefą czasową ustawioną przez $time. Jeśli nigdy jej nie ustawiłeś, bot wraca do własnego zegara lokalnego.
+</block>
+</dash>

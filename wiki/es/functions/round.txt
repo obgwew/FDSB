@@ -1,0 +1,36 @@
+<dash>
+name: $round
+desc: Redondea un número al entero más cercano.
+category: Matemática y números
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $round toma un único número y devuelve el entero más cercano, así que 1.7 se convierte en 2 y 1.4 en 1. En una línea propia el bot publica la cifra redondeada, y dentro de otro comando el número cae en medio de una frase donde iría cualquier otro valor.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !round en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $round[number]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $round[1.7]
+</block>
+
+<block type="callout" kind="note">
+text: Se necesita exactamente un número, y cualquier cosa que no sea un número detiene el comando con un error. Un valor que termine en .5 va al número par más cercano, lo que significa que 2.5 se convierte en 2 y 3.5 en 4.
+</block>
+</dash>
+
+<details>
+syntax: $round[number]
+param: number|number|Obligatorio|El número a redondear a un entero
+</details>

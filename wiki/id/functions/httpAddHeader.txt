@@ -1,0 +1,37 @@
+<dash>
+name: $httpAddHeader
+desc: Menempelkan header tambahan ke permintaan web yang dibuat perintah Anda berikutnya.
+category: HTTP
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Berikan nama header dan sebuah nilai, dan keduanya ikut serta dengan permintaan berikutnya yang dibuat perintah Anda, entah itu ternyata GET, POST, PUT, patch, atau delete. Beginilah cara Anda menyisipkan API key atau bearer token tanpa membangunnya ke dalam alamat. Setelah permintaan terkirim, header dibersihkan, jadi masing-masing hanya berlaku untuk satu panggilan dan tidak lebih.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !lookup
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $httpAddHeader[name; value]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $httpAddHeader[Authorization; Bearer token123]
+text: $httpGet[https://api.example.com/data]
+</block>
+
+<block type="callout" kind="note">
+text: Setel nama header yang sama dua kali dan nilai kedua menggantikan yang pertama. Kedua bagian harus ada: hilangkan salah satunya dan bot berhenti dengan kesalahan yang memberi tahu Anda apa yang kurang.
+</block>
+</dash>
+
+<details>
+syntax: $httpAddHeader[name; value]
+param: name|text|Wajib|Nama header tersebut, misalnya Authorization
+param: value|text|Wajib|Apa yang dikirim sebagai nilainya
+</details>

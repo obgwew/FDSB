@@ -1,0 +1,40 @@
+<dash>
+name: $removeComponent
+desc: Melepaskan tombol-tombol yang Anda sebutkan dari sebuah pesan dan membiarkan sisanya tetap di layar.
+category: Komponen
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Sebutkan tombol-tombol dengan ID yang Anda berikan saat menambahkannya dan bot melepasnya dari pesan, meninggalkan segala sesuatu yang lain di tempatnya. Anda dapat mengosongkan beberapa sekaligus, dan menempelkan ID pesan di ujungnya ketika Anda ingin merapikan pesan yang lebih tua alih-alih yang saat ini. Pesan dikirim ulang dengan baris yang dipangkas, sehingga perubahannya terlihat seketika.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !tidybuttons
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $removeComponent[customID1; customID2; ...; (messageID)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $removeComponent[btn_cancel; btn_confirm]
+</block>
+
+<block type="callout" kind="note">
+text: Tombol tautan dicocokkan berdasarkan alamat webnya alih-alih sebuah ID, sehingga Anda dapat menghapusnya dengan baris yang sama. Menu yang Anda tambahkan dengan ID kustom dapat dilepas dengan cara yang persis sama seperti tombol.
+</block>
+
+<block type="callout" kind="warning">
+text: Jika yang terakhir di dalam kurung adalah angka biasa dan ada setidaknya satu ID di depannya, angka itu dibaca sebagai pesan yang akan dikerjakan. Biarkan lepas dan bot memakai pesan yang sedang ia bangun saat ini, atau pesan yang diklik orang itu, dan jika bukan salah satu ID Anda yang ada di sana, bot mengatakan demikian alih-alih diam-diam tidak melakukan apa pun.
+</block>
+</dash>
+
+<details>
+syntax: $removeComponent[customID1; customID2; ...; (messageID)]
+param: customID|text|Wajib|ID atau alamat web yang Anda berikan pada tombol atau menu saat menambahkannya
+param: messageID|snowflake|Opsional|ID pesan bot lama yang akan dilepas alih-alih pesan saat ini
+</details>

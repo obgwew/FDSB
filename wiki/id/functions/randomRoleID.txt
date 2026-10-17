@@ -1,0 +1,31 @@
+<dash>
+name: $randomRoleID
+desc: Memilih salah satu peran server secara acak dan menyerahkan ID-nya.
+category: Acak
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Bot mengumpulkan setiap peran di server saat ini, menyisihkan salah satunya secara acak dan memberi Anda ID peran itu. Peran @everyone tidak pernah muncul, karena ia milik semua orang dan memilihnya tidak akan memberi tahu Anda apa pun. Yang Anda dapat adalah deretan digit polos, siap dimasukkan ke baris lain yang membutuhkan peran.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $randomRoleID
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $randomRoleID
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: Random role ID: $randomRoleID
+</block>
+
+<block type="callout" kind="note">
+text: Peran hanya ada di dalam server, jadi ini tidak bisa digunakan dalam pesan pribadi. Server yang tidak memiliki peran sendiri mendapatkan kesalahan alih-alih hasil.
+</block>
+</dash>

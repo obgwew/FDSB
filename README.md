@@ -60,128 +60,51 @@ FDSB is a cross-platform application for creating and running Discord bots local
 
 ---
 
-## Versioning Scheme
-
-This project uses its own versioning convention, which differs from Semantic Versioning and other standard schemes. Version numbers follow the format `X.Y.Z`, defined as follows:
-
-| Segment | Incremented when |
-|---------|------------------|
-| `X.y.z` | A fundamental change is made to how the application receives or sends data, interacts with external intermediaries, or handles automation, exporting, retrieval, and similar behavior. |
-| `x.Y.z` | A new feature is introduced, or a usage shortcut or internal automation mechanism becomes permanently dependent on the UI. Also applies when a new language command requires a corresponding UI feature. |
-| `x.y.Z` | Bug fixes, additions of FDScript commands, UI corrections or behavioral adjustments, restoration of correct command behavior, and improvements to stability and performance. |
-
----
-
 ## Changelog
 
 **Alpha stage:** 1.0.0 to 2.x.x (current)
 
-### 1.0.0 — Initial Alpha Release
-- New interface
-- New scripting language: FDScript Gen 0
-- New control mechanism
+### 1.0.x — Initial Alpha
+- New interface, new control mechanism, and FDScript Gen 0
+- Fixed Arabic rendering, translator errors, startup crash, and server connection issue
 
-### 1.0.1 — Patch
-- Fixed Arabic language rendering
-- Fixed translator errors
-- Fixed a crash on startup
-- Fixed a server connection issue
-
-### 2.0.0 — Feature Update
-- Improved UI
-- Introduced FDScript Gen 1
-- Fixed bot file conflicts
-- Added a settings panel
-- Added theme support
-
-### 2.0.1 — FDScript Expansion and Fixes
-- Added more than 20 new FDScript commands
-- Fixed several themes
-- Fixed button behavior in `commands_view`
-- Fixed inputs in `settings_view`
+### 2.0.x — Feature Update
+- Improved UI, added settings panel and theme support
+- Introduced FDScript Gen 1 with 20+ new commands
+- Fixed bot file conflicts, themes, and button/input behavior in `commands_view` and `settings_view`
 - Replaced the Kivy icon with the BCFD icon
 
 ### 2.1.0 — Task Integration and Event Commands
-- Added new administrative commands (basic Discord commands)
-- Added new event commands
+- Added administrative and event commands
 - Added bot data upload and download
 - Began development of FDScript Gen 2
-- Fixed several commands
 
-### 2.2.0 — UI Migration to Flet
-- Migrated the UI framework from Kivy to Flet
-- Updated the UI and added UI effects
-- Fixed several UI issues and commands
+### 2.2.x — Migration to Flet and Renaming to FDSB
+- Migrated the UI framework from Kivy to Flet, with UI effects
+- Added APK compatibility (2.2.3)
+- Added French, German, Chinese, Russian, and Turkish
+- Fixed variable commands, prefix logic, theme/language switching, color-coding, and server issues
+- Project officially renamed **FDSB** after 2.2.1
 
-### 2.2.1 — Fixes and Additional Languages
-- Fixed variable commands
-- Fixed prefix logic
-- Fixed theme switching and language switching
-- Added French (Fr) and German (De)
-
-> Following version 2.2.1, the project was officially renamed **FDSB**.
-
-### 2.2.2 — Major Repairs, Languages, and Command View UI
-- Fixed additional commands and variables
-- Fixed color-coding
-- Fixed several UI issues in the command view
-- Fixed server issues
-- Added Chinese (Zh), Russian (Ru), and Turkish (Tr)
-
-### 2.2.3 — Android-Exclusive Release
-- Added APK compatibility
-- Fixed several commands
-- Improved stability and control responsiveness
-- Added more errors to fix later :)
-
-### 2.3.0 — Wiki Page
-- Added support for channel commands
-- Introduced a new Wiki interface
-- Fixed several issues in the command editor
-- Fixed text color issues in the Android build
-
-### 2.3.1 — Application Fixes
-- Updated the loading screen
-- Fixed theme and language issues
-- Updated the variables view and the Wiki view
-- Fixed several commands
-
-### 2.3.2 — Repairs and Command Support
+### 2.3.x — Wiki and Channel/HTTP Commands
+- Introduced the Wiki interface with faster downloads
+- Added channel commands, HTTP commands, and split commands
 - Added Polish
-- Improved Wiki download speed
-- Added HTTP commands
-- Added additional split commands
-- Fixed further commands and UI issues
+- Updated the loading screen, variables view, and command editor
+- Fixed Android text colors, themes, and languages
 
-### 2.4.0 — New UI, Bot Status, and Additional Commands
-- Added all embed commands and further commands
-- Added function commands
-- Added boost-related events and commands
-- Added a button for editing the bot's status
-- Fixed HTTP and other commands
-- Fixed several UI issues on Android
-
-### 2.4.1 — UI and Command Fixes
-- Added menu commands
-- Added Persian (Fa-IR) and Urdu (Ur)
-- Fixed the UI across all views
-- Fixed several commands
-- Fixed Android and notification errors
-
-### 2.4.2 — Stability Update (current)
-- Added further variable and channel commands
+### 2.4.x — New UI, Bot Status, and Stability
+- Added embed, function, menu, boost, variable, channel, and leaderboard commands
+- Added bot status editor, UI animations, and a more fluid UI architecture
+- Added Persian and Urdu
 - Began development of FDScript Gen 2.5
-- Added UI animations
-- Fixed several commands
-- Revised the UI and notifications
-- Achieved stability on Android 13 and earlier
+- Fixed Android and notification errors, with stability on Android 13 and earlier
 
-### 2.4.3 — Stability, UI Architecture, and Leaderboards
-- Added leaderboard commands
-- Added new variables
-- Improved the UI architecture for a smoother, more fluid experience
-- Improved long-term stability and overall performance
-- Fixed several commands
+### 2.5.0 — CodeEditor and Discord Status
+- Added CodeEditor for FDScript
+- Added Time/Blacklist commands and Discord Status UI
+- Added Indonesian and Spanish
+- Fixed several UI issues and commands
 
 ---
 

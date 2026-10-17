@@ -1,0 +1,41 @@
+<dash>
+name: $time
+desc: يحدد المنطقة الزمنية التي يُقاس بها الوقت لبقية هذا الأمر.
+category: التوقيت والتأخير
+
+<block type="text" title="كيف يعمل الأمر؟">
+text: يأخذ $time اسم منطقة زمنية من القائمة العالمية، مثل Asia/Amman أو Europe/London، ويحتفظ به طوال تشغيل الأمر الحالي. بمجرد تعيينه، تقرأ $hour و$minute و$second الوقت في تلك المنطقة الزمنية بدلًا من المنطقة التي يستضيف فيها البوت. لا يُطبع أي شيء بمفرده — فهو سطر إعداد تضعه فوق الأسطر التي تقرأ الوقت فعليًا.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة على !clock
+item: اكتب سكربتك في المحرر
+item: الصق السطر أدناه في المكان الذي تحتاجه
+item: اضغط على حفظ
+</block>
+
+<block type="code" title="الصيغة">
+text: $time[timezone]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $time[Asia/Amman]
+text: $sendMessage[Right now it is $hour:$minute]
+</block>
+
+<block type="callout" kind="note">
+text: اكتب المنطقة الزمنية على شكل منطقة ومدين، مفصولين بشرطة مائلة، مثل Asia/Amman أو Europe/London أو America/New_York. القائمة هي نفسها القائمة القياسية المستخدمة عالميًا، لذا تقبل أي اسم شائع.
+</block>
+
+<block type="callout" kind="important">
+text: إذا لم يتعرف البوت على اسم المنطقة الزمنية، يُظهر خطأ بدلًا من تغيير الساعة. ينطبق هذا الإعداد على هذا التشغيل فقط، لذا ضع $time قبل الأسطر التي تقرأ الساعة، وتذكر أن $day و$month و$year يظلان يقرؤون ساعة البوت المحلية بغض النظر عن هذا الإعداد.
+</block>
+</dash>
+
+<details>
+syntax: $time[timezone]
+param: timezone|text|مطلوب|اسم منطقة زمنية وفقًا لـ IANA، مثل Asia/Amman أو Europe/London
+</details>

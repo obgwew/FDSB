@@ -1,0 +1,44 @@
+<dash>
+name: $setVar
+desc: Guarda un valor bajo un nombre para que tus otros comandos puedan leerlo más tarde.
+category: Variables
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $setVar registra un valor bajo el nombre que elijas, así que cualquier comando posterior puede leerlo con $getVar. Dale un nombre y un valor y el valor lo comparte todo el mundo; añade un ID de miembro como tercera parte y queda guardado solo para esa persona. Lo que guardas sigue guardado cuando el bot se reinicia.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de Variables
+item: Toca + y escribe el nombre que quieras usar
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !setVar en el campo Prefijo
+item: Escribe tu script en el editor
+item: Añade el nombre y el valor, y luego un ID de miembro si el valor es para una sola persona
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $setVar[name; value]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $setVar[greeting; Hello World!]
+</block>
+
+<block type="callout" kind="note">
+text: Necesita una línea propia, así que no puedes meter $setVar dentro del texto de otro comando. Lee el valor de vuelta con $getVar, usando el mismo nombre y, para un valor privado, el mismo ID de miembro.
+</block>
+
+<block type="callout" kind="important">
+text: Si ese nombre aún no está en la lista, el bot guarda el valor de todos modos y luego detiene tu comando con un aviso. Crea la variable en la pestaña de Variables primero y el valor quedará como pretendías.
+</block>
+</dash>
+
+<details>
+syntax: $setVar[name; value; (userID)]
+param: name|text|Obligatorio|El nombre bajo el que se registra el valor, exactamente como aparece en la pestaña de Variables
+param: value|text|Obligatorio|El valor que conservar hasta que lo cambies de nuevo
+param: userID|snowflake|Opcional|Si se indica, el valor queda guardado para ese miembro en lugar de para todos
+</details>

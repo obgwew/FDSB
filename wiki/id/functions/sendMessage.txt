@@ -1,0 +1,36 @@
+<dash>
+name: $sendMessage
+desc: Memposting sebaris teks di kanal tempat perintah digunakan.
+category: Pesan
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $sendMessage menaruh apa pun yang Anda tulis di dalam kurung ke dalam kanal, dan setiap nilai atau placeholder di dalamnya diisi terlebih dahulu. Ia menerima satu potong teks, dan itulah baris yang dilihat anggota muncul. Tombol yang sudah Anda siapkan dengan $addButton ikut serta pada pesan yang sama.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !sendMessage
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $sendMessage[text]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $sendMessage[Hello, $authorName!]
+</block>
+
+<block type="callout" kind="note">
+text: Hanya satu potong teks: titik koma di dalam pesan Anda membelahnya menjadi dua dan bot berhenti dengan kesalahan, jadi hilangkan itu. Pemformatan Discord seperti **bold**, miring, dan tautan muncul seperti biasa.
+</block>
+</dash>
+
+<details>
+syntax: $sendMessage[text]
+param: text|text|Wajib|Kata-kata yang diposting. Nilai di dalamnya diisi terlebih dahulu.
+</details>

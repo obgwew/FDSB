@@ -1,0 +1,31 @@
+<dash>
+name: $reply
+desc: Hace que todo lo que el bot publique a continuación aparezca como respuesta al mensaje que lo activó.
+category: Mensajes
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Coloca esta línea encima de tus comandos de envío y, en lugar de aparecer un mensaje nuevo abajo del canal, cada uno se adjunta al mensaje del propio miembro con la flechita de respuesta. El intercambio se mantiene en un solo sitio y queda claro qué pregunta produjo qué respuesta. Cubre todo lo que sigue en esa ejecución del comando, no solo el mensaje inmediatamente siguiente.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !ask en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $reply
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $reply
+text: $sendMessage[This will be a reply!]
+</block>
+
+<block type="callout" kind="note">
+text: Si ya has dirigido el comando a un destino concreto con $useChannel o has pedido un mensaje directo, ese destino gana y la flecha de respuesta nunca aparece.
+</block>
+</dash>

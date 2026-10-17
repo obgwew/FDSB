@@ -1,0 +1,25 @@
+<dash>
+name: $month
+desc: Gibt die aktuelle Monatszahl an, immer zweistellig, von 01 bis 12.
+category: Timing & Verzögerungen
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: $month liest die Uhr und gibt den laufenden Monat zurück, immer zweistellig breit, sodass Januar 01 und Dezember 12 ergibt. Fügen Sie es in eine Textzeile ein und die Ziffern landen, wo Sie sie platzieren, oder lassen Sie es auf einer eigenen Zeile stehen, dann postet der Bot die Zahl im Kanal. Setzen Sie es zwischen $day und $year, um sich Ihr eigenes Datum zu bauen.
+</block>
+
+<block type="code" title="Syntax">
+text: $month
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $sendMessage[Today is $day/$month/$year]
+</block>
+
+<block type="callout" kind="note">
+text: Die Zahl reicht von 01 bis 12 und ist immer zweistellig breit, sodass $day/$month/$year etwa als 17/10/2026 erscheint.
+</block>
+
+<block type="callout" kind="important">
+text: $day, $month und $year lesen jeweils die lokale Uhr des Bots. Die mit $time gesetzte Zeitzone wird nur von $hour, $minute und $second berücksichtigt.
+</block>
+</dash>

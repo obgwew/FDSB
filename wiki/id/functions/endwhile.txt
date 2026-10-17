@@ -1,0 +1,39 @@
+<dash>
+name: $endwhile
+desc: Menandai di mana sebuah loop berulang berhenti sehingga bot kembali menguji kondisinya lagi.
+category: Kontrol Alur
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $endwhile menutup sebuah loop yang Anda buka dengan $while. Setiap kali bot mencapainya, baris-baris di antaranya sudah dijalankan dan bot kembali ke atas untuk membaca kondisinya lagi, mengulang selama jawabannya tetap ya. Jadi sebuah loop yang ditulis dengan batas 5 memosting bloknya lima kali, dan kemudian perintah Anda berlanjut di bawahnya.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !countdown
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $endwhile
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $setVar[count; 0]
+text: $while[$getVar[count] < 5]
+text:   $sendMessage[Count: $getVar[count]]
+text:   $setVar[count; $math[$getVar[count] + 1]]
+text: $endwhile
+</block>
+
+<block type="callout" kind="important">
+text: Tidak ada yang membatasi berapa kali sebuah loop boleh mengulang. Pastikan ada sesuatu di dalam blok yang pada akhirnya membuat kondisinya menjadi false, karena jika tidak bot terus memosting baris-baris yang sama dan tidak pernah mencapai sisa perintah Anda.
+</block>
+
+<block type="callout" kind="warning">
+text: Setiap $while memerlukan $endwhile-nya sendiri. Jika baris penutupnya tidak Anda tuliskan, sisa skrip menjadi bagian dari isi loop, sehingga perintah yang Anda letakkan setelah loop ikut terulang bersamanya.
+</block>
+</dash>

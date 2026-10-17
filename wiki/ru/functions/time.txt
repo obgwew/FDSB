@@ -1,0 +1,31 @@
+<dash>
+name: $time
+desc: Задаёт часовой пояс, в котором читаются часы, для остальной части этой команды.
+category: Тайминг и задержки
+
+<block type="text" title="Как работает команда?">
+text: $time берёт название часового пояса из общего списка — например Asia/Amman или Europe/London — и сохраняет его для выполняемой команды. После установки $hour, $minute и $second читают часы в этом поясе, а не там, где размещён бот. Сама по себе она ничего не выводит — это настраивающая строка, которую ставят над строками, реально читающими время.
+</block>
+
+<block type="code" title="Синтаксис">
+text: $time[timezone]
+</block>
+
+<block type="code" title="Готовый пример для копирования">
+text: $time[Asia/Amman]
+text: $sendMessage[Right now it is $hour:$minute]
+</block>
+
+<block type="callout" kind="note">
+text: Часовой пояс записывается как регион и город через косую черту: Asia/Amman, Europe/London или America/New_York. Это тот же стандартный список, которым пользуется весь мир, поэтому принимается любое знакомое название.
+</block>
+
+<block type="callout" kind="important">
+text: Если название не распознано, бот отвечает ошибкой вместо смены времени. Настройка действует только для текущего запуска, поэтому ставьте $time выше строк, читающих час, и помните, что $day, $month и $year всё равно читают собственные локальные часы бота.
+</block>
+</dash>
+
+<details>
+syntax: $time[timezone]
+param: timezone|text|Required|Название часового пояса IANA, например Asia/Amman или Europe/London
+</details>

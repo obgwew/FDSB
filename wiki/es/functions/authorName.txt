@@ -1,0 +1,31 @@
+<dash>
+name: $authorName
+desc: Te da el nombre de usuario de la cuenta de quien escribió el comando.
+category: Info
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: El bot lee el nombre de la cuenta que envió el mensaje y lo entrega como texto normal. Solo en una línea se publica en el canal; dentro de una frase se rellena donde lo escribiste. Como lee el nombre en vivo, un miembro que se cambia el nombre muestra el nuevo de inmediato.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $authorName en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $authorName
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: Hello, $authorName!
+</block>
+
+<block type="callout" kind="note">
+text: Este es el nombre de usuario propio de la cuenta, no el apodo que alguien ha elegido para este servidor. Para el nombre por servidor, pide $displayName en su lugar.
+</block>
+</dash>

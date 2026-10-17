@@ -1,0 +1,34 @@
+<dash>
+name: $channelID
+desc: Memberikan nomor ID kanal tempat perintah dijalankan.
+category: Info
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $channelID memberikan angka panjang yang dipakai Discord untuk mengenali kanal tempat perintah Anda diketik.
+text: Jatuhkan di mana pun dalam pesan, dan bot mencetaknya sebagai deret angka polos, tanpa apa pun membungkusnya.
+text: Angka itulah yang diharapkan perintah lain ketika mereka perlu diarahkan ke kanal tertentu, sehingga perintah ini menghemat Anda menyalinnya dari menu Discord secara manual.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !where
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $channelID
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: This command was used in channel $channelID
+</block>
+
+<block type="callout" kind="note">
+text: Yang kembali adalah ID kanal milik Discord sendiri, deret panjang angka seperti 123456789012345678.
+text: Itu adalah angka yang sama yang Anda dapatkan ketika menyalakan Developer Mode di Discord dan menyalin tautan kanal.
+</block>
+</dash>

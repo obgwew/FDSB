@@ -1,0 +1,37 @@
+<dash>
+name: $getUserStatus
+desc: Te dice si un miembro está en línea, ausente, ocupado o desconectado.
+category: Info
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Úsalo sin argumento y el bot informa del estado de la persona que ejecutó el comando. Añade un ID de usuario o una @mención y comprueba ese miembro del servidor en su lugar. Cualquiera que no esté en el servidor cuenta como desconectado, y se devuelve la misma respuesta si intentas usarlo en un chat privado.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $getUserStatus en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $getUserStatus
+text: $getUserStatus[(userID/mention)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: Your status is: $getUserStatus
+</block>
+
+<block type="callout" kind="note">
+text: Las respuestas son online, idle, dnd y offline. Discord solo comparte esto para miembros de un servidor, así que el comando tiene que ejecutarse dentro de uno.
+</block>
+</dash>
+
+<details>
+syntax: $getUserStatus[(userID/mention)]
+param: userID/mention|text|Opcional|A quién comprobar. Déjalo vacío y el bot mira a la persona que ejecutó el comando
+</details>

@@ -1,0 +1,38 @@
+<dash>
+name: $httpPut
+desc: Envía una solicitud PUT a una dirección web y guarda la respuesta.
+category: HTTP
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Dale una dirección web y el bot envía allí una solicitud PUT, añadiendo el cuerpo cuando lo proporciones. Un cuerpo que se pueda interpretar como JSON viaja como JSON, todo lo demás va como texto plano. Las cabeceras que pusiste en cola con $httpAddHeader salen con esta solicitud y se borran justo después. El código de estado vuelve en $httpStatus y el texto de la respuesta en $httpResult, listos para imprimir o reutilizar.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !webhook en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $httpPut[URL; (Body)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $httpAddHeader[Content-Type; application/json]
+text: $httpPut[https://api.example.com/users/1; {"name": "FDScript"}]
+text: $httpStatus
+</block>
+
+<block type="callout" kind="note">
+text: El bot da diez segundos a una solicitud antes de abandonarla. Una que falla informa del estado 500 con el mensaje de error esperando en $httpResult, mientras que una dirección a la que el bot no llegará informa de 400 en su lugar.
+</block>
+</dash>
+
+<details>
+syntax: $httpPut[URL; (Body)]
+param: URL|text|Obligatorio|La dirección web a la que enviar el PUT
+param: Body|text|Opcional|Qué llevar con la solicitud, como JSON o texto plano
+</details>

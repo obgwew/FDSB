@@ -1,0 +1,36 @@
+<dash>
+name: $or
+desc: Mengatakan benar ketika setidaknya satu dari pemeriksaan yang Anda cantumkan keluar benar, dan salah ketika tidak ada satupun yang benar.
+category: Kontrol Alur
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $or memeriksa setiap pemeriksaan yang Anda berikan dan menanyakan apakah setidaknya satu di antaranya terpenuhi. Dua angka dibandingkan sebagai angka dan dua kata sebagai kata, sehingga jenis pemeriksaan yang berbeda bisa berbagi satu baris. Yang kembali adalah kata benar atau salah, siap dimasukkan ke dalam blok if.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !or
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $or[condition1; condition2; condition3; ...]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $or[$authorID == 123; $authorID == 456]
+</block>
+
+<block type="callout" kind="note">
+text: Setiap pemeriksaan dapat memakai tanda yang sama seperti blok if: ==, !=, >, <, >= dan <=. Pemeriksaan tanpa tanda sama sekali dihitung sebagai benar kecuali teks di belakangnya ternyata kosong.
+</block>
+</dash>
+
+<details>
+syntax: $or[condition1; condition2; condition3; ...]
+param: condition|expression|Wajib|Satu atau lebih pemeriksaan untuk diuji. Masing-masing dapat memakai ==, !=, >, <, >= dan <=.
+</details>

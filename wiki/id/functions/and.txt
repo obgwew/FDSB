@@ -1,0 +1,36 @@
+<dash>
+name: $and
+desc: Menjawab true hanya bila semua kondisi yang Anda daftarkan sama-sama benar.
+category: Kontrol Alur
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Letakkan dua tes atau lebih bersebelahan, lalu Anda mendapatkan satu jawaban sederhana kembali. Semuanya harus terpenuhi pada saat yang sama agar kata true muncul; satu tes yang gagal mengubah seluruhnya menjadi false. Itu membuatnya cara yang rapi untuk men-gate sebuah $if pada beberapa hal sekaligus, dan perintah ini juga berfungsi pada barisnya sendiri, tempat jawabannya diposting di kanal apa adanya.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !check
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $and[condition1; condition2; condition3; ...]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $and[$authorID == 123; $guildName == MyServer]
+</block>
+
+<block type="callout" kind="note">
+text: Setiap kondisi ditulis dengan perbandingan yang dipakai $if: ==, !=, >, <, >= dan <=. Jawabannya selalu kata polos true atau false, sehingga Anda dapat menyimpannya dan mengujinya lagi nanti.
+</block>
+</dash>
+
+<details>
+syntax: $and[condition1; condition2; condition3; ...]
+param: condition|expression|Wajib|Pemeriksaan yang dilakukan, memakai ==, !=, >, <, >= atau <=. Semuanya harus terpenuhi agar true.
+</details>

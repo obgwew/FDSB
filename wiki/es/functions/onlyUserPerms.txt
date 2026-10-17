@@ -1,0 +1,51 @@
+<dash>
+name: $onlyUserPerms
+desc: Detiene el comando con tu propio mensaje a menos que la persona que lo ejecuta tenga permiso para hacer lo que viene después.
+category: Control de acceso
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $onlyUserPerms comprueba los permisos del miembro que ejecutó el comando antes de que se ejecute la parte protegida. Lista los permisos que necesita y termina con el mensaje que se envía cuando falta alguno. Si los tiene todos, no se muestra nada y tu comando continúa. Si falta uno, el mensaje se envía y el resto del comando se descarta justo ahí.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $onlyUserPerms[permission; ...; error message]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $onlyUserPerms[manage_messages; You need Manage Messages to do that.]
+text: $onlyAdmin
+text: $sendMessage[Message deleted.]
+</block>
+
+<block type="options" title="Permisos comunes">
+option: manage_messages|Borrar y fijar mensajes
+option: kick_members|Expulsar miembros
+option: ban_members|Banear miembros
+option: timeout_members|Poner en time out a los miembros
+option: manage_roles|Asignar y quitar roles
+option: moderate_members|Poner en time out y expulsar miembros
+</block>
+
+<block type="callout" kind="note">
+text: Los nombres de permisos son los propios nombres de Discord en minúsculas con guiones bajos. Pon el mensaje al final — todo lo que va después de los permisos cuenta como un solo mensaje.
+</block>
+
+<block type="callout" kind="important">
+text: Esto no es lo mismo que $onlyAdmin. Mira los propios permisos de la persona, lo que significa que un rol al que diste permisos extra pasará aunque no sea un rol de administrador.
+</block>
+</dash>
+
+<details>
+syntax: $onlyUserPerms[permission; ...; error message]
+param: permission|text|Obligatorio|Uno o más nombres de permiso de Discord, separados por punto y coma, como manage_messages o kick_members.
+param: error message|text|Obligatorio|Mensaje enviado al canal cuando al miembro le falta uno de los permisos. Todo lo que va después de los permisos cuenta como este mensaje.
+</details>

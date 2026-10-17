@@ -1,0 +1,36 @@
+<dash>
+name: $or
+desc: Dice true cuando al menos una de las comprobaciones que listas sale correcta, y false cuando ninguna lo es.
+category: Control de flujo
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $or mira cada comprobación que le das y pregunta si al menos una se cumple. Dos números se comparan como números y dos palabras como palabras, así que diferentes tipos de comprobación pueden compartir una línea. Lo que vuelve es la palabra true o false, lista para meterse en un bloque if.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !or en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $or[condition1; condition2; condition3; ...]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $or[$authorID == 123; $authorID == 456]
+</block>
+
+<block type="callout" kind="note">
+text: Cada comprobación puede usar los mismos signos que un bloque if: ==, !=, >, <, >= y <=. Una comprobación sin ningún signo cuenta como true a menos que el texto detrás resulte estar vacío.
+</block>
+</dash>
+
+<details>
+syntax: $or[condition1; condition2; condition3; ...]
+param: condition|expression|Obligatorio|Una o más comprobaciones para probar. Cada una puede usar ==, !=, >, <, >= y <=.
+</details>

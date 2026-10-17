@@ -1,0 +1,31 @@
+<dash>
+name: $getBotInvent
+desc: Te da un enlace ya listo para añadir el bot a otro servidor.
+category: Utilidades
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: El bot construye su propio enlace de añadido en el momento y lo publica en el canal. A quien lo siga se le piden todos los permisos de una vez, así que no hay una segunda pantalla de casillas que marcar. Escríbelo dentro de una frase si prefieres que no llegue por sí solo.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $getBotInvent en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $getBotInvent
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: Invite me: $getBotInvent
+</block>
+
+<block type="callout" kind="note">
+text: El enlace pide todos los permisos en lugar de unos pocos elegidos, que es más de lo que la mayoría de los servidores necesita en realidad. Si el bot no puede leer su propio ID de aplicación, el mensaje lo dice en lugar de mostrar un enlace.
+</block>
+</dash>

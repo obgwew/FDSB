@@ -1,0 +1,42 @@
+<dash>
+name: $onBanRemove
+desc: Menjalankan baris-baris Anda begitu sebuah ban dicabut dan seorang pengguna dibebaskan dari ban.
+category: Peristiwa
+
+<block type="text" title="Bagaimana cara kerja peristiwa?">
+text: Simpan sebuah perintah yang kolom Awalannya $onBanRemove dan aplikasi menandainya sebagai Peristiwa untuk Anda. Detik sebuah ban dicabut — oleh moderator atau melalui log audit — baris-baris di bawah awalan itu mulai berjalan tanpa ada yang mengetik apa pun.
+text: Orang yang dibebaskan dari ban adalah penulisnya di sini, jadi $mention, $authorID dan $authorName menunjuk kepadanya, sementara $guildID dan $guildName menjelaskan server tempat ban dicabut.
+text: Ban tidak memiliki kanalnya sendiri, jadi kanal pesan dibiarkan kosong kecuali Anda menyebutkan satu. Letakkan ID kanal dalam kurung tepat setelah awalan dan balasan Anda mendarat di sana.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $onBanRemove
+item: Aplikasi menandainya sebagai Peristiwa untuk Anda
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: #PREFIX:$onBanRemove[channelID]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: #PREFIX:$onBanRemove[123456789012345678]
+text:  sendMessage[$mention is no longer banned from $guildName]
+</block>
+
+<block type="callout" kind="note">
+text: Pertahankan $onBanRemove di baris pertama. Geser lebih ke bawah dan aplikasi berhenti memperlakukan perintah itu sebagai peristiwa, sehingga ia akan duduk dan menunggu seseorang mengetik awalannya seperti perintah biasa.
+</block>
+
+<block type="callout" kind="important">
+text: Sebutkan ID kanal setelah awalan, karena sebuah ban tidak terikat pada kanal mana pun dan bot tidak punya tempat untuk berbicara. Pada saat ban dicabut, orang tersebut belum menjadi anggota server, jadi andalkan $mention, $authorID dan $authorName alih-alih apa pun yang membaca peran mereka.
+</block>
+</dash>
+
+<details>
+syntax: $onBanRemove
+</details>

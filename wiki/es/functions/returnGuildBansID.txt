@@ -1,0 +1,39 @@
+<dash>
+name: $returnGuildBansID
+desc: Reúne en una lista, para leer más tarde, la ID de todos los miembros baneados de un servidor.
+category: Comandos de retorno
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Nombra un servidor, un nombre de almacenamiento y un separador, y el bot recorre la lista de baneos de ese servidor. La ID de cada miembro baneado se une con tu separador y se archiva bajo el nombre de almacenamiento, así que no se imprime nada en el canal por ahora. Más tarde, $return con el mismo nombre saca la lista entera como una sola línea de texto.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !welcome en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $returnGuildBansID[GuildID; var; separator]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $returnGuildBansID[$guildID; bannedIDs; ,]
+text: $sendMessage[Banned users: $return[bannedIDs]]
+</block>
+
+<block type="callout" kind="important">
+text: El bot necesita el permiso Ban Members en ese servidor o la lectura falla con un error de permisos. Un servidor sin nadie baneado también se informa como error, así que no lo leas como una lista vacía.
+</block>
+</dash>
+
+<details>
+syntax: $returnGuildBansID[GuildID; var; separator]
+param: GuildID|snowflake|Obligatorio|De qué servidor leer la lista de baneos
+param: var|text|Obligatorio|Bajo qué nombre guardar la lista, que se leerá después con $return[]
+param: separator|text|Obligatorio|Qué va entre las IDs. Las palabras también valen: dot, com, apo, sem, colon
+</details>

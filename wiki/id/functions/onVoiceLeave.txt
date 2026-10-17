@@ -1,0 +1,40 @@
+<dash>
+name: $onVoiceLeave
+desc: Menjalankan perintah Anda sendiri setiap kali seseorang terputus dari kanal suara.
+category: Peristiwa
+
+<block type="text" title="Bagaimana cara kerja peristiwa?">
+text: Letakkan $onVoiceLeave di kolom Awalan dan aplikasi menandai perintah itu sebagai Peristiwa, jadi tidak ada yang perlu mengetik apa pun untuk memicunya. Saat seorang anggota terputus dari kanal suara mana pun, baris-baris di bawahnya berjalan dengan orang itu sebagai $author, dan apa pun yang Anda kirim mendarat di kanal sistem server Anda. Tambahkan ID kanal dalam kurung siku setelah awalan, seperti $onVoiceLeave[123456789012345678], dan semuanya pergi ke kanal itu.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $onVoiceLeave
+item: Aplikasi menandainya sebagai Peristiwa untuk Anda
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: #PREFIX:$onVoiceLeave
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: #PREFIX:$onVoiceLeave
+text:  sendMessage[$authorName left a voice channel.]
+</block>
+
+<block type="callout" kind="note">
+text: Setelah Anda ketuk Simpan, perintah itu menunggu dengan sendirinya dan menyala untuk setiap pemutusan suara di server. $authorName dan $mention keduanya merujuk pada orang yang baru keluar, jadi Anda dapat menyebutnya atau menandainya sesuka Anda.
+</block>
+
+<block type="callout" kind="important">
+text: Karena aplikasi mengategorikan ini sebagai Peristiwa, perintah ini tidak pernah muncul dalam daftar perintah biasa dan tidak ada yang bisa memicunya dengan mengetik. Seorang anggota yang berpindah dari satu kanal suara langsung ke kanal lain dihitung sebagai keluar dari yang pertama, sehingga perintah berjalan bahkan ketika mereka tidak benar-benar pergi ke mana pun.
+</block>
+</dash>
+
+<details>
+syntax: $onVoiceLeave
+</details>

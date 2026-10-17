@@ -1,0 +1,25 @@
+<dash>
+name: $second
+desc: Renvoie la seconde actuelle de la minute, de 00 à 59.
+category: Minutage & Délais
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: $second lit l'horloge et renvoie la seconde actuelle, toujours sur deux chiffres, donc la seconde d'ouverture de chaque minute affiche 00. Insérez-le dans une ligne de texte et les chiffres se placent là où vous les mettez, ou laissez-le sur une ligne à part et le bot publie le chiffre dans le canal. Comme il est lu à nouveau à chaque exécution, c'est un moyen pratique de donner à une commande un résultat légèrement différent chaque fois.
+</block>
+
+<block type="code" title="Syntaxe">
+text: $second
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $sendMessage[The time is $hour:$minute:$second]
+</block>
+
+<block type="callout" kind="note">
+text: La valeur va de 00 à 59 et fait toujours deux chiffres, ce qui garde une lecture complète $hour:$minute:$second bien espacée.
+</block>
+
+<block type="callout" kind="important">
+text: $second suit le fuseau horaire que vous définissez avec $time. Si vous n'en définissez jamais, il se rabat sur l'horloge locale propre au bot.
+</block>
+</dash>

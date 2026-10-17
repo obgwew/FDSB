@@ -1,0 +1,52 @@
+<dash>
+name: $getLeaderboardValue
+desc: Mengembalikan nilai, ID, atau nama entri yang berada pada peringkat tertentu di papan peringkat.
+category: Variabel
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $getLeaderboardValue membangun sebuah peringkat lalu menjangkaunya. Anda memberikan sebuah posisi, dan ia mengembalikan apa yang duduk di sana — skor tersimpan, ID, atau nama tampilan. Sendirian, ia mencetak hasil itu di kanal; di dalam perintah lain, hasilnya disisipkan di tempatnya. Jika Anda meminta posisi yang melewati ujung daftar, Anda tidak mendapatkan apa pun, jadi periksa panjangnya terlebih dahulu ketika daftarnya bisa pendek.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buat variabelnya terlebih dahulu di tab Variabel
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $getLeaderboardValue[type; name; sort; position; return_type]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $sendMessage[Top player: $getLeaderboardValue[user; points; desc; 1; name]]
+</block>
+
+<block type="options" title="Jenis variabel">
+option: user|Satu nilai per anggota, disimpan terpisah di setiap server
+option: globaluser|Satu nilai per anggota, dibagikan ke semua server tempat bot berada
+option: server|Satu nilai per server
+</block>
+
+<block type="options" title="Apa yang dikembalikan">
+option: value|Skor tersimpan itu sendiri (dipakai saat Anda mengosongkan ini)
+option: id|ID Discord dari entri tersebut
+option: name|Nama tampilan, dengan cadangan ke ID mentah bila tidak bisa diuraikan
+</block>
+
+<block type="callout" kind="note">
+text: Urutkan daftarnya dengan cara yang sama seperti saat Anda membaca posisinya, jika tidak Anda akan mendapatkan entri yang berbeda. Nilai yang bukan angka dilewati.
+</block>
+</dash>
+
+<details>
+syntax: $getLeaderboardValue[type; name; sort; position; (return_type)]
+param: type|text|Wajib|Kolam mana yang diberi peringkat: user, globaluser, atau server.
+param: name|text|Wajib|Nama variabel yang menjadi dasar peringkat.
+param: sort|text|Wajib|desc untuk tertinggi dahulu, atau asc untuk terendah dahulu.
+param: position|number|Wajib|Posisi mana yang dibaca, dihitung dari 1. Posisi yang melewati ujung daftar mengembalikan apa pun.
+param: return_type|text|Opsional|value untuk skor tersimpan, id untuk ID Discord, atau name untuk nama tampilan.
+</details>

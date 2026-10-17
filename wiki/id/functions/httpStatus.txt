@@ -1,0 +1,46 @@
+<dash>
+name: $httpStatus
+desc: Memberi tahu Anda nomor status yang dibawa pulang oleh permintaan web terakhir Anda.
+category: HTTP
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $httpStatus menyerahkan kembali angka yang dibawa pulang oleh permintaan web terakhir Anda, sama seperti 200 atau 404 yang Anda lihat di bilah alamat browser. Belum ada yang diminta dan ia melaporkan 0. Karena ia menetap pada sebuah nilai, Anda dapat memasukkannya ke dalam blok if untuk memutuskan apa yang terjadi selanjutnya.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !httpStatus
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $httpStatus
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $httpGet[https://api.example.com/data]
+text: $if[$httpStatus == 200] {
+text:   $reply[Request succeeded]
+text: }
+</block>
+
+<block type="callout" kind="note">
+text: Permintaan yang tidak pernah mencapai situs dilaporkan sebagai 500, dan yang ditolak bot adalah 400. Baca setelah baris permintaan, bukan sebelumnya.
+</block>
+
+<block type="callout" kind="warning">
+text: Pada versi yang sedang Anda jalankan, memintanya menghentikan seluruh perintah dengan kesalahan internal sebelum apa pun mencapai kanal. Sisihkan dulu sampai itu diperbaiki.
+</block>
+
+<block type="callout" kind="note">
+text: Contoh menutup blok if-nya dengan kurung kurawal. Editor justru mengharapkan $endif pada barisnya sendiri, jadi ambil bentuk blok if dari halamannya sendiri.
+</block>
+</dash>
+
+<details>
+syntax: $httpStatus
+</details>

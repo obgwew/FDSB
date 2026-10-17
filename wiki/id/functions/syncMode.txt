@@ -1,0 +1,41 @@
+<dash>
+name: $syncMode
+desc: Menandai baris-baris di bawahnya sebagai satu kelompok yang seharusnya dikirim bersamaan.
+category: Kontrol Alur
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $syncMode menandai semua baris di bawahnya sebagai satu kelompok, jadi baris-baris di dalamnya dimaksudkan untuk dikirim bersamaan, bukan satu per satu. Batas-batas kelompok ditentukan oleh blok kontrol, pemanggilan fungsi, pemeriksaan, maupun pergantian kanal. Pada versi yang sedang Anda gunakan, fitur pengiriman berkelompok belum terhubung, jadi baris-baris masih dikirim satu per satu dan tidak ada perbedaan yang terlihat di kanal.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !syncMode
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $syncMode
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $syncMode
+text: $sendMessage[First step]
+text: $sendMessage[Second step]
+</block>
+
+<block type="callout" kind="warning">
+text: Saat ini, baris-baris di bawah $syncMode belum berjalan bersamaan. Jangan mengandalkan mereka dikirim bersamaan, dan jangan mengandalkan seluruh kelompok berhenti bersamaan jika salah satu baris gagal.
+</block>
+
+<block type="callout" kind="note">
+text: Setiap perintah baru sudah memiliki $syncMode pada baris pertamanya secara otomatis, jadi biasanya Anda tidak perlu menambahkannya lagi.
+</block>
+</dash>
+
+<details>
+syntax: $syncMode
+</details>

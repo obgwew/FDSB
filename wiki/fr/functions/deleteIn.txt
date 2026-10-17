@@ -1,0 +1,35 @@
+<dash>
+name: $deleteIn
+desc: Attend une durée définie, puis supprime les propres réponses du bot dans le canal.
+category: Minutage & Délais
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: $deleteIn prend une durée et demande au bot d'effacer sa propre sortie une fois ce délai écoulé. Il rattrape le message que le bot a déjà publié dans cette exécution et tous ceux qu'il publie ensuite, les retient pendant le délai que vous avez indiqué, puis les supprime pour laisser le canal propre. Cela permet facilement de distribuer une note temporaire ou un résultat ponctuel qui ne doit pas rester dans le salon pour toujours.
+</block>
+
+<block type="code" title="Syntaxe">
+text: $deleteIn[duration]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $deleteIn[5s]
+text: $sendMessage[This message is removed after 5 seconds]
+</block>
+
+<block type="callout" kind="note">
+text: Une durée, c'est un nombre suivi d'une unité : ms pour les millisecondes, s pour les secondes, m pour les minutes, h pour les heures, d pour les jours et w pour les semaines. Vous pouvez en combiner plusieurs, donc 1h30m correspond à une heure et trente minutes, et le délai maximal autorisé est de 14 jours.
+</block>
+
+<block type="callout" kind="warning">
+text: Le bot doit avoir la permission de supprimer des messages dans ce canal, et chaque message qu'il supprime doit être un qu'il a publié lui-même. Si le délai s'écoule pendant que le bot est hors ligne, le message reste en place, car le compte à rebours vit avec le bot.
+</block>
+
+<block type="callout" kind="important">
+text: Seule une durée est acceptée ici — exactement un argument, avec une valeur supérieure à zéro. Une attente trop longue, une unité manquante ou un nombre sans rien derrière est refusé avec une erreur.
+</block>
+</dash>
+
+<details>
+syntax: $deleteIn[duration]
+param: duration|text|Requis|Combien de temps attendre avant de supprimer, sous forme d'un nombre avec une unité — 5s, 10m, 2h, 1d — et jusqu'à 14 jours
+</details>

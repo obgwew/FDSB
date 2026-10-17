@@ -6,66 +6,70 @@
 
 KNOWN_COMMANDS: set[str] = {
     # a
-    "addBotReactions", "addButton", "addTimestamp", "addUserReactions", "and",
-    "author", "authorIcon", "authorID", "authorName", "authorURL",
-    "authorAvatar", "authorServerAvatar", "addSelectMenuOption",
+    "addBotReactions", "addButton", "addSelectMenuOption", "addTimestamp", "addUserReactions",
+    "and", "author", "authorAvatar", "authorIcon", "authorID",
+    "authorName", "authorServerAvatar", "authorURL",
     # b
-    "ban", "boostCount", "boostLevel", "botID", "botLeave", "botName", "break",
+    "ban", "blackListRoles", "blackListServer", "blackListUsers", "boostCount",
+    "boostLevel", "botID", "botLeave", "botName", "break",
     # c
-    "call", "ceil", "changeUsername", "channelExists", "channelID", "channelName",
-    "channelType", "charCount", "checkContains", "clear", "clientTyping", "cloneRole",
-    "color", "cooldown", "createChannel", "createRole", "cropText",
-    "customID", "cloneChannel",
+    "call", "ceil", "changeUsername", "channelExists", "channelID",
+    "channelName", "channelType", "charCount", "checkContains", "clear",
+    "clientTyping", "cloneChannel", "cloneRole", "color", "cooldown",
+    "createChannel", "createRole", "cropText", "customID",
     # d
-    "deleteChannels", "deletecommand", "deleteRole", "description",
-    "displayName", "div", "dm",
+    "deleteChannels", "deletecommand", "deleteRole", "description", "displayName",
+    "div", "dm", "day",
     # e
-    "editButton", "editChannelPerms", "editIn", "editMessage", "editSplitOut",
-    "elif", "else", "endfor", "endfunc", "endif",
-    "endwhile", "emojiExists", "emojiName", "editSelectMenu", "editSelectMenuOption",
-    "editChannelTopic", "ephemeral",
+    "editButton", "editChannelPerms", "editChannelTopic", "editIn", "editMessage",
+    "editSelectMenu", "editSelectMenuOption", "editSplitOut", "elif", "else",
+    "emojiExists", "emojiName", "endfor", "endfunc", "endif",
+    "endwhile", "ephemeral",
     # f
-    "findChannel", "findRole", "floor", "footer", "footerIcon", "for", "func",
+    "findChannel", "findRole", "floor", "footer", "footerIcon",
+    "for", "func",
     # g
-    "getBotInvent", "getCreationDateTimestamp", "getGuildVar","getLeaderboardPosition", "getLeaderboardValue",
-    "getMessage", "getServerInvite","getSplitOutLength", "getTimestamp", "getUserStatus",
-    "getUserVar", "getVar", "globalUserLeaderboard", "guildID", "guildName",
-    "guildVerificationLvl", "guildBanner",
+    "getBotInvent", "getCreationDateTimestamp", "getGuildVar", "getLeaderboardPosition", "getLeaderboardValue",
+    "getMessage", "getServerInvite", "getSplitOutLength", "getTimestamp", "getUserStatus",
+    "getUserVar", "getVar", "globalUserLeaderboard", "guildBanner", "guildID",
+    "guildName", "guildVerificationLvl",
     # h
-    "httpAddHeader", "httpDelete", "httpGet", "httpPatch", "httpPost",
-    "httpPut", "httpResult", "httpStatus",
+    "hour", "httpAddHeader", "httpDelete", "httpGet", "httpPatch",
+    "httpPost", "httpPut", "httpResult", "httpStatus",
     # i
-    "if", "image", "isAdmin", "isBooster", "isBot", "isNSFW",
-    "isNumber", "isOwner",
+    "if", "image", "isAdmin", "isBooster", "isBot",
+    "isNSFW", "isNumber", "isOwner",
     # j
     "joinSplitOut",
     # k
     "kick",
     # l
-    "lastBotMessageID", "lastUserMessageID", "log","lineCount",
+    "lastBotMessageID", "lastUserMessageID", "lineCount", "log",
     # m
     "math", "membersCount", "mention", "message", "messageID",
-    "mod", "mul", "modifyRolePerms", "moveChannel", "modifyChannel",
+    "minute", "mod", "modifyChannel", "modifyRolePerms", "month",
+    "moveChannel", "mul",
     # n
-    "numberSeparator", "numberAbbreviate", "newSelectMenu",
+    "newSelectMenu", "numberAbbreviate", "numberSeparator",
     # o
-    "onlyAdmin", "onlyBotPerms", "onlyFor", "onlyIf", "onlyIn", "onlyNSFW", "onlyUserPerms", "or",
+    "onlyAdmin", "onlyBotPerms", "onlyFor", "onlyIf", "onlyIn",
+    "onlyNSFW", "onlyUserPerms", "or",
     # p
     "ping", "power",
     # r
-    "randomint", "randomRoleID", "randomRoleMention", "randomstr","randomUserID",
-    "removeButtons", "removeComponent", "removeLinks", "removeSplitOutElement", "repeatMessage",
-    "replaceRegex", "replaceText", "reply", "replyIn", "resetGuildVar",
-    "resetUserVar", "return","returnGetReactions", "returnGuildBansID", "returnGuildChannelsID",
-    "returnGuildEmojisID", "returnGuildRolesID", "returnGuildUsersID", "roleAssign", "round",
-    "removeAllComponents",
+    "randomint", "randomRoleID", "randomRoleMention", "randomstr", "randomUserID",
+    "removeAllComponents", "removeButtons", "removeComponent", "removeLinks", "removeSplitOutElement",
+    "repeatMessage", "replaceRegex", "replaceText", "reply", "replyIn",
+    "resetGuildVar", "resetUserVar", "return", "returnGetReactions", "returnGuildBansID",
+    "returnGuildChannelsID", "returnGuildEmojisID", "returnGuildRolesID", "returnGuildUsersID", "roleAssign",
+    "round",
     # s
-    "sendEmbedMessage", "sendMessage", "serverLeaderboard", "serverOwnerID", "setBotStatus",
-    "setGuildVar", "setUserVar", "setVar", "slowmode", "splitIn",
-    "splitOut", "strictArgs", "sub", "sum", "suppressErrors",
-    "switch","serverIcon", "syncChannel", "syncMode",
+    "second", "sendEmbedMessage", "sendMessage", "serverIcon", "serverLeaderboard",
+    "serverOwnerID", "setBotStatus", "setGuildVar", "setUserVar", "setVar",
+    "slowmode", "splitIn", "splitOut", "strictArgs", "sub",
+    "sum", "suppressErrors", "switch", "syncChannel", "syncMode",
     # t
-    "timeout", "title", "thumbnail",
+    "thumbnail", "time", "timeout", "title",
     # u
     "unban", "untimeout", "uptime", "useChannel", "userBanner",
     "userBannerColor", "userLeaderboard",
@@ -73,6 +77,8 @@ KNOWN_COMMANDS: set[str] = {
     "var", "voiceUsersLimit",
     # w
     "wait", "while",
+    # y
+    "year",
 }
 
 CONTROL_FLOW_COMMANDS: set[str] = {

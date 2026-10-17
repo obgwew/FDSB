@@ -1,0 +1,50 @@
+<dash>
+name: $createRole
+desc: Crea un rol nuevo en el servidor con el nombre, el color y los permisos que elijas.
+category: Moderación
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $createRole añade un rol nuevo al servidor donde se usó el comando.
+text: Le das un nombre, un color y cuánto poder debe tener el rol, ya sea uno de los ajustes preestablecidos de abajo o un número de permiso directo.
+text: También puedes decidir si el rol se lista por separado junto a los miembros y si se permite que alguien lo mencione, y ambas cosas quedan desactivadas salvo que digas que sí.
+text: El rol terminado aparece en la lista de roles de tu servidor al instante, y su ID se puede obtener con $return[createdRoleID] para pasarlo a un comando posterior.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !role en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $createRole[role name; color; permissions; (display role; mention role)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $createRole[VIP; #FFD700; member; yes; no]
+</block>
+
+<block type="options" title="Ajustes preestablecidos de permisos">
+option: cosmetic|Sin permisos en absoluto, solo un nombre de color
+option: member|Permisos de miembro normal: enviar mensajes, reaccionar, subir archivos, unirse a voz
+option: mod / moderator|Expulsiones, baneos, timeouts y gestión de mensajes
+option: manager / admin|Todo lo que puede hacer un moderador, más canales, roles, webhooks y emojis
+</block>
+
+<block type="callout" kind="note">
+text: El bot necesita el permiso Manage Roles en ese servidor, y el comando solo funciona dentro de un servidor, nunca en un chat privado.
+text: El límite propio de Discord de 100 caracteres se aplica al nombre del rol.
+</block>
+</dash>
+
+<details>
+syntax: $createRole[role name; color; permissions; (display role; mention role)]
+param: role name|text|Obligatorio|El nombre que se muestra para el rol nuevo, hasta 100 caracteres
+param: color|text|Obligatorio|Un color hexadecimal como #FF5733, o vacío para el predeterminado
+param: permissions|text|Obligatorio|Uno de los ajustes preestablecidos de arriba, o el número de permiso directo
+param: display role|yes/no|Opcional|yes para listar el rol por separado al lado de los miembros (predeterminado: no)
+param: mention role|yes/no|Opcional|yes para que cualquiera pueda mencionar el rol (predeterminado: no)
+</details>

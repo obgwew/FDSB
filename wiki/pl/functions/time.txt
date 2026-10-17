@@ -1,0 +1,31 @@
+<dash>
+name: $time
+desc: Ustawia strefę czasową, w której odczytywany jest zegar, na resztę tej komendy.
+category: Czas i opóźnienia
+
+<block type="text" title="Jak działa komenda?">
+text: $time przyjmuje nazwę strefy czasowej z ogólnoświatowej listy, np. Asia/Amman albo Europe/London, i zachowuje ją dla komendy, która się wykonuje. Po ustawieniu $hour, $minute i $second odczytują zegar w tej strefie czasowej zamiast tego, gdzie bot akurat jest hostowany. Nic samo z siebie nie wyświetla — to linia konfiguracyjna, którą umieszczasz nad tymi, które naprawdę odczytują czas.
+</block>
+
+<block type="code" title="Składnia">
+text: $time[timezone]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $time[Asia/Amman]
+text: $sendMessage[Right now it is $hour:$minute]
+</block>
+
+<block type="callout" kind="note">
+text: Strefę zapisz jako region i miasto rozdzielone ukośnikiem, np. Asia/Amman, Europe/London albo America/New_York. Lista jest tą samą standardową, z której korzysta reszta świata, więc akceptowana jest każda znana nazwa.
+</block>
+
+<block type="callout" kind="important">
+text: Jeśli nazwa nie zostanie rozpoznana, bot odpowiada błędem zamiast zmieniać zegar. Ustawienie dotyczy tylko tego uruchomienia, więc umieść $time przed liniami odczytującymi godzinę i pamiętaj, że $day, $month i $year niezmiennie odczytują własny zegar lokalny bota, niezależnie od tej strefy.
+</block>
+</dash>
+
+<details>
+syntax: $time[timezone]
+param: timezone|text|Required|Nazwa strefy czasowej IANA, np. Asia/Amman lub Europe/London
+</details>

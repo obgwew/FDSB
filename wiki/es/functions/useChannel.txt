@@ -1,0 +1,43 @@
+<dash>
+name: $useChannel
+desc: Envía todo lo que tu comando escribe después de esta línea a un canal distinto.
+category: Control de acceso
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $useChannel toma un ID de servidor y un ID de canal y traslada la salida de tu comando a ese canal. Todo lo escrito por encima se queda donde estaba; cada mensaje posterior, ya sea texto simple, tarjetas o respuestas, se publica en el canal que indiques en su lugar. Puede apuntar a un canal de un servidor completamente distinto.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !useChannel en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $useChannel[guildID; channelID]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $sendMessage[This goes to the current channel]
+text: $useChannel[1234567890; 9876543210]
+text: $sendMessage[This goes to the specified channel!]
+</block>
+
+<block type="callout" kind="note">
+text: Ambas partes se resuelven antes de comprobarse, y las dos tienen que ser números simples. El bot también tiene que ser miembro del servidor que indiques y poder ver el canal. Cualquier cosa que no encuentre se omite en silencio y se anota en el registro, así que el resto de tu comando sigue yendo al canal original.
+</block>
+
+<block type="callout" kind="warning">
+text: Una vez que el interruptor está activado nunca se desactiva solo, así que cada línea posterior también acaba en el otro canal. Detrás de la pulsación de un botón, la respuesta a Discord se retiene primero, y el texto va al canal objetivo en lugar de debajo del botón.
+</block>
+</dash>
+
+<details>
+syntax: $useChannel[guildID; channelID]
+param: guildID|number|Obligatorio|En qué servidor está el canal objetivo
+param: channelID|number|Obligatorio|A qué canal debe ir todo lo que venga después de esta línea
+</details>

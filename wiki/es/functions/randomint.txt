@@ -1,0 +1,37 @@
+<dash>
+name: $randomint
+desc: Genera un número entero al azar entre dos límites que tú eliges.
+category: Aleatorio
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Elige un valor mínimo y uno máximo y el bot saca un número entero en ese rango, ambos extremos incluidos, y lo publica. Si los intercambias por accidente los ordena por ti, así que 100 y 1 se comportan igual que 1 y 100. El resultado es un número simple que puedes imprimir por sí solo o meter directamente en otro comando.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !dice en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $randomint[min; max]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $randomint[1; 100]
+</block>
+
+<block type="callout" kind="note">
+text: Los dos límites tienen que estar. Si dejas fuera uno, el bot publica un error pidiendo la pareja, y cualquier cosa que no sea un número recibe el mismo trato.
+</block>
+</dash>
+
+<details>
+syntax: $randomint[min; max]
+param: min|number|Obligatorio|El número más pequeño en el que puede caer
+param: max|number|Obligatorio|El número más grande en el que puede caer
+</details>

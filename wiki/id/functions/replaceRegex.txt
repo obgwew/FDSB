@@ -1,0 +1,38 @@
+<dash>
+name: $replaceRegex
+desc: Mengganti rentetan karakter yang cocok dalam sepotong teks dengan sesuatu yang Anda pilih.
+category: Utilitas Teks
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Berikan sepotong teks, aturan karakter, dan pengganti, lalu bot mencetak kembali teks itu dengan setiap kecocokan ditukar dengan penggantinya. Aturan dalam kurung siku seperti [aeiou] menangkap salah satu huruf itu, -[aeiou] menangkap semua yang bukan salah satunya, dan aturan lain dicocokkan sebagai teks biasa persis seperti yang Anda ketik. Karena aturan menangkap rentetan utuh, Banana dengan aturan vokal menjadi B*n*n* alih-alih enam bintang terpisah.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !shout
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $replaceRegex[text; rule; replacement]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $replaceRegex[Banana; [aeiou]; *]
+</block>
+
+<block type="callout" kind="note">
+text: Rentetan dicocokkan secara greedy, sehingga beberapa karakter berturut-turut menyatu menjadi satu salinan pengganti Anda. Kosongkan pengganti untuk menghapus karakter sepenuhnya, dan ingat bahwa hasil yang akhirnya benar-benar kosong tidak pernah dikirim ke chat.
+</block>
+</dash>
+
+<details>
+syntax: $replaceRegex[text; rule; replacement]
+param: text|text|Wajib|Teks yang diproses
+param: rule|text|Wajib|Aturan karakter. [chars] mencocokkan karakter itu, -[chars] mencocokkan semua yang lain, apa pun selainnya dicocokkan secara harfiah
+param: replacement|text|Wajib|Apa yang diletakkan di tempat setiap kecocokan
+</details>

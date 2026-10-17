@@ -1,0 +1,31 @@
+<dash>
+name: $blackListServer
+desc: Bu komutun listedeki herhangi bir sunucuda çalışmasını engeller.
+category: Erişim Kontrolü
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $blackListServer, komutun hangi sunucuda çalıştırıldığını kontrol eder ve bunu sizin listelediğiniz sunucularla karşılaştırır. Geçerli sunucu eşleşirse bot sizin ret mesajınızı gösterir (mesajı boş bıraktıysanız varsayılan birini) ve komutun geri kalanı yok sayılır. Listede değilse hiçbir şey yazdırılmaz ve betik normal şekilde devam eder. Bu, komutu belirli yerlerden uzak tutup başka her yerde açık bırakmanın temiz yoludur.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $blackListServer[server; ...; message]
+</block>
+
+<block type="code" title="Kopyalamaya Hazır Örnek">
+text: $blackListServer[123456789012345678; Sorry, this server cannot use the command!]
+</block>
+
+<block type="callout" kind="note">
+text: Bir sunucu kimliğiyle ya da adıyla yazılabilir ve ad eşleştirmesi büyük/küçük harf fark etmez. Birden fazlasını noktalı virgülle ayırarak listeleyebilirsiniz. Son argümana kadar olan her şey sunucu olarak kabul edilir; özel ret mesajınız ise son argümanda yer alır.
+</block>
+
+<block type="callout" kind="warning">
+text: Kontrol başarılı olduğunda komut tam orada durur — altındaki hiçbir satır çalışmaz. Özel mesajı boş bırakırsanız bot kendi varsayılan ifadesine döner.
+</block>
+</dash>
+
+<details>
+syntax: $blackListServer[server; ...; message]
+param: server|text|Required|Noktalı virgülle ayrılmış, kimlik veya ad olarak yazılan engellenen sunucular
+param: message|text|Optional|Bir sunucu eşleştiğinde varsayılan ret mesajı yerine gösterilecek mesaj
+</details>

@@ -1,0 +1,40 @@
+<dash>
+name: $removeAllComponents
+desc: Melepaskan setiap tombol dan menu dari pesan yang dikirim bot.
+category: Komponen
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $removeAllComponents mengosongkan bagian interaktif sebuah pesan, menghapus semua tombol dan menu pilihan dalam satu sapuan dan menyisakan teks biasa. Biarkan ID pesan lepas dan ia bekerja pada apa pun yang akan dikirim atau baru saja dikirim bot selama jalankan ini. Berikan sebuah ID pesan dan ia mengosongkan pesan itu persis, dan tombol-tombol menghilang dari kanal di depan semua orang yang menyaksikan.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !clean
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $removeAllComponents
+text: $removeAllComponents[(messageID)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $removeAllComponents[123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: Ini versi kasar dari pekerjaan ini. $removeButtons dan $removeComponent mengambil satu per satu, sedangkan yang ini mengosongkan seluruh baris sekaligus.
+</block>
+
+<block type="callout" kind="warning">
+text: Hanya pesan yang dikirim bot itu sendiri yang bisa dikosongkan, dan ID harus berupa digit saja. Jika memang tidak ada apa pun untuk dibersihkan, Anda mendapatkan kesalahan yang mengatakan demikian, bukan diam-diam tidak melakukan apa pun.
+</block>
+</dash>
+
+<details>
+syntax: $removeAllComponents[(messageID)]
+param: messageID|snowflake|Opsional|Pesan bot mana yang akan dikosongkan. Biarkan lepas untuk mengosongkan balasan yang tertunda, pesan di balik klik tombol, atau pesan terakhir yang dikirim.
+</details>

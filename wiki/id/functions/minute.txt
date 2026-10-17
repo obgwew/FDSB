@@ -1,0 +1,35 @@
+<dash>
+name: $minute
+desc: Memberi menit saat ini dalam satu jam, dari 00 sampai 59.
+category: Waktu & Jeda
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $minute membaca jam dan menyerahkan kembali menit saat ini, selalu dua digit, sehingga menit kesembilan dalam jam kembali sebagai 09. Jatuhkan ke dalam baris teks dan angka-angka mendarat di tempat Anda meletakkannya, atau tinggalkan pada barisnya sendiri dan bot memposting angka itu di kanal. Ia diukur baru setiap kali jalannya berjalan, sehingga ia berubah seiring menit berlalu.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !minute
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $minute
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $sendMessage[It is now $hour:$minute]
+</block>
+
+<block type="callout" kind="note">
+text: Nilainya berjalan dari 00 sampai 59 dan selalu selebar dua digit, sehingga ia sejajar ketika Anda menempatkannya di antara $hour dan $second.
+</block>
+
+<block type="callout" kind="important">
+text: $minute mengikuti zona waktu yang Anda atur dengan $time. Jika Anda tidak pernah mengaturnya, ia jatuh kembali ke jam lokal milik bot itu sendiri.
+</block>
+</dash>

@@ -1,0 +1,31 @@
+<dash>
+name: $deletecommand
+desc: Membersihkan pesan yang menjalankan perintah Anda.
+category: Moderasi
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Letakkan $deletecommand di bagian atas sebuah perintah, dan bot menghapus pesan yang memicunya, sehingga kanal yang ramai tetap rapi alih-alih penuh dengan baris perintah. Segala sesuatu yang Anda tulis setelahnya tetap berjalan dan tetap terkirim. Jika bot tidak diizinkan menghapus pesan di sana, pesan asli tetap di tempatnya dan bot menjelaskan alasannya.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $deletecommand
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $deletecommand
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $deletecommand
+text: $sendMessage[Command received!]
+</block>
+
+<block type="callout" kind="warning">
+text: Bot memerlukan izin Manage Messages di kanal tersebut. Tanpa itu, Discord menolak penghapusan dan bot memosting kesalahan yang menyatakan bahwa izinnya tidak cukup.
+</block>
+</dash>

@@ -1,0 +1,40 @@
+<dash>
+name: $onLeave
+desc: Menjalankan skrip Anda sendiri setiap kali seseorang meninggalkan server.
+category: Peristiwa
+
+<block type="text" title="Bagaimana cara kerja peristiwa?">
+text: $onLeave menyala dengan sendirinya: di saat seorang anggota keluar atau dikeluarkan, Discord menyerahkan orang itu ke skrip Anda dan skrip langsung berjalan. Di dalamnya Anda dapat memakai nilai-nilai biasa seperti $authorName dan $authorID untuk menyebut siapa pun yang baru keluar, atau untuk memeriksa peran apa yang mereka miliki. Tidak ada yang perlu mengetik apa pun untuk ini terjadi, ia bereaksi terhadap peristiwa itu dengan sendirinya.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $onLeave
+item: Aplikasi menandainya sebagai Peristiwa untuk Anda
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: #PREFIX:$onLeave
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: #PREFIX:$onLeave
+text:  sendMessage[Goodbye $authorName!]
+</block>
+
+<block type="callout" kind="note">
+text: Biarkan kanalnya lepas dan bot mengirim di kanal tempat peristiwa berasal. Jika Anda lebih suka salam perpisahan di tempat lain, letakkan ID kanal dalam kurung di baris pertama itu.
+</block>
+
+<block type="callout" kind="important">
+text: Yang satu ini tidak pernah menunggu pesan masuk, ia hanya berjalan saat bot online. Nyalakan bot dari tab Utama dan pastikan ia menjadi anggota server yang ingin Anda pantau, kalau tidak tidak ada yang akan pernah menyala.
+</block>
+</dash>
+
+<details>
+syntax: $onLeave
+</details>

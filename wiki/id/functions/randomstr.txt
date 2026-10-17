@@ -1,0 +1,36 @@
+<dash>
+name: $randomstr
+desc: Memilih salah satu opsi yang Anda cantumkan secara acak dan menampilkannya.
+category: Acak
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $randomstr mengambil opsi-opsi yang Anda cantumkan dan memilih salah satunya secara acak, lalu bot mengirim pilihan itu. Setiap opsi kemungkinannya sama besar dan setiap kali dijalankan adalah lemparan baru, sehingga perintah yang sama bisa menjawab berbeda setiap kali. Satu opsi sudah cukup, dan tidak ada batas atas berapa banyak yang Anda berikan.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !randomstr
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $randomstr[string1; string2; string3; ...]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $randomstr[Hello!; Hi there!; Hey!; What's up?]
+</block>
+
+<block type="callout" kind="note">
+text: Di barisnya sendiri, opsi yang dipilih dikirim sebagai pesan tersendiri; di dalam perintah lain, ia justru jatuh ke tengah kalimat. Daftar kosong ditolak dengan kesalahan.
+</block>
+</dash>
+
+<details>
+syntax: $randomstr[string1; string2; string3; ...]
+param: string|text|Wajib|Satu atau lebih opsi untuk dipilih. Salah satunya dipilih dan ditampilkan.
+</details>

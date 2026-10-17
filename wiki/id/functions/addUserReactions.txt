@@ -1,0 +1,42 @@
+<dash>
+name: $addUserReactions
+desc: Menempatkan reaksi emoji pada pesan yang memicu perintah Anda.
+category: Komponen
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $addUserReactions menempelkan emoji pilihan Anda pada pesan yang baru saja dikirim anggota tersebut, sehingga reaksi muncul tepat di bawah apa yang ia tulis.
+text: Sebanyak apa pun boleh Anda daftarkan, dipisahkan titik koma, dan apa pun yang dapat diuraikan bot di dalamnya diisi terlebih dahulu, yang berarti nilai tersimpan juga dapat dipakai sebagai emoji.
+text: Setiap emoji ditempelkan satu per satu dengan jeda singkat di antaranya, dan Anda boleh memakai hingga 20 emoji dalam satu pemanggilan.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !react
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $addUserReactions[emoji1; emoji2; emoji3; ...]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $addUserReactions[👍; ❤️]
+</block>
+
+<block type="callout" kind="note">
+text: Bila Discord sedang sibuk dan menjawab dengan rate limit, bot menunggu dan mencoba emoji itu untuk kedua kalinya sebelum melanjutkan sisanya.
+</block>
+
+<block type="callout" kind="warning">
+text: Dua puluh emoji adalah batasnya, dan sisanya ditolak dengan kesalahan.
+text: Bila teks Anda tidak berisi emoji sama sekali, perintah ini hanya diam tidak melakukan apa pun dan tidak berkata apa-apa, dan bot memerlukan izin Add Reactions di kanal tersebut.
+</block>
+</dash>
+
+<details>
+syntax: $addUserReactions[emoji1; emoji2; emoji3; ...]
+param: emoji|text|Wajib|Satu emoji atau lebih untuk bereaksi, dipisahkan titik koma. Nilai di dalamnya diisi terlebih dahulu, lalu setiap emoji yang ditemukan ditambahkan sesuai urutan.
+</details>

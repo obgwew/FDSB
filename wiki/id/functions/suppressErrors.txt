@@ -1,0 +1,40 @@
+<dash>
+name: $suppressErrors
+desc: Menyembunyikan pesan kesalahan bot dan menampilkan pesan buatan Anda sebagai gantinya.
+category: Kontrol Akses
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $suppressErrors memberi tahu bot untuk tidak menampilkan pesan kesalahannya sendiri selama sisa perintah berjalan. Bila baris ini ada di skrip Anda, kesalahan sintaks, nilai tidak valid, atau tindakan yang gagal tidak akan memunculkan penjelasan biasa di kanal. Anda bisa memasukkan pesan pendek di dalam kurung, lalu pesan itulah yang akan dilihat anggota. Atau, biarkan kosong agar kegagalan terjadi tanpa menampilkan apa-apa.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !welcome
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $suppressErrors[custom message]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $suppressErrors[Something went wrong! Please try again.]
+</block>
+
+<block type="callout" kind="note">
+text: Bot membaca baris ini sebelum perintah benar-benar dijalankan, jadi posisinya tidak harus di awal. Kesalahan tetap tercatat di sisi bot, hanya saja tidak lagi dikirim ke kanal.
+</block>
+
+<block type="callout" kind="warning">
+text: Ini berguna untuk menjaga kanal tetap rapi, tetapi bisa membuat masalah yang sebenarnya sulit dilacak. Perintah tetap akan berhenti di titik kegagalan, hanya saja berhentinya secara diam-diam.
+</block>
+</dash>
+
+<details>
+syntax: $suppressErrors[(custom message)]
+param: custom message|text|Opsional|Pesan yang dikirim ke kanal saat terjadi kesalahan. Biarkan kosong agar tidak ada pesan yang ditampilkan.
+</details>

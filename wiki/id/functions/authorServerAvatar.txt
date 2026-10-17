@@ -1,0 +1,37 @@
+<dash>
+name: $authorServerAvatar
+desc: Memberikan tautan gambar avatar server seorang anggota, atau dari siapa yang menjalankan perintah.
+category: Info
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Perintah ini mengembalikan sebuah tautan gambar langsung yang dapat Anda selipkan ke pesan atau embed. Biarkan kosong dan perintah memakai orang yang memicunya; berikan ID pengguna atau sebuah @mention dan ia membaca orang itu sebagai gantinya. Anggota yang tidak pernah memilih gambar khusus server mendapatkan avatar biasa mereka, dan yang bergerak kembali sebagai tautan .gif.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $authorServerAvatar
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $authorServerAvatar
+text: $authorServerAvatar[(userID/@mention)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: Your server avatar: $authorServerAvatar
+</block>
+
+<block type="callout" kind="note">
+text: Avatar server adalah gambar yang hanya dapat diganti anggota untuk satu server saja, sehingga sering berbeda dari avatar biasa mereka ($authorAvatar). Bila ID tidak cocok dengan siapa pun yang dikenal bot, Anda mendapatkan kesalahan alih-alih tautan.
+</block>
+</dash>
+
+<details>
+syntax: $authorServerAvatar[(userID/@mention)]
+param: userID/@mention|text|Opsional|Anggota mana yang dibaca. Biarkan kosong untuk siapa pun yang menjalankan perintah.
+</details>

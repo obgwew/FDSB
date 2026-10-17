@@ -1,0 +1,25 @@
+<dash>
+name: $year
+desc: Geçerli yılı, 2026 gibi dört haneli olarak verir.
+category: Zamanlama ve Gecikmeler
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $year saate bakar ve mevcut yılı dört haneli olarak, kısaltılmış 26 yerine 2026 olarak geri verir. Bir metin satırına yerleştirirseniz rakamlar koyduğunuz yere düşer; satırda tek başına bırakırsanız bot bu rakamı kanala gönderir. Yılda yalnızca bir kez değişir; bu da onu tarihler için istikrarlı bir yapı taşı yapar.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $year
+</block>
+
+<block type="code" title="Kopyalamaya Hazır Örnek">
+text: $sendMessage[Welcome to $year!]
+</block>
+
+<block type="callout" kind="note">
+text: Yıl her zaman dört hane olarak döner; bu yüzden $day ve $month ile kurduğunuz bir tarihin sonuna yerleştirmek her zaman güvenlidir.
+</block>
+
+<block type="callout" kind="important">
+text: $day, $month ve $year botun kendi yerel saatini okur. $time ile ayarlanan saat dilimini yalnızca $hour, $minute ve $second takip eder.
+</block>
+</dash>

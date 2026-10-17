@@ -1,0 +1,25 @@
+<dash>
+name: $second
+desc: Dakikanın geçerli saniyesini 00'den 59'a kadar verir.
+category: Zamanlama ve Gecikmeler
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $second saate bakar ve mevcut saniyeyi, her zaman iki haneyle geri verir; her dakikanın ilk saniyesi 00 olarak okunur. Bir metin satırına yerleştirirseniz rakamlar koyduğunuz yere düşer; satırda tek başına bırakırsanız bot bu rakamı kanala gönderir. Her çalıştırmada taze okunduğu için, bir komuta her seferinde biraz farklı sonuç vermenin kullanışlı yoludur.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $second
+</block>
+
+<block type="code" title="Kopyalamaya Hazır Örnek">
+text: $sendMessage[The time is $hour:$minute:$second]
+</block>
+
+<block type="callout" kind="note">
+text: Değer 00 ile 59 arasında değişir ve her zaman iki hanelidir; böylece tam bir $hour:$minute:$second okuması düzgün aralıklı kalır.
+</block>
+
+<block type="callout" kind="important">
+text: $second, $time ile ayarladığınız saat dilimini takip eder. Hiçbir zaman ayarlamadıysanız botun kendi yerel saatine döner.
+</block>
+</dash>

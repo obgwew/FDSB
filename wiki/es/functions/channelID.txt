@@ -1,0 +1,34 @@
+<dash>
+name: $channelID
+desc: Te da el número de ID del canal en el que se usó el comando.
+category: Info
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $channelID te da el número largo que Discord usa para identificar el canal en el que se escribió tu comando.
+text: Colócalo en cualquier parte de un mensaje y el bot lo imprime como dígitos simples, sin nada alrededor.
+text: Ese número es lo que otros comandos esperan cuando necesitan apuntar a un canal específico, así que te ahorra copiarlo a mano de un menú de Discord.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !where en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $channelID
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: This command was used in channel $channelID
+</block>
+
+<block type="callout" kind="note">
+text: Lo que devuelve es el propio ID de canal de Discord, una larga ristra de dígitos como 123456789012345678.
+text: Es el mismo número que obtienes al activar el modo desarrollador en Discord y copiar un enlace de canal.
+</block>
+</dash>

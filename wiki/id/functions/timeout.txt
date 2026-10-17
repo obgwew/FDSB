@@ -1,0 +1,45 @@
+<dash>
+name: $timeout
+desc: Memberi waktu henti (timeout) kepada anggota selama jangka waktu tertentu, sehingga mereka tidak bisa mengirim pesan, bereaksi, atau bergabung ke kanal suara.
+category: Moderasi
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $timeout mengambil durasi dan nama anggota, lalu memberi timeout kepada anggota tersebut selama durasi itu. Selama timeout berlangsung, mereka tidak bisa mengirim pesan, memberikan reaksi, atau bergabung ke kanal suara. Discord akan menandai mereka sebagai "Timed Out". Timeout ini berjalan berdasarkan waktu Discord sendiri, jadi tetap berlaku meski bot offline.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !timeout
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $timeout[time; user]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $timeout[1h; @user]
+</block>
+
+<block type="callout" kind="note">
+text: Durasi ditulis sebagai angka diikuti satuan: s untuk detik, m untuk menit, h untuk jam, d untuk hari. Durasi maksimal yang diizinkan Discord adalah 28 hari. Untuk membatalkan timeout sebelum selesai, gunakan $untimeout.
+</block>
+
+<block type="callout" kind="warning">
+text: Bot membutuhkan izin "Moderate Members", dan role tertinggi bot harus berada di atas role anggota yang ditargetkan.
+</block>
+
+<block type="callout" kind="important">
+text: Pada versi yang sedang Anda gunakan, baris ini dilewati sebelum dijalankan, jadi tidak ada anggota yang akan kena timeout. Sisa perintah akan berjalan seperti biasanya.
+</block>
+</dash>
+
+<details>
+syntax: $timeout[time; user]
+param: time|text|Wajib|Durasi timeout, berupa angka diikuti s, m, h, atau d, contoh: 1h, 30m, 7d
+param: user|text|Wajib|Anggota yang akan dikena timeout, bisa berupa ID atau mention
+</details>

@@ -1,0 +1,35 @@
+<dash>
+name: $day
+desc: Gives today's date number, always two digits, from 01 to 31.
+category: Timing & Delays
+
+<block type="text" title="How does the command work?">
+text: $day reads the clock and hands back the day of the month, always two digits wide, so the 7th comes back as 07 and the 24th as 24. Drop it into a line of text and the digits land exactly where you put them. Leave it on a line of its own and the bot posts the number in the channel on its own.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !date
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: $day
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $sendMessage[Day $day of this month]
+</block>
+
+<block type="callout" kind="note">
+text: The number is always padded to two digits, from 01 through to 31, so it lines up neatly in a date you assemble yourself out of $day, $month and $year.
+</block>
+
+<block type="callout" kind="important">
+text: $day, $month and $year all read the bot's own local clock. The timezone set with $time is followed only by $hour, $minute and $second, so keep that in mind if your server sits in a different part of the world.
+</block>
+</dash>

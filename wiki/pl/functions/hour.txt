@@ -1,0 +1,25 @@
+<dash>
+name: $hour
+desc: Zwraca bieżącą godzinę doby, od 00 do 23.
+category: Czas i opóźnienia
+
+<block type="text" title="Jak działa komenda?">
+text: $hour odczytuje zegar i zwraca bieżącą godzinę w formacie 24-godzinnym, zawsze na dwóch cyfrach, więc wczesne popołudnie pokaże 15, a nie 3. Wstaw go w linijkę tekstu, a cyfry wylądują tam, gdzie je umieścisz, albo zostaw go w osobnej linii, a bot odczyta godzinę na kanał. Jest mierzony świeżo przy każdym uruchomieniu, więc dwie komendy oddzielone minutą mogą zwrócić dwie różne liczby.
+</block>
+
+<block type="code" title="Składnia">
+text: $hour
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $sendMessage[The hour here is $hour]
+</block>
+
+<block type="callout" kind="note">
+text: Wartość waha się od 00 do 23 na dwudziestoczterogodzinnym zegarze, więc trzecia po południu wraca jako 15. Połącz ją z $minute i $second, aby złożyć pełny odczyt zegara, np. 15:04:09.
+</block>
+
+<block type="callout" kind="important">
+text: $hour podąża za strefą czasową ustawioną przez $time. Jeśli nigdy jej nie ustawiłeś, bot wraca do własnego zegara lokalnego.
+</block>
+</dash>

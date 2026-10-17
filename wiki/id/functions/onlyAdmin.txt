@@ -1,0 +1,31 @@
+<dash>
+name: $onlyAdmin
+desc: Menghentikan perintah mati-matian kecuali orang yang menjalankannya adalah admin server atau pemilik server.
+category: Kontrol Akses
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Ini adalah pos pemeriksaan yang bisa Anda letakkan di atas sebuah perintah. Bot melihat orang yang memicunya: jika ia memiliki server atau memegang izin Administrator, baris-baris Anda yang lain berjalan tanpa terganggu. Jika tidak, semuanya berhenti tepat di situ dan sisa perintah dibuang.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !welcome
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $onlyAdmin
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $onlyAdmin[You need admin permissions!]
+</block>
+
+<block type="callout" kind="note">
+text: Gerbang ini hanya masuk akal di dalam server — dalam pesan langsung ia melaporkan kesalahan. Tulis teks Anda sendiri di dalam kurung dan baris persis itu dikirim sebagai penolakan; biarkan lepas dan bot memakai penolakan bawaannya sendiri.
+</block>
+</dash>

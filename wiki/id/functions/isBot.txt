@@ -1,0 +1,36 @@
+<dash>
+name: $isBot
+desc: Menjawab benar atau salah tergantung pada apakah seorang anggota adalah akun bot.
+category: Info
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Serahkan sebuah anggota dan bot membalas dengan benar ketika akun itu milik mesin, atau salah ketika ada orang di baliknya. Mention dan ID polos sama-sama diterima, sehingga menguji siapa pun yang mengetik pesan saat ini hanya butuh satu kata. Hanya anggota server ini yang dapat dicari; siapa pun dilaporkan sebagai salah.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !checkbot
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $isBot[userID]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $isBot[$authorID]
+</block>
+
+<block type="callout" kind="note">
+text: Menguji anggota yang baru saja mengirim pesan adalah penggunaan sehari-harinya, dan cara tercepat untuk memisahkan orang dan akun otomatis.
+</block>
+</dash>
+
+<details>
+syntax: $isBot[userID]
+param: userID|text|Wajib|Anggota yang diuji, lewat @mention atau ID-nya
+</details>

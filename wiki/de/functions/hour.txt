@@ -1,0 +1,25 @@
+<dash>
+name: $hour
+desc: Gibt die aktuelle Stunde des Tages an, von 00 bis 23.
+category: Timing & Verzögerungen
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: $hour liest die Uhr und gibt die aktuelle Stunde im 24-Stunden-Raster zurück, immer zweistellig, sodass der frühe Nachmittag 15 und nicht 3 ergibt. Fügen Sie es in eine Textzeile ein und die Ziffern landen, wo Sie sie platzieren, oder lassen Sie es auf einer eigenen Zeile stehen, dann liest der Bot die Stunde im Kanal vor. Der Wert wird bei jedem Durchgang neu ermittelt, sodass zwei Befehle mit einer Minute Abstand zwei verschiedene Zahlen liefern können.
+</block>
+
+<block type="code" title="Syntax">
+text: $hour
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $sendMessage[The hour here is $hour]
+</block>
+
+<block type="callout" kind="note">
+text: Der Wert reicht von 00 bis 23 im 24-Stunden-Raster, sodass drei Uhr nachmittags als 15 zurückgegeben wird. Kombinieren Sie ihn mit $minute und $second, um eine vollständige Uhrzeit wie 15:04:09 zu bilden.
+</block>
+
+<block type="callout" kind="important">
+text: $hour folgt der Zeitzone, die Sie mit $time gesetzt haben. Wenn Sie nie eine gesetzt haben, greift die lokale Uhr des Bots.
+</block>
+</dash>

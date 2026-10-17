@@ -14,10 +14,6 @@ async def _resolve_channel(ctx: ExecutionContext, channel_id: int) -> discord.ab
     except (discord.NotFound, discord.Forbidden, discord.HTTPException):
         return None
 
-def resolve_inline(args: list[str], ctx: ExecutionContext) -> str:
-    return ""
-
-
 async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: discord.abc.Messageable) -> None:
     if len(args) < 3:
         await _send_error(ch, FDSyntaxError(

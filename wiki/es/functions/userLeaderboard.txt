@@ -1,0 +1,52 @@
+<dash>
+name: $userLeaderboard
+desc: Construye una tabla de clasificación que ordena a los miembros del servidor actual usando una puntuación almacenada.
+category: Variables
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $userLeaderboard lee una variable que guarda una puntuación por miembro en el servidor donde se usó el comando, y alinea a los miembros desde la puntuación más alta hasta la más baja. Envía la lista ordenada al canal. Cada servidor conserva su propia copia de las puntuaciones, así que cada uno obtiene su propia clasificación separada.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Crea la variable primero en la pestaña de Variables
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $userLeaderboard[name; (sort); (limit); (format)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $userLeaderboard[points; desc; 5; {rank}. {mention} — {value}]
+</block>
+
+<block type="options" title="Tipos de ordenación">
+option: desc|El valor más alto primero (se usa cuando dejas la ordenación vacía)
+option: asc|El valor más bajo primero
+</block>
+
+<block type="options" title="Marcadores de línea">
+option: {rank}|La posición, empezando en 1
+option: {name}|Nombre visible del miembro
+option: {mention}|Una mención clicable del miembro
+option: {id}|ID de Discord del miembro
+option: {value}|La puntuación almacenada
+</block>
+
+<block type="callout" kind="note">
+text: Solo se pueden ordenar números, así que las entradas que contienen texto se dejan fuera. El límite puede ir de 1 a 25 y se limita por ti; cualquier valor mayor se recorta.
+</block>
+</dash>
+
+<details>
+syntax: $userLeaderboard[name; (sort); (limit); (format)]
+param: name|text|Obligatorio|Nombre de la variable que guarda una puntuación por miembro en este servidor.
+param: sort|text|Opcional|desc para el más alto primero (por defecto), o asc para el más bajo primero.
+param: limit|number|Opcional|Cuántas líneas mostrar, de 1 a 25. Por defecto 10.
+param: format|text|Opcional|Plantilla de línea. Por defecto {rank}. {name} — {value}. Puedes usar {rank}, {name}, {mention}, {id} y {value}.
+</details>

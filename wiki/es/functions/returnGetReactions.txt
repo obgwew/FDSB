@@ -1,0 +1,45 @@
+<dash>
+name: $returnGetReactions
+desc: Cuenta las reacciones humanas de un mensaje o lista quién reaccionó, listo para leer después.
+category: Comandos de retorno
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Apúntalo a un mensaje y a un emoji, y el bot abre ese mensaje para ver quién pulsó ese emoji. Tú eliges si cuenta a las personas o escribe sus IDs como una lista unida, y en cualquier caso la respuesta se archiva bajo el nombre de almacenamiento que le diste, así que nada aparece en el chat por ahora. Más tarde, $return con ese mismo nombre saca el resultado como texto. Las cuentas de bot nunca cuentan, sea como sea que lo pidas.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $returnGetReactions en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $returnGetReactions[channelID; messageID; type; var; separator; emoji]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $returnGetReactions[$channelID; 123456789; usersID; reactors; ,; 👍]
+</block>
+
+<block type="callout" kind="note">
+text: Si pides un recuento y en el mensaje nadie usó ese emoji, simplemente se guarda 0. Si en cambio pides la lista de IDs, esa misma situación publica un error, igual que un mensaje al que solo reaccionaron bots.
+</block>
+
+<block type="callout" kind="important">
+text: El bot necesita Read Message History en ese canal; si no, no puede abrir el mensaje y tu comando se detiene con un error de permisos.
+</block>
+</dash>
+
+<details>
+syntax: $returnGetReactions[channelID; messageID; type; var; separator; emoji]
+param: channelID|snowflake|Obligatorio|En qué canal está el mensaje
+param: messageID|snowflake|Obligatorio|Qué mensaje mirar
+param: type|text|Obligatorio|usersID para guardar quién reaccionó, o tr para guardar cuántas personas lo hicieron
+param: var|text|Obligatorio|Bajo qué nombre guardar el resultado, que se leerá después con $return[]
+param: separator|text|Obligatorio|Qué va entre las IDs. Las palabras también valen: dot, com, apo, sem, colon
+param: emoji|text|Obligatorio|Qué emoji buscar, escrito tal como aparece en el mensaje
+</details>

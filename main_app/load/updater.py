@@ -13,8 +13,8 @@ import urllib.request
 import flet as ft
 
 from main_app.theme.theme_engine import ThemeEngine
-from main_app.langs.translations import Translations
-from main_app.settings import get_current_lang
+from main_app.langs._translations import Translations
+from main_app.settings_bot import get_current_lang
 
 
 def _t(key: str, fallback: str = '') -> str:

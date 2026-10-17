@@ -1,0 +1,40 @@
+<dash>
+name: $authorURL
+desc: Convierte el nombre del autor en la parte superior de un embed en un enlace que se abre al tocar.
+category: Constructor de embed
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $authorURL hace que la línea del autor de un embed abra la dirección que le des cuando alguien toca el nombre.
+text: Establece primero el nombre con $author y la URL después, y cualquier icono que ya hayas elegido se queda exactamente donde está.
+text: Si todavía no se ha establecido un nombre, se pone un marcador de posición en blanco para que el enlace siga teniendo algo sobre lo que ponerse, y mientras construyes varios embeds puedes añadir el número del embed como segunda parte para elegir el correcto.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !card en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $authorURL[url;(index)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $author[Visit our site]
+text: $authorURL[https://example.com]
+</block>
+
+<block type="callout" kind="note">
+text: Empieza la dirección por http:// o https://. Discord no da ninguna señal visible de que un nombre es pulsable, así que merece la pena decirlo en el texto del embed.
+</block>
+</dash>
+
+<details>
+syntax: $authorURL[url;(index)]
+param: url|text|Obligatorio|A dónde debe llevar el nombre, empezando por http:// o https://
+param: index|number|Opcional|Qué embed cambiar cuando construyes varios (predeterminado 1)
+</details>

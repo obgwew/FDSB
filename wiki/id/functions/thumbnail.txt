@@ -1,0 +1,38 @@
+<dash>
+name: $thumbnail
+desc: Menambahkan gambar kecil di sudut kanan atas embed (kartu) yang dibuat perintah.
+category: Pembuat Embed
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $thumbnail mengatur gambar kecil yang muncul di pojok kanan atas kartu embed. Berikan teks yang berisi alamat web, lalu alamat pertama yang ditemukan akan dipakai. Anda juga bisa memberikan angka di akhirnya bila perintah membuat beberapa kartu sekaligus dan ingin menambahkan thumbnail ke kartu tertentu.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !thumbnail
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $thumbnail[url;(index)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $title[Server stats]
+text: $thumbnail[https://example.com/chart.png]
+</block>
+
+<block type="callout" kind="note">
+text: Alamat gambar harus diawali dengan http:// atau https://. Tanda baca yang tersisa setelah URL akan dipangkas secara otomatis. Jika tidak ada URL yang valid, bot akan mengirim kesalahan alih-alih membuat embed tanpa gambar.
+</block>
+</dash>
+
+<details>
+syntax: $thumbnail[url;(index)]
+param: url|text|Wajib|Teks yang berisi alamat gambar, harus diawali dengan http:// atau https://
+param: index|number|Opsional|Kartu embed mana yang akan diberi thumbnail, bila membuat beberapa embed; secara default digunakan kartu pertama.
+</details>

@@ -9,14 +9,13 @@ from FDScript import (
 from FDCore import _load_ids_data, _save_ids_data
 
 
-async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: discord.abc.Messageable) -> None:
+def _apply(args: list[str], ctx: ExecutionContext):
     if len(args) == 2:
         name  = ctx.resolve(args[0]).strip()
         value = ctx.resolve(args[1])
 
         if not name:
-            await _send_error(ch, FDLogicError("`$setVar` — variable name cannot be empty."))
-            return
+            return FDLogicError("`$setVar` — variable name cannot be empty.")
 
         data = _load_data()
         existed = name in data
@@ -25,25 +24,23 @@ async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: disc
 
         if not existed:
             ctx.log_event(f"setVar [{name}] ← {_truncate(value)!r} (created — first time, global)")
-            await _send_error(ch, FDEnvironmentError(
+            return FDEnvironmentError(
                 f"Variable `{name}` did not exist and has been created with the "
                 f"provided value. Script stopped — please review the program."
-            ))
-            return
+            )
 
         ctx.log_event(f"setVar [{name}] ← {_truncate(value)!r} (persistent)")
+        return None
 
-    elif len(args) == 3:
+    if len(args) == 3:
         name    = ctx.resolve(args[0]).strip()
         value   = ctx.resolve(args[1])
         user_id = ctx.resolve(args[2]).strip()
 
         if not name:
-            await _send_error(ch, FDLogicError("`$setVar` — variable name cannot be empty."))
-            return
+            return FDLogicError("`$setVar` — variable name cannot be empty.")
         if not user_id:
-            await _send_error(ch, FDLogicError("`$setVar` — user ID cannot be empty."))
-            return
+            return FDLogicError("`$setVar` — user ID cannot be empty.")
 
         global_data = _load_data()
         ids_data = _load_ids_data()
@@ -58,16 +55,28 @@ async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: disc
                 f"setVar [{name}] for user {user_id} ← {_truncate(value)!r} "
                 f"(created — private, no matching global variable)"
             )
-            await _send_error(ch, FDEnvironmentError(
+            return FDEnvironmentError(
                 f"No global variable `{name}` exists. A private variable "
                 f"`{name}` has been created for user `{user_id}` with the "
                 f"provided value. Script stopped — please review the program."
-            ))
-            return
+            )
 
         ctx.log_event(f"setVar [{name}] for user {user_id} ← {_truncate(value)!r} (persistent)")
+        return None
 
-    else:
-        await _send_error(ch, FDLogicError(
-            "`$setVar` requires 2 or 3 arguments: `$setVar[name; value]` or `$setVar[name; value; user_id]`"
-        ))
+    return FDLogicError(
+        "`$setVar` requires 2 or 3 arguments: `$setVar[name; value]` or `$setVar[name; value; user_id]`"
+    )
+
+
+def resolve_inline(args: list[str], ctx: ExecutionContext) -> str:
+    err = _apply(args, ctx)
+    if err is not None:
+        ctx._abort_with_error(err)
+    return ""
+
+
+async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: discord.abc.Messageable) -> None:
+    err = _apply(args, ctx)
+    if err is not None:
+        await _send_error(ch, err)

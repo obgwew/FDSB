@@ -1,0 +1,25 @@
+<dash>
+name: $hour
+desc: Günün geçerli saatini 00'den 23'e kadar verir.
+category: Zamanlama ve Gecikmeler
+
+<block type="text" title="Komut nasıl çalışır?">
+text: $hour saate bakar ve mevcut saati yirmi dört saatlik kadrandan, her zaman iki haneyle geri verir; öğleden sonra üç, 3 yerine 15 olarak okunur. Bir metin satırına yerleştirirseniz rakamlar koyduğunuz yere düşer; satırda tek başına bırakırsanız bot saati kanala okur. Değer her çalıştırmada taze hesaplanır, bu yüzden birer dakika arayla verilen iki komut birbirinden farklı iki sayı döndürebilir.
+</block>
+
+<block type="code" title="Sözdizimi">
+text: $hour
+</block>
+
+<block type="code" title="Kopyalamaya Hazır Örnek">
+text: $sendMessage[The hour here is $hour]
+</block>
+
+<block type="callout" kind="note">
+text: Değer yirmi dört saatlik saatte 00 ile 23 arasında değişir, bu yüzden öğleden sonra üç 15 olarak döner. 15:04:09 gibi tam bir saat okuması oluşturmak için $minute ve $second ile eşleştirin.
+</block>
+
+<block type="callout" kind="important">
+text: $hour, $time ile ayarladığınız saat dilimini takip eder. Hiçbir zaman ayarlamadıysanız botun kendi yerel saatine döner.
+</block>
+</dash>

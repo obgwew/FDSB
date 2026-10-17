@@ -1,0 +1,44 @@
+<dash>
+name: $returnGuildRolesID
+desc: Mengumpulkan ID peran sebuah server ke dalam satu nilai yang bisa Anda gunakan kembali.
+category: Perintah Pengembalian
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $returnGuildRolesID mengumpulkan ID peran server yang Anda sebut dan merekatkannya di bawah label pilihan Anda. Baca label itu kembali nanti dengan $return[label] dan seluruh daftarnya tiba dalam satu kesatuan, siap disisipkan ke sebuah pesan atau ditelusuri langkah demi langkah. Biarkan bagian izin kosong atau tulis all dan setiap peran kembali; sebut sebuah izin sebagai gantinya dan hanya peran yang memilikinya yang didaftar.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !rolelist
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $returnGuildRolesID[GuildID; permission; var; separator]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $returnGuildRolesID[$guildID; all; roleIDs; ,]
+text: $sendMessage[Roles: $return[roleIDs]]
+</block>
+
+<block type="callout" kind="note">
+text: Untuk bagian izin, biarkan kosong atau tulis all untuk mengambil setiap peran, atau ketik nama izin seperti kick_members atau manage_messages, atau bahkan nomor mentah yang dipakai Discord. Sebuah peran memenuhi syarat ketika ia memiliki izin itu atau apa pun yang lebih kuat.
+</block>
+
+<block type="callout" kind="warning">
+text: Bot harus menjadi anggota server itu, dan peran @everyone tidak pernah menjadi bagian dari jawabannya. Jika tidak ada apa pun di server yang cocok dengan yang Anda minta, Anda mendapatkan kesalahan alih-alih daftar kosong.
+</block>
+</dash>
+
+<details>
+syntax: $returnGuildRolesID[GuildID; permission; var; separator]
+param: GuildID|snowflake|Wajib|Server mana yang perannya diambil
+param: permission|text|Wajib|Peran mana yang dipertahankan: kosong atau all untuk semuanya, nama izin seperti kick_members, atau nomor izin mentah
+param: var|text|Wajib|Label tempat ID yang dikumpulkan disimpan, dibaca kembali dengan $return[]
+param: separator|text|Wajib|Apa yang berada di antara ID, seperti koma. Bentuk bernama: dot, com, apo, sem, colon
+</details>

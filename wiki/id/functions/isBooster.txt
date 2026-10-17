@@ -1,0 +1,36 @@
+<dash>
+name: $isBooster
+desc: Menjawab benar atau salah tergantung pada apakah seorang anggota sedang melakukan boost server.
+category: Info
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Arahkan ke sebuah anggota dan ia menentukan apakah orang itu sedang melakukan boost server saat ini, lalu mencetak benar atau salah. Boost harus sedang berjalan tepat saat ini juga, sehingga jawabannya berbalik ke salah begitu boost berakhir. Seseorang yang tidak pernah bergabung, atau yang bukan anggota di sini, selalu kembali sebagai salah juga.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !checkboost
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $isBooster[userID]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $isBooster[$authorID]
+</block>
+
+<block type="callout" kind="note">
+text: Boost harus berada di server ini. Seseorang yang melakukan boost server lain miliknya sendiri, atau yang boost-nya di sini sudah berakhir, dihitung sebagai salah.
+</block>
+</dash>
+
+<details>
+syntax: $isBooster[userID]
+param: userID|text|Wajib|Anggota yang diuji, lewat @mention atau ID-nya
+</details>

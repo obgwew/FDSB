@@ -1,0 +1,31 @@
+<dash>
+name: $uptime
+desc: Muestra cuánto tiempo lleva el bot en línea desde la última vez que arrancó.
+category: Utilidades
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $uptime cuenta el tiempo desde que el bot se puso en línea y lo devuelve como un lapso legible, como 2d 5h 30m 12s. Cualquier unidad que sea cero se omite, así que un bot reciente simplemente dice 45s. El reloj vuelve a empezar cada vez que el bot arranca, y se pone a cero en el momento en que lo reinicias.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !uptime en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $uptime
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: Bot has been up for $uptime
+</block>
+
+<block type="callout" kind="note">
+text: Es un valor y no un mensaje, así que encaja directamente en una frase, y en una línea propia el bot lo publica por ti.
+</block>
+</dash>

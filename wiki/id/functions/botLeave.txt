@@ -1,0 +1,39 @@
+<dash>
+name: $botLeave
+desc: Mengeluarkan bot dari sebuah server.
+category: Server
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Jalankan tanpa apa pun di belakangnya, dan bot langsung keluar dari server tempat perintah itu dipakai.
+text: Berikan sebuah ID server sebagai gantinya, dan server itulah yang ia tinggalkan, dan itu bahkan berfungsi dari percakapan pribadi selama bot masih menjadi anggota di sana.
+text: ID server yang bukan deret angka polos, atau yang belum pernah dimasuki bot, ditolak dengan sebuah kesalahan di kanal.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !leave
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $botLeave
+text: $botLeave[guildID]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $botLeave
+</block>
+
+<block type="callout" kind="warning">
+text: Tidak ada tombol urungkan di dalam obrolan — membawa bot kembali berarti mengundangnya lagi melalui aplikasi.
+text: Di luar sebuah server, selalu berikan ID servernya, dan ingat bahwa isinya harus berupa angka saja.
+</block>
+</dash>
+
+<details>
+syntax: $botLeave[(guildID)]
+param: guildID|snowflake|Opsional|Server mana yang ditinggalkan. Tanpa itu, bot meninggalkan server tempat perintah dijalankan.
+</details>

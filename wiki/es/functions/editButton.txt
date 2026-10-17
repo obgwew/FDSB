@@ -1,0 +1,44 @@
+<dash>
+name: $editButton
+desc: Reescribe el texto, el color o el estado de un botón que ya está en tu mensaje.
+category: Componentes
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Señala un botón por el ID que le diste, o por el enlace que hay detrás, y el bot pone una etiqueta, un estilo y un estado nuevos en el mensaje donde ese botón está. Si nombras un ID de mensaje, edita ese mensaje exacto; si lo dejas fuera, mira los botones que tienes en cola, luego el mensaje del que vino el pulso, luego el último mensaje que envió el bot. Los botones de enlace conservan su enlace y solo cambia el texto.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $editButton en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $editButton[ID/URL; label; style; (disabled; emoji; messageID)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $editButton[btn_confirm; Confirmed; success]
+</block>
+
+<block type="callout" kind="note">
+text: Dale el mismo ID con el que se creó el botón. Pon disabled en yes y el botón se vuelve gris y deja de responder; déjalo fuera y el botón mantiene el estado que tuviera.
+</block>
+
+<block type="callout" kind="warning">
+text: Solo se pueden editar mensajes que envió este bot, y el botón tiene que estar ya en ese mensaje. Si el ID no coincide con nada, el bot informa que no encontró ningún botón así.
+</block>
+</dash>
+
+<details>
+syntax: $editButton[ID/URL; label; style; (disabled; emoji; messageID)]
+param: ID/URL|text|Obligatorio|El ID propio del botón, o el enlace al que apunta
+param: label|text|Obligatorio|El texto que mostrar en el botón
+param: style|text|Obligatorio|primary, secondary, success, danger o link
+param: disabled|yes/no|Opcional|yes vuelve gris el botón, no lo hace de nuevo pulsable
+param: emoji|text|Opcional|Un emoji que mostrar en el botón
+param: messageID|snowflake|Opcional|Qué mensaje del bot contiene el botón; déjalo fuera y se usa el más cercano
+</details>

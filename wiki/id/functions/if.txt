@@ -1,0 +1,49 @@
+<dash>
+name: $if
+desc: Menjalankan baris-baris di bawahnya hanya ketika kondisi yang Anda tulis bernilai benar.
+category: Kontrol Alur
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $if mengambil sebuah kondisi dan memeriksanya sebelum bot melakukan apa pun lagi. Ketika kondisinya terpenuhi, baris-baris antara $if dan $endif yang menutupnya dijalankan dan anggota melihat apa yang Anda tulis di sana. Ketika tidak, baris-baris itu dilewati dalam diam dan bot melanjutkan ke bawah — dengan begitu perintah yang sama dapat memberi satu anggota sebuah balasan dan semua orang lain balasan yang berbeda.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !welcome
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $if[condition]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $if[$authorID == 123456789]
+text:   Hello Admin!
+text: $else
+text:   You are not an admin.
+text: $endif
+</block>
+
+<block type="options" title="Operator perbandingan">
+option: ==|Sama dengan — angka dibandingkan sebagai angka
+option: !=|Tidak sama dengan
+option: >|Lebih besar dari
+option: <|Lebih kecil dari
+option: >=|Lebih besar dari, atau sama dengan
+option: <=|Lebih kecil dari, atau sama dengan
+</block>
+
+<block type="callout" kind="note">
+text: Satu $if dapat bersarang di dalam yang lain. Tambahkan $elif untuk kondisi kedua dan $else untuk kasus ketika tidak ada yang cocok, lalu selalu tutup bloknya dengan $endif agar bot tahu di mana blok itu berakhir.
+</block>
+</dash>
+
+<details>
+syntax: $if[condition]
+param: condition|expression|Wajib|Yang diuji, misalnya $authorID == 123 atau $var[score] >= 90. Bekerja dengan enam operator perbandingan.
+</details>

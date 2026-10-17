@@ -1,0 +1,42 @@
+<dash>
+name: $onBanRemove
+desc: Runs your lines the moment a ban is lifted and a user is unbanned.
+category: Event
+
+<block type="text" title="How does the event work?">
+text: Save a command whose Prefix field is $onBanRemove and the app marks it as an Event for you. The instant a ban is lifted — by a moderator or through the audit log — the lines under that prefix start running with nobody typing anything.
+text: The unbanned person is the author here, so $mention, $authorID and $authorName point at them, while $guildID and $guildName describe the server the ban was lifted in.
+text: A ban has no channel of its own, so the message channel is left empty unless you name one. Put a channel ID in brackets straight after the prefix and your replies land there instead.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $onBanRemove
+item: The app marks it as an Event for you
+item: Paste the code below into the editor
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: #PREFIX:$onBanRemove[channelID]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: #PREFIX:$onBanRemove[123456789012345678]
+text:  sendMessage[$mention is no longer banned from $guildName]
+</block>
+
+<block type="callout" kind="note">
+text: Keep $onBanRemove on the first line. Move it further down and the app stops treating the command as an event, so it will sit and wait for somebody to type its prefix like any other command.
+</block>
+
+<block type="callout" kind="important">
+text: Name a channel ID after the prefix, because a ban is not tied to any channel and the bot otherwise has nowhere to speak. At the moment the ban is lifted the person is not a member of the server yet, so rely on $mention, $authorID and $authorName rather than anything that reads their roles.
+</block>
+</dash>
+
+<details>
+syntax: $onBanRemove
+</details>

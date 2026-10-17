@@ -1,0 +1,35 @@
+<dash>
+name: $deleteIn
+desc: Wartet eine eingestellte Dauer und entfernt dann die eigenen Antworten des Bots aus dem Kanal.
+category: Timing & Verzögerungen
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: $deleteIn übernimmt eine Zeitspanne und lässt den Bot die eigene Ausgabe entfernen, sobald diese Zeit abgelaufen ist. Es werden die in diesem Durchgang bereits gesendete Nachricht des Bots und alle späteren erfasst, für die von Ihnen angegebene Verzögerung gehalten und dann gelöscht, sodass der Kanal sauber bleibt. So können Sie bequem einen temporären Hinweis oder ein einmaliges Ergebnis ausgeben, das nicht dauerhaft im Chat stehen bleiben soll.
+</block>
+
+<block type="code" title="Syntax">
+text: $deleteIn[duration]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $deleteIn[5s]
+text: $sendMessage[This message is removed after 5 seconds]
+</block>
+
+<block type="callout" kind="note">
+text: Eine Länge besteht aus einer Zahl und einer Einheit: ms für Millisekunden, s für Sekunden, m für Minuten, h für Stunden, d für Tage und w für Wochen. Mehrere lassen sich verknüpfen, sodass 1h30m eine Stunde und dreißig Minuten bedeutet, und die längste erlaubte Verzögerung beträgt 14 Tage.
+</block>
+
+<block type="callout" kind="warning">
+text: Der Bot braucht die Berechtigung, Nachrichten in diesem Kanal zu löschen, und jede entfernte Nachricht muss von ihm selbst gesendet worden sein. Läuft die Verzögerung, während der Bot offline ist, bleibt die Nachricht stehen, da der Countdown beim Bot liegt.
+</block>
+
+<block type="callout" kind="important">
+text: Hier wird nur eine Länge akzeptiert — genau ein Argument mit einem Wert größer als null. Zu lange Wartezeiten, eine fehlende Einheit oder eine Zahl ohne Einheit werden stattdessen mit einem Fehler abgelehnt.
+</block>
+</dash>
+
+<details>
+syntax: $deleteIn[duration]
+param: duration|text|Erforderlich|Wie lange vor dem Löschen gewartet wird, als Zahl mit Einheit — 5s, 10m, 2h, 1d — und bis zu 14 Tagen
+</details>

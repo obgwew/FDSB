@@ -1,0 +1,40 @@
+<dash>
+name: $returnGuildEmojisID
+desc: Mengumpulkan nomor ID emoji khusus sebuah server ke dalam satu nilai yang bisa Anda baca kembali.
+category: Perintah Pengembalian
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Berikan ID server ke bot dan ia mengumpulkan nomor ID setiap emoji khusus yang ada di sana, menyimpannya di bawah nama pilihan Anda, dan menggabungkannya dengan pemisah yang Anda minta. Pilih animated atau static dulu dan Anda hanya mendapatkan jenis itu. Tidak ada yang ditulis di chat dengan sendirinya, jadi baca daftarnya kembali dengan $return sebelum menggunakannya.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !emojis
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $returnGuildEmojisID[GuildID; type; var; separator]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $returnGuildEmojisID[$guildID; animated; animEmojis; ,]
+text: $sendMessage[Animated emojis: $return[animEmojis]]
+</block>
+
+<block type="callout" kind="note">
+text: Filternya mengambil all, static atau animated. Server yang tidak menyimpan emoji jenis yang Anda minta melaporkan kesalahan alih-alih hasil kosong, dan nomor-nomornya tidak harus kembali dalam urutan yang sama seperti emoji terdaftar di layar pengaturan server.
+</block>
+</dash>
+
+<details>
+syntax: $returnGuildEmojisID[GuildID; type; var; separator]
+param: GuildID|snowflake|Wajib|Server mana yang emojinya dikumpulkan
+param: type|text|Wajib|Emoji mana yang disertakan: all, static atau animated
+param: var|text|Wajib|Nama tempat hasilnya disimpan, dibaca kembali nanti dengan $return[]
+param: separator|text|Wajib|Apa yang berada di antara nomor-nomor itu. Nama juga bisa: dot, com, apo, sem, colon
+</details>

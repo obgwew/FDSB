@@ -1,0 +1,50 @@
+<dash>
+name: $createRole
+desc: Membuat peran baru di server dengan nama, warna, dan izin pilihan Anda.
+category: Moderasi
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $createRole menambahkan sebuah peran baru ke server tempat perintah dijalankan.
+text: Anda memberinya nama, warna, dan seberapa besar kewenangan yang harus dibawanya, baik salah satu preset di bawah maupun sebuah angka izin mentah.
+text: Anda juga dapat memutuskan apakah peran itu ditampilkan sendirian di samping anggota dan apakah semua orang boleh men-tagnya, dan keduanya tetap mati kecuali Anda menjawab ya.
+text: Peran yang selesai muncul di daftar peran server Anda seketika, dan ID-nya dapat diambil dengan $return[createdRoleID] untuk diserahkan ke perintah berikutnya.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !role
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $createRole[role name; color; permissions; (display role; mention role)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $createRole[VIP; #FFD700; member; yes; no]
+</block>
+
+<block type="options" title="Preset izin">
+option: cosmetic|Tanpa izin sama sekali, hanya nama berwarna
+option: member|Kewenangan anggota biasa: mengirim pesan, bereaksi, mengunggah file, masuk suara
+option: mod / moderator|Menendang, memblokir, timeout, dan manajemen pesan
+option: manager / admin|Semua yang bisa dilakukan moderator, ditambah kanal, peran, webhook, dan emoji
+</block>
+
+<block type="callout" kind="note">
+text: Bot memerlukan izin Manage Roles di server itu, dan perintah ini hanya berfungsi di dalam server, tidak pernah di percakapan pribadi.
+text: Batas Discord sendiri sebanyak 100 karakter berlaku untuk nama peran.
+</block>
+</dash>
+
+<details>
+syntax: $createRole[role name; color; permissions; (display role; mention role)]
+param: role name|text|Wajib|Nama yang ditampilkan untuk peran baru, hingga 100 karakter
+param: color|text|Wajib|Warna heksadesimal seperti #FF5733, atau kosong untuk bawaan
+param: permissions|text|Wajib|Salah satu preset di atas, atau angka izin mentah
+param: display role|yes/no|Opsional|yes untuk menampilkan peran itu sendirian di samping anggota (bawaan: no)
+param: mention role|yes/no|Opsional|yes agar semua orang boleh men-tag peran itu (bawaan: no)
+</details>

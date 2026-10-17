@@ -1,0 +1,51 @@
+<dash>
+name: $onlyUserPerms
+desc: Menghentikan perintah dengan pesan Anda sendiri kecuali orang yang menjalankannya diizinkan melakukan langkah berikutnya.
+category: Kontrol Akses
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $onlyUserPerms memeriksa izin anggota yang menjalankan perintah sebelum bagian yang dilindungi berjalan. Cantumkan izin yang mereka butuhkan, lalu akhiri dengan pesan yang dikirim ketika satu izin hilang. Jika mereka memiliki semuanya, tidak ada yang ditampilkan dan perintah Anda berlanjut. Jika satu hilang, pesan dikirim dan sisa perintah dibuang tepat di situ.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $onlyUserPerms[permission; ...; error message]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $onlyUserPerms[manage_messages; You need Manage Messages to do that.]
+text: $onlyAdmin
+text: $sendMessage[Message deleted.]
+</block>
+
+<block type="options" title="Izin yang umum">
+option: manage_messages|Menghapus dan menyematkan pesan
+option: kick_members|Mengeluarkan anggota
+option: ban_members|Memblokir anggota
+option: timeout_members|Memberi jeda waktu anggota
+option: manage_roles|Menetapkan dan mencabut peran
+option: moderate_members|Memberi jeda waktu dan mengeluarkan anggota
+</block>
+
+<block type="callout" kind="note">
+text: Nama izin adalah nama milik Discord sendiri dengan huruf kecil dan garis bawah. Letakkan pesannya di akhir — semua yang setelah izin dihitung sebagai satu pesan.
+</block>
+
+<block type="callout" kind="important">
+text: Ini tidak sama dengan $onlyAdmin. Ia melihat izin orang itu sendiri, yang berarti peran yang Anda beri izin ekstra akan lolos bahkan jika itu bukan peran admin.
+</block>
+</dash>
+
+<details>
+syntax: $onlyUserPerms[permission; ...; error message]
+param: permission|text|Wajib|Satu atau lebih nama izin Discord, dipisahkan dengan titik koma, seperti manage_messages atau kick_members.
+param: error message|text|Wajib|Pesan yang dikirim ke kanal saat anggota kehilangan salah satu izin. Semua yang setelah izin dihitung sebagai pesan ini.
+</details>

@@ -1,0 +1,40 @@
+<dash>
+name: $guildBanner
+desc: Te da el enlace a la imagen de banner de un servidor.
+category: Servidor
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Úsalo sin argumento y devuelve el banner del servidor en el que se usó el comando; añade un ID de servidor y lee ese servidor en su lugar. Los banners animados vuelven como un enlace .gif y los fijos como .png, listos para meterlos en un mensaje o en una tarjeta. Un servidor sin banner definido te da un error en lugar de un enlace.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $guildBanner en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $guildBanner[(guild_id)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $guildBanner[123456789012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: El servidor necesita un banner y el bot tiene que ser miembro de él, de lo contrario no hay nada que devolver. En un chat privado debes nombrar el servidor, ya que no hay ningún actual que leer.
+</block>
+
+<block type="callout" kind="note">
+text: Metido dentro de una línea funciona con lo que el bot ya tiene cargado, así que solo puede devolver un servidor que reconozca rápido. En su propia línea también está dispuesto a ir a buscar un servidor.
+</block>
+</dash>
+
+<details>
+syntax: $guildBanner[(guild_id)]
+param: guildID|snowflake|Opcional|Qué servidor leer; omítelo y se usa el actual
+</details>

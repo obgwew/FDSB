@@ -1,0 +1,41 @@
+<dash>
+name: $editChannelPerms
+desc: Menyalakan atau mematikan izin individual untuk satu peran atau satu anggota di satu kanal.
+category: Moderasi
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Sebutkan sebuah kanal, sebutkan sebuah peran atau anggota, lalu daftarkan izin yang ingin Anda ubah, dan bot menulis ulang daftar izin kanal itu untuk mereka semata. Tanda plus di depan sebuah izin mengizinkannya, tanda minus memblokirnya, dan garis miring mengembalikannya ke apa pun yang ditetapkan peran tingkat server. Tidak ada hal lain pada kanal yang berubah, sehingga inilah cara membuka sebuah kanal suara bagi segelintir orang atau mengunci sebuah kanal teks tanpa menyentuh peran server.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !lock
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $editChannelPerms[channel ID; target ID; perm1; perm2; ...]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $editChannelPerms[123456789; 987654321; +send_messages; -connect]
+</block>
+
+<block type="callout" kind="warning">
+text: Bot memerlukan izin Manage Channels atau Manage Permissions di kanal tersebut, dan perubahan harus terjadi di dalam sebuah server, bukan lewat pesan langsung. Jika peran target berada di atas peran tertinggi bot itu sendiri, Discord menolak seluruh perintah.
+</block>
+
+<block type="callout" kind="note">
+text: Nama izin menggunakan nama milik Discord sendiri, ditulis dalam snake_case: send_messages, view_channel, connect, manage_roles. Nama yang tidak dikenali bot menghentikan perintah secara langsung alih-alih dilewati diam-diam.
+</block>
+</dash>
+
+<details>
+syntax: $editChannelPerms[channel ID; target ID; perm1; perm2; ...]
+param: channelID|text|Wajib|ID numerik kanal yang akan diubah
+param: targetID|text|Wajib|Peran atau anggota mana yang akan diubah untuknya, sebagai ID atau mention
+param: permissions|text|Wajib|Satu atau beberapa izin, dengan + untuk mengizinkan, - untuk menolak, atau / untuk mengatur ulang
+</details>

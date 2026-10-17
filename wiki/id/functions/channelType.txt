@@ -1,0 +1,36 @@
+<dash>
+name: $channelType
+desc: Menyebut jenis kanal sebuah tempat: teks, suara, kategori, forum, atau panggung.
+category: Kanal
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Arahkan perintah ini ke sebuah kanal, lalu Anda mendapatkan jenis kanal itu kembali sebagai satu kata. Biarkan kurungnya kosong, dan ia justru melaporkan kanal tempat perintah dijalankan. Jawaban ini berguna untuk menjaga aksi yang hanya masuk akal di satu jenis tempat.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $channelType
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $channelType[channel mention/ID]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $channelType[<#123456789012345678>]
+</block>
+
+<block type="callout" kind="note">
+text: Kanal yang tidak dapat ditemukan bot, atau kurung yang berisi sesuatu yang bukan ID kanal, kembali sebagai unknown alih-alih sebuah kesalahan. Periksa kata itu sebelum Anda bertindak berdasarkan hasilnya.
+</block>
+</dash>
+
+<details>
+syntax: $channelType[channel mention/ID]
+param: channel|text|Opsional|Kanal mana yang dilihat, lewat mention atau ID. Biarkan kosong untuk kanal saat ini.
+</details>

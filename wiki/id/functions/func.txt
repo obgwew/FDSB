@@ -1,0 +1,38 @@
+<dash>
+name: $func
+desc: Membuka blok bernama berisi baris-baris Anda sendiri yang bisa dijalankan lagi nanti.
+category: Kontrol Alur
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $func menandai awal bagian skrip yang bisa digunakan ulang dan memberinya nama pilihan Anda. Segala sesuatu yang Anda tulis di antaranya dan $endfunc disisihkan, dan hanya berjalan pada saat Anda memintanya dengan $call[name]. Bot membaca seluruh blok tanpa mengeksekusinya, jadi Anda bisa menggunakan ulang baris yang sama sesering yang Anda suka dalam satu perintah.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !welcome
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $func[name]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $func[sendWelcome]
+text: $sendMessage[Welcome!]
+text: $endfunc
+</block>
+
+<block type="callout" kind="important">
+text: Berikan setiap blok nama miliknya sendiri dan jangan pernah memakai ulang nama itu dua kali dalam perintah yang sama. Setiap $func memerlukan $endfunc yang cocok, dan $call hanya bisa menjangkau blok yang sudah dibaca bot, jadi letakkan definisi di atas baris yang memanggilnya.
+</block>
+</dash>
+
+<details>
+syntax: $func[name]
+param: name|text|Wajib|Nama yang akan Anda berikan ke $call nanti untuk menjalankan blok ini
+</details>

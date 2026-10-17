@@ -1,0 +1,41 @@
+<dash>
+name: $messageContains
+desc: Menjalankan baris-baris Anda secara mandiri setiap kali sebuah pesan membawa salah satu kata Anda.
+category: Peristiwa
+
+<block type="text" title="Bagaimana cara kerja peristiwa?">
+text: Daftarkan kata pemicu Anda di kolom Awalan, dipisahkan dengan titik koma, dan aplikasi menandai perintah itu sebagai Peristiwa untuk Anda. Setelah itu, pesan apa pun yang mengandung bahkan satu dari kata-kata itu menjalankan baris-baris di bawahnya secara mandiri. Pencocokan mengabaikan huruf besar, sehingga Hi dan hi dihitung sama, dan tidak ada bedanya di mana pun kata itu duduk dalam pesan itu.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $messageContains[hello;hi;hey]
+item: Aplikasi menandainya sebagai Peristiwa untuk Anda
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: #PREFIX:$messageContains[word1;word2;word3]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: #PREFIX:$messageContains[hello;hi;hey]
+text:  sendMessage[Hey there! How can I help?]
+</block>
+
+<block type="callout" kind="note">
+text: Satu kata saja dari daftar sudah cukup untuk memicunya. Jika setiap kata harus hadir dalam pesan yang sama, pilih $messageContainsAll sebagai gantinya.
+</block>
+
+<block type="callout" kind="important">
+text: Kata-kata dicocokkan sebagai rentang teks biasa, sehingga hi juga memicu pada pesan yang mengatakan hiya. Pertahankan setiap pemicu sebagai satu kata tanpa putus bila Anda ingin tetap ketat.
+</block>
+</dash>
+
+<details>
+syntax: $messageContains[word1;word2;...]
+param: words|text|Wajib|Kata pemicu Anda, dipisahkan dengan titik koma. Satu kecocokan sudah cukup.
+</details>

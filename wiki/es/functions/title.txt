@@ -1,0 +1,36 @@
+<dash>
+name: $title
+desc: Coloca el encabezado en negrita en la parte superior de la tarjeta que construye tu comando.
+category: Constructor de embed
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Lo que pongas entre los paréntesis se convierte en el encabezado en negrita de la parte superior de la tarjeta, situado por encima de la descripción y de la barra de color. El propio formato de Discord funciona dentro, así que la negrita, la cursiva y los enlaces también salen. Cuando un comando construye más de una tarjeta, añade el número de la tarjeta después del texto para rellenar la segunda o la tercera en lugar de la primera.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !rules en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $title[text]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $title[Server Rules]
+</block>
+
+<block type="callout" kind="note">
+text: El encabezado solo aparece una vez que la tarjeta se envía de verdad, así que un $title en su propia línea no hace nada visible hasta que algo lo pone en pantalla. Mantenlo en una sola línea razonable — un encabezado que Discord rechace impide que se entregue toda la tarjeta.
+</block>
+</dash>
+
+<details>
+syntax: $title[text]
+param: text|text|Obligatorio|El encabezado que se muestra en la parte superior de la tarjeta
+</details>

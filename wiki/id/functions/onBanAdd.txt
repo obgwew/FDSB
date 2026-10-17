@@ -1,0 +1,42 @@
+<dash>
+name: $onBanAdd
+desc: Menjalankan baris-baris Anda begitu seseorang di-ban dari server.
+category: Peristiwa
+
+<block type="text" title="Bagaimana cara kerja peristiwa?">
+text: Simpan sebuah perintah yang kolom Awalannya $onBanAdd dan aplikasi menandainya sebagai Peristiwa untuk Anda. Detik seorang anggota di-ban — oleh moderator, oleh salah satu perintah Anda sendiri atau melalui log audit — baris-baris di bawah awalan itu mulai berjalan tanpa ada yang mengetik apa pun.
+text: Orang yang di-ban adalah penulisnya di sini, jadi $mention, $authorID dan $authorName menunjuk kepadanya, sementara $guildID dan $guildName menjelaskan server tempat ban terjadi.
+text: Ban tidak memiliki kanalnya sendiri, jadi kanal pesan dibiarkan kosong kecuali Anda menyebutkan satu. Letakkan ID kanal dalam kurung tepat setelah awalan dan balasan Anda mendarat di sana.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $onBanAdd
+item: Aplikasi menandainya sebagai Peristiwa untuk Anda
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: #PREFIX:$onBanAdd[channelID]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: #PREFIX:$onBanAdd[123456789012345678]
+text:  sendMessage[$mention has been banned from $guildName]
+</block>
+
+<block type="callout" kind="note">
+text: Pertahankan $onBanAdd di baris pertama. Geser lebih ke bawah dan aplikasi berhenti memperlakukan perintah itu sebagai peristiwa, sehingga ia akan duduk dan menunggu seseorang mengetik awalannya seperti perintah biasa.
+</block>
+
+<block type="callout" kind="important">
+text: Sebutkan ID kanal setelah awalan, karena sebuah ban tidak terikat pada kanal mana pun dan bot tidak punya tempat untuk berbicara. Siapa pun yang membacanya harus memiliki akses ke kanal tersebut, dan anggota yang di-ban tidak akan pernah melihat pesannya — yang menjadikannya tempat yang baik untuk mencatat apa yang terjadi.
+</block>
+</dash>
+
+<details>
+syntax: $onBanAdd
+</details>

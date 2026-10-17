@@ -1,0 +1,31 @@
+<dash>
+name: $message
+desc: Te devuelve las palabras que un miembro escribió después de tu comando, todas o de una en una.
+category: Info
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $message mira lo que el miembro escribió después del nombre de tu comando. Usado por sí solo te devuelve cada palabra que siguió, y con un número te devuelve esa palabra concreta, contando desde 1. Dentro de un evento no hay nombre de comando que omitir, así que allí te devuelve en su lugar todo el texto que el evento recibió.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !message en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $message
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $sendMessage[You said: $message]
+</block>
+
+<block type="callout" kind="note">
+text: Pide una palabra que no está y la línea sale vacía, así que no aparece absolutamente nada en el canal. Cualquier $ que un miembro haya escrito se muestra como texto plano y nunca se ejecuta como un comando propio.
+</block>
+</dash>

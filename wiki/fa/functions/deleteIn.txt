@@ -1,0 +1,35 @@
+<dash>
+name: $deleteIn
+desc: Waits a set time, then removes the bot's own replies from the channel.
+category: زمان‌بندی و تاخیر
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $deleteIn یک زمان مشخص را دریافت می‌کند و پس از سپری شدن آن، پاسخ‌های خود ربات را از کانال حذف می‌کند.
+</block>
+
+<block type="code" title="سینتکس">
+text: $deleteIn[duration]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $deleteIn[5s]
+text: $sendMessage[This message is removed after 5 seconds]
+</block>
+
+<block type="callout" kind="note">
+text: مدت زمان شامل یک عدد به‌همراه واحد است: ms (میلی‌ثانیه)، s (ثانیه)، m (دقیقه)، h (ساعت)، d (روز) و w (هفته). می‌توانید آن‌ها را ترکیب کنید، مثلاً 1h30m برابر یک ساعت و سی دقیقه است. حداکثر زمان مجاز 14 روز است.
+</block>
+
+<block type="callout" kind="warning">
+text: ربات برای حذف پیام‌ها در آن کانال به مجوز نیاز دارد و تنها می‌تواند پیام‌هایی را حذف کند که خود ارسال کرده است. اگر ربات در زمان پایان تاخیر آفلاین باشد، پیام حذف نخواهد شد.
+</block>
+
+<block type="callout" kind="important">
+text: $deleteIn فقط یک آرگومان دریافت می‌کند که باید مدت زمان و بزرگ‌تر از صفر باشد.
+</block>
+</dash>
+
+<details>
+syntax: $deleteIn[duration]
+param: duration|text|الزامی|How long to wait before deleting, as a number with a unit — 5s, 10m, 2h, 1d — and up to 14 days
+</details>

@@ -1,0 +1,53 @@
+<dash>
+name: $newSelectMenu
+desc: Membangun menu dropdown yang duduk di bawah salah satu pesan bot Anda.
+category: Komponen
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Mulai sebuah menu dengan ID yang Anda buat sendiri, lalu tentukan berapa banyak pilihan yang harus dibuat seorang anggota dan berapa banyak yang boleh mereka buat. ID itu adalah cara setiap baris berikutnya merujuknya. Pilihan-pilihan itu sendiri datang kemudian, ditambahkan dengan $addSelectMenuOption, dan dropdown yang selesai ikut bersama pesan yang Anda kirim. Berikan ID sebuah pesan bot yang sudah Anda kirim dan menu itu mendarat di pesan itu sebagai gantinya.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !colors
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $newSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+text: $addSelectMenuOption[color_menu; Red; red; The color red]
+text: $addSelectMenuOption[color_menu; Blue; blue; The color blue]
+text: $sendMessage[Choose your favorite color!]
+</block>
+
+<block type="options" title="Rincian perilaku">
+option: Min|Berapa banyak pilihan yang harus dibuat seseorang sebelum ia menerima
+option: Max|Berapa banyak pilihan yang boleh dibuat seseorang sekaligus
+option: Placeholder|Petunjuk abu-abu yang beristirahat di menu tertutup
+option: Message ID|Pesan bot yang sudah dikirim untuk meletakkan menu di atasnya
+</block>
+
+<block type="callout" kind="note">
+text: Sebuah menu hanya menjadi terlihat setelah setidaknya satu pilihan ditambahkan dengan $addSelectMenuOption. Sesudahnya, $editSelectMenu mengubah batasan atau petunjuk dan $editSelectMenuOption mengubah sebuah pilihan tunggal.
+</block>
+
+<block type="callout" kind="warning">
+text: Min tidak boleh pernah berada di atas Max. Satu pesan dapat membawa 25 dropdown dan tombol bersama-sama pada paling banyak, dan menunjuk ke pesan yang tidak dikirim bot Anda ditolak.
+</block>
+</dash>
+
+<details>
+syntax: $newSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+param: Menu ID|text|Wajib|Nama yang akan Anda gunakan untuk menu ini nanti
+param: Min|number|Wajib|Berapa banyak pilihan yang harus dibuat
+param: Max|number|Wajib|Paling banyak pilihan yang boleh dibuat
+param: Placeholder|text|Opsional|Petunjuk abu-abu yang terlihat sebelum apa pun dipilih
+param: Message ID|snowflake|Opsional|Salah satu pesan bot Anda sendiri untuk melampirkan menu ini
+</details>

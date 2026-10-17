@@ -1,0 +1,38 @@
+<dash>
+name: $for
+desc: Menjalankan blok baris di bawahnya sejumlah tertentu.
+category: Kontrol Alur
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Berikan sebuah bilangan bulat dan setiap baris yang Anda letakkan sebelum $endfor berjalan tepat sebanyak itu, satu demi satu. Atur angkanya ke nol atau kurang dan seluruh blok dilewati. Di mana pun di dalamnya, $break memutus perulangan lebih awal dan melanjutkan sisa perintah Anda.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !countdown
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $for[count]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $for[5]
+text:   $sendMessage[Iteration!]
+text: $endfor
+</block>
+
+<block type="callout" kind="note">
+text: Jumlahnya harus berupa bilangan bulat, jika tidak bot memposting kesalahan dan memperlakukan perulangan seolah-olah berjalan nol kali. $for dan $endfor selalu berpasangan, dan satu perulangan bisa berada di dalam perulangan lain sedalam yang Anda suka.
+</block>
+</dash>
+
+<details>
+syntax: $for[count]
+param: count|number|Wajib|Berapa kali blok dijalankan; apa pun di bawah nol akan melewatinya
+</details>

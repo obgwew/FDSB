@@ -1,0 +1,43 @@
+<dash>
+name: $getUserVar
+desc: Lee el valor que un miembro guarda para un nombre de variable.
+category: Variables
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Cada miembro tiene su propia casilla bajo el mismo nombre de variable, y esto es lo que la lee. Con solo un nombre obtienes la casilla de quien escribió el comando; añade un ID de miembro y lees la suya en su lugar. Mientras esa casilla siga vacía, se devuelve el valor compartido de la pestaña de Variables, así que nadie se queda nunca sin nada.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Crea la variable primero en la pestaña de Variables
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !profile en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $getUserVar[name; (user_id); (guild_id)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $getUserVar[points; 123456789012345678]
+</block>
+
+<block type="callout" kind="important">
+text: Si nombras una variable que nunca se creó en la pestaña de Variables, el bot añade una vacía, te avisa de ello y detiene tu comando. Configura la variable primero.
+</block>
+
+<block type="callout" kind="note">
+text: El miembro que obtienes por defecto es quien escribió el comando, y el servidor por defecto es aquel en el que se ejecutó. Nada llega al chat a menos que dejes la línea por sí sola.
+</block>
+</dash>
+
+<details>
+syntax: $getUserVar[name; (user_id); (guild_id)]
+param: name|text|Obligatorio|Qué variable leer
+param: userID|text|Opcional|De quién leer su propio valor; déjalo vacío para la persona que escribió el comando
+param: guildID|text|Opcional|En qué servidor buscar; déjalo vacío para el servidor en el que se ejecutó el comando
+</details>

@@ -1,0 +1,38 @@
+<dash>
+name: $var
+desc: Menyimpan nilai sementara selama perintah berjalan, lalu menghapusnya setelah perintah selesai.
+category: Variabel
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Berikan nama dan nilai, maka nilai tersebut akan disimpan untuk sisa eksekusi perintah ini. Jika hanya memberikan nama saja, maka perintah akan mengembalikan nilai yang tersimpan. Ini cocok untuk menyimpan total sementara, penghitung loop, atau angka yang hanya dipakai selama perintah berjalan dan tidak perlu disimpan permanen. Semua nilai yang disimpan oleh $var akan hilang begitu perintah selesai.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !scoreboard
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $var[name; value]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $var[score; 10]
+text: $sendMessage[Your score is $var[score]]
+</block>
+
+<block type="callout" kind="note">
+text: Jika Anda ingin nilai bertahan antar eksekusi perintah, gunakan $setVar dan $getVar. $var adalah tempat penyimpanan sementara yang hanya berlaku selama perintah sedang berjalan. Anda juga bisa menyisipkannya langsung di dalam kurung perintah lain.
+</block>
+</dash>
+
+<details>
+syntax: $var[name; (value)]
+param: name|text|Wajib|Nama variabel untuk dibaca atau ditulis
+param: value|text|Opsional|Jika diisi, nilai ini akan disimpan dengan nama tersebut. Jika dikosongkan, nilai yang tersimpan akan dikembalikan
+</details>

@@ -1,0 +1,36 @@
+<dash>
+name: $replyIn
+desc: Menahan balasan bot berikutnya selama waktu yang ditentukan.
+category: Waktu & Jeda
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $replyIn menjeda perintah Anda sehingga bot tidak langsung bergegas ke baris berikutnya. Berikan durasi seperti 5s dan semua setelahnya menunggu lima detik sebelum mulai, cara mudah untuk menggelar pesan yang mendarat sedikit lebih lambat alih-alih sekaligus. Penantian itu sendiri tidak mencetak apa pun, skrip Anda cukup lanjut lagi begitu waktunya habis.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !remind
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $replyIn[time]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $replyIn[5s]
+text: $sendMessage[This appears after 5 seconds!]
+</block>
+
+<block type="callout" kind="note">
+text: Durasi adalah angka plus satuan: s untuk detik, m untuk menit, h untuk jam, d untuk hari. Apa pun yang Anda tulis di atas penantian sudah terkirim, dan hanya perintah yang satu ini yang ditahan selama waktu berjalan.
+</block>
+</dash>
+
+<details>
+syntax: $replyIn[time]
+param: time|text|Wajib|Berapa lama menunggu, sebagai angka plus s, m, h atau d, seperti 5s, 10m atau 1h
+</details>

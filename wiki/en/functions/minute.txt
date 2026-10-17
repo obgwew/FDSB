@@ -1,0 +1,35 @@
+<dash>
+name: $minute
+desc: Gives the current minute of the hour, from 00 to 59.
+category: Timing & Delays
+
+<block type="text" title="How does the command work?">
+text: $minute reads the clock and hands back the current minute, always two digits, so the ninth minute of the hour comes back as 09. Drop it into a line of text and the digits land where you put them, or leave it on a line of its own and the bot posts the figure in the channel. It is measured fresh on each run, so it changes as the minutes pass.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !minute
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: $minute
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $sendMessage[It is now $hour:$minute]
+</block>
+
+<block type="callout" kind="note">
+text: The value runs from 00 to 59 and is always two digits wide, so it lines up when you place it between $hour and $second.
+</block>
+
+<block type="callout" kind="important">
+text: $minute follows the timezone you set with $time. If you never set one, it falls back to the bot's own local clock.
+</block>
+</dash>

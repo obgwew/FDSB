@@ -1,0 +1,37 @@
+<dash>
+name: $endfunc
+desc: Cierra un bloque de líneas con nombre para que puedas ejecutarlo otra vez con $call.
+category: Control de flujo
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $endfunc marca el final del bloque con nombre que abriste con $func. Las líneas que hay dentro se guardan en lugar de ejecutarse de inmediato, y solo se reproducen cuando $call[ese nombre] las reclama, así que una misma pieza de trabajo puede estar en un comando tantas veces como quieras. Ponle el nombre después de $func y ciérralo con $endfunc, y el resto de tu comando continúa con normalidad.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !welcome en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $endfunc
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $func[ping]
+text: $sendMessage[Pong]
+text: $endfunc
+</block>
+
+<block type="callout" kind="warning">
+text: Un $endfunc sin un $func que le corresponda deja el bloque desequilibrado y el bot informa de un error de script. Cada $endfunc cierra un solo $func, aunque haya bucles o condiciones anidados dentro.
+</block>
+</dash>
+
+<details>
+syntax: $endfunc
+</details>

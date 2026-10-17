@@ -1,0 +1,38 @@
+<dash>
+name: $splitIn
+desc: Memotong sepotong teks menjadi bagian-bagian terpisah yang bisa Anda pilih satu per satu.
+category: Utilitas Teks
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $splitIn memecah sepotong teks di mana pun pemisah yang Anda berikan muncul dan menyimpan bagian-bagiannya untuk sisa perintah. Tidak ada yang dicetak dengan sendirinya, bagian-bagian itu hanya menunggu sampai Anda meminta salah satunya dengan $splitOut. Dari sana Anda bisa mengambil bagian pertama, bagian terakhir, atau bagian bernomor mana pun di antaranya dan memakainya di mana pun Anda akan memakai nilai lain.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !welcome
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $splitIn[text; delimiter]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $splitIn[apple,banana,cherry; ,]
+text: $splitOut[1]
+</block>
+
+<block type="callout" kind="note">
+text: Bagian dihitung dari 1: berikan $splitOut sebuah angka, atau < untuk bagian paling pertama dan > untuk yang paling terakhir. Spasi di sekitar setiap bagian dipangkas saat teks dipotong, dan pemisah kosong ditolak.
+</block>
+</dash>
+
+<details>
+syntax: $splitIn[text; delimiter]
+param: text|text|Wajib|Teks yang dipotong menjadi bagian-bagian
+param: delimiter|text|Wajib|Apa yang dipotong di antara bagian-bagian, misalnya koma. Ini tidak boleh dibiarkan kosong.
+</details>

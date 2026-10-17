@@ -1,0 +1,40 @@
+<dash>
+name: $cooldown
+desc: Impide que el mismo miembro ejecute tu comando otra vez durante un rato.
+category: Control de acceso
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Pon una duración en el comando y el primer miembro que lo active tiene vía libre; cualquiera que lo intente otra vez antes de que pase el tiempo se detiene justo en la puerta y nunca llega a tus líneas. El bloque pertenece solo a este comando, así que ese miembro sigue libre para usar tus otros comandos mientras espera. Añade una segunda parte y ese es el mensaje que recibe en lugar de silencio.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !daily en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $cooldown[time; error message]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $cooldown[10s; Please wait {time} before using this again!]
+</block>
+
+<block type="callout" kind="note">
+text: Escribe el tiempo como un número y una letra: s para segundos, m para minutos, h para horas, d para días, así que 10s o 5m. Si omites la letra se asumen segundos, mientras que cualquier otra cosa se rechaza con un error.
+</block>
+
+<block type="callout" kind="important">
+text: Pon {time} o %time% en tu mensaje y el bot lo rellena con el tiempo que queda, contando hacia atrás mientras lo leen. Deja el mensaje completamente fuera y el intento repetido simplemente se detiene sin publicar nada.
+</block>
+</dash>
+
+<details>
+syntax: $cooldown[time; error message]
+param: time|text|Obligatorio|Cuánto dura la espera, como un número más s, m, h o d, por ejemplo 10s, 5m, 1h, 1d
+param: error message|text|Obligatorio|Qué decirles mientras dura la espera. Usa {time} o %time% para el tiempo restante.
+</details>

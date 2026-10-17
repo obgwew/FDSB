@@ -1,0 +1,31 @@
+<dash>
+name: $clear
+desc: Menghapus sekumpulan pesan terkini dari kanal aktif dalam satu sapuan.
+category: Moderasi
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Jalankan tanpa apa pun, dan sepuluh pesan terbaru menghilang; berikan sebuah angka di dalamnya, dan sebanyak itulah yang ikut terhapus. Bot menghapusnya dalam satu permintaan, sehingga kanal kosong sekaligus alih-alih pesan demi pesan. Hitungannya harus berada di antara 1 dan 100.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !welcome
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $clear
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $clear[50]
+</block>
+
+<block type="callout" kind="warning">
+text: Discord hanya mengizinkan bot menghapus massal pesan yang berumur kurang dari dua minggu, dan bot memerlukan izin Manage Messages di kanal ini. Apa pun di luar 1 sampai 100 kembali sebagai kesalahan, begitu pula angka yang bukan bilangan bulat.
+</block>
+</dash>

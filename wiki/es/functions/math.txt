@@ -1,0 +1,56 @@
+<dash>
+name: $math
+desc: Calcula una operación y publica la respuesta en el canal.
+category: Matemática y números
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Escribe un cálculo entre los signos de suma, resta, multiplicación, división y potencia y el bot devuelve el resultado. También hay ayudas de redondeo y la trigonometría habitual, junto con las constantes pi, e e inf. Solo se acepta aritmética, así que no puede colarse nada más dentro de tu expresión.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $math en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $math[expression]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $math[2 + 2 * 3]
+</block>
+
+<block type="options" title="Operadores admitidos">
+option: +|Suma los dos números
+option: -|Resta el segundo número al primero
+option: *|Multiplica
+option: /|Divide
+option: //|Divide y descarta la parte decimal
+option: %|Lo que queda tras dividir
+option: **|Eleva a una potencia
+</block>
+
+<block type="options" title="Funciones admitidas">
+option: sqrt|Raíz cuadrada
+option: abs|A qué distancia está el número de cero
+option: ceil|Redondea hacia arriba al siguiente número entero
+option: floor|Redondea hacia abajo al número entero inferior
+option: round|Redondea al número entero más cercano
+option: log/log2/log10|Logaritmo en base 10, 2 o e
+option: sin/cos/tan|Seno, coseno y tangente
+</block>
+
+<block type="callout" kind="note">
+text: Dividir por cero vuelve como error en lugar de un número, y un resultado entero descarta el punto decimal — 8 vuelve como 8, no como 8.0.
+</block>
+</dash>
+
+<details>
+syntax: $math[expression]
+param: expression|text|Obligatorio|El cálculo a resolver, como 2 + 2, sqrt(16) o pi * 2
+</details>

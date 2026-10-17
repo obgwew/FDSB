@@ -1,0 +1,31 @@
+<dash>
+name: $reply
+desc: Membuat semua yang diposting bot berikutnya muncul sebagai balasan atas pesan yang memicunya.
+category: Pesan
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Letakkan baris ini di atas perintah pengiriman Anda, dan alih-alih pesan baru muncul di bawah kanal, masing-masing menempel pada pesan anggota itu sendiri dengan panah balasan kecil. Percakapannya tetap di satu tempat dan jelas pertanyaan mana menghasilkan jawaban mana. Ini mencakup semua yang menyusul dalam jalannya perintah itu, bukan hanya pesan berikutnya.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !ask
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $reply
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $reply
+text: $sendMessage[This will be a reply!]
+</block>
+
+<block type="callout" kind="note">
+text: Jika Anda sudah mengarahkan perintah ke tempat tertentu dengan $useChannel atau meminta pesan langsung, tujuan itu yang menang dan panah balasan tidak pernah muncul.
+</block>
+</dash>

@@ -9,8 +9,8 @@ import json
 import asyncio
 import flet as ft
 
-from main_app.langs.translations import Translations
-from main_app.settings           import get_current_lang
+from main_app.langs._translations import Translations
+from main_app.settings_app           import get_current_lang
 from main_app.theme.theme_engine import ThemeEngine
 from main_app.core_fdsb.FDCore   import set_vars_dir as _fd_set_vars_dir
 
@@ -113,15 +113,6 @@ def _delete_scoped_file(base_dir: str, name: str):
 def _t(key: str) -> str:
     return Translations.get(key, get_current_lang())
 
-def _t_or(key: str, fallback: str = '') -> str:
-    try:
-        val = _t(key)
-    except Exception:
-        val = None
-    if not val or val == key:
-        return fallback
-    return val
-
 def _ar(text: str) -> str:
     return text
 
@@ -147,7 +138,7 @@ def _confirm_delete(page: ft.Page, item_name: str, on_confirm: callable):
     def _cancel(_):
         page.pop_dialog()
 
-    msg_template  = _t('delete_confirm') or 'Are you sure you want to delete "{item_name}"?\nThis action cannot be undone.'
+    msg_template  = _t('delete_confirm')
     formatted_msg = msg_template.replace('{item_name}', item_name)
 
     dlg = ft.AlertDialog(
@@ -157,7 +148,7 @@ def _confirm_delete(page: ft.Page, item_name: str, on_confirm: callable):
         title=ft.Row(
             [
                 ft.Icon(ft.Icons.WARNING_AMBER_ROUNDED, color=_c('danger'), size=22),
-                ft.Text(_t('delete_q') or 'Delete?', weight=ft.FontWeight.BOLD,
+                ft.Text(_t('delete_q'), weight=ft.FontWeight.BOLD,
                         color=_c('text'), size=16),
             ],
             spacing=8,
@@ -165,13 +156,13 @@ def _confirm_delete(page: ft.Page, item_name: str, on_confirm: callable):
         content=ft.Text(_ar(formatted_msg), color=_c('text_dim'), size=13),
         actions=[
             ft.TextButton(
-                content=ft.Text(_t('cancel') or 'Cancel', color=_c('text_dim')),
+                content=ft.Text(_t('cancel'), color=_c('text_dim')),
                 on_click=_cancel,
             ),
             ft.FilledButton(
                 content=ft.Row(
                     [ft.Icon(ft.Icons.DELETE_FOREVER_ROUNDED, color='#FFFFFF', size=16),
-                     ft.Text(_t('delete') or 'Delete', color='#FFFFFF',
+                     ft.Text(_t('delete'), color='#FFFFFF',
                              weight=ft.FontWeight.BOLD)],
                     spacing=6, tight=True,
                 ),
@@ -217,7 +208,7 @@ def _confirm_unsaved(page: ft.Page, on_save: callable, on_discard: callable,
         content=ft.Text(_t('unsaved_body'), color=_c('text_dim'), size=13),
         actions=[
             ft.TextButton(
-                content=ft.Text(_t('cancel') or 'Cancel', color=_c('text_dim')),
+                content=ft.Text(_t('cancel'), color=_c('text_dim')),
                 on_click=_cancel,
             ),
             ft.TextButton(
@@ -451,12 +442,12 @@ class BotVariablesTab:
             pass
 
     def _set_name_error(self):
-        self._name_inp.error                = _t('enter_variable_name') or 'Name is required'
+        self._name_inp.error                = _t('enter_variable_name')
         self._name_inp.border_color         = _c('danger')
         self._name_inp.focused_border_color = _c('danger')
 
     def _set_name_taken_error(self):
-        self._name_inp.error                = _t_or('name_taken', 'Variable name already exists')
+        self._name_inp.error                = _t('name_taken')
         self._name_inp.border_color         = _c('danger')
         self._name_inp.focused_border_color = _c('danger')
 
@@ -587,13 +578,13 @@ class BotVariablesTab:
 
     def _build_list_view(self):
         self._header_title = ft.Text(
-            _t('variables') or 'Variables',
+            _t('variables'),
             size=15,
             weight=ft.FontWeight.BOLD,
             color=_c('text'),
         )
         self._search_inp = ft.TextField(
-            hint_text=_t('search') or 'Search',
+            hint_text=_t('search'),
             height=40,
             width=180,
             content_padding=ft.Padding(left=10, right=10, top=0, bottom=0),
@@ -623,7 +614,7 @@ class BotVariablesTab:
 
         self._empty_lbl = ft.Container(
             content=ft.Text(
-                _t('no_variables') or 'No variables found.',
+                _t('no_variables'),
                 size=13,
                 color=_c('text_dim'),
                 text_align=ft.TextAlign.CENTER,
@@ -685,7 +676,7 @@ class BotVariablesTab:
             style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=8)),
         )
         self._editor_breadcrumb = ft.Text(
-            _t('variables_slash') or "Variable's /", size=13, color=_c('text_dim'),
+            _t('variables_slash'), size=13, color=_c('text_dim'),
         )
         self._editor_title = ft.Text(
             _t('new_variable_file'), size=13, weight=ft.FontWeight.BOLD, color=_c('text'),
@@ -701,17 +692,17 @@ class BotVariablesTab:
             icon=ft.Icons.MENU_ROUNDED,
             icon_color=_c('text_dim'),
             icon_size=18,
-            tooltip=_t('scoped_vars') or 'Scoped / Per-user / Guild JSON Data',
+            tooltip=_t('scoped_vars'),
             visible=False,
             on_click=lambda _: self._open_json_editor(self._name_inp.value or ''),
             style=ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=8)),
         )
 
-        self._name_lbl  = ft.Text(_t('name_label')  or 'Name',  size=10, weight=ft.FontWeight.BOLD, color=_c('text_dim'))
-        self._value_lbl = ft.Text(_t('value_label') or 'Value', size=10, weight=ft.FontWeight.BOLD, color=_c('text_dim'))
+        self._name_lbl  = ft.Text(_t('name_label'),  size=10, weight=ft.FontWeight.BOLD, color=_c('text_dim'))
+        self._value_lbl = ft.Text(_t('value_label'), size=10, weight=ft.FontWeight.BOLD, color=_c('text_dim'))
 
         self._name_inp = ft.TextField(
-            hint_text=_t('var_name_hint') or 'variable_name',
+            hint_text=_t('var_name_hint'),
             dense=True,
             bgcolor=_c('card_bg'),
             border_color=_c('card_border'),
@@ -723,7 +714,7 @@ class BotVariablesTab:
             on_change=self._mark_dirty,
         )
         self._value_inp = ft.TextField(
-            hint_text=_t('var_value_hint') or 'variable_value',
+            hint_text=_t('var_value_hint'),
             dense=True,
             bgcolor=_c('card_bg'),
             border_color=_c('card_border'),
@@ -738,7 +729,7 @@ class BotVariablesTab:
         self._save_btn = ft.FilledButton(
             content=ft.Row(
                 [ft.Icon(ft.Icons.SAVE_OUTLINED, color='#FFFFFF', size=16),
-                 ft.Text(_t('save') or 'Save', color='#FFFFFF', weight=ft.FontWeight.BOLD)],
+                 ft.Text(_t('save'), color='#FFFFFF', weight=ft.FontWeight.BOLD)],
                 spacing=6, tight=True,
             ),
             on_click=self._save_variable,
@@ -783,7 +774,7 @@ class BotVariablesTab:
                         ft.Container(
                             content=ft.Column(
                                 [
-                                    ft.Text(_t('info_var') or 'Info Variable', size=11,
+                                    ft.Text(_t('info_var'), size=11,
                                             weight=ft.FontWeight.BOLD,
                                             color=_c('text_dim')),
                                     self._editor_card,
@@ -905,7 +896,7 @@ class BotVariablesTab:
                                 expand=True,
                             ),
                             ft.FilledButton(
-                                content=ft.Text(_t('edit') or 'Edit',
+                                content=ft.Text(_t('edit'),
                                                 color=_c('text_on_accent')),
                                 on_click=lambda _, p=path: self._open_editor(p),
                                 style=_btn_style(
@@ -915,7 +906,7 @@ class BotVariablesTab:
                                 ),
                             ),
                             ft.FilledButton(
-                                content=ft.Text(_t('del') or 'Del', color='#FFFFFF'),
+                                content=ft.Text(_t('del'), color='#FFFFFF'),
                                 on_click=lambda _, p=path, n=name: self._ask_delete(p, n),
                                 style=_btn_style(
                                     _c('danger'),
@@ -1060,13 +1051,13 @@ class BotVariablesTab:
             ),
             actions=[
                 ft.TextButton(
-                    content=ft.Text(_t('cancel') or 'Cancel', color=_c('text_dim')),
+                    content=ft.Text(_t('cancel'), color=_c('text_dim')),
                     on_click=self._request_close_json_editor,
                 ),
                 ft.FilledButton(
                     content=ft.Row(
                         [ft.Icon(ft.Icons.SAVE_OUTLINED, color='#FFFFFF', size=16),
-                         ft.Text(_t('save') or 'Save', color='#FFFFFF',
+                         ft.Text(_t('save'), color='#FFFFFF',
                                  weight=ft.FontWeight.BOLD)],
                         spacing=6, tight=True,
                     ),
@@ -1131,15 +1122,13 @@ class BotVariablesTab:
         try:
             parsed = json.loads(raw)
         except Exception as e:
-            self._json_editor_error_lbl.value   = f'{_t("invalid_json") or "Invalid JSON"}: {e}'
+            self._json_editor_error_lbl.value   = f'{_t("invalid_json")}: {e}'
             self._json_editor_error_lbl.visible = True
             self._page.update()
             return
 
         if not isinstance(parsed, dict):
-            self._json_editor_error_lbl.value   = (
-                _t('json_must_be_object') or 'Top level value must be a JSON object.'
-            )
+            self._json_editor_error_lbl.value   = _t('json_must_be_object')
             self._json_editor_error_lbl.visible = True
             self._page.update()
             return

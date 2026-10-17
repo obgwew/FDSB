@@ -1,0 +1,39 @@
+<dash>
+name: $replaceText
+desc: Cambia un texto por otro dentro de un mensaje.
+category: Utilidades de texto
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Dale el texto original, la parte que quieres eliminar y lo que debe ocupar su lugar, y vuelve la versión editada. Cada coincidencia se cambia salvo que añadas una cuarta parte con un número, que limita cuántas se modifican. Ponlo en una línea propia y el texto reescrito se publica directamente en el canal.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !clean en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $replaceText[message; old; new; (amount)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $replaceText[Hello World; World; FDScript]
+</block>
+
+<block type="callout" kind="note">
+text: Deja fuera la cuarta parte o pon -1 para coger todas las ocurrencias. Algo que no sea un número en ese sitio detiene el comando con un error en lugar de que el bot adivine cuántas tenías en mente.
+</block>
+</dash>
+
+<details>
+syntax: $replaceText[message; old; new; (amount)]
+param: message|text|Obligatorio|El texto sobre el que quieres actuar
+param: old|text|Obligatorio|La parte exacta a buscar
+param: new|text|Obligatorio|Lo que debe ocupar su lugar
+param: amount|number|Opcional|Cuántas coincidencias cambiar; -1 o vacío las coge todas
+</details>

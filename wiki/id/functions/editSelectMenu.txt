@@ -1,0 +1,46 @@
+<dash>
+name: $editSelectMenu
+desc: Mengubah berapa banyak opsi yang diminta sebuah menu dan petunjuk apa yang ditunjukkannya sebelum seseorang memilih.
+category: Komponen
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Arahkan perintah ini ke ID yang Anda berikan pada sebuah menu saat Anda menyusunnya, dan bot menulis ulang menu itu di tempatnya pada pesan tempat ia sudah berada. Anda bisa melonggarkan atau memperketat berapa banyak opsi yang harus dipilih seseorang, dan mengubah teks petunjuk abu-abu di atas menu yang tertutup. Opsi-opsinya sendiri dibiarkan persis seperti semula, sehingga satu baris mengubah menu satu pilihan menjadi menu dua pilihan.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !colors
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $editSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+text: $addSelectMenuOption[color_menu; Red; red; The color red]
+text: $addSelectMenuOption[color_menu; Blue; blue; The color blue]
+text: $editSelectMenu[color_menu; 1; 2; Pick one or two colors]
+</block>
+
+<block type="callout" kind="note">
+text: Kosongkan ID pesan, dan bot mencari menu pada pesan tempat interaksi berasal terlebih dahulu, lalu pada pesan terakhir yang ia kirim. Dalam kedua kasusnya, pesan itu harus merupakan pesan yang diposting bot sendiri.
+</block>
+
+<block type="callout" kind="warning">
+text: Min berjalan dari 0 sampai 25, Max dari 1 sampai 25, dan Min tidak boleh pernah berada di atas Max. Jika pesan tidak memuat menu dengan ID yang Anda sebutkan, bot menyatakannya alih-alih mengedit sesuatu yang lain.
+</block>
+</dash>
+
+<details>
+syntax: $editSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+param: Menu ID|text|Wajib|ID yang Anda berikan pada menu saat Anda menyusunnya
+param: Min|number|Wajib|Berapa banyak opsi yang harus dipilih pengguna, 0 sampai 25
+param: Max|number|Wajib|Berapa banyak opsi yang boleh dipilih pengguna, 1 sampai 25
+param: Placeholder|text|Opsional|Teks petunjuk baru yang ditampilkan di atas menu sebelum sebuah pilihan dibuat
+param: Message ID|snowflake|Opsional|Pesan bot mana yang memuat menunya. Kosongkan untuk memakai pesan yang jelas dimaksud.
+</details>

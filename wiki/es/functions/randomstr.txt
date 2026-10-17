@@ -1,0 +1,36 @@
+<dash>
+name: $randomstr
+desc: Elige al azar una de las opciones que enumeras y la muestra.
+category: Aleatorio
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $randomstr toma las opciones que enumeras y elige una de ellas al azar, y luego el bot la publica. Cada opción tiene las mismas probabilidades y cada ejecución es una tirada nueva, así que el mismo comando puede responder distinto cada vez. Basta con una opción, y no hay límite de cuántas le des.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !randomstr en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $randomstr[string1; string2; string3; ...]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $randomstr[Hello!; Hi there!; Hey!; What's up?]
+</block>
+
+<block type="callout" kind="note">
+text: En una línea propia la opción elegida se publica como un mensaje aparte; dentro de otro comando, en cambio, se inserta en medio de una frase. Una lista vacía se rechaza con un error.
+</block>
+</dash>
+
+<details>
+syntax: $randomstr[string1; string2; string3; ...]
+param: string|text|Obligatorio|Una o más opciones entre las que elegir. Se elige y muestra una de ellas.
+</details>

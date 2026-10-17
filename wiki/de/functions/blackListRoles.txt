@@ -1,0 +1,31 @@
+<dash>
+name: $blackListRoles
+desc: Hält den Befehl für jeden an, der eine der aufgeführten Rollen trägt.
+category: Zugriffskontrolle
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: $blackListRoles ist eine Prüfstelle, die Sie in einen Befehl einfügen können. Der Bot vergleicht die Rollen der auslösenden Person mit den von Ihnen aufgeführten. Bei einem Treffer wird Ihre Ablehnungsnachricht angezeigt — oder eine Standardnachricht, falls Sie keine angegeben haben — und der Rest des Befehls wird verworfen. Trifft niemand zu, wird nichts ausgegeben und das Skript läuft einfach weiter.
+</block>
+
+<block type="code" title="Syntax">
+text: $blackListRoles[role; ...; message]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $blackListRoles[Admin; Moderator; Sorry, this command is for another group of people!]
+</block>
+
+<block type="callout" kind="note">
+text: Eine Rolle kann als Erwähnung, als ID oder als Name angegeben werden, wobei der Name ohne Beachtung der Groß-/Kleinschreibung erkannt wird. Mehrere Rollen trennen Sie durch Semikolons. Alles bis zum letzten Argument gilt als Rolle, das letzte Argument ist daher für Ihre eigene Ablehnungsnachricht bestimmt.
+</block>
+
+<block type="callout" kind="warning">
+text: Wenn die Prüfung erfolgreich ist, stoppt der Befehl an dieser Stelle — keine Zeile darunter wird ausgeführt. Lassen Sie die eigene Nachricht weg, greift der Bot auf eine eigene Formulierung zurück.
+</block>
+</dash>
+
+<details>
+syntax: $blackListRoles[role; ...; message]
+param: role|text|Erforderlich|Die gesperrten Rollen als Erwähnungen, IDs oder Namen, durch Semikolons getrennt
+param: message|text|Optional|Eine Nachricht, die statt der Standard-Ablehnung angezeigt wird, wenn eine Rolle zutrifft
+</details>

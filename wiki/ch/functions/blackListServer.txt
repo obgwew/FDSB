@@ -1,0 +1,31 @@
+<dash>
+name: $blackListServer
+desc: 阻止该命令在名单上的任何服务器中运行。
+category: 访问控制
+
+<block type="text" title="命令如何工作？">
+text: $blackListServer 会检查命令是在哪个服务器中运行的，并与你列出的服务器进行比较。如果当前服务器匹配，机器人会显示你提供的拒绝消息（未提供时则显示默认消息），命令的其余部分将被丢弃。如果不在名单上，就不会输出任何内容，脚本继续执行。这是让命令避开特定服务器、同时在其他所有地方照常开放的干净做法。
+</block>
+
+<block type="code" title="语法">
+text: $blackListServer[server; ...; message]
+</block>
+
+<block type="code" title="可复制示例">
+text: $blackListServer[123456789012345678; Sorry, this server cannot use the command!]
+</block>
+
+<block type="callout" kind="note">
+text: 服务器可以写成 ID 或名称，按名称匹配时不区分大小写。多个服务器之间用分号分隔。最后一个参数之前的所有内容都视为服务器，所以最后一个参数用来放你自定义的拒绝消息。
+</block>
+
+<block type="callout" kind="warning">
+text: 检查命中时命令会立即中止——其下方的任何一行都不会执行。省略自定义消息时，机器人会退回使用自己的默认措辞。
+</block>
+</dash>
+
+<details>
+syntax: $blackListServer[server; ...; message]
+param: server|text|Required|被禁止的服务器，可写成 ID 或名称，用分号分隔
+param: message|text|Optional|服务器匹配时用来代替默认拒绝消息的显示内容
+</details>

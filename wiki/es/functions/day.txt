@@ -1,0 +1,35 @@
+<dash>
+name: $day
+desc: Da el número del día de hoy, siempre con dos dígitos, del 01 al 31.
+category: Tiempos y esperas
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $day lee el reloj y devuelve el día del mes, siempre con dos dígitos de ancho, así que el día 7 devuelve 07 y el 24 devuelve 24. Mételo en una línea de texto y los dígitos caen exactamente donde lo pongas. Déjalo en una línea propia y el bot publica el número en el canal por su cuenta.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !date en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $day
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $sendMessage[Day $day of this month]
+</block>
+
+<block type="callout" kind="note">
+text: El número siempre se rellena hasta dos dígitos, del 01 al 31, así que queda bien alineado en una fecha que armes tú mismo con $day, $month y $year.
+</block>
+
+<block type="callout" kind="important">
+text: $day, $month y $year leen todos el reloj local propio del bot. La zona horaria configurada con $time solo la siguen $hour, $minute y $second, así que tenlo en cuenta si tu servidor está en otra parte del mundo.
+</block>
+</dash>

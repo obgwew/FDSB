@@ -1,0 +1,35 @@
+<dash>
+name: $getTimestamp
+desc: Te da la hora actual como segundos contados desde el 1 de enero de 1970.
+category: Tiempos y esperas
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Cada vez que se ejecuta tu comando, este lee el reloj y devuelve el número de segundos desde el 1 de enero de 1970, el formato de hora que esperan la mayoría de los lenguajes de programación y las API web. Ponlo dentro de una línea de texto y el bot imprime esos dígitos en su lugar. Se mide de nuevo en cada ejecución, así que dos comandos con un minuto de diferencia dan dos números distintos.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !age en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $getTimestamp
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $sendMessage[Now in Unix time: $getTimestamp]
+</block>
+
+<block type="callout" kind="note">
+text: Escríbelo dentro de tu mensaje como <t:$getTimestamp> y Discord toma el control, mostrando a cada lector la fecha y la hora en su propia zona horaria en lugar de una fila de dígitos.
+</block>
+
+<block type="callout" kind="important">
+text: Solo funciona dentro de otro comando. Puesto en una línea por sí solo no hay dónde imprimir, así que el bot dice que es un comando de solo valor y no aparece nada en el chat.
+</block>
+</dash>

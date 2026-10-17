@@ -1,0 +1,41 @@
+<dash>
+name: $messageContains
+desc: Ejecuta tus líneas por sí solas siempre que un mensaje lleve una de tus palabras.
+category: Evento
+
+<block type="text" title="¿Cómo funciona el evento?">
+text: Enumera tus palabras desencadenantes en el campo Prefijo, separadas por puntos y coma, y la aplicación marca el comando como evento por ti. A partir de ahí, cualquier mensaje que contenga aunque sea una de esas palabras pone en marcha por sí solas las líneas de debajo. La coincidencia ignora las mayúsculas, así que Hi y hi cuentan igual, y da igual en qué parte del mensaje esté la palabra.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $messageContains[hello;hi;hey] en el campo Prefijo
+item: La aplicación lo marca como evento por ti
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: #PREFIX:$messageContains[word1;word2;word3]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: #PREFIX:$messageContains[hello;hi;hey]
+text:  sendMessage[Hey there! How can I help?]
+</block>
+
+<block type="callout" kind="note">
+text: Basta con una palabra de la lista para dispararlo. Si todas las palabras tienen que estar presentes en el mismo mensaje, elige $messageContainsAll en su lugar.
+</block>
+
+<block type="callout" kind="important">
+text: Las palabras se comparan como tramos de texto planos, así que hi también se activa con un mensaje que diga hiya. Mantén cada palabra desencadenante como una sola palabra indivisible si quieres que se mantenga estricta.
+</block>
+</dash>
+
+<details>
+syntax: $messageContains[word1;word2;...]
+param: words|text|Obligatorio|Tus palabras desencadenantes, separadas por puntos y coma. Con una coincidencia basta.
+</details>

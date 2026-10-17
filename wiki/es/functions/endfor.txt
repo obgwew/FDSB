@@ -1,0 +1,33 @@
+<dash>
+name: $endfor
+desc: Marca dónde termina un bucle $for para que el bot sepa hasta dónde repetir.
+category: Control de flujo
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $endfor cierra un bucle $for. Todo lo que escribiste entre ambos se ejecuta otra vez una vez por cada cuenta que pediste, y luego el bot sigue con las líneas de abajo. Así, un bucle de 5 publica el mismo mensaje cinco veces antes de que el resto del comando continúe.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !welcome en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $endfor
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $for[5]
+text:   $sendMessage[Iteration!]
+text: $endfor
+</block>
+
+<block type="callout" kind="warning">
+text: Cada $for necesita su $endfor. Si dejas fuera la línea de cierre, el bot da un error de script en cuanto pasa del final de tu bucle.
+</block>
+</dash>

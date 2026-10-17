@@ -1,0 +1,31 @@
+<dash>
+name: $authorID
+desc: Publica el largo ID numérico de Discord de quien escribió el comando.
+category: Info
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Siempre que se ejecuta tu comando, el bot busca la cuenta detrás del mensaje y envía el ID de esa cuenta como una simple ristra de dígitos. En una línea propia aterriza en el canal como un mensaje aparte. Escrito dentro de una línea de texto, se rellena ahí en su lugar, así que puedes montar toda una frase alrededor.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $authorID en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $authorID
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: Your ID is $authorID
+</block>
+
+<block type="callout" kind="note">
+text: Lo que obtienes se parece a 123456789012345678 — esa ristra de dígitos es el único identificador de esa cuenta, y se mantiene igual aunque la persona se cambie el nombre.
+</block>
+</dash>

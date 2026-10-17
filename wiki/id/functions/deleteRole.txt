@@ -1,0 +1,35 @@
+<dash>
+name: $deleteRole
+desc: Menghapus sebuah peran dari server secara permanen.
+category: Moderasi
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Sebutkan sebuah peran lewat ID-nya atau @mention, lalu bot mencarinya di server tempat perintah dipakai, kemudian menghapusnya. Semua orang yang memilikinya kehilangan peran itu pada saat yang sama dan tidak ada jalan untuk mengembalikannya. Peran yang tidak ada di server tersebut dilaporkan sebagai hilang, bukan diabaikan diam-diam.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $deleteRole
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $deleteRole[role ID or @mention]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $deleteRole[&123456789]
+</block>
+
+<block type="callout" kind="warning">
+text: Penghapusan tidak bisa dibatalkan. Bot memerlukan izin Manage Roles, dan peran tertinggi miliknya sendiri harus berada di atas peran yang Anda hapus, jika tidak Discord menolak permintaannya.
+</block>
+</dash>
+
+<details>
+syntax: $deleteRole[role ID or @mention]
+param: role ID or @mention|text|Wajib|Peran yang akan dihapus, sebagai angkanya atau sebuah @mention-nya
+</details>

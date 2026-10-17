@@ -1,0 +1,42 @@
+<dash>
+name: $emojiExists
+desc: Menjawab true atau false tergantung pada apakah bot bisa memakai sebuah emoji khusus.
+category: Info
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Berikan sebuah emoji khusus, dan bot menjawab dengan kata true atau false di kanal. Bot hanya mengenal emoji dari server yang sudah ia ikuti, sehingga ID dari server yang tidak ia ikuti kembali sebagai false. Mention lengkap seperti <:name:id> atau <a:name:id> diuraikan untuk Anda, sementara emoji Unicode sehari-hari tidak memiliki ID di sini dan ditolak dengan kesalahan.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $emojiExists
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $emojiExists[emoji id]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $if[$emojiExists[123456789012345678]]
+text:  $sendMessage[That emoji exists!]
+text: $endif
+</block>
+
+<block type="callout" kind="note">
+text: Berguna sebagai uji di dalam sebuah $if atau $onlyIf, di mana jawabannya menentukan apakah baris-baris di bawahnya dijalankan sama sekali.
+</block>
+
+<block type="callout" kind="warning">
+text: Bot harus berbagi sebuah server dengan emoji itu. ID yang sepenuhnya valid dari server yang tidak diikuti bot tetap dijawab false.
+</block>
+</dash>
+
+<details>
+syntax: $emojiExists[emoji id]
+param: emoji id|snowflake|Wajib|Emoji khusus yang dicari, sebagai angka atau mention seperti <:name:id> / <a:name:id>
+</details>

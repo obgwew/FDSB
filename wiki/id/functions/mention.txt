@@ -1,0 +1,31 @@
+<dash>
+name: $mention
+desc: Memberi Anda tag yang dapat diklik untuk anggota yang menjalankan perintah.
+category: Info
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $mention menyerahkan tag anggota yang pesannya memicu perintah Anda. Masukkan ke dalam baris teks Anda sendiri dan bot memposting nama yang menyala di kanal dan menandai orang itu. Tidak diperlukan apa pun lagi untuk membuatnya bekerja, yang menjadikannya cara tercepat untuk menyapa siapa pun yang sedang berdiri di depan Anda saat ini.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !greet
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $mention
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: Hello $mention!
+</block>
+
+<block type="callout" kind="note">
+text: Yang dikirim adalah tag Discord yang sebenarnya, yang tampak seperti ini di skrip Anda: <@123456789>. Di kanal ia muncul sebagai nama anggota, mengekliknya membuka profilnya, dan orang itu juga mendapatkan notifikasi.
+</block>
+</dash>

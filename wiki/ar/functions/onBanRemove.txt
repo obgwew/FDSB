@@ -1,0 +1,42 @@
+<dash>
+name: $onBanRemove
+desc: يشغّل أسطر سكربتك فور رفع الحظر عن شخص ما وإلغاء حظره.
+category: الحدث
+
+<block type="text" title="كيف يعمل الحدث؟">
+text: احفظ أمرًا واضبط حقل البادئة على $onBanRemove، فيضع التطبيق عليه علامة حدث نيابةً عنك. فور رفع الحظر — سواء من قبل مشرف أو عبر سجل التدقيق — تبدأ الأسطر التي تكتبها تحت هذه البادئة بالتشغيل دون أن يكتب أحد شيئًا.
+text: الشخص الذي تم إلغاء حظره هو الكاتب هنا، لذا تشير $mention و$authorID و$authorName إليه، بينما تصف $guildID و$guildName السيرفر الذي تم فيه رفع الحظر.
+text: للحظر لا يوجد قناة خاصة به، لذا تظل قناة الرسالة فارغة ما لم تحدد قناة. ضع معرّف القناة بين قوسين مباشرةً بعد البادئة، فيُرسل البوت ردوده إلى تلك القناة بدلًا من ذلك.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة على $onBanRemove
+item: يضع التطبيق عليه علامة حدث نيابةً عنك
+item: الصق الكود أدناه في المحرر
+item: اضغط على حفظ
+</block>
+
+<block type="code" title="الصيغة">
+text: #PREFIX:$onBanRemove[channelID]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: #PREFIX:$onBanRemove[123456789012345678]
+text:  sendMessage[$mention is no longer banned from $guildName]
+</block>
+
+<block type="callout" kind="note">
+text: احتفظ بـ $onBanRemove في السطر الأول. إذا نقلته إلى أسفل، يتوقف التطبيق عن اعتبار الأمر حدثًا، ويصبح أمرًا عاديًا ينتظر أن يكتبه شخص ما.
+</block>
+
+<block type="callout" kind="important">
+text: حدد معرّف قناة بعد البادئة، لأن رفع الحظر غير مرتبط بأي قناة والبوت لن يكون لديه مكان لينشر فيه الردود. في اللحظة التي يُرفع فيها الحظر، لا يعود الشخص عضوًا في السيرفر بعد، لذا اعتمد على $mention و$authorID و$authorName بدلًا من أي متغير يعتمد على أدواره.
+</block>
+</dash>
+
+<details>
+syntax: $onBanRemove
+</details>

@@ -1,0 +1,39 @@
+<dash>
+name: $setUserVar
+desc: Mengingat sebuah nilai untuk satu anggota di dalam satu server.
+category: Variabel
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $setUserVar menyimpan sebuah nilai terhadap nama yang Anda pilih dan anggota yang Anda tentukan, sehingga skor, jumlah teguran, atau catatan terakhir terlihat bisa berada di samping orang itu dan tidak di tempat lain. Dengan hanya nama dan nilai, ia menyimpan entri di bawah siapa pun yang menjalankan perintah, di server tempat ia mengetiknya. Tambahkan ID pengguna atau ID server sebagai bagian ketiga atau keempat dan nilainya ditulis di tempat yang sama sekali lain.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buat variabelnya terlebih dahulu di tab Variabel
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !points
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $setUserVar[name; value; (user_id); (guild_id)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $setUserVar[points; 10; 123456789012345678; 987654321012345678]
+</block>
+
+<block type="callout" kind="important">
+text: Nilainya memang tersimpan bahkan pada jalan pertama, tetapi jika namanya belum ada di tab Variabel perintah tetap berhenti dengan kesalahan. Buat variabelnya di sana dulu dan penyimpanannya berjalan lancar sejak saat itu.
+</block>
+</dash>
+
+<details>
+syntax: $setUserVar[name; value; (user_id); (guild_id)]
+param: name|text|Wajib|Nama tempat nilainya disimpan
+param: value|text|Wajib|Apa yang diingat
+param: userID|snowflake|Opsional|Anggota mana tempatnya berada. Biarkan kosong untuk memakai orang yang menjalankan perintah.
+param: guildID|snowflake|Opsional|Server mana tempatnya berada. Biarkan kosong untuk memakai yang saat ini.
+</details>

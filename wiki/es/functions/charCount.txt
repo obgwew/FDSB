@@ -1,0 +1,36 @@
+<dash>
+name: $charCount
+desc: Cuenta las letras y los dígitos de un texto, ignorando el resto.
+category: Matemática y números
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Dale un texto y recibes de vuelta cuántas letras y dígitos contiene, como un número simple. Los espacios, la puntuación y los símbolos se saltan por completo, así que Hello World! da diez en lugar de doce. Las letras de cualquier alfabeto cuentan igual que las inglesas. Escrito en línea, el número se rellena por ti en lugar de publicarse por su cuenta.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $charCount en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $charCount[text]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $charCount[Hello World!]
+</block>
+
+<block type="callout" kind="note">
+text: Si dejas el texto fuera, el bot publica un error en lugar de adivinar. Lo que ya hayas rellenado se lee primero, así que puedes contar un mensaje o un valor guardado.
+</block>
+</dash>
+
+<details>
+syntax: $charCount[text]
+param: text|text|Obligatorio|El texto que contar
+</details>

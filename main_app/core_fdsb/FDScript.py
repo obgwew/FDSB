@@ -15,6 +15,7 @@ import discord
 
 from . import FDCore as _FDCore_module
 
+print(f"[FDScript] loaded: {__file__} | syncMode single-message build 3")
 sys.modules.setdefault('FDScript', sys.modules[__name__])
 sys.modules.setdefault('FDCore', _FDCore_module)
 
@@ -73,7 +74,7 @@ from .FDCore import (
 
 from .engine_FDScript.control_flow_ops import ControlFlowMixin
 from .engine_FDScript.functions_ops import FunctionsMixin
-from .engine_FDScript.sync_mode_ops import SyncModeMixin
+from .engine_FDScript.sync_mode_ops import SyncModeMixin, sync_add_text, sync_merge_view
 
 # ─────────────────────────────────────────────
 # Command Registry
@@ -297,6 +298,11 @@ class Interpreter(ControlFlowMixin, FunctionsMixin, SyncModeMixin):
             
         except FDAbortScript:
             ctx.log_event("script execution aborted due to error.")
+            if ctx.sync_mode:
+                try:
+                    await self._flush_message(ctx)
+                except Exception as e:
+                    ctx.log_event(f"warning: could not send collected syncMode output: {e}")
             
         except Exception as e:
             ctx.log_event(f"Unhandled crash: {e}")
@@ -306,6 +312,10 @@ class Interpreter(ControlFlowMixin, FunctionsMixin, SyncModeMixin):
 
     # ── Flush final message (Text + Embed(s) + Buttons) ────────
     async def _flush_message(self, ctx: ExecutionContext):
+        ctx._sync_flushing = True
+        if ctx._sync_used:
+            await self._flush_sync_message(ctx)
+            return
         text_content = getattr(ctx, 'text_buffer', "")
         if ctx.remove_links:
             text_content = _strip_links(text_content)
@@ -345,8 +355,93 @@ class Interpreter(ControlFlowMixin, FunctionsMixin, SyncModeMixin):
             ctx.log_event(f"Failed to send buffered message: {e}")
             print(f"[FDScript] Buffered message send error: {e}")
 
+    # ── Flush everything collected by $syncMode as ONE message ─
+    @staticmethod
+    def _split_text(text: str, limit: int = 2000) -> list[str]:
+        parts = []
+        while len(text) > limit:
+            cut = text.rfind("\n", 0, limit)
+            if cut <= 0:
+                cut = text.rfind(" ", 0, limit)
+            if cut <= 0:
+                cut = limit
+            parts.append(text[:cut].rstrip())
+            text = text[cut:].lstrip("\n ")
+        if text:
+            parts.append(text)
+        return parts
+
+    async def _flush_sync_message(self, ctx: ExecutionContext):
+        text_content = ctx.text_buffer
+        if ctx.remove_links:
+            text_content = _strip_links(text_content)
+        text_content = text_content.strip()
+
+        embeds = [
+            builder.build()
+            for _, builder in sorted(ctx.embed_builders.items())
+            if builder.is_set()
+        ]
+        embeds += list(ctx._sync_embeds)
+
+        if ctx._sync_view is not None:
+            sync_merge_view(ctx, ctx.view)
+            ctx.view = ctx._sync_view
+        view = ctx.view if (ctx.view and ctx.view.children) else None
+        files = list(ctx._sync_files)
+
+        if not text_content and not embeds and view is None and not files:
+            return
+
+        ctx.stop_typing()
+        ch = await ctx.get_dest(force_default=True)
+
+        async def _send(**kw):
+            if getattr(ctx, "is_global_reply", False):
+                _, kw, ok = _apply_remove_links(ctx, (), kw, has_view=bool(kw.get("view")))
+                return await ctx.message.reply(**kw) if ok else None
+            return await ch.send(**kw)
+
+        chunks = self._split_text(text_content) or [""]
+        sent = None
+        try:
+            for part in chunks[:-1]:
+                sent = await _send(content=part) or sent
+
+            kwargs = {}
+            if chunks[-1]:
+                kwargs["content"] = chunks[-1]
+            if embeds:
+                kwargs["embeds"] = embeds[:10]
+            if view is not None:
+                kwargs["view"] = view
+            if files:
+                kwargs["files"] = files
+            sent = await _send(**kwargs) or sent
+
+            for k in range(10, len(embeds), 10):
+                sent = await _send(embeds=embeds[k:k + 10]) or sent
+
+            if sent is not None:
+                ctx.last_bot_message = sent
+            ctx.log_event("syncMode → single message sent")
+        except discord.HTTPException as e:
+            ctx.log_event(f"Failed to send syncMode message: {e}")
+            print(f"[FDScript] syncMode message send error: {e}")
+        finally:
+            ctx.view = None
+            ctx._sync_view = None
+            ctx.text_buffer = ""
+            ctx._sync_embeds = []
+            ctx._sync_files = []
+            ctx._sync_used = False
+
     # ── Flush a standalone $addButton chain (no text/embed) ────
     async def _flush_view_only(self, ctx: ExecutionContext):
+        if ctx.sync_mode and not ctx._sync_flushing:
+            sync_merge_view(ctx, ctx.view)
+            ctx.view = None
+            return
         if not (ctx.view and ctx.view.children):
             return
 
@@ -389,7 +484,7 @@ class Interpreter(ControlFlowMixin, FunctionsMixin, SyncModeMixin):
                 full_text = f"{label}\n{body}"
                 block     = f"```\n{full_text}\n```"
 
-                if len(block) <= _LOG_CHAR_LIMIT:
+                if pending.prefer_message and len(block) <= _LOG_CHAR_LIMIT:
                     await target_ch.send(block)
                 else:
                     raw_bytes = full_text.encode("utf-8")
@@ -401,8 +496,12 @@ class Interpreter(ControlFlowMixin, FunctionsMixin, SyncModeMixin):
                         c if c.isalnum() or c in ('-', '_') else '_'
                         for c in pending.name_code
                     ).strip('_') or "fdscript_log"
+                    note = (
+                        "📄 Log snapshot too large for a code block — sent as file:"
+                        if pending.prefer_message else "📄 FDScript log:"
+                    )
                     await target_ch.send(
-                        "📄 Log snapshot too large for a code block — sent as file:",
+                        note,
                         file=discord.File(fp=io.BytesIO(raw_bytes), filename=f"{safe_name}.txt")
                     )
 
@@ -531,6 +630,7 @@ class Interpreter(ControlFlowMixin, FunctionsMixin, SyncModeMixin):
     async def _append_text(self, ctx: ExecutionContext, tok) -> None:
         line_no = getattr(tok, 'line_no', None)
         ctx.set_line(line_no)
+        tok = await self._expand_inline_text(tok, None, ctx)
         resolved_text = ctx.resolve(tok)
         await self._drain_pending_inline(ctx)
         if not resolved_text.strip():
@@ -617,6 +717,7 @@ class Interpreter(ControlFlowMixin, FunctionsMixin, SyncModeMixin):
     async def _process_text_token(self, tokens: list, tok, next_idx: int, ctx: ExecutionContext) -> int:
         line_no = getattr(tok, 'line_no', None)
         ctx.set_line(line_no)
+        tok = await self._expand_inline_text(tok, tokens, ctx)
 
         capture = getattr(ctx, '_capture_out', None)
         if capture is not None:
@@ -633,7 +734,12 @@ class Interpreter(ControlFlowMixin, FunctionsMixin, SyncModeMixin):
             return next_idx
 
         next_idx, wait_cmd = await self._collect_trailing_buttons(tokens, next_idx, ctx)
-        await self._send_text_now(ctx, resolved_text)
+        if ctx.sync_mode and not ctx._sync_flushing:
+            sync_add_text(ctx, resolved_text, line_no)
+            sync_merge_view(ctx, ctx.view)
+            ctx.view = None
+        else:
+            await self._send_text_now(ctx, resolved_text)
 
         if wait_cmd is not None:
             await self._exec_command(wait_cmd, ctx, tokens)
@@ -665,7 +771,7 @@ class Interpreter(ControlFlowMixin, FunctionsMixin, SyncModeMixin):
                 continue
             if tok.name == "syncMode":
                 ctx.sync_mode = True
-                ctx.log_event("syncMode enabled")
+                ctx.log_event("syncMode enabled (single-message build 3)")
                 continue
             if tok.name == "endfunc":
                 continue
@@ -737,18 +843,23 @@ class Interpreter(ControlFlowMixin, FunctionsMixin, SyncModeMixin):
             return
         if cmd.name == "syncMode":
             ctx.sync_mode = True
-            ctx.log_event("syncMode enabled")
+            ctx.log_event("syncMode enabled (single-message build 3)")
             return
 
+        is_sync_timer = ctx.sync_mode and cmd.name in self._SYNC_TIMERS
+        if is_sync_timer:
+            ctx.log_event(f"syncMode → ${cmd.name}: sending the batch so far, then waiting")
+            await self._flush_sync_batch(ctx)
+
         module = _load_cmd(cmd.name)
-        ch = await ctx.get_dest()
+        ch = await ctx.get_dest(raw=is_sync_timer)
 
         if module is None:
-            await _send_error(ch, FDLogicError(f"Unknown command: `${cmd.name}`"))
+            await _send_error(await ctx.get_dest(raw=True), FDLogicError(f"Unknown command: `${cmd.name}`"))
             return
 
         if not hasattr(module, "execute"):
-            await _send_error(ch, FDLogicError(
+            await _send_error(await ctx.get_dest(raw=True), FDLogicError(
                 f"`${cmd.name}` has no `execute()` — it may be an inline-only command "
                 f"and can't be used as a standalone statement."
             ))
@@ -760,7 +871,7 @@ class Interpreter(ControlFlowMixin, FunctionsMixin, SyncModeMixin):
         except FDAbortScript:
             raise
         except Exception as e:
-            await _send_error(ch, FDLogicError(f"`${cmd.name}` raised an error: `{e}`"))
+            await _send_error(await ctx.get_dest(raw=True), FDLogicError(f"`${cmd.name}` raised an error: `{e}`"))
 
     # ── command Lookahead Wrapper ────────────
     _SEND_COMMANDS = ("sendMessage", "sendEmbedMessage", "reply", "replyIn", "editMessage")

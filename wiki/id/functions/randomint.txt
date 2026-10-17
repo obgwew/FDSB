@@ -1,0 +1,37 @@
+<dash>
+name: $randomint
+desc: Melempar angka bulat acak di antara dua batas yang Anda tentukan.
+category: Acak
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Pilih nilai terendah dan tertinggi dan bot memilih satu angka bulat dalam rentang itu, kedua ujung termasuk di dalamnya, lalu mengirimnya. Menukar keduanya secara tidak sengaja dan bot mengaturnya untuk Anda, sehingga 100 dan 1 berperilaku sama dengan 1 dan 100. Hasilnya adalah angka polos yang bisa Anda cetak sendiri atau langsung masukkan ke perintah lain.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !dice
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $randomint[min; max]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $randomint[1; 100]
+</block>
+
+<block type="callout" kind="note">
+text: Kedua batas harus ada. Biarkan satu lepas dan bot mengirim kesalahan yang meminta keduanya, dan apa pun yang bukan angka mendapatkan perlakuan yang sama.
+</block>
+</dash>
+
+<details>
+syntax: $randomint[min; max]
+param: min|number|Wajib|Angka terkecil yang bisa dihasilkan
+param: max|number|Wajib|Angka terbesar yang bisa dihasilkan
+</details>

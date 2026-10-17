@@ -1,0 +1,36 @@
+<dash>
+name: $cloneRole
+desc: Menempatkan peran baru sepenuhnya di server dengan pengaturan yang sama dengan peran lama.
+category: Moderasi
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Arahkan perintah ini ke sebuah peran, dan bot membaca izin peran itu, warnanya, apakah ia ditonjolkan di daftar anggota, dan apakah anggota diperbolehkan men-tagnya. Perintah kemudian membuat peran kedua yang membawa semua itu. Tambahkan sebuah nama sebagai bagian kedua, dan salinan itu diganti namanya; tanpa itu, peran baru mempertahankan nama aslinya.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !ping
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $cloneRole[role ID or @mention; (optional new name)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $cloneRole[&123456789; Cloned Role]
+</block>
+
+<block type="callout" kind="note">
+text: Bot memerlukan izin Manage Roles, dan peran yang Anda sebut harus milik server tempat Anda berada. Tidak ada yang diambil — peran asli tetap persis di tempatnya.
+</block>
+</dash>
+
+<details>
+syntax: $cloneRole[role ID or @mention; (optional new name)]
+param: role ID or @mention|text|Wajib|Peran yang ingin Anda salin
+param: optional new name|text|Opsional|Nama yang dipanggil untuk salinan. Biarkan kosong untuk memakai nama asli.
+</details>

@@ -1,0 +1,31 @@
+<dash>
+name: $randomUserID
+desc: Elige al azar un miembro humano del servidor y devuelve su ID.
+category: Aleatorio
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Ejecútalo y el bot elige al azar a un miembro de entre todos los del servidor y luego publica la ID de esa persona como simples dígitos. Las cuentas de bot nunca entran en el sorteo, así que un servidor lleno de bots no puede ser fuente. Ponlo dentro de una línea y el número se rellena donde lo hayas escrito.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $randomUserID en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $randomUserID
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: Random user ID: $randomUserID
+</block>
+
+<block type="callout" kind="note">
+text: Solo funciona dentro de un servidor, porque un chat privado no tiene lista de miembros de la que sacar. Si allí no se encuentra ningún miembro humano, el bot dice que no encontró a nadie para elegir.
+</block>
+</dash>

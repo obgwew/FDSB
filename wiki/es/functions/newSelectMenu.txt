@@ -1,0 +1,53 @@
+<dash>
+name: $newSelectMenu
+desc: Construye el menú desplegable que va debajo de uno de los mensajes de tu bot.
+category: Componentes
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Inicia un menú con un ID que inventes tú mismo, y luego indica cuántas opciones debe elegir un miembro y cuántas se le permite elegir. Ese ID es como todas las líneas posteriores se refieren a él. Las opciones mismas vienen después, añadidas con $addSelectMenuOption, y el desplegable terminado viaja junto con el mensaje que envías. Dale el ID de un mensaje de tu bot que ya hayas publicado y el menú aterriza en ese mensaje en su lugar.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !colors en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $newSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+text: $addSelectMenuOption[color_menu; Red; red; The color red]
+text: $addSelectMenuOption[color_menu; Blue; blue; The color blue]
+text: $sendMessage[Choose your favorite color!]
+</block>
+
+<block type="options" title="Detalles de comportamiento">
+option: Min|Cuántas opciones tiene que hacer alguien para que se acepte
+option: Max|Cuántas opciones puede hacer alguien a la vez
+option: Placeholder|Sugerencia gris que descansa en el menú cerrado
+option: Message ID|Un mensaje de tu bot ya publicado sobre el que colocar el menú
+</block>
+
+<block type="callout" kind="note">
+text: Un menú solo se vuelve visible cuando se ha añadido al menos una opción con $addSelectMenuOption. Después, $editSelectMenu cambia los límites o la sugerencia y $editSelectMenuOption cambia una sola opción.
+</block>
+
+<block type="callout" kind="warning">
+text: Min nunca puede estar por encima de Max. Un mensaje puede llevar como máximo 25 menús desplegables y botones en total, y se rechaza apuntar a un mensaje que tu bot no envió.
+</block>
+</dash>
+
+<details>
+syntax: $newSelectMenu[Menu ID; Min; Max; (Placeholder; Message ID)]
+param: Menu ID|text|Obligatorio|El nombre que usarás para este menú más adelante
+param: Min|number|Obligatorio|Cuántas opciones tienen que hacerse
+param: Max|number|Obligatorio|El máximo de opciones que pueden hacerse
+param: Placeholder|text|Opcional|Sugerencia gris que se ve antes de elegir nada
+param: Message ID|snowflake|Opcional|Uno de tus propios mensajes de bot al que adjuntar este menú
+</details>

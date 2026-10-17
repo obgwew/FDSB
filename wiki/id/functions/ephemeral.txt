@@ -1,0 +1,36 @@
+<dash>
+name: $ephemeral
+desc: Membalasan bot menjadi pribadi sehingga hanya orang yang menjalankan perintah yang bisa melihatnya.
+category: Pesan
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $ephemeral mengalihkan balasan bot ke mode pribadi. Tanpa argumen, atau dengan nilai apa pun selain false, balasan hanya ditampilkan kepada pengguna yang memicunya. Berikan false, no, 0, atau off untuk mematikan mode pribadi kembali untuk sisa skrip. Saat Anda meletakkannya di bagian atas perintah Anda, segala sesuatu yang dikirim bot kemudian tetap pribadi juga.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $ephemeral[(false)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $ephemeral
+text: $sendMessage[Only you can see this.]
+</block>
+
+<block type="callout" kind="note">
+text: Balasan pribadi hanya bekerja saat perintah dimulai dari sebuah slash command atau dari sebuah tombol serta select menu. Jika seseorang memicunya dengan mengetik pesan biasa, pengaturan itu diabaikan dan balasan tetap publik.
+</block>
+</dash>
+
+<details>
+syntax: $ephemeral[(false)]
+param: false|yes/no|Opsional|Kosongkan agar balasan menjadi pribadi. Berikan false, no, 0, atau off agar balasan menjadi publik lagi.
+</details>

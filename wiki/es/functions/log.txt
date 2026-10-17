@@ -1,0 +1,40 @@
+<dash>
+name: $log
+desc: Envía a un canal que elijas un informe de todo lo que el comando ha hecho hasta el momento.
+category: Utilidades
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Nombra un canal y el bot reúne un registro continuo de lo que tu comando ha estado haciendo, qué condiciones se cumplieron, qué valores leyó y qué envió, y luego lo publica allí una vez que termina la ejecución. Añade un nombre corto después del ID del canal y esa etiqueta se coloca en la parte superior del informe para que varios rastreos se mantengan separados. Es la forma más rápida de averiguar por qué un comando largo se detuvo donde lo hizo.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !trace en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $log[channelID; name_code]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $log[123456789; myCommand]
+</block>
+
+<block type="callout" kind="note">
+text: El informe llega como un solo bloque de código gris. Una ejecución con mucho contenido no cabe en un solo mensaje, así que todo lo que supere unos 2.000 caracteres se envía como archivo de texto adjunto.
+</block>
+
+<block type="callout" kind="warning">
+text: El canal tiene que ser uno que el bot pueda abrir de verdad. Cuando no puede, el fallo se informa de vuelta donde se escribió el comando en lugar de descartarse sin decir nada.
+</block>
+</dash>
+
+<details>
+syntax: $log[channelID; name_code]
+param: channelID|snowflake|Obligatorio|ID numérico del canal al que va el informe
+param: name_code|text|Opcional|Una etiqueta corta para poner en la parte superior del informe
+</details>

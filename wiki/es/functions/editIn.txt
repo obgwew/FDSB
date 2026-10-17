@@ -1,0 +1,38 @@
+<dash>
+name: $editIn
+desc: Espera un tiempo determinado y luego cambia el texto del último mensaje que envió el bot.
+category: Tiempos y esperas
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: El bot hace una pausa durante la duración que le des — segundos, minutos, horas o días — y luego reescribe su propio mensaje más reciente. Así es fácil publicar un marcador de posición como Loading... y reemplazarlo cuando el trabajo termina. El mensaje que cambia tiene que ser uno que el bot publicó durante la misma ejecución.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !welcome en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $editIn[time; newMessage]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $sendMessage[Loading...]
+text: $editIn[5s; Done!]
+</block>
+
+<block type="callout" kind="note">
+text: La espera se escribe como un número y una unidad: 5s, 10m, 2h, 1d. Cualquier otra forma se rechaza. Solo se reemplaza el texto — un embed o botones que ya estuvieran en el mensaje se quedan como están.
+</block>
+</dash>
+
+<details>
+syntax: $editIn[time; newMessage]
+param: time|text|Obligatorio|Cuánto esperar, como un número y una unidad: 5s, 10m, 2h, 1d
+param: newMessage|text|Obligatorio|El texto que debería estar ahí cuando termine la espera
+</details>

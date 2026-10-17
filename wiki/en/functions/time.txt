@@ -1,0 +1,41 @@
+<dash>
+name: $time
+desc: Sets the timezone the clock is read in for the rest of this command.
+category: Timing & Delays
+
+<block type="text" title="How does the command work?">
+text: $time takes a timezone name from the worldwide list, such as Asia/Amman or Europe/London, and keeps it for the command that is running. Once it is set, $hour, $minute and $second read the clock in that timezone instead of wherever the bot happens to be hosted. It prints nothing by itself — it is a setup line you place above the ones that actually read the time.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !clock
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: $time[timezone]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $time[Asia/Amman]
+text: $sendMessage[Right now it is $hour:$minute]
+</block>
+
+<block type="callout" kind="note">
+text: Write the timezone as a region and a city separated by a slash, such as Asia/Amman, Europe/London or America/New_York. The list is the same standard one the rest of the world uses, so any familiar name is accepted.
+</block>
+
+<block type="callout" kind="important">
+text: If the name is not recognised the bot answers with an error instead of changing the clock. The setting belongs to this run only, so place $time before the lines that read the hour, and remember that $day, $month and $year keep reading the bot's own local clock regardless of it.
+</block>
+</dash>
+
+<details>
+syntax: $time[timezone]
+param: timezone|text|Required|An IANA timezone name, such as Asia/Amman or Europe/London
+</details>

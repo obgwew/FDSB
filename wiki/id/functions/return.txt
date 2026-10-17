@@ -1,0 +1,37 @@
+<dash>
+name: $return
+desc: Mengambil nilai yang disimpan sebelumnya oleh perintah seperti $returnGuildUsersID dan menaruhnya di tempat Anda menggunakannya.
+category: Variabel
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Beberapa perintah mengumpulkan daftar hasil dan menyimpannya di bawah nama pendek, dan $return adalah cara Anda meminta nama itu kembali. Di barisnya sendiri, ia mencetak nilai tersimpan di kanal. Ditulis di dalam perintah lain, ia ditukar sebagai teks biasa sebelum perintah itu berjalan, jadi Anda bisa menyelipkannya di tengah kalimat. Minta nama yang belum disisihkan oleh apa pun dan bot melaporkan kesalahan alih-alih mengarang nilai.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !lookup
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $return[var]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $returnGuildUsersID[$guildID; cache; userIDs; ,]
+text: $sendMessage[User IDs: $return[userIDs]]
+</block>
+
+<block type="callout" kind="note">
+text: Perintah yang cocok harus berjalan lebih dulu — $returnGuildUsersID sebelum userIDs, $returnGuildChannelsID sebelum channelIDs, dan seterusnya. Namanya dicocokkan persis, jadi perhatikan huruf besarnya.
+</block>
+</dash>
+
+<details>
+syntax: $return[var]
+param: var|text|Wajib|Nama yang diambil kembali, seperti userIDs, channelIDs atau roleIDs
+</details>

@@ -1,0 +1,43 @@
+<dash>
+name: $sendEmbedMessage
+desc: Publica una tarjeta con color en un canal, con título, texto, color y pie.
+category: Mensajes
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $sendEmbedMessage construye una tarjeta con las partes que le das y la publica en el canal que nombres. Las partes siguen un orden fijo: canal, título, descripción, color y luego pie, y los miembros ven el título arriba, el cuerpo en medio y la línea pequeña del pie abajo. Después del pie puedes seguir con más partes: un autor, un icono de autor, un icono de pie, una miniatura, una imagen, un sí para añadir la hora y un último sí que añade la ID del mensaje nuevo.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !embed en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $sendEmbedMessage[channelID; title; description; color; footer]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $sendEmbedMessage[$channelID; Welcome!; Thanks for joining; #00FF00; Enjoy your stay]
+</block>
+
+<block type="callout" kind="note">
+text: La parte del color admite un valor hexadecimal como #FF5733 y pinta la franja del lado izquierdo de la tarjeta. Todo lo que dejes fuera simplemente no se pone en la tarjeta, y solo el canal es realmente necesario para conseguir una.
+</block>
+
+<block type="callout" kind="warning">
+text: El bot necesita Send Messages y Embed Links en ese canal, y tiene que poder ver el canal. Un canal al que no puede llegar da un error en lugar de una tarjeta publicada en otra parte.
+</block>
+</dash>
+
+<details>
+syntax: $sendEmbedMessage[channelID; title; description; color; footer]
+param: channelID|snowflake|Obligatorio|En qué canal se publica la tarjeta
+param: title|text|Opcional|El encabezado de la parte superior de la tarjeta
+param: description|text|Opcional|El texto del cuerpo de la tarjeta
+param: color|text|Opcional|El color de la franja, como un valor hexadecimal como #FF5733
+param: footer|text|Opcional|La línea pequeña de la parte inferior de la tarjeta
+</details>

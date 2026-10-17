@@ -1,0 +1,41 @@
+<dash>
+name: $messageContainsAll
+desc: Menjalankan perintah Anda hanya ketika sebuah pesan membawa setiap kata yang Anda daftarkan.
+category: Peristiwa
+
+<block type="text" title="Bagaimana cara kerja peristiwa?">
+text: Masukkan kata-kata Anda di kolom Awalan, dipisahkan dengan titik koma, dan aplikasi menandai perintah itu sebagai Peristiwa untuk Anda. Setiap kali pesan obrolan kebetulan mengandung semua kata itu, baris-baris di bawahnya dijalankan secara mandiri; huruf besar tidak berarti apa pun. Lewatkan bahkan satu kata saja dan tidak ada yang terpicu sama sekali.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $messageContainsAll[bot;help]
+item: Aplikasi menandainya sebagai Peristiwa untuk Anda
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: #PREFIX:$messageContainsAll[word1;word2;word3]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: #PREFIX:$messageContainsAll[bot;help]
+text:  sendMessage[Need help with the bot? Here's how...]
+</block>
+
+<block type="callout" kind="note">
+text: Setiap kata yang terdaftar harus muncul dalam pesan itu. Jika satu kata saja seharusnya sudah cukup, gunakan $messageContains sebagai gantinya.
+</block>
+
+<block type="callout" kind="important">
+text: Kata-kata dicocokkan sebagai rentang teks biasa, sehingga help juga memicu pada pesan yang mengatakan helpful. Urutan tidak berarti apa pun, tetapi pertahankan setiap kata sebagai satu string tanpa putus.
+</block>
+</dash>
+
+<details>
+syntax: $messageContainsAll[word1;word2;...]
+param: words|text|Wajib|Kata pemicu, dipisahkan dengan titik koma. Semuanya harus cocok.
+</details>

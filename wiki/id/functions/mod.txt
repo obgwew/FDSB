@@ -1,0 +1,37 @@
+<dash>
+name: $mod
+desc: Menyerahkan kembali sisa setelah membagi satu angka dengan angka lain.
+category: Matematika & Angka
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Berikan dua angka atau lebih dan bot membagi angka pertama dengan angka kedua, lalu melaporkan apa yang tersisa. Tambahkan angka ketiga dan ia diterapkan pada jawaban bergiliran, sehingga beberapa pembagian dapat ditautkan sekaligus. $mod[10; 3] kembali sebagai 1, yaitu sisa dari 10 dibagi 3.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $mod
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $mod[a; b; ...]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $sendMessage[$mod[10; 3]]
+</block>
+
+<block type="callout" kind="warning">
+text: Membagi dengan nol menghentikan perintah dengan kesalahan, dan apa pun yang bukan sebuah angka di dalam kurung ditolak dengan cara yang sama.
+</block>
+</dash>
+
+<details>
+syntax: $mod[a; b; ...]
+param: a|number|Wajib|Angka yang dibagi
+param: b|number|Wajib|Angka pembaginya, tidak boleh 0. Angka tambahan apa pun diterapkan satu demi satu
+</details>

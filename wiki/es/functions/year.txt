@@ -1,0 +1,35 @@
+<dash>
+name: $year
+desc: Da el año actual, con cuatro dígitos como 2026.
+category: Tiempos y esperas
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $year lee el reloj y devuelve el año actual completo, de cuatro dígitos, así que dice 2026 en lugar de un 26 abreviado. Mételo en una línea de texto y los dígitos caen donde los pongas, o déjalo en una línea propia y el bot publica la cifra en el canal. Solo cambia una vez al año, lo que lo convierte en un bloque de construcción estable para fechas.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !year en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $year
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $sendMessage[Welcome to $year!]
+</block>
+
+<block type="callout" kind="note">
+text: El año siempre vuelve con cuatro dígitos, así que siempre es seguro colocarlo al final de una fecha construida con $day y $month.
+</block>
+
+<block type="callout" kind="important">
+text: $day, $month y $year leen todos el propio reloj local del bot. La zona horaria establecida con $time solo la siguen $hour, $minute y $second.
+</block>
+</dash>

@@ -1,0 +1,38 @@
+<dash>
+name: $membersCount
+desc: Memberi Anda jumlah anggota dalam sebuah server.
+category: Info
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Pada dirinya sendiri $membersCount menghitung anggota manusia dari server tempat pesan dikirim dan bot memposting angka itu di kanal. Masukkan sebuah ID server dan sebuah yes di dalam kurung dan ia menghitung server berbeda sebagai gantinya, kali ini dengan akun bot ikut dihitung dalam totalnya. Biarkan yes-nya keluar dan hanya orang sungguhan yang dihitung, sehingga angka yang Anda lihat adalah keanggotaan yang akan dikutip seorang pemilik server.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !info
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $membersCount
+text: $membersCount[guildID; includeBots]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: We have $membersCount members!
+</block>
+
+<block type="callout" kind="note">
+text: Akun bot tetap di luar hitungan kecuali Anda memintanya dengan menulis yes setelah ID server. Versi polos hanya bekerja di dalam server, dan untuk menghitung server lain bot juga harus menjadi anggotanya.
+</block>
+</dash>
+
+<details>
+syntax: $membersCount[(guildID; includeBots)]
+param: guildID|snowflake|Opsional|Server mana yang dihitung. Biarkan kosong untuk menggunakan server tempat pesan dikirim.
+param: includeBots|yes/no|Opsional|Tulis yes untuk menghitung akun bot juga. Biarkan kosong dan hanya anggota manusia yang dihitung.
+</details>

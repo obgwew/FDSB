@@ -1,0 +1,43 @@
+<dash>
+name: $addBotReactions
+desc: Menempelkan emoji pada pesan yang baru saja dikirim perintah Anda.
+category: Komponen
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Bot mengambil emoji yang Anda daftarkan, menemukannya di mana pun emoji itu muncul dalam teks yang Anda berikan, lalu bereaksi terhadap pesan terakhir yang dikirimnya selama sesi berjalan ini. Emoji ditempelkan satu per satu, sesuai urutan Anda menulisnya, dengan jeda singkat di antara setiap emoji agar Discord tidak keberatan. Tidak terjadi apa-apa bila perintah Anda belum mengirim pesan sama sekali, jadi letakkan perintah ini di bawah baris yang berbicara.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !vote
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $addBotReactions[emoji1; emoji2; emoji3; ...]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $addBotReactions[✅; ❌; 🎉]
+</block>
+
+<block type="callout" kind="note">
+text: Bot memerlukan izin Add Reactions di kanal tersebut. Bila Discord menyuruhnya melambat, ia menunggu dan mencoba emoji itu untuk kedua kalinya sebelum melanjutkan sisanya.
+</block>
+
+<block type="callout" kind="warning">
+text: Dua puluh emoji adalah batas untuk satu baris. Melebihi itu, perintah berhenti dengan kesalahan alih-alih bereaksi pada apa pun.
+</block>
+
+<block type="callout" kind="important">
+text: Tidak ada pesan bot sebelumnya selama sesi berjalan, atau tidak ada emoji yang dapat dikenali di dalam teks yang Anda berikan, dan perintah langsung gagal tanpa menambahkan apa pun ke pesan.
+</block>
+</dash>
+
+<details>
+syntax: $addBotReactions[emoji1; emoji2; emoji3; ...]
+param: emoji|text|Wajib|Emoji mana yang dipakai untuk bereaksi. Setiap emoji dalam teks yang Anda berikan ditambahkan, sesuai urutan.
+</details>

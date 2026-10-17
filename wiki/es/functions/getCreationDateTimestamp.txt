@@ -1,0 +1,36 @@
+<dash>
+name: $getCreationDateTimestamp
+desc: Convierte cualquier ID de Discord en el momento en que se creó esa cosa.
+category: Tiempos y esperas
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Cada usuario, servidor, canal, rol y mensaje guarda su hora de creación oculta dentro de su ID. Dale a este comando uno de esos ID, o una mención como <@123>, y devuelve ese momento como una marca de tiempo Unix: segundos contados desde el 1 de enero de 1970. Pon el número dentro de los corchetes <t:...> de Discord y se convierte en una fecha que cada lector ve en su propia zona horaria.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $getCreationDateTimestamp en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $getCreationDateTimestamp[idOrMention]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $sendMessage[Your account was created on <t:$getCreationDateTimestamp[$authorID]>]
+</block>
+
+<block type="callout" kind="note">
+text: Sirve cualquier cosa que tenga un ID de Discord: usuarios, servidores, canales, roles, mensajes. Cualquier cosa que no sea un número o una mención se rechaza con un error en lugar de con una fecha equivocada.
+</block>
+</dash>
+
+<details>
+syntax: $getCreationDateTimestamp[idOrMention]
+param: idOrMention|text|Obligatorio|Un ID de Discord, o una mención de uno como <@id>, <#id> o <@&id>
+</details>

@@ -1,0 +1,37 @@
+<dash>
+name: $getServerInvite
+desc: Genera un enlace de invitación para un servidor.
+category: Utilidades
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Por sí solo crea una invitación para el servidor en el que se ejecutó el comando; dale un ID de servidor y lo hará para ese otro en su lugar. Cuando el servidor ya tiene una dirección personalizada, es eso lo que se devuelve, y si no, el bot crea una invitación permanente en el primer canal de texto donde le está permitido. En cualquier caso, el enlace terminado se publica en el canal listo para copiarse.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $getServerInvite en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $getServerInvite
+text: $getServerInvite[(guildID)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: Join our server: $getServerInvite
+</block>
+
+<block type="callout" kind="note">
+text: El bot tiene que ser miembro del servidor y poder crear invitaciones allí, de lo contrario te dice que no puede hacer una. Deja los corchetes vacíos y se usa el servidor en el que estás.
+</block>
+</dash>
+
+<details>
+syntax: $getServerInvite[(guildID)]
+param: guildID|snowflake|Opcional|De qué servidor obtener una invitación. Si lo omites, se usa el actual.
+</details>

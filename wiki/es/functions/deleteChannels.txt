@@ -1,0 +1,38 @@
+<dash>
+name: $deleteChannels
+desc: Elimina uno o más canales del servidor.
+category: Gestión de canales
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $deleteChannels toma IDs de canales o menciones de canal y los elimina del servidor, uno tras otro, en el orden en que los enumeraste.
+text: Cada valor tiene que ser una serie simple de dígitos o una mención de canal como <#123456789012345678>, y cualquier otra cosa detiene la ejecución con un error que nombra el valor defectuoso.
+text: Si el bot no tiene permiso para eliminar alguno de ellos, se detiene ahí y lo dice en el canal, así que comprueba el resultado antes de planear un segundo lote.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !clean en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $deleteChannels[channel ID/mention; ...]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $deleteChannels[<#123456789012345678>]
+</block>
+
+<block type="callout" kind="warning">
+text: Eliminar un canal no se puede deshacer desde el chat, y los mensajes de dentro se van con él.
+text: El bot necesita Manage Channels para cada canal que enumeres, y un fallo a mitad de camino deja a los anteriores ya eliminados.
+</block>
+</dash>
+
+<details>
+syntax: $deleteChannels[channel ID/mention; ...]
+param: channels|text|Obligatorio|Uno o más IDs de canal o menciones de canal, separados por punto y coma.
+</details>

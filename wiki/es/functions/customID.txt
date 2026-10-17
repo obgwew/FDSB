@@ -1,0 +1,37 @@
+<dash>
+name: $customID
+desc: Te dice qué botón o entrada de menú pulsó el miembro.
+category: Info
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $customID lee de vuelta la etiqueta que le diste a un botón o a una entrada de menú cuando lo construiste, así que un mismo script puede reaccionar de forma distinta según lo que se pulsara.
+text: El valor se rellena solo cuando el script lo inició alguien pulsando un componente, y vuelve vacío en cualquier otro sitio.
+text: Eso lo convierte en lo natural con lo que comparar dentro de un $if cuando ofreces más de una opción.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !buttons en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $customID
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $if[$customID == btn_confirm]
+text:   You confirmed!
+text: $elif[$customID == btn_cancel]
+text:   You cancelled!
+text: $endif
+</block>
+
+<block type="callout" kind="note">
+text: Solo un toque puede rellenar esto. Cuando el comando viene del chat normal, el valor está vacío, así que una comprobación contra él nunca coincidirá.
+</block>
+</dash>

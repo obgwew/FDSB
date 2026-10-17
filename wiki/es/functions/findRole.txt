@@ -1,0 +1,38 @@
+<dash>
+name: $findRole
+desc: Convierte el nombre, el ID o la mención de un rol en el ID de ese rol.
+category: Utilidad
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Los roles se conocen por nombres que la gente cambia y escribe de mil maneras, así que este te busca uno en el servidor actual. Escribe el nombre tal como aparece o con cualquier combinación de mayúsculas, o pega una mención o un ID de rol, y recibes de vuelta el ID del rol correspondiente. Escrito por sí solo se publica en el canal; metido dentro de otra línea, se rellena ahí en su lugar.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $findRole en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $findRole[name]
+text: $findRole[roleID]
+text: $findRole[@role]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $findRole[Moderators]
+</block>
+
+<block type="callout" kind="note">
+text: Solo funciona dentro de un servidor, ya que los roles pertenecen a uno. Si pides un nombre que no existe, el bot publica un error diciéndolo, lo que te evita pasar un ID equivocado a lo que venga después.
+</block>
+</dash>
+
+<details>
+syntax: $findRole[query]
+param: query|text|Obligatorio|Una mención de rol, un ID de rol o el nombre del rol que buscar
+</details>

@@ -72,17 +72,12 @@ class LoadingScreen:
 
     async def run(self, work_coro, done_message: str = '',
                    extra_hold_min: float = 1.0, extra_hold_max: float = 3.0):
-        """
-        يستبدل محتوى الـ container بالكامل.
-        جيد عندما يكون الـ container يغطي الشاشة أصلاً.
-        """
         if self._container is None:
             raise ValueError('LoadingScreen requires a container for run()')
 
         previous_content = self._container.content
         previous_bg = getattr(self._container, 'bgcolor', None)
 
-        # نجعل الـ container نفسه يغطي الشاشة بالكامل
         self._container.content = self._view
         self._container.bgcolor = _c('bg')
         self._container.expand = True
@@ -104,7 +99,6 @@ class LoadingScreen:
             if extra > 0:
                 await asyncio.sleep(extra)
 
-        # استعادة الحالة السابقة
         self._container.content = previous_content
         self._container.bgcolor = previous_bg
         self._page.update()
@@ -115,17 +109,11 @@ class LoadingScreen:
 
     async def run_overlay(self, work_coro, done_message: str = '',
                            extra_hold_min: float = 1.0, extra_hold_max: float = 3.0):
-        """
-        أفضل طريقة لتغطية الشاشة بالكامل (خاصة على الـ APK).
-        تستخدم page.overlay + Container يتمدد على كل الشاشة.
-        """
-        # نبني overlay يغطي الشاشة 100%
         overlay = ft.Container(
             content=self._view,
             alignment=ft.Alignment(0, 0),
             expand=True,
             bgcolor=_c('bg'),
-            # هذه الخصائص تساعد في تغطية الشاشة على الموبايل
             width=self._page.width if self._page.width else None,
             height=self._page.height if self._page.height else None,
             left=0,

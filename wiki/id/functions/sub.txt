@@ -1,0 +1,37 @@
+<dash>
+name: $sub
+desc: Mengurangkan semua angka setelah yang pertama secara berturut-turut dari angka pertama.
+category: Matematika & Angka
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $sub membutuhkan setidaknya dua angka. Ia mulai dari angka pertama, lalu mengurangkan setiap angka berikutnya darinya. Misalnya, $sub[10; 3; 2] akan menghasilkan 5. Hasilnya berupa nilai, bukan pesan, jadi bisa digunakan sendiri atau langsung disisipkan ke dalam kalimat.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !sub
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $sub[a; b; ...]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $sendMessage[Result is $sub[10; 3]]
+</block>
+
+<block type="callout" kind="note">
+text: Diperlukan minimal dua angka. Jika ada huruf di dalam daftar, seluruh perhitungan akan menghasilkan kesalahan. Bagian yang kosong akan dianggap sebagai 0, sehingga bisa mengubah hasil secara tidak langsung.
+</block>
+</dash>
+
+<details>
+syntax: $sub[a; b; ...]
+param: a|number|Wajib|Angka awal yang akan dikurangi
+param: b|number|Wajib|Angka pertama yang dikurangkan; semua angka berikutnya juga akan dikurangkan
+</details>

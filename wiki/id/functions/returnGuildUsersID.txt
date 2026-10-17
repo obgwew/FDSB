@@ -1,0 +1,45 @@
+<dash>
+name: $returnGuildUsersID
+desc: Mengumpulkan ID setiap anggota manusia di sebuah server sehingga Anda bisa menggunakan kembali daftarnya.
+category: Perintah Pengembalian
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $returnGuildUsersID menelusuri anggota server yang Anda sebut dan mengumpulkan ID setiap orang, dengan mengabaikan akun bot. ID-ID itu digabung dengan pemisah yang Anda pilih dan disimpan di bawah nama yang Anda tentukan, dan $return membawa seluruh daftar keluar di mana pun Anda membutuhkannya. Tidak ada yang dicetak di kanal selama ia mengumpulkan.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !userlist
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $returnGuildUsersID[guildID; cache/chunk; var; separator]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $returnGuildUsersID[$guildID; cache; userIDs; ,]
+text: $sendMessage[Users: $return[userIDs]]
+</block>
+
+<block type="options" title="Mode pengambilan">
+option: cache|Memakai daftar anggota yang sudah dimiliki bot, cepat tetapi kadang tidak lengkap di server besar
+option: chunk|Meminta seluruh daftar anggota ke Discord terlebih dahulu, lebih lambat tetapi selalu lengkap
+</block>
+
+<block type="callout" kind="note">
+text: Akun bot tidak pernah dikumpulkan, dan bot harus menjadi anggota server yang Anda sebut. Server yang ternyata tidak berisi siapa pun dilaporkan sebagai kesalahan alih-alih sebagai daftar kosong.
+</block>
+</dash>
+
+<details>
+syntax: $returnGuildUsersID[guildID; cache/chunk; var; separator]
+param: guildID|snowflake|Wajib|Server mana yang ditelusuri
+param: cache/chunk|text|Wajib|cache untuk daftar anggota yang sudah dimiliki bot, chunk untuk daftar segar yang lengkap
+param: var|text|Wajib|Nama tempat daftarnya disimpan, dibaca kembali nanti dengan $return[]
+param: separator|text|Wajib|Apa yang berada di antara ID, seperti koma atau titik koma. Anda juga bisa mengetik nama: dot, com, apo, sem, colon
+</details>

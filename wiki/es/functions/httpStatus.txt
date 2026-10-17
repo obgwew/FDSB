@@ -1,0 +1,46 @@
+<dash>
+name: $httpStatus
+desc: Te dice el número de estado con el que volvió tu última solicitud web.
+category: HTTP
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $httpStatus devuelve el número con el que volvió tu última solicitud web, el mismo 200 o 404 que verías en la barra de direcciones de un navegador. Si todavía no se ha pedido nada, informa de 0. Como se resuelve a un valor, puedes colocarlo en un bloque if para decidir qué pasa después.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !httpStatus en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $httpStatus
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $httpGet[https://api.example.com/data]
+text: $if[$httpStatus == 200] {
+text:   $reply[Request succeeded]
+text: }
+</block>
+
+<block type="callout" kind="note">
+text: Una solicitud que nunca llegó al sitio se informa como 500, y una que el bot se negó a hacer es 400. Léelo después de la línea de la solicitud, no antes.
+</block>
+
+<block type="callout" kind="warning">
+text: En la versión que estás ejecutando, pedirlo detiene todo el comando con un error interno antes de que nada llegue al canal. Déjalo fuera hasta que eso se resuelva.
+</block>
+
+<block type="callout" kind="note">
+text: El ejemplo cierra su bloque if con llaves. El editor espera $endif en su propia línea, así que toma la forma del bloque if de su propia página.
+</block>
+</dash>
+
+<details>
+syntax: $httpStatus
+</details>

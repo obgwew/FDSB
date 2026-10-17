@@ -1,0 +1,53 @@
+<dash>
+name: $returnGuildChannelsID
+desc: Reúne las IDs de canal de un servidor bajo un nombre que puedes leer más tarde.
+category: Comandos de retorno
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Pide un tipo de canal en un servidor y el bot recoge la ID de cada canal de ese tipo, las une con el separador que elegiste y archiva la cadena entera bajo un nombre de tu elección. Más tarde, en el mismo comando, lees esa lista con $return[name]. No se publica nada en el canal hasta que lo envíes tú mismo.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $returnGuildChannelsID en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $returnGuildChannelsID[GuildID; ChannelType; var; separator]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $returnGuildChannelsID[$guildID; text; channelIDs; ,]
+text: $sendMessage[Text channels: $return[channelIDs]]
+</block>
+
+<block type="options" title="Tipos de canal">
+option: all|Todos los canales del servidor
+option: text|Solo canales de texto
+option: voice|Solo canales de voz
+option: category|Solo las filas de categoría
+option: forum|Solo canales de foro
+option: stage|Solo canales de escenario
+</block>
+
+<block type="callout" kind="note">
+text: Recupera la lista con $return[name] una vez guardada. El separador decide cómo se colocan las IDs entre sí — una coma, un punto y coma, un espacio, o uno con nombre como com o sem.
+</block>
+
+<block type="callout" kind="important">
+text: El bot solo puede mirar dentro de un servidor al que se haya unido. Si le das un servidor en el que no está, o un tipo que no reconoce, informa del problema en lugar de guardar nada.
+</block>
+</dash>
+
+<details>
+syntax: $returnGuildChannelsID[GuildID; ChannelType; var; separator]
+param: GuildID|snowflake|Obligatorio|De qué servidor leer los canales
+param: ChannelType|text|Obligatorio|Qué recoger: all, text, voice, category, forum o stage
+param: var|text|Obligatorio|El nombre con el que luego leerás la lista con $return
+param: separator|text|Obligatorio|Qué va entre las IDs, como , o ;. Los con nombre también valen: dot, com, apo, sem, colon
+</details>

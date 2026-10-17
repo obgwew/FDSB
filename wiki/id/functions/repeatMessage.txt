@@ -1,0 +1,41 @@
+<dash>
+name: $repeatMessage
+desc: Mengulang sepotong teks sebanyak jumlah tetap dan mengirim hasilnya dalam satu pesan.
+category: Utilitas Teks
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $repeatMessage menerima bilangan bulat dan sepotong teks, lalu mengirim teks itu sebanyak itu kali berturut-turut. Berdiri sendiri, ia mencetak hasil yang diulang, dan di dalam perintah lain teks yang diulang disisipkan di tempatnya, yang praktis untuk menyusun pola dan pemisah. Tulis \s di tempat Anda ingin ada spasi di antara pengulangan.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $repeatMessage[amount; message]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $repeatMessage[5; ★]
+</block>
+
+<block type="options" title="Aturan">
+option: amount|Bilangan bulat 1 atau lebih. Tidak ada yang dikirim untuk 0.
+option: message|Teks yang diulang. Tulis \s untuk spasi.
+</block>
+
+<block type="callout" kind="note">
+text: Discord membatasi satu pesan maksimal 2000 karakter, jadi pengulangan diperiksa sebelum apa pun dikirim. Jika amount dikalikan panjang teks melewati batas itu, perintah berhenti dan meminta Anda memakai lebih sedikit pengulangan atau teks yang lebih pendek.
+</block>
+</dash>
+
+<details>
+syntax: $repeatMessage[amount; message]
+param: amount|number|Wajib|Berapa kali teks diulang. Harus bilangan bulat 1 atau lebih.
+param: message|text|Wajib|Teks yang diulang. Tulis \s untuk spasi.
+</details>

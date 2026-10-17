@@ -1,0 +1,31 @@
+<dash>
+name: $authorName
+desc: Memberikan nama akun siapa pun yang mengetik perintah.
+category: Info
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Bot membaca nama dari akun yang mengirim pesan itu dan menyerahkannya sebagai teks biasa. Bila sendirian di sebuah baris, nama itu diposting di kanal; bila di dalam kalimat, ia diisi di tempat Anda menulisnya. Karena membaca nama secara langsung, seorang anggota yang mengganti nama akan langsung menampilkan nama barunya.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $authorName
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $authorName
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: Hello, $authorName!
+</block>
+
+<block type="callout" kind="note">
+text: Ini adalah nama akun itu sendiri, bukan sapaan yang dipilih orang untuk server ini. Untuk nama per-server, minta $displayName sebagai gantinya.
+</block>
+</dash>

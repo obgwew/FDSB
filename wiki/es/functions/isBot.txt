@@ -1,0 +1,36 @@
+<dash>
+name: $isBot
+desc: Responde true o false según si un miembro es una cuenta de bot.
+category: Info
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Dale un miembro y el bot responde con true cuando esa cuenta pertenece a una máquina, o false cuando hay una persona detrás. Se aceptan tanto una mención como un ID pelado, así que comprobar a quien escribió el mensaje actual cuesta una sola palabra. Solo se pueden consultar miembros de este servidor; cualquier otro se informa como false.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !checkbot en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $isBot[userID]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $isBot[$authorID]
+</block>
+
+<block type="callout" kind="note">
+text: Comprobar al miembro que acaba de enviar el mensaje es el uso cotidiano, y la forma más rápida de separar a las personas de las cuentas automatizadas.
+</block>
+</dash>
+
+<details>
+syntax: $isBot[userID]
+param: userID|text|Obligatorio|El miembro a comprobar, como una @mención o su ID
+</details>

@@ -1,0 +1,31 @@
+<dash>
+name: $blackListUsers
+desc: Empêche la commande pour toute personne figurant sur la liste des utilisateurs.
+category: Contrôle d'accès
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: $blackListUsers regarde la personne qui a déclenché la commande et la compare aux utilisateurs que vous avez listés. Si elle correspond, le bot affiche votre message de refus, ou un message par défaut si vous l'avez omis, et le reste de la commande est abandonné. Si elle n'est pas dans la liste, rien n'est affiché et le script continue simplement. C'est la façon directe de tenir certaines personnes à l'écart d'une commande sans la restreindre pour tout le monde.
+</block>
+
+<block type="code" title="Syntaxe">
+text: $blackListUsers[user; ...; message]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $blackListUsers[@user; Sorry, you are not allowed to use this command!]
+</block>
+
+<block type="callout" kind="note">
+text: Un utilisateur peut s'écrire sous forme de mention, de son ID ou de son nom, et les noms sont comparés sans tenir compte des majuscules. Son pseudo d'affichage et son nom global sont aussi vérifiés. Listez-en plusieurs en les séparant par des points-virgules. Tout ce qui précède le dernier argument est traité comme un utilisateur, donc c'est dans le dernier argument que va votre refus personnalisé.
+</block>
+
+<block type="callout" kind="warning">
+text: Quand la vérification réussit, la commande s'arrête là — aucune ligne en dessous ne s'exécute. Omettez le message personnalisé et le bot se rabat sur sa propre formulation.
+</block>
+</dash>
+
+<details>
+syntax: $blackListUsers[user; ...; message]
+param: user|text|Requis|Les utilisateurs bloqués, sous forme de mentions, d'ID ou de noms, séparés par des points-virgules
+param: message|text|Optionnel|Un message à afficher à la place du refus par défaut lorsqu'un utilisateur correspond
+</details>

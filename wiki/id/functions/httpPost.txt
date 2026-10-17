@@ -1,0 +1,42 @@
+<dash>
+name: $httpPost
+desc: Mengirim data ke alamat web dan menyimpan apa pun yang kembali.
+category: HTTP
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Arahkan ini ke sebuah alamat dan bot membuat permintaan POST ke sana, mengirim body apa pun yang Anda berikan bersama header apa pun yang Anda tambahkan sebelumnya. Ketika jawaban tiba, ia disimpan untuk Anda baca kembali, bersama kode status yang dikembalikan situs, jadi baris-baris di bawahnya bisa menarik sebuah kolom dari balasan dan meletakkannya ke pesan. Teks body yang kebetulan merupakan JSON valid dikirim sebagai JSON, dan apa pun yang lain dikirim sebagai data biasa.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !notify
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $httpPost[URL; (Body)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $httpAddHeader[Content-Type; application/json]
+text: $httpPost[https://api.example.com/users; {"name": "FDScript"}]
+text: $httpResult[id]
+</block>
+
+<block type="callout" kind="note">
+text: Header hanya milik satu permintaan. Apa pun yang Anda tambahkan dengan $httpAddHeader ikut terkirim dengan panggilan ini lalu dibersihkan, jadi permintaan berikutnya dimulai bersih dan tidak bisa mewarisi Content-Type yang tidak Anda maksud untuk dikirim.
+</block>
+
+<block type="callout" kind="warning">
+text: Selalu ada sesuatu yang jatuh ke hasil. Jika situs gagal atau koneksi terputus, status kembali sebagai 500 dan hasil memuat alasan alih-alih perintah berhenti mati, dan URL yang bot tolak untuk dipanggil kembali sebagai 400.
+</block>
+</dash>
+
+<details>
+syntax: $httpPost[URL; (Body)]
+param: URL|text|Wajib|Alamat yang dikirim permintaan
+param: Body|text|Opsional|Apa yang dikirim bersamanya, berupa JSON atau teks biasa
+</details>

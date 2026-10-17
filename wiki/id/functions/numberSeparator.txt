@@ -1,0 +1,46 @@
+<dash>
+name: $numberSeparator
+desc: Mengelompokkan angka bulat panjang menjadi blok tiga digit yang mudah dibaca.
+category: Matematika & Angka
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Masukkan sebuah angka dan bot memecah digitnya menjadi kelompok tiga dari kanan, sehingga 1234567 terbaca sebagai 1,234,567. Koma dipakai sebagai pemisah kecuali Anda memberikan bagian kedua yang berisi pemisah Anda sendiri, seperti titik atau spasi. Tanda minus pada angka negatif tetap berdiri di depan kelompok pertama.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !stats
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $numberSeparator[number]
+text: $numberSeparator[number; separator]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $numberSeparator[1234567]
+</block>
+
+<block type="code" title="Contoh siap salin (pemisah khusus)">
+text: $numberSeparator[1234567; .]
+</block>
+
+<block type="callout" kind="note">
+text: Angka tiga digit seperti 500 dikembalikan persis seperti yang diketik, karena hanya ada satu kelompok tempat memasang pemisah. Kosongkan bagian kedua dan koma dipakai lagi.
+</block>
+
+<block type="callout" kind="warning">
+text: Tanda desimal atau huruf apa pun membuat bot mengirim kesalahan alih-alih memformat hanya digit yang dikenalinya.
+</block>
+</dash>
+
+<details>
+syntax: $numberSeparator[number; (separator)]
+param: number|number|Wajib|Angka bulat yang dikelompokkan; tanda - di depan tetap dipertahankan
+param: separator|text|Opsional|Apa yang ditempatkan di antara kelompok; koma bila dibiarkan kosong
+</details>

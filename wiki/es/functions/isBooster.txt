@@ -1,0 +1,36 @@
+<dash>
+name: $isBooster
+desc: Responde true o false según si un miembro está potenciando el servidor ahora mismo.
+category: Info
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Apúntalo a un miembro y averigua si esa persona está potenciando actualmente el servidor, y luego imprime true o false. La potencia tiene que estar activa en este preciso momento, así que la respuesta vuelve a false en cuanto caduca. Alguien que nunca se ha unido, o que no es miembro aquí, también vuelve siempre false.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !checkboost en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $isBooster[userID]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $isBooster[$authorID]
+</block>
+
+<block type="callout" kind="note">
+text: La potencia tiene que ser en este servidor. Alguien que potencia otro servidor suyo, o cuya potencia aquí ya ha caducado, cuenta como false.
+</block>
+</dash>
+
+<details>
+syntax: $isBooster[userID]
+param: userID|text|Obligatorio|El miembro a comprobar, como una @mención o su ID
+</details>

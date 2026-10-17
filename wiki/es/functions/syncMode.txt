@@ -1,0 +1,41 @@
+<dash>
+name: $syncMode
+desc: Marca las líneas que tiene debajo como un solo grupo que debería enviarse junto.
+category: Control de flujo
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $syncMode marca todo lo que tiene debajo como un solo grupo, así que las líneas de dentro están pensadas para salir juntas en lugar de una tras otra. Los bloques de control, las llamadas a funciones, las comprobaciones y los cambios de canal marcan los bordes del grupo. En la versión que estás ejecutando, el ejecutor de grupos aún no está conectado, así que las líneas siguen llegando una a una y nada en el canal se ve distinto.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !syncMode en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $syncMode
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $syncMode
+text: $sendMessage[First step]
+text: $sendMessage[Second step]
+</block>
+
+<block type="callout" kind="warning">
+text: Nada de lo que tiene debajo se ejecuta al mismo tiempo todavía. No cuentes con que las líneas lleguen juntas, ni con que todo el grupo se detenga junto cuando una línea falle.
+</block>
+
+<block type="callout" kind="note">
+text: Todo comando nuevo ya se abre con $syncMode en la primera línea, así que está ahí desde el momento en que tocas + y puedes dejarlo donde está.
+</block>
+</dash>
+
+<details>
+syntax: $syncMode
+</details>

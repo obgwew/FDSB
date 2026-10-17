@@ -1,0 +1,38 @@
+<dash>
+name: $resetUserVar
+desc: Tira el valor personal de un miembro para una variable para que vuelva al valor por defecto.
+category: Variables
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Cada miembro puede llevar su propia copia de una variable, y esto descarta esa copia privada para siempre. La variable en sí se queda exactamente igual en la pestaña de Variables, junto con su valor por defecto, así que solo esa persona vuelve al punto de partida compartido mientras los demás conservan el suyo. Nombra a un miembro tú mismo y limpias la puntuación de otra persona; añade también la ID de un servidor y la limpias solo en ese servidor.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Crea la variable primero en la pestaña de Variables
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !resetpoints en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $resetUserVar[name; (user_id); (guild_id)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $resetUserVar[points; 123456789012345678]
+</block>
+
+<block type="callout" kind="note">
+text: Si no hay nada tras el nombre, el bot limpia el valor de quien ejecutó el comando, en el servidor donde lo escribió. Reiniciar a alguien que nunca tuvo un valor personal es inofensivo y no cambia nada en absoluto.
+</block>
+</dash>
+
+<details>
+syntax: $resetUserVar[name; (user_id); (guild_id)]
+param: name|text|Obligatorio|La variable cuya copia personal debe descartarse
+param: userID|text|Opcional|Para qué miembro limpiarla. Déjalo fuera para usar a la persona que ejecutó el comando.
+param: guildID|text|Opcional|En qué servidor limpiarla. Déjalo fuera para usar el actual.
+</details>

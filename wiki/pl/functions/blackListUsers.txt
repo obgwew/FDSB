@@ -1,0 +1,31 @@
+<dash>
+name: $blackListUsers
+desc: Zatrzymuje komendę dla każdej osoby wymienionej na liście użytkowników.
+category: Kontrola dostępu
+
+<block type="text" title="Jak działa komenda?">
+text: $blackListUsers przygląda się osobie, która wywołała komendę, i porównuje ją z użytkownikami, które podałeś. Jeśli pasuje, bot wyświetla podany przez ciebie komunikat odmowy — albo domyślny, jeśli go pominąłeś — a reszta komendy zostaje odrzucona. Jeśli nie ma jej na liście, nic nie zostaje wyświetlone i skrypt po prostu działa dalej. To najprostszy sposób, żeby odciąć konkretne osoby od komendy, nie zaostrzając jej dla wszystkich.
+</block>
+
+<block type="code" title="Składnia">
+text: $blackListUsers[user; ...; message]
+</block>
+
+<block type="code" title="Przykład gotowy do skopiowania">
+text: $blackListUsers[@user; Sorry, you are not allowed to use this command!]
+</block>
+
+<block type="callout" kind="note">
+text: Użytkownika można zapisać jako wzmiankę, jako jego ID albo nazwę, a nazwy są dopasowywane bez względu na wielkość liter. Sprawdzana jest też jego nazwa wyświetlana i globalna. Wypisz kilka, rozdzielając je średnikami. Wszystko do ostatniego argumentu jest traktowane jako użytkownik, więc w ostatnim argumencie umieszczasz własny komunikat odmowy.
+</block>
+
+<block type="callout" kind="warning">
+text: Gdy warunek zostanie spełniony, komenda zatrzymuje się w tym miejscu — żadna linia poniżej nie zostanie wykonana. Pominięcie własnej wiadomości sprawia, że bot sięga po własne sformułowanie.
+</block>
+</dash>
+
+<details>
+syntax: $blackListUsers[user; ...; message]
+param: user|text|Required|Zablokowani użytkownicy, jako wzmianki, ID lub nazwy, rozdzielone średnikami
+param: message|text|Optional|Wiadomość wyświetlana zamiast domyślnej odmowy, gdy użytkownik pasuje
+</details>

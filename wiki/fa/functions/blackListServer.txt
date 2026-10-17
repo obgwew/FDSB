@@ -1,0 +1,31 @@
+<dash>
+name: $blackListServer
+desc: اجرای دستور را فقط به سرورهای مشخص‌شده محدود می‌کند و از اجرای آن در بقیه سرورها جلوگیری می‌کند.
+category: کنترل دسترسی
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $blackListServer بررسی می‌کند که دستور در کدام سرور اجرا می‌شود. اگر سرور فعلی در لیست سرورهای مجاز نباشد، ربات پیام رد شما را نمایش می‌دهد (یا در صورت عدم تعیین، پیام پیش‌فرض) و بقیه دستور متوقف می‌شود. اگر سرور در لیست باشد، هیچ پیامی نمایش داده نمی‌شود و اسکریپت به‌طور عادی ادامه می‌یابد.
+</block>
+
+<block type="code" title="سینتکس">
+text: $blackListServer[server; ...; message]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $blackListServer[123456789012345678; Sorry, this server cannot use the command!]
+</block>
+
+<block type="callout" kind="note">
+text: سرورها را می‌توان به‌صورت شناسه یا نام وارد کرد. می‌توانید چندین سرور را با نقطه‌ویرگول از هم جدا کنید. همه آرگومان‌ها تا آرگومان آخر به‌عنوان سرور در نظر گرفته می‌شوند، بنابراین آرگومان آخر پیام رد سفارشی خواهد بود.
+</block>
+
+<block type="callout" kind="warning">
+text: در صورت عدم مطابقت سرور با لیست، اجرای دستور بلافاصله متوقف می‌شود — هیچ خطی بعد از آن اجرا نخواهد شد. اگر پیام سفارشی را ننویسید، ربات از پیام پیش‌فرض خود استفاده می‌کند.
+</block>
+</dash>
+
+<details>
+syntax: $blackListServer[server; ...; message]
+param: server|text|الزامی|The allowed servers, as IDs or names, separated by semicolons
+param: message|text|اختیاری|A message to show instead of the default refusal when the server is not allowed
+</details>

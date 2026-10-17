@@ -13,10 +13,11 @@ import time
 
 import flet as ft
 
-from main_app.settings import BotSettingsTab, get_current_lang, is_mobile
+from main_app.settings_bot import BotSettingsTab
+from main_app.settings_app import get_current_lang, is_mobile
 from main_app.load.token_vault import TokenVault
 from main_app.commands_view import BotCommandsTab
-from main_app.langs.translations import Translations
+from main_app.langs._translations import Translations
 from main_app.theme.theme_engine import ThemeEngine
 from main_app.variables_view import BotVariablesTab
 from main_app.wiki_view import BotWikiTab
@@ -33,7 +34,6 @@ def _t(key: str) -> str:
     return Translations.get(key, get_current_lang())
 
 
-# last error raised while importing main_app.core_fdsb (shown to the user instead of failing silently)
 _CORE_ERR = {'msg': ''}
 
 def _run_bg(page: ft.Page, fn, *args):
@@ -180,11 +180,11 @@ def _check_discord_intents(token: str) -> dict:
 
         missing = []
         if not has_presence:
-            missing.append("Presence Intent")
+            missing.append(_t('intent_name_presence'))
         if not has_members:
-            missing.append("Server Members Intent")
+            missing.append(_t('intent_name_members'))
         if not has_content:
-            missing.append("Message Content Intent")
+            missing.append(_t('intent_name_content'))
 
         res["checked"] = True
         res["missing"] = missing
@@ -226,6 +226,49 @@ def _soft_shadow(blur: int = 16, dy: int = 6, opacity: float = 0.10) -> ft.BoxSh
         color=ft.Colors.with_opacity(opacity, '#000000'),
         offset=ft.Offset(0, dy),
     )
+
+
+def _border_all(w: float, color: str) -> ft.Border:
+    s = ft.BorderSide(w, color)
+    return ft.Border(left=s, top=s, right=s, bottom=s)
+
+
+def _action_chip(content: ft.Control) -> ft.Container:
+    """Small rounded icon holder used inside the secondary action tiles."""
+    return ft.Container(
+        content=content,
+        width=26, height=26, border_radius=9,
+        bgcolor=_c('bg'),
+        alignment=ft.Alignment(0, 0),
+    )
+
+
+def _action_label(text: str) -> ft.Text:
+    return ft.Text(
+        text, size=13, weight=ft.FontWeight.W_500, color=_c('text'),
+        no_wrap=True, overflow=ft.TextOverflow.ELLIPSIS,
+        text_align=ft.TextAlign.CENTER, expand=True,
+    )
+
+
+def _tonal_btn(chip: ft.Control, label: ft.Control, on_click) -> ft.Container:
+    """Secondary action: a card-style tile (icon chip + label) matching the dashboard cards."""
+    btn = _ink_btn(
+        content=ft.Row(
+            [chip, label], spacing=8,
+            alignment=ft.MainAxisAlignment.CENTER,
+            vertical_alignment=ft.CrossAxisAlignment.CENTER,
+        ),
+        bgcolor=_c('card_bg'),
+        on_click=on_click,
+        border_radius=12,
+        padding=ft.Padding(left=10, top=0, right=10, bottom=0),
+    )
+    btn.height = 44
+    btn.expand = True
+    btn.border = _border_all(1, _c('card_border'))
+    btn.shadow = _soft_shadow(blur=8, dy=2, opacity=0.10)
+    return btn
 
 
 def _card(content: ft.Control, bgcolor: str, border_color: str,
@@ -305,23 +348,17 @@ class BotMainTab:
             color=_c('text'), text_align=ft.TextAlign.CENTER,
         )
 
-        self._invite_icon  = ft.Icon(ft.Icons.OPEN_IN_BROWSER, color='#FFFFFF', size=18)
-        self._invite_label = ft.Text(_t('invite_bot'), color='#FFFFFF', size=14,
-                                     weight=ft.FontWeight.W_500)
-        self._invite_btn = _ink_btn(
-            content=ft.Row([self._invite_icon, self._invite_label],
-                           spacing=8, alignment=ft.MainAxisAlignment.CENTER),
-            bgcolor=_c('btn_invite'),
-            on_click=self._invite_bot,
-            width=210,
-        )
+        self._invite_icon  = ft.Icon(ft.Icons.OPEN_IN_NEW_ROUNDED, color=_c('btn_invite'), size=15)
+        self._invite_chip  = _action_chip(self._invite_icon)
+        self._invite_label = _action_label(_t('invite_bot'))
+        self._invite_btn   = _tonal_btn(self._invite_chip, self._invite_label, self._invite_bot)
 
         self._srv_dot = ft.Container(
             width=10, height=10, border_radius=5,
             bgcolor=_c('offline'),
         )
         self._srv_state = ft.Text(
-            'Offline', size=12, color=_c('offline'), weight=ft.FontWeight.W_700,
+            _t('offline'), size=12, color=_c('offline'), weight=ft.FontWeight.W_700,
         )
         self._srv_icon_wrap = ft.Container(
             content=ft.Icon(ft.Icons.DNS_ROUNDED, size=16, color=_c('text_dim')),
@@ -441,33 +478,24 @@ class BotMainTab:
         self._toggle_icon      = ft.Icon(ft.Icons.PLAY_ARROW_ROUNDED, color='#FFFFFF', size=20)
         self._toggle_icon_slot = ft.Container(content=self._toggle_icon,
                                                alignment=ft.Alignment(0, 0))
-        self._toggle_label     = ft.Text(_t('start'), color='#FFFFFF', size=14,
-                                         weight=ft.FontWeight.W_500)
+        self._toggle_label     = ft.Text(_t('start'), color='#FFFFFF', size=15,
+                                         weight=ft.FontWeight.BOLD)
         self._toggle_container = _ink_btn(
             content=ft.Row([self._toggle_icon_slot, self._toggle_label],
                            spacing=8, alignment=ft.MainAxisAlignment.CENTER),
             bgcolor=_c('success'),
             on_click=self._toggle_server,
-            width=260,
-            padding=ft.Padding(left=25, top=13, right=20, bottom=13),
+            padding=ft.Padding(left=20, top=0, right=20, bottom=0),
         )
+        self._toggle_container.height = 48
         self._toggle_container.border_radius = 12
         self._toggle_container.shadow = _soft_shadow(blur=14, dy=5, opacity=0.18)
 
-        self._verify_icon      = ft.Icon(ft.Icons.VERIFIED_ROUNDED, color='#FFFFFF', size=18)
-        self._verify_icon_slot = ft.Container(content=self._verify_icon,
-                                               alignment=ft.Alignment(0, 0))
-        self._verify_btn = _ink_btn(
-            content=self._verify_icon_slot,
-            bgcolor=_c('accent'),
-            on_click=self._verify_token,
-            width=46,
-            padding=ft.Padding(left=0, top=0, right=0, bottom=0),
-        )
-        self._verify_btn.height = 46
-        self._verify_btn.border_radius = 12
-        self._verify_btn.tooltip = _t('verify_token')
-        self._verify_btn.shadow = _soft_shadow(blur=14, dy=5, opacity=0.18)
+        self._verify_icon      = ft.Icon(ft.Icons.VERIFIED_ROUNDED, color=_c('accent'), size=15)
+        self._verify_icon_slot = _action_chip(self._verify_icon)
+        self._verify_label     = _action_label(_t('verify_token'))
+        self._verify_btn       = _tonal_btn(self._verify_icon_slot, self._verify_label,
+                                            self._verify_token)
 
         self._news_text = ft.Text(_read_new_txt(), size=13, color=_c('text_dim'))
 
@@ -685,7 +713,7 @@ class BotMainTab:
                 self._busy = False
                 self._set_online_state(False)
                 self._notify(
-                    f"Bot engine failed to load: {_CORE_ERR['msg'] or 'unknown error'}",
+                    _t('engine_load_failed').format(error=_CORE_ERR['msg'] or _t('unknown_error')),
                     _c('danger'),
                 )
                 try: self._page.update()
@@ -712,8 +740,7 @@ class BotMainTab:
                         consume = getattr(local_server, 'consume_last_error', None)
                         self._notify(
                             (consume() if callable(consume) else '')
-                            or 'Bot did not start (start_bot returned False). '
-                               'Check the token, intents and console output.',
+                            or _t('bot_start_failed_hint'),
                             _c('danger'),
                         )
                         try: self._page.update()
@@ -732,15 +759,13 @@ class BotMainTab:
                 print(f'[Dashboard] toggle failed: {e}')
                 self._busy = False
                 self._set_online_state(self._server_online)
-                self._notify(f'Bot start/stop failed: {type(e).__name__}: {e}', _c('danger'))
+                self._notify(_t('bot_toggle_failed').format(error=f'{type(e).__name__}: {e}'), _c('danger'))
                 try: self._page.update()
                 except Exception: pass
 
         _run_bg(self._page, work)
 
     def _arm_start_watchdog(self, timeout: float = 60.0):
-        """If the bot never reports ready (e.g. login failed / missing intents),
-        don't leave the button stuck on 'Starting...' forever."""
         self._start_gen += 1
         gen = self._start_gen
 
@@ -753,8 +778,7 @@ class BotMainTab:
             self._busy = False
             self._set_online_state(False)
             self._notify(
-                'Bot did not become ready in time. Check the token, '
-                'Privileged Gateway Intents and the console output.',
+                _t('bot_not_ready'),
                 _c('danger'),
             )
             try: self._page.update()
@@ -777,9 +801,9 @@ class BotMainTab:
         self._verifying = True
         self._verify_btn.disabled = True
         self._verify_btn.opacity  = 0.70
-        self._verify_btn.tooltip  = _t('verifying')
+        self._verify_label.value  = _t('verifying')
         self._verify_icon_slot.content = ft.ProgressRing(
-            width=14, height=14, stroke_width=2, color='#FFFFFF',
+            width=14, height=14, stroke_width=2, color=_c('accent'),
         )
         try:
             self._page.update()
@@ -797,7 +821,7 @@ class BotMainTab:
                 self._verifying = False
                 self._verify_btn.disabled = False
                 self._verify_btn.opacity  = 1.0
-                self._verify_btn.tooltip  = _t('verify_token')
+                self._verify_label.value  = _t('verify_token')
                 self._verify_icon_slot.content = self._verify_icon
 
                 try:
@@ -844,8 +868,15 @@ class BotMainTab:
         get = lambda k: data.get(k, '#888888')
         self._name_text.color        = get('text')
         self._news_text.color        = get('text_dim')
-        self._invite_btn.bgcolor     = get('btn_invite')
-        self._verify_btn.bgcolor     = get('accent')
+        for tile, chip in ((self._invite_btn, self._invite_chip),
+                           (self._verify_btn, self._verify_icon_slot)):
+            tile.bgcolor = get('card_bg')
+            tile.border  = _border_all(1, get('card_border'))
+            chip.bgcolor = get('bg')
+        self._invite_icon.color      = get('btn_invite')
+        self._verify_icon.color      = get('accent')
+        self._invite_label.color     = get('text')
+        self._verify_label.color     = get('text')
         self._avatar_ctrl.border     = ft.Border(
             left=ft.BorderSide(3, get('accent')), top=ft.BorderSide(3, get('accent')),
             right=ft.BorderSide(3, get('accent')), bottom=ft.BorderSide(3, get('accent')),
@@ -897,11 +928,13 @@ class BotMainTab:
                 [
                     avatar_section,
                     ft.Row([self._name_text], alignment=ft.MainAxisAlignment.CENTER),
-                    ft.Row([self._invite_btn], alignment=ft.MainAxisAlignment.CENTER),
-                    ft.Row(
-                        [self._toggle_container, self._verify_btn],
-                        alignment=ft.MainAxisAlignment.CENTER,
+                    ft.Column(
+                        [
+                            self._toggle_container,
+                            ft.Row([self._invite_btn, self._verify_btn], spacing=10),
+                        ],
                         spacing=10,
+                        horizontal_alignment=ft.CrossAxisAlignment.STRETCH,
                     ),
                     self._status_row,
                     self._intents_warning_card,
@@ -959,7 +992,6 @@ class BotMainTab:
         self._news_text.value = _read_new_txt()
 
         self._check_privileged_intents_bg()
-
 
     def _show_change_avatar_dialog(self, _):
         if not self._bot_data.get('bot_dir'):
@@ -1125,7 +1157,7 @@ class BotDashboardScreen:
         self._page    = page
         self._on_back = on_back
         self._active  = 'main'
-        self._return_to = None   # tab we jumped from (e.g. editor -> wiki), so Back returns there
+        self._return_to = None
         self._bot_dir = bot_dir
         self._tab_containers: dict[str, ft.Container] = {}
 
@@ -1147,8 +1179,7 @@ class BotDashboardScreen:
             visible=True,
         )
 
-        self._tab_views: dict = {}   # created lazily in _view()
-
+        self._tab_views: dict = {}
         self._tab_ids = [t[0] for t in _TABS]
 
         self._slider = SlideStack(page)
@@ -1177,22 +1208,23 @@ class BotDashboardScreen:
         self._view('wiki').select_events_filter()
         self._switch_tab('wiki')
         if origin != 'wiki':
-            self._return_to = origin   # set after _switch_tab (which clears it)
+            self._return_to = origin
+        if self._page:
+            self._page.update()
 
     def handle_back(self) -> bool:
-        # 1) deepest level first: editor / folder / detail inside the active tab
         active_tab = self._tab_views.get(self._active)
         if active_tab and hasattr(active_tab, 'handle_back'):
             if active_tab.handle_back():
+                if self._page:
+                    self._page.update()
                 return True
 
-        # 2) we arrived here from another tab (e.g. editor -> wiki): go back to it
         if self._return_to and self._return_to != self._active:
             target, self._return_to = self._return_to, None
             self._switch_tab(target)
             return True
 
-        # 3) every tab sits directly under the bot list: let the app go there
         return False
 
     def _on_theme(self, data: dict):
@@ -1286,7 +1318,6 @@ class BotDashboardScreen:
         self._rebuild_all_tabs(update_nav=False)
 
     def build(self) -> ft.Control:
-        # Header using Stack to guarantee absolute center alignment of title
         self._header = ft.Container(
             content=ft.Stack(
                 controls=[
@@ -1343,6 +1374,11 @@ class BotDashboardScreen:
         leaving_id = self._active
 
         if target_id == leaving_id:
+            active_view = self._tab_views.get(leaving_id)
+            if active_view and hasattr(active_view, 'handle_back'):
+                if active_view.handle_back():
+                    if self._page:
+                        self._page.update()
             return
 
         def _do_switch():
@@ -1350,7 +1386,8 @@ class BotDashboardScreen:
 
         def _stay_on_current_tab():
             self._nav_bar.selected_index = self._tab_ids.index(leaving_id)
-            self._page.update()
+            if self._page:
+                self._page.update()
 
         leaving_view = self._tab_views.get(leaving_id)
         guard = getattr(leaving_view, 'guard_tab_change', None)
@@ -1370,7 +1407,7 @@ class BotDashboardScreen:
     def _activate(self, tab_id: str):
         prev                         = self._active
         self._active                 = tab_id
-        self._return_to              = None   # any manual/explicit switch forgets the jump origin
+        self._return_to              = None
         self._nav_bar.selected_index = self._tab_ids.index(tab_id)
         self._back_btn.visible       = (tab_id == 'main')
         self._update_title()
@@ -1385,8 +1422,8 @@ class BotDashboardScreen:
             direction = 1 if self._tab_ids.index(tab_id) > self._tab_ids.index(self._active) else -1
         self._activate(tab_id)
         self._slider.show_slot(slot, direction)
-
-    # ── swipe between tabs ────────────────────────────────────────────────
+        if self._page and hasattr(self, '_header'):
+            self._page.update()
 
     def _swipe_allowed(self) -> bool:
         view    = self._tab_views.get(self._active)
@@ -1405,9 +1442,13 @@ class BotDashboardScreen:
         def _go():
             self._activate(target)
             finish(True)
+            if self._page and hasattr(self, '_header'):
+                self._page.update()
 
         def _stay():
             finish(False)
+            if self._page and hasattr(self, '_header'):
+                self._page.update()
 
         guard = getattr(self._tab_views.get(self._active), 'guard_tab_change', None)
         if callable(guard):

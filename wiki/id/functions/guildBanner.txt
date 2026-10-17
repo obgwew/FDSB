@@ -1,0 +1,40 @@
+<dash>
+name: $guildBanner
+desc: Memberikan Anda tautan ke gambar spanduk sebuah server.
+category: Server
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Gunakan tanpa argumen dan ia mengembalikan spanduk server tempat perintah digunakan; tambahkan ID server dan ia justru membaca server itu. Spanduk bergerak kembali sebagai tautan .gif dan yang diam sebagai .png, siap dimasukkan ke pesan atau kartu. Server tanpa spanduk yang disetel memberikan Anda kesalahan alih-alih tautan.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $guildBanner
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $guildBanner[(guild_id)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $guildBanner[123456789012345678]
+</block>
+
+<block type="callout" kind="warning">
+text: Server memerlukan spanduk dan bot harus menjadi anggotanya, jika tidak tidak ada yang bisa dikembalikan. Di obrolan pribadi Anda harus menyebut servernya, karena tidak ada server saat ini untuk dibaca.
+</block>
+
+<block type="callout" kind="note">
+text: Diletakkan di dalam sebuah baris, ia bekerja dari apa yang sudah dimuat bot, jadi hanya bisa mengembalikan server yang cepat dikenalinya. Di barisnya sendiri, ia juga bersedia pergi mencari sebuah server.
+</block>
+</dash>
+
+<details>
+syntax: $guildBanner[(guild_id)]
+param: guildID|snowflake|Opsional|Server mana yang dibaca; hilangkan dan server saat ini yang digunakan
+</details>

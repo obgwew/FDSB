@@ -1,0 +1,31 @@
+<dash>
+name: $randomRoleMention
+desc: Memilih sebuah peran dari server Anda secara acak dan menyebutnya.
+category: Acak
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Bot membaca daftar peran di server, memilih salah satunya secara acak dan mengirim mention-nya, yang tiba disorot dan bisa diklik. Peran yang dimiliki setiap anggota secara bawaan tidak pernah menjadi yang dipilih. Setiap panggilan independen, sehingga peran yang sama bisa muncul dua kali berturut-turut.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $randomRoleMention
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $randomRoleMention
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: Congrats $randomRoleMention!
+</block>
+
+<block type="callout" kind="note">
+text: Di luar server, atau di server yang tidak memiliki peran selain yang bawaan, bot melaporkan kesalahan alih-alih sebuah mention. Setiap peran lain di server sah untuk dipilih, termasuk yang belum pernah diberikan kepada siapa pun.
+</block>
+</dash>

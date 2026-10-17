@@ -1,0 +1,25 @@
+<dash>
+name: $day
+desc: Gives today's date number, always two digits, from 01 to 31.
+category: زمان‌بندی و تاخیر
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $day ساعت را بررسی می‌کند و روز ماه را با دو رقم برمی‌گرداند؛ برای مثال هفتم می‌شود 07 و بیست‌وچهارم می‌شود 24. می‌توانید آن را در داخل متن قرار دهید تا ارقام دقیقاً در همان محل قرار بگیرند. اگر آن را در یک خط جداگانه بنویسید، ربات عدد را به‌تنهایی در کانال ارسال خواهد کرد.
+</block>
+
+<block type="code" title="سینتکس">
+text: $day
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $sendMessage[Day $day of this month]
+</block>
+
+<block type="callout" kind="note">
+text: عدد همیشه با دو رقم پد شده نمایش داده می‌شود، از 01 تا 31، تا در ساخت تاریخ دستی با کمک $day، $month و $year به‌خوبی هم‌خوانی داشته باشد.
+</block>
+
+<block type="callout" kind="important">
+text: $day، $month و $year همگی ساعت محلی ربات را می‌خوانند. منطقه زمانی تعیین‌شده با $time فقط توسط $hour، $minute و $second رعایت می‌شود، بنابراین اگر سرور شما در منطقه زمانی متفاوتی قرار دارد به این موضوع توجه داشته باشید.
+</block>
+</dash>

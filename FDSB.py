@@ -90,7 +90,6 @@ def get_app_data_dir() -> str:
 
 
 def _server_running() -> bool:
-    """Safe wrapper: if the state is unknown, assume RUNNING so nothing is deleted."""
     fn = getattr(Server, 'is_running', None)
     if not callable(fn):
         print('[FDSB] Server.is_running missing - update Server.py and fgs_service.py')
@@ -103,7 +102,6 @@ def _server_running() -> bool:
 
 
 def clear_app_cache():
-    """Deletes disposable cache only. Never touches persistent data (app_data)."""
     protected = os.path.abspath(get_persistent_base_dir())
     cache_dir = os.getenv('FLET_APP_STORAGE_TEMP')
     if not cache_dir:
@@ -127,13 +125,14 @@ def get_resource_path(*parts: str) -> str:
     return os.path.join(base, *parts)
 
 
-from main_app.langs.translations import Translations
-from main_app.settings import get_current_lang, get_current_theme, apply_theme_globally, ALL_THEMES
+from main_app.langs._translations import Translations
+from main_app.settings_app import get_current_lang, init_theme, apply_page_theme
 from main_app.theme.theme_engine import ThemeEngine
 from main_app.main import BotDashboardScreen
 from main_app.load.motion import SlideStack
 from main_app.load.updater import check_for_updates
 from main_app.load.token_vault import TokenVault
+from main_app.settings_app import SettingsAppScreen
 
 logging.getLogger('discord').setLevel(logging.INFO)
 
@@ -148,16 +147,6 @@ icon_path = get_resource_path('main_app', 'icons', 'FDSB.png')
 def _t(key: str) -> str:
     return Translations.get(key, get_current_lang())
 
-
-def _tr(key: str, ar: str, en: str) -> str:
-    """Translation with inline fallback when the key is missing from translations."""
-    try:
-        val = Translations.get(key, get_current_lang())
-        if val and val != key:
-            return val
-    except Exception:
-        pass
-    return ar if str(get_current_lang()).startswith('ar') else en
 
 def _ar(text: str) -> str:
     return text
@@ -177,7 +166,6 @@ COUNTER_FILE = os.path.join(APP_DATA_DIR, 'counter.json')
 
 
 def get_bot_dir(bot_name: str) -> str:
-    """Legacy: folder derived from the name (only for bots made before IDs)."""
     safe = "".join(c for c in bot_name if c.isalnum() or c in (' ', '-', '_')).strip()
     return os.path.join(APP_DATA_DIR, safe.replace(' ', '_') or 'bot')
 
@@ -187,7 +175,6 @@ def get_bot_dir_by_id(bot_id: int) -> str:
 
 
 def _next_bot_number() -> int:
-    """Ever-increasing bot number. Never decreases, even if bots are deleted."""
     ensure_app_data_dir()
     last = 0
     try:
@@ -324,14 +311,6 @@ def _nav_clear():
 
 
 def _dashboard_back(dashboard) -> bool:
-    """Ask the open dashboard to go back one level internally
-    (editor -> commands list, sub-page -> tab root, ...).
-    Returns True if something was handled.
-
-    1. Uses dashboard.handle_back() when the dashboard defines it.
-    2. Otherwise scans its attributes for any child (tab) exposing handle_back(),
-       so the editor's back step works even if the dashboard does not forward it.
-    """
     if dashboard is None:
         return False
 
@@ -359,12 +338,6 @@ def _dashboard_back(dashboard) -> bool:
                 print(f'[FDSB] child.handle_back failed: {ex}')
     return False
 
-
-# حالة نافذة الخروج.
-# على أندرويد: عند الضغط على رجوع النظام، يرسل Flet الحدث on_confirm_pop ثم ينتظر
-# (حتى 5 دقائق) أن نستدعي view.confirm_pop(True/False):
-#   False -> يبقى التطبيق      True -> يغلق التطبيق فعلياً (SystemNavigator.pop)
-# لذلك أثناء ظهور نافذة الخروج نترك هذا الطلب "معلّقاً" ونحسمه حسب اختيار المستخدم.
 _EXIT_STATE = {'dialog': None, 'view': None, 'asking': False}
 
 
@@ -379,48 +352,45 @@ async def _resolve_pop(should_pop: bool):
 
 
 def _show_exit_confirm(page: ft.Page):
-    """Small 'are you sure you want to exit?' dialog shown at the root screen."""
     if _EXIT_STATE['asking']:
-        return                                   # لا نفتح نافذتين فوق بعض
+        return
     _EXIT_STATE['asking'] = True
 
     async def _stay(_=None):
         _EXIT_STATE['asking'] = False
         page.pop_dialog()
-        await _resolve_pop(False)                # إلغاء الإغلاق
+        await _resolve_pop(False)     
 
     async def _exit(_=None):
         _EXIT_STATE['asking'] = False
         page.pop_dialog()
-        await _resolve_pop(True)                 # إغلاق التطبيق بالكامل
+        await _resolve_pop(True)
 
     async def _dismissed(_=None):
-        # أُغلقت النافذة بزر الرجوع أو بالضغط خارجها = البقاء
         if _EXIT_STATE['asking']:
             _EXIT_STATE['asking'] = False
             await _resolve_pop(False)
 
     dlg = ft.AlertDialog(
-        modal=False,                             # الرجوع مرة أخرى يغلق النافذة (= البقاء)
+        modal=False,
         title=ft.Text(
-            _tr('exit_title', 'الخروج من التطبيق', 'Exit app'),
+            _t('exit_title'),
             color=_c('text'),
             weight=ft.FontWeight.BOLD,
             text_align=ft.TextAlign.CENTER,
         ),
         content=ft.Text(
-            _tr('exit_message', 'هل أنت متأكد أنك تريد الخروج؟',
-                'Are you sure you want to exit?'),
+            _t('exit_message'),
             color=_c('text'),
             text_align=ft.TextAlign.CENTER,
         ),
         actions=[
             ft.TextButton(
-                content=ft.Text(_tr('exit_stay', 'البقاء', 'Stay'), color=_c('text')),
+                content=ft.Text(_t('exit_stay'), color=_c('text')),
                 on_click=_stay,
             ),
             ft.TextButton(
-                content=ft.Text(_tr('exit_confirm', 'خروج', 'Exit'), color=_c('danger')),
+                content=ft.Text(_t('exit_confirm'), color=_c('danger')),
                 on_click=_exit,
             ),
         ],
@@ -434,29 +404,17 @@ def _show_exit_confirm(page: ft.Page):
 
 
 def _perform_back(page: ft.Page = None, ask_exit: bool = True) -> bool:
-    """One 'back' step, deepest level first:
-
-        dialog  ->  editor (inside dashboard)  ->  commands/tabs  ->  bot list  ->  exit prompt
-
-    Always returns True: the app never closes by itself, we either navigate
-    one level back or ask the user to confirm exit.
-    """
     try:
-        # 0. نافذة حوارية مفتوحة؟ أغلقها فقط. (pop_dialog لا يرمي خطأ عند عدم وجود نافذة
-        #    بل يرجع None، لذلك يجب فحص القيمة المرجعة وإلا يُعتبر الرجوع "تم" دائماً.)
         if page is not None and page.pop_dialog() is not None:
             return True
 
-        # 1. داخل لوحة تحكم البوت: دع المحرر/التبويب يعالج الرجوع أولاً
         if _CURRENT_SCREEN.get('kind') == 'dashboard':
             if _dashboard_back(_CURRENT_SCREEN.get('dashboard')):
                 return True
 
-        # 2. الرجوع للشاشة السابقة (لوحة التحكم -> واجهة البوتات)
         if _nav_pop():
             return True
 
-        # 3. نحن في الواجهة الرئيسية: اسأل المستخدم عن الخروج
         if page is not None and ask_exit:
             _show_exit_confirm(page)
         return True
@@ -482,20 +440,17 @@ def _set_body(page: ft.Page, content: ft.Control):
     root = _root_stack(page)
     prev, kind = _ROOT['prev_kind'], _CURRENT_SCREEN['kind']
     _ROOT['prev_kind'] = kind
-    if prev == 'main' and kind == 'dashboard':
-        direction = 1         # dashboard slides in from the right
-    elif prev == 'dashboard' and kind == 'main':
-        direction = -1        # bot list slides back in from the left
+    if prev == 'main' and kind in ('dashboard', 'settings'):
+        direction = 1
+    elif prev in ('dashboard', 'settings') and kind == 'main':
+        direction = -1
     else:
-        direction = 0         # first screen / same screen
+        direction = 0
 
     async def _handle_view_pop(e):
-        # يصل هنا كل ضغطة على زر الرجوع في أندرويد.
         view = page.views[0] if page.views else None
         _EXIT_STATE['view'] = view
         _perform_back(page)
-        # إن تمّ التنقل داخلياً نلغي الإغلاق فوراً. أما إن ظهرت نافذة الخروج
-        # فنترك الطلب معلّقاً ليحسمه زر "خروج" أو "البقاء".
         if not _EXIT_STATE['asking'] and view is not None:
             try:
                 await view.confirm_pop(False)
@@ -596,7 +551,7 @@ def build_bot_card(
         bgcolor=_c('accent'),
         icon_size=18,
         on_click=lambda _: on_open_dashboard(bot_data),
-        tooltip='Open Dashboard',
+        tooltip=_t('open_dashboard'),
         style=ft.ButtonStyle(shape=ft.CircleBorder()),
     )
 
@@ -657,8 +612,8 @@ class CreateBotDialog:
         )
 
         self._name_field = ft.TextField(
-            label=_t('name_label') or 'Bot Name',
-            hint_text=_t('name_hint') or 'My Awesome Bot',
+            label=_t('name_label'),
+            hint_text=_t('name_hint'),
             border_color=_c('input_border'),
             focused_border_color=_c('accent'),
             cursor_color=_c('accent'),
@@ -670,8 +625,8 @@ class CreateBotDialog:
             on_change=lambda e: self._refresh_import_availability(),
         )
         self._token_field = ft.TextField(
-            label=_t('token_label') or 'Bot Token',
-            hint_text=_t('token_hint') or 'Paste your Discord token here',
+            label=_t('token_label'),
+            hint_text=_t('token_hint'),
             password=True,
             can_reveal_password=True,
             border_color=_c('input_border'),
@@ -743,11 +698,11 @@ class CreateBotDialog:
             ),
             actions=[
                 ft.TextButton(
-                    content=ft.Text('Cancel', color=_c('text_dim')),
+                    content=ft.Text(_t('cancel'), color=_c('text_dim')),
                     on_click=self._cancel,
                 ),
                 ft.FilledButton(
-                    content=ft.Text(_t('make') or 'Create', color='#FFFFFF', weight=ft.FontWeight.W_600),
+                    content=ft.Text(_t('make'), color='#FFFFFF', weight=ft.FontWeight.W_600),
                     on_click=self._submit,
                     style=ft.ButtonStyle(
                         bgcolor=_c('accent'),
@@ -765,7 +720,7 @@ class CreateBotDialog:
 
     async def _pick_image(self, _):
         files = await self._file_picker.pick_files(
-            dialog_title='Choose Bot Image',
+            dialog_title=_t('choose_bot_image'),
             file_type=ft.FilePickerFileType.CUSTOM,
             allowed_extensions=['png', 'jpg', 'jpeg', 'gif', 'webp'],
         )
@@ -857,7 +812,7 @@ class CreateBotDialog:
         self._refresh_import_availability()
 
     async def _submit(self, _):
-        name  = self._name_field.value.strip() or 'My Bot'
+        name  = self._name_field.value.strip() or _t('default_bot_name')
         token = self._token_field.value.strip()
 
         if not token:
@@ -868,7 +823,6 @@ class CreateBotDialog:
         if not is_valid_discord_token(token):
             self._token_field.error_text = (
                 _t('token_invalid_format')
-                or 'Invalid token format.'
             )
             self._page.update()
             return
@@ -892,9 +846,10 @@ class CreateBotDialog:
 
 class MainView:
 
-    def __init__(self, page: ft.Page, on_open_dashboard: callable):
+    def __init__(self, page: ft.Page, on_open_dashboard: callable, on_open_settings: callable):
         self._page              = page
         self._on_open_dashboard = on_open_dashboard
+        self._on_open_settings  = on_open_settings
 
         self._count_label = ft.Text(
             value="",
@@ -927,19 +882,32 @@ class MainView:
 
     def build(self) -> ft.Control:
         header = ft.Container(
-            content=ft.Column(
+            content=ft.Row(
                 [
-                    self._count_label,
-                    ft.Text(
-                        _t('main_title'),
-                        size=22,
-                        weight=ft.FontWeight.BOLD,
-                        color=_c('title_bcfd'),
+                    ft.Column(
+                        [
+                            self._count_label,
+                            ft.Text(
+                                _t('main_title'),
+                                size=22,
+                                weight=ft.FontWeight.BOLD,
+                                color=_c('title_bcfd'),
+                            ),
+                        ],
+                        spacing=2,
+                        expand=True,
+                    ),
+                    ft.IconButton(
+                        icon=ft.Icons.SETTINGS_ROUNDED,
+                        icon_color=_c('text'),
+                        icon_size=24,
+                        tooltip=_t('tab_settings'),
+                        on_click=lambda _: self._on_open_settings(),
                     ),
                 ],
-                spacing=2,
+                vertical_alignment=ft.CrossAxisAlignment.CENTER,
             ),
-            padding=ft.Padding(left=18, top=10, right=18, bottom=10),
+            padding=ft.Padding(left=18, top=10, right=10, bottom=10),
         )
 
         self._content_area = ft.Container(
@@ -1016,7 +984,7 @@ class MainView:
             shutil.rmtree(bot_dir, ignore_errors=True)
             _show_warning(
                 self._page,
-                'Could not store the token securely on this device.',
+                _t('token_store_failed'),
             )
             return
 
@@ -1075,7 +1043,14 @@ def _show_main(page: ft.Page):
     def open_dashboard(bot_data: dict):
         _show_dashboard(page, bot_data)
 
-    view = MainView(page=page, on_open_dashboard=open_dashboard)
+    def open_settings():
+        _show_settings(page)
+
+    view = MainView(
+        page=page,
+        on_open_dashboard=open_dashboard,
+        on_open_settings=open_settings,
+    )
 
     _CURRENT_SCREEN['kind']      = 'main'
     _CURRENT_SCREEN['dashboard'] = None
@@ -1097,6 +1072,16 @@ def _show_dashboard(page: ft.Page, bot_data: dict):
     _set_body(page, dashboard.build())
 
 
+def _show_settings(page: ft.Page):
+    screen = SettingsAppScreen(page=page, on_back=lambda: _show_main(page))
+
+    _CURRENT_SCREEN['kind']      = 'settings'
+    _CURRENT_SCREEN['dashboard'] = None
+    _nav_push(lambda: _show_main(page))
+
+    _set_body(page, screen.build())
+
+
 # ══════════════════════════════════════════════════════════════════════════════
 #  ENTRY POINT
 # ══════════════════════════════════════════════════════════════════════════════
@@ -1104,16 +1089,11 @@ def _show_dashboard(page: ft.Page, bot_data: dict):
 async def main(page: ft.Page):
     page.title   = 'FDSB'
     page.padding = 0
-
-    # Earliest diagnostic frame: if this is visible, Python main() was entered.
-    # Flet already creates a default View in page.views, so reuse it instead of
-    # appending a second one (two stacked Views caused the duplicate Navigator
-    # GlobalKey error at startup).
     page.views[0].padding = 0
     page.views[0].controls = [
         ft.Container(
             content=ft.Column(
-                [ft.ProgressRing(), ft.Text('Starting FDSB…')],
+                [ft.ProgressRing(), ft.Text(_t('starting_app'))],
                 alignment=ft.MainAxisAlignment.CENTER,
                 horizontal_alignment=ft.CrossAxisAlignment.CENTER,
                 spacing=16,
@@ -1143,16 +1123,8 @@ async def main(page: ft.Page):
     page.theme = ft.Theme(font_family=default_font)
     page.dark_theme = ft.Theme(font_family=default_font)
 
-    saved_theme = get_current_theme() or 'system_wh'
-    if saved_theme not in ALL_THEMES:
-        saved_theme = 'system_wh'
-
-    page.theme_mode = (
-        ft.ThemeMode.DARK if saved_theme in ('system_da', 'v2_dark')
-        else ft.ThemeMode.LIGHT
-    )
-
-    apply_theme_globally(saved_theme)
+    init_theme()
+    apply_page_theme(page)
 
     def _sync_page_bg(data: dict):
         page.bgcolor = data.get('bg', '#FFFFFF')
@@ -1161,13 +1133,10 @@ async def main(page: ft.Page):
     page._bg_sync = _sync_page_bg
     ThemeEngine.subscribe(page._bg_sync)
     page.bgcolor = ThemeEngine.hex('bg')
-
-    # Render the usable UI first. Secure storage may be slow or unavailable
-    # on some Android versions; it must not hold the first frame hostage.
+    
     _show_main(page)
 
     async def _initialize_background_mode():
-        # Start after the main screen has been sent to the client.
         await asyncio.sleep(0.2)
         try:
             if not _server_running():
@@ -1194,8 +1163,7 @@ async def main(page: ft.Page):
         if migration_failed:
             _show_warning(
                 page,
-                'Some bot tokens could not be moved to secure storage: '
-                + ', '.join(migration_failed),
+                _t('token_migration_failed').format(names=', '.join(migration_failed)),
             )
 
     page.run_task(_initialize_token_vault)

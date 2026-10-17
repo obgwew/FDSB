@@ -1,0 +1,40 @@
+<dash>
+name: $log
+desc: Mengirim laporan tentang semua yang telah dilakukan perintah sejauh ini ke sebuah kanal pilihan Anda.
+category: Utilitas
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Sebutkan sebuah kanal dan bot mengumpulkan catatan berjalan tentang apa yang perintah Anda lakukan, kondisi mana yang lolos, nilai mana yang dibacanya dan apa yang dikirimnya, lalu mengirimkannya ke sana sekali jalannya selesai. Tambahkan sebuah nama pendek setelah ID kanal dan label itu duduk di bagian atas laporan sehingga beberapa jejak tetap terpisah. Ini adalah cara tercepat untuk mengetahui mengapa sebuah perintah panjang berhenti di titik tertentu.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !trace
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $log[channelID; name_code]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $log[123456789; myCommand]
+</block>
+
+<block type="callout" kind="note">
+text: Laporan tiba sebagai satu blok kode abu-abu. Jalannya yang berisi banyak hal tidak muat dalam satu pesan, sehingga apa pun di atas sekitar 2.000 karakter dikirim sebagai lampiran berkas teks sebagai gantinya.
+</block>
+
+<block type="callout" kind="warning">
+text: Kanal harus berupa kanal yang benar-benar dapat diakses bot. Ketika tidak dapat, kegagalannya dilaporkan kembali di tempat perintah diketik alih-alih dijatuhkan tanpa sepatah kata pun.
+</block>
+</dash>
+
+<details>
+syntax: $log[channelID; name_code]
+param: channelID|snowflake|Wajib|ID numerik kanal yang menerima laporan
+param: name_code|text|Opsional|Label pendek untuk diletakkan di bagian atas laporan
+</details>

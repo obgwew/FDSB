@@ -1,0 +1,31 @@
+<dash>
+name: $randomUserID
+desc: Memilih anggota manusia server secara acak dan menyerahkan ID-nya.
+category: Acak
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Jalankan dan bot memilih satu anggota secara acak dari semua orang di server, lalu mengirim ID orang itu sebagai digit polos. Akun bot tidak pernah ikut undian, jadi server yang penuh bot tidak bisa dipilih dari. Letakkan di dalam sebuah baris dan angkanya diisi di mana pun Anda mengetiknya.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $randomUserID
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $randomUserID
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: Random user ID: $randomUserID
+</block>
+
+<block type="callout" kind="note">
+text: Hanya berfungsi di dalam server, karena obrolan pribadi tidak memiliki daftar anggota untuk diundi. Jika tidak ditemukan anggota manusia di sana, bot mengatakan bahwa ia tidak menemukan siapa pun untuk dipilih.
+</block>
+</dash>

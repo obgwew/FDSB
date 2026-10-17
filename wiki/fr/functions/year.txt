@@ -1,0 +1,25 @@
+<dash>
+name: $year
+desc: Renvoie l'année actuelle, sur quatre chiffres comme 2026.
+category: Minutage & Délais
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: $year lit l'horloge et renvoie l'année actuelle en entier, sur quatre chiffres, donc il affiche 2026 plutôt qu'un 26 raccourci. Insérez-le dans une ligne de texte et les chiffres se placent là où vous les mettez, ou laissez-le sur une ligne à part et le bot publie le chiffre dans le canal. Il ne change qu'une fois par an, ce qui en fait un bloc de construction stable pour les dates.
+</block>
+
+<block type="code" title="Syntaxe">
+text: $year
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $sendMessage[Welcome to $year!]
+</block>
+
+<block type="callout" kind="note">
+text: L'année revient toujours sur quatre chiffres, il est donc toujours sûr de la placer à la fin d'une date construite à partir de $day et $month.
+</block>
+
+<block type="callout" kind="important">
+text: $day, $month et $year lisent tous l'horloge locale propre au bot. Le fuseau horaire défini avec $time n'est suivi que par $hour, $minute et $second.
+</block>
+</dash>

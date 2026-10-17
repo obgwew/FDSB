@@ -1,0 +1,40 @@
+<dash>
+name: $alwaysReply
+desc: Menjalankan baris-baris Anda secara mandiri setelah setiap pesan yang dikirim seseorang.
+category: Peristiwa
+
+<block type="text" title="Bagaimana cara kerja peristiwa?">
+text: Atur kolom Awalan ke $alwaysReply dan aplikasi menandai perintah itu sebagai Peristiwa untuk Anda, yang berarti tidak ada yang perlu mengetiknya. Sejak itu, setiap pesan dari orang sungguhan di kanal menjalankan baris-baris Anda sebagai balasan atas pesan tersebut, tanpa ada yang melakukan apa pun. Ini cara termudah untuk membangun sesuatu yang mendengarkan seluruh percakapan.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $alwaysReply
+item: Aplikasi menandainya sebagai Peristiwa untuk Anda
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: #PREFIX:$alwaysReply
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: #PREFIX:$alwaysReply
+text:  sendMessage[You said: $message]
+</block>
+
+<block type="callout" kind="warning">
+text: Ini dipicu pada segala sesuatu, jadi pertahankan baris-baris Anda tetap pendek. Di server yang ramai, bot yang menjawab setiap pesan dengan cepat menabrak batas pengiriman Discord dan mulai diabaikan.
+</block>
+
+<block type="callout" kind="important">
+text: Karena menjawab sebagai balasan, apa pun yang dikirim baris-baris Anda muncul tertempel di bawah pesan yang memicunya alih-alih berdiri sendiri.
+</block>
+</dash>
+
+<details>
+syntax: $alwaysReply
+</details>

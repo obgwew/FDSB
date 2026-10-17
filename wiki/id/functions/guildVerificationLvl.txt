@@ -1,0 +1,31 @@
+<dash>
+name: $guildVerificationLvl
+desc: Membaca seberapa ketat server dalam mengizinkan anggota baru berbicara.
+category: Server
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Di dalam server, ini mengembalikan tingkat verifikasi yang dipakai Discord untuk menentukan seberapa banyak bukti yang harus diberikan pendatang baru sebelum memposting. Kata yang Anda dapat adalah tingkat itu sendiri — none, low, medium, high, atau highest. Letakkan di dalam pesan untuk menjelaskan mengapa seseorang belum bisa berbicara, atau cabangkan skrip Anda berdasarkan seberapa terbuka server itu.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !serverinfo
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $guildVerificationLvl
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $sendMessage[Verification level here: $guildVerificationLvl]
+</block>
+
+<block type="callout" kind="important">
+text: Ia hanya bekerja di dalam sebuah server. Minta di pesan langsung dan bot melaporkan kesalahan lingkungan, yang menghentikan perintah Anda di situ juga.
+</block>
+</dash>

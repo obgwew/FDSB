@@ -3,7 +3,21 @@ welcome to update 2.5.0
 # add:
 - code editor dsl
 
-- 
+- more theme desinge's 
 
-# fixes:
--
+- stauts of discord dev web 
+
+- times commands
+
+- blackList commands
+
+# fixdded:
+- some commands
+
+- improving wiki speed
+
+- language
+
+- buttons of main
+
+- notification on android

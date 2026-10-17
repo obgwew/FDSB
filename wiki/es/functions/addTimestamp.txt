@@ -1,0 +1,31 @@
+<dash>
+name: $addTimestamp
+desc: Estampa la fecha y la hora actuales en la tarjeta que construye tu comando.
+category: Tiempos y esperas
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Añade esto mientras armas una tarjeta y el bot escribe la fecha y la hora actuales en esa tarjeta, en la pequeña línea de su borde inferior. Discord muestra esa línea en la zona horaria de cada lector, así que se lee correctamente para todos estén donde estén. Solo toca la tarjeta, así que asegúrate de que se está construyendo una antes de pedirlo.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo $addTimestamp en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $addTimestamp
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $addTimestamp
+</block>
+
+<block type="callout" kind="note">
+text: A todos se les muestra el mismo momento escrito en la zona horaria de su propio dispositivo, así que tu tarjeta nunca tiene que explicar de dónde salió la fecha.
+</block>
+</dash>

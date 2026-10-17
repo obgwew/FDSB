@@ -1,0 +1,46 @@
+<dash>
+name: $numberSeparator
+desc: Agrupa un número entero largo en bloques legibles de tres dígitos.
+category: Matemática y números
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Pon un número y el bot divide sus dígitos en grupos de tres contando desde la derecha, así que 1234567 se lee como 1,234,567. Una coma hace la separación a menos que le des una segunda parte con la tuya, como un punto o un espacio. Un signo menos en un número negativo queda delante del primer grupo.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !stats en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $numberSeparator[number]
+text: $numberSeparator[number; separator]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $numberSeparator[1234567]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar (separador personalizado)">
+text: $numberSeparator[1234567; .]
+</block>
+
+<block type="callout" kind="note">
+text: Un número de tres dígitos como 500 vuelve exactamente como se escribió, ya que solo hay un grupo entre el que colocar un separador. Deja vacía la segunda parte y se usa la coma de nuevo.
+</block>
+
+<block type="callout" kind="warning">
+text: Un punto decimal o cualquier letra hace que el bot publique un error en lugar de dar formato solo a los dígitos que reconoce.
+</block>
+</dash>
+
+<details>
+syntax: $numberSeparator[number; (separator)]
+param: number|number|Obligatorio|El número entero a agrupar; se conserva un - inicial
+param: separator|text|Opcional|Qué colocar entre los grupos; una coma si se deja vacío
+</details>

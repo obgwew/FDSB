@@ -1,0 +1,53 @@
+<dash>
+name: $addSelectMenuOption
+desc: Añade una opción a un menú desplegable que empezaste antes en el mismo comando.
+category: Componentes
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Cada línea que escribes pone una entrada nueva en el menú desplegable indicado por el Menu ID, emparejada con el que iniciaste con $newSelectMenu. La gente ve la etiqueta con tu descripción debajo y un emoji opcional a su lado, mientras que tu código solo recibe el valor. Marca una entrada como predeterminada y el menú se abre con ella ya elegida.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !ping en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $addSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $newSelectMenu[color_menu; 1; 1; Pick a color]
+text: $addSelectMenuOption[color_menu; Red; red; The color red]
+text: $addSelectMenuOption[color_menu; Blue; blue; The color blue; yes]
+</block>
+
+<block type="options" title="Detalles">
+option: Default|ponlo en yes y esta opción ya está seleccionada cuando se abre el menú
+option: Emoji|un emoji que se muestra junto a la etiqueta de la opción
+option: Message ID|ID de un mensaje que el bot ya envió, para que su menú se actualice en vivo
+</block>
+
+<block type="callout" kind="note">
+text: Los valores dentro de un mismo menú desplegable tienen que ser distintos entre sí, y se rechaza una etiqueta o un valor vacíos. Deja el Message ID fuera y el menú viaja con el mensaje que se está enviando; pon uno y el menú de ese mensaje antiguo se reconstruye al instante.
+</block>
+
+<block type="callout" kind="warning">
+text: Un menú desplegable admite 25 opciones como máximo y solo una de ellas puede ser la predeterminada. Si el Menu ID no coincide con nada que hayas iniciado en este mismo comando, el bot informa de un error.
+</block>
+</dash>
+
+<details>
+syntax: $addSelectMenuOption[Menu ID; Label; Value; Description; (Default; Emoji; Message ID)]
+param: Menu ID|text|Obligatorio|A qué menú desplegable de $newSelectMenu pertenece esta opción
+param: Label|text|Obligatorio|Las palabras que la gente ve en la lista
+param: Value|text|Obligatorio|El texto único que se devuelve cuando se elige esta opción
+param: Description|text|Puede quedar vacío|Línea más pequeña que se muestra bajo la etiqueta
+param: Default|yes/no|Opcional|yes para que esta opción ya esté seleccionada
+param: Emoji|text|Opcional|Emoji que se muestra junto a la etiqueta
+param: Message ID|snowflake|Opcional|Un mensaje que el bot ya envió, para reconstruir su menú en vivo
+</details>

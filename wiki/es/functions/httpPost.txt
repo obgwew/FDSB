@@ -1,0 +1,42 @@
+<dash>
+name: $httpPost
+desc: Envía datos a una dirección web y guarda lo que vuelva.
+category: HTTP
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Apunta esto a una dirección y el bot hace una solicitud POST a ella, enviando el cuerpo que le des junto con las cabeceras que hayas añadido de antemano. Cuando llega la respuesta se conserva para que la leas, junto con el código de estado que devolvió el sitio, para que las líneas de debajo puedan sacar un campo de la respuesta y colocarlo en un mensaje. El texto del cuerpo que resulte ser JSON válido sale como JSON, y todo lo demás sale como datos planos.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !notify en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $httpPost[URL; (Body)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $httpAddHeader[Content-Type; application/json]
+text: $httpPost[https://api.example.com/users; {"name": "FDScript"}]
+text: $httpResult[id]
+</block>
+
+<block type="callout" kind="note">
+text: Las cabeceras pertenecen a una sola solicitud. Lo que hayas añadido con $httpAddHeader sale con esta llamada y luego se borra, así que la siguiente solicitud empieza limpia y no puede heredar un Content-Type que no querías enviar.
+</block>
+
+<block type="callout" kind="warning">
+text: Siempre llega algo al resultado. Si el sitio falla o la conexión se cae, el estado vuelve como 500 y el resultado contiene el motivo en lugar de detener el comando en seco, y una URL que el bot se niega a llamar vuelve como 400.
+</block>
+</dash>
+
+<details>
+syntax: $httpPost[URL; (Body)]
+param: URL|text|Obligatorio|La dirección a la que enviar la solicitud
+param: Body|text|Opcional|Qué enviar con ella, ya sea JSON o texto plano
+</details>

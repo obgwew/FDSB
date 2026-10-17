@@ -1,0 +1,36 @@
+<dash>
+name: $replyIn
+desc: Retrasa la siguiente respuesta del bot durante un tiempo determinado.
+category: Tiempos y esperas
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $replyIn pausa tu comando para que el bot no se lance directamente a la siguiente línea. Pon una duración como 5s y todo lo que viene detrás espera cinco segundos antes de empezar, que es la forma fácil de escenificar un mensaje que llega un poco más tarde en lugar de todo a la vez. La espera no imprime nada por sí misma, tu script simplemente retoma cuando se acaba el tiempo.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !remind en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $replyIn[time]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $replyIn[5s]
+text: $sendMessage[This appears after 5 seconds!]
+</block>
+
+<block type="callout" kind="note">
+text: Una duración es un número más una unidad: s para segundos, m para minutos, h para horas, d para días. Todo lo que hayas escrito antes de la espera ya se ha enviado, y solo este comando se retrasa mientras pasa el tiempo.
+</block>
+</dash>
+
+<details>
+syntax: $replyIn[time]
+param: time|text|Obligatorio|Cuánto esperar, como un número más s, m, h o d, por ejemplo 5s, 10m o 1h
+</details>

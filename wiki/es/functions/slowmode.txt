@@ -1,0 +1,40 @@
+<dash>
+name: $slowmode
+desc: Establece cada cuánto pueden publicar los miembros en un canal.
+category: Moderación
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $slowmode pone una pausa entre mensajes en el canal que indiques. Dale un canal y una duración como 10s y los miembros tendrán que esperar ese tiempo antes de volver a publicar, lo que baja la temperatura de un canal ajetreado sin bloquearlo. Usa 0s para levantar el límite y dejar que todos escriban tan a menudo como quieran, tal como lo encontraste.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !slowmode en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $slowmode[channelID; time]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $slowmode[$channelID; 10s]
+</block>
+
+<block type="callout" kind="note">
+text: Una duración es un número más una unidad: s para segundos, m para minutos, h para horas. Seis horas es el tope, así que cualquier cosa más larga se rechaza, y 0s apaga el modo lento de nuevo de una sola vez.
+</block>
+
+<block type="callout" kind="warning">
+text: El bot necesita Manage Channels en ese canal antes de que el cambio surta efecto. Un tipo de canal que no tiene ajuste de modo lento, por ejemplo una categoría, se rechaza con un error en lugar de cambiarse.
+</block>
+</dash>
+
+<details>
+syntax: $slowmode[channelID; time]
+param: channelID|snowflake|Obligatorio|En qué canal poner la pausa
+param: time|text|Obligatorio|Cuánto dura la pausa, como un número más s, m o h. 0s apaga el modo lento.
+</details>

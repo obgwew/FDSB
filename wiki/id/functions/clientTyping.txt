@@ -1,0 +1,33 @@
+<dash>
+name: $clientTyping
+desc: Menampilkan gelembung mengetik bot di kanal selama perintah berjalan.
+category: Utilitas
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Pada barisnya sendiri, perintah ini menampilkan indikator mengetik yang familiar di kanal, sehingga siapa pun yang memperhatikan tahu bot sedang sibuk alih-alih menganggur. Indikator itu tetap di sana selagi perintah Anda berlanjut dan hilang begitu bot benar-benar mengirim sesuatu, atau sesi berjalan berakhir. Memasangkannya dengan sebuah $wait sebelum langkah yang lambat membuat jawabannya terasa seperti benar-benar sedang diketik.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $clientTyping
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $clientTyping
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $clientTyping
+text: $wait[3s]
+text: $sendMessage[Done!]
+</block>
+
+<block type="callout" kind="note">
+text: Gelembung itu muncul di kanal tempat perintah diketik, sehingga tidak ada yang perlu diatur. Tambahkan sebuah $wait tepat setelahnya untuk menahannya di sana selama durasi pilihan Anda.
+</block>
+</dash>

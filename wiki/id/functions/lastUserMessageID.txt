@@ -1,0 +1,36 @@
+<dash>
+name: $lastUserMessageID
+desc: Menyerahkan ID dari pesan yang menjalankan perintah Anda.
+category: Variabel
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Ini mengisi ID dari pesan yang memicu perintah — yang membawa awalan Anda. Ia tetap sama untuk seluruh jalannya, sehingga baris-baris yang lebih lanjut, atau fungsi yang Anda panggil nanti, semuanya melihat angka yang sama. Pada dirinya sendiri, angka itu tidak berarti banyak bagi siapa pun yang membaca obrolan, sehingga biasanya dibungkus di dalam sebuah pesan atau diserahkan ke perintah lain yang bekerja dengan ID.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !welcome
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $lastUserMessageID
+text: $lastUserMessageID[]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $sendMessage[Your message ID is $lastUserMessageID]
+</block>
+
+<block type="callout" kind="note">
+text: Ini adalah nilai, bukan sebuah aksi, sehingga ia hanya melakukan sesuatu ketika berada di dalam perintah lain. Pada barisnya sendiri tidak ada apa pun untuk dikirimnya.
+</block>
+</dash>
+
+<details>
+syntax: $lastUserMessageID
+</details>

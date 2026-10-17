@@ -1,0 +1,46 @@
+<dash>
+name: $roleAssign
+desc: Memberi peran pada anggota, mencabut peran, atau melakukan keduanya sekaligus.
+category: Moderasi
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $roleAssign mengubah peran apa saja yang dikenakan seorang anggota. Letakkan anggotanya lebih dulu, lalu daftarkan peran yang ingin Anda sentuh, masing-masing diawali + untuk memberikannya atau - untuk mencabutnya. Bot menerapkan seluruh daftarnya sekaligus, sehingga bilah peran anggota berubah dalam satu kali dan sisa skrip Anda lanjut dengan peran baru yang sudah diterapkan.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !role
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $roleAssign[user; +role1; -role2; ...]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $roleAssign[$authorID; +&123456789; -&987654321]
+</block>
+
+<block type="options" title="Awalan peran">
+option: +|Memberikan peran — tulis sebagai +&123456789 atau +@RoleName
+option: -|Mencabut peran — tulis sebagai -&123456789 atau -@RoleName
+</block>
+
+<block type="callout" kind="note">
+text: Anda dapat menambah dan menghapus peran sebanyak yang Anda suka dalam satu baris, dan anggotanya selalu menjadi bagian pertama. Bot butuh Manage Roles di server itu, dan perannya sendiri harus berada di atas peran yang dibagikannya.
+</block>
+
+<block type="callout" kind="warning">
+text: Anggotanya harus sudah berada di server, jika tidak Anda mendapatkan kesalahan dan tidak ada yang berubah. Peran yang tidak ada dilewati begitu saja, dan jika peran bot berada di bawah peran yang Anda coba ubah, Discord menolak seluruh permintaannya.
+</block>
+</dash>
+
+<details>
+syntax: $roleAssign[user; +role1; -role2; ...]
+param: user|text|Wajib|Anggota yang perannya berubah, sebagai ID pengguna atau mention
+param: +role1|text|Wajib|Peran yang diberikan: tanda + diikuti ID peran atau mention, seperti +&123456789
+param: -role2|text|Opsional|Peran yang dicabut: tanda - diikuti ID peran atau mention. Tambahkan sebanyak bagian + dan - yang Anda butuhkan.
+</details>

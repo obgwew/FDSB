@@ -1,0 +1,36 @@
+<dash>
+name: $channelExists
+desc: Menjawab yes atau no tentang apakah sebuah kanal benar-benar ada.
+category: Kanal
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Berikan sebuah mention kanal atau ID, dan bot memeriksa apakah ia benar-benar dapat menemukan kanal itu, menjawab true atau false. Sebaiknya lakukan ini sebelum mengirim apa pun ke sana, agar sebuah perintah tidak jatuh di tengah jalan karena tempat yang sudah tidak ada lagi. Tanpa kurung, ia menjawab true, memperlakukan pemeriksaan kosong sebagai hal yang tidak perlu dikeluhkan.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $channelExists
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $channelExists[channel mention/ID]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $channelExists[<#123456789012345678>]
+</block>
+
+<block type="callout" kind="note">
+text: Jawabannya selalu kata polos true atau false, sehingga Anda dapat mengujinya dengan sebuah $if sebelum melanjutkan memakai kanal itu.
+</block>
+</dash>
+
+<details>
+syntax: $channelExists[channel mention/ID]
+param: channel|text|Opsional|Mention kanal atau ID yang diperiksa; biarkan kosong dan jawabannya true
+</details>

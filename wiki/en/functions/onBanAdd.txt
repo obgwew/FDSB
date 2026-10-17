@@ -1,0 +1,42 @@
+<dash>
+name: $onBanAdd
+desc: Runs your lines the moment someone is banned from the server.
+category: Event
+
+<block type="text" title="How does the event work?">
+text: Save a command whose Prefix field is $onBanAdd and the app marks it as an Event for you. The instant a member is banned — by a moderator, by one of your own commands or through the audit log — the lines under that prefix start running with nobody typing anything.
+text: The banned person is the author here, so $mention, $authorID and $authorName point at them, while $guildID and $guildName describe the server the ban happened in.
+text: A ban has no channel of its own, so the message channel is left empty unless you name one. Put a channel ID in brackets straight after the prefix and your replies land there instead.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $onBanAdd
+item: The app marks it as an Event for you
+item: Paste the code below into the editor
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: #PREFIX:$onBanAdd[channelID]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: #PREFIX:$onBanAdd[123456789012345678]
+text:  sendMessage[$mention has been banned from $guildName]
+</block>
+
+<block type="callout" kind="note">
+text: Keep $onBanAdd on the first line. Move it further down and the app stops treating the command as an event, so it will sit and wait for somebody to type its prefix like any other command.
+</block>
+
+<block type="callout" kind="important">
+text: Name a channel ID after the prefix, because a ban is not tied to any channel and the bot otherwise has nowhere to speak. Whoever reads it must have access to that channel, and the banned member will never see the message — which makes it a good place for a record of what happened.
+</block>
+</dash>
+
+<details>
+syntax: $onBanAdd
+</details>

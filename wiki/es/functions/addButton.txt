@@ -1,0 +1,57 @@
+<dash>
+name: $addButton
+desc: Coloca un botón pulsable debajo del mensaje que envía tu comando.
+category: Componentes
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Cada llamada añade un botón, y tú decides qué aspecto tiene y dónde se sitúa. Dale una etiqueta y un color y aparece debajo del mensaje en cuanto tu comando lo publica. Un botón de cualquier estilo que no sea link lleva un ID que tú eliges, que es como reconoces la pulsación más tarde dentro de un evento $onInteraction; un botón link en cambio solo abre la dirección que le das.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !menu en el campo Prefijo
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $addButton[newLine; ID/URL; label; style; (disabled; emoji; messageID)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $addButton[no; btn_confirm; Confirm; success]
+</block>
+
+<block type="options" title="Estilos de botón (style)">
+option: primary|Botón azul
+option: secondary|Botón gris
+option: success|Botón verde
+option: danger|Botón rojo
+option: link|Abre una dirección web en lugar de disparar un evento
+</block>
+
+<block type="callout" kind="note">
+text: Elige link y la segunda parte tiene que ser una dirección completa que empiece por http:// o https://. Cualquier otro estilo quiere un ID corto en su lugar, y dos botones del mismo mensaje no pueden compartir uno.
+</block>
+
+<block type="callout" kind="warning">
+text: Un mensaje puede llevar 25 botones como máximo, cinco por fila y cinco filas de fondo. Cuando una fila se llena, el siguiente botón baja solo a una nueva, y quedarse sin espacio detiene el comando con un error.
+</block>
+
+<block type="callout" kind="important">
+text: Rellena la última parte con el ID de un mensaje que el bot ya envió y el botón aterriza en ese mensaje en lugar del siguiente, que es como haces crecer un menú a posteriori.
+</block>
+</dash>
+
+<details>
+syntax: $addButton[newLine; ID/URL; label; style; (disabled; emoji; messageID)]
+param: newLine|yes/no|Obligatorio|yes empieza una fila nueva, no lo mete junto al último botón
+param: ID/URL|text|Obligatorio|El ID corto con el que coincide tu evento, o una dirección completa cuando el estilo es link
+param: label|text|Puede quedar vacío|Las palabras que se muestran en el botón
+param: style|text|Obligatorio|primary / secondary / success / danger / link
+param: disabled|yes/no|Opcional|yes pone el botón en gris para que no se pueda pulsar (predeterminado: no)
+param: emoji|text|Opcional|Un emoji que mostrar en el botón
+param: messageID|snowflake|Opcional|A qué mensaje que el bot ya envió añadir el botón en su lugar
+</details>

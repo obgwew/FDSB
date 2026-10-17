@@ -1,0 +1,31 @@
+<dash>
+name: $time
+desc: Définit le fuseau horaire dans lequel l'horloge est lue pour le reste de cette commande.
+category: Minutage & Délais
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: $time prend un nom de fuseau horaire dans la liste mondiale, comme Asia/Amman ou Europe/London, et le conserve pour la commande en cours. Une fois défini, $hour, $minute et $second lisent l'horloge dans ce fuseau horaire plutôt que là où le bot se trouve hébergé. Il n'affiche rien par lui-même — c'est une ligne de configuration que vous placez au-dessus de celles qui lisent réellement l'heure.
+</block>
+
+<block type="code" title="Syntaxe">
+text: $time[timezone]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $time[Asia/Amman]
+text: $sendMessage[Right now it is $hour:$minute]
+</block>
+
+<block type="callout" kind="note">
+text: Écrivez le fuseau horaire sous la forme d'une région et d'une ville séparées par une barre oblique, comme Asia/Amman, Europe/London ou America/New_York. La liste est la même que celle standard utilisée dans le reste du monde, donc tout nom familier est accepté.
+</block>
+
+<block type="callout" kind="important">
+text: Si le nom n'est pas reconnu, le bot répond avec une erreur au lieu de changer l'horloge. Le réglage appartient uniquement à cette exécution, alors placez $time avant les lignes qui lisent l'heure, et rappelez-vous que $day, $month et $year continuent de lire l'horloge locale propre au bot quoi qu'il arrive.
+</block>
+</dash>
+
+<details>
+syntax: $time[timezone]
+param: timezone|text|Requis|Un nom de fuseau horaire IANA, comme Asia/Amman ou Europe/London
+</details>

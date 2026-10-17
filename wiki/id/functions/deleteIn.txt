@@ -1,0 +1,45 @@
+<dash>
+name: $deleteIn
+desc: Menunggu waktu tertentu, lalu menghapus balasan bot sendiri dari kanal.
+category: Waktu & Jeda
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $deleteIn menerima sebuah durasi lalu meminta bot membersihkan keluarannya sendiri setelah waktu itu habis. Bot menangkap pesan yang sudah dipostingnya dalam pelaksanaan ini dan semua yang dipostingnya kemudian, menahannya selama jeda yang Anda sebutkan, lalu menghapusnya supaya kanal tetap bersih. Dengan begitu, mudah sekali memberikan catatan sementara atau hasil sekali pakai yang tidak seharusnya berdiam selamanya di chat.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !temp
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $deleteIn[duration]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $deleteIn[5s]
+text: $sendMessage[This message is removed after 5 seconds]
+</block>
+
+<block type="callout" kind="note">
+text: Sebuah durasi berupa angka plus sebuah satuan: ms untuk milidetik, s untuk detik, m untuk menit, h untuk jam, d untuk hari, dan w untuk minggu. Anda bisa menggabungkan beberapa sekaligus, sehingga 1h30m berarti satu jam tiga puluh menit, dan jeda terpanjang yang diizinkan adalah 14 hari.
+</block>
+
+<block type="callout" kind="warning">
+text: Bot memerlukan izin untuk menghapus pesan di kanal tersebut, dan setiap pesan yang dihapusnya harus merupakan pesan yang ia posting sendiri. Jika jeda berjalan saat bot sedang luring, pesan tetap di tempatnya, sebab hitung mundurnya hidup bersama bot.
+</block>
+
+<block type="callout" kind="important">
+text: Hanya durasi yang diterima di sini — tepatnya satu argumen, dengan nilai lebih besar dari nol. Tunggu yang terlalu lama, satuan yang hilang, atau angka tanpa satuan akan ditolak dengan kesalahan sebagai gantinya.
+</block>
+</dash>
+
+<details>
+syntax: $deleteIn[duration]
+param: duration|text|Wajib|Berapa lama menunggu sebelum menghapus, sebagai angka dengan satuan — 5s, 10m, 2h, 1d — dan sampai 14 hari
+</details>

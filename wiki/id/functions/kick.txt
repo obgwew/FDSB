@@ -1,0 +1,34 @@
+<dash>
+name: $kick
+desc: Mengeluarkan seorang anggota dari server, meninggalkan akunnya tak tersentuh sehingga ia dapat kembali.
+category: Moderasi
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Biarkan kurungnya kosong dan bot mengeluarkan siapa pun yang menjalankan perintah. Masukkan sebuah user ID atau mention di dalamnya dan orang itu dikeluarkan sebagai gantinya, dengan catatan tertinggal yang menyebutkan perintah mana yang melakukannya. Anggota langsung kehilangan akses tetapi akunnya tidak tersentuh, sehingga undangan baru membawanya kembali dengan peran yang sama dan pesan-pesan lamanya yang sama.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !kick
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $kick
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $kick[123456789]
+</block>
+
+<block type="callout" kind="warning">
+text: Mengeluarkan seseorang memerlukan izin Kick Members, dan peran tertinggi bot harus berada di atas peran target atau Discord menolaknya. Gunakan kurung dengan hati-hati, karena $kick tanpa apa pun mengeluarkan orang yang menjalankannya.
+</block>
+
+<block type="callout" kind="note">
+text: Tidak ada server untuk mengeluarkan siapa pun di pesan langsung, sehingga bot melaporkan kesalahan alih-alih bertindak.
+</block>
+</dash>

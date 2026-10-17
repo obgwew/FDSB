@@ -1,0 +1,41 @@
+<dash>
+name: $time
+desc: Mengatur zona waktu yang akan dipakai untuk membaca jam selama perintah ini berjalan.
+category: Waktu & Jeda
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $time menerima nama zona waktu standar IANA, seperti Asia/Amman atau Europe/London, dan akan memakainya selama perintah ini berjalan. Setelah diatur, $hour, $minute, dan $second akan membaca jam berdasarkan zona waktu tersebut, bukan berdasarkan zona waktu tempat bot di-hosting. Perintah ini tidak mengirim apa-apa sendiri — ini adalah pengaturan yang sebaiknya diletakkan sebelum baris yang membaca waktu.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !clock
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $time[timezone]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $time[Asia/Amman]
+text: $sendMessage[Right now it is $hour:$minute]
+</block>
+
+<block type="callout" kind="note">
+text: Tulis zona waktu dalam format wilayah/kota dengan garis miring, misalnya Asia/Amman, Europe/London, atau America/New_York. Nama-nama tersebut mengikuti standar IANA yang umum dipakai.
+</block>
+
+<block type="callout" kind="important">
+text: Jika nama zona waktu tidak dikenali, bot akan mengirim kesalahan alih-alih mengubah jam. Pengaturan ini hanya berlaku untuk satu eksekusi perintah, jadi letakkan $time sebelum baris yang membaca jam. Perhatikan bahwa $day, $month, dan $year tetap membaca waktu lokal bot, tidak terpengaruh oleh pengaturan ini.
+</block>
+</dash>
+
+<details>
+syntax: $time[timezone]
+param: timezone|text|Wajib|Nama zona waktu IANA, seperti Asia/Amman atau Europe/London
+</details>

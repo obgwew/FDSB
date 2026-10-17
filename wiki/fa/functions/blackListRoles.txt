@@ -1,0 +1,31 @@
+<dash>
+name: $blackListRoles
+desc: اجرای دستور را برای افرادی که هیچ‌یک از نقش‌های تعیین‌شده را ندارند متوقف می‌کند.
+category: کنترل دسترسی
+
+<block type="text" title="این دستور چگونه کار می‌کند؟">
+text: $blackListRoles بررسی می‌کند که آیا کاربری که دستور را فراخوانی کرده است حداقل یکی از نقش‌های لیست‌شده را دارد یا خیر. اگر هیچ‌یک از نقش‌ها را نداشته باشد، ربات پیام رد شما را نمایش می‌دهد (یا در صورت عدم تعیین، پیام پیش‌فرض) و بقیه دستور متوقف می‌شود. اگر کاربر حداقل یکی از نقش‌ها را داشته باشد، هیچ پیامی نمایش داده نمی‌شود و اسکریپت به‌طور عادی ادامه می‌یابد.
+</block>
+
+<block type="code" title="سینتکس">
+text: $blackListRoles[role; ...; message]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: $blackListRoles[Admin; Moderator; Sorry, this command is for another group of people!]
+</block>
+
+<block type="callout" kind="note">
+text: نقش‌ها را می‌توان به‌صورت منشن، شناسه یا نام وارد کرد. نام نقش‌ها با حروف بزرگ و کوچک حساس نیستند. می‌توانید چندین نقش را با نقطه‌ویرگول از هم جدا کنید. همه آرگومان‌ها تا آرگومان آخر به‌عنوان نقش در نظر گرفته می‌شوند، بنابراین آرگومان آخر پیام رد سفارشی خواهد بود.
+</block>
+
+<block type="callout" kind="warning">
+text: در صورت عدم داشتن هیچ‌یک از نقش‌های تعیین‌شده، اجرای دستور بلافاصله متوقف می‌شود — هیچ خطی بعد از آن اجرا نخواهد شد. اگر پیام سفارشی را ننویسید، ربات از پیام پیش‌فرض خود استفاده می‌کند.
+</block>
+</dash>
+
+<details>
+syntax: $blackListRoles[role; ...; message]
+param: role|text|الزامی|The blocked roles, as mentions, IDs or names, separated by semicolons
+param: message|text|اختیاری|A message to show instead of the default refusal when the user lacks all roles
+</details>

@@ -1,0 +1,41 @@
+<dash>
+name: $switch
+desc: Memilih satu pilihan dari daftar yang Anda tulis, berdasarkan nomor urutnya.
+category: Utilitas Teks
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Tuliskan pilihan-pilihan Anda sesuai urutan yang ingin Anda beri nomor, lalu di akhir tambahkan nomor pilihan yang ingin diambil — 1 untuk yang pertama, 2 untuk yang kedua, dan seterusnya. Bot akan mengirim pilihan tersebut sendiri di kanal. Karena nomornya bisa berasal dari mana saja, Anda bisa menggunakan $randomint atau variabel untuk memilih secara acak.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !pick
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $switch[item1; item2; ... ; index]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $switch[Red; Green; Blue; $randomint[1; 3]]
+</block>
+
+<block type="callout" kind="note">
+text: Berguna untuk memberikan beberapa opsi siap pakai — seperti warna, jawaban, atau daftar map — tanpa harus mengulang baris berkali-kali. Jika disisipkan ke dalam $sendMessage, pilihan yang terambil akan muncul langsung di tengah kalimat, bukan di baris terpisah.
+</block>
+
+<block type="callout" kind="warning">
+text: Nomor harus selalu berada di bagian paling akhir dalam kurung, dan harus berupa bilangan bulat antara 1 dan jumlah item yang telah Anda tulis. Angka 0, angka yang terlalu besar, atau nilai yang bukan angka akan menyebabkan bot mengirim kesalahan alih-alih menebak.
+</block>
+</dash>
+
+<details>
+syntax: $switch[item1; item2; ... ; index]
+param: item|text|Wajib|Salah satu pilihan, ditulis sesuai urutan yang ingin diberi nomor
+param: index|number|Wajib|Pilihan mana yang diambil, dimulai dari 1; wajib berada di bagian paling akhir kurung
+</details>

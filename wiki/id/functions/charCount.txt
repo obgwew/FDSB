@@ -1,0 +1,36 @@
+<dash>
+name: $charCount
+desc: Menghitung huruf dan angka dalam sebuah teks, mengabaikan sisanya.
+category: Matematika & Angka
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Berikan sebuah teks, lalu Anda mendapatkan kembali berapa banyak huruf dan angka yang ia berisi, sebagai angka biasa. Spasi, tanda baca, dan simbol dilewati sama sekali, sehingga Hello World! menjadi sepuluh alih-alih dua belas. Huruf dari aksara mana pun dihitung sama seperti huruf Inggris. Bila ditulis sebaris, angka itu justru diisi untuk Anda alih-alih diposting dengan sendirinya.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $charCount
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda perlu
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $charCount[text]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $charCount[Hello World!]
+</block>
+
+<block type="callout" kind="note">
+text: Tanpa teks, bot memposting kesalahan alih-alih menebak-nebak. Apa pun yang sudah Anda isi lebih dulu dibaca terlebih dahulu, sehingga Anda dapat menghitung sebuah pesan atau nilai tersimpan.
+</block>
+</dash>
+
+<details>
+syntax: $charCount[text]
+param: text|text|Wajib|Teks yang dihitung
+</details>

@@ -1,0 +1,36 @@
+<dash>
+name: $floor
+desc: Redondea un número hacia abajo hasta el número entero que queda justo debajo.
+category: Matemática y números
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Dale un decimal y descarta la parte fraccionaria, siempre hacia abajo. Así, 3.9 se convierte en 3, y -2.1 en -3 en lugar de -2. El resultado es siempre un número entero, y puedes escribirlo directamente en un mensaje o en un cálculo.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el prefijo !welcome en el campo Prefijo
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $floor[number]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $sendMessage[Result is $floor[3.9]]
+</block>
+
+<block type="callout" kind="note">
+text: Quiere exactamente un número, así que con dos o con ninguno da un error. Cualquier cosa que no sea un número también se rechaza. ¿Quieres la otra dirección? Usa $ceil en su lugar.
+</block>
+</dash>
+
+<details>
+syntax: $floor[number]
+param: number|number|Obligatorio|El número que redondear hacia abajo, como 3.9 o -2.1
+</details>
