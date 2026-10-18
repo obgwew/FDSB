@@ -29,6 +29,8 @@ FDSB is a cross-platform application for creating and running Discord bots local
 1. Download the APK or EXE build compatible with your device.
 2. Launch the application. The interface is displayed in English by default.
 3. Select **New Bot**. On the page that opens, enter the bot token and bot name, and optionally add a bot image.
+> [!NOTE]
+> The token is stored encrypted within the system and cannot be modified by extracting files, but this is only available in recent versions 2.4.3, 2.5.0 and beyond. 
 
 > [!NOTE]
 > In the Discord Developer Portal, create your bot and enable all three Gateway Intents (the toggles at the bottom of the **Bot** tab). Then copy the bot token and paste it into the application.
@@ -37,9 +39,6 @@ FDSB is a cross-platform application for creating and running Discord bots local
 
 > [!NOTE]
 > The bot name and image configured within the application do not modify the original bot on Discord.
-
-> [!WARNING]
-> The token is stored locally on the device and is **not encrypted**.
 
 5. Consult the **Wiki** page for the full list of available FDScript commands.
 6. Open the **Commands** tab and select the **+** button to create a new command. In the editor, enter a command name (required) and choose a prefix. Write the command's code according to the Wiki, then select **Save**.
