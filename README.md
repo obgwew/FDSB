@@ -28,34 +28,42 @@ FDSB is a cross-platform application for creating and running Discord bots local
 
 1. Download the APK or EXE build compatible with your device.
 2. Launch the application. The interface is displayed in English by default.
-3. Select **New Bot**. On the page that opens, enter the bot token and bot name, and optionally add a bot image.
-> [!NOTE]
-> The token is stored encrypted within the system and cannot be modified by extracting files, but this is only available in recent versions 2.4.3, 2.5.0 and beyond. 
-
-> [!NOTE]
-> In the Discord Developer Portal, create your bot and enable all three Gateway Intents (the toggles at the bottom of the **Bot** tab). Then copy the bot token and paste it into the application.
-
+3. Select **New Bot**. On the page that opens, enter the bot token and bot name, and optionally add a bot image. *(See [Setup Notes](#setup-notes) first.)*
 4. Open the bot and go to **Settings** to select the preferred language and interface theme.
-
-> [!NOTE]
-> The bot name and image configured within the application do not modify the original bot on Discord.
-
 5. Consult the **Wiki** page for the full list of available FDScript commands.
 6. Open the **Commands** tab and select the **+** button to create a new command. In the editor, enter a command name (required) and choose a prefix. Write the command's code according to the Wiki, then select **Save**.
-7. Return to the main screen and select **Start** to run the bot.
+7. Return to the main screen and select **Start** to run the bot. *(For Android, see [Background Execution](#background-execution).)*
+
+---
+
+## Notes and Warnings
+
+### Setup Notes
+
+> [!NOTE]
+> **Discord Developer Portal:** Create your bot and enable all three Gateway Intents (the toggles at the bottom of the **Bot** tab). Then copy the bot token and paste it into the application.
+
+> [!NOTE]
+> **Token security:** The token is stored encrypted within the system and cannot be modified by extracting files. This is only available in recent versions: 2.4.3, 2.5.0 and beyond.
+
+> [!NOTE]
+> **Bot name and image:** What you configure within the application does not modify the original bot on Discord.
+
+### Background Execution
 
 > [!WARNING]
 > The application can run in the background, provided that battery optimization is disabled for it and no network restrictions are applied to it.
 
 > [!CAUTION]
-> The background execution settings described above are documented for Android 13 and earlier versions. For Android 14 and later, background operation is not supported (the only workaround is to convert the application into an "app bubble" and keep it visible on the foreground interface).
+> The settings above are documented for **Android 13 and earlier**. For **Android 14 and later**, background operation is not supported. The only workaround is to convert the application into an "app bubble" and keep it visible on the foreground interface.
 
----
+### Development Status
 
-## Notes
+> [!NOTE]
+> The built-in command set is intentionally kept simple, while more complex tasks are handled by FDScript. This design choice is unrelated to the number of commands planned for future releases.
 
-- The built-in command set is intentionally kept simple, while more complex tasks are handled by FDScript. This design choice is unrelated to the number of commands planned for future releases.
-- FDScript undergoes gradual changes with each update. Commands may therefore be added, removed, or modified during the Alpha stage. **Sensitive bots should not be built until a stable Beta release is available.**
+> [!CAUTION]
+> FDScript undergoes gradual changes with each update. Commands may therefore be added, removed, or modified during the Alpha stage. **Sensitive bots should not be built until a stable Beta release is available.**
 
 ---
 
@@ -109,7 +117,7 @@ FDSB is a cross-platform application for creating and running Discord bots local
 
 ## Contributors
 
-- @y.lw(Hidden for privacy reasons) — Contributor
+- @y.lw (Hidden for privacy reasons) — Contributor
 - [@obgwew](https://github.com/obgwew) — Programming
 
 ---
