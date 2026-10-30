@@ -4,6 +4,7 @@
 - [ ] Slash commands support
 - [ ] Create via no-code
 - [ ] Modifying colors and command formats
+- [ ] Image support in wikis
 
 ## v2.7.x
 - [ ] Creating custom commands within the application
