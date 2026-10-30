@@ -1,13 +1,17 @@
 # Roadmap
 
 ## v2.5.x
-- [ ] Use a real code editor
-- [ ] Sync the bot with the Discord Developer Portal
-- [ ] Add 200+ commands
+- [x] Use a real code editor
+- [x] Sync the bot with the Discord Developer Portal
+- [x] Add 200+ commands
 
 ## v2.6.x
 - [ ] Slash commands support
 - [ ] Create via no-code
+- [ ] Modifying colors and command formats
+
+## v2.7.x
+- [ ] Creating custom commands within the application
 
 ## Future
 - [ ] Audio system
