@@ -1,10 +1,5 @@
 # Roadmap
 
-## v2.5.x
-- [x] Use a real code editor
-- [x] Sync the bot with the Discord Developer Portal
-- [x] Add 200+ commands
-
 ## v2.6.x
 - [ ] Slash commands support
 - [ ] Create via no-code
