@@ -1,0 +1,37 @@
+<dash>
+name: $toUppercase
+desc: Convierte un texto en letras mayúsculas.
+category: Utilidades de texto
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Cada letra minúscula del texto se convierte en mayúscula, y todo lo demás se deja como está. Los dígitos, espacios, signos de puntuación y emojis se quedan exactamente donde estaban.
+text: Úsalo para gritar un título, hacer que un código destaque o comparar dos valores sin importar sus mayúsculas. El resultado puede estar en su propia línea o dentro de una frase.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el campo Prefijo en $toUppercase
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $toUppercase[text]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $toUppercase[HeLLo WoRLD]
+</block>
+
+<block type="callout" kind="note">
+text: Sin ningún texto el bot informa un error. Los argumentos adicionales se unen primero con puntos y coma, así que una frase que contenga un punto y coma se mantiene entera.
+</block>
+</dash>
+
+<details>
+syntax: $toUppercase[text]
+param: text|text|Obligatorio|El texto a convertir; las variables y marcadores se rellenan primero
+</details>

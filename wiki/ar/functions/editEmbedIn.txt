@@ -1,0 +1,45 @@
+<dash>
+name: $editEmbedIn
+desc: ينتظر وقتًا محددًا، ثم يحرّر تضمين آخر رسالة أرسلها البوت.
+category: بناء التضمينات
+
+<block type="text" title="كيف يعمل الأمر؟">
+text: يعمل هذا مثل $editEmbed، باستثناء أنك لا تحتاج إلى معرّف رسالة. يتذكّر آخر رسالة أرسلها البوت، وينتظر الوقت الذي تعطيه إياه، ثم يغيّر تضمين تلك الرسالة.
+text: الوقت عدد صحيح يتبعه s أو m أو h أو d، مثل 30s أو 5m أو 2h أو 1d. أعط جزءًا واحدًا على الأقل للتغيير، واترك الآخرين فارغين للإبقاء عليهم كما هم. وهو الرفيق الطبيعي لـ $sendEmbedMessage، حيث تُنشر بطاقة الآن ويأتي تحرير ثانٍ بعد قليل.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة على $editEmbedIn
+item: الصق الكود أدناه في المحرر
+item: اضغط على حفظ
+</block>
+
+<block type="code" title="الصيغة">
+text: $editEmbedIn[time; (title); (description); (footer); (color)]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $sendEmbedMessage[$channelID; Starting; Please wait a moment; #F59E0B]
+text: $editEmbedIn[10s; Finished; Everything is done; ; #00FF00]
+</block>
+
+<block type="callout" kind="note">
+text: يجب ملء واحد على الأقل من العنوان أو الوصف أو التذييل أو اللون، وإلا يبلّغ البوت أنه لا يوجد شيء للتغيير. تحتفظ الأجزاء الفارغة بقيمتها القديمة، لذا استخدم فاصلة منقوطة مجردة كعنصر نائب عندما تريد التخطي إلى اللون.
+</block>
+
+<block type="callout" kind="warning">
+text: يجب أن يكون البوت قد أرسل بالفعل رسالة حقيقية تحتوي على تضمين في هذه التشغيلة. وفي وضع $syncMode تُرسل الرسالة المجمّعة أولًا، ولكن إذا لم يكن هناك تضمين على آخر رسالة يُرفض التحرير. لا يمكن تحرير سوى الرسائل التي أرسلها البوت.
+</block>
+</dash>
+
+<details>
+syntax: $editEmbedIn[time; (title); (description); (footer); (color)]
+param: time|text|مطلوب|مدة الانتظار: عدد صحيح و s أو m أو h أو d، مثل 30s أو 5m
+param: title|text|اختياري|عنوان جديد؛ اتركه فارغًا للإبقاء على القديم
+param: description|text|اختياري|نص جسم جديد؛ اتركه فارغًا للإبقاء على القديم
+param: footer|text|اختياري|سطر تذييل جديد؛ اتركه فارغًا للإبقاء على القديم
+param: color|text|اختياري|قيمة سداسية عشرية مثل #FF5733 أو لون مسمّى
+</details>

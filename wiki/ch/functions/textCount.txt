@@ -1,0 +1,37 @@
+<dash>
+name: $textCount
+desc: 统计一段文本中的每个字符，包括空格和符号。
+category: 字符串工具
+
+<block type="text" title="此命令如何工作？">
+text: 给它一段文本，你就会得到它的长度，逐字符计数。与 $charCount 跳过空格和标点不同，此命令会统计所有内容：字母、数字、空格、表情和符号。
+text: 这使它成为对照 Discord 2000 字符上限等限制进行检查的诚实方式。任何已填写的内容，例如消息或保存的值，都会先展开再计数。
+</block>
+
+<block type="list" title="如何在应用中使用">
+item: 打开命令选项卡
+item: 点按 + 创建新命令
+item: 在名称字段中为其命名
+item: 将前缀字段设为 $textCount
+item: 在编辑器中编写你的脚本
+item: 将下方行粘贴到你需要的任何位置
+item: 点按保存
+</block>
+
+<block type="code" title="语法">
+text: $textCount[text]
+</block>
+
+<block type="code" title="可直接复制的示例">
+text: $sendMessage[That sentence is $textCount[Hello, world!] characters long.]
+</block>
+
+<block type="callout" kind="note">
+text: 额外参数会在计数前用分号重新连接在一起，因此你在括号中写的分号也会计为一个字符。空括号计为零。
+</block>
+</dash>
+
+<details>
+syntax: $textCount[text]
+param: text|text|Optional|要测量的文本；变量和占位符会先填充。空值给出 0
+</details>

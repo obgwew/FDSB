@@ -1,0 +1,45 @@
+<dash>
+name: $awaitedCommand
+desc: Uruchamia twój skrypt, gdy ktoś odpowie po tym, jak $awaitInput poprosił o odpowiedź.
+category: Zdarzenie
+
+<block type="text" title="Jak działa to zdarzenie?">
+text: To zdarzenie działa w parze z $awaitInput. Ustaw pole Prefiks na $awaitedCommand[name], używając tej samej nazwy, którą nadałeś $awaitInput, a linie poniżej uruchomią się w momencie, gdy nadejdzie oczekiwana odpowiedź.
+text: Dodaj opcjonalny filtr po średniku w nawiasach, aby zdecydować, które odpowiedzi są akceptowane. `<numeric>` akceptuje liczby całkowite i dziesiętne, natomiast `<yes/no>` akceptuje tylko wymienione przez ciebie słowa, oddzielone ukośnikami i bez rozróżniania wielkości liter. Bez żadnego filtra każda odpowiedź budzi skrypt.
+</block>
+
+<block type="list" title="Jak używać tego w aplikacji">
+item: Otwórz kartę Komendy
+item: Stuknij +, aby rozpocząć nową komendę
+item: Nadaj jej nazwę w polu Nazwa
+item: Ustaw pole Prefiks na $awaitedCommand[age]
+item: Aplikacja oznaczy ją jako Zdarzenie
+item: Wklej poniższy kod do edytora
+item: Stuknij Zapisz
+</block>
+
+<block type="code" title="Składnia">
+text: #PREFIX:$awaitedCommand[name]
+text: #PREFIX:$awaitedCommand[name;<numeric>]
+text: #PREFIX:$awaitedCommand[name;<yes/no>]
+</block>
+
+<block type="code" title="Przykład do skopiowania">
+text: #PREFIX:$awaitedCommand[age;<numeric>]
+text: $sendMessage[Got it, you are $message years old.]
+</block>
+
+<block type="callout" kind="note">
+text: Sama odpowiedź jest wiadomością, na której działa skrypt, więc $message zawiera tekst wpisany przez członka. Kilka skryptów czekających na tę samą nazwę uruchomi się wszystkich, najstarszy plik najpierw, o ile każdy akceptuje odpowiedź.
+</block>
+
+<block type="callout" kind="important">
+text: Nazwa musi pasować do tej podanej w $awaitInput, a w tym kanale musi być aktywne oczekiwanie. Bez trwającego oczekiwania wiadomość nigdy nie obudzi tego skryptu. Umieść prefiks w pierwszej linii, inaczej aplikacja przestanie traktować plik jako zdarzenie.
+</block>
+</dash>
+
+<details>
+syntax: $awaitedCommand[waitName; (filter)]
+param: waitName|text|Required|Nazwa używana przez pasującą linię $awaitInput
+param: filter|text|Optional|Otocz nawiasami kątowymi: numeric dla liczb lub lista taka jak yes/no/true/false
+</details>

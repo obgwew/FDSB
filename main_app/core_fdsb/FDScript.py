@@ -29,6 +29,7 @@ except ImportError as e:
 
 from .FDCore import (
     set_vars_dir,
+    strip_fds_header,
     set_bot_start_time,
     get_reserved_names,
     ExecutionContext,
@@ -59,6 +60,8 @@ from .FDCore import (
     script_wants_ephemeral,
     _strip_links,
     _apply_remove_links,
+    send_embed_message,
+    flush_pending_message,
     _BOT_START_TIME,
     _format_uptime,
     _build_timestamp,
@@ -241,6 +244,7 @@ class Interpreter(ControlFlowMixin, FunctionsMixin, SyncModeMixin):
     _MAX_CALL_DEPTH = 50
 
     def __init__(self, script: str):
+        script = strip_fds_header(script)
         self.script_text = script
         self.source_lines = script.splitlines()
         self.functions: dict[str, tuple[int, int]] = {}
@@ -343,7 +347,7 @@ class Interpreter(ControlFlowMixin, FunctionsMixin, SyncModeMixin):
             kwargs['view'] = ctx.view
 
         try:
-            if getattr(ctx, "is_global_reply", False):
+            if ctx.use_message_reply():
                 _, kwargs, _ok = _apply_remove_links(ctx, (), kwargs, has_view=has_view)
                 sent = await ctx.message.reply(**kwargs) if _ok else None
             else:
@@ -397,7 +401,7 @@ class Interpreter(ControlFlowMixin, FunctionsMixin, SyncModeMixin):
         ch = await ctx.get_dest(force_default=True)
 
         async def _send(**kw):
-            if getattr(ctx, "is_global_reply", False):
+            if ctx.use_message_reply():
                 _, kw, ok = _apply_remove_links(ctx, (), kw, has_view=bool(kw.get("view")))
                 return await ctx.message.reply(**kw) if ok else None
             return await ch.send(**kw)
@@ -435,6 +439,7 @@ class Interpreter(ControlFlowMixin, FunctionsMixin, SyncModeMixin):
             ctx._sync_embeds = []
             ctx._sync_files = []
             ctx._sync_used = False
+            ctx.embed_builders = {}
 
     # ── Flush a standalone $addButton chain (no text/embed) ────
     async def _flush_view_only(self, ctx: ExecutionContext):
@@ -449,7 +454,7 @@ class Interpreter(ControlFlowMixin, FunctionsMixin, SyncModeMixin):
         ch = await ctx.get_dest()
 
         try:
-            if getattr(ctx, "is_global_reply", False):
+            if ctx.use_message_reply():
                 sent = await ctx.message.reply(view=ctx.view)
             else:
                 sent = await ch.send(view=ctx.view)
@@ -702,7 +707,7 @@ class Interpreter(ControlFlowMixin, FunctionsMixin, SyncModeMixin):
         view = ctx.view if ctx.view is not None else discord.utils.MISSING
 
         try:
-            if getattr(ctx, "is_global_reply", False):
+            if ctx.use_message_reply():
                 sent = await ctx.message.reply(content=resolved_text, view=view)
             else:
                 sent = await ch.send(resolved_text, view=view)

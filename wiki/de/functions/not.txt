@@ -1,0 +1,37 @@
+<dash>
+name: $not
+desc: Kehrt eine Prüfung um und macht aus true false und aus false true.
+category: Flusssteuerung
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: $not nimmt eine Prüfung und antwortet mit deren Gegenteil. Gib ihm einen Vergleich und es kehrt das Ergebnis um, sodass ein Paar, das nicht gleich ist, als true zurückkommt. Gib ihm einen Wert allein, zählen Wörter wie true, yes oder on als wahr, während false, no, off oder ein leerer Wert als falsch zählen.
+text: Die Antwort ist immer das reine Wort true oder false, was es einfach macht, es um eine vorhandene Prüfung in einem $if-Block zu legen oder in eine eigene Zeile zu setzen.
+</block>
+
+<block type="list" title="So verwendest du es in der App">
+item: Öffne den Tab Befehle
+item: Tippe auf +, um einen neuen Befehl zu starten
+item: Gib ihm im Feld Name einen Namen
+item: Setze das Feld Präfix auf !not
+item: Schreibe dein Skript in den Editor
+item: Füge die folgende Zeile überall ein, wo du sie brauchst
+item: Tippe auf Speichern
+</block>
+
+<block type="code" title="Syntax">
+text: $not[condition]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $sendMessage[Result: $not[true]]
+</block>
+
+<block type="callout" kind="note">
+text: Es werden dieselben Vergleichszeichen wie bei $if verstanden: ==, !=, >, <, >= und <=. Alles ohne Zeichen wird als wahr behandelt, es sei denn, es ist leer oder eines der bekannten falschen Wörter.
+</block>
+</dash>
+
+<details>
+syntax: $not[condition]
+param: condition|expression|Erforderlich|Ein Wert oder eine Prüfung zum Umkehren, mit ==, !=, >, <, >= oder <=
+</details>

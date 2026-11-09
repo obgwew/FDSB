@@ -1,0 +1,44 @@
+<dash>
+name: $sort
+desc: Met une liste de nombres en ordre et renvoie tous ou seulement les premiers.
+category: Mathématiques & Nombres
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: Donnez à $sort une suite de nombres, puis indiquez-lui la direction, combien en renvoyer et ce qu'il faut mettre entre eux. asc ordonne du plus petit au plus grand et desc fait l'inverse, et un nombre de retours de -1 garde toute la liste.
+text: Les décimales et les nombres négatifs sont acceptés, et les valeurs reviennent telles qu'elles ont été écrites, sans être réécrites. Le résultat peut être glissé dans une phrase ou publié sur sa propre ligne.
+</block>
+
+<block type="list" title="Comment l'utiliser dans l'application">
+item: Ouvrez l'onglet Commandes
+item: Appuyez sur + pour créer une nouvelle commande
+item: Donnez-lui un nom dans le champ Nom
+item: Réglez le champ Préfixe sur $sort
+item: Écrivez votre script dans l'éditeur
+item: Collez la ligne ci-dessous là où vous en avez besoin
+item: Appuyez sur Enregistrer
+</block>
+
+<block type="code" title="Syntaxe">
+text: $sort[number;number;...;asc/desc;returnAmount;separator]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $sort[42;7;19;9;66;desc;3;, ]
+</block>
+
+<block type="callout" kind="note">
+text: Un nombre de retours de -1 signifie tous les nombres, tandis que tout autre nombre doit être 1 ou plus. S'il y a moins de nombres que le nombre demandé, vous les récupérez simplement tous.
+</block>
+
+<block type="callout" kind="warning">
+text: Chaque valeur avant la direction doit être un vrai nombre. Un mot ou un emplacement vide arrête la commande avec une erreur nommant la valeur qu'elle n'a pas pu lire.
+</block>
+</dash>
+
+<details>
+syntax: $sort[number;number;...;asc/desc;returnAmount;separator]
+param: number|number|Requis|Les nombres à trier ; donnez-en un ou plusieurs avant la direction
+param: asc/desc|text|Requis|asc du plus petit au plus grand, desc du plus grand au plus petit
+param: returnAmount|text|Requis|Combien de valeurs renvoyer, ou -1 pour toutes
+param: separator|text|Requis|Ce qui va entre les valeurs, comme une virgule, ou un nom : dot, com, apo, sem, colon
+</details>

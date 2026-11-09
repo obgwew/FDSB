@@ -1,0 +1,37 @@
+<dash>
+name: $emoteCount
+desc: Tells you how many custom emojis a server has.
+category: Server
+
+<block type="text" title="How does the command work?">
+text: Ask with nothing inside and the bot counts the custom emojis uploaded to the server where the script ran. Add a server ID and it counts that server instead, as long as the bot is a member there.
+text: What comes back is the bare number, ready to be dropped into a sentence. It only counts the server's own custom emojis, not the standard Unicode emoji built into Discord.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $emoteCount
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: $emoteCount[(guildID)]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $sendMessage[This server has $emoteCount custom emotes!]
+</block>
+
+<block type="callout" kind="note">
+text: In a direct message there is no server to count, so pass a server ID there. A server the bot cannot see, or one it is not a member of, is reported as an error rather than as a zero.
+</block>
+</dash>
+
+<details>
+syntax: $emoteCount[(guildID)]
+param: guildID|snowflake|Optional|Which server to count the emojis of; leave empty for the current one
+</details>

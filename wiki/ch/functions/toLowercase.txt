@@ -1,0 +1,37 @@
+<dash>
+name: $toLowercase
+desc: 将一段文本转换为全小写字母。
+category: 字符串工具
+
+<block type="text" title="此命令如何工作？">
+text: 文本中的每个大写字母都会转换为其小写形式，其他所有内容保持不变。数字、空格、标点和表情会原样通过。
+text: 它便于在比较答案时不担心大小写，或让名称看起来整洁。结果可以单独发布在一行，也可以放入句子中。
+</block>
+
+<block type="list" title="如何在应用中使用">
+item: 打开命令选项卡
+item: 点按 + 创建新命令
+item: 在名称字段中为其命名
+item: 将前缀字段设为 $toLowercase
+item: 在编辑器中编写你的脚本
+item: 将下方行粘贴到你需要的任何位置
+item: 点按保存
+</block>
+
+<block type="code" title="语法">
+text: $toLowercase[text]
+</block>
+
+<block type="code" title="可直接复制的示例">
+text: $toLowercase[HeLLo WoRLD]
+</block>
+
+<block type="callout" kind="note">
+text: 完全没有文本时，机器人会报告错误。额外参数会先用分号连接，因此包含分号的短语会保持完整。
+</block>
+</dash>
+
+<details>
+syntax: $toLowercase[text]
+param: text|text|Required|要转换的文本；变量和占位符会先填充
+</details>

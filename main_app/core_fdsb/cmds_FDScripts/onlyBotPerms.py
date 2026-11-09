@@ -9,10 +9,11 @@ from FDScript import (
 
 async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: discord.abc.Messageable) -> None:
     parts = [ctx.resolve(a).strip() for a in args]
-    if len(parts) < 2 or not all(parts):
+    if len(parts) < 2 or not all(parts[:-1]):
         await _send_error(ch, FDSyntaxError(
-            "`$onlyBotPerms` requires at least one permission and an error message — "
-            "example: `$onlyBotPerms[kick_members;ban_members;Error message]`"
+            "`$onlyBotPerms` requires at least one permission and a message slot — "
+            "example: `$onlyBotPerms[kick_members;ban_members;Error message]` "
+            "or `$onlyBotPerms[kick_members;]` for silent abort"
         ))
         return
 
@@ -50,9 +51,12 @@ async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: disc
         return
 
     ctx.stop_typing()
-    dest = await ctx.get_dest()
-    sent = await dest.send(message)
-    if sent:
-        ctx.last_bot_message = sent
-    ctx.log_event(f"onlyBotPerms → Denied (missing: {', '.join(missing)}). Error message sent.")
+    if message:
+        dest = await ctx.get_dest()
+        sent = await dest.send(message)
+        if sent:
+            ctx.last_bot_message = sent
+        ctx.log_event(f"onlyBotPerms → Denied (missing: {', '.join(missing)}). Error message sent.")
+    else:
+        ctx.log_event(f"onlyBotPerms → Denied (missing: {', '.join(missing)}). Silent abort.")
     raise FDAbortScript()

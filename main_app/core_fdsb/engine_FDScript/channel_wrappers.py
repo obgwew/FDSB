@@ -14,6 +14,10 @@ class InteractionChannelWrapper:
 
     async def send(self, *args, **kwargs):
         view = kwargs.pop('view', self.ctx.view)
+        if view is None:
+            # followup.send() raises TypeError on view=None (unlike channel.send);
+            # MISSING means "no view".
+            view = discord.utils.MISSING
         args, kwargs, _ok = _apply_remove_links(
             self.ctx, args, kwargs, has_view=bool(view and getattr(view, 'children', None))
         )

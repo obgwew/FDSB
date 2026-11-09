@@ -1,0 +1,45 @@
+<dash>
+name: $awaitedCommand
+desc: Führt dein Skript aus, wenn jemand antwortet, nachdem $awaitInput um eine Antwort gebeten hat.
+category: Ereignis
+
+<block type="text" title="Wie funktioniert das Ereignis?">
+text: Dieses Ereignis arbeitet als Paar mit $awaitInput. Setze das Präfixfeld auf $awaitedCommand[name] und verwende denselben Namen, den du $awaitInput gegeben hast; die Zeilen darunter laufen in dem Moment, in dem die erwartete Antwort eintrifft.
+text: Füge nach einem Semikolon innerhalb der Klammern einen optionalen Filter hinzu, um zu entscheiden, welche Antworten akzeptiert werden. `<numeric>` akzeptiert ganze und dezimale Zahlen, während `<yes/no>` nur die von dir aufgelisteten Wörter akzeptiert, getrennt durch Schrägstriche und ohne Beachtung der Groß-/Kleinschreibung. Ohne Filter weckt jede Antwort das Skript.
+</block>
+
+<block type="list" title="So verwendest du es in der App">
+item: Öffne den Tab Befehle
+item: Tippe auf +, um einen neuen Befehl zu starten
+item: Gib ihm im Feld Name einen Namen
+item: Setze das Feld Präfix auf $awaitedCommand[age]
+item: Die App markiert es automatisch als Ereignis
+item: Füge den Code unten in den Editor ein
+item: Tippe auf Speichern
+</block>
+
+<block type="code" title="Syntax">
+text: #PREFIX:$awaitedCommand[name]
+text: #PREFIX:$awaitedCommand[name;<numeric>]
+text: #PREFIX:$awaitedCommand[name;<yes/no>]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: #PREFIX:$awaitedCommand[age;<numeric>]
+text: $sendMessage[Got it, you are $message years old.]
+</block>
+
+<block type="callout" kind="note">
+text: Die Antwort selbst ist die Nachricht, auf der das Skript läuft, daher enthält $message den Text, den das Mitglied eingegeben hat. Alle Skripte, die auf denselben Namen warten, laufen, die älteste Datei zuerst, solange jedes die Antwort akzeptiert.
+</block>
+
+<block type="callout" kind="important">
+text: Der Name muss mit dem übereinstimmen, der $awaitInput gegeben wurde, und in diesem Kanal muss ein Warten aktiv sein. Ohne laufendes Warten weckt eine Nachricht dieses Skript nie. Setze das Präfix in die erste Zeile, sonst behandelt die App die Datei nicht mehr als Ereignis.
+</block>
+</dash>
+
+<details>
+syntax: $awaitedCommand[waitName; (filter)]
+param: waitName|text|Erforderlich|Der Name, den die passende $awaitInput-Zeile verwendet
+param: filter|text|Optional|In spitze Klammern setzen: numeric für Zahlen oder eine Liste wie yes/no/true/false
+</details>

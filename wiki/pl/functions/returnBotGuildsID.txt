@@ -1,0 +1,45 @@
+<dash>
+name: $returnBotGuildsID
+desc: Zbiera ID każdego serwera, na którym jest bot, aby można było ponownie użyć listy.
+category: Komendy zwrotne
+
+<block type="text" title="Jak działa ta komenda?">
+text: Ta komenda przechodzi przez każdy serwer, do którego dołączył bot, i zbiera każde ID serwera. ID są łączone wybranym przez ciebie separatorem i zapisywane pod wybraną przez ciebie nazwą, a $return wyciąga całą listę tam, gdzie jej potrzebujesz. Podczas zbierania nic nie jest publikowane na kanale.
+text: Pierwsza część wybiera, jak lista jest zbierana. cache używa serwerów, które bot już zna, i jest natychmiastowe, natomiast chunk najpierw prosi Discord o pełną listę, co jest wolniejsze, ale zawsze aktualne na dużych botach.
+</block>
+
+<block type="list" title="Jak używać tego w aplikacji">
+item: Otwórz kartę Komendy
+item: Stuknij +, aby rozpocząć nową komendę
+item: Nadaj jej nazwę w polu Nazwa
+item: Ustaw pole Prefiks na !guilds
+item: Wpisz swój skrypt w edytorze
+item: Wklej poniższe linie tam, gdzie ich potrzebujesz
+item: Stuknij Zapisz
+</block>
+
+<block type="code" title="Składnia">
+text: $returnBotGuildsID[cache/chunk; var; separator]
+</block>
+
+<block type="code" title="Przykład do skopiowania">
+text: $returnBotGuildsID[cache; guildIDs; ,]
+text: $sendMessage[I am in these servers: $return[guildIDs]]
+</block>
+
+<block type="options" title="Tryby pobierania">
+option: cache|Używa listy serwerów, którą bot już ma, szybko, ale może być nieaktualna
+option: chunk|Najpierw prosi Discord o pełną listę serwerów, wolniej, ale kompletnie
+</block>
+
+<block type="callout" kind="note">
+text: Separatorem może być symbol, taki jak przecinek lub średnik, albo jedna z czytelnych nazw: dot, com, apo, sem lub colon. Jeśli bot nie jest na żadnym serwerze, komenda zgłasza błąd zamiast zapisać pustą listę.
+</block>
+</dash>
+
+<details>
+syntax: $returnBotGuildsID[cache/chunk; var; separator]
+param: cache/chunk|text|Required|cache dla znanej listy serwerów, chunk dla świeżej pełnej listy
+param: var|text|Required|Nazwa, pod którą lista jest zapisywana, odczytywana później przez $return[]
+param: separator|text|Required|Co znajduje się między ID, na przykład przecinek lub średnik, albo nazwa: dot, com, apo, sem, colon
+</details>

@@ -1,23 +1,17 @@
-welcome to update 2.5.0
+welcome to update 2.5.1
 
 # add:
-- code editor dsl
+- some settings
 
-- more theme desinge's 
-
-- stauts of discord dev web 
-
-- times commands
-
-- blackList commands
-
-# fixdded:
 - some commands
 
-- improving wiki speed
+- the ability to create folders
 
-- language
+- backup storage system on andriod
 
-- buttons of main
+# fixdded:
+- lot of commands
 
-- notification on android
+- lot of FDScript gen 2.5
+
+- lot of ui

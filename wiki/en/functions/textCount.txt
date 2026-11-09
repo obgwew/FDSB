@@ -1,0 +1,37 @@
+<dash>
+name: $textCount
+desc: Counts every character in a piece of text, spaces and symbols included.
+category: String Utilities
+
+<block type="text" title="How does the command work?">
+text: Feed it a text and you get back how long it is, counted character by character. Unlike $charCount, which steps over spaces and punctuation, this one counts everything: letters, digits, spaces, emoji and symbols alike.
+text: That makes it the honest way to check against a limit such as Discord's 2000 character cap. Anything already filled in, like a message or a saved value, is expanded first and then counted.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $textCount
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: $textCount[text]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $sendMessage[That sentence is $textCount[Hello, world!] characters long.]
+</block>
+
+<block type="callout" kind="note">
+text: Extra arguments are joined back together with semicolons before counting, so a semicolon you write in the brackets counts as one character too. Empty brackets count as zero.
+</block>
+</dash>
+
+<details>
+syntax: $textCount[text]
+param: text|text|Optional|The text to measure; variables and placeholders are filled in first. Empty gives 0
+</details>

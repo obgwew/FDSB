@@ -1,0 +1,45 @@
+<dash>
+name: $returnBotGuildsID
+desc: Collects the ID of every server the bot is in so you can reuse the list.
+category: Return Commands
+
+<block type="text" title="How does the command work?">
+text: This command walks through every server the bot has joined and collects each server ID. The IDs are joined with a separator you choose and filed under a name you pick, and $return brings the whole list back out wherever you need it. Nothing is posted in the channel while it collects.
+text: The first part chooses how the list is gathered. cache uses the servers the bot already knows about and is instant, while chunk asks Discord for the complete list first, which is slower but always current on large bots.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !guilds
+item: Write your script in the editor
+item: Paste the lines below wherever you need them
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: $returnBotGuildsID[cache/chunk; var; separator]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $returnBotGuildsID[cache; guildIDs; ,]
+text: $sendMessage[I am in these servers: $return[guildIDs]]
+</block>
+
+<block type="options" title="Fetch modes">
+option: cache|Uses the server list the bot already has, quick but possibly out of date
+option: chunk|Asks Discord for the full server list first, slower but complete
+</block>
+
+<block type="callout" kind="note">
+text: The separator can be a symbol such as a comma or semicolon, or one of the readable names: dot, com, apo, sem or colon. If the bot is in no server at all, the command reports an error instead of filing an empty list.
+</block>
+</dash>
+
+<details>
+syntax: $returnBotGuildsID[cache/chunk; var; separator]
+param: cache/chunk|text|Required|cache for the known server list, chunk for a fresh complete list
+param: var|text|Required|The name the list is filed under, read back later with $return[]
+param: separator|text|Required|What goes between the IDs, such as a comma or a semicolon, or a name: dot, com, apo, sem, colon
+</details>

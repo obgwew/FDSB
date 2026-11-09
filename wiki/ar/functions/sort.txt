@@ -1,0 +1,44 @@
+<dash>
+name: $sort
+desc: يرتّب قائمة أرقام ويعيدها كلها أو أعلاها فقط.
+category: الرياضيات والأرقام
+
+<block type="text" title="كيف يعمل الأمر؟">
+text: أعط $sort سلسلة أرقام، ثم أخبره بالاتجاه وكم عددًا يعيد وما يوضع بينها. يرتّب asc من الأصغر إلى الأكبر و desc يفعل العكس، وكمية إرجاع -1 تحتفظ بالقائمة كاملة.
+text: تُقبل الأعداد العشرية والسلبية، وتعود القيم كما كُتبت، لا معاد كتابتها. ويمكن إدراج النتيجة في جملة أو نشرها في سطر خاص بها.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة على $sort
+item: اكتب سكربتك في المحرر
+item: الصق السطر أدناه حيثما تحتاجه
+item: اضغط على حفظ
+</block>
+
+<block type="code" title="الصيغة">
+text: $sort[number;number;...;asc/desc;returnAmount;separator]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $sort[42;7;19;9;66;desc;3;, ]
+</block>
+
+<block type="callout" kind="note">
+text: كمية إرجاع -1 تعني كل الأرقام، بينما أي كمية أخرى يجب أن تكون 1 أو أكثر. وإذا كان عدد الأرقام أقل من الكمية، فستحصل عليها كلها ببساطة.
+</block>
+
+<block type="callout" kind="warning">
+text: يجب أن تكون كل قيمة قبل الاتجاه رقمًا حقيقيًا. كلمة واحدة أو خانة فارغة توقف الأمر بخطأ يسمّي القيمة التي تعذّرت قراءتها.
+</block>
+</dash>
+
+<details>
+syntax: $sort[number;number;...;asc/desc;returnAmount;separator]
+param: number|number|مطلوب|الأرقام التي يجب ترتيبها؛ أعط واحدًا أو أكثر قبل الاتجاه
+param: asc/desc|text|مطلوب|asc من الأصغر إلى الأكبر، و desc من الأكبر إلى الأصغر
+param: returnAmount|text|مطلوب|كم قيمة يجب إعادتها، أو -1 للجميع
+param: separator|text|مطلوب|ما يوضع بين القيم، مثل فاصلة، أو اسم: dot أو com أو apo أو sem أو colon
+</details>

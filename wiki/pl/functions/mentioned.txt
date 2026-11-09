@@ -1,0 +1,38 @@
+<dash>
+name: $mentioned
+desc: Daje wzmiankę pierwszej osoby oznaczonej w wiadomości lub autora, gdy nikt nie jest oznaczony.
+category: Narzędzia
+
+<block type="text" title="Jak działa ta komenda?">
+text: Gdy członek pisze wiadomość i oznacza w niej inne osoby, $mentioned zwraca wzmiankę jednej z nich. Pierwsza część wybiera którą, licząc od 1, a druga decyduje, co zrobić, gdy wiadomość oznacza mniej osób niż ta liczba.
+text: Z yes, domyślnym ustawieniem, bot wraca do wzmianki autora wiadomości. Z no zwraca zamiast tego pusty wynik, co jest przydatne, gdy chcesz reagować tylko na prawdziwe oznaczenie.
+</block>
+
+<block type="list" title="Jak używać tego w aplikacji">
+item: Otwórz kartę Komendy
+item: Stuknij +, aby rozpocząć nową komendę
+item: Nadaj jej nazwę w polu Nazwa
+item: Ustaw pole Prefiks na !greet
+item: Wpisz swój skrypt w edytorze
+item: Wklej poniższą linię tam, gdzie jej potrzebujesz
+item: Stuknij Zapisz
+</block>
+
+<block type="code" title="Składnia">
+text: $mentioned[(number); (returnAuthor)]
+</block>
+
+<block type="code" title="Przykład do skopiowania">
+text: $sendMessage[Hello $mentioned, welcome!]
+</block>
+
+<block type="callout" kind="note">
+text: Liczba jest dodatnią liczbą całkowitą i domyślnie wynosi 1, a powtórzone oznaczenia tej samej osoby są liczone raz. W naciśnięciu przycisku lub wyborze menu nie ma wpisanej wiadomości do odczytania, więc używany jest autor fallbacku.
+</block>
+</dash>
+
+<details>
+syntax: $mentioned[(number); (returnAuthor)]
+param: number|text|Optional|Która oznaczona osoba ma zostać zwrócona, licząc od 1. Domyślnie 1
+param: returnAuthor|yes/no|Optional|yes wspomina autora, gdy nie ma takiego oznaczenia, no zwraca puste. Domyślnie yes
+</details>

@@ -1,0 +1,44 @@
+<dash>
+name: $awaitInput
+desc: Nasłuchuje następnej odpowiedzi kogoś i uruchamia drugi skrypt, gdy nadejdzie.
+category: Kontrola przepływu
+
+<block type="text" title="Jak działa ta komenda?">
+text: $awaitInput ustawia oczekiwanie i sam nic nie publikuje. Przyjmuje wybraną przez ciebie nazwę, a od tego momentu bot obserwuje następną pasującą wiadomość i uruchamia skrypt, którego pierwsza linia to `$awaitedCommand[ta nazwa]`.
+text: Domyślnie nasłuchuje osoby, która uruchomiła komendę, na kanale, na którym komenda została uruchomiona. Podaj ID użytkownika, aby czekać na konkretnego członka, lub słowo everyone, aby zaakceptować następną odpowiedź od kogokolwiek. Podaj ID kanału na końcu, gdy odpowiedź ma przyjść z innego kanału.
+</block>
+
+<block type="list" title="Jak używać tego w aplikacji">
+item: Otwórz kartę Komendy
+item: Stuknij +, aby rozpocząć nową komendę
+item: Nadaj jej nazwę w polu Nazwa
+item: Ustaw pole Prefiks na !ask
+item: Wpisz poniższą linię w edytorze
+item: Stuknij Zapisz
+item: Utwórz drugi skrypt dla odpowiedzi, zobacz $awaitedCommand
+</block>
+
+<block type="code" title="Składnia">
+text: $awaitInput[name; (userID/everyone); (channelID)]
+</block>
+
+<block type="code" title="Przykład do skopiowania">
+text: $sendMessage[How old are you?]
+text: $awaitInput[age]
+</block>
+
+<block type="callout" kind="note">
+text: Nazwa może zawierać tylko litery, cyfry, podkreślenia i myślniki, a jest dopasowywana bez rozróżniania wielkości liter. Oczekiwanie zużywa się raz, więc odpowiedź uruchamia swój skrypt jednokrotnie, a potem bot wraca do zwykłego nasłuchiwania.
+</block>
+
+<block type="callout" kind="warning">
+text: Jedno oczekiwanie jest przechowywane na parę kanału i członka. Ponowne zapytanie do tego samego członka na tym samym kanale zastępuje starszą nazwę, więc pierwsze pytanie przestaje oczekiwać odpowiedzi. Zarówno użytkownik, jak i kanał muszą być zwykłymi ID numerycznymi; tylko część użytkownika może być słowem everyone.
+</block>
+</dash>
+
+<details>
+syntax: $awaitInput[name; (userID/everyone); (channelID)]
+param: name|text|Required|Nazwa oczekiwania; pasujący skrypt $awaitedCommand używa tej samej nazwy
+param: userID|snowflake|Optional|Którego członka nasłuchiwać, lub everyone dla kogokolwiek. Zostaw puste dla osoby, która uruchomiła komendę
+param: channelID|snowflake|Optional|Na którym kanale odpowiedź musi zostać wysłana. Zostaw puste dla bieżącego kanału
+</details>

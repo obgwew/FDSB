@@ -1,0 +1,37 @@
+<dash>
+name: $not
+desc: 翻转检查，将 true 变为 false，将 false 变为 true。
+category: 流程控制
+
+<block type="text" title="此命令如何工作？">
+text: $not 接受一个检查并返回其相反结果。给它一个比较，它会反转结果，因此不相等的对会返回 true。单独给它一个值时，true、yes 或 on 等词视为真，而 false、no、off 或空值视为假。
+text: 答案始终是纯单词 true 或 false，这使得它很容易包裹在 $if 块中的现有检查周围，或单独放在一行。
+</block>
+
+<block type="list" title="如何在应用中使用">
+item: 打开命令选项卡
+item: 点按 + 创建新命令
+item: 在名称字段中为其命名
+item: 将前缀字段设为 !not
+item: 在编辑器中编写你的脚本
+item: 将下方行粘贴到你需要的任何位置
+item: 点按保存
+</block>
+
+<block type="code" title="语法">
+text: $not[condition]
+</block>
+
+<block type="code" title="可直接复制的示例">
+text: $sendMessage[Result: $not[true]]
+</block>
+
+<block type="callout" kind="note">
+text: 可理解与 $if 相同的比较符号：==、!=、>、<、>= 和 <=。任何没有符号的内容都视为真，除非它为空或是已知的假词之一。
+</block>
+</dash>
+
+<details>
+syntax: $not[condition]
+param: condition|expression|Required|要反转的值或检查，使用 ==、!=、>、<、>= 或 <=
+</details>

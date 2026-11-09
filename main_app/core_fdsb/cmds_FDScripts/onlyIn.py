@@ -14,10 +14,11 @@ def _as_id(text: str) -> int | None:
 
 async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: discord.abc.Messageable) -> None:
     parts = [ctx.resolve(a).strip() for a in args]
-    if len(parts) < 2 or not all(parts):
+    if len(parts) < 2 or not all(parts[:-1]):
         await _send_error(ch, FDSyntaxError(
-            "`$onlyIn` requires at least one channel/server and an error message — "
-            "example: `$onlyIn[123456789012345678;general;Error message]`"
+            "`$onlyIn` requires at least one channel/server and a message slot — "
+            "example: `$onlyIn[123456789012345678;general;Error message]` "
+            "or `$onlyIn[123456789012345678;]` for silent abort"
         ))
         return
 
@@ -37,9 +38,12 @@ async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: disc
         return
 
     ctx.stop_typing()
-    dest = await ctx.get_dest()
-    sent = await dest.send(message)
-    if sent:
-        ctx.last_bot_message = sent
-    ctx.log_event("onlyIn → Denied. Error message sent.")
+    if message:
+        dest = await ctx.get_dest()
+        sent = await dest.send(message)
+        if sent:
+            ctx.last_bot_message = sent
+        ctx.log_event("onlyIn → Denied. Error message sent.")
+    else:
+        ctx.log_event("onlyIn → Denied. Silent abort.")
     raise FDAbortScript()

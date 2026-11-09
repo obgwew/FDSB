@@ -1,0 +1,38 @@
+<dash>
+name: $findUser
+desc: Transforme un ID d'utilisateur ou une mention en ID de membre réutilisable, avec repli sur l'auteur.
+category: Utilitaires
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: Donnez-lui un ID d'utilisateur ou une mention et le bot vérifie si cette personne est membre du serveur actuel. Si oui, vous récupérez son ID en chiffres simples, prêt pour un changement de rôle, un message privé ou une variable enregistrée.
+text: Quand la personne n'est pas membre, la seconde partie décide ce qui se passe. Avec yes, qui est la valeur par défaut, le bot renvoie l'ID de la personne qui a lancé la commande ; avec no, il ne renvoie rien du tout. Cela en fait un moyen pratique de cibler le membre nommé, ou de se rabattre sur la personne qui demande.
+</block>
+
+<block type="list" title="Comment l'utiliser dans l'application">
+item: Ouvrez l'onglet Commandes
+item: Appuyez sur + pour créer une nouvelle commande
+item: Donnez-lui un nom dans le champ Nom
+item: Réglez le champ Préfixe sur $findUser
+item: Écrivez votre script dans l'éditeur
+item: Collez la ligne ci-dessous là où vous en avez besoin
+item: Appuyez sur Enregistrer
+</block>
+
+<block type="code" title="Syntaxe">
+text: $findUser[userID/mention; (returnAuthor)]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $sendMessage[Target: $findUser[$mentioned]]
+</block>
+
+<block type="callout" kind="note">
+text: Il ne cherche que dans le serveur actuel, donc un utilisateur valide qui n'est pas membre du serveur est traité comme absent. La mention doit être une vraie mention d'utilisateur comme <@123>, et le mot de repli est soit yes soit no.
+</block>
+</dash>
+
+<details>
+syntax: $findUser[userID/mention; (returnAuthor)]
+param: userID|text|Requis|L'utilisateur à rechercher, sous forme d'ID ou de mention
+param: returnAuthor|yes/no|Optionnel|yes renvoie l'auteur quand personne n'est trouvé, no ne renvoie rien. Par défaut yes
+</details>

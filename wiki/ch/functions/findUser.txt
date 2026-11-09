@@ -1,0 +1,38 @@
+<dash>
+name: $findUser
+desc: 将用户 ID 或提及转换为可重复使用的成员 ID，并以作者作为回退。
+category: 实用工具
+
+<block type="text" title="此命令如何工作？">
+text: 提供用户 ID 或提及，机器人会检查该人是否为当前服务器的成员。如果是，你会以纯数字形式得到他们的 ID，可用于角色更改、私信或保存的变量。
+text: 当该人不是成员时，第二部分决定会发生什么。使用 yes（默认值）时，机器人返回运行命令者的 ID；使用 no 时，它完全不返回任何内容。这使它成为定位指定成员或回退到提问者的便捷方式。
+</block>
+
+<block type="list" title="如何在应用中使用">
+item: 打开命令选项卡
+item: 点按 + 创建新命令
+item: 在名称字段中为其命名
+item: 将前缀字段设为 $findUser
+item: 在编辑器中编写你的脚本
+item: 将下方行粘贴到你需要的任何位置
+item: 点按保存
+</block>
+
+<block type="code" title="语法">
+text: $findUser[userID/mention; (returnAuthor)]
+</block>
+
+<block type="code" title="可直接复制的示例">
+text: $sendMessage[Target: $findUser[$mentioned]]
+</block>
+
+<block type="callout" kind="note">
+text: 它只搜索当前服务器，因此不是公会成员的有效用户会被视为缺失。提及必须是真实的用户提及，例如 <@123>，回退词是 yes 或 no。
+</block>
+</dash>
+
+<details>
+syntax: $findUser[userID/mention; (returnAuthor)]
+param: userID|text|Required|要查找的用户，以 ID 或用户提及表示
+param: returnAuthor|yes/no|Optional|yes 在找不到人时返回作者，no 返回空。默认为 yes
+</details>

@@ -1,0 +1,37 @@
+<dash>
+name: $toLowercase
+desc: Wandelt einen Text in lauter Kleinbuchstaben um.
+category: Textwerkzeuge
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: Jeder Großbuchstabe im Text wird in seine Kleinbuchstabenform umgewandelt, und alles andere bleibt unberührt. Ziffern, Leerzeichen, Satzzeichen und Emojis gehen unverändert durch.
+text: Er ist praktisch, um Antworten zu vergleichen, ohne sich um Groß-/Kleinschreibung zu kümmern, oder um einen Namen ordentlich aussehen zu lassen. Das Ergebnis kann in einer eigenen Zeile gepostet oder in einen Satz eingefügt werden.
+</block>
+
+<block type="list" title="So verwendest du es in der App">
+item: Öffne den Tab Befehle
+item: Tippe auf +, um einen neuen Befehl zu starten
+item: Gib ihm im Feld Name einen Namen
+item: Setze das Feld Präfix auf $toLowercase
+item: Schreibe dein Skript in den Editor
+item: Füge die folgende Zeile überall ein, wo du sie brauchst
+item: Tippe auf Speichern
+</block>
+
+<block type="code" title="Syntax">
+text: $toLowercase[text]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $toLowercase[HeLLo WoRLD]
+</block>
+
+<block type="callout" kind="note">
+text: Ohne jeglichen Text meldet der Bot einen Fehler. Zusätzliche Argumente werden zuerst mit Semikolons verbunden, sodass ein Satz mit einem Semikolon vollständig bleibt.
+</block>
+</dash>
+
+<details>
+syntax: $toLowercase[text]
+param: text|text|Erforderlich|Der umzuwandelnde Text; Variablen und Platzhalter werden zuerst ausgefüllt
+</details>

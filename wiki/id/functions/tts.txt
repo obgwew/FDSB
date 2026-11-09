@@ -1,0 +1,41 @@
+<dash>
+name: $tts
+desc: Membuat bot membacakan pesan Anda dengan suara teks-ke-ucapan Discord.
+category: Pesan
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Apa pun yang Anda taruh di dalam kurung diposting di kanal saat ini sebagai pesan teks-ke-ucapan, dan Discord membacakannya dengan keras untuk siapa pun di kanal yang tidak membisukan jenis pesan itu.
+text: Teksnya dipakai persis seperti yang ditulis, jadi kalimat sederhana adalah yang terbaik. Jaga tetap pendek dan jelas, karena suaranya berhenti dengan canggung pada tautan dan rangkaian simbol yang panjang.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !say
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $tts[text]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $tts[Attention everyone, the event starts in five minutes!]
+</block>
+
+<block type="callout" kind="note">
+text: Teksnya boleh sampai 2000 karakter. Di bawah $syncMode pesan yang diucapkan dikirim sendiri alih-alih dilipat ke pesan yang terkumpul, karena Discord memperlakukan TTS sebagai pesan terpisah.
+</block>
+
+<block type="callout" kind="warning">
+text: Bot memerlukan izin Kirim Pesan TTS di kanal, dan anggota bisa mematikan TTS di sisi mereka, jadi jangan pernah mengandalkannya untuk pengumuman penting. Gunakan dengan hemat, karena berbicara menimpa orang lain cepat menjadi menjengkelkan.
+</block>
+</dash>
+
+<details>
+syntax: $tts[text]
+param: text|text|Wajib|Apa yang harus dikatakan bot, sampai 2000 karakter
+</details>

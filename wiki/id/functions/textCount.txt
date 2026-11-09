@@ -1,0 +1,37 @@
+<dash>
+name: $textCount
+desc: Menghitung setiap karakter dalam sepotong teks, termasuk spasi dan simbol.
+category: Utilitas Teks
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Beri teks dan Anda mendapat panjangnya, dihitung karakter demi karakter. Berbeda dari $charCount, yang melangkahi spasi dan tanda baca, yang ini menghitung semuanya: huruf, angka, spasi, emoji, dan simbol sama saja.
+text: Itu menjadikannya cara jujur untuk memeriksa batas seperti batas 2000 karakter Discord. Apa pun yang sudah terisi, seperti pesan atau nilai tersimpan, diperluas lebih dulu lalu dihitung.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $textCount
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda membutuhkannya
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $textCount[text]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $sendMessage[That sentence is $textCount[Hello, world!] characters long.]
+</block>
+
+<block type="callout" kind="note">
+text: Argumen tambahan digabungkan kembali dengan titik koma sebelum dihitung, jadi titik koma yang Anda tulis di dalam kurung juga dihitung sebagai satu karakter. Kurung kosong dihitung nol.
+</block>
+</dash>
+
+<details>
+syntax: $textCount[text]
+param: text|text|Opsional|Teks yang akan diukur; variabel dan placeholder diisi lebih dulu. Kosong memberi 0
+</details>

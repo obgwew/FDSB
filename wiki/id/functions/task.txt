@@ -1,0 +1,43 @@
+<dash>
+name: $task
+desc: Menjalankan skrip berulang kali dengan pengatur waktu selama bot tetap online.
+category: Peristiwa
+
+<block type="text" title="Bagaimana cara kerja peristiwa?">
+text: Atur kolom Awalan ke $task[time] dan aplikasi menandai berkas sebagai Peristiwa untuk Anda. Waktunya adalah bilangan bulat diikuti s, m, h, atau d, untuk detik, menit, jam, atau hari, dan tidak boleh nol. Saat bot terhubung, jalankan pertama terjadi satu interval kemudian, dan sejak itu baris-barisnya berulang dengan tempo itu selama bot berjalan.
+text: Satu jalankan tidak punya pesan di baliknya, jadi tidak ada penulis, server, atau kanal untuk dijadikan cadangan. Data seperti $botID dan $botName tersedia, tetapi sebelum mengirim apa pun ke kanal, arahkan skrip ke salah satunya dengan $useChannel[guildID; channelID].
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $task[1h]
+item: Aplikasi menandainya sebagai Peristiwa untuk Anda
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: #PREFIX:$task[time]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: #PREFIX:$task[1h]
+text: $useChannel[123456789012345678; 987654321098765432]
+text: $sendMessage[Hourly check-in from $botName.]
+</block>
+
+<block type="callout" kind="note">
+text: Edit diambil sendiri. Bot membaca ulang folder peristiwa kira-kira setiap sepuluh detik, jadi waktu atau baris yang berubah berlaku tanpa memulai ulang, dan menghapus berkas cukup menghentikan pengatur waktunya.
+</block>
+
+<block type="callout" kind="warning">
+text: Pengatur waktu terus berbunyi bahkan saat tidak ada orang, jadi jaga tugas tetap ringan dan hindari memposting terlalu sering. Batas laju Discord berlaku untuk pesan pengatur waktu seperti pesan lainnya.
+</block>
+</dash>
+
+<details>
+syntax: $task[time]
+param: time|text|Wajib|Bilangan bulat dan satu satuan: s, m, h, atau d, misalnya 30s, 5m, 2h, atau 1d
+</details>

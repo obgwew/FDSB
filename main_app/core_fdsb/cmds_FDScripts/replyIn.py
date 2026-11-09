@@ -4,7 +4,7 @@ import re
 import discord
 from FDScript import (
     ExecutionContext, Command,
-    FDLogicError, _send_error
+    FDLogicError, _send_error, flush_pending_message
 )
 
 
@@ -34,6 +34,8 @@ async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: disc
 
     multipliers = {'s': 1, 'm': 60, 'h': 3600, 'd': 86400}
     seconds = amount * multipliers[unit]
+
+    await flush_pending_message(ctx, ch)
 
     ctx.log_event(f"replyIn → delaying reply for {resolved_text} ({seconds} seconds)...")
 

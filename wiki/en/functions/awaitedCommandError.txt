@@ -1,0 +1,43 @@
+<dash>
+name: $awaitedCommandError
+desc: Runs when the reply after $awaitInput does not match the filter you set.
+category: Event
+
+<block type="text" title="How does the event work?">
+text: This is the companion of $awaitedCommand. Give it the Prefix field $awaitedCommandError[name], using the same wait name, and it runs only when a reply arrives, an $awaitedCommand script with that name exists, but the reply fails its filter.
+text: A classic use is a yes or no question: the normal awaited script handles accepted words, while this one politely points out that the answer was not understood. The rejected text is the message behind the script, so $message still holds whatever was typed.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $awaitedCommandError[confirm]
+item: The app marks it as an Event for you
+item: Paste the code below into the editor
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: #PREFIX:$awaitedCommandError[name]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: #PREFIX:$awaitedCommandError[confirm]
+text: $sendMessage[Please answer with yes or no.]
+text: $awaitInput[confirm]
+</block>
+
+<block type="callout" kind="note">
+text: The error script has no filter of its own; any reply that fails the matching $awaitedCommand filter wakes it. If no $awaitedCommand script exists for that name at all, nothing happens here either, so always create the normal script too.
+</block>
+
+<block type="callout" kind="warning">
+text: The wait is consumed by the reply even when it does not match. To ask again, run $awaitInput with the same name once more, as the example does.
+</block>
+</dash>
+
+<details>
+syntax: $awaitedCommandError[waitName]
+param: waitName|text|Required|The name used by the matching $awaitInput and $awaitedCommand lines
+</details>

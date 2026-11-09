@@ -1,0 +1,44 @@
+<dash>
+name: $awaitInput
+desc: Attend la prochaine réponse de quelqu'un et exécute un second script quand elle arrive.
+category: Contrôle de flux
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: $awaitInput met en place une attente et ne publie rien par lui-même. Il prend un nom que vous choisissez, et à partir de là le bot surveille le prochain message correspondant et exécute le script dont la première ligne est `$awaitedCommand[ce nom]`.
+text: Par défaut, il écoute la personne qui a lancé la commande, dans le canal où la commande a été lancée. Passez un ID d'utilisateur pour attendre un membre précis, ou le mot everyone pour accepter la prochaine réponse de n'importe qui. Passez un ID de canal en dernier quand la réponse doit venir d'un autre canal.
+</block>
+
+<block type="list" title="Comment l'utiliser dans l'application">
+item: Ouvrez l'onglet Commandes
+item: Appuyez sur + pour créer une nouvelle commande
+item: Donnez-lui un nom dans le champ Nom
+item: Réglez le champ Préfixe sur !ask
+item: Écrivez la ligne ci-dessous dans l'éditeur
+item: Appuyez sur Enregistrer
+item: Créez un second script pour la réponse, voir $awaitedCommand
+</block>
+
+<block type="code" title="Syntaxe">
+text: $awaitInput[name; (userID/everyone); (channelID)]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $sendMessage[How old are you?]
+text: $awaitInput[age]
+</block>
+
+<block type="callout" kind="note">
+text: Le nom ne peut utiliser que des lettres, des chiffres, des traits de soulignement et des traits d'union, et il est comparé sans tenir compte des majuscules. Une attente est consommée une fois, donc la réponse exécute son script une seule fois, puis le bot se remet à écouter comme d'habitude.
+</block>
+
+<block type="callout" kind="warning">
+text: Une attente est conservée par paire de canal et de membre. Redemander pour le même membre dans le même canal remplace le nom précédent, donc la première question cesse d'attendre une réponse. L'utilisateur comme le canal doivent être de simples ID numériques ; seule la partie utilisateur peut être le mot everyone.
+</block>
+</dash>
+
+<details>
+syntax: $awaitInput[name; (userID/everyone); (channelID)]
+param: name|text|Requis|Le nom de l'attente ; le script $awaitedCommand correspondant utilise le même nom
+param: userID|snowflake|Optionnel|Quel membre écouter, ou everyone pour n'importe qui. Laissez vide pour la personne qui a lancé la commande
+param: channelID|snowflake|Optionnel|Dans quel canal la réponse doit être envoyée. Laissez vide pour le canal actuel
+</details>

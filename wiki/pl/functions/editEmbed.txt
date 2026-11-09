@@ -1,0 +1,44 @@
+<dash>
+name: $editEmbed
+desc: Przepisuje tytuł, opis, stopkę lub kolor embedu, który bot już opublikował.
+category: Kreator embedów
+
+<block type="text" title="Jak działa ta komenda?">
+text: Podaj ID wiadomości i co najmniej jedną część do zmiany, a bot zaktualizuje embed znajdujący się na tej wiadomości. Części pozostawione puste pozostaną dokładnie takie, jakie były, więc wystarczy jeden nowy tytuł i nic więcej nie zostanie naruszone.
+text: Wiadomość jest wyszukiwana na bieżącym kanale lub na kanale, na który przełączył $useChannel. Edytować można tylko wiadomości wysłane przez samego bota, a wiadomość musi już zawierać embed. Kolor akceptuje wartość szesnastkową, taką jak #FF5733, lub jeden z nazwanych kolorów.
+</block>
+
+<block type="list" title="Jak używać tego w aplikacji">
+item: Otwórz kartę Komendy
+item: Stuknij +, aby rozpocząć nową komendę
+item: Nadaj jej nazwę w polu Nazwa
+item: Ustaw pole Prefiks na !editEmbed
+item: Wklej poniższy kod do edytora
+item: Stuknij Zapisz
+</block>
+
+<block type="code" title="Składnia">
+text: $editEmbed[messageID; (title); (description); (footer); (color)]
+</block>
+
+<block type="code" title="Przykład do skopiowania">
+text: $editEmbed[$lastBotMessageID; Updated title]
+</block>
+
+<block type="callout" kind="note">
+text: Zostaw lukę, wpisując tylko średnik, aby pominąć część, na przykład nowy tytuł i kolor bez opisu i stopki: $editEmbed[123; New title; ; ; #00FF00]. ID wiadomości może pochodzić z $lastBotMessageID lub z dowolnej zapisanej wartości.
+</block>
+
+<block type="callout" kind="warning">
+text: Bot może edytować tylko własne wiadomości i potrzebuje na tym kanale uprawnienia Czytaj historię wiadomości. Wiadomość bez embedu lub taka, której bot nie wysłał, jest zgłaszana jako błąd zamiast być zmieniana.
+</block>
+</dash>
+
+<details>
+syntax: $editEmbed[messageID; (title); (description); (footer); (color)]
+param: messageID|snowflake|Required|Wiadomość, której embed ma zostać edytowany
+param: title|text|Optional|Nowy nagłówek; zostaw puste, aby zachować stary
+param: description|text|Optional|Nowy tekst treści; zostaw puste, aby zachować stary
+param: footer|text|Optional|Nowa linia stopki; zostaw puste, aby zachować starą
+param: color|text|Optional|Wartość szesnastkowa, taka jak #FF5733, lub nazwany kolor
+</details>

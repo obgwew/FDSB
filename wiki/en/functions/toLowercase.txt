@@ -1,0 +1,37 @@
+<dash>
+name: $toLowercase
+desc: Turns a piece of text into all lowercase letters.
+category: String Utilities
+
+<block type="text" title="How does the command work?">
+text: Every capital letter in the text is turned into its lowercase form, and everything else is left alone. Digits, spaces, punctuation and emoji pass through unchanged.
+text: It is handy for comparing answers without worrying about capitals, or for making a name look tidy. The result can be posted on its own line or tucked into a sentence.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $toLowercase
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: $toLowercase[text]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $toLowercase[HeLLo WoRLD]
+</block>
+
+<block type="callout" kind="note">
+text: With no text at all the bot reports an error. Additional arguments are joined with semicolons first, so a phrase containing a semicolon stays whole.
+</block>
+</dash>
+
+<details>
+syntax: $toLowercase[text]
+param: text|text|Required|The text to convert; variables and placeholders are filled in first
+</details>

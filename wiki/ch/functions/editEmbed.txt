@@ -1,0 +1,44 @@
+<dash>
+name: $editEmbed
+desc: 重写机器人已发布的嵌入消息的标题、描述、页脚或颜色。
+category: 嵌入构建
+
+<block type="text" title="此命令如何工作？">
+text: 提供消息 ID 和至少一个要更改的部分，机器人会更新该消息上的嵌入。留空的部分会保持原样，因此仅一个新标题就足够，其他内容不会被动。
+text: 消息会在当前频道中查找，或在 $useChannel 切换到的频道中查找。只能编辑机器人自己发送的消息，且消息必须已经包含嵌入。颜色接受十六进制值（如 #FF5733）或某个命名颜色。
+</block>
+
+<block type="list" title="如何在应用中使用">
+item: 打开命令选项卡
+item: 点按 + 创建新命令
+item: 在名称字段中为其命名
+item: 将前缀字段设为 !editEmbed
+item: 将下方代码粘贴到编辑器中
+item: 点按保存
+</block>
+
+<block type="code" title="语法">
+text: $editEmbed[messageID; (title); (description); (footer); (color)]
+</block>
+
+<block type="code" title="可直接复制的示例">
+text: $editEmbed[$lastBotMessageID; Updated title]
+</block>
+
+<block type="callout" kind="note">
+text: 只输入一个分号即可跳过某个部分，例如新标题和颜色，而不要描述或页脚：$editEmbed[123; New title; ; ; #00FF00]。消息 ID 可以来自 $lastBotMessageID 或任何已保存的值。
+</block>
+
+<block type="callout" kind="warning">
+text: 机器人只能编辑自己的消息，并且需要在该频道中拥有读取消息历史记录权限。没有嵌入的消息，或不是机器人发送的消息，会报告为错误而不是被更改。
+</block>
+</dash>
+
+<details>
+syntax: $editEmbed[messageID; (title); (description); (footer); (color)]
+param: messageID|snowflake|Required|应编辑其嵌入的消息
+param: title|text|Optional|新标题；留空以保留旧标题
+param: description|text|Optional|新正文文本；留空以保留旧内容
+param: footer|text|Optional|新页脚行；留空以保留旧内容
+param: color|text|Optional|十六进制值，如 #FF5733，或命名颜色
+</details>

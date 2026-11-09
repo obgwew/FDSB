@@ -1,0 +1,45 @@
+<dash>
+name: $editEmbedIn
+desc: Waits a set time, then edits the embed on the last message the bot sent.
+category: Embed Builder
+
+<block type="text" title="How does the command work?">
+text: This one works like $editEmbed, except that you do not need a message ID. It remembers the last message the bot sent, waits for the time you give it, and then changes the embed on that message.
+text: The time is a whole number followed by s, m, h or d, such as 30s, 5m, 2h or 1d. Give at least one part to change, and leave the others empty to keep them as they are. It is the natural partner of $sendEmbedMessage, where one card is posted now and a second edit arrives a little later.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $editEmbedIn
+item: Paste the code below into the editor
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: $editEmbedIn[time; (title); (description); (footer); (color)]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $sendEmbedMessage[$channelID; Starting; Please wait a moment; #F59E0B]
+text: $editEmbedIn[10s; Finished; Everything is done; ; #00FF00]
+</block>
+
+<block type="callout" kind="note">
+text: At least one of title, description, footer or colour must be filled in, otherwise the bot reports that there is nothing to change. Empty parts keep their old value, so use a bare semicolon as a placeholder when you want to skip ahead to the colour.
+</block>
+
+<block type="callout" kind="warning">
+text: The bot must have already sent a real message holding an embed in this run. Under $syncMode the collected message is sent first, but if there is no embed on the last message the edit is refused. Only messages sent by the bot can be edited.
+</block>
+</dash>
+
+<details>
+syntax: $editEmbedIn[time; (title); (description); (footer); (color)]
+param: time|text|Required|How long to wait: a whole number and s, m, h or d, for example 30s or 5m
+param: title|text|Optional|A new heading; leave empty to keep the old one
+param: description|text|Optional|New body text; leave empty to keep the old one
+param: footer|text|Optional|A new footer line; leave empty to keep the old one
+param: color|text|Optional|A hex value like #FF5733 or a named colour
+</details>

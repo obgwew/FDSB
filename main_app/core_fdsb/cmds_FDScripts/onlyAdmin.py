@@ -47,23 +47,21 @@ async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: disc
     is_owner = (member.id == guild.owner_id)
     is_admin = getattr(member.guild_permissions, 'administrator', False)
 
-    if not (is_owner or is_admin):
-        ctx.stop_typing()
+    if is_owner or is_admin:
+        ctx.log_event(f"onlyAdmin → Passed for user {member.id}.")
+        return
 
-        error_msg = ";".join(ctx.resolve(arg) for arg in args).strip() if args else ""
+    ctx.stop_typing()
 
+    error_msg = ";".join(ctx.resolve(arg) for arg in args).strip() if args else ""
+
+    if error_msg:
         dest = await ctx.get_dest()
-        if error_msg:
-            sent = await dest.send(error_msg)
+        sent = await dest.send(error_msg)
+        if sent:
             ctx.last_bot_message = sent
-            ctx.log_event(f"onlyAdmin → Denied for {member.id}. Custom error sent.")
-        else:
-            ctx.log_event(f"onlyAdmin → Denied for {member.id}. Default error sent.")
-            await _send_error(
-                dest,
-                FDEnvironmentError("`$onlyAdmin` — Only server administrators or the server owner can execute this command.")
-            )
+        ctx.log_event(f"onlyAdmin → Denied for {member.id}. Custom message sent.")
+    else:
+        ctx.log_event(f"onlyAdmin → Denied for {member.id}. Silent abort.")
 
-        raise FDAbortScript()
-
-    ctx.log_event(f"onlyAdmin → Passed for user {member.id}.")
+    raise FDAbortScript()

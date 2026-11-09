@@ -1,0 +1,38 @@
+<dash>
+name: $findUser
+desc: Mengubah ID pengguna atau mention menjadi ID anggota yang bisa dipakai ulang, dengan cadangan ke penulis.
+category: Utilitas
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Berikan ID pengguna atau mention dan bot memeriksa apakah orang itu anggota server saat ini. Jika ya, Anda mendapat ID-nya sebagai angka biasa, siap untuk perubahan peran, DM, atau variabel tersimpan.
+text: Saat orang itu bukan anggota, bagian kedua menentukan apa yang terjadi. Dengan yes, yang merupakan bawaan, bot mengembalikan ID siapa pun yang menjalankan perintah; dengan no, ia tidak mengembalikan apa pun. Itu menjadikannya cara praktis untuk menyasar anggota yang disebutkan, atau beralih ke orang yang bertanya.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $findUser
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda membutuhkannya
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $findUser[userID/mention; (returnAuthor)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $sendMessage[Target: $findUser[$mentioned]]
+</block>
+
+<block type="callout" kind="note">
+text: Ia hanya mencari di server saat ini, jadi pengguna valid yang bukan anggota server dianggap tidak ada. Mention harus berupa mention pengguna sungguhan seperti <@123>, dan kata cadangannya adalah yes atau no.
+</block>
+</dash>
+
+<details>
+syntax: $findUser[userID/mention; (returnAuthor)]
+param: userID|text|Wajib|Pengguna yang dicari, sebagai ID atau mention pengguna
+param: returnAuthor|yes/no|Opsional|yes mengembalikan penulis saat tidak ada yang ditemukan, no tidak mengembalikan apa pun. Bawaannya yes
+</details>

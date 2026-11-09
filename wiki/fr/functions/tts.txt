@@ -1,0 +1,41 @@
+<dash>
+name: $tts
+desc: Fait lire votre message à voix haute par le bot avec la voix de synthèse vocale de Discord.
+category: Messages
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: Tout ce que vous mettez entre les crochets est publié dans le canal actuel comme un message de synthèse vocale, et Discord le lit à voix haute pour quiconque dans le canal n'a pas coupé ce type de message.
+text: Le texte est utilisé exactement tel qu'il est écrit, donc une phrase simple est préférable. Gardez-le court et clair, car la voix fait des pauses gênantes sur les liens et les longues séries de symboles.
+</block>
+
+<block type="list" title="Comment l'utiliser dans l'application">
+item: Ouvrez l'onglet Commandes
+item: Appuyez sur + pour créer une nouvelle commande
+item: Donnez-lui un nom dans le champ Nom
+item: Réglez le champ Préfixe sur !say
+item: Écrivez votre script dans l'éditeur
+item: Collez la ligne ci-dessous dans l'éditeur
+item: Appuyez sur Enregistrer
+</block>
+
+<block type="code" title="Syntaxe">
+text: $tts[text]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $tts[Attention everyone, the event starts in five minutes!]
+</block>
+
+<block type="callout" kind="note">
+text: Le texte peut faire jusqu'à 2000 caractères. Sous $syncMode, le message parlé est envoyé séparément plutôt que d'être intégré au message collecté, car Discord traite la TTS comme un message distinct.
+</block>
+
+<block type="callout" kind="warning">
+text: Le bot a besoin de la permission Envoyer des messages TTS dans le canal, et les membres peuvent désactiver la TTS de leur côté, alors ne comptez jamais dessus pour des annonces importantes. Utilisez-la avec parcimonie, car parler par-dessus les gens devient vite agaçant.
+</block>
+</dash>
+
+<details>
+syntax: $tts[text]
+param: text|text|Requis|Ce que le bot doit dire, jusqu'à 2000 caractères
+</details>

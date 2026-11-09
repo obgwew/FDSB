@@ -9,10 +9,6 @@ from FDScript import (
 _EMOJI_TYPES = {"all", "static", "animated"}
 
 
-def resolve_inline(args: list[str], ctx: ExecutionContext) -> str:
-    return ""
-
-
 async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: discord.abc.Messageable) -> None:
     resolved = [ctx.resolve(arg).strip() for arg in args]
 

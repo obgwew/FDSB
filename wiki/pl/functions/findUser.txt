@@ -1,0 +1,38 @@
+<dash>
+name: $findUser
+desc: Zamienia ID użytkownika lub wzmiankę na ID członka do ponownego użycia, z fallbackiem do autora.
+category: Narzędzia
+
+<block type="text" title="Jak działa ta komenda?">
+text: Podaj ID użytkownika lub wzmiankę, a bot sprawdzi, czy ta osoba jest członkiem bieżącego serwera. Jeśli tak, otrzymasz jej ID jako zwykłe cyfry, gotowe do zmiany roli, wiadomości prywatnej lub zapisanej zmiennej.
+text: Gdy osoba nie jest członkiem, druga część decyduje, co się stanie. Z yes, które jest domyślne, bot zwraca ID osoby, która uruchomiła komendę; z no nie zwraca niczego. To czyni go wygodnym sposobem na wskazanie nazwanego członka lub powrót do osoby pytającej.
+</block>
+
+<block type="list" title="Jak używać tego w aplikacji">
+item: Otwórz kartę Komendy
+item: Stuknij +, aby rozpocząć nową komendę
+item: Nadaj jej nazwę w polu Nazwa
+item: Ustaw pole Prefiks na $findUser
+item: Wpisz swój skrypt w edytorze
+item: Wklej poniższą linię tam, gdzie jej potrzebujesz
+item: Stuknij Zapisz
+</block>
+
+<block type="code" title="Składnia">
+text: $findUser[userID/mention; (returnAuthor)]
+</block>
+
+<block type="code" title="Przykład do skopiowania">
+text: $sendMessage[Target: $findUser[$mentioned]]
+</block>
+
+<block type="callout" kind="note">
+text: Szuka tylko na bieżącym serwerze, więc prawidłowy użytkownik, który nie jest członkiem serwera, jest traktowany jako nieobecny. Wzmianka musi być prawdziwą wzmianką użytkownika, taką jak <@123>, a słowem fallbacku jest yes lub no.
+</block>
+</dash>
+
+<details>
+syntax: $findUser[userID/mention; (returnAuthor)]
+param: userID|text|Required|Użytkownik do wyszukania, jako ID lub wzmianka użytkownika
+param: returnAuthor|yes/no|Optional|yes zwraca autora, gdy nikogo nie znaleziono, no nie zwraca niczego. Domyślnie yes
+</details>

@@ -1,0 +1,41 @@
+<dash>
+name: $tts
+desc: 让机器人用 Discord 的文字转语音声音大声读出你的消息。
+category: 消息发送
+
+<block type="text" title="此命令如何工作？">
+text: 你放入括号中的任何内容都会作为文字转语音消息发布到当前频道，Discord 会为频道中未屏蔽此类消息的任何人朗读它。
+text: 文本会完全按书写内容使用，因此最好使用普通句子。保持简短清晰，因为语音在链接和长串符号上会尴尬地停顿。
+</block>
+
+<block type="list" title="如何在应用中使用">
+item: 打开命令选项卡
+item: 点按 + 创建新命令
+item: 在名称字段中为其命名
+item: 将前缀字段设为 !say
+item: 在编辑器中编写你的脚本
+item: 将下方行粘贴到编辑器中
+item: 点按保存
+</block>
+
+<block type="code" title="语法">
+text: $tts[text]
+</block>
+
+<block type="code" title="可直接复制的示例">
+text: $tts[Attention everyone, the event starts in five minutes!]
+</block>
+
+<block type="callout" kind="note">
+text: 文本最多可达 2000 个字符。在 $syncMode 下，朗读消息会单独发送，而不是合并到收集的消息中，因为 Discord 将 TTS 作为单独消息处理。
+</block>
+
+<block type="callout" kind="warning">
+text: 机器人需要频道中的发送 TTS 消息权限，且成员可以在自己那边关闭 TTS，因此切勿依赖它发布重要公告。请谨慎使用，因为对别人大声说话很快就会令人厌烦。
+</block>
+</dash>
+
+<details>
+syntax: $tts[text]
+param: text|text|Required|机器人应说的内容，最多 2000 个字符
+</details>

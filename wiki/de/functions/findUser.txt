@@ -1,0 +1,38 @@
+<dash>
+name: $findUser
+desc: Wandelt eine Benutzer-ID oder Erwähnung in eine wiederverwendbare Mitglieds-ID um, mit Rückgriff auf den Autor.
+category: Werkzeuge
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: Gib ihm eine Benutzer-ID oder eine Erwähnung und der Bot prüft, ob diese Person Mitglied des aktuellen Servers ist. Wenn ja, bekommst du ihre ID als reine Ziffern zurück, bereit für eine Rollenänderung, eine DM oder eine gespeicherte Variable.
+text: Wenn die Person kein Mitglied ist, entscheidet der zweite Teil, was passiert. Mit yes, dem Standard, gibt der Bot die ID der Person zurück, die den Befehl ausgeführt hat; mit no gibt er überhaupt nichts zurück. Das macht ihn zu einer bequemen Möglichkeit, das genannte Mitglied anzusprechen oder auf die fragende Person zurückzugreifen.
+</block>
+
+<block type="list" title="So verwendest du es in der App">
+item: Öffne den Tab Befehle
+item: Tippe auf +, um einen neuen Befehl zu starten
+item: Gib ihm im Feld Name einen Namen
+item: Setze das Feld Präfix auf $findUser
+item: Schreibe dein Skript in den Editor
+item: Füge die folgende Zeile überall ein, wo du sie brauchst
+item: Tippe auf Speichern
+</block>
+
+<block type="code" title="Syntax">
+text: $findUser[userID/mention; (returnAuthor)]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $sendMessage[Target: $findUser[$mentioned]]
+</block>
+
+<block type="callout" kind="note">
+text: Er durchsucht nur den aktuellen Server, daher wird ein gültiger Benutzer, der kein Gildenmitglied ist, als fehlend behandelt. Die Erwähnung muss eine echte Benutzererwähnung wie <@123> sein, und das Rückgriffswort ist entweder yes oder no.
+</block>
+</dash>
+
+<details>
+syntax: $findUser[userID/mention; (returnAuthor)]
+param: userID|text|Erforderlich|Der gesuchte Benutzer, als ID oder Benutzererwähnung
+param: returnAuthor|yes/no|Optional|yes gibt den Autor zurück, wenn niemand gefunden wird, no gibt nichts zurück. Standard ist yes
+</details>

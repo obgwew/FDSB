@@ -8,6 +8,7 @@
 
 import os
 import sys
+import asyncio
 import json
 import time
 import zipfile
@@ -22,6 +23,7 @@ import flet as ft
 from main_app.status.status_view import BotStatusView
 from main_app.status.intents_view import BotIntentsView
 from main_app.load.token_vault import TokenVault
+from main_app.load.loading_view import LoadingScreen
 
 from main_app.settings_app import (
     is_mobile, get_persistent_base_dir, get_current_lang,
@@ -177,8 +179,11 @@ class BotSettingsTab:
 
     def __init__(self, page: ft.Page, bot_data: dict = None,
                  on_bot_save=None, on_theme_change=None, on_lang_change=None,   # on_theme_change / on_lang_change: unused, kept for compatibility (theme + language now live in settings_app.py)
-                 is_bot_online=None):
+                 is_bot_online=None, on_bot_deleted=None):
         self._page              = page
+        # Optional: callable() invoked after the bot was fully deleted (navigate to the main screen).
+        # If omitted, falls back to page._go_home (set in FDSB.py).
+        self._on_bot_deleted    = on_bot_deleted
         # Optional: callable(bot_data) -> bool telling whether the bot process is online.
         self._is_bot_online     = is_bot_online
         self._bot_data          = bot_data or {}
@@ -1098,7 +1103,7 @@ class BotSettingsTab:
         self._delete_init_btn.visible  = True
         self._page.update()
 
-    def _execute_deletion(self, _):
+    async def _execute_deletion(self, _):
         if (self._captcha_field.value or '').strip() != self._captcha_code:
             self._regenerate_captcha()
             self._captcha_field.value      = ''
@@ -1107,47 +1112,59 @@ class BotSettingsTab:
             return
 
         base_dir = get_persistent_base_dir()
+        app_data = os.path.normpath(os.path.join(base_dir, 'app_data'))
         bot_name = self._bot_data.get('name', '')
-        _bot_dir = self._bot_data.get('bot_dir', '')
+        bot_dir  = self._bot_data.get('bot_dir', '')
+        bot_id   = TokenVault.bot_id_from_dir(bot_dir) if bot_dir else None
 
-        # Remove token from vault
-        if _bot_dir:
-            _bot_id = TokenVault.bot_id_from_dir(_bot_dir)
-            TokenVault.forget_cached(_bot_id)
-            try:
-                self._page.run_task(TokenVault.remove, _bot_id)
-            except Exception as e:
-                print(f'[Settings] token remove failed: {e}')
-
-        # Remove app_data folder for this bot
+        # Folders to remove (never the base dir or the app_data root itself).
+        protected = {os.path.normpath(base_dir), app_data}
+        targets: list[str] = []
         if bot_name:
-            target = os.path.normpath(os.path.join(base_dir, 'app_data', bot_name))
-            if os.path.exists(target):
+            targets.append(os.path.normpath(os.path.join(app_data, bot_name)))
+        if bot_dir:
+            targets.append(os.path.normpath(bot_dir))
+        targets = [p for i, p in enumerate(targets)
+                   if p not in protected and p not in targets[:i]]
+
+        async def _work(screen: LoadingScreen):
+            existing = [p for p in targets if os.path.exists(p)]
+            total = len(existing) + 2          # folders + token + navigation
+            done = 0
+            screen.set_progress(0.0)
+
+            # 1) folders first: if one fails, nothing else is touched and we stay here.
+            for path in existing:
+                await asyncio.to_thread(shutil.rmtree, path)
+                print(f'[Settings] Deleted: {path}')
+                done += 1
+                screen.set_progress(done / total)
+
+            # 2) token (best effort: the bot is already gone at this point)
+            if bot_id is not None:
                 try:
-                    shutil.rmtree(target)
-                    print(f'[Settings] Deleted app_data target: {target}')
+                    TokenVault.forget_cached(bot_id)
+                    await TokenVault.remove(bot_id)
                 except Exception as e:
-                    print(f'[Settings] Delete failed: {e}')
+                    print(f'[Settings] token remove failed: {e}')
+            done += 1
+            screen.set_progress(done / total)
 
-        # Remove bot_dir if separate
-        if _bot_dir and os.path.exists(_bot_dir) and _bot_dir != base_dir:
-            try:
-                shutil.rmtree(_bot_dir)
-                print(f'[Settings] Deleted bot directory: {_bot_dir}')
-            except Exception as e:
-                print(f'[Settings] Delete bot_dir failed: {e}')
+            # 3) go to the main screen while the loading overlay is still covering the page
+            self._bot_data = {}
+            go_home = self._on_bot_deleted or getattr(self._page, '_go_home', None)
+            if callable(go_home):
+                go_home()
+            elif self._on_bot_save:
+                self._on_bot_save({})
 
-        # Reset bot state cleanly
-        self._bot_data = {}
-        self._name_field.value = ''
-        self._token_field.value = ''
-        self._hide_captcha()
-
-        # Trigger main FDSB interface callback to seamlessly navigate back to dashboard/bot creation
-        if self._on_bot_save:
-            self._on_bot_save({})
-
-        self._page.update()
+        screen = LoadingScreen(page=self._page, title=_t('delete_bot_perm'))
+        try:
+            await screen.run_overlay(_work, extra_hold_min=0.3, extra_hold_max=0.6)
+        except Exception as e:
+            print(f'[Settings] Delete failed: {e}')
+            self._notify(f'{type(e).__name__}: {e}', _c('danger'))
+            self._hide_captcha()
 
     async def _save_bot(self, _):
         new_name  = (self._name_field.value or '').strip()

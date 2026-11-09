@@ -1,0 +1,37 @@
+<dash>
+name: $not
+desc: Inverse une vérification, transformant true en false et false en true.
+category: Contrôle de flux
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: $not prend une vérification et répond son contraire. Donnez-lui une comparaison et il inverse le résultat, donc une paire qui n'est pas égale revient comme true. Donnez-lui une valeur seule et des mots comme true, yes ou on comptent comme vrai, tandis que false, no, off ou une valeur vide comptent comme faux.
+text: La réponse est toujours le mot brut true ou false, ce qui facilite son enveloppement autour d'une vérification existante dans un bloc $if ou son placement sur sa propre ligne.
+</block>
+
+<block type="list" title="Comment l'utiliser dans l'application">
+item: Ouvrez l'onglet Commandes
+item: Appuyez sur + pour créer une nouvelle commande
+item: Donnez-lui un nom dans le champ Nom
+item: Réglez le champ Préfixe sur !not
+item: Écrivez votre script dans l'éditeur
+item: Collez la ligne ci-dessous là où vous en avez besoin
+item: Appuyez sur Enregistrer
+</block>
+
+<block type="code" title="Syntaxe">
+text: $not[condition]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $sendMessage[Result: $not[true]]
+</block>
+
+<block type="callout" kind="note">
+text: Les mêmes signes de comparaison que $if sont compris : ==, !=, >, <, >= et <=. Tout ce qui n'a pas de signe est traité comme vrai sauf si c'est vide ou l'un des mots faux connus.
+</block>
+</dash>
+
+<details>
+syntax: $not[condition]
+param: condition|expression|Requis|Une valeur ou une vérification à inverser, avec ==, !=, >, <, >= ou <=
+</details>

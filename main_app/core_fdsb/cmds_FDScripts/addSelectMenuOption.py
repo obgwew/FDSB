@@ -18,10 +18,6 @@ def _get_registry(ctx: ExecutionContext) -> dict:
     return registry
 
 
-def resolve_inline(args: list[str], ctx: ExecutionContext) -> str:
-    return ""
-
-
 async def _sync_to_message(ch: discord.abc.Messageable, ctx: ExecutionContext,
                             menu_id: str, entry: dict, message_id: int) -> bool:
     try:
@@ -56,9 +52,15 @@ async def _sync_to_message(ch: discord.abc.Messageable, ctx: ExecutionContext,
         return False
 
     new_view = discord.ui.View(timeout=None)
-    for item in kept_items:
-        new_view.add_item(item)
-    new_view.add_item(entry["select"])
+    try:
+        for item in kept_items:
+            new_view.add_item(item)
+        new_view.add_item(entry["select"])
+    except ValueError:
+        await _send_error(ch, FDLogicError(
+            "`$addSelectMenuOption` — that message has no free row left for this select menu"
+        ))
+        return False
 
     try:
         updated_message = await target_message.edit(view=new_view)
@@ -178,7 +180,14 @@ async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: disc
                     "`$addSelectMenuOption` — no room left on the response message for this select menu"
                 ))
                 return
-            ctx.view.add_item(select)
+            try:
+                ctx.view.add_item(select)
+            except ValueError:
+                select.options.remove(option)
+                await _send_error(ch, FDLogicError(
+                    "`$addSelectMenuOption` — no free row left on the response message for this select menu"
+                ))
+                return
             entry["added_to_view"] = True
 
     ctx.log_event(f"addSelectMenuOption → added `{_truncate(label)}` (`{value}`) to `{menu_id}`")

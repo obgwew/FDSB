@@ -1,0 +1,37 @@
+<dash>
+name: $emoteCount
+desc: 告诉你服务器拥有多少个自定义表情。
+category: 服务器
+
+<block type="text" title="此命令如何工作？">
+text: 括号内不填内容询问，机器人会统计脚本运行所在服务器上传的自定义表情。添加服务器 ID，它就会改为统计该服务器，只要机器人是该服务器的成员。
+text: 返回的是纯数字，可直接放入句子中。它只统计服务器自己的自定义表情，不统计 Discord 内置的标准 Unicode 表情。
+</block>
+
+<block type="list" title="如何在应用中使用">
+item: 打开命令选项卡
+item: 点按 + 创建新命令
+item: 在名称字段中为其命名
+item: 将前缀字段设为 $emoteCount
+item: 在编辑器中编写你的脚本
+item: 将下方行粘贴到你需要的任何位置
+item: 点按保存
+</block>
+
+<block type="code" title="语法">
+text: $emoteCount[(guildID)]
+</block>
+
+<block type="code" title="可直接复制的示例">
+text: $sendMessage[This server has $emoteCount custom emotes!]
+</block>
+
+<block type="callout" kind="note">
+text: 在私信中不存在可统计的服务器，因此请在那里传入服务器 ID。机器人无法看到的服务器，或它不是成员的服务器，会报告为错误而不是零。
+</block>
+</dash>
+
+<details>
+syntax: $emoteCount[(guildID)]
+param: guildID|snowflake|Optional|要统计其表情的服务器；留空表示当前服务器
+</details>

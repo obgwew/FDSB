@@ -1,0 +1,38 @@
+<dash>
+name: $mentioned
+desc: 给出消息中第一个被标记的人的提及，或在无人被标记时给出作者。
+category: 实用工具
+
+<block type="text" title="此命令如何工作？">
+text: 当成员输入消息并在其中标记其他人时，$mentioned 会返回其中一人的提及。第一部分选择哪一个，从 1 开始计数，第二部分决定当消息标记的人数少于该数字时该怎么做。
+text: 使用 yes（默认值）时，机器人回退为提及消息作者。使用 no 时，它返回空结果，当你只想对真实标记做出反应时这很方便。
+</block>
+
+<block type="list" title="如何在应用中使用">
+item: 打开命令选项卡
+item: 点按 + 创建新命令
+item: 在名称字段中为其命名
+item: 将前缀字段设为 !greet
+item: 在编辑器中编写你的脚本
+item: 将下方行粘贴到你需要的任何位置
+item: 点按保存
+</block>
+
+<block type="code" title="语法">
+text: $mentioned[(number); (returnAuthor)]
+</block>
+
+<block type="code" title="可直接复制的示例">
+text: $sendMessage[Hello $mentioned, welcome!]
+</block>
+
+<block type="callout" kind="note">
+text: 数字是正整数，默认为 1，对同一人的重复标记只计算一次。在按钮按下或菜单选择中没有可读取的输入消息，因此使用回退作者。
+</block>
+</dash>
+
+<details>
+syntax: $mentioned[(number); (returnAuthor)]
+param: number|text|Optional|要返回哪个被标记的人，从 1 开始计数。默认为 1
+param: returnAuthor|yes/no|Optional|yes 在没有此类标记时提及作者，no 返回空。默认为 yes
+</details>

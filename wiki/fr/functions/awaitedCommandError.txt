@@ -1,0 +1,43 @@
+<dash>
+name: $awaitedCommandError
+desc: S'exécute quand la réponse après $awaitInput ne correspond pas au filtre que vous avez défini.
+category: Événement
+
+<block type="text" title="Comment fonctionne l'événement ?">
+text: C'est le compagnon de $awaitedCommand. Donnez-lui le champ Préfixe $awaitedCommandError[name], avec le même nom d'attente, et il ne s'exécute que lorsqu'une réponse arrive, qu'un script $awaitedCommand avec ce nom existe, mais que la réponse échoue à son filtre.
+text: Un usage classique est une question oui ou non : le script d'attente normal gère les mots acceptés, tandis que celui-ci signale poliment que la réponse n'a pas été comprise. Le texte rejeté est le message derrière le script, donc $message contient toujours ce qui a été saisi.
+</block>
+
+<block type="list" title="Comment l'utiliser dans l'application">
+item: Ouvrez l'onglet Commandes
+item: Appuyez sur + pour créer une nouvelle commande
+item: Donnez-lui un nom dans le champ Nom
+item: Réglez le champ Préfixe sur $awaitedCommandError[confirm]
+item: L'application le marque comme événement pour vous
+item: Collez le code ci-dessous dans l'éditeur
+item: Appuyez sur Enregistrer
+</block>
+
+<block type="code" title="Syntaxe">
+text: #PREFIX:$awaitedCommandError[name]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: #PREFIX:$awaitedCommandError[confirm]
+text: $sendMessage[Please answer with yes or no.]
+text: $awaitInput[confirm]
+</block>
+
+<block type="callout" kind="note">
+text: Le script d'erreur n'a pas de filtre propre ; toute réponse qui échoue au filtre du $awaitedCommand correspondant le réveille. Si aucun script $awaitedCommand n'existe pour ce nom, rien ne se passe ici non plus, alors créez toujours aussi le script normal.
+</block>
+
+<block type="callout" kind="warning">
+text: L'attente est consommée par la réponse même quand elle ne correspond pas. Pour redemander, exécutez à nouveau $awaitInput avec le même nom, comme le fait l'exemple.
+</block>
+</dash>
+
+<details>
+syntax: $awaitedCommandError[waitName]
+param: waitName|text|Requis|Le nom utilisé par les lignes $awaitInput et $awaitedCommand correspondantes
+</details>

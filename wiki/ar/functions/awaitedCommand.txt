@@ -1,0 +1,45 @@
+<dash>
+name: $awaitedCommand
+desc: يشغّل سكربتك عندما يجيب أحدهم بعد أن يطلب $awaitInput ردًّا.
+category: الحدث
+
+<block type="text" title="كيف يعمل هذا الحدث؟">
+text: يعمل هذا الحدث كزوج مع $awaitInput. اضبط حقل البادئة على $awaitedCommand[name] باستخدام الاسم نفسه الذي أعطيته لـ $awaitInput، وستُنفَّذ الأسطر الموجودة تحته لحظة وصول الرد المنتظر.
+text: أضف مرشّحًا اختياريًا بعد فاصلة منقوطة داخل القوسين لتحديد الردود المقبولة. يقبل `<numeric>` الأعداد الصحيحة والعشرية، بينما يقبل `<yes/no>` الكلمات التي تسردها فقط، مفصولة بشرطات مائلة مع تجاهل حالة الأحرف. ومن دون أي مرشّح، يوقظ أي رد السكربت.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة على $awaitedCommand[age]
+item: يعلّمه التطبيق كحدث تلقائيًا
+item: الصق الكود أدناه في المحرر
+item: اضغط على حفظ
+</block>
+
+<block type="code" title="الصيغة">
+text: #PREFIX:$awaitedCommand[name]
+text: #PREFIX:$awaitedCommand[name;<numeric>]
+text: #PREFIX:$awaitedCommand[name;<yes/no>]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: #PREFIX:$awaitedCommand[age;<numeric>]
+text: $sendMessage[Got it, you are $message years old.]
+</block>
+
+<block type="callout" kind="note">
+text: الرد نفسه هو الرسالة التي يعمل عليها السكربت، لذا يحمل $message النص الذي كتبه العضو. وتعمل جميع السكربتات التي تنتظر الاسم نفسه، من أقدم ملف أولًا، ما دام كل منها يقبل الرد.
+</block>
+
+<block type="callout" kind="important">
+text: يجب أن يطابق الاسم الاسم المعطى لـ $awaitInput، ويجب أن يكون هناك انتظار نشط في تلك القناة. ومن دون انتظار جارٍ، لا توقظ رسالة هذا السكربت أبدًا. ضع البادئة في السطر الأول، وإلا يتوقف التطبيق عن معاملة الملف كحدث.
+</block>
+</dash>
+
+<details>
+syntax: $awaitedCommand[waitName; (filter)]
+param: waitName|text|مطلوب|الاسم المستخدم في سطر $awaitInput المطابق
+param: filter|text|اختياري|ضعها بين قوسين زاويين: numeric للأعداد، أو قائمة مثل yes/no/true/false
+</details>

@@ -1,0 +1,45 @@
+<dash>
+name: $editEmbedIn
+desc: 等待设定时间，然后编辑机器人最后发送的消息上的嵌入。
+category: 嵌入构建
+
+<block type="text" title="此命令如何工作？">
+text: 此命令的工作方式与 $editEmbed 类似，只是你不需要消息 ID。它会记住机器人最后发送的消息，等待你给出的时间，然后更改该消息上的嵌入。
+text: 时间是一个整数后跟 s、m、h 或 d，例如 30s、5m、2h 或 1d。至少提供一个要更改的部分，其他部分留空以保持原样。它是 $sendEmbedMessage 的天然搭档，现在发布一张卡片，稍后再进行第二次编辑。
+</block>
+
+<block type="list" title="如何在应用中使用">
+item: 打开命令选项卡
+item: 点按 + 创建新命令
+item: 在名称字段中为其命名
+item: 将前缀字段设为 $editEmbedIn
+item: 将下方代码粘贴到编辑器中
+item: 点按保存
+</block>
+
+<block type="code" title="语法">
+text: $editEmbedIn[time; (title); (description); (footer); (color)]
+</block>
+
+<block type="code" title="可直接复制的示例">
+text: $sendEmbedMessage[$channelID; Starting; Please wait a moment; #F59E0B]
+text: $editEmbedIn[10s; Finished; Everything is done; ; #00FF00]
+</block>
+
+<block type="callout" kind="note">
+text: 标题、描述、页脚或颜色中至少必须填写一个，否则机器人会报告没有可更改的内容。空部分会保留其旧值，因此当你想跳到颜色时，使用单独的分号作为占位符。
+</block>
+
+<block type="callout" kind="warning">
+text: 机器人必须在此次运行中已经发送过一条包含嵌入的真实消息。在 $syncMode 下会先发送收集的消息，但如果最后一条消息上没有嵌入，编辑会被拒绝。只有机器人发送的消息才能被编辑。
+</block>
+</dash>
+
+<details>
+syntax: $editEmbedIn[time; (title); (description); (footer); (color)]
+param: time|text|Required|等待多久：一个整数和 s、m、h 或 d，例如 30s 或 5m
+param: title|text|Optional|新标题；留空以保留旧标题
+param: description|text|Optional|新正文文本；留空以保留旧内容
+param: footer|text|Optional|新页脚行；留空以保留旧内容
+param: color|text|Optional|十六进制值，如 #FF5733，或命名颜色
+</details>

@@ -1,0 +1,37 @@
+<dash>
+name: $toUppercase
+desc: Turns a piece of text into all capital letters.
+category: String Utilities
+
+<block type="text" title="How does the command work?">
+text: Every lowercase letter in the text becomes a capital, and everything else is left as it is. Digits, spaces, punctuation and emoji stay exactly where they were.
+text: Use it to shout a title, make a code stand out, or compare two values without caring about their case. The result can stand on its own line or sit inside a sentence.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $toUppercase
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: $toUppercase[text]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $toUppercase[HeLLo WoRLD]
+</block>
+
+<block type="callout" kind="note">
+text: With no text at all the bot reports an error. Additional arguments are joined with semicolons first, so a phrase containing a semicolon stays whole.
+</block>
+</dash>
+
+<details>
+syntax: $toUppercase[text]
+param: text|text|Required|The text to convert; variables and placeholders are filled in first
+</details>

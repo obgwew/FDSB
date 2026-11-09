@@ -1,0 +1,43 @@
+<dash>
+name: $task
+desc: 在机器人保持在线时，按计时器反复运行脚本。
+category: 事件
+
+<block type="text" title="此事件如何工作？">
+text: 将前缀字段设为 $task[time]，应用会为你将该文件标记为事件。时间是一个整数后跟 s、m、h 或 d，分别表示秒、分钟、小时或天，且不能为零。当机器人连接时，第一次运行会在一个间隔后发生，从那时起，只要机器人在运行，这些行就会按该节奏重复。
+text: 一次运行背后没有消息，因此没有作者、服务器或频道可回退。$botID 和 $botName 等数据可用，但在向频道发送任何内容之前，请用 $useChannel[guildID; channelID] 将脚本指向某个频道。
+</block>
+
+<block type="list" title="如何在应用中使用">
+item: 打开命令选项卡
+item: 点按 + 创建新命令
+item: 在名称字段中为其命名
+item: 将前缀字段设为 $task[1h]
+item: 应用会为你将其标记为事件
+item: 将下方代码粘贴到编辑器中
+item: 点按保存
+</block>
+
+<block type="code" title="语法">
+text: #PREFIX:$task[time]
+</block>
+
+<block type="code" title="可直接复制的示例">
+text: #PREFIX:$task[1h]
+text: $useChannel[123456789012345678; 987654321098765432]
+text: $sendMessage[Hourly check-in from $botName.]
+</block>
+
+<block type="callout" kind="note">
+text: 编辑会自动生效。机器人大约每十秒重新读取事件文件夹，因此更改时间或更改行无需重启即可生效，删除文件只会停止其计时器。
+</block>
+
+<block type="callout" kind="warning">
+text: 即使周围没有人，计时器也会持续触发，因此请保持任务轻量并避免过于频繁地发布。Discord 速率限制同样适用于计时器消息，就像任何其他消息一样。
+</block>
+</dash>
+
+<details>
+syntax: $task[time]
+param: time|text|Required|一个整数和一个单位：s、m、h 或 d，例如 30s、5m、2h 或 1d
+</details>

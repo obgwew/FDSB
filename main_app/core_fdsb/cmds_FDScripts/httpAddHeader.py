@@ -14,8 +14,5 @@ def _process(args: list[str], ctx: ExecutionContext) -> str:
     ctx.http_headers[name] = value
     return ""
 
-def resolve_inline(args: list[str], ctx: ExecutionContext) -> str:
-    return _process(args, ctx)
-
 async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: discord.abc.Messageable) -> None:
     _process(args, ctx)

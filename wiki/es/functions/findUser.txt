@@ -1,0 +1,38 @@
+<dash>
+name: $findUser
+desc: Convierte un ID de usuario o una mención en un ID de miembro reutilizable, con respaldo al autor.
+category: Utilidades
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Dale un ID de usuario o una mención y el bot comprueba si esa persona es miembro del servidor actual. Si lo es, recibes su ID como dígitos simples, listo para un cambio de rol, un MD o una variable guardada.
+text: Cuando la persona no es miembro, la segunda parte decide qué pasa. Con yes, que es el valor predeterminado, el bot devuelve el ID de quien ejecutó el comando; con no, no devuelve nada. Eso lo convierte en una forma cómoda de apuntar al miembro nombrado, o de recurrir a la persona que pregunta.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el campo Prefijo en $findUser
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $findUser[userID/mention; (returnAuthor)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $sendMessage[Target: $findUser[$mentioned]]
+</block>
+
+<block type="callout" kind="note">
+text: Solo busca en el servidor actual, así que un usuario válido que no sea miembro del gremio se trata como inexistente. La mención tiene que ser una mención de usuario real como <@123>, y la palabra de respaldo es yes o no.
+</block>
+</dash>
+
+<details>
+syntax: $findUser[userID/mention; (returnAuthor)]
+param: userID|text|Obligatorio|El usuario a buscar, como ID o mención de usuario
+param: returnAuthor|yes/no|Opcional|yes devuelve el autor cuando no se encuentra a nadie, no no devuelve nada. Por defecto yes
+</details>

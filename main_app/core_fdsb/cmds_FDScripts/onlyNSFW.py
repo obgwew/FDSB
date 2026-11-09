@@ -2,17 +2,12 @@
 import discord
 from FDScript import (
     ExecutionContext, Command,
-    FDSyntaxError, FDAbortScript, _send_error
+    FDAbortScript
 )
 
 
 async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: discord.abc.Messageable) -> None:
     message = ";".join(ctx.resolve(a) for a in args).strip() if args else ""
-    if not message:
-        await _send_error(ch, FDSyntaxError(
-            "`$onlyNSFW` requires an error message — example: `$onlyNSFW[Error message]`"
-        ))
-        return
 
     src = ctx.interaction or ctx.message
     channel = getattr(src, "channel", None)
@@ -25,9 +20,12 @@ async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: disc
         return
 
     ctx.stop_typing()
-    dest = await ctx.get_dest()
-    sent = await dest.send(message)
-    if sent:
-        ctx.last_bot_message = sent
-    ctx.log_event("onlyNSFW → Denied. Error message sent.")
+    if message:
+        dest = await ctx.get_dest()
+        sent = await dest.send(message)
+        if sent:
+            ctx.last_bot_message = sent
+        ctx.log_event("onlyNSFW → Denied. Error message sent.")
+    else:
+        ctx.log_event("onlyNSFW → Denied. Silent abort.")
     raise FDAbortScript()

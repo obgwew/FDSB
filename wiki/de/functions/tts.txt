@@ -1,0 +1,41 @@
+<dash>
+name: $tts
+desc: Lässt den Bot deine Nachricht mit Discords Text-to-Speech-Stimme laut vorlesen.
+category: Nachrichten
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: Alles, was du in die Klammern schreibst, wird im aktuellen Kanal als Text-to-Speech-Nachricht gepostet, und Discord liest es für jeden im Kanal laut vor, der diese Art von Nachricht nicht stummgeschaltet hat.
+text: Der Text wird genau so verwendet, wie er geschrieben ist, daher ist ein einfacher Satz am besten. Halte ihn kurz und klar, denn die Stimme macht bei Links und langen Symbolketten unangenehme Pausen.
+</block>
+
+<block type="list" title="So verwendest du es in der App">
+item: Öffne den Tab Befehle
+item: Tippe auf +, um einen neuen Befehl zu starten
+item: Gib ihm im Feld Name einen Namen
+item: Setze das Feld Präfix auf !say
+item: Schreibe dein Skript in den Editor
+item: Füge die folgende Zeile in den Editor ein
+item: Tippe auf Speichern
+</block>
+
+<block type="code" title="Syntax">
+text: $tts[text]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $tts[Attention everyone, the event starts in five minutes!]
+</block>
+
+<block type="callout" kind="note">
+text: Der Text darf bis zu 2000 Zeichen lang sein. Unter $syncMode wird die gesprochene Nachricht separat gesendet, statt in die gesammelte Nachricht eingefügt zu werden, weil Discord TTS als separate Nachricht behandelt.
+</block>
+
+<block type="callout" kind="warning">
+text: Der Bot benötigt im Kanal die Berechtigung TTS-Nachrichten senden, und Mitglieder können TTS auf ihrer Seite abschalten, verlasse dich also nie bei wichtigen Ankündigungen darauf. Verwende es sparsam, denn über Leute hinweg zu sprechen wird schnell nervig.
+</block>
+</dash>
+
+<details>
+syntax: $tts[text]
+param: text|text|Erforderlich|Was der Bot sagen soll, bis zu 2000 Zeichen
+</details>

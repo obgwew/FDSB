@@ -1,0 +1,41 @@
+<dash>
+name: $tts
+desc: Makes the bot read your message out loud with Discord's text-to-speech voice.
+category: Messaging
+
+<block type="text" title="How does the command work?">
+text: Whatever you put in the brackets is posted in the current channel as a text-to-speech message, and Discord reads it aloud for anyone in the channel who has not muted that kind of message.
+text: The text is used exactly as written, so a plain sentence is best. Keep it short and clear, because the voice pauses awkwardly on links and long strings of symbols.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !say
+item: Write your script in the editor
+item: Paste the line below into the editor
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: $tts[text]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $tts[Attention everyone, the event starts in five minutes!]
+</block>
+
+<block type="callout" kind="note">
+text: The text may be up to 2000 characters. Under $syncMode the spoken message is sent on its own rather than being folded into the collected message, because Discord handles TTS as a separate message.
+</block>
+
+<block type="callout" kind="warning">
+text: The bot needs the Send TTS Messages permission in the channel, and members can turn TTS off on their side, so never rely on it for important announcements. Use it sparingly, since speaking over people quickly becomes annoying.
+</block>
+</dash>
+
+<details>
+syntax: $tts[text]
+param: text|text|Required|What the bot should say, up to 2000 characters
+</details>

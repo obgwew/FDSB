@@ -1,0 +1,43 @@
+<dash>
+name: $awaitedCommandError
+desc: Berjalan saat balasan setelah $awaitInput tidak cocok dengan filter yang Anda atur.
+category: Peristiwa
+
+<block type="text" title="Bagaimana cara kerja peristiwa?">
+text: Ini pendamping $awaitedCommand. Beri kolom Awalan $awaitedCommandError[name], menggunakan nama penantian yang sama, dan ia hanya berjalan saat balasan tiba, skrip $awaitedCommand dengan nama itu ada, tetapi balasan gagal melewati filternya.
+text: Penggunaan klasiknya adalah pertanyaan ya atau tidak: skrip penantian normal menangani kata-kata yang diterima, sedangkan yang ini dengan sopan menunjukkan bahwa jawabannya tidak dipahami. Teks yang ditolak adalah pesan di balik skrip, jadi $message tetap memuat apa pun yang diketik.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $awaitedCommandError[confirm]
+item: Aplikasi menandainya sebagai Peristiwa untuk Anda
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: #PREFIX:$awaitedCommandError[name]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: #PREFIX:$awaitedCommandError[confirm]
+text: $sendMessage[Please answer with yes or no.]
+text: $awaitInput[confirm]
+</block>
+
+<block type="callout" kind="note">
+text: Skrip kesalahan tidak punya filter sendiri; balasan apa pun yang gagal pada filter $awaitedCommand yang cocok akan membangunkannya. Jika tidak ada skrip $awaitedCommand untuk nama itu sama sekali, di sini juga tidak terjadi apa-apa, jadi selalu buat juga skrip normalnya.
+</block>
+
+<block type="callout" kind="warning">
+text: Penantian dikonsumsi oleh balasan bahkan ketika tidak cocok. Untuk bertanya lagi, jalankan $awaitInput dengan nama yang sama sekali lagi, seperti yang dilakukan contoh.
+</block>
+</dash>
+
+<details>
+syntax: $awaitedCommandError[waitName]
+param: waitName|text|Wajib|Nama yang digunakan baris $awaitInput dan $awaitedCommand yang cocok
+</details>

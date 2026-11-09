@@ -1,0 +1,37 @@
+<dash>
+name: $toUppercase
+desc: Wandelt einen Text in lauter Großbuchstaben um.
+category: Textwerkzeuge
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: Jeder Kleinbuchstabe im Text wird zu einem Großbuchstaben, und alles andere bleibt, wie es ist. Ziffern, Leerzeichen, Satzzeichen und Emojis bleiben genau an ihrem Platz.
+text: Verwende ihn, um einen Titel zu schreien, einen Code hervorzuheben oder zwei Werte zu vergleichen, ohne auf ihre Groß-/Kleinschreibung zu achten. Das Ergebnis kann in einer eigenen Zeile stehen oder in einem Satz sitzen.
+</block>
+
+<block type="list" title="So verwendest du es in der App">
+item: Öffne den Tab Befehle
+item: Tippe auf +, um einen neuen Befehl zu starten
+item: Gib ihm im Feld Name einen Namen
+item: Setze das Feld Präfix auf $toUppercase
+item: Schreibe dein Skript in den Editor
+item: Füge die folgende Zeile überall ein, wo du sie brauchst
+item: Tippe auf Speichern
+</block>
+
+<block type="code" title="Syntax">
+text: $toUppercase[text]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $toUppercase[HeLLo WoRLD]
+</block>
+
+<block type="callout" kind="note">
+text: Ohne jeglichen Text meldet der Bot einen Fehler. Zusätzliche Argumente werden zuerst mit Semikolons verbunden, sodass ein Satz mit einem Semikolon vollständig bleibt.
+</block>
+</dash>
+
+<details>
+syntax: $toUppercase[text]
+param: text|text|Erforderlich|Der umzuwandelnde Text; Variablen und Platzhalter werden zuerst ausgefüllt
+</details>

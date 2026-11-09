@@ -1,0 +1,45 @@
+<dash>
+name: $returnBotGuildsID
+desc: Sammelt die ID jedes Servers, in dem der Bot ist, damit du die Liste wiederverwenden kannst.
+category: Rückgabebefehle
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: Dieser Befehl durchläuft jeden Server, dem der Bot beigetreten ist, und sammelt jede Server-ID. Die IDs werden mit einem Trennzeichen deiner Wahl verbunden und unter einem Namen deiner Wahl abgelegt, und $return bringt die ganze Liste überall zurück, wo du sie brauchst. Während des Sammelns wird nichts im Kanal gepostet.
+text: Der erste Teil wählt, wie die Liste gesammelt wird. cache verwendet die Server, die der Bot bereits kennt, und ist sofort fertig, während chunk zuerst die vollständige Liste von Discord anfordert, was langsamer ist, aber bei großen Bots immer aktuell.
+</block>
+
+<block type="list" title="So verwendest du es in der App">
+item: Öffne den Tab Befehle
+item: Tippe auf +, um einen neuen Befehl zu starten
+item: Gib ihm im Feld Name einen Namen
+item: Setze das Feld Präfix auf !guilds
+item: Schreibe dein Skript in den Editor
+item: Füge die folgenden Zeilen überall ein, wo du sie brauchst
+item: Tippe auf Speichern
+</block>
+
+<block type="code" title="Syntax">
+text: $returnBotGuildsID[cache/chunk; var; separator]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $returnBotGuildsID[cache; guildIDs; ,]
+text: $sendMessage[I am in these servers: $return[guildIDs]]
+</block>
+
+<block type="options" title="Abrufmodi">
+option: cache|Verwendet die Serverliste, die der Bot bereits hat, schnell aber möglicherweise veraltet
+option: chunk|Fragt zuerst die vollständige Serverliste bei Discord ab, langsamer aber vollständig
+</block>
+
+<block type="callout" kind="note">
+text: Das Trennzeichen kann ein Symbol wie ein Komma oder Semikolon sein oder einer der lesbaren Namen: dot, com, apo, sem oder colon. Wenn der Bot in keinem Server ist, meldet der Befehl einen Fehler, statt eine leere Liste abzulegen.
+</block>
+</dash>
+
+<details>
+syntax: $returnBotGuildsID[cache/chunk; var; separator]
+param: cache/chunk|text|Erforderlich|cache für die bekannte Serverliste, chunk für eine frische vollständige Liste
+param: var|text|Erforderlich|Der Name, unter dem die Liste abgelegt wird, später mit $return[] gelesen
+param: separator|text|Erforderlich|Was zwischen die IDs kommt, etwa ein Komma oder Semikolon, oder ein Name: dot, com, apo, sem, colon
+</details>

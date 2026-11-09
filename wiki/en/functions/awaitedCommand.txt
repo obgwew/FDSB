@@ -1,0 +1,45 @@
+<dash>
+name: $awaitedCommand
+desc: Runs your script when somebody answers after $awaitInput asked for a reply.
+category: Event
+
+<block type="text" title="How does the event work?">
+text: This event works as a pair with $awaitInput. Set the Prefix field to $awaitedCommand[name], using the same name you gave $awaitInput, and the lines underneath run the moment the awaited answer arrives.
+text: Add an optional filter after a semicolon inside the brackets to decide which replies are accepted. `<numeric>` accepts whole and decimal numbers, while `<yes/no>` accepts only the words you list, separated by slashes and ignoring capitals. With no filter at all, any reply wakes the script.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $awaitedCommand[age]
+item: The app marks it as an Event for you
+item: Paste the code below into the editor
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: #PREFIX:$awaitedCommand[name]
+text: #PREFIX:$awaitedCommand[name;<numeric>]
+text: #PREFIX:$awaitedCommand[name;<yes/no>]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: #PREFIX:$awaitedCommand[age;<numeric>]
+text: $sendMessage[Got it, you are $message years old.]
+</block>
+
+<block type="callout" kind="note">
+text: The reply itself is the message the script runs on, so $message holds the text the member typed. Several scripts waiting for the same name all run, oldest file first, as long as each one accepts the reply.
+</block>
+
+<block type="callout" kind="important">
+text: The name has to match the one given to $awaitInput, and a wait has to be active in that channel. With no wait running, a message never wakes this script. Put the prefix on the first line, otherwise the app stops treating the file as an event.
+</block>
+</dash>
+
+<details>
+syntax: $awaitedCommand[waitName; (filter)]
+param: waitName|text|Required|The name used by the matching $awaitInput line
+param: filter|text|Optional|Wrap it in angle brackets: numeric for numbers, or a list such as yes/no/true/false
+</details>

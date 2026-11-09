@@ -107,11 +107,13 @@ FDSB is a cross-platform application for creating and running Discord bots local
 - Began development of FDScript Gen 2.5
 - Fixed Android and notification errors, with stability on Android 13 and earlier
 
-### 2.5.0 — CodeEditor and Discord Status
+### 2.5.x — CodeEditor and Discord Status
 - Added CodeEditor for FDScript
 - Added Time/Blacklist commands and Discord Status UI
 - Added Indonesian and Spanish
-- Fixed several UI issues and commands
+- Fixed several UI issues and commands and andriod UI
+- Added Backup Storage System On Andriod
+- Added The Ability To Create Folders
 
 ---
 

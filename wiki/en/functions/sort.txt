@@ -1,0 +1,44 @@
+<dash>
+name: $sort
+desc: Puts a list of numbers in order and hands back all of them or just the top few.
+category: Math & Numbers
+
+<block type="text" title="How does the command work?">
+text: Give $sort a run of numbers, then tell it the direction, how many to return and what to put between them. asc orders from smallest to largest and desc does the opposite, and a return amount of -1 keeps the whole list.
+text: Decimals and negative numbers are accepted, and the values come back as they were written, not rewritten. The result can be dropped into a sentence or posted on a line of its own.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $sort
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: $sort[number;number;...;asc/desc;returnAmount;separator]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $sort[42;7;19;9;66;desc;3;, ]
+</block>
+
+<block type="callout" kind="note">
+text: A return amount of -1 means every number, while any other amount must be 1 or more. If there are fewer numbers than the amount, you simply get them all back.
+</block>
+
+<block type="callout" kind="warning">
+text: Every value before the direction has to be a real number. One word or an empty slot stops the command with an error naming the value it could not read.
+</block>
+</dash>
+
+<details>
+syntax: $sort[number;number;...;asc/desc;returnAmount;separator]
+param: number|number|Required|The numbers to sort; give one or more before the direction
+param: asc/desc|text|Required|asc from smallest to largest, desc from largest to smallest
+param: returnAmount|text|Required|How many values to return, or -1 for all of them
+param: separator|text|Required|What goes between the values, such as a comma, or a name: dot, com, apo, sem, colon
+</details>

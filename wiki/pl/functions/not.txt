@@ -1,0 +1,37 @@
+<dash>
+name: $not
+desc: Odwraca sprawdzenie, zamieniając true na false, a false na true.
+category: Kontrola przepływu
+
+<block type="text" title="Jak działa ta komenda?">
+text: $not bierze jedno sprawdzenie i odpowiada jego przeciwieństwem. Podaj porównanie, a odwróci wynik, więc para, która nie jest równa, wraca jako true. Podaj samą wartość, a słowa takie jak true, yes lub on liczą się jako prawda, natomiast false, no, off lub pusta wartość liczą się jako fałsz.
+text: Odpowiedź to zawsze samo słowo true lub false, co ułatwia owinięcie istniejącego sprawdzenia w bloku $if lub umieszczenie go we własnej linii.
+</block>
+
+<block type="list" title="Jak używać tego w aplikacji">
+item: Otwórz kartę Komendy
+item: Stuknij +, aby rozpocząć nową komendę
+item: Nadaj jej nazwę w polu Nazwa
+item: Ustaw pole Prefiks na !not
+item: Wpisz swój skrypt w edytorze
+item: Wklej poniższą linię tam, gdzie jej potrzebujesz
+item: Stuknij Zapisz
+</block>
+
+<block type="code" title="Składnia">
+text: $not[condition]
+</block>
+
+<block type="code" title="Przykład do skopiowania">
+text: $sendMessage[Result: $not[true]]
+</block>
+
+<block type="callout" kind="note">
+text: Rozumiane są te same znaki porównania co w $if: ==, !=, >, <, >= i <=. Wszystko bez znaku jest traktowane jako prawda, chyba że jest puste lub jest jednym ze znanych słów fałszu.
+</block>
+</dash>
+
+<details>
+syntax: $not[condition]
+param: condition|expression|Required|Wartość lub sprawdzenie do odwrócenia, z użyciem ==, !=, >, <, >= lub <=
+</details>

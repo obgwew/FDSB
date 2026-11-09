@@ -1,0 +1,45 @@
+<dash>
+name: $awaitedCommand
+desc: وقتی کسی پس از درخواست پاسخ توسط $awaitInput پاسخ می‌دهد، اسکریپت شما را اجرا می‌کند.
+category: رویداد
+
+<block type="text" title="این رویداد چگونه کار می‌کند؟">
+text: این رویداد به‌صورت جفت با $awaitInput کار می‌کند. فیلد پیشوند را روی $awaitedCommand[name] تنظیم کنید، با همان نامی که به $awaitInput دادید، و خطوط زیرین همان لحظه‌ای که پاسخ مورد انتظار می‌رسد اجرا می‌شوند.
+text: پس از یک نقطه‌ویرگول داخل براکت‌ها یک فیلتر اختیاری اضافه کنید تا مشخص شود کدام پاسخ‌ها پذیرفته می‌شوند. `<numeric>` اعداد صحیح و اعشاری را می‌پذیرد، در حالی که `<yes/no>` فقط کلماتی را که فهرست می‌کنید می‌پذیرد، جدا شده با اسلش و بدون توجه به حروف بزرگ. بدون هیچ فیلتری، هر پاسخی اسکریپت را بیدار می‌کند.
+</block>
+
+<block type="list" title="نحوه استفاده در برنامه">
+item: تب دستورها را باز کنید
+item: برای شروع یک دستور جدید روی + بزنید
+item: در فیلد نام یک نام به آن بدهید
+item: فیلد پیشوند را روی $awaitedCommand[age] تنظیم کنید
+item: برنامه آن را به‌صورت خودکار به‌عنوان رویداد علامت می‌زند
+item: کد زیر را در ویرایشگر جای‌گذاری کنید
+item: روی ذخیره بزنید
+</block>
+
+<block type="code" title="سینتکس">
+text: #PREFIX:$awaitedCommand[name]
+text: #PREFIX:$awaitedCommand[name;<numeric>]
+text: #PREFIX:$awaitedCommand[name;<yes/no>]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: #PREFIX:$awaitedCommand[age;<numeric>]
+text: $sendMessage[Got it, you are $message years old.]
+</block>
+
+<block type="callout" kind="note">
+text: خود پاسخ همان پیامی است که اسکریپت روی آن اجرا می‌شود، بنابراین $message متن تایپ‌شده توسط عضو را در خود دارد. چندین اسکریپت که منتظر یک نام هستند همه اجرا می‌شوند، ابتدا قدیمی‌ترین فایل، تا زمانی که هر کدام پاسخ را بپذیرند.
+</block>
+
+<block type="callout" kind="important">
+text: نام باید با نامی که به $awaitInput داده شده یکسان باشد و یک انتظار باید در آن کانال فعال باشد. بدون انتظار در حال اجرا، هیچ پیامی این اسکریپت را بیدار نمی‌کند. پیشوند را در خط اول قرار دهید، در غیر این صورت برنامه دیگر فایل را به‌عنوان رویداد در نظر نمی‌گیرد.
+</block>
+</dash>
+
+<details>
+syntax: $awaitedCommand[waitName; (filter)]
+param: waitName|text|الزامی|نامی که خط $awaitInput متناظر استفاده می‌کند
+param: filter|text|اختیاری|آن را در براکت زاویه‌دار بگذارید: numeric برای اعداد، یا فهرستی مانند yes/no/true/false
+</details>

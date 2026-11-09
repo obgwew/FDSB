@@ -1,0 +1,37 @@
+<dash>
+name: $toLowercase
+desc: Mengubah sepotong teks menjadi huruf kecil semua.
+category: Utilitas Teks
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Setiap huruf besar dalam teks diubah menjadi bentuk kecilnya, dan sisanya dibiarkan. Angka, spasi, tanda baca, dan emoji lewat tanpa berubah.
+text: Berguna untuk membandingkan jawaban tanpa mengkhawatirkan huruf besar, atau membuat nama terlihat rapi. Hasilnya bisa diposting di barisnya sendiri atau diselipkan ke dalam kalimat.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $toLowercase
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda membutuhkannya
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $toLowercase[text]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $toLowercase[HeLLo WoRLD]
+</block>
+
+<block type="callout" kind="note">
+text: Tanpa teks sama sekali bot melaporkan kesalahan. Argumen tambahan digabungkan dengan titik koma lebih dulu, jadi frasa yang memuat titik koma tetap utuh.
+</block>
+</dash>
+
+<details>
+syntax: $toLowercase[text]
+param: text|text|Wajib|Teks yang akan dikonversi; variabel dan placeholder diisi lebih dulu
+</details>

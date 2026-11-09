@@ -1,0 +1,44 @@
+<dash>
+name: $editEmbed
+desc: Réécrit le titre, la description, le pied de page ou la couleur d'un embed que le bot a déjà publié.
+category: Constructeur d'embed
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: Donnez l'ID d'un message et au moins une partie à modifier, et le bot met à jour l'embed présent sur ce message. Les parties que vous laissez vides restent exactement telles qu'elles étaient, donc un seul nouveau titre suffit et rien d'autre n'est touché.
+text: Le message est recherché dans le canal actuel, ou dans le canal vers lequel $useChannel a basculé. Seuls les messages envoyés par le bot lui-même peuvent être modifiés, et le message doit déjà contenir un embed. La couleur accepte une valeur hexadécimale comme #FF5733 ou l'une des couleurs nommées.
+</block>
+
+<block type="list" title="Comment l'utiliser dans l'application">
+item: Ouvrez l'onglet Commandes
+item: Appuyez sur + pour créer une nouvelle commande
+item: Donnez-lui un nom dans le champ Nom
+item: Réglez le champ Préfixe sur !editEmbed
+item: Collez le code ci-dessous dans l'éditeur
+item: Appuyez sur Enregistrer
+</block>
+
+<block type="code" title="Syntaxe">
+text: $editEmbed[messageID; (title); (description); (footer); (color)]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $editEmbed[$lastBotMessageID; Updated title]
+</block>
+
+<block type="callout" kind="note">
+text: Laissez un vide en tapant juste un point-virgule pour sauter une partie, par exemple un nouveau titre et une couleur sans description ni pied de page : $editEmbed[123; New title; ; ; #00FF00]. L'ID du message peut venir de $lastBotMessageID ou de n'importe quelle valeur enregistrée.
+</block>
+
+<block type="callout" kind="warning">
+text: Le bot ne peut modifier que ses propres messages, et il a besoin de Lire l'historique des messages dans ce canal. Un message sans embed, ou un message que le bot n'a pas envoyé, est signalé comme une erreur au lieu d'être modifié.
+</block>
+</dash>
+
+<details>
+syntax: $editEmbed[messageID; (title); (description); (footer); (color)]
+param: messageID|snowflake|Requis|Le message dont l'embed doit être modifié
+param: title|text|Optionnel|Un nouveau titre ; laissez vide pour garder l'ancien
+param: description|text|Optionnel|Nouveau texte du corps ; laissez vide pour garder l'ancien
+param: footer|text|Optionnel|Une nouvelle ligne de pied de page ; laissez vide pour garder l'ancienne
+param: color|text|Optionnel|Une valeur hexadécimale comme #FF5733 ou une couleur nommée
+</details>

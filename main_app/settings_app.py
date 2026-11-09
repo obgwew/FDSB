@@ -153,6 +153,27 @@ def get_current_accent() -> str:
 def get_current_outline() -> bool:
     return _saved_theme()[2]
 
+def get_syntax_highlighting() -> bool:
+    """Editor syntax colors on/off (persisted, default: on)."""
+    return bool(load_settings().get('syntax_highlighting', True))
+
+def set_syntax_highlighting(enabled: bool):
+    save_settings({'syntax_highlighting': bool(enabled)})
+
+def get_show_editor_stats() -> bool:
+    """Lines/characters counter above the editor (persisted, default: on)."""
+    return bool(load_settings().get('show_editor_stats', True))
+
+def set_show_editor_stats(enabled: bool):
+    save_settings({'show_editor_stats': bool(enabled)})
+
+def get_silent_var_creation() -> bool:
+    """Create new variables silently: no warning, script keeps running (default: off)."""
+    return bool(load_settings().get('silent_var_creation', False))
+
+def set_silent_var_creation(enabled: bool):
+    save_settings({'silent_var_creation': bool(enabled)})
+
 def get_current_lang() -> str:
     return (load_settings().get('lang', 'en') or 'en').lstrip('_') or 'en'
 
@@ -435,6 +456,7 @@ class SettingsAppScreen:
                     self._build_app_info(),
                     self._build_language_section(),
                     self._build_design_section(),
+                    self._build_editor_section(),
                     ft.Container(height=24),
                 ],
                 spacing=20,
@@ -666,6 +688,54 @@ class SettingsAppScreen:
 
         ls = LoadingScreen(page=self._page, title=_t('language'))
         await ls.run_overlay(_apply)
+
+    # ── Editor ────────────────────────────────────────────────────────────────
+
+    def _switch_row(self, label: str, desc: str, value: bool, on_change) -> ft.Control:
+        return ft.Row(
+            [
+                ft.Column(
+                    [
+                        ft.Text(label, size=13, color=_c('text'),
+                                weight=ft.FontWeight.W_500),
+                        ft.Text(desc, size=11, color=_c('text_dim')),
+                    ],
+                    spacing=2, expand=True,
+                ),
+                ft.Switch(
+                    value=value,
+                    active_color=_c('accent'),
+                    on_change=lambda e: on_change(bool(e.control.value)),
+                ),
+            ],
+            vertical_alignment=ft.CrossAxisAlignment.CENTER,
+        )
+
+    def _build_editor_section(self) -> ft.Control:
+        return ft.Column(
+            [
+                _section_title(_t('editor_section'), ft.Icons.CODE_ROUNDED),
+                _card_container(
+                    ft.Column(
+                        [
+                            self._switch_row(
+                                _t('syntax_color_label'), _t('syntax_switch_tooltip'),
+                                get_syntax_highlighting(), set_syntax_highlighting),
+                            ft.Divider(color=_c('divider'), height=1),
+                            self._switch_row(
+                                _t('editor_stats_label'), _t('editor_stats_desc'),
+                                get_show_editor_stats(), set_show_editor_stats),
+                            ft.Divider(color=_c('divider'), height=1),
+                            self._switch_row(
+                                _t('silent_var_label'), _t('silent_var_desc'),
+                                get_silent_var_creation(), set_silent_var_creation),
+                        ],
+                        spacing=10,
+                    ),
+                ),
+            ],
+            spacing=8,
+        )
 
     # ── Design: style x accent x borders ──────────────────────────────────────
 

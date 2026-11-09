@@ -1,0 +1,43 @@
+<dash>
+name: $awaitedCommandError
+desc: وقتی اجرا می‌شود که پاسخ پس از $awaitInput با فیلتری که تنظیم کردید مطابقت نداشته باشد.
+category: رویداد
+
+<block type="text" title="این رویداد چگونه کار می‌کند؟">
+text: این همراه $awaitedCommand است. فیلد پیشوند را $awaitedCommandError[name] بدهید، با همان نام انتظار، و فقط زمانی اجرا می‌شود که پاسخی برسد، اسکریپت $awaitedCommand با آن نام وجود داشته باشد، اما پاسخ از فیلتر آن عبور نکند.
+text: یک کاربرد کلاسیک پرسش بله یا خیر است: اسکریپت انتظار عادی کلمات پذیرفته‌شده را مدیریت می‌کند، در حالی که این یکی مؤدبانه یادآوری می‌کند که پاسخ درک نشد. متن ردشده همان پیام پشت اسکریپت است، بنابراین $message همچنان هر چیزی را که تایپ شده در خود دارد.
+</block>
+
+<block type="list" title="نحوه استفاده در برنامه">
+item: تب دستورها را باز کنید
+item: برای شروع یک دستور جدید روی + بزنید
+item: در فیلد نام یک نام به آن بدهید
+item: فیلد پیشوند را روی $awaitedCommandError[confirm] تنظیم کنید
+item: برنامه آن را به‌صورت خودکار به‌عنوان رویداد علامت می‌زند
+item: کد زیر را در ویرایشگر جای‌گذاری کنید
+item: روی ذخیره بزنید
+</block>
+
+<block type="code" title="سینتکس">
+text: #PREFIX:$awaitedCommandError[name]
+</block>
+
+<block type="code" title="مثال آماده کپی">
+text: #PREFIX:$awaitedCommandError[confirm]
+text: $sendMessage[Please answer with yes or no.]
+text: $awaitInput[confirm]
+</block>
+
+<block type="callout" kind="note">
+text: اسکریپت خطا فیلتر خودش را ندارد؛ هر پاسخی که از فیلتر $awaitedCommand متناظر عبور نکند آن را بیدار می‌کند. اگر اصلاً هیچ اسکریپت $awaitedCommand برای آن نام وجود نداشته باشد، اینجا هم چیزی رخ نمی‌دهد، پس همیشه اسکریپت عادی را هم بسازید.
+</block>
+
+<block type="callout" kind="warning">
+text: انتظار حتی وقتی پاسخ مطابقت ندارد توسط همان پاسخ مصرف می‌شود. برای پرسیدن دوباره، $awaitInput را یک بار دیگر با همان نام اجرا کنید، همان‌طور که مثال انجام می‌دهد.
+</block>
+</dash>
+
+<details>
+syntax: $awaitedCommandError[waitName]
+param: waitName|text|الزامی|نامی که خطوط $awaitInput و $awaitedCommand متناظر استفاده می‌کنند
+</details>

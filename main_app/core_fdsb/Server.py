@@ -50,6 +50,8 @@ EVENT_PREFIXES: set[str] = {
     '$onVoiceJoined',
     '$onVoiceLeave',
     '$alwaysReply',
+    '$awaitedCommand',
+    '$awaitedCommandError',
     '$messageContains',
     '$messageContainsAll',
     '$onBotOnline',
@@ -57,6 +59,7 @@ EVENT_PREFIXES: set[str] = {
     '$onBoostServer',
     '$onBanAdd',
     '$onBanRemove',
+    '$task',
 }
 
 _BOOST_MESSAGE_TYPES = {
@@ -308,6 +311,12 @@ def _make_bot(bot_dir: str, bot_image: str = ''):
                 except Exception:
                     pass
 
+        try:
+            from main_app.core_fdsb.event_FDScripts.task import handle_event as start_tasks
+            await start_tasks(bot, prefix_manager._bot_events_dir)
+        except Exception:
+            pass
+
     @bot.event
     async def on_disconnect():
         set_fgs_state(STATE_ERROR, _t('server_disconnected'))
@@ -426,6 +435,12 @@ def _make_bot(bot_dir: str, bot_image: str = ''):
             return
 
         set_fgs_state(STATE_SYNCING)
+        try:
+            from main_app.core_fdsb.event_FDScripts.awaitedCommand import handle_event as handle_awaited_command
+            if await handle_awaited_command(message, bot, prefix_manager._bot_events_dir):
+                return
+        except Exception as e:
+            print(f"[Server] Error executing $awaitedCommand event: {e}")
         always_scripts = prefix_manager.get_event_scripts("$alwaysReply")
         if always_scripts:
             try:

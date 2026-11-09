@@ -17,10 +17,6 @@ def _get_registry(ctx: ExecutionContext) -> dict:
     return registry
 
 
-def resolve_inline(args: list[str], ctx: ExecutionContext) -> str:
-    return ""
-
-
 async def _fetch_target_message(ch: discord.abc.Messageable, ctx: ExecutionContext,
                                  message_id_arg: str | None) -> discord.Message | None:
     if message_id_arg is not None:
@@ -117,10 +113,12 @@ async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: disc
     existing_view = discord.ui.View.from_message(target_message, timeout=None)
 
     old_select: discord.ui.Select | None = None
+    old_index = 0
     other_items = []
     for item in existing_view.children:
         if isinstance(item, discord.ui.Select) and item.custom_id == menu_id:
             old_select = item
+            old_index = len(other_items)
         else:
             other_items.append(item)
 
@@ -135,14 +133,20 @@ async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: disc
         placeholder=placeholder,
         min_values=min_values,
         max_values=max_values,
-        options=old_select.options,
-        row=old_select.row,
+        options=list(old_select.options),
     )
 
     new_view = discord.ui.View(timeout=None)
-    for item in other_items:
-        new_view.add_item(item)
-    new_view.add_item(new_select)
+    try:
+        ordered = other_items[:old_index] + [new_select] + other_items[old_index:]
+        for item in ordered:
+            item.row = None
+            new_view.add_item(item)
+    except ValueError:
+        await _send_error(ch, FDLogicError(
+            "`$editSelectMenu` — could not rebuild the message components (row limit)"
+        ))
+        return
 
     try:
         updated_message = await target_message.edit(view=new_view)

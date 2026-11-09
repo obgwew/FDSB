@@ -1,0 +1,45 @@
+<dash>
+name: $editEmbedIn
+desc: Espera un tiempo establecido y luego edita el embed del último mensaje que envió el bot.
+category: Constructor de embed
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Este funciona como $editEmbed, salvo que no necesitas un ID de mensaje. Recuerda el último mensaje que envió el bot, espera el tiempo que le des y luego cambia el embed de ese mensaje.
+text: El tiempo es un número entero seguido de s, m, h o d, como 30s, 5m, 2h o 1d. Da al menos una parte que cambiar y deja las demás vacías para mantenerlas como están. Es el compañero natural de $sendEmbedMessage, donde ahora se publica una tarjeta y un poco después llega una segunda edición.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el campo Prefijo en $editEmbedIn
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $editEmbedIn[time; (title); (description); (footer); (color)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $sendEmbedMessage[$channelID; Starting; Please wait a moment; #F59E0B]
+text: $editEmbedIn[10s; Finished; Everything is done; ; #00FF00]
+</block>
+
+<block type="callout" kind="note">
+text: Al menos uno de título, descripción, pie o color debe estar relleno, o el bot informa que no hay nada que cambiar. Las partes vacías mantienen su valor anterior, así que usa un punto y coma suelto como marcador cuando quieras saltar hasta el color.
+</block>
+
+<block type="callout" kind="warning">
+text: El bot tiene que haber enviado ya un mensaje real que contenga un embed en esta ejecución. En $syncMode el mensaje recopilado se envía primero, pero si no hay un embed en el último mensaje se rechaza la edición. Solo se pueden editar los mensajes enviados por el bot.
+</block>
+</dash>
+
+<details>
+syntax: $editEmbedIn[time; (title); (description); (footer); (color)]
+param: time|text|Obligatorio|Cuánto esperar: un número entero y s, m, h o d, por ejemplo 30s o 5m
+param: title|text|Opcional|Un nuevo titular; déjalo vacío para mantener el anterior
+param: description|text|Opcional|Nuevo texto del cuerpo; déjalo vacío para mantener el anterior
+param: footer|text|Opcional|Una nueva línea de pie; déjala vacía para mantener la anterior
+param: color|text|Opcional|Un valor hexadecimal como #FF5733 o un color con nombre
+</details>

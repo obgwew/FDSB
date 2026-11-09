@@ -409,4 +409,41 @@ INDONESIAN_DICT = {
     'intents_conn_unknown':  (1305, 'Koneksi belum diperiksa'),
     'intents_ping_test':     (1306, 'Uji koneksi server'),
     'intents_ping_none':     (1307, 'Tidak ada respons'),
+
+    # ── Settings section title ────────────────────────────────
+    'editor_section':        (1376, 'Editor'),
+
+    # ── Command Folders ───────────────────────────────────────
+    'folder_label':          (1378, 'Folder'),
+    'folder_root':           (1379, 'Tanpa folder (root)'),
+    'folder_pick_title':     (1380, 'Pilih folder'),
+    'folder_select':         (1381, 'Pilih'),
+    'folder_new':            (1382, 'Folder baru'),
+    'folder_new_name':       (1383, 'Nama folder'),
+    'folder_create_in':      (1384, 'Folder baru akan dibuat di'),
+    'folder_name_taken':     (1385, 'Folder dengan nama ini sudah ada di sini'),
+    'folder_name_required':  (1386, 'Masukkan nama folder'),
+    'folder_new_sub':        (1387, 'Subfolder baru'),
+    'folder_new_cmd':        (1388, 'Perintah baru di sini'),
+    'folder_rename':         (1389, 'Ganti nama'),
+    'folder_move':           (1390, 'Pindahkan ke folder lain'),
+    'folder_delete':         (1391, 'Hapus folder'),
+    'folder_delete_body':    (1392, 'Hanya folder yang dihapus. Perintah dan folder di dalamnya dipindahkan ke folder induk.'),
+    'folder_items':          (1393, '{n} item'),
+    'folder_move_failed':    (1394, 'Tidak dapat memindahkan folder ke sini'),
+    'command_trigger':       (1395, 'Pemicu Perintah'),
+    'folder_new_var':        (1396, 'Variabel baru di sini'),
+
+    # ── Editor settings ───────────────────────────────────────
+    'editor_stats_label':    (1397, 'Penghitung baris / karakter'),
+    'editor_stats_desc':     (1398, 'Tampilkan penghitung di atas editor'),
+    'silent_var_label':      (1399, 'Pembuatan variabel senyap'),
+    'silent_var_desc':       (1400, 'Buat variabel baru tanpa peringatan dan biarkan skrip tetap berjalan'),
+
+    # ── Bot deletion (loading screen) ─────────────────────────
+    'deleting_bot':          (1401, 'Menghapus bot…'),
+    'deleting_bot_files':    (1402, 'Menghapus file bot…'),
+    'deleting_bot_token':    (1403, 'Menghapus token yang tersimpan…'),
+    'deleting_bot_done':     (1404, 'Bot dihapus'),
+    'delete_bot_failed':     (1405, 'Tidak dapat menghapus bot: {error}'),
 }

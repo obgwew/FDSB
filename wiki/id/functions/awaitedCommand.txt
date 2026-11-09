@@ -1,0 +1,45 @@
+<dash>
+name: $awaitedCommand
+desc: Menjalankan skrip Anda saat seseorang membalas setelah $awaitInput meminta jawaban.
+category: Peristiwa
+
+<block type="text" title="Bagaimana cara kerja peristiwa?">
+text: Peristiwa ini bekerja berpasangan dengan $awaitInput. Atur kolom Awalan ke $awaitedCommand[name], menggunakan nama yang sama yang Anda berikan ke $awaitInput, dan baris-baris di bawahnya berjalan saat jawaban yang ditunggu tiba.
+text: Tambahkan filter opsional setelah titik koma di dalam kurung untuk menentukan balasan mana yang diterima. `<numeric>` menerima bilangan bulat dan desimal, sedangkan `<yes/no>` hanya menerima kata-kata yang Anda daftarkan, dipisahkan garis miring dan mengabaikan huruf besar. Tanpa filter sama sekali, balasan apa pun membangunkan skrip.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $awaitedCommand[age]
+item: Aplikasi menandainya sebagai Peristiwa untuk Anda
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: #PREFIX:$awaitedCommand[name]
+text: #PREFIX:$awaitedCommand[name;<numeric>]
+text: #PREFIX:$awaitedCommand[name;<yes/no>]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: #PREFIX:$awaitedCommand[age;<numeric>]
+text: $sendMessage[Got it, you are $message years old.]
+</block>
+
+<block type="callout" kind="note">
+text: Balasan itu sendiri adalah pesan yang menjadi dasar skrip berjalan, jadi $message memuat teks yang diketik anggota. Beberapa skrip yang menunggu nama yang sama semuanya berjalan, berkas terlama lebih dulu, selama masing-masing menerima balasan.
+</block>
+
+<block type="callout" kind="important">
+text: Nama harus cocok dengan yang diberikan ke $awaitInput, dan sebuah penantian harus aktif di kanal itu. Tanpa penantian yang berjalan, sebuah pesan tidak pernah membangunkan skrip ini. Taruh awalan di baris pertama, jika tidak aplikasi berhenti memperlakukan berkas sebagai peristiwa.
+</block>
+</dash>
+
+<details>
+syntax: $awaitedCommand[waitName; (filter)]
+param: waitName|text|Wajib|Nama yang digunakan baris $awaitInput yang cocok
+param: filter|text|Opsional|Bungkus dalam kurung sudut: numeric untuk angka, atau daftar seperti yes/no/true/false
+</details>

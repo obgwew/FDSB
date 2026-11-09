@@ -1,0 +1,37 @@
+<dash>
+name: $toUppercase
+desc: Mengubah sepotong teks menjadi huruf besar semua.
+category: Utilitas Teks
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Setiap huruf kecil dalam teks menjadi huruf besar, dan sisanya dibiarkan seperti apa adanya. Angka, spasi, tanda baca, dan emoji tetap persis di tempatnya.
+text: Gunakan untuk meneriakkan judul, membuat kode menonjol, atau membandingkan dua nilai tanpa memperhatikan huruf besar-kecilnya. Hasilnya bisa berdiri di barisnya sendiri atau berada di dalam kalimat.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $toUppercase
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda membutuhkannya
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $toUppercase[text]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $toUppercase[HeLLo WoRLD]
+</block>
+
+<block type="callout" kind="note">
+text: Tanpa teks sama sekali bot melaporkan kesalahan. Argumen tambahan digabungkan dengan titik koma lebih dulu, jadi frasa yang memuat titik koma tetap utuh.
+</block>
+</dash>
+
+<details>
+syntax: $toUppercase[text]
+param: text|text|Wajib|Teks yang akan dikonversi; variabel dan placeholder diisi lebih dulu
+</details>

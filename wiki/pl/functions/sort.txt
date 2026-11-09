@@ -1,0 +1,44 @@
+<dash>
+name: $sort
+desc: Porządkuje listę liczb i zwraca wszystkie lub tylko kilka pierwszych.
+category: Matematyka i liczby
+
+<block type="text" title="Jak działa ta komenda?">
+text: Podaj $sort ciąg liczb, a następnie powiedz mu kierunek, ile zwrócić i co wstawić między nimi. asc porządkuje od najmniejszej do największej, a desc robi odwrotnie, a liczba zwrotów -1 zachowuje całą listę.
+text: Akceptowane są ułamki dziesiętne i liczby ujemne, a wartości wracają takie, jak zostały zapisane, bez przepisywania. Wynik można wstawić do zdania lub opublikować we własnej linii.
+</block>
+
+<block type="list" title="Jak używać tego w aplikacji">
+item: Otwórz kartę Komendy
+item: Stuknij +, aby rozpocząć nową komendę
+item: Nadaj jej nazwę w polu Nazwa
+item: Ustaw pole Prefiks na $sort
+item: Wpisz swój skrypt w edytorze
+item: Wklej poniższą linię tam, gdzie jej potrzebujesz
+item: Stuknij Zapisz
+</block>
+
+<block type="code" title="Składnia">
+text: $sort[number;number;...;asc/desc;returnAmount;separator]
+</block>
+
+<block type="code" title="Przykład do skopiowania">
+text: $sort[42;7;19;9;66;desc;3;, ]
+</block>
+
+<block type="callout" kind="note">
+text: Liczba zwrotów -1 oznacza wszystkie liczby, natomiast każda inna liczba musi wynosić 1 lub więcej. Jeśli liczb jest mniej niż żądana liczba, po prostu otrzymasz je wszystkie.
+</block>
+
+<block type="callout" kind="warning">
+text: Każda wartość przed kierunkiem musi być prawdziwą liczbą. Jedno słowo lub puste miejsce zatrzymuje komendę błędem, który nazywa wartość, której nie można było odczytać.
+</block>
+</dash>
+
+<details>
+syntax: $sort[number;number;...;asc/desc;returnAmount;separator]
+param: number|number|Required|Liczby do posortowania; podaj jedną lub więcej przed kierunkiem
+param: asc/desc|text|Required|asc od najmniejszej do największej, desc od największej do najmniejszej
+param: returnAmount|text|Required|Ile wartości zwrócić, lub -1 dla wszystkich
+param: separator|text|Required|Co znajduje się między wartościami, na przykład przecinek, albo nazwa: dot, com, apo, sem, colon
+</details>

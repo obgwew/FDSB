@@ -1,0 +1,45 @@
+<dash>
+name: $returnBotGuildsID
+desc: يجمع معرّف كل خادم يوجد فيه البوت حتى تتمكن من إعادة استخدام القائمة.
+category: أوامر الإرجاع
+
+<block type="text" title="كيف يعمل الأمر؟">
+text: يمر هذا الأمر عبر كل خادم انضم إليه البوت ويجمع معرّف كل خادم. تُضمّ المعرّفات بفاصل تختاره وتُحفظ تحت اسم تختاره، ويعيد $return القائمة كاملة حيثما تحتاجها. لا يُنشر شيء في القناة أثناء الجمع.
+text: يختار الجزء الأول كيفية جمع القائمة. يستخدم cache الخوادم التي يعرفها البوت مسبقًا وهو فوري، بينما يطلب chunk القائمة الكاملة من ديسكورد أولًا، وهو أبطأ لكنه محدّث دائمًا في البوتات الكبيرة.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة على !guilds
+item: اكتب سكربتك في المحرر
+item: الصق الأسطر أدناه حيثما تحتاجها
+item: اضغط على حفظ
+</block>
+
+<block type="code" title="الصيغة">
+text: $returnBotGuildsID[cache/chunk; var; separator]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $returnBotGuildsID[cache; guildIDs; ,]
+text: $sendMessage[I am in these servers: $return[guildIDs]]
+</block>
+
+<block type="options" title="أوضاع الجلب">
+option: cache|يستخدم قائمة الخوادم التي يملكها البوت بالفعل، سريع لكنه قد يكون قديمًا
+option: chunk|يطلب قائمة الخوادم الكاملة من ديسكورد أولًا، أبطأ لكنه كامل
+</block>
+
+<block type="callout" kind="note">
+text: يمكن أن يكون الفاصل رمزًا مثل فاصلة أو فاصلة منقوطة، أو أحد الأسماء المقروءة: dot أو com أو apo أو sem أو colon. وإذا لم يكن البوت في أي خادم أصلًا، يبلّغ الأمر خطأً بدلًا من حفظ قائمة فارغة.
+</block>
+</dash>
+
+<details>
+syntax: $returnBotGuildsID[cache/chunk; var; separator]
+param: cache/chunk|text|مطلوب|cache لقائمة الخوادم المعروفة، و chunk لقائمة كاملة حديثة
+param: var|text|مطلوب|الاسم الذي تُحفظ تحته القائمة، ويُقرأ لاحقًا بـ $return[]
+param: separator|text|مطلوب|ما يوضع بين المعرّفات، مثل فاصلة أو فاصلة منقوطة، أو اسم: dot أو com أو apo أو sem أو colon
+</details>

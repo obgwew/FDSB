@@ -1,0 +1,45 @@
+<dash>
+name: $returnBotGuildsID
+desc: 收集机器人所在每个服务器的 ID，以便你可以重复使用该列表。
+category: 返回命令
+
+<block type="text" title="此命令如何工作？">
+text: 此命令会遍历机器人已加入的每个服务器并收集每个服务器 ID。这些 ID 会以你选择的分隔符连接，并归档在你选择的名称下，$return 会在你需要的地方带回整个列表。收集期间不会在频道中发布任何内容。
+text: 第一部分选择如何收集列表。cache 使用机器人已经知道的服务器，速度很快，而 chunk 会先向 Discord 请求完整列表，速度较慢但在大型机器人上始终是最新的。
+</block>
+
+<block type="list" title="如何在应用中使用">
+item: 打开命令选项卡
+item: 点按 + 创建新命令
+item: 在名称字段中为其命名
+item: 将前缀字段设为 !guilds
+item: 在编辑器中编写你的脚本
+item: 将下方行粘贴到你需要的任何位置
+item: 点按保存
+</block>
+
+<block type="code" title="语法">
+text: $returnBotGuildsID[cache/chunk; var; separator]
+</block>
+
+<block type="code" title="可直接复制的示例">
+text: $returnBotGuildsID[cache; guildIDs; ,]
+text: $sendMessage[I am in these servers: $return[guildIDs]]
+</block>
+
+<block type="options" title="获取模式">
+option: cache|使用机器人已有的服务器列表，快速但可能过时
+option: chunk|先向 Discord 请求完整服务器列表，较慢但完整
+</block>
+
+<block type="callout" kind="note">
+text: 分隔符可以是逗号或分号之类的符号，也可以是可读名称之一：dot、com、apo、sem 或 colon。如果机器人根本不在任何服务器中，该命令会报告错误，而不是归档空列表。
+</block>
+</dash>
+
+<details>
+syntax: $returnBotGuildsID[cache/chunk; var; separator]
+param: cache/chunk|text|Required|cache 表示已知服务器列表，chunk 表示全新的完整列表
+param: var|text|Required|列表归档所用的名称，稍后通过 $return[] 读回
+param: separator|text|Required|ID 之间的内容，例如逗号或分号，或名称：dot、com、apo、sem、colon
+</details>

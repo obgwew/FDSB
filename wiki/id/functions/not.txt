@@ -1,0 +1,37 @@
+<dash>
+name: $not
+desc: Membalik sebuah pemeriksaan, mengubah true menjadi false dan false menjadi true.
+category: Kontrol Alur
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $not mengambil satu pemeriksaan dan menjawab kebalikannya. Berikan perbandingan dan ia membalik hasilnya, sehingga pasangan yang tidak sama kembali sebagai true. Berikan nilai sendiri dan kata seperti true, yes, atau on dihitung benar, sedangkan false, no, off, atau nilai kosong dihitung salah.
+text: Jawabannya selalu kata polos true atau false, yang memudahkan membungkusnya di sekitar pemeriksaan yang ada dalam blok $if atau menaruhnya di barisnya sendiri.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !not
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda membutuhkannya
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $not[condition]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $sendMessage[Result: $not[true]]
+</block>
+
+<block type="callout" kind="note">
+text: Tanda perbandingan yang sama seperti $if dipahami: ==, !=, >, <, >=, dan <=. Apa pun tanpa tanda diperlakukan benar kecuali kosong atau salah satu kata salah yang dikenal.
+</block>
+</dash>
+
+<details>
+syntax: $not[condition]
+param: condition|expression|Wajib|Nilai atau pemeriksaan untuk dibalik, menggunakan ==, !=, >, <, >=, atau <=
+</details>

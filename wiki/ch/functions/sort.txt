@@ -1,0 +1,44 @@
+<dash>
+name: $sort
+desc: 对数字列表排序，并返回全部或仅前几个。
+category: 数学与数字
+
+<block type="text" title="此命令如何工作？">
+text: 给 $sort 一串数字，然后告诉它方向、返回多少个以及它们之间的内容。asc 从小到大排序，desc 则相反，返回数量为 -1 时保留整个列表。
+text: 接受小数和负数，值会按书写原样返回，不会重写。结果可以放入句子中或单独发布在一行。
+</block>
+
+<block type="list" title="如何在应用中使用">
+item: 打开命令选项卡
+item: 点按 + 创建新命令
+item: 在名称字段中为其命名
+item: 将前缀字段设为 $sort
+item: 在编辑器中编写你的脚本
+item: 将下方行粘贴到你需要的任何位置
+item: 点按保存
+</block>
+
+<block type="code" title="语法">
+text: $sort[number;number;...;asc/desc;returnAmount;separator]
+</block>
+
+<block type="code" title="可直接复制的示例">
+text: $sort[42;7;19;9;66;desc;3;, ]
+</block>
+
+<block type="callout" kind="note">
+text: 返回数量为 -1 表示所有数字，而任何其他数量必须为 1 或更多。如果数字数量少于该数量，你只会得到全部数字。
+</block>
+
+<block type="callout" kind="warning">
+text: 方向之前的每个值都必须是真实数字。一个单词或空槽会停止命令，并报错指出无法读取的值。
+</block>
+</dash>
+
+<details>
+syntax: $sort[number;number;...;asc/desc;returnAmount;separator]
+param: number|number|Required|要排序的数字；在方向之前提供一个或多个
+param: asc/desc|text|Required|asc 从小到大，desc 从大到小
+param: returnAmount|text|Required|要返回多少个值，或 -1 表示全部
+param: separator|text|Required|值之间的内容，例如逗号，或名称：dot、com、apo、sem、colon
+</details>

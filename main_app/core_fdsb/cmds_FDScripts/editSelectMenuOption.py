@@ -15,10 +15,6 @@ def _get_registry(ctx: ExecutionContext) -> dict:
     return registry
 
 
-def resolve_inline(args: list[str], ctx: ExecutionContext) -> str:
-    return ""
-
-
 async def _fetch_target_message(ch: discord.abc.Messageable, ctx: ExecutionContext,
                                  message_id_arg: str | None) -> discord.Message | None:
     if message_id_arg is not None:

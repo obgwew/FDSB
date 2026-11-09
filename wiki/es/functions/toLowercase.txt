@@ -1,0 +1,37 @@
+<dash>
+name: $toLowercase
+desc: Convierte un texto en letras minúsculas.
+category: Utilidades de texto
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Cada letra mayúscula del texto se convierte en su forma minúscula, y todo lo demás se deja igual. Los dígitos, espacios, signos de puntuación y emojis pasan sin cambios.
+text: Es útil para comparar respuestas sin preocuparte por las mayúsculas, o para que un nombre se vea ordenado. El resultado se puede publicar en su propia línea o meter en una frase.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el campo Prefijo en $toLowercase
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $toLowercase[text]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $toLowercase[HeLLo WoRLD]
+</block>
+
+<block type="callout" kind="note">
+text: Sin ningún texto el bot informa un error. Los argumentos adicionales se unen primero con puntos y coma, así que una frase que contenga un punto y coma se mantiene entera.
+</block>
+</dash>
+
+<details>
+syntax: $toLowercase[text]
+param: text|text|Obligatorio|El texto a convertir; las variables y marcadores se rellenan primero
+</details>

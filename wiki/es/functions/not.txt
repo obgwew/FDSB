@@ -1,0 +1,37 @@
+<dash>
+name: $not
+desc: Invierte una comprobación, convirtiendo true en false y false en true.
+category: Control de flujo
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: $not toma una comprobación y responde lo contrario. Dale una comparación e invierte el resultado, así que una pareja que no es igual vuelve como true. Dale un valor por sí solo y palabras como true, yes u on cuentan como verdadero, mientras que false, no, off o un valor vacío cuentan como falso.
+text: La respuesta es siempre la palabra pelada true o false, lo que facilita envolver una comprobación existente en un bloque $if o ponerla en su propia línea.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el campo Prefijo en !not
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $not[condition]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $sendMessage[Result: $not[true]]
+</block>
+
+<block type="callout" kind="note">
+text: Se entienden los mismos signos de comparación que en $if: ==, !=, >, <, >= y <=. Cualquier cosa sin signo se trata como verdadera a menos que esté vacía o sea una de las palabras falsas conocidas.
+</block>
+</dash>
+
+<details>
+syntax: $not[condition]
+param: condition|expression|Obligatorio|Un valor o una comprobación que invertir, usando ==, !=, >, <, >= o <=
+</details>

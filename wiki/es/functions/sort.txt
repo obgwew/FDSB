@@ -1,0 +1,44 @@
+<dash>
+name: $sort
+desc: Ordena una lista de números y devuelve todos o solo los primeros.
+category: Matemática y números
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Dale a $sort una serie de números y luego indícale la dirección, cuántos devolver y qué poner entre ellos. asc ordena de menor a mayor y desc hace lo contrario, y una cantidad de retorno de -1 conserva la lista completa.
+text: Se aceptan decimales y números negativos, y los valores vuelven tal como se escribieron, sin reescribirlos. El resultado se puede meter en una frase o publicar en su propia línea.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el campo Prefijo en $sort
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $sort[number;number;...;asc/desc;returnAmount;separator]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $sort[42;7;19;9;66;desc;3;, ]
+</block>
+
+<block type="callout" kind="note">
+text: Una cantidad de retorno de -1 significa todos los números, mientras que cualquier otra cantidad debe ser 1 o más. Si hay menos números que la cantidad, simplemente recibes todos.
+</block>
+
+<block type="callout" kind="warning">
+text: Cada valor antes de la dirección tiene que ser un número real. Una palabra o un hueco vacío detiene el comando con un error que nombra el valor que no pudo leer.
+</block>
+</dash>
+
+<details>
+syntax: $sort[number;number;...;asc/desc;returnAmount;separator]
+param: number|number|Obligatorio|Los números a ordenar; da uno o más antes de la dirección
+param: asc/desc|text|Obligatorio|asc de menor a mayor, desc de mayor a menor
+param: returnAmount|text|Obligatorio|Cuántos valores devolver, o -1 para todos
+param: separator|text|Obligatorio|Lo que va entre los valores, como una coma, o un nombre: dot, com, apo, sem, colon
+</details>

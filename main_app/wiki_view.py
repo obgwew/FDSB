@@ -56,8 +56,6 @@ _CATEGORY_META: Dict[str, Tuple[str, str, str]] = {
 _CATEGORY_DEFAULT_ICON  = 'LABEL_ROUNDED'
 _CATEGORY_DEFAULT_COLOR = '#6B7280'
 
-# {language: {normalized category name from the wiki data: canonical key}}
-# Names come from the translation file (wiki_cat_<key>), nothing is hard-coded here.
 _CATEGORY_NAME_CACHE: Dict[str, Dict[str, str]] = {}
 
 
@@ -79,11 +77,50 @@ def _category_names() -> Dict[str, str]:
     return names
 
 
+_CATEGORY_ALIASES: Dict[str, Tuple[str, ...]] = {
+    'command':  ('command', 'commands'),
+    'event':    ('event', 'events'),
+    'variable': ('variable', 'variables'),
+    'discord':  ('discord',),
+    'time':     ('time', 'times'),
+}
+_ALIAS_TO_KEY: Dict[str, str] = {
+    alias: key for key, aliases in _CATEGORY_ALIASES.items() for alias in aliases
+}
+
+
 def _canonical_category(cat: Optional[str]) -> str:
     key = _normalize_category(cat)
     if key in _CATEGORY_META:
         return key
+    if key in _ALIAS_TO_KEY:
+        return _ALIAS_TO_KEY[key]
     return _category_names().get(key, key)
+
+
+def _tag_key(value: Optional[str]) -> str:
+    k = _normalize_category(value)
+    return _ALIAS_TO_KEY.get(k, k)
+
+
+def _entry_key(entry) -> str:
+    return _tag_key(getattr(entry, 'tag', '')) or _tag_key(getattr(entry, 'category', ''))
+
+
+def _entry_label(entry) -> str:
+    key = _entry_key(entry)
+    if key in _CATEGORY_META:
+        return _t(_CATEGORY_META[key][0])
+    if (entry.category or '').strip():
+        return entry.category.strip()
+    if key:
+        return key
+    return _t('filter_other')
+
+
+def _entry_color(entry) -> str:
+    key = _entry_key(entry)
+    return _CATEGORY_META[key][2] if key in _CATEGORY_META else _CATEGORY_DEFAULT_COLOR
 
 
 def _category_label(cat: str) -> str:
@@ -181,6 +218,7 @@ class WikiEntry:
     blocks:   List[WikiDashBlock]   = field(default_factory=list)
     file_name: str = ''
     has_details: bool = False
+    tag:      str = ''
 
 
 class WikiParser:
@@ -324,6 +362,7 @@ class WikiParser:
         name = ''
         desc = ''
         category = ''
+        tag = ''
 
         for line in dash_content.splitlines():
             line = line.strip()
@@ -338,7 +377,9 @@ class WikiParser:
                 desc = v
             elif k == 'category':
                 category = v
-            if name and desc and category:
+            elif k == 'tag':
+                tag = v.lower()
+            if name and desc and category and tag:
                 break
 
         if not name or not desc:
@@ -354,6 +395,7 @@ class WikiParser:
             blocks=[],
             file_name=file_name,
             has_details=has_details,
+            tag=tag,
         )
 
     @classmethod
@@ -379,6 +421,7 @@ class WikiParser:
                 blocks=dash_blocks,
                 file_name=file_name,
                 has_details=details is not None,
+                tag=dash_data.get('tag', '').strip().lower(),
             )
         except Exception:
             return None
@@ -478,6 +521,7 @@ class WikiCache:
             'category':    entry.category,
             'file_name':   entry.file_name,
             'has_details': entry.has_details,
+            'tag':         entry.tag,
         }
 
     @classmethod
@@ -520,8 +564,8 @@ class WikiCache:
     @classmethod
     def load_light_entries(cls, lang: str) -> List[WikiEntry]:
         raw = cls._load_meta_raw(lang)
-        if not raw:
-            raw = cls._rebuild_meta(lang)
+        if not raw or any('tag' not in m for m in raw):
+            raw = cls._rebuild_meta(lang) or raw
 
         entries: List[WikiEntry] = []
         for m in raw:
@@ -533,6 +577,7 @@ class WikiCache:
                 blocks=[],
                 file_name=m.get('file_name', ''),
                 has_details=bool(m.get('has_details', False)),
+                tag=m.get('tag', ''),
             ))
         entries.sort(key=lambda e: e.file_name)
         return entries
@@ -571,7 +616,6 @@ class WikiRemote:
 
     @classmethod
     def fetch_sizes(cls, lang: str) -> Dict[str, int]:
-        """{file_name: size_in_bytes} for the whole wiki folder in ONE request."""
         url = f'{GITHUB_API_BASE}/{lang}/functions'
         req = urllib.request.Request(url, headers={
             'User-Agent': 'FDScriptDashboard',
@@ -695,24 +739,16 @@ class BotWikiTab:
         )
 
         self._status_text = ft.Text(self._status_label(), size=12, color=_c('text_dim'))
-        # Virtual (windowed) list: only a small window of cards exists at any time
-        # (12 on first paint, never more than ~24). Everything above / below the
-        # window is replaced by one empty spacer of the exact same height, so the
-        # scrollbar and scroll position behave as if all cards were there.
         self._win_lo = 0
         self._win_hi = 0
         self._card_cache: Dict[int, ft.Control] = {}
-        self._resetting   = False    # True while a search/filter redraw is scrolling to its target
-        self._saved_offset = 0.0     # list scroll position remembered while a wiki page is open
-        self._scroll_pix  = 0.0      # latest scroll position reported by Flutter
-        self._scroll_view = 600.0    # latest viewport height
+        self._resetting   = False    
+        self._saved_offset = 0.0     
+        self._scroll_pix  = 0.0      
+        self._scroll_view = 600.0    
         self._last_pix    = 0.0
         self._going_down  = True
         self._sync_running = False
-        # item_extent makes Flutter use a FIXED-extent list: every slot is exactly
-        # _ITEM_EXT tall, so scroll extent / scrollbar thumb are exact (no estimating
-        # from whichever children happen to be built). The cards that are not alive
-        # are represented by the list's top/bottom padding, never by huge children.
         self._list_view = ft.ListView(
             expand=True, spacing=0, padding=ft.Padding(0, 0, 0, 70),
             item_extent=self._ITEM_EXT,
@@ -808,7 +844,12 @@ class BotWikiTab:
         )
 
     def _open_filter_sheet(self, _):
-        found_cats = sorted(list({e.category.strip() for e in self._entries if e.category}))
+        found_cats: Dict[str, str] = {}
+        for e in self._entries:
+            k = _entry_key(e)
+            if k and k not in found_cats:
+                found_cats[k] = _entry_label(e)
+        found_cats = dict(sorted(found_cats.items(), key=lambda kv: kv[1].lower()))
         filter_col = ft.Column(spacing=10, tight=True)
         checkboxes: List[ft.Checkbox] = []
 
@@ -831,9 +872,7 @@ class BotWikiTab:
                 )
             )
         else:
-            for raw in found_cats:
-                canonical = _canonical_category(raw)
-                label = _category_label(raw)
+            for canonical, label in found_cats.items():
 
                 cb = ft.Checkbox(
                     label=label,
@@ -926,10 +965,6 @@ class BotWikiTab:
         return False
 
     def guard_tab_change(self, on_proceed: callable, on_cancel: callable = None):
-        # Leaving the Wiki for another tab (Settings, Variables, ...) keeps it exactly
-        # as it is: the list at its scroll position, or the open dashboard / detail
-        # page. It is only reset when the bot dashboard itself is left for the main
-        # FDSB view (dispose() + a brand-new BotWikiTab next time).
         self._remember_list_position()
         on_proceed and on_proceed()
 
@@ -945,10 +980,6 @@ class BotWikiTab:
         if self._page:
             self._page.update()
             if self._view_mode == 'list' and self._filtered:
-                # The dashboard calls on_show BEFORE it slides this tab's slot in, so
-                # the list is not mounted yet. Flutter also lost its scroll offset while
-                # the tab was hidden. Re-apply the saved offset a few times, spread over
-                # the slide animation, so at least one attempt lands on a mounted list.
                 self._restore_list_position(delay=0.05, settle=(0.0, 0.2, 0.4))
             else:
                 self._resetting = False
@@ -956,8 +987,6 @@ class BotWikiTab:
     def on_hide(self):
         self._remember_list_position()
         if self._view_mode == 'list' and self._filtered:
-            # ignore scroll events while the list is detached / being re-mounted, so a
-            # bogus position can never move the card window away from the saved one
             self._resetting = True
 
     def _is_rtl(self) -> bool:
@@ -1050,30 +1079,27 @@ class BotWikiTab:
         if self._active_filters:
             result = [
                 en for en in result
-                if _canonical_category(en.category) in self._active_filters
+                if _entry_key(en) in self._active_filters
             ]
 
         if query:
             result = [
                 en for en in result
                 if query in en.name.lower() or query in en.desc.lower()
+                or query in (en.tag or '').lower()
             ]
 
         self._filtered = result
         self._update_wiki_count()
         self._rebuild_list()
 
-    # ── windowed list ────────────────────────────────────────────────────────
-    _CARD_H   = 152                 # fixed card height  -> exact scroll maths
-    _GAP      = 12                  # space between cards
-    _ITEM_EXT = _CARD_H + _GAP      # height one slot takes in the list
-    _WIN_STEP = 12                  # cards added/removed per step
-    _WIN_MAX  = 24                  # max cards alive at once
+    _CARD_H   = 152                 
+    _GAP      = 12                  
+    _ITEM_EXT = _CARD_H + _GAP      
+    _WIN_STEP = 12                  
+    _WIN_MAX  = 24                  
 
     def _rebuild_list(self, target: int = 0):
-        """Search / filter changed: delete every live card, then redraw only the
-        window around `target` (12 cards above it, 12 below). target=0 is the
-        first result, so a new search starts with its first 12 matches."""
         self._card_cache.clear()
         self._list_view.controls = []
         n = len(self._filtered)
@@ -1118,7 +1144,6 @@ class BotWikiTab:
                             await self._list_view.scroll_to(offset=offset, duration=0)
                             break
                         except Exception:
-                            # list may not be mounted yet right after a view switch
                             await asyncio.sleep(0.06)
             finally:
                 self._scroll_pix = offset
@@ -1130,11 +1155,9 @@ class BotWikiTab:
             self._resetting = False
 
     def _apply_window(self):
-        """Materialise cards [lo, hi); stand in for all the others with padding."""
         n, lo, hi = len(self._filtered), self._win_lo, self._win_hi
         ext = self._ITEM_EXT
 
-        # drop cards that left the window (this is what frees the UI objects)
         for idx in [i for i in self._card_cache if i < lo or i >= hi]:
             del self._card_cache[idx]
 
@@ -1146,18 +1169,11 @@ class BotWikiTab:
                 self._card_cache[idx] = card
             controls.append(card)
 
-        # total extent = top + cards + bottom is ALWAYS n * ext (+70 bottom margin)
         self._list_view.item_extent = ext
         self._list_view.padding = ft.Padding(0, lo * ext, 0, (n - hi) * ext + 70)
         self._list_view.controls = controls
 
     def _on_list_scroll(self, e):
-        """Only record the newest position; one worker applies it.
-
-        Scroll events can arrive faster than the UI can be patched. Handling each
-        one directly lets old positions overwrite newer ones (the up/down desync),
-        so events are coalesced and the window always follows the LATEST position.
-        """
         if self._resetting:
             return
         self._scroll_pix  = max(0.0, float(e.pixels or 0))
@@ -1177,16 +1193,16 @@ class BotWikiTab:
                 if self._move_window(pix, self._scroll_view):
                     self._list_view.update()
                 await asyncio.sleep(0.04)
-                if self._scroll_pix == pix:     # position settled -> done
+                if self._scroll_pix == pix:
                     break
         except Exception as ex:
             print(f'[Wiki] window sync failed: {ex}')
         finally:
             self._sync_running = False
 
-    _AHEAD_MIN  = 5    # cards that must exist in the direction of travel
-    _BEHIND_MIN = 2    # and behind it
-    _BEHIND_KEEP = 4   # cards kept behind the viewport when the window is moved
+    _AHEAD_MIN  = 5
+    _BEHIND_MIN = 2
+    _BEHIND_KEEP = 4
 
     def _move_window(self, pix: float, view: float) -> bool:
         n = len(self._filtered)
@@ -1207,15 +1223,14 @@ class BotWikiTab:
         lo, hi = self._win_lo, self._win_hi
         cap = max(self._WIN_MAX, vis + self._WIN_STEP)
 
-        below = (hi - 1 - last) if hi < n else 10 ** 6   # cards ready under the viewport
-        above = (first - lo)    if lo > 0 else 10 ** 6   # cards ready over the viewport
+        below = (hi - 1 - last) if hi < n else 10 ** 6
+        above = (first - lo)    if lo > 0 else 10 ** 6
         ahead, behind = (below, above) if down else (above, below)
 
         covered = first >= lo and last < hi
         if covered and ahead >= self._AHEAD_MIN and behind >= self._BEHIND_MIN:
             return False
 
-        # Move the window so most of its 24 slots lie in the direction of travel.
         keep = self._BEHIND_KEEP if down else cap - vis - self._BEHIND_KEEP
         new_lo = max(0, min(first - keep, n - cap))
         new_hi = min(n, new_lo + cap)
@@ -1227,7 +1242,6 @@ class BotWikiTab:
         return True
 
     def _build_slot(self, entry: WikiEntry) -> ft.Container:
-        """Fixed-height slot = card + gap, so positions are exact multiples of _ITEM_EXT."""
         return ft.Container(
             content=self._build_card(entry),
             height=self._ITEM_EXT,
@@ -1241,8 +1255,8 @@ class BotWikiTab:
             ft.Text(entry.name, size=15, weight=ft.FontWeight.BOLD, color=_c('text'),
                     max_lines=1, overflow=ft.TextOverflow.ELLIPSIS, expand_loose=True),
         ]
-        if entry.category:
-            title_row.append(_badge(_category_label(entry.category), _category_color(entry.category)))
+        if entry.tag or entry.category:
+            title_row.append(_badge(_entry_label(entry), _entry_color(entry)))
 
         def _action(icon, label, handler) -> ft.Container:
             return _ink_btn(
@@ -1417,9 +1431,6 @@ class BotWikiTab:
             self._restore_list_position()
 
     def _restore_list_position(self, delay: float = 0.0, settle: tuple = (0.0,)):
-        """The list is removed from the page while a wiki page is open, so Flutter
-        forgets its scroll offset. Put it back exactly where the user left it
-        (the card window / padding in memory already match that position)."""
         if self._filtered:
             self._scroll_list_to(self._saved_offset, delay, settle)
 
@@ -1493,7 +1504,6 @@ class BotWikiTab:
             return
         index.sort()
 
-        # Total download size (one GitHub API request). If it fails we just hide the size.
         try:
             sizes = await loop.run_in_executor(None, WikiRemote.fetch_sizes, lang)
         except Exception as ex:
@@ -1517,7 +1527,6 @@ class BotWikiTab:
             txt = f'{pct}% • {_fmt_size(stats["bytes"])}'
             return f'{txt} / {total_txt}' if total_txt else txt
 
-        # Android: ask for notification permission, then show the first notification
         if _fgs is not None:
             _fgs.ensure_background_mode(self._page)
             await _fgs.ensure_notification_permission()
@@ -1550,7 +1559,6 @@ class BotWikiTab:
                 stats['bytes'] += len(text.encode('utf-8'))
                 screen.set_progress(stats['done'] / total, _progress_text())
 
-                # throttle: at most one notification update per second
                 now = time.monotonic()
                 if now - stats['last_notif'] >= 1.0:
                     stats['last_notif'] = now
@@ -1604,11 +1612,20 @@ class BotWikiTab:
         if self._page:
             self._page.update()
 
-    def select_events_filter(self):
+    def select_filters(self, tags, search: str = ''):
+        task = getattr(self, '_search_debounce_task', None)
+        if task:
+            task.cancel()
+        if isinstance(tags, str):
+            tags = [tags]
         self._view_mode = 'list'
-        self._active_filters = {'event'}
-        self._search_field.value = ""
+        self._active_filters = {k for k in (_tag_key(t) for t in (tags or [])) if k}
+        self._search_field.value = search or ""
+        self._saved_offset = 0.0
         self._apply_filters()
         self._render()
         if self._page:
             self._page.update()
+
+    def select_events_filter(self):
+        self.select_filters(['الحدث', 'event', '事件', 'событие', 'evento', 'événement', 'ereignis', 'eventi', 'evento', 'واقعہ', 'رویداد'], search='')

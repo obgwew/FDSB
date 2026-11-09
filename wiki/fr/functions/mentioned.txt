@@ -1,0 +1,38 @@
+<dash>
+name: $mentioned
+desc: Vous donne la mention de la première personne étiquetée dans un message, ou celle de l'auteur quand personne n'est étiqueté.
+category: Utilitaires
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: Quand un membre tape un message et y étiquette d'autres personnes, $mentioned renvoie la mention de l'une d'elles. La première partie choisit laquelle, en comptant à partir de 1, et la seconde décide quoi faire quand le message étiquette moins de personnes que ce nombre.
+text: Avec yes, la valeur par défaut, le bot se rabat sur la mention de l'auteur du message. Avec no, il renvoie un résultat vide à la place, ce qui est pratique quand vous ne voulez réagir qu'à une vraie étiquette.
+</block>
+
+<block type="list" title="Comment l'utiliser dans l'application">
+item: Ouvrez l'onglet Commandes
+item: Appuyez sur + pour créer une nouvelle commande
+item: Donnez-lui un nom dans le champ Nom
+item: Réglez le champ Préfixe sur !greet
+item: Écrivez votre script dans l'éditeur
+item: Collez la ligne ci-dessous là où vous en avez besoin
+item: Appuyez sur Enregistrer
+</block>
+
+<block type="code" title="Syntaxe">
+text: $mentioned[(number); (returnAuthor)]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $sendMessage[Hello $mentioned, welcome!]
+</block>
+
+<block type="callout" kind="note">
+text: Le nombre est un entier positif et vaut 1 par défaut, et les étiquettes répétées de la même personne ne comptent qu'une fois. Dans un appui sur un bouton ou un choix de menu, il n'y a pas de message tapé à lire, donc l'auteur de repli est utilisé.
+</block>
+</dash>
+
+<details>
+syntax: $mentioned[(number); (returnAuthor)]
+param: number|text|Optionnel|Quelle personne étiquetée renvoyer, en comptant à partir de 1. Par défaut 1
+param: returnAuthor|yes/no|Optionnel|yes mentionne l'auteur quand il n'y a pas une telle étiquette, no renvoie vide. Par défaut yes
+</details>

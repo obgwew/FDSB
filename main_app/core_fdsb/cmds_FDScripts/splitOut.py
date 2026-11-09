@@ -2,16 +2,25 @@
 import discord
 from FDScript import (
     ExecutionContext, Command,
-    FDLogicError, FDEnvironmentError,
+    FDSyntaxError, FDLogicError, FDEnvironmentError,
     _send_error,
 )
 
-def _get_split_value(args: list[str], ctx: ExecutionContext) -> str:
+
+def _resolve_split_out(args: list[str], ctx: ExecutionContext) -> tuple[str | None, Exception | None]:
     split_result = getattr(ctx, "split_result", None)
     if split_result is None:
-        raise ValueError("no split result in context")
+        return None, FDEnvironmentError("`$splitOut` — no split result in context. Call `$splitIn` first.")
+
+    if not args:
+        return None, FDSyntaxError(
+            "`$splitOut` requires an index argument: `$splitOut[index]`\n"
+            "Valid values: a number (1-based), `<`, or `>`."
+        )
 
     index_raw = ctx.resolve(args[0]).strip()
+    if not index_raw:
+        return None, FDLogicError("`$splitOut` — index argument cannot be empty.")
 
     if index_raw == ">":
         index = len(split_result) - 1
@@ -21,39 +30,28 @@ def _get_split_value(args: list[str], ctx: ExecutionContext) -> str:
         try:
             index = int(index_raw) - 1
         except ValueError:
-            raise ValueError(f"invalid index `{index_raw}`")
+            return None, FDLogicError(
+                f"`$splitOut` — invalid index `{index_raw}`. Use a number (1-based), `<` (first), or `>` (last)."
+            )
 
     if index < 0 or index >= len(split_result):
-        raise ValueError(f"index `{index_raw}` is out of range")
+        return None, FDLogicError(f"`$splitOut` — index `{index_raw}` is out of range.")
 
-    return split_result[index]
+    return split_result[index], None
+
 
 def resolve_inline(args: list[str], ctx: ExecutionContext) -> str:
-    if not args:
+    value, err = _resolve_split_out(args, ctx)
+    if err is not None:
+        ctx._abort_with_error(err)
         return ""
-    try:
-        return _get_split_value(args, ctx)
-    except Exception:
-        return "" 
+    return value
+
 
 async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: discord.abc.Messageable) -> None:
-    if not args:
-        await _send_error(ch, FDLogicError(
-            "`$splitOut` requires an index argument: `$splitOut[index]`\n"
-            "Valid values: a number (1-based), `<` for first, `>` for last."
-        ))
-        return
-
-    try:
-        value = _get_split_value(args, ctx)
-    except ValueError as e:
-        msg = str(e)
-        if "no split result" in msg:
-            await _send_error(ch, FDEnvironmentError("`$splitOut` — no split result in context. Call `$splitIn` first."))
-        elif "invalid index" in msg:
-             await _send_error(ch, FDLogicError(f"`$splitOut` — {msg}. Use a number (1-based), `<` (first), or `>` (last)."))
-        else:
-            await _send_error(ch, FDLogicError(f"`$splitOut` — {msg}."))
+    value, err = _resolve_split_out(args, ctx)
+    if err is not None:
+        await _send_error(ch, err)
         return
 
     ctx.stop_typing()

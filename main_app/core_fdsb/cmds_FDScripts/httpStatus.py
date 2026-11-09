@@ -2,7 +2,7 @@
 import discord
 from FDScript import ExecutionContext, Command
 
-async def resolve_inline(args: list[str], ctx: ExecutionContext) -> str:
+def resolve_inline(args: list[str], ctx: ExecutionContext) -> str:
     return str(getattr(ctx, "http_status", "0"))
 
 async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: discord.abc.Messageable) -> None:

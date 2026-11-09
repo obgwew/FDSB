@@ -1,0 +1,37 @@
+<dash>
+name: $textCount
+desc: Zählt jedes Zeichen in einem Text, einschließlich Leerzeichen und Symbolen.
+category: Textwerkzeuge
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: Gib ihm einen Text und du bekommst zurück, wie lang er ist, Zeichen für Zeichen gezählt. Anders als $charCount, das Leerzeichen und Satzzeichen überspringt, zählt dieser alles: Buchstaben, Ziffern, Leerzeichen, Emojis und Symbole gleichermaßen.
+text: Das macht ihn zur ehrlichen Methode, um gegen ein Limit wie Discords Obergrenze von 2000 Zeichen zu prüfen. Alles, was bereits ausgefüllt ist, etwa eine Nachricht oder ein gespeicherter Wert, wird zuerst erweitert und dann gezählt.
+</block>
+
+<block type="list" title="So verwendest du es in der App">
+item: Öffne den Tab Befehle
+item: Tippe auf +, um einen neuen Befehl zu starten
+item: Gib ihm im Feld Name einen Namen
+item: Setze das Feld Präfix auf $textCount
+item: Schreibe dein Skript in den Editor
+item: Füge die folgende Zeile überall ein, wo du sie brauchst
+item: Tippe auf Speichern
+</block>
+
+<block type="code" title="Syntax">
+text: $textCount[text]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $sendMessage[That sentence is $textCount[Hello, world!] characters long.]
+</block>
+
+<block type="callout" kind="note">
+text: Zusätzliche Argumente werden vor dem Zählen wieder mit Semikolons zusammengefügt, daher zählt ein Semikolon, das du in die Klammern schreibst, ebenfalls als ein Zeichen. Leere Klammern zählen als null.
+</block>
+</dash>
+
+<details>
+syntax: $textCount[text]
+param: text|text|Optional|Der zu messende Text; Variablen und Platzhalter werden zuerst ausgefüllt. Leer ergibt 0
+</details>

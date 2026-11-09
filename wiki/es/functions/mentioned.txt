@@ -1,0 +1,38 @@
+<dash>
+name: $mentioned
+desc: Te da la mención de la primera persona etiquetada en un mensaje, o la del autor cuando no hay nadie etiquetado.
+category: Utilidades
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Cuando un miembro escribe un mensaje y etiqueta a otras personas en él, $mentioned devuelve la mención de una de ellas. La primera parte elige cuál, contando desde 1, y la segunda decide qué hacer cuando el mensaje etiqueta a menos personas que esa.
+text: Con yes, el valor predeterminado, el bot recurre a mencionar al autor del mensaje. Con no, devuelve un resultado vacío, lo que resulta útil cuando solo quieres reaccionar a una etiqueta real.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el campo Prefijo en !greet
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $mentioned[(number); (returnAuthor)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $sendMessage[Hello $mentioned, welcome!]
+</block>
+
+<block type="callout" kind="note">
+text: El número es un entero positivo y por defecto es 1, y las etiquetas repetidas de la misma persona se cuentan una vez. En una pulsación de botón o una elección de menú no hay mensaje escrito que leer, así que se usa el autor de respaldo.
+</block>
+</dash>
+
+<details>
+syntax: $mentioned[(number); (returnAuthor)]
+param: number|text|Opcional|Qué persona etiquetada devolver, contando desde 1. Por defecto 1
+param: returnAuthor|yes/no|Opcional|yes menciona al autor cuando no hay tal etiqueta, no devuelve vacío. Por defecto yes
+</details>

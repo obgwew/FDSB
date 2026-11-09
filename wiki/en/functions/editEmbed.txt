@@ -1,0 +1,44 @@
+<dash>
+name: $editEmbed
+desc: Rewrites the title, description, footer or colour of an embed the bot already posted.
+category: Embed Builder
+
+<block type="text" title="How does the command work?">
+text: Give the ID of a message and at least one part to change, and the bot updates the embed sitting on that message. Parts you leave empty stay exactly as they were, so a single new title is enough and nothing else is touched.
+text: The message is looked up in the current channel, or in the channel $useChannel switched to. Only messages the bot sent itself can be edited, and the message has to hold an embed already. The colour accepts a hex value such as #FF5733 or one of the named colours.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !editEmbed
+item: Paste the code below into the editor
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: $editEmbed[messageID; (title); (description); (footer); (color)]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $editEmbed[$lastBotMessageID; Updated title]
+</block>
+
+<block type="callout" kind="note">
+text: Leave a gap by typing just a semicolon to skip a part, for example a new title and colour with no description or footer: $editEmbed[123; New title; ; ; #00FF00]. The message ID can come from $lastBotMessageID or from any saved value.
+</block>
+
+<block type="callout" kind="warning">
+text: The bot can only edit its own messages, and it needs Read Message History in that channel. A message with no embed, or one the bot did not send, is reported as an error instead of being changed.
+</block>
+</dash>
+
+<details>
+syntax: $editEmbed[messageID; (title); (description); (footer); (color)]
+param: messageID|snowflake|Required|The message whose embed should be edited
+param: title|text|Optional|A new heading; leave empty to keep the old one
+param: description|text|Optional|New body text; leave empty to keep the old one
+param: footer|text|Optional|A new footer line; leave empty to keep the old one
+param: color|text|Optional|A hex value like #FF5733 or a named colour
+</details>

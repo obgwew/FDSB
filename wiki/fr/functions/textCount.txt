@@ -1,0 +1,37 @@
+<dash>
+name: $textCount
+desc: Compte chaque caractère d'un texte, espaces et symboles compris.
+category: Utilitaires de texte
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: Donnez-lui un texte et vous obtenez sa longueur, comptée caractère par caractère. Contrairement à $charCount, qui saute les espaces et la ponctuation, celui-ci compte tout : lettres, chiffres, espaces, émojis et symboles de la même manière.
+text: Cela en fait la façon honnête de vérifier une limite comme le plafond de 2000 caractères de Discord. Tout ce qui est déjà rempli, comme un message ou une valeur enregistrée, est d'abord développé puis compté.
+</block>
+
+<block type="list" title="Comment l'utiliser dans l'application">
+item: Ouvrez l'onglet Commandes
+item: Appuyez sur + pour créer une nouvelle commande
+item: Donnez-lui un nom dans le champ Nom
+item: Réglez le champ Préfixe sur $textCount
+item: Écrivez votre script dans l'éditeur
+item: Collez la ligne ci-dessous là où vous en avez besoin
+item: Appuyez sur Enregistrer
+</block>
+
+<block type="code" title="Syntaxe">
+text: $textCount[text]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $sendMessage[That sentence is $textCount[Hello, world!] characters long.]
+</block>
+
+<block type="callout" kind="note">
+text: Les arguments supplémentaires sont d'abord réunis avec des points-virgules avant le comptage, donc un point-virgule que vous écrivez entre les crochets compte aussi comme un caractère. Des crochets vides comptent comme zéro.
+</block>
+</dash>
+
+<details>
+syntax: $textCount[text]
+param: text|text|Optionnel|Le texte à mesurer ; les variables et espaces réservés sont d'abord remplis. Vide donne 0
+</details>

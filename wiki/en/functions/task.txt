@@ -1,0 +1,43 @@
+<dash>
+name: $task
+desc: Runs a script again and again on a timer while the bot stays online.
+category: Event
+
+<block type="text" title="How does the event work?">
+text: Set the Prefix field to $task[time] and the app marks the file as an Event for you. The time is a whole number followed by s, m, h or d, for seconds, minutes, hours or days, and it may not be zero. When the bot connects, the first run happens one interval later, and from then on the lines repeat at that pace for as long as the bot is running.
+text: A run has no message behind it, so there is no author, server or channel to fall back on. Data such as $botID and $botName is available, but before sending anything into a channel, point the script at one with $useChannel[guildID; channelID].
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $task[1h]
+item: The app marks it as an Event for you
+item: Paste the code below into the editor
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: #PREFIX:$task[time]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: #PREFIX:$task[1h]
+text: $useChannel[123456789012345678; 987654321098765432]
+text: $sendMessage[Hourly check-in from $botName.]
+</block>
+
+<block type="callout" kind="note">
+text: Edits are picked up on their own. The bot re-reads the events folder about every ten seconds, so a changed time or changed lines take effect without restarting, and deleting the file simply stops its timer.
+</block>
+
+<block type="callout" kind="warning">
+text: The timer keeps firing even when nobody is around, so keep tasks light and avoid posting too often. Discord rate limits apply to timer messages just like any other message.
+</block>
+</dash>
+
+<details>
+syntax: $task[time]
+param: time|text|Required|A whole number and one unit: s, m, h or d, for example 30s, 5m, 2h or 1d
+</details>

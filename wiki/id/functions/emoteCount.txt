@@ -1,0 +1,37 @@
+<dash>
+name: $emoteCount
+desc: Memberi tahu Anda berapa banyak emoji khusus yang dimiliki sebuah server.
+category: Server
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Tanyakan tanpa isi apa pun dan bot menghitung emoji khusus yang diunggah ke server tempat skrip dijalankan. Tambahkan ID server dan ia menghitung server itu sebagai gantinya, selama bot menjadi anggota di sana.
+text: Yang kembali adalah angka polos, siap dimasukkan ke dalam kalimat. Ia hanya menghitung emoji khusus milik server itu sendiri, bukan emoji Unicode standar yang ada di Discord.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $emoteCount
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda membutuhkannya
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $emoteCount[(guildID)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $sendMessage[This server has $emoteCount custom emotes!]
+</block>
+
+<block type="callout" kind="note">
+text: Dalam pesan langsung tidak ada server untuk dihitung, jadi berikan ID server di sana. Server yang tidak bisa dilihat bot, atau server tempat ia bukan anggota, dilaporkan sebagai kesalahan alih-alih nol.
+</block>
+</dash>
+
+<details>
+syntax: $emoteCount[(guildID)]
+param: guildID|snowflake|Opsional|Server mana yang emojinya dihitung; biarkan kosong untuk server saat ini
+</details>

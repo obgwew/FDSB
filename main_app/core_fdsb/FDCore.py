@@ -108,6 +108,8 @@ from .engine_FDScript.links_ops import (
 from .engine_FDScript.embed_ops import (
     _EmbedAuthor,
     _EmbedBuilder,
+    send_embed_message,
+    flush_pending_message,
 )
 from .engine_FDScript.sync_mode_ops import _SyncCollector
 from .engine_FDScript.channel_wrappers import (
@@ -127,6 +129,17 @@ def __getattr__(name):
         from .engine_FDScript import runtime_state
         return getattr(runtime_state, name)
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+
+_FDS_HEADER_RE = re.compile(r'^[ \t]*#(?:PREFIX|ORDER):', re.IGNORECASE)
+
+def strip_fds_header(text: str) -> str:
+    if not text:
+        return text
+    lines = text.splitlines(keepends=True)
+    i = 0
+    while i < len(lines) and _FDS_HEADER_RE.match(lines[i]):
+        i += 1
+    return ''.join(lines[i:]) if i else text
 
 print(f"[FDCore] loaded: {__file__} | syncMode single-message build 3")
 _cooldowns: dict = {}
@@ -353,6 +366,14 @@ class ExecutionContext(ResolverMixin, InlineCmdsMixin, MathOpsMixin):
         if getattr(self, 'is_global_reply', False):
             return _ReplyWrapper(self.message, self)
         return NormalChannelWrapper(self.message.channel, self)
+
+    def use_message_reply(self) -> bool:
+        """True when output must go through message.reply() ($reply mode).
+        Under $ephemeral inside an interaction a message reply can't be hidden,
+        so the (ephemeral-aware) interaction wrapper is used instead."""
+        if not getattr(self, 'is_global_reply', False):
+            return False
+        return not (self.ephemeral and self.interaction is not None)
 
     def set_line(self, line_no: int | None):
         self.current_line_no = line_no

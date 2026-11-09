@@ -423,4 +423,41 @@ TURKISH_DICT = {
     'intents_conn_unknown':  (1305, 'Bağlantı henüz kontrol edilmedi'),
     'intents_ping_test':     (1306, 'Sunucu bağlantısını test et'),
     'intents_ping_none':     (1307, 'Yanıt yok'),
+
+    # ── Settings section title ────────────────────────────────
+    'editor_section':        (1376, 'Düzenleyici'),
+
+    # ── Command Folders ───────────────────────────────────────
+    'folder_label':          (1378, 'Klasör'),
+    'folder_root':           (1379, 'Klasör yok (kök)'),
+    'folder_pick_title':     (1380, 'Klasör seç'),
+    'folder_select':         (1381, 'Seç'),
+    'folder_new':            (1382, 'Yeni klasör'),
+    'folder_new_name':       (1383, 'Klasör adı'),
+    'folder_create_in':      (1384, 'Yeni klasör burada oluşturulacak'),
+    'folder_name_taken':     (1385, 'Bu adda bir klasör zaten burada var'),
+    'folder_name_required':  (1386, 'Bir klasör adı girin'),
+    'folder_new_sub':        (1387, 'Yeni alt klasör'),
+    'folder_new_cmd':        (1388, 'Buraya yeni komut'),
+    'folder_rename':         (1389, 'Yeniden adlandır'),
+    'folder_move':           (1390, 'Başka klasöre taşı'),
+    'folder_delete':         (1391, 'Klasörü sil'),
+    'folder_delete_body':    (1392, 'Yalnızca klasör silinir. İçindeki komutlar ve klasörler üst klasöre taşınır.'),
+    'folder_items':          (1393, '{n} öğe'),
+    'folder_move_failed':    (1394, 'Klasör buraya taşınamıyor'),
+    'command_trigger':       (1395, 'Komut Tetikleyici'),
+    'folder_new_var':        (1396, 'Buraya yeni değişken'),
+
+    # ── Editor settings ───────────────────────────────────────
+    'editor_stats_label':    (1397, 'Satır / karakter sayacı'),
+    'editor_stats_desc':     (1398, 'Sayacı düzenleyicinin üstünde göster'),
+    'silent_var_label':      (1399, 'Sessiz değişken oluşturma'),
+    'silent_var_desc':       (1400, 'Yeni değişkenleri uyarı olmadan oluştur ve betiğin çalışmaya devam etmesini sağla'),
+
+    # ── Bot deletion (loading screen) ─────────────────────────
+    'deleting_bot':          (1401, 'Bot siliniyor…'),
+    'deleting_bot_files':    (1402, 'Bot dosyaları kaldırılıyor…'),
+    'deleting_bot_token':    (1403, 'Kayıtlı token kaldırılıyor…'),
+    'deleting_bot_done':     (1404, 'Bot silindi'),
+    'delete_bot_failed':     (1405, 'Bot silinemedi: {error}'),
 }

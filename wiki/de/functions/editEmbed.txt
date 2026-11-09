@@ -1,0 +1,44 @@
+<dash>
+name: $editEmbed
+desc: Schreibt Titel, Beschreibung, Fußzeile oder Farbe eines bereits vom Bot geposteten Embeds neu.
+category: Embed-Ersteller
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: Gib die ID einer Nachricht und mindestens einen zu ändernden Teil an, und der Bot aktualisiert das Embed auf dieser Nachricht. Teile, die du leer lässt, bleiben genau wie sie waren, daher genügt ein einziger neuer Titel und nichts anderes wird berührt.
+text: Die Nachricht wird im aktuellen Kanal gesucht, oder in dem Kanal, zu dem $useChannel gewechselt hat. Nur Nachrichten, die der Bot selbst gesendet hat, können bearbeitet werden, und die Nachricht muss bereits ein Embed enthalten. Die Farbe akzeptiert einen Hex-Wert wie #FF5733 oder eine der benannten Farben.
+</block>
+
+<block type="list" title="So verwendest du es in der App">
+item: Öffne den Tab Befehle
+item: Tippe auf +, um einen neuen Befehl zu starten
+item: Gib ihm im Feld Name einen Namen
+item: Setze das Feld Präfix auf !editEmbed
+item: Füge den Code unten in den Editor ein
+item: Tippe auf Speichern
+</block>
+
+<block type="code" title="Syntax">
+text: $editEmbed[messageID; (title); (description); (footer); (color)]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $editEmbed[$lastBotMessageID; Updated title]
+</block>
+
+<block type="callout" kind="note">
+text: Lass eine Lücke, indem du nur ein Semikolon tippst, um einen Teil zu überspringen, zum Beispiel einen neuen Titel und eine neue Farbe ohne Beschreibung oder Fußzeile: $editEmbed[123; New title; ; ; #00FF00]. Die Nachrichten-ID kann von $lastBotMessageID oder von einem beliebigen gespeicherten Wert kommen.
+</block>
+
+<block type="callout" kind="warning">
+text: Der Bot kann nur seine eigenen Nachrichten bearbeiten und benötigt dort die Berechtigung Nachrichtenverlauf lesen. Eine Nachricht ohne Embed oder eine, die der Bot nicht gesendet hat, wird als Fehler gemeldet, statt geändert zu werden.
+</block>
+</dash>
+
+<details>
+syntax: $editEmbed[messageID; (title); (description); (footer); (color)]
+param: messageID|snowflake|Erforderlich|Die Nachricht, deren Embed bearbeitet werden soll
+param: title|text|Optional|Eine neue Überschrift; leer lassen, um die alte zu behalten
+param: description|text|Optional|Neuer Fließtext; leer lassen, um den alten zu behalten
+param: footer|text|Optional|Eine neue Fußzeile; leer lassen, um die alte zu behalten
+param: color|text|Optional|Ein Hex-Wert wie #FF5733 oder eine benannte Farbe
+</details>

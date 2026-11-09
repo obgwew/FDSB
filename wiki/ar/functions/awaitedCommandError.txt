@@ -1,0 +1,43 @@
+<dash>
+name: $awaitedCommandError
+desc: يعمل عندما لا يطابق الرد بعد $awaitInput المرشّح الذي ضبطته.
+category: الحدث
+
+<block type="text" title="كيف يعمل هذا الحدث؟">
+text: هذا رفيق $awaitedCommand. أعطه حقل البادئة $awaitedCommandError[name] باستخدام اسم الانتظار نفسه، وسيعمل فقط عندما يصل رد، ويوجد سكربت $awaitedCommand بذلك الاسم، لكن الرد يفشل في المرشّح.
+text: من الاستخدامات الكلاسيكية سؤال بنعم أو لا: يتعامل سكربت الانتظار العادي مع الكلمات المقبولة، بينما يشير هذا بلطف إلى أن الإجابة لم تُفهم. النص المرفوض هو الرسالة التي يقوم عليها السكربت، لذا لا يزال $message يحمل ما تمت كتابته.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة على $awaitedCommandError[confirm]
+item: يعلّمه التطبيق كحدث تلقائيًا
+item: الصق الكود أدناه في المحرر
+item: اضغط على حفظ
+</block>
+
+<block type="code" title="الصيغة">
+text: #PREFIX:$awaitedCommandError[name]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: #PREFIX:$awaitedCommandError[confirm]
+text: $sendMessage[Please answer with yes or no.]
+text: $awaitInput[confirm]
+</block>
+
+<block type="callout" kind="note">
+text: لا يملك سكربت الخطأ مرشّحًا خاصًا به؛ أي رد يفشل في مرشّح $awaitedCommand المطابق يوقظه. وإذا لم يوجد سكربت $awaitedCommand لهذا الاسم أصلًا، فلن يحدث شيء هنا أيضًا، لذا أنشئ السكربت العادي دائمًا.
+</block>
+
+<block type="callout" kind="warning">
+text: يُستهلك الانتظار بالرد حتى عندما لا يطابق. لطرح السؤال مرة أخرى، شغّل $awaitInput بالاسم نفسه مرة أخرى، كما يفعل المثال.
+</block>
+</dash>
+
+<details>
+syntax: $awaitedCommandError[waitName]
+param: waitName|text|مطلوب|الاسم المستخدم في سطور $awaitInput و $awaitedCommand المطابقة
+</details>

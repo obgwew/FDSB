@@ -2,8 +2,9 @@
 import discord
 from FDScript import (
     ExecutionContext, Command,
-    FDLogicError, _send_error, _parse_color, _NAMED_COLORS,
+    FDLogicError, _send_error,
 )
+from engine_FDScript.parse_utils import _parse_color, _NAMED_COLORS
 
 
 def resolve_inline(args: list[str], ctx: ExecutionContext) -> str:

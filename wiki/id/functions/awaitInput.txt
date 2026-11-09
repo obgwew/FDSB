@@ -1,0 +1,44 @@
+<dash>
+name: $awaitInput
+desc: Mendengarkan balasan berikutnya seseorang dan menjalankan skrip kedua saat balasan itu tiba.
+category: Kontrol Alur
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: $awaitInput menyiapkan penantian dan tidak memposting apa pun sendiri. Ia mengambil nama yang Anda pilih, dan sejak itu bot mengawasi pesan berikutnya yang cocok dan menjalankan skrip yang baris pertamanya `$awaitedCommand[nama itu]`.
+text: Secara bawaan ia mendengarkan orang yang menjalankan perintah, di kanal tempat perintah dijalankan. Berikan ID pengguna untuk menunggu satu anggota tertentu, atau kata everyone untuk menerima balasan berikutnya dari siapa pun. Berikan ID kanal terakhir saat jawaban harus datang dari kanal lain.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !ask
+item: Tulis baris di bawah di editor
+item: Ketuk Simpan
+item: Buat skrip kedua untuk jawabannya, lihat $awaitedCommand
+</block>
+
+<block type="code" title="Sintaks">
+text: $awaitInput[name; (userID/everyone); (channelID)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $sendMessage[How old are you?]
+text: $awaitInput[age]
+</block>
+
+<block type="callout" kind="note">
+text: Nama hanya boleh memakai huruf, angka, garis bawah, dan tanda hubung, dan dicocokkan tanpa memperhatikan huruf besar. Penantian dipakai sekali, jadi jawaban menjalankan skripnya satu kali lalu bot kembali mendengarkan seperti biasa.
+</block>
+
+<block type="callout" kind="warning">
+text: Satu penantian disimpan per pasangan kanal dan anggota. Meminta lagi untuk anggota yang sama di kanal yang sama menggantikan nama lama, jadi pertanyaan pertama berhenti menunggu jawaban. Pengguna dan kanal keduanya harus ID numerik biasa; hanya bagian pengguna yang boleh berupa kata everyone.
+</block>
+</dash>
+
+<details>
+syntax: $awaitInput[name; (userID/everyone); (channelID)]
+param: name|text|Wajib|Nama penantian; skrip $awaitedCommand yang cocok memakai nama yang sama
+param: userID|snowflake|Opsional|Anggota mana yang didengarkan, atau everyone untuk siapa pun. Biarkan kosong untuk orang yang menjalankan perintah
+param: channelID|snowflake|Opsional|Di kanal mana jawaban harus dikirim. Biarkan kosong untuk kanal saat ini
+</details>

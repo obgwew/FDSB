@@ -47,9 +47,5 @@ async def _process(args: list[str], ctx: ExecutionContext) -> str:
     return ""
 
 
-async def resolve_inline(args: list[str], ctx: ExecutionContext) -> str:
-    return await _process(args, ctx)
-
-
 async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: discord.abc.Messageable) -> None:
     await _process(args, ctx)

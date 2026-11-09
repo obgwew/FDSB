@@ -1,0 +1,44 @@
+<dash>
+name: $awaitInput
+desc: Listens for somebody's next reply and runs a second script when it arrives.
+category: Flow Control
+
+<block type="text" title="How does the command work?">
+text: $awaitInput sets up a wait and posts nothing by itself. It takes a name you choose, and from then on the bot watches for the next matching message and runs the script whose first line is `$awaitedCommand[that name]`.
+text: By default it listens to the person who ran the command, in the channel the command ran in. Pass a user ID to wait for one specific member, or the word everyone to accept the next reply from anybody. Pass a channel ID last when the answer should come from another channel.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !ask
+item: Write the line below in the editor
+item: Tap Save
+item: Create a second script for the answer, see $awaitedCommand
+</block>
+
+<block type="code" title="Syntax">
+text: $awaitInput[name; (userID/everyone); (channelID)]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $sendMessage[How old are you?]
+text: $awaitInput[age]
+</block>
+
+<block type="callout" kind="note">
+text: The name may use letters, digits, underscores and hyphens only, and it is matched without caring about capitals. A wait is used up once, so the answer runs its script a single time and then the bot goes back to listening as usual.
+</block>
+
+<block type="callout" kind="warning">
+text: One wait is kept per channel and member pair. Asking again for the same member in the same channel replaces the older name, so the first question stops expecting an answer. Both the user and the channel have to be plain numeric IDs; only the user part may be the word everyone.
+</block>
+</dash>
+
+<details>
+syntax: $awaitInput[name; (userID/everyone); (channelID)]
+param: name|text|Required|The wait name; the matching $awaitedCommand script uses the same name
+param: userID|snowflake|Optional|Which member to listen to, or everyone for anybody. Leave empty for the person who ran the command
+param: channelID|snowflake|Optional|Which channel the answer must be sent in. Leave empty for the current channel
+</details>

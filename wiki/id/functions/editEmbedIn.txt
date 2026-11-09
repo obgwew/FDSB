@@ -1,0 +1,45 @@
+<dash>
+name: $editEmbedIn
+desc: Menunggu waktu yang ditentukan, lalu mengedit embed pada pesan terakhir yang dikirim bot.
+category: Pembuat Embed
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Yang ini bekerja seperti $editEmbed, kecuali Anda tidak perlu ID pesan. Ia mengingat pesan terakhir yang dikirim bot, menunggu waktu yang Anda berikan, lalu mengubah embed pada pesan itu.
+text: Waktunya adalah bilangan bulat diikuti s, m, h, atau d, seperti 30s, 5m, 2h, atau 1d. Berikan setidaknya satu bagian untuk diubah, dan biarkan yang lain kosong untuk mempertahankannya. Ini pasangan alami $sendEmbedMessage, di mana satu kartu diposting sekarang dan edit kedua datang sedikit kemudian.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $editEmbedIn
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $editEmbedIn[time; (title); (description); (footer); (color)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $sendEmbedMessage[$channelID; Starting; Please wait a moment; #F59E0B]
+text: $editEmbedIn[10s; Finished; Everything is done; ; #00FF00]
+</block>
+
+<block type="callout" kind="note">
+text: Setidaknya salah satu dari judul, deskripsi, footer, atau warna harus diisi, jika tidak bot melaporkan bahwa tidak ada yang perlu diubah. Bagian kosong mempertahankan nilai lamanya, jadi gunakan titik koma kosong sebagai pengganti saat Anda ingin melompat ke warna.
+</block>
+
+<block type="callout" kind="warning">
+text: Bot harus sudah mengirim pesan nyata yang memuat embed dalam jalannya ini. Di bawah $syncMode pesan yang terkumpul dikirim lebih dulu, tetapi jika tidak ada embed pada pesan terakhir, editnya ditolak. Hanya pesan yang dikirim bot yang bisa diedit.
+</block>
+</dash>
+
+<details>
+syntax: $editEmbedIn[time; (title); (description); (footer); (color)]
+param: time|text|Wajib|Berapa lama menunggu: bilangan bulat dan s, m, h, atau d, misalnya 30s atau 5m
+param: title|text|Opsional|Judul baru; biarkan kosong untuk mempertahankan yang lama
+param: description|text|Opsional|Teks isi baru; biarkan kosong untuk mempertahankan yang lama
+param: footer|text|Opsional|Baris footer baru; biarkan kosong untuk mempertahankan yang lama
+param: color|text|Opsional|Nilai heksadesimal seperti #FF5733 atau warna bernama
+</details>

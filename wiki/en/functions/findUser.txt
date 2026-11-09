@@ -1,0 +1,38 @@
+<dash>
+name: $findUser
+desc: Turns a user ID or mention into a member ID you can reuse, with a fallback to the author.
+category: Utilities
+
+<block type="text" title="How does the command work?">
+text: Give it a user ID or a mention and the bot checks whether that person is a member of the current server. If they are, you get their ID back as plain digits, ready for a role change, a DM or a saved variable.
+text: When the person is not a member, the second part decides what happens. With yes, which is the default, the bot hands back the ID of whoever ran the command; with no, it hands back nothing at all. That makes it a convenient way to target the named member, or fall back to the person asking.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to $findUser
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: $findUser[userID/mention; (returnAuthor)]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $sendMessage[Target: $findUser[$mentioned]]
+</block>
+
+<block type="callout" kind="note">
+text: It only searches the current server, so a valid user who is not a guild member is treated as missing. The mention has to be a real user mention such as <@123>, and the fallback word is either yes or no.
+</block>
+</dash>
+
+<details>
+syntax: $findUser[userID/mention; (returnAuthor)]
+param: userID|text|Required|The user to look for, as an ID or a user mention
+param: returnAuthor|yes/no|Optional|yes returns the author when nobody is found, no returns nothing. Defaults to yes
+</details>

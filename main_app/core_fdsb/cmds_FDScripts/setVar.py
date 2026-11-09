@@ -9,6 +9,15 @@ from FDScript import (
 from FDCore import _load_ids_data, _save_ids_data
 
 
+def _silent_creation() -> bool:
+    """Editor setting: create new variables silently (no warning, script keeps running)."""
+    try:
+        from main_app.settings_app import get_silent_var_creation
+        return get_silent_var_creation()
+    except Exception:
+        return False
+
+
 def _apply(args: list[str], ctx: ExecutionContext):
     if len(args) == 2:
         name  = ctx.resolve(args[0]).strip()
@@ -24,6 +33,8 @@ def _apply(args: list[str], ctx: ExecutionContext):
 
         if not existed:
             ctx.log_event(f"setVar [{name}] ← {_truncate(value)!r} (created — first time, global)")
+            if _silent_creation():
+                return None
             return FDEnvironmentError(
                 f"Variable `{name}` did not exist and has been created with the "
                 f"provided value. Script stopped — please review the program."
@@ -55,6 +66,8 @@ def _apply(args: list[str], ctx: ExecutionContext):
                 f"setVar [{name}] for user {user_id} ← {_truncate(value)!r} "
                 f"(created — private, no matching global variable)"
             )
+            if _silent_creation():
+                return None
             return FDEnvironmentError(
                 f"No global variable `{name}` exists. A private variable "
                 f"`{name}` has been created for user `{user_id}` with the "

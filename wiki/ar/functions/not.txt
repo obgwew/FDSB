@@ -1,0 +1,37 @@
+<dash>
+name: $not
+desc: يقلب فحصًا، فيحوّل true إلى false و false إلى true.
+category: التحكم في التدفق
+
+<block type="text" title="كيف يعمل الأمر؟">
+text: يأخذ $not فحصًا واحدًا ويجيب عكسه. أعطه مقارنة فيقلب النتيجة، لذا يعود زوج غير متساوٍ على أنه true. وأعطه قيمة وحدها فتُعدّ كلمات مثل true أو yes أو on صحيحة، بينما تُعدّ false أو no أو off أو قيمة فارغة خاطئة.
+text: الإجابة دائمًا هي الكلمة المجردة true أو false، مما يسهّل لفه حول فحص موجود في كتلة $if أو وضعه في سطر خاص به.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة على !not
+item: اكتب سكربتك في المحرر
+item: الصق السطر أدناه حيثما تحتاجه
+item: اضغط على حفظ
+</block>
+
+<block type="code" title="الصيغة">
+text: $not[condition]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $sendMessage[Result: $not[true]]
+</block>
+
+<block type="callout" kind="note">
+text: تُفهم علامات المقارنة نفسها التي يفهمها $if: ==، و !=، و >، و <، و >=، و <=. أي شيء بلا علامة يُعامل كصحيح ما لم يكن فارغًا أو إحدى كلمات الخطأ المعروفة.
+</block>
+</dash>
+
+<details>
+syntax: $not[condition]
+param: condition|expression|مطلوب|قيمة أو فحص لقلبه، باستخدام == أو != أو > أو < أو >= أو <=
+</details>

@@ -1,0 +1,38 @@
+<dash>
+name: $mentioned
+desc: Gibt die Erwähnung der ersten in einer Nachricht markierten Person zurück, oder den Autor, wenn niemand markiert ist.
+category: Werkzeuge
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: Wenn ein Mitglied eine Nachricht tippt und darin andere Personen markiert, gibt $mentioned die Erwähnung von einer davon zurück. Der erste Teil wählt aus, welche, gezählt ab 1, und der zweite Teil entscheidet, was passiert, wenn die Nachricht weniger Personen markiert als diese Zahl.
+text: Mit yes, dem Standard, greift der Bot auf die Erwähnung des Autors der Nachricht zurück. Mit no gibt er stattdessen ein leeres Ergebnis zurück, was praktisch ist, wenn du nur auf eine echte Markierung reagieren willst.
+</block>
+
+<block type="list" title="So verwendest du es in der App">
+item: Öffne den Tab Befehle
+item: Tippe auf +, um einen neuen Befehl zu starten
+item: Gib ihm im Feld Name einen Namen
+item: Setze das Feld Präfix auf !greet
+item: Schreibe dein Skript in den Editor
+item: Füge die folgende Zeile überall ein, wo du sie brauchst
+item: Tippe auf Speichern
+</block>
+
+<block type="code" title="Syntax">
+text: $mentioned[(number); (returnAuthor)]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $sendMessage[Hello $mentioned, welcome!]
+</block>
+
+<block type="callout" kind="note">
+text: Die Zahl ist eine positive ganze Zahl und standardmäßig 1, und wiederholte Markierungen derselben Person werden einmal gezählt. Bei einem Tastendruck oder einer Menüauswahl gibt es keine getippte Nachricht zum Lesen, daher wird der Rückgriffsautor verwendet.
+</block>
+</dash>
+
+<details>
+syntax: $mentioned[(number); (returnAuthor)]
+param: number|text|Optional|Welche markierte Person zurückgegeben wird, gezählt ab 1. Standard ist 1
+param: returnAuthor|yes/no|Optional|yes erwähnt den Autor, wenn es keine solche Markierung gibt, no gibt leer zurück. Standard ist yes
+</details>

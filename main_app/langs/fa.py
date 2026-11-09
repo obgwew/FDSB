@@ -411,4 +411,41 @@ PERSIAN_DICT = {
     'intents_conn_unknown':       (1305, 'اتصال هنوز بررسی نشده است'),
     'intents_ping_test':          (1306, 'تست اتصال سرور'),
     'intents_ping_none':          (1307, 'پاسخی دریافت نشد'),
+
+    # ── Settings section title ────────────────────────────────
+    'editor_section':        (1376, 'ویرایشگر'),
+
+    # ── Command Folders ───────────────────────────────────────
+    'folder_label':          (1378, 'پوشه'),
+    'folder_root':           (1379, 'بدون پوشه (ریشه)'),
+    'folder_pick_title':     (1380, 'انتخاب پوشه'),
+    'folder_select':         (1381, 'انتخاب'),
+    'folder_new':            (1382, 'پوشه جدید'),
+    'folder_new_name':       (1383, 'نام پوشه'),
+    'folder_create_in':      (1384, 'پوشه جدید در اینجا ایجاد می\u200cشود'),
+    'folder_name_taken':     (1385, 'پوشه\u200cای با این نام از قبل اینجا وجود دارد'),
+    'folder_name_required':  (1386, 'نام پوشه را وارد کنید'),
+    'folder_new_sub':        (1387, 'زیرپوشه جدید'),
+    'folder_new_cmd':        (1388, 'دستور جدید اینجا'),
+    'folder_rename':         (1389, 'تغییر نام'),
+    'folder_move':           (1390, 'انتقال به پوشه دیگر'),
+    'folder_delete':         (1391, 'حذف پوشه'),
+    'folder_delete_body':    (1392, 'فقط پوشه حذف می\u200cشود. دستورها و پوشه\u200cهای داخل آن به پوشه والد منتقل می\u200cشوند.'),
+    'folder_items':          (1393, '{n} مورد'),
+    'folder_move_failed':    (1394, 'انتقال پوشه به اینجا ممکن نیست'),
+    'command_trigger':       (1395, 'راه\u200cانداز دستور'),
+    'folder_new_var':        (1396, 'متغیر جدید اینجا'),
+
+    # ── Editor settings ───────────────────────────────────────
+    'editor_stats_label':    (1397, 'شمارنده خطوط / نویسه\u200cها'),
+    'editor_stats_desc':     (1398, 'نمایش شمارنده بالای ویرایشگر'),
+    'silent_var_label':      (1399, 'ساخت بی\u200cصدای متغیر'),
+    'silent_var_desc':       (1400, 'ایجاد متغیرهای جدید بدون هشدار و ادامه اجرای اسکریپت'),
+
+    # ── Bot deletion (loading screen) ─────────────────────────
+    'deleting_bot':          (1401, 'در حال حذف ربات…'),
+    'deleting_bot_files':    (1402, 'در حال حذف فایل\u200cهای ربات…'),
+    'deleting_bot_token':    (1403, 'در حال حذف توکن ذخیره\u200cشده…'),
+    'deleting_bot_done':     (1404, 'ربات حذف شد'),
+    'delete_bot_failed':     (1405, 'حذف ربات ممکن نشد: {error}'),
 }

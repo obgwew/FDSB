@@ -1,0 +1,43 @@
+<dash>
+name: $task
+desc: Exécute un script encore et encore sur un minuteur tant que le bot reste en ligne.
+category: Événement
+
+<block type="text" title="Comment fonctionne l'événement ?">
+text: Réglez le champ Préfixe sur $task[time] et l'application marque le fichier comme un événement pour vous. Le temps est un nombre entier suivi de s, m, h ou d, pour secondes, minutes, heures ou jours, et il ne peut pas être zéro. Quand le bot se connecte, la première exécution a lieu un intervalle plus tard, et à partir de là les lignes se répètent à ce rythme tant que le bot tourne.
+text: Une exécution n'a pas de message derrière elle, donc il n'y a ni auteur, ni serveur, ni canal sur lesquels se rabattre. Des données comme $botID et $botName sont disponibles, mais avant d'envoyer quoi que ce soit dans un canal, pointez le script vers un canal avec $useChannel[guildID; channelID].
+</block>
+
+<block type="list" title="Comment l'utiliser dans l'application">
+item: Ouvrez l'onglet Commandes
+item: Appuyez sur + pour créer une nouvelle commande
+item: Donnez-lui un nom dans le champ Nom
+item: Réglez le champ Préfixe sur $task[1h]
+item: L'application le marque comme événement pour vous
+item: Collez le code ci-dessous dans l'éditeur
+item: Appuyez sur Enregistrer
+</block>
+
+<block type="code" title="Syntaxe">
+text: #PREFIX:$task[time]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: #PREFIX:$task[1h]
+text: $useChannel[123456789012345678; 987654321098765432]
+text: $sendMessage[Hourly check-in from $botName.]
+</block>
+
+<block type="callout" kind="note">
+text: Les modifications sont prises en compte d'elles-mêmes. Le bot relit le dossier des événements environ toutes les dix secondes, donc un temps ou des lignes modifiés prennent effet sans redémarrage, et supprimer le fichier arrête simplement son minuteur.
+</block>
+
+<block type="callout" kind="warning">
+text: Le minuteur continue de se déclencher même quand personne n'est là, alors gardez les tâches légères et évitez de publier trop souvent. Les limites de débit de Discord s'appliquent aux messages du minuteur comme à tout autre message.
+</block>
+</dash>
+
+<details>
+syntax: $task[time]
+param: time|text|Requis|Un nombre entier et une unité : s, m, h ou d, par exemple 30s, 5m, 2h ou 1d
+</details>

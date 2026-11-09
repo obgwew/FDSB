@@ -1,0 +1,38 @@
+<dash>
+name: $mentioned
+desc: Memberi Anda mention orang pertama yang ditandai dalam sebuah pesan, atau penulisnya saat tidak ada yang ditandai.
+category: Utilitas
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Saat seorang anggota mengetik pesan dan menandai orang lain di dalamnya, $mentioned mengembalikan mention salah satu dari mereka. Bagian pertama memilih yang mana, dihitung dari 1, dan bagian kedua menentukan apa yang harus dilakukan saat pesan menandai lebih sedikit orang dari angka itu.
+text: Dengan yes, bawaannya, bot beralih ke mention penulis pesan. Dengan no, ia mengembalikan hasil kosong sebagai gantinya, yang berguna saat Anda hanya ingin bereaksi pada tanda sungguhan.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !greet
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda membutuhkannya
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $mentioned[(number); (returnAuthor)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $sendMessage[Hello $mentioned, welcome!]
+</block>
+
+<block type="callout" kind="note">
+text: Angkanya adalah bilangan bulat positif dan bawaannya 1, dan tanda berulang dari orang yang sama dihitung sekali. Dalam penekanan tombol atau pilihan menu tidak ada pesan yang diketik untuk dibaca, jadi penulis cadangan yang digunakan.
+</block>
+</dash>
+
+<details>
+syntax: $mentioned[(number); (returnAuthor)]
+param: number|text|Opsional|Orang bertanda mana yang dikembalikan, dihitung dari 1. Bawaannya 1
+param: returnAuthor|yes/no|Opsional|yes menyebut penulis saat tidak ada tanda seperti itu, no mengembalikan kosong. Bawaannya yes
+</details>

@@ -1,0 +1,44 @@
+<dash>
+name: $editEmbed
+desc: Reescribe el título, la descripción, el pie o el color de un embed que el bot ya publicó.
+category: Constructor de embed
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Da el ID de un mensaje y al menos una parte que cambiar, y el bot actualiza el embed que hay en ese mensaje. Las partes que dejes vacías se quedan exactamente como estaban, así que un solo título nuevo basta y no se toca nada más.
+text: El mensaje se busca en el canal actual, o en el canal al que $useChannel cambió. Solo se pueden editar los mensajes que el propio bot envió, y el mensaje tiene que contener ya un embed. El color acepta un valor hexadecimal como #FF5733 o uno de los colores con nombre.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el campo Prefijo en !editEmbed
+item: Pega el código de abajo en el editor
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $editEmbed[messageID; (title); (description); (footer); (color)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $editEmbed[$lastBotMessageID; Updated title]
+</block>
+
+<block type="callout" kind="note">
+text: Deja un hueco escribiendo solo un punto y coma para saltar una parte, por ejemplo un título y color nuevos sin descripción ni pie: $editEmbed[123; New title; ; ; #00FF00]. El ID del mensaje puede venir de $lastBotMessageID o de cualquier valor guardado.
+</block>
+
+<block type="callout" kind="warning">
+text: El bot solo puede editar sus propios mensajes, y necesita Leer historial de mensajes en ese canal. Un mensaje sin embed, o uno que el bot no envió, se informa como error en lugar de cambiarse.
+</block>
+</dash>
+
+<details>
+syntax: $editEmbed[messageID; (title); (description); (footer); (color)]
+param: messageID|snowflake|Obligatorio|El mensaje cuyo embed debe editarse
+param: title|text|Opcional|Un nuevo titular; déjalo vacío para mantener el anterior
+param: description|text|Opcional|Nuevo texto del cuerpo; déjalo vacío para mantener el anterior
+param: footer|text|Opcional|Una nueva línea de pie; déjala vacía para mantener la anterior
+param: color|text|Opcional|Un valor hexadecimal como #FF5733 o un color con nombre
+</details>

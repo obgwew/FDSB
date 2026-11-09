@@ -1,0 +1,38 @@
+<dash>
+name: $mentioned
+desc: Gives you the mention of the first person tagged in a message, or the author when nobody is tagged.
+category: Utilities
+
+<block type="text" title="How does the command work?">
+text: When a member types a message and tags other people in it, $mentioned hands back the mention of one of them. The first part picks which one, counting from 1, and the second part decides what to do when the message tags fewer people than that.
+text: With yes, the default, the bot falls back to mentioning the author of the message. With no, it returns an empty result instead, which is handy when you only want to react to a real tag.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !greet
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: $mentioned[(number); (returnAuthor)]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $sendMessage[Hello $mentioned, welcome!]
+</block>
+
+<block type="callout" kind="note">
+text: The number is a positive integer and defaults to 1, and repeated tags of the same person are counted once. In a button press or a menu choice there is no typed message to read, so the fallback author is used.
+</block>
+</dash>
+
+<details>
+syntax: $mentioned[(number); (returnAuthor)]
+param: number|text|Optional|Which tagged person to return, counting from 1. Defaults to 1
+param: returnAuthor|yes/no|Optional|yes mentions the author when there is no such tag, no returns empty. Defaults to yes
+</details>

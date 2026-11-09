@@ -1,0 +1,45 @@
+<dash>
+name: $editEmbedIn
+desc: Czeka określony czas, a następnie edytuje embed na ostatniej wiadomości wysłanej przez bota.
+category: Kreator embedów
+
+<block type="text" title="Jak działa ta komenda?">
+text: Ta działa jak $editEmbed, z tą różnicą, że nie potrzebujesz ID wiadomości. Zapamiętuje ostatnią wiadomość wysłaną przez bota, czeka podany czas, a następnie zmienia embed na tej wiadomości.
+text: Czas to liczba całkowita, po której następuje s, m, h lub d, na przykład 30s, 5m, 2h lub 1d. Podaj co najmniej jedną część do zmiany, a pozostałe zostaw puste, aby je zachować. To naturalny partner $sendEmbedMessage, gdzie jedna karta jest publikowana teraz, a druga edycja przychodzi nieco później.
+</block>
+
+<block type="list" title="Jak używać tego w aplikacji">
+item: Otwórz kartę Komendy
+item: Stuknij +, aby rozpocząć nową komendę
+item: Nadaj jej nazwę w polu Nazwa
+item: Ustaw pole Prefiks na $editEmbedIn
+item: Wklej poniższy kod do edytora
+item: Stuknij Zapisz
+</block>
+
+<block type="code" title="Składnia">
+text: $editEmbedIn[time; (title); (description); (footer); (color)]
+</block>
+
+<block type="code" title="Przykład do skopiowania">
+text: $sendEmbedMessage[$channelID; Starting; Please wait a moment; #F59E0B]
+text: $editEmbedIn[10s; Finished; Everything is done; ; #00FF00]
+</block>
+
+<block type="callout" kind="note">
+text: Co najmniej jedno z pól tytuł, opis, stopka lub kolor musi być wypełnione, inaczej bot zgłosi, że nie ma nic do zmiany. Puste części zachowują starą wartość, więc użyj samego średnika jako zastępnika, gdy chcesz przeskoczyć do koloru.
+</block>
+
+<block type="callout" kind="warning">
+text: Bot musi już wysłać w tym uruchomieniu prawdziwą wiadomość zawierającą embed. W trybie $syncMode zebrana wiadomość jest wysyłana najpierw, ale jeśli na ostatniej wiadomości nie ma embedu, edycja jest odrzucana. Edytować można tylko wiadomości wysłane przez bota.
+</block>
+</dash>
+
+<details>
+syntax: $editEmbedIn[time; (title); (description); (footer); (color)]
+param: time|text|Required|Jak długo czekać: liczba całkowita i s, m, h lub d, na przykład 30s lub 5m
+param: title|text|Optional|Nowy nagłówek; zostaw puste, aby zachować stary
+param: description|text|Optional|Nowy tekst treści; zostaw puste, aby zachować stary
+param: footer|text|Optional|Nowa linia stopki; zostaw puste, aby zachować starą
+param: color|text|Optional|Wartość szesnastkowa, taka jak #FF5733, lub nazwany kolor
+</details>

@@ -100,7 +100,9 @@ class SyncModeMixin:
     _SYNC_TIMERS = ("wait", "replyIn")
 
     async def _flush_sync_batch(self, ctx) -> None:
-        if not ctx._sync_used:
+        pending_embed = any(b.is_set() for b in ctx.embed_builders.values())
+        pending_view = bool(ctx.view and getattr(ctx.view, "children", None))
+        if not (ctx._sync_used or pending_embed or pending_view):
             return
         ctx._sync_flushing = True
         try:

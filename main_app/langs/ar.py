@@ -48,6 +48,7 @@ ARABIC_DICT = {
     # ── Settings ──────────────────────────────────────────────
     'general_section':     (1031, 'عام'),
     'design_section':      (1032, 'التصميم'),
+    'editor_section':      (1376, 'المحرر'),
     'info_section':        (1033, 'معلومات'),
     'name_project':        (1034, 'اسم المشروع'),
     'token_field':         (1035, 'توكن البوت'),
@@ -154,7 +155,7 @@ ARABIC_DICT = {
     'callout_question':     (1147, 'ما هذا؟'),
 
     # ── variables_view ────────────────────────────────────────
-    'variables':            (1028, 'المتغيرات'),
+    'variables':            (1377, 'المتغيرات'),
     'variables_slash':      (1151, 'متغيرات /'),
     'scoped_vars':          (1152, 'قيم لكل مستخدم'),
     'value_label':          (1153, 'القيمة'),
@@ -411,4 +412,38 @@ ARABIC_DICT = {
     'intents_conn_unknown':  (1305, 'لم يتم التحقق من الاتصال بعد'),
     'intents_ping_test':     (1306, 'اختبار اتصال الخادم'),
     'intents_ping_none':     (1307, 'لا يوجد رد'),
+
+    # ── Command Folders ───────────────────────────────────────
+    'folder_label':          (1378, 'مجلد'),
+    'folder_root':           (1379, 'بدون مجلد (الجذر)'),
+    'folder_pick_title':     (1380, 'اختر مجلدًا'),
+    'folder_select':         (1381, 'تحديد'),
+    'folder_new':            (1382, 'مجلد جديد'),
+    'folder_new_name':       (1383, 'اسم المجلد'),
+    'folder_create_in':      (1384, 'سيتم إنشاء المجلد الجديد في'),
+    'folder_name_taken':     (1385, 'يوجد مجلد بهذا الاسم هنا بالفعل'),
+    'folder_name_required':  (1386, 'أدخل اسم المجلد'),
+    'folder_new_sub':        (1387, 'مجلد فرعي جديد'),
+    'folder_new_cmd':        (1388, 'أمر جديد هنا'),
+    'folder_rename':         (1389, 'إعادة تسمية'),
+    'folder_move':           (1390, 'نقل إلى مجلد آخر'),
+    'folder_delete':         (1391, 'حذف المجلد'),
+    'folder_delete_body':    (1392, 'يتم حذف المجلد فقط. تنتقل الأوامر والمجلدات الموجودة داخله إلى المجلد الأصل.'),
+    'folder_items':          (1393, '{n} عنصر'),
+    'folder_move_failed':    (1394, 'لا يمكن نقل المجلد إلى هنا'),
+    'command_trigger':       (1395, 'مشغّل الأمر'),
+    'folder_new_var':        (1396, 'متغير جديد هنا'),
+
+    # ── Editor settings ───────────────────────────────────────
+    'editor_stats_label':    (1397, 'عدّاد الأسطر / الأحرف'),
+    'editor_stats_desc':     (1398, 'إظهار العدّاد أعلى المحرر'),
+    'silent_var_label':      (1399, 'إنشاء متغيرات صامت'),
+    'silent_var_desc':       (1400, 'إنشاء متغيرات جديدة دون تحذير وإبقاء السكربت قيد التشغيل'),
+
+    # ── Bot deletion (loading screen) ─────────────────────────
+    'deleting_bot':          (1401, 'جارٍ حذف البوت…'),
+    'deleting_bot_files':    (1402, 'جارٍ إزالة ملفات البوت…'),
+    'deleting_bot_token':    (1403, 'جارٍ إزالة التوكن المحفوظ…'),
+    'deleting_bot_done':     (1404, 'تم حذف البوت'),
+    'delete_bot_failed':     (1405, 'تعذّر حذف البوت: {error}'),
 }

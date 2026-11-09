@@ -1,0 +1,45 @@
+<dash>
+name: $editEmbedIn
+desc: Attend un temps défini, puis modifie l'embed du dernier message envoyé par le bot.
+category: Constructeur d'embed
+
+<block type="text" title="Comment fonctionne la commande ?">
+text: Celle-ci fonctionne comme $editEmbed, sauf que vous n'avez pas besoin d'ID de message. Elle retient le dernier message envoyé par le bot, attend le temps que vous lui donnez, puis change l'embed de ce message.
+text: Le temps est un nombre entier suivi de s, m, h ou d, comme 30s, 5m, 2h ou 1d. Donnez au moins une partie à modifier et laissez les autres vides pour les garder telles quelles. C'est le partenaire naturel de $sendEmbedMessage, où une carte est publiée maintenant et une seconde modification arrive un peu plus tard.
+</block>
+
+<block type="list" title="Comment l'utiliser dans l'application">
+item: Ouvrez l'onglet Commandes
+item: Appuyez sur + pour créer une nouvelle commande
+item: Donnez-lui un nom dans le champ Nom
+item: Réglez le champ Préfixe sur $editEmbedIn
+item: Collez le code ci-dessous dans l'éditeur
+item: Appuyez sur Enregistrer
+</block>
+
+<block type="code" title="Syntaxe">
+text: $editEmbedIn[time; (title); (description); (footer); (color)]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: $sendEmbedMessage[$channelID; Starting; Please wait a moment; #F59E0B]
+text: $editEmbedIn[10s; Finished; Everything is done; ; #00FF00]
+</block>
+
+<block type="callout" kind="note">
+text: Au moins un titre, une description, un pied de page ou une couleur doit être rempli, sinon le bot signale qu'il n'y a rien à modifier. Les parties vides gardent leur ancienne valeur, alors utilisez un point-virgule seul comme espace réservé quand vous voulez sauter jusqu'à la couleur.
+</block>
+
+<block type="callout" kind="warning">
+text: Le bot doit avoir déjà envoyé un vrai message contenant un embed dans cette exécution. Sous $syncMode, le message collecté est envoyé d'abord, mais s'il n'y a pas d'embed sur le dernier message, la modification est refusée. Seuls les messages envoyés par le bot peuvent être modifiés.
+</block>
+</dash>
+
+<details>
+syntax: $editEmbedIn[time; (title); (description); (footer); (color)]
+param: time|text|Requis|Combien de temps attendre : un nombre entier et s, m, h ou d, par exemple 30s ou 5m
+param: title|text|Optionnel|Un nouveau titre ; laissez vide pour garder l'ancien
+param: description|text|Optionnel|Nouveau texte du corps ; laissez vide pour garder l'ancien
+param: footer|text|Optionnel|Une nouvelle ligne de pied de page ; laissez vide pour garder l'ancienne
+param: color|text|Optionnel|Une valeur hexadécimale comme #FF5733 ou une couleur nommée
+</details>

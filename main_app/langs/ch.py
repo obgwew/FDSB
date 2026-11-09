@@ -411,4 +411,41 @@ CHINESE_DICT = {
     'start_err_no_token':         (1373, '未找到机器人令牌（应用未传递，config.json 中也不存在）。'),
     'server_disconnected':        (1374, '连接已断开'),
     'status_live_default':        (1375, '直播中'),
+
+    # ── Settings section title ────────────────────────────────
+    'editor_section':        (1376, '编辑器'),
+
+    # ── Command Folders ───────────────────────────────────────
+    'folder_label':          (1378, '文件夹'),
+    'folder_root':           (1379, '无文件夹（根目录）'),
+    'folder_pick_title':     (1380, '选择文件夹'),
+    'folder_select':         (1381, '选择'),
+    'folder_new':            (1382, '新建文件夹'),
+    'folder_new_name':       (1383, '文件夹名称'),
+    'folder_create_in':      (1384, '新文件夹将创建于'),
+    'folder_name_taken':     (1385, '此处已存在同名文件夹'),
+    'folder_name_required':  (1386, '请输入文件夹名称'),
+    'folder_new_sub':        (1387, '新建子文件夹'),
+    'folder_new_cmd':        (1388, '在此新建命令'),
+    'folder_rename':         (1389, '重命名'),
+    'folder_move':           (1390, '移动到其他文件夹'),
+    'folder_delete':         (1391, '删除文件夹'),
+    'folder_delete_body':    (1392, '仅删除该文件夹。其中的命令和文件夹将移至上级文件夹。'),
+    'folder_items':          (1393, '{n} 项'),
+    'folder_move_failed':    (1394, '无法将文件夹移动到此位置'),
+    'command_trigger':       (1395, '命令触发器'),
+    'folder_new_var':        (1396, '在此新建变量'),
+
+    # ── Editor settings ───────────────────────────────────────
+    'editor_stats_label':    (1397, '行数 / 字符数统计'),
+    'editor_stats_desc':     (1398, '在编辑器上方显示计数器'),
+    'silent_var_label':      (1399, '静默创建变量'),
+    'silent_var_desc':       (1400, '创建新变量时不显示警告并保持脚本运行'),
+
+    # ── Bot deletion (loading screen) ─────────────────────────
+    'deleting_bot':          (1401, '正在删除机器人…'),
+    'deleting_bot_files':    (1402, '正在删除机器人文件…'),
+    'deleting_bot_token':    (1403, '正在删除已保存的令牌…'),
+    'deleting_bot_done':     (1404, '机器人已删除'),
+    'delete_bot_failed':     (1405, '无法删除机器人：{error}'),
 }

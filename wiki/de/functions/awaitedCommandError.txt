@@ -1,0 +1,43 @@
+<dash>
+name: $awaitedCommandError
+desc: Läuft, wenn die Antwort nach $awaitInput nicht zum festgelegten Filter passt.
+category: Ereignis
+
+<block type="text" title="Wie funktioniert das Ereignis?">
+text: Dies ist der Begleiter von $awaitedCommand. Gib ihm das Präfixfeld $awaitedCommandError[name] mit demselben Wartenamen, und es läuft nur, wenn eine Antwort eintrifft, ein $awaitedCommand-Skript mit diesem Namen existiert, aber die Antwort seinen Filter nicht besteht.
+text: Ein klassischer Einsatz ist eine Ja-oder-Nein-Frage: Das normale Warteskript behandelt akzeptierte Wörter, während dieses höflich darauf hinweist, dass die Antwort nicht verstanden wurde. Der abgelehnte Text ist die Nachricht hinter dem Skript, daher enthält $message weiterhin das Eingetippte.
+</block>
+
+<block type="list" title="So verwendest du es in der App">
+item: Öffne den Tab Befehle
+item: Tippe auf +, um einen neuen Befehl zu starten
+item: Gib ihm im Feld Name einen Namen
+item: Setze das Feld Präfix auf $awaitedCommandError[confirm]
+item: Die App markiert es automatisch als Ereignis
+item: Füge den Code unten in den Editor ein
+item: Tippe auf Speichern
+</block>
+
+<block type="code" title="Syntax">
+text: #PREFIX:$awaitedCommandError[name]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: #PREFIX:$awaitedCommandError[confirm]
+text: $sendMessage[Please answer with yes or no.]
+text: $awaitInput[confirm]
+</block>
+
+<block type="callout" kind="note">
+text: Das Fehlerskript hat keinen eigenen Filter; jede Antwort, die den passenden $awaitedCommand-Filter nicht besteht, weckt es. Wenn für diesen Namen überhaupt kein $awaitedCommand-Skript existiert, passiert auch hier nichts, also erstelle immer auch das normale Skript.
+</block>
+
+<block type="callout" kind="warning">
+text: Das Warten wird durch die Antwort verbraucht, auch wenn sie nicht passt. Um erneut zu fragen, führe $awaitInput noch einmal mit demselben Namen aus, wie es das Beispiel tut.
+</block>
+</dash>
+
+<details>
+syntax: $awaitedCommandError[waitName]
+param: waitName|text|Erforderlich|Der Name, den die passenden $awaitInput- und $awaitedCommand-Zeilen verwenden
+</details>

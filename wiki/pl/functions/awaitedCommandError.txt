@@ -1,0 +1,43 @@
+<dash>
+name: $awaitedCommandError
+desc: Uruchamia się, gdy odpowiedź po $awaitInput nie pasuje do ustawionego filtra.
+category: Zdarzenie
+
+<block type="text" title="Jak działa to zdarzenie?">
+text: To towarzysz $awaitedCommand. Nadaj mu pole Prefiks $awaitedCommandError[name], używając tej samej nazwy oczekiwania, a uruchomi się tylko wtedy, gdy nadejdzie odpowiedź, istnieje skrypt $awaitedCommand o tej nazwie, ale odpowiedź nie przejdzie jego filtra.
+text: Klasycznym zastosowaniem jest pytanie tak lub nie: zwykły skrypt oczekiwania obsługuje akceptowane słowa, a ten uprzejmie wskazuje, że odpowiedzi nie zrozumiano. Odrzucony tekst jest wiadomością za skryptem, więc $message nadal zawiera to, co wpisano.
+</block>
+
+<block type="list" title="Jak używać tego w aplikacji">
+item: Otwórz kartę Komendy
+item: Stuknij +, aby rozpocząć nową komendę
+item: Nadaj jej nazwę w polu Nazwa
+item: Ustaw pole Prefiks na $awaitedCommandError[confirm]
+item: Aplikacja oznaczy ją jako Zdarzenie
+item: Wklej poniższy kod do edytora
+item: Stuknij Zapisz
+</block>
+
+<block type="code" title="Składnia">
+text: #PREFIX:$awaitedCommandError[name]
+</block>
+
+<block type="code" title="Przykład do skopiowania">
+text: #PREFIX:$awaitedCommandError[confirm]
+text: $sendMessage[Please answer with yes or no.]
+text: $awaitInput[confirm]
+</block>
+
+<block type="callout" kind="note">
+text: Skrypt błędu nie ma własnego filtra; każda odpowiedź, która nie przejdzie filtra pasującego $awaitedCommand, budzi go. Jeśli dla tej nazwy w ogóle nie istnieje skrypt $awaitedCommand, tutaj też nic się nie dzieje, więc zawsze twórz także zwykły skrypt.
+</block>
+
+<block type="callout" kind="warning">
+text: Oczekiwanie jest zużywane przez odpowiedź, nawet gdy nie pasuje. Aby zapytać ponownie, uruchom $awaitInput z tą samą nazwą jeszcze raz, tak jak robi to przykład.
+</block>
+</dash>
+
+<details>
+syntax: $awaitedCommandError[waitName]
+param: waitName|text|Required|Nazwa używana przez pasujące linie $awaitInput i $awaitedCommand
+</details>

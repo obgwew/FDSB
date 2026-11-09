@@ -14,10 +14,11 @@ def _as_id(text: str) -> int | None:
 
 async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: discord.abc.Messageable) -> None:
     parts = [ctx.resolve(a).strip() for a in args]
-    if len(parts) < 2 or not all(parts):
+    if len(parts) < 2 or not all(parts[:-1]):
         await _send_error(ch, FDSyntaxError(
-            "`$onlyFor` requires at least one user/role and an error message — "
-            "example: `$onlyFor[123456789012345678;Moderator;Error message]`"
+            "`$onlyFor` requires at least one user/role and a message slot — "
+            "example: `$onlyFor[123456789012345678;Moderator;Error message]` "
+            "or `$onlyFor[123456789012345678;]` for silent abort"
         ))
         return
 
@@ -46,9 +47,12 @@ async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: disc
         return
 
     ctx.stop_typing()
-    dest = await ctx.get_dest()
-    sent = await dest.send(message)
-    if sent:
-        ctx.last_bot_message = sent
-    ctx.log_event("onlyFor → Denied. Error message sent.")
+    if message:
+        dest = await ctx.get_dest()
+        sent = await dest.send(message)
+        if sent:
+            ctx.last_bot_message = sent
+        ctx.log_event("onlyFor → Denied. Error message sent.")
+    else:
+        ctx.log_event("onlyFor → Denied. Silent abort.")
     raise FDAbortScript()

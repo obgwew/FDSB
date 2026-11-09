@@ -32,13 +32,15 @@ So the engine-side folder name and the author-side folder name are unrelated. Th
 
 ---
 
-## 2. The 11 files in this folder
+## 2. The event files
 
 | File | Role |
 |---|---|
 | `alwaysReply.py` | `$alwaysReply` — runs for every human message. |
 | `messageContains.py` | `$messageContains[a;b;c]` — runs if **any** keyword appears. |
 | `messageContainsAll.py` | `$messageContainsAll[a;b;c]` — runs only if **all** keywords appear. |
+| `awaitedCommand.py` | `$awaitedCommand[name;<filter>]` — a reply arrives after `$awaitInput`. |
+| `awaitedCommandError.py` | `$awaitedCommandError[name]` — the reply failed the matching awaited filter. |
 | `onJoined.py` | `$onJoined` — a member joins a server. |
 | `onLeave.py` | `$onLeave` — a member leaves a server. |
 | `onVoiceJoined.py` | `$onVoiceJoined` — a member joins a voice channel. |
@@ -47,11 +49,14 @@ So the engine-side folder name and the author-side folder name are unrelated. Th
 | `onBotMessage.py` | `$onBotMessage` / `$onBotMessage[yes]` — another (or this) bot posts. |
 | `onBoostServer.py` | `$onBoostServer` — the server gains a boost (Nitro tier message). |
 | `onBotOnline.py` | `$onBotOnline[channelID]` — the bot itself connects. |
-| `_event_context.py` | Shared helper: builds a `ExecutionContext` from a `discord.Member`. |
+| `onBanAdd.py` | `$onBanAdd[channelID]` — a member is banned. |
+| `onBanRemove.py` | `$onBanRemove[channelID]` — a member is unbanned. |
+| `task.py` | `$task[time]` — runs a script again and again on a timer. |
+| `_event_context.py` | Shared helper: builds an `ExecutionContext` from a `discord.Member` or a ban event. |
 | `_event_scan.py` | Shared helper: iterates the events dir, normalises the first line, extracts `[...]` contents. |
 
 The authoritative list of allowed prefixes is `EVENT_PREFIXES` in
-`main_app/core_fdsb/Server.py:51`. It is also what the app UI uses to decide whether a
+`main_app/core_fdsb/Server.py:46`. It is also what the app UI uses to decide whether a
 script belongs in `bot_events/` or `bot_commands/` (`commands_view.py:_is_event_prefix`).
 
 ---
@@ -72,16 +77,22 @@ discord.py
                  └─ FDCore.tokenise_line → cmds_FDScripts/*  (the actual commands)
 ```
 
-Two lookup styles exist and they are **not** interchangeable:
+Three lookup styles exist and they are **not** interchangeable:
 
 - `get_event_scripts(name)` → `list[str]` — content only, prefix argument discarded.
-  Used by `onJoined`, `onLeave`, `onVoiceJoined`, `onVoiceLeave`, `alwaysReply`,
-  `onBoostServer`.
+  Used by `onJoined`, `onLeave`, `onVoiceJoined`, `onVoiceLeave`, `onBanAdd`,
+  `onBanRemove`, `alwaysReply`, `onBoostServer`.
 - `get_event_scripts_with_arg(name)` → `list[tuple[str, str | None]]` — keeps the text
   inside `[...]`. Used only by `onBotOnline`, which needs the channel ID.
+- **Directory scan** — `messageContains`, `messageContainsAll`, `onBotMessage`,
+  `onInteraction`, `awaitedCommand`, `awaitedCommandError` and `task` read
+  `bot_events/` themselves, because they match arguments rather than an exact name or
+  need to watch the folder continuously. They use their own lowercase `_PREFIX`
+  constants (`task` and the awaited pair also call `prefix_manager._bot_events_dir`).
 
-Both sort by `os.path.getctime()` (falling back to `getmtime`), oldest first. So when
-several event scripts fire at once they run sequentially, oldest file first.
+Both `get_event_scripts*` helpers sort by `os.path.getctime()` (falling back to
+`getmtime`), oldest first. So when several event scripts fire at once they run
+sequentially, oldest file first.
 
 ---
 
@@ -132,7 +143,7 @@ await run_script(message, bot, script_text, is_event=True)
 
 `run_script` (`FDScript.py:808`) constructs `Interpreter` + `ExecutionContext` for you.
 
-Four handlers need a context they can't get from `run_script`, and build it manually:
+Six handlers need a context they can't get from `run_script`, and build it manually:
 
 ```python
 interpreter = Interpreter(script_text)
@@ -140,7 +151,10 @@ ctx = build_member_context(bot, member, script_text, "$onJoined")
 await interpreter.run(ctx)
 ```
 
-`onJoined.py`, `onLeave.py`, `onVoiceJoined.py`, `onVoiceLeave.py` do this.
+`onJoined.py`, `onLeave.py`, `onVoiceJoined.py`, `onVoiceLeave.py` do this;
+`onBanAdd.py` and `onBanRemove.py` use `build_ban_context(...)` the same way. `task.py`
+is the exception: it builds an `ExecutionContext` around its own `_TaskMessage` (no
+member, no channel) and fills only `botID` / `botName`.
 
 ### `is_event`, `is_reply`, `interaction`
 
@@ -271,6 +285,52 @@ The channel is resolved with `get_channel`, falling back to `fetch_channel`. The
 status / FGS notification is set up *before* the scripts run. Each script is wrapped in its
 own `try/except Exception: pass`, so one failure never blocks the others.
 
+### `onBanAdd` / `onBanRemove`
+`on_member_ban` / `on_member_unban` → `get_event_scripts("$onBanAdd")` /
+`get_event_scripts("$onBanRemove")` → `build_ban_context(...)` → `Interpreter.run`. The
+prefix may carry `[channelID]`; without a reachable channel the fake message uses a dummy
+channel (`id = 0`) and output will fail. Builtins are `authorID`, `authorName`, `mention`,
+`guildID`, `guildName`, plus `channelID`/`channelName` when the channel was found.
+
+### `awaitedCommand` — `$awaitedCommand[name;<filter>]`
+This is the other half of `$awaitInput`. `awaitInput` calls
+`register_wait(channel_id, user_id, name)`, which stores the name in a module-level dict
+keyed by `(channel_id, user_id)`; the word `everyone` stores `user_id = None`.
+
+On every human message `on_message` calls `awaitedCommand.handle_event` **before**
+`$alwaysReply`. It pops the wait for `(channel, author)` and then falls back to
+`(channel, None)`; the wait is consumed even when no script matches. Matching files are
+found by scanning `bot_events/` for a first line of
+`#prefix:$awaitedcommand[name]` (case-insensitive, spaces removed) and run oldest first
+with `run_script(..., is_event=True)`.
+
+The optional second bracket part is a filter. `<numeric>` accepts `-?\d+(\.\d+)?`;
+anything else inside `<...>` is split on `/` and the whole reply must equal one option,
+case-insensitively. If scripts exist for the name but none pass the filter, the handler
+delegates to `awaitedCommandError`. Returns `True` when a script ran, and `on_message`
+then returns early so the reply is not also treated as a command.
+
+### `awaitedCommandError` — `$awaitedCommandError[name]`
+Not called from `Server.py`; it is invoked only by `awaitedCommand` when a wait matched but
+the reply failed every filter. It ignores filters, scans for
+`#prefix:$awaitedcommanderror[name]`, and runs every match oldest first. If no
+`$awaitedCommand` script exists for that name, it never runs.
+
+### `task` — `$task[time]`
+Started from `on_ready` via `task.handle_event(bot, events_dir)`. It keeps one supervisor
+task and reuses it while the same bot stays connected. The supervisor rescans
+`bot_events/` every 10 seconds; a file whose first line is `#prefix:$task[time]` (spaces
+stripped, case-insensitive) with a whole number of at least 1 followed by `s`, `m`, `h` or
+`d` gets its own asyncio interval loop.
+
+Changes are detected by `(mtime_ns, size)`: an edited file is cancelled and restarted, a
+deleted file is cancelled. Each run constructs a fresh `ExecutionContext` around a
+`_TaskMessage` (`author = bot.user`, `channel = None`, `guild = None`, `content = ""`) and
+fills only the `botID` and `botName` builtins before calling `Interpreter.run`. There is no
+triggering message, so `$authorID`, `$channelID` and `$guildID` are empty; call
+`$useChannel[guildID; channelID]` (or `$dm`) before sending anything. The first run happens
+one interval after the loop starts, and a drift guard keeps later runs on schedule.
+
 ---
 
 ## 9. Ordering inside `on_message`
@@ -279,14 +339,17 @@ This ordering is fixed and worth knowing when events and commands coexist:
 
 1. boost message? → run `$onBoostServer`, **return**.
 2. `message.author.bot`? → run `$onBotMessage`, **return**.
-3. `set_fgs_state(STATE_SYNCING)`; run `$alwaysReply`.
-4. run `$messageContains`, then `$messageContainsAll`.
-5. `get_scripts_by_message(...)` — if any command script matches, run them all
+3. `set_fgs_state(STATE_SYNCING)`; run `$awaitedCommand` — if a script ran, **return**.
+4. then run `$alwaysReply`.
+5. then run `$messageContains`, then `$messageContainsAll`.
+6. `get_scripts_by_message(...)` — if any command script matches, run them all
    oldest-first and **return** (`bot.process_commands` is skipped).
-6. otherwise `await bot.process_commands(message)`.
+7. otherwise `await bot.process_commands(message)`.
 
-So `$alwaysReply` / `$messageContains*` fire even for messages that also trigger a command,
-and event handlers never see bot-authored messages.
+So a reply that satisfies a pending `$awaitInput` is handled first and does not fall
+through to the other message events or to commands. `$alwaysReply` and
+`$messageContains*` fire even for messages that also trigger a command, and event
+handlers never see bot-authored messages.
 
 ---
 

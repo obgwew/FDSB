@@ -1,0 +1,37 @@
+<dash>
+name: $not
+desc: Flips a check around, turning true into false and false into true.
+category: Flow Control
+
+<block type="text" title="How does the command work?">
+text: $not takes one check and answers the opposite of it. Give it a comparison and it inverts the result, so a pair that is not equal comes back as true. Give it a value on its own and words such as true, yes or on count as true, while false, no, off or an empty value count as false.
+text: The answer is always the bare word true or false, which makes it easy to wrap around an existing check in an $if block or put it on a line of its own.
+</block>
+
+<block type="list" title="How to use it in the app">
+item: Open the Commands tab
+item: Tap + to start a new command
+item: Give it a name in the Name field
+item: Set the Prefix field to !not
+item: Write your script in the editor
+item: Paste the line below wherever you need it
+item: Tap Save
+</block>
+
+<block type="code" title="Syntax">
+text: $not[condition]
+</block>
+
+<block type="code" title="Ready-to-copy Example">
+text: $sendMessage[Result: $not[true]]
+</block>
+
+<block type="callout" kind="note">
+text: The same comparison signs as $if are understood: ==, !=, >, <, >= and <=. Anything without a sign is treated as true unless it is empty or one of the known false words.
+</block>
+</dash>
+
+<details>
+syntax: $not[condition]
+param: condition|expression|Required|A value or a check to invert, using ==, !=, >, <, >= or <=
+</details>

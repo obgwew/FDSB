@@ -36,6 +36,7 @@ def _check_brackets(text: str) -> tuple[bool, str]:
 
 _ESCAPE_MAP: dict[str, str] = {
     'n':  '\n',
+    's':  ' ',
     't':  '\t',
     'r':  '\r',
     '\\': '\\',
@@ -134,6 +135,16 @@ def _parse_color(raw: str) -> int:
         return int(raw.lstrip("#"), 16)
     except ValueError:
         return 0x2B2D31
+
+def _try_parse_color(raw: str) -> int | None:
+    raw = raw.strip().lower()
+    if raw in _NAMED_COLORS:
+        return _NAMED_COLORS[raw]
+    try:
+        value = int(raw.lstrip("#"), 16)
+    except ValueError:
+        return None
+    return value if 0 <= value <= 0xFFFFFF else None
 
 _NAMED_SEPARATORS: dict[str, str] = {
     "dot": ".", "com": ",", "apo": "'", "sem": ";", "colon": ":",

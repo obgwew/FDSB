@@ -48,6 +48,7 @@ ENGLISH_DICT = {
     # ── Settings ──────────────────────────────────────────────
     'general_section':     (1031, 'General'),
     'design_section':      (1032, 'Design'),
+    'editor_section':      (1376, 'Editor'),
     'info_section':        (1033, 'Information'),
     'name_project':        (1034, 'Project Name'),
     'token_field':         (1035, 'Bot Token'),
@@ -175,7 +176,6 @@ ENGLISH_DICT = {
     'filter_discord':       (1172, 'Discord'),
     'filter_time':          (1173, 'Time'),
     'filter_other':         (1174, 'Other'),
-    # Category names exactly as they appear inside the wiki data files (used to match entries to filters)
     'wiki_cat_command':     (1344, 'Command'),
     'wiki_cat_event':       (1345, 'Event'),
     'wiki_cat_variable':    (1346, 'Variables'),
@@ -192,7 +192,7 @@ ENGLISH_DICT = {
     'callout_question':     (1147, 'What is this?'),
 
     # ── variables_view ────────────────────────────────────────
-    'variables':            (1028, 'Variables'),
+    'variables':            (1377, 'Variables'),
     'variables_slash':      (1151, "Variable's /"),
     'scoped_vars':          (1152, 'Per-user values'),
     'value_label':          (1153, 'Value'),
@@ -295,12 +295,12 @@ ENGLISH_DICT = {
     # ── Mobile Warning ────────────────────────────────────────────────────
     'mobile_warn_title':      (1232, 'Mobile Background Notice'),
     'mobile_warn_body':       (1233, 'Running bots on mobile systems (only Android) is subject to strict OS background limits.\n\n• In best-case scenarios, the bot may run in the background for up to 6 hours only.\n• You must disable Battery Optimization (set to "Unrestricted") in your device settings.\n• Some devices may suspend the bot immediately when minimized.\n\nRegarding running the bots on hosting/server/vps or something like that, it is not supported yet.'),
-    
+
     # ── Command Editor Syntax Warning ─────────────────────────────────────
     'syntax_warn_banner':     (1234, 'Color mode is active. For large files (>2000 chars), switch off color mode to prevent device lag.'),
     'syntax_limit_refusal':   (1235, 'Cannot enable color mode: Text exceeds the 2000 characters limit to protect performance.'),
     'syntax_color_label':     (1236, 'Color'),
-    
+
     # ── Total Counts ──────────────────────────────────────────────────────
     'total_bots_count':       (1237, 'Total bots you own: {count}'),
     'total_vars_count':       (1238, 'Total variables: {count}'),
@@ -312,7 +312,7 @@ ENGLISH_DICT = {
     'verifying':              (1249, 'Verifying...'),
     'token_valid':            (1250, 'Connection successful! Token is valid.'),
     'token_invalid':          (1251, 'Invalid Token or Connection failed.'),
-    
+
     # ── Android Background Notification ────────────────────────────────────
     'fgs_state_working':          (1252, 'Bot is running | 🟢'),
     'server_status_online':       (1257, 'Server online: {name}'),
@@ -408,4 +408,38 @@ ENGLISH_DICT = {
     'intents_conn_unknown':  (1305, 'Connection not checked yet'),
     'intents_ping_test':     (1306, 'Test server connection'),
     'intents_ping_none':     (1307, 'No response'),
+
+    # ── Command Folders ───────────────────────────────────────
+    'folder_label':          (1378, 'Folder'),
+    'folder_root':           (1379, 'No folder (root)'),
+    'folder_pick_title':     (1380, 'Choose folder'),
+    'folder_select':         (1381, 'Select'),
+    'folder_new':            (1382, 'New folder'),
+    'folder_new_name':       (1383, 'Folder name'),
+    'folder_create_in':      (1384, 'New folder will be created in'),
+    'folder_name_taken':     (1385, 'A folder with this name already exists here'),
+    'folder_name_required':  (1386, 'Enter a folder name'),
+    'folder_new_sub':        (1387, 'New subfolder'),
+    'folder_new_cmd':        (1388, 'New command here'),
+    'folder_rename':         (1389, 'Rename'),
+    'folder_move':           (1390, 'Move to another folder'),
+    'folder_delete':         (1391, 'Delete folder'),
+    'folder_delete_body':    (1392, 'Only the folder is deleted. Commands and folders inside it move up to the parent folder.'),
+    'folder_items':          (1393, '{n} items'),
+    'folder_move_failed':    (1394, 'Cannot move the folder here'),
+    'command_trigger':       (1395, 'Command Trigger'),
+    'folder_new_var':        (1396, 'New variable here'),
+
+    # ── Editor settings ───────────────────────────────────────
+    'editor_stats_label':    (1397, 'Lines / characters counter'),
+    'editor_stats_desc':     (1398, 'Show the counter above the editor'),
+    'silent_var_label':      (1399, 'Silent variable creation'),
+    'silent_var_desc':       (1400, 'Create new variables without a warning and keep the script running'),
+
+    # ── Bot deletion (loading screen) ─────────────────────────
+    'deleting_bot':          (1401, 'Deleting bot…'),
+    'deleting_bot_files':    (1402, 'Removing bot files…'),
+    'deleting_bot_token':    (1403, 'Removing the saved token…'),
+    'deleting_bot_done':     (1404, 'Bot deleted'),
+    'delete_bot_failed':     (1405, 'Could not delete the bot: {error}'),
 }

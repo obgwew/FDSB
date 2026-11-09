@@ -1,0 +1,44 @@
+<dash>
+name: $sort
+desc: Menyusun daftar angka dan mengembalikan semuanya atau hanya beberapa teratas.
+category: Matematika & Angka
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Berikan $sort deretan angka, lalu beri tahu arah, berapa banyak yang dikembalikan, dan apa yang ditaruh di antaranya. asc mengurutkan dari terkecil ke terbesar dan desc sebaliknya, dan jumlah pengembalian -1 mempertahankan seluruh daftar.
+text: Desimal dan angka negatif diterima, dan nilainya kembali seperti saat ditulis, bukan ditulis ulang. Hasilnya bisa dimasukkan ke dalam kalimat atau diposting di barisnya sendiri.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke $sort
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda membutuhkannya
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $sort[number;number;...;asc/desc;returnAmount;separator]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $sort[42;7;19;9;66;desc;3;, ]
+</block>
+
+<block type="callout" kind="note">
+text: Jumlah pengembalian -1 berarti semua angka, sedangkan jumlah lain harus 1 atau lebih. Jika angkanya lebih sedikit dari jumlahnya, Anda cukup mendapat semuanya kembali.
+</block>
+
+<block type="callout" kind="warning">
+text: Setiap nilai sebelum arah harus berupa angka nyata. Satu kata atau slot kosong menghentikan perintah dengan kesalahan yang menyebut nilai yang tidak bisa dibacanya.
+</block>
+</dash>
+
+<details>
+syntax: $sort[number;number;...;asc/desc;returnAmount;separator]
+param: number|number|Wajib|Angka yang akan diurutkan; berikan satu atau lebih sebelum arah
+param: asc/desc|text|Wajib|asc dari terkecil ke terbesar, desc dari terbesar ke terkecil
+param: returnAmount|text|Wajib|Berapa nilai yang dikembalikan, atau -1 untuk semuanya
+param: separator|text|Wajib|Apa yang ada di antara nilai, seperti koma, atau nama: dot, com, apo, sem, colon
+</details>

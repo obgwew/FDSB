@@ -1,0 +1,44 @@
+<dash>
+name: $awaitInput
+desc: Lauscht auf die nächste Antwort von jemandem und führt bei Eingang ein zweites Skript aus.
+category: Flusssteuerung
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: $awaitInput richtet ein Warten ein und postet selbst nichts. Es nimmt einen Namen deiner Wahl, und von da an beobachtet der Bot die nächste passende Nachricht und führt das Skript aus, dessen erste Zeile `$awaitedCommand[that name]` ist.
+text: Standardmäßig lauscht es auf die Person, die den Befehl ausgeführt hat, im Kanal, in dem der Befehl lief. Übergib eine Benutzer-ID, um auf ein bestimmtes Mitglied zu warten, oder das Wort everyone, um die nächste Antwort von irgendjemandem zu akzeptieren. Übergib zuletzt eine Kanal-ID, wenn die Antwort aus einem anderen Kanal kommen soll.
+</block>
+
+<block type="list" title="So verwendest du es in der App">
+item: Öffne den Tab Befehle
+item: Tippe auf +, um einen neuen Befehl zu starten
+item: Gib ihm im Feld Name einen Namen
+item: Setze das Feld Präfix auf !ask
+item: Schreibe die folgende Zeile in den Editor
+item: Tippe auf Speichern
+item: Erstelle ein zweites Skript für die Antwort, siehe $awaitedCommand
+</block>
+
+<block type="code" title="Syntax">
+text: $awaitInput[name; (userID/everyone); (channelID)]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $sendMessage[How old are you?]
+text: $awaitInput[age]
+</block>
+
+<block type="callout" kind="note">
+text: Der Name darf nur Buchstaben, Ziffern, Unterstriche und Bindestriche enthalten und wird ohne Beachtung der Groß-/Kleinschreibung abgeglichen. Ein Warten wird einmal verbraucht, daher führt die Antwort ihr Skript genau einmal aus und der Bot lauscht danach wie gewohnt weiter.
+</block>
+
+<block type="callout" kind="warning">
+text: Pro Paar aus Kanal und Mitglied wird ein Warten gespeichert. Erneutes Fragen für dasselbe Mitglied im selben Kanal ersetzt den älteren Namen, sodass die erste Frage keine Antwort mehr erwartet. Sowohl Benutzer als auch Kanal müssen reine numerische IDs sein; nur der Benutzerteil darf das Wort everyone sein.
+</block>
+</dash>
+
+<details>
+syntax: $awaitInput[name; (userID/everyone); (channelID)]
+param: name|text|Erforderlich|Der Wartename; das passende $awaitedCommand-Skript verwendet denselben Namen
+param: userID|snowflake|Optional|Auf welches Mitglied gelauscht werden soll, oder everyone für irgendjemanden. Leer lassen für die Person, die den Befehl ausgeführt hat
+param: channelID|snowflake|Optional|In welchem Kanal die Antwort gesendet werden muss. Leer lassen für den aktuellen Kanal
+</details>

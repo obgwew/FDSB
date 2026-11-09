@@ -1,0 +1,45 @@
+<dash>
+name: $returnBotGuildsID
+desc: Mengumpulkan ID setiap server tempat bot berada agar Anda bisa memakai ulang daftarnya.
+category: Perintah Pengembalian
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Perintah ini menelusuri setiap server yang diikuti bot dan mengumpulkan setiap ID server. ID digabungkan dengan pemisah yang Anda pilih dan disimpan di bawah nama yang Anda pilih, dan $return mengeluarkan seluruh daftar di mana pun Anda membutuhkannya. Tidak ada yang diposting di kanal saat mengumpulkan.
+text: Bagian pertama memilih bagaimana daftar dikumpulkan. cache memakai server yang sudah diketahui bot dan instan, sedangkan chunk meminta daftar lengkap dari Discord lebih dulu, yang lebih lambat tetapi selalu terkini pada bot besar.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !guilds
+item: Tulis skrip Anda di editor
+item: Tempel baris di bawah di mana pun Anda membutuhkannya
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $returnBotGuildsID[cache/chunk; var; separator]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $returnBotGuildsID[cache; guildIDs; ,]
+text: $sendMessage[I am in these servers: $return[guildIDs]]
+</block>
+
+<block type="options" title="Mode pengambilan">
+option: cache|Memakai daftar server yang sudah dimiliki bot, cepat tetapi mungkin usang
+option: chunk|Meminta daftar server lengkap dari Discord lebih dulu, lebih lambat tetapi lengkap
+</block>
+
+<block type="callout" kind="note">
+text: Pemisahnya bisa berupa simbol seperti koma atau titik koma, atau salah satu nama yang bisa dibaca: dot, com, apo, sem, atau colon. Jika bot tidak berada di server mana pun, perintah melaporkan kesalahan alih-alih menyimpan daftar kosong.
+</block>
+</dash>
+
+<details>
+syntax: $returnBotGuildsID[cache/chunk; var; separator]
+param: cache/chunk|text|Wajib|cache untuk daftar server yang diketahui, chunk untuk daftar lengkap yang segar
+param: var|text|Wajib|Nama tempat daftar disimpan, dibaca lagi nanti dengan $return[]
+param: separator|text|Wajib|Apa yang ada di antara ID, seperti koma atau titik koma, atau nama: dot, com, apo, sem, colon
+</details>

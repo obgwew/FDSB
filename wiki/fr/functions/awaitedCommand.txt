@@ -1,0 +1,45 @@
+<dash>
+name: $awaitedCommand
+desc: Exécute votre script quand quelqu'un répond après que $awaitInput a demandé une réponse.
+category: Événement
+
+<block type="text" title="Comment fonctionne l'événement ?">
+text: Cet événement fonctionne par paire avec $awaitInput. Réglez le champ Préfixe sur $awaitedCommand[name], en utilisant le même nom que celui donné à $awaitInput, et les lignes en dessous s'exécutent dès que la réponse attendue arrive.
+text: Ajoutez un filtre facultatif après un point-virgule entre les crochets pour décider quelles réponses sont acceptées. `<numeric>` accepte les nombres entiers et décimaux, tandis que `<yes/no>` n'accepte que les mots que vous listez, séparés par des barres obliques et sans tenir compte des majuscules. Sans aucun filtre, toute réponse réveille le script.
+</block>
+
+<block type="list" title="Comment l'utiliser dans l'application">
+item: Ouvrez l'onglet Commandes
+item: Appuyez sur + pour créer une nouvelle commande
+item: Donnez-lui un nom dans le champ Nom
+item: Réglez le champ Préfixe sur $awaitedCommand[age]
+item: L'application le marque comme événement pour vous
+item: Collez le code ci-dessous dans l'éditeur
+item: Appuyez sur Enregistrer
+</block>
+
+<block type="code" title="Syntaxe">
+text: #PREFIX:$awaitedCommand[name]
+text: #PREFIX:$awaitedCommand[name;<numeric>]
+text: #PREFIX:$awaitedCommand[name;<yes/no>]
+</block>
+
+<block type="code" title="Exemple prêt à copier">
+text: #PREFIX:$awaitedCommand[age;<numeric>]
+text: $sendMessage[Got it, you are $message years old.]
+</block>
+
+<block type="callout" kind="note">
+text: La réponse elle-même est le message sur lequel le script s'exécute, donc $message contient le texte saisi par le membre. Plusieurs scripts attendant le même nom s'exécutent tous, du fichier le plus ancien au plus récent, tant que chacun accepte la réponse.
+</block>
+
+<block type="callout" kind="important">
+text: Le nom doit correspondre à celui donné à $awaitInput, et une attente doit être active dans ce canal. Sans attente en cours, un message ne réveille jamais ce script. Placez le préfixe sur la première ligne, sinon l'application cesse de traiter le fichier comme un événement.
+</block>
+</dash>
+
+<details>
+syntax: $awaitedCommand[waitName; (filter)]
+param: waitName|text|Requis|Le nom utilisé par la ligne $awaitInput correspondante
+param: filter|text|Optionnel|Entourez-le de chevrons : numeric pour les nombres, ou une liste comme yes/no/true/false
+</details>

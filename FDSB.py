@@ -135,6 +135,8 @@ from main_app.load.token_vault import TokenVault
 from main_app.settings_app import SettingsAppScreen
 
 logging.getLogger('discord').setLevel(logging.INFO)
+logging.basicConfig(level=logging.WARNING)
+logging.getLogger('flet').setLevel(logging.DEBUG)
 
 from main_app.core_fdsb import Server
 
@@ -255,6 +257,8 @@ def load_all_bots() -> list:
         except Exception as e:
             print(f"[Storage] error {config_path}: {e}")
     return bots
+
+_BACKUP_DIRS = ('bot_commands/', 'bot_events/', 'bot_vars/')
 
 
 def bot_exists(bot_name: str) -> bool:
@@ -423,12 +427,14 @@ def _perform_back(page: ft.Page = None, ask_exit: bool = True) -> bool:
         return True
 
 
-_ROOT = {'stack': None, 'prev_kind': None}
+_ROOT = {'stack': None, 'prev_kind': None, 'page': None}
 
 
 def _root_stack(page: ft.Page) -> SlideStack:
-    if _ROOT['stack'] is None:
-        _ROOT['stack'] = SlideStack(page)
+    if _ROOT['stack'] is None or _ROOT['page'] is not page:
+        _ROOT['stack']     = SlideStack(page)
+        _ROOT['page']      = page
+        _ROOT['prev_kind'] = None
     return _ROOT['stack']
 
 
@@ -643,7 +649,7 @@ class CreateBotDialog:
         self._file_picker = ft.FilePicker()
         self._import_zip_path    = ''
         self._import_file_picker = ft.FilePicker()
-        self._import_status_text = ft.Text('', size=11)
+        self._import_status_text = ft.Text('', size=11, no_wrap=False, width=300)
         self._import_btn = ft.OutlinedButton(
             content=ft.Row(
                 [ft.Icon(ft.Icons.UNARCHIVE_OUTLINED, size=16, color=_c('accent')),
@@ -690,12 +696,18 @@ class CreateBotDialog:
                         [self._import_btn, self._import_clear_btn],
                         spacing=4, vertical_alignment=ft.CrossAxisAlignment.CENTER,
                     ),
-                    self._import_status_text,
+                    ft.Container(
+                        content=self._import_status_text,
+                        padding=ft.Padding(left=0, top=0, right=0, bottom=10),
+                    ),
                 ],
                 tight=True,
                 spacing=14,
                 width=300,
             ),
+            scrollable=True,
+            content_padding=ft.Padding(left=24, top=12, right=24, bottom=12),
+            actions_padding=ft.Padding(left=16, top=12, right=16, bottom=16),
             actions=[
                 ft.TextButton(
                     content=ft.Text(_t('cancel'), color=_c('text_dim')),
@@ -773,7 +785,7 @@ class CreateBotDialog:
                 names = zf.namelist()
         except Exception:
             return False
-        return any(n.startswith('bot_commands/') or n.startswith('bot_vars/') for n in names)
+        return any(n.startswith(_BACKUP_DIRS) for n in names)
 
     async def _pick_import_zip(self, _):
         if self._import_file_picker not in self._page.services:
@@ -1002,7 +1014,7 @@ class MainView:
         try:
             with zipfile.ZipFile(zip_path, 'r') as zf:
                 for member in zf.namelist():
-                    if member.startswith('bot_commands/') or member.startswith('bot_vars/'):
+                    if member.startswith(_BACKUP_DIRS):
                         zf.extract(member, bot_dir)
         except Exception as e:
             print(f'[MainView] backup restore failed: {e}')
@@ -1086,7 +1098,160 @@ def _show_settings(page: ft.Page):
 #  ENTRY POINT
 # ══════════════════════════════════════════════════════════════════════════════
 
+_TOKEN_RESTORE_TEXTS = {
+    'ar': {
+        'title':   'أدخل توكن البوت',
+        'message': 'تمت استعادة بيانات «{name}» لكن التوكن لا يُنسخ احتياطياً. أدخله مرة أخرى للمتابعة.',
+        'later':   'لاحقاً',
+        'save':    'حفظ',
+    },
+    'en': {
+        'title':   'Enter the bot token',
+        'message': '"{name}" was restored, but its token is not part of the backup. Enter it again to continue.',
+        'later':   'Later',
+        'save':    'Save',
+    },
+}
+
+
+def _restore_text(key: str) -> str:
+    lang = str(get_current_lang() or 'en').lower()
+    texts = _TOKEN_RESTORE_TEXTS.get(lang[:2]) or _TOKEN_RESTORE_TEXTS['en']
+    return texts[key]
+
+
+def _bot_display_name(bot_id: str) -> str:
+    path = os.path.join(APP_DATA_DIR, bot_id, 'bot_files', 'config.json')
+    try:
+        with open(path, 'r', encoding='utf-8') as f:
+            return json.load(f).get('name') or bot_id
+    except Exception:
+        return bot_id
+
+
+async def _ask_token(page: ft.Page, bot_id: str) -> bool:
+    result = asyncio.get_running_loop().create_future()
+
+    def _finish(value: bool):
+        if not result.done():
+            result.set_result(value)
+
+    field = ft.TextField(
+        label=_t('token_label'),
+        hint_text=_t('token_hint'),
+        password=True,
+        can_reveal_password=True,
+        border_color=_c('input_border'),
+        focused_border_color=_c('accent'),
+        cursor_color=_c('accent'),
+        bgcolor=_c('input_bg'),
+        border_radius=10,
+        label_style=ft.TextStyle(color=_c('text'), size=13),
+        text_style=ft.TextStyle(color=_c('text'), size=13),
+        hint_style=ft.TextStyle(color=_c('text_dim'), size=13),
+    )
+
+    async def _save(_=None):
+        token = (field.value or '').strip()
+        if not token:
+            field.error_text = _t('token_required')
+            page.update()
+            return
+        if not is_valid_discord_token(token):
+            field.error_text = _t('token_invalid_format')
+            page.update()
+            return
+        try:
+            await TokenVault.set(bot_id, token)
+        except Exception as ex:
+            print(f'[FDSB] storing restored token failed for {bot_id}: {ex}')
+            field.error_text = _t('token_store_failed')
+            page.update()
+            return
+        _finish(True)
+        page.pop_dialog()
+
+    def _later(_=None):
+        _finish(False)
+        page.pop_dialog()
+
+    def _dismissed(_=None):
+        _finish(False)
+
+    dlg = ft.AlertDialog(
+        modal=True,
+        bgcolor=_c('popup_bg'),
+        shape=ft.RoundedRectangleBorder(radius=18),
+        title=ft.Text(
+            _restore_text('title'),
+            weight=ft.FontWeight.BOLD,
+            color=_c('text'),
+        ),
+        content=ft.Column(
+            [
+                ft.Text(
+                    _restore_text('message').format(name=_bot_display_name(bot_id)),
+                    size=13,
+                    color=_c('text'),
+                ),
+                field,
+            ],
+            tight=True,
+            spacing=14,
+            width=300,
+        ),
+        actions=[
+            ft.TextButton(
+                content=ft.Text(_restore_text('later'), color=_c('text_dim')),
+                on_click=_later,
+            ),
+            ft.FilledButton(
+                content=ft.Text(_restore_text('save'), color='#FFFFFF', weight=ft.FontWeight.W_600),
+                on_click=_save,
+                style=ft.ButtonStyle(
+                    bgcolor=_c('accent'),
+                    color='#FFFFFF',
+                    shape=ft.RoundedRectangleBorder(radius=12),
+                ),
+            ),
+        ],
+        actions_alignment=ft.MainAxisAlignment.END,
+        on_dismiss=_dismissed,
+    )
+    page.show_dialog(dlg)
+    return await result
+
+
+async def _prompt_missing_tokens(page: ft.Page, bot_ids: list):
+    for bot_id in bot_ids:
+        try:
+            await _ask_token(page, bot_id)
+        except Exception as ex:
+            print(f'[FDSB] token prompt failed for {bot_id}: {ex}')
+            break
+
+
+_LAST_BG_SYNC = {'fn': None}
+
+
+def _reset_session_state():
+    _dispose_current_dashboard()
+    _CURRENT_SCREEN['kind'] = None
+    _nav_clear()
+    _EXIT_STATE.update({'dialog': None, 'view': None, 'asking': False})
+    _ROOT.update({'stack': None, 'prev_kind': None, 'page': None})
+    old = _LAST_BG_SYNC['fn']
+    if old is not None:
+        try:
+            ThemeEngine.unsubscribe(old)
+        except Exception as e:
+            print(f'[FDSB] unsubscribe old page bg failed: {e}')
+        _LAST_BG_SYNC['fn'] = None
+
+
 async def main(page: ft.Page):
+    _reset_session_state()
+    print(f'[FDSB] main() started - page id {id(page)}')
     page.title   = 'FDSB'
     page.padding = 0
     page.views[0].padding = 0
@@ -1131,9 +1296,12 @@ async def main(page: ft.Page):
         page.update()
 
     page._bg_sync = _sync_page_bg
+    _LAST_BG_SYNC['fn'] = page._bg_sync
     ThemeEngine.subscribe(page._bg_sync)
     page.bgcolor = ThemeEngine.hex('bg')
-    
+
+    page._go_home = lambda: _show_main(page)
+
     _show_main(page)
 
     async def _initialize_background_mode():
@@ -1165,6 +1333,14 @@ async def main(page: ft.Page):
                 page,
                 _t('token_migration_failed').format(names=', '.join(migration_failed)),
             )
+
+        try:
+            missing = await TokenVault.bots_without_token(APP_DATA_DIR)
+        except Exception as e:
+            print(f'[FDSB] missing-token check failed: {e}')
+            missing = []
+        if missing:
+            await _prompt_missing_tokens(page, missing)
 
     page.run_task(_initialize_token_vault)
 

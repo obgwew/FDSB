@@ -1,0 +1,37 @@
+<dash>
+name: $emoteCount
+desc: يخبرك بعدد الإيموجي المخصصة التي يملكها خادم.
+category: الخادم
+
+<block type="text" title="كيف يعمل الأمر؟">
+text: اسأل دون شيء في الداخل فيعدّ البوت الإيموجي المخصصة المرفوعة إلى الخادم الذي شُغّل فيه السكربت. أضف معرّف خادم فيعدّ ذلك الخادم بدلًا منه، ما دام البوت عضوًا هناك.
+text: ما يعود هو الرقم المجرد، جاهزًا لإدراجه في جملة. يعدّ فقط إيموجي الخادم المخصصة، وليس إيموجي Unicode القياسية المدمجة في ديسكورد.
+</block>
+
+<block type="list" title="كيف تستخدمه في التطبيق">
+item: افتح تبويب الأوامر
+item: اضغط على + لبدء أمر جديد
+item: امنحه اسمًا في حقل الاسم
+item: اضبط حقل البادئة على $emoteCount
+item: اكتب سكربتك في المحرر
+item: الصق السطر أدناه حيثما تحتاجه
+item: اضغط على حفظ
+</block>
+
+<block type="code" title="الصيغة">
+text: $emoteCount[(guildID)]
+</block>
+
+<block type="code" title="مثال جاهز للنسخ">
+text: $sendMessage[This server has $emoteCount custom emotes!]
+</block>
+
+<block type="callout" kind="note">
+text: في رسالة مباشرة لا يوجد خادم لعدّه، لذا مرّر معرّف خادم هناك. الخادم الذي لا يستطيع البوت رؤيته، أو الذي ليس عضوًا فيه، يُبلَّغ كخطأ بدلًا من صفر.
+</block>
+</dash>
+
+<details>
+syntax: $emoteCount[(guildID)]
+param: guildID|snowflake|اختياري|الخادم الذي يجب عدّ إيموجيه؛ اتركه فارغًا للخادم الحالي
+</details>

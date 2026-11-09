@@ -9,6 +9,15 @@ from FDScript import (
 from FDCore import _get_user_vars_dir, _load_scoped_var, _save_scoped_var
 
 
+def _silent_creation() -> bool:
+    """Editor setting: create new variables silently (no warning, script keeps running)."""
+    try:
+        from main_app.settings_app import get_silent_var_creation
+        return get_silent_var_creation()
+    except Exception:
+        return False
+
+
 def _apply(args: list[str], ctx: ExecutionContext):
     if len(args) not in (2, 3, 4):
         return FDLogicError(
@@ -44,6 +53,8 @@ def _apply(args: list[str], ctx: ExecutionContext):
             f"setUserVar [{name}] for user {user_id} in guild {guild_id} ← {_truncate(value)!r} "
             f"(created — private, no matching global variable)"
         )
+        if _silent_creation():
+            return None
         return FDEnvironmentError(
             f"No global variable `{name}` exists. A user variable `{name}` has been "
             f"created for user `{user_id}` in guild `{guild_id}` with the provided value. "

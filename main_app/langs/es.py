@@ -409,4 +409,41 @@ SPANISH_DICT = {
     'intents_conn_unknown':  (1305, 'Conexión aún no comprobada'),
     'intents_ping_test':     (1306, 'Probar conexión con el servidor'),
     'intents_ping_none':     (1307, 'Sin respuesta'),
+
+    # ── Settings section title ────────────────────────────────
+    'editor_section':        (1376, 'Editor'),
+
+    # ── Command Folders ───────────────────────────────────────
+    'folder_label':          (1378, 'Carpeta'),
+    'folder_root':           (1379, 'Sin carpeta (raíz)'),
+    'folder_pick_title':     (1380, 'Elegir carpeta'),
+    'folder_select':         (1381, 'Seleccionar'),
+    'folder_new':            (1382, 'Nueva carpeta'),
+    'folder_new_name':       (1383, 'Nombre de la carpeta'),
+    'folder_create_in':      (1384, 'La nueva carpeta se creará en'),
+    'folder_name_taken':     (1385, 'Ya existe una carpeta con este nombre aquí'),
+    'folder_name_required':  (1386, 'Introduce un nombre de carpeta'),
+    'folder_new_sub':        (1387, 'Nueva subcarpeta'),
+    'folder_new_cmd':        (1388, 'Nuevo comando aquí'),
+    'folder_rename':         (1389, 'Renombrar'),
+    'folder_move':           (1390, 'Mover a otra carpeta'),
+    'folder_delete':         (1391, 'Eliminar carpeta'),
+    'folder_delete_body':    (1392, 'Solo se elimina la carpeta. Los comandos y carpetas que contiene suben a la carpeta principal.'),
+    'folder_items':          (1393, '{n} elementos'),
+    'folder_move_failed':    (1394, 'No se puede mover la carpeta aquí'),
+    'command_trigger':       (1395, 'Disparador de comando'),
+    'folder_new_var':        (1396, 'Nueva variable aquí'),
+
+    # ── Editor settings ───────────────────────────────────────
+    'editor_stats_label':    (1397, 'Contador de líneas / caracteres'),
+    'editor_stats_desc':     (1398, 'Mostrar el contador sobre el editor'),
+    'silent_var_label':      (1399, 'Creación silenciosa de variables'),
+    'silent_var_desc':       (1400, 'Crear nuevas variables sin advertencia y mantener el script en ejecución'),
+
+    # ── Bot deletion (loading screen) ─────────────────────────
+    'deleting_bot':          (1401, 'Eliminando bot…'),
+    'deleting_bot_files':    (1402, 'Eliminando archivos del bot…'),
+    'deleting_bot_token':    (1403, 'Eliminando el token guardado…'),
+    'deleting_bot_done':     (1404, 'Bot eliminado'),
+    'delete_bot_failed':     (1405, 'No se pudo eliminar el bot: {error}'),
 }

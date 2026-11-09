@@ -1,0 +1,43 @@
+<dash>
+name: $task
+desc: Führt ein Skript immer wieder per Timer aus, solange der Bot online bleibt.
+category: Ereignis
+
+<block type="text" title="Wie funktioniert das Ereignis?">
+text: Setze das Präfixfeld auf $task[time] und die App markiert die Datei automatisch als Ereignis. Die Zeit ist eine ganze Zahl gefolgt von s, m, h oder d für Sekunden, Minuten, Stunden oder Tage, und sie darf nicht null sein. Wenn der Bot sich verbindet, erfolgt der erste Lauf ein Intervall später, und von da an wiederholen sich die Zeilen in diesem Takt, solange der Bot läuft.
+text: Ein Lauf hat keine Nachricht hinter sich, also gibt es keinen Autor, Server oder Kanal zum Zurückgreifen. Daten wie $botID und $botName sind verfügbar, aber bevor du etwas in einen Kanal sendest, richte das Skript mit $useChannel[guildID; channelID] auf einen.
+</block>
+
+<block type="list" title="So verwendest du es in der App">
+item: Öffne den Tab Befehle
+item: Tippe auf +, um einen neuen Befehl zu starten
+item: Gib ihm im Feld Name einen Namen
+item: Setze das Feld Präfix auf $task[1h]
+item: Die App markiert es automatisch als Ereignis
+item: Füge den Code unten in den Editor ein
+item: Tippe auf Speichern
+</block>
+
+<block type="code" title="Syntax">
+text: #PREFIX:$task[time]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: #PREFIX:$task[1h]
+text: $useChannel[123456789012345678; 987654321098765432]
+text: $sendMessage[Hourly check-in from $botName.]
+</block>
+
+<block type="callout" kind="note">
+text: Änderungen werden von selbst übernommen. Der Bot liest den Ereignisordner etwa alle zehn Sekunden neu ein, sodass eine geänderte Zeit oder geänderte Zeilen ohne Neustart wirksam werden, und das Löschen der Datei stoppt einfach ihren Timer.
+</block>
+
+<block type="callout" kind="warning">
+text: Der Timer feuert weiter, auch wenn niemand da ist, also halte Aufgaben leicht und vermeide zu häufiges Posten. Für Timernachrichten gelten die Discord-Ratenbegrenzungen wie für jede andere Nachricht.
+</block>
+</dash>
+
+<details>
+syntax: $task[time]
+param: time|text|Erforderlich|Eine ganze Zahl und eine Einheit: s, m, h oder d, zum Beispiel 30s, 5m, 2h oder 1d
+</details>

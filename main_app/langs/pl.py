@@ -411,4 +411,41 @@ POLISH_DICT = {
     'intents_conn_unknown':  (1305, 'Połączenie jeszcze nie sprawdzone'),
     'intents_ping_test':     (1306, 'Test połączenia z serwerem'),
     'intents_ping_none':     (1307, 'Brak odpowiedzi'),
+
+    # ── Settings section title ────────────────────────────────
+    'editor_section':        (1376, 'Edytor'),
+
+    # ── Command Folders ───────────────────────────────────────
+    'folder_label':          (1378, 'Folder'),
+    'folder_root':           (1379, 'Bez folderu (katalog główny)'),
+    'folder_pick_title':     (1380, 'Wybierz folder'),
+    'folder_select':         (1381, 'Wybierz'),
+    'folder_new':            (1382, 'Nowy folder'),
+    'folder_new_name':       (1383, 'Nazwa folderu'),
+    'folder_create_in':      (1384, 'Nowy folder zostanie utworzony w'),
+    'folder_name_taken':     (1385, 'Folder o tej nazwie już tu istnieje'),
+    'folder_name_required':  (1386, 'Podaj nazwę folderu'),
+    'folder_new_sub':        (1387, 'Nowy podfolder'),
+    'folder_new_cmd':        (1388, 'Nowa komenda tutaj'),
+    'folder_rename':         (1389, 'Zmień nazwę'),
+    'folder_move':           (1390, 'Przenieś do innego folderu'),
+    'folder_delete':         (1391, 'Usuń folder'),
+    'folder_delete_body':    (1392, 'Usuwany jest tylko folder. Komendy i foldery w nim przenoszą się do folderu nadrzędnego.'),
+    'folder_items':          (1393, '{n} elementów'),
+    'folder_move_failed':    (1394, 'Nie można przenieść folderu tutaj'),
+    'command_trigger':       (1395, 'Wyzwalacz komendy'),
+    'folder_new_var':        (1396, 'Nowa zmienna tutaj'),
+
+    # ── Editor settings ───────────────────────────────────────
+    'editor_stats_label':    (1397, 'Licznik wierszy / znaków'),
+    'editor_stats_desc':     (1398, 'Pokaż licznik nad edytorem'),
+    'silent_var_label':      (1399, 'Ciche tworzenie zmiennych'),
+    'silent_var_desc':       (1400, 'Twórz nowe zmienne bez ostrzeżenia i pozwól skryptowi działać dalej'),
+
+    # ── Bot deletion (loading screen) ─────────────────────────
+    'deleting_bot':          (1401, 'Usuwanie bota…'),
+    'deleting_bot_files':    (1402, 'Usuwanie plików bota…'),
+    'deleting_bot_token':    (1403, 'Usuwanie zapisanego tokenu…'),
+    'deleting_bot_done':     (1404, 'Bot usunięty'),
+    'delete_bot_failed':     (1405, 'Nie udało się usunąć bota: {error}'),
 }

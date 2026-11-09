@@ -10,8 +10,8 @@ async def _process(args: list[str], ctx: ExecutionContext) -> str:
     if len(args) < 1:
         ctx._abort_with_error(FDSyntaxError("`$httpPost` requires at least 1 arg: `$httpPost[URL;(Body)]`"))
 
-    url = (await ctx.resolve(args[0])).strip()
-    body_raw = (await ctx.resolve(args[1])) if len(args) > 1 else None
+    url = (ctx.resolve(args[0])).strip()
+    body_raw = (ctx.resolve(args[1])) if len(args) > 1 else None
     headers = dict(getattr(ctx, "http_headers", {}))
     headers.setdefault("User-Agent", DEFAULT_USER_AGENT)
 
@@ -45,10 +45,6 @@ async def _process(args: list[str], ctx: ExecutionContext) -> str:
 
     ctx.http_headers = {}
     return ""
-
-
-async def resolve_inline(args: list[str], ctx: ExecutionContext) -> str:
-    return await _process(args, ctx)
 
 
 async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: discord.abc.Messageable) -> None:

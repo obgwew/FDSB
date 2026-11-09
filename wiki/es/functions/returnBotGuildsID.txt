@@ -1,0 +1,45 @@
+<dash>
+name: $returnBotGuildsID
+desc: Recopila el ID de cada servidor en el que está el bot para que puedas reutilizar la lista.
+category: Comandos de retorno
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Este comando recorre cada servidor al que se ha unido el bot y recopila cada ID de servidor. Los ID se unen con un separador que tú eliges y se archivan bajo un nombre que tú eliges, y $return saca la lista completa donde la necesites. No se publica nada en el canal mientras recopila.
+text: La primera parte elige cómo se recopila la lista. cache usa los servidores que el bot ya conoce y es instantáneo, mientras que chunk pide primero a Discord la lista completa, lo que es más lento pero siempre actual en bots grandes.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el campo Prefijo en !guilds
+item: Escribe tu script en el editor
+item: Pega las líneas de abajo donde las necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $returnBotGuildsID[cache/chunk; var; separator]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $returnBotGuildsID[cache; guildIDs; ,]
+text: $sendMessage[I am in these servers: $return[guildIDs]]
+</block>
+
+<block type="options" title="Modos de obtención">
+option: cache|Usa la lista de servidores que el bot ya tiene, rápida pero posiblemente desactualizada
+option: chunk|Pide primero a Discord la lista completa de servidores, más lenta pero completa
+</block>
+
+<block type="callout" kind="note">
+text: El separador puede ser un símbolo como una coma o un punto y coma, o uno de los nombres legibles: dot, com, apo, sem o colon. Si el bot no está en ningún servidor, el comando informa un error en lugar de archivar una lista vacía.
+</block>
+</dash>
+
+<details>
+syntax: $returnBotGuildsID[cache/chunk; var; separator]
+param: cache/chunk|text|Obligatorio|cache para la lista de servidores conocida, chunk para una lista completa y reciente
+param: var|text|Obligatorio|El nombre bajo el que se archiva la lista, que luego se lee con $return[]
+param: separator|text|Obligatorio|Lo que va entre los ID, como una coma o un punto y coma, o un nombre: dot, com, apo, sem, colon
+</details>

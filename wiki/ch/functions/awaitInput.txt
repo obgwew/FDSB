@@ -1,0 +1,44 @@
+<dash>
+name: $awaitInput
+desc: 监听某人的下一条回复，并在到达时运行第二个脚本。
+category: 流程控制
+
+<block type="text" title="此命令如何工作？">
+text: $awaitInput 设置一个等待，本身不发布任何内容。它接受你选择的名称，从那时起机器人会监视下一条匹配的消息，并运行第一行为 `$awaitedCommand[that name]` 的脚本。
+text: 默认情况下，它监听运行命令的人，在命令运行的频道中。传入用户 ID 可等待某个特定成员，或使用单词 everyone 接受任何人的下一条回复。当答案应来自另一个频道时，最后传入频道 ID。
+</block>
+
+<block type="list" title="如何在应用中使用">
+item: 打开命令选项卡
+item: 点按 + 创建新命令
+item: 在名称字段中为其命名
+item: 将前缀字段设为 !ask
+item: 在编辑器中写入下方行
+item: 点按保存
+item: 为答案创建第二个脚本，参见 $awaitedCommand
+</block>
+
+<block type="code" title="语法">
+text: $awaitInput[name; (userID/everyone); (channelID)]
+</block>
+
+<block type="code" title="可直接复制的示例">
+text: $sendMessage[How old are you?]
+text: $awaitInput[age]
+</block>
+
+<block type="callout" kind="note">
+text: 名称只能使用字母、数字、下划线和连字符，且匹配时不区分大小写。等待只能使用一次，因此答案只会运行其脚本一次，之后机器人恢复常规监听。
+</block>
+
+<block type="callout" kind="warning">
+text: 每个频道和成员组合只保留一个等待。在同一频道再次为同一成员请求等待会替换较旧的名称，因此第一个问题将不再期待答案。用户和频道都必须是纯数字 ID；只有用户部分可以是单词 everyone。
+</block>
+</dash>
+
+<details>
+syntax: $awaitInput[name; (userID/everyone); (channelID)]
+param: name|text|Required|等待名称；匹配的 $awaitedCommand 脚本使用相同名称
+param: userID|snowflake|Optional|要监听的成员，或 everyone 表示任何人。留空表示运行命令的人
+param: channelID|snowflake|Optional|答案必须发送到的频道。留空表示当前频道
+</details>

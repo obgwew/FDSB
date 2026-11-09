@@ -54,11 +54,8 @@ _permission_handler = None
 _flet_page = None
 _flet_session_loop = None
 _fgs_running = False
-# Serialises start/stop: the permission dialogs fire pause/resume lifecycle events
-# that used to trigger a second concurrent start.
 _fgs_lock = asyncio.Lock()
 
-# Notification ids / channels
 _FGS_NOTIFICATION_ID = 101
 _LEAVE_NOTIFICATION_ID = 102
 _LIMIT_NOTIFICATION_ID = 103
@@ -68,16 +65,12 @@ _ALERT_CHANNEL_ID = "fdsb_alerts"
 _SERVICE_CHANNEL_ID = "fdsb_service"
 _DOWNLOAD_CHANNEL_ID = "fdsb_downloads"
 
-# Android limits a dataSync foreground service to ~6h, stop slightly before it.
 _FGS_MAX_SECONDS = 5 * 3600 + 50 * 60
-# How long the "download finished" notification stays visible.
 _DOWNLOAD_DONE_VISIBLE_MS = 4000
 
 _bot_should_run = False
 _app_in_background = False
-# The "app is in background" alert is shown ONCE per bot session, never repeated.
 _leave_notified = False
-# Set when the 6h limit stopped the service; blocks silent auto-restarts.
 _limit_reached = False
 
 _fgs_timer_task = None
@@ -168,8 +161,6 @@ def schedule_on_flet_loop(coro) -> bool:
 
 
 def _attach_service(page: ft.Page, svc) -> None:
-    """Flet services only work after they are added to page.services AND the page
-    is updated; otherwise every method call on them fails."""
     try:
         if hasattr(page, 'services') and svc not in page.services:
             page.services.append(svc)
@@ -249,16 +240,15 @@ async def request_background_permissions() -> None:
 
 
 async def ensure_notification_permission() -> bool:
-    """Ask for the POST_NOTIFICATIONS permission (Android 13+) if not granted yet."""
     if not _is_android():
         return True
     if _permission_handler is not None and fph is not None:
         try:
             status = await _permission_handler.get_status(fph.Permission.NOTIFICATION)
-            if getattr(status, 'name', '') == 'granted':
+            if status == fph.PermissionStatus.GRANTED:
                 return True
             status = await _permission_handler.request(fph.Permission.NOTIFICATION)
-            return getattr(status, 'name', '') == 'granted'
+            return status == fph.PermissionStatus.GRANTED
         except Exception as e:
             print(f"[Permissions] NOTIFICATION check failed: {e}")
     n = _android_notifications
@@ -319,22 +309,17 @@ async def _dismiss_download_later(delay: float):
 
 
 async def show_download_notification(title: str, body: str, done: bool = False, page=None):
-    """Temporary download notification.
-    - While downloading: calling it again updates the SAME notification (live progress).
-    - When done=True: it stays for a few seconds, then disappears by itself."""
     global _download_dismiss_task, _flet_page
     if page is not None and _flet_page is None:
         _flet_page = page
     if _android_notifications is None and _flet_page is not None:
         ensure_background_mode(_flet_page)
-        # give the freshly attached native service a moment to mount
         await asyncio.sleep(0.3)
     n = _android_notifications
     if n is None or not _is_android():
         print(f"[FGS] download notification skipped (plugin={n is not None}, android={_is_android()})")
         return
 
-    # A newer update always cancels a pending auto-dismiss.
     if _download_dismiss_task is not None and not _download_dismiss_task.done():
         _download_dismiss_task.cancel()
     _download_dismiss_task = None
@@ -361,7 +346,6 @@ async def show_download_notification(title: str, body: str, done: bool = False, 
         return
 
     if done:
-        # Fallback in case the OS ignores timeout_after.
         _download_dismiss_task = asyncio.create_task(
             _dismiss_download_later(_DOWNLOAD_DONE_VISIBLE_MS / 1000 + 0.5)
         )
@@ -393,8 +377,6 @@ def _start_limit_task():
 
 
 async def _fgs_limit_loop():
-    """Waits until the ~6h Android limit (5h50m), then removes the timer
-    notification and asks the user to restart the app."""
     try:
         await asyncio.sleep(_FGS_MAX_SECONDS)
         if not _fgs_running:
@@ -408,11 +390,9 @@ async def _fgs_limit_loop():
 async def _finish_by_limit():
     global _limit_reached
     _limit_reached = True
-    # 1) stop the service (removes the count-up timer notification)
     await stop_android_foreground_service()
     await _cancel_alert(_FGS_NOTIFICATION_ID)
     await _cancel_alert(_LEAVE_NOTIFICATION_ID)
-    # 2) tell the user to restart the app
     await _show_alert(
         _LIMIT_NOTIFICATION_ID,
         _title(),
@@ -452,7 +432,6 @@ async def _start_android_foreground_service_locked(bot_name: str, bot_image: str
             title=title,
             body=_t('fgs_state_working'),
             foreground_service_types=["data_sync"],
-            # Native count-up timer (Android Chronometer) starting from "now".
             when=_fgs_start_time,
             show_when=True,
             uses_chronometer=True,
@@ -528,12 +507,10 @@ async def _handle_user_leaving():
     _app_in_background = True
     if not _is_android() or not _bot_should_run or _limit_reached:
         return
-    # pause/hide/detach can fire several times in a row -> ignore repeats.
     if already_in_background:
         return
     if not _fgs_running:
         await start_android_foreground_service(_title(), _fgs_bot_image)
-    # The leave alert is sent only ONCE per bot session.
     if _leave_notified:
         return
     _leave_notified = True
@@ -581,8 +558,6 @@ async def _disable_wakelock():
 
 async def start_background_mode(bot_name: str, bot_image: str = ""):
     global _bot_should_run, _leave_notified, _limit_reached
-    # A fresh start of the bot = a fresh session: reset the one-time alert
-    # and the 6h limit flag, and clear the old "restart the app" notification.
     if not _bot_should_run:
         _leave_notified = False
     _limit_reached = False

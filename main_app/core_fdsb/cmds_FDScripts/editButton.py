@@ -25,7 +25,6 @@ def _apply(btn: discord.ui.Button, label: str, style: discord.ButtonStyle, disab
 
 
 def _view_from_message(message: discord.Message, *, timeout=None) -> discord.ui.View:
-    """يعيد بناء الـ View مع الحفاظ على رقم الصف (line) الأصلي"""
     view = discord.ui.View(timeout=timeout)
     for row_idx, action_row in enumerate(message.components):
         for component in action_row.children:
@@ -33,6 +32,12 @@ def _view_from_message(message: discord.Message, *, timeout=None) -> discord.ui.
             item.row = row_idx
             view.add_item(item)
     return view
+
+
+def _channel(ctx: ExecutionContext):
+    if ctx.interaction is not None and ctx.interaction.channel is not None:
+        return ctx.interaction.channel
+    return getattr(ctx.message, "channel", None)
 
 
 def _sync_ctx_message(ctx: ExecutionContext, updated_message: discord.Message) -> None:
@@ -46,16 +51,8 @@ def _sync_ctx_message(ctx: ExecutionContext, updated_message: discord.Message) -
         ctx.interaction.message = updated_message
 
 
-def resolve_inline(args: list[str], ctx: ExecutionContext) -> str:
-    return ""
-
-
 async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: discord.abc.Messageable,
                   *, do_edit: bool = True) -> None:
-    """
-    do_edit=False → يطبّق التعديل على الـ View فقط بدون إرسال إلى ديسكورد
-    (يُستخدم أثناء تجميع عدة $editButton متتالية)
-    """
     if len(args) < 3:
         await _send_error(ch, FDSyntaxError(
             "`$editButton` requires at least 3 arguments: "
@@ -83,7 +80,6 @@ async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: disc
 
     style = BUTTON_STYLES[style_str]
 
-    # ── messageID ────────────────────────────────────────
     if message_id_arg is not None:
         if not message_id_arg.isdigit():
             await _send_error(ch, FDLogicError(
@@ -91,8 +87,13 @@ async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: disc
             ))
             return
 
+        channel = _channel(ctx)
+        if channel is None:
+            await _send_error(ch, FDLogicError("`$editButton` — could not determine the channel to fetch the message from"))
+            return
+
         try:
-            target_message = await ctx.message.channel.fetch_message(int(message_id_arg))
+            target_message = await channel.fetch_message(int(message_id_arg))
         except discord.NotFound:
             await _send_error(ch, FDLogicError(
                 f"`$editButton` — no message found with ID `{message_id_arg}` in this channel"

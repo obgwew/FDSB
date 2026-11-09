@@ -1,0 +1,37 @@
+<dash>
+name: $emoteCount
+desc: Sagt dir, wie viele benutzerdefinierte Emojis ein Server hat.
+category: Server
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: Frage ohne Inhalt und der Bot zählt die benutzerdefinierten Emojis, die auf den Server hochgeladen wurden, auf dem das Skript lief. Füge eine Server-ID hinzu und er zählt stattdessen diesen Server, solange der Bot dort Mitglied ist.
+text: Zurück kommt die reine Zahl, bereit, in einen Satz eingefügt zu werden. Er zählt nur die eigenen benutzerdefinierten Emojis des Servers, nicht die in Discord eingebauten Standard-Unicode-Emojis.
+</block>
+
+<block type="list" title="So verwendest du es in der App">
+item: Öffne den Tab Befehle
+item: Tippe auf +, um einen neuen Befehl zu starten
+item: Gib ihm im Feld Name einen Namen
+item: Setze das Feld Präfix auf $emoteCount
+item: Schreibe dein Skript in den Editor
+item: Füge die folgende Zeile überall ein, wo du sie brauchst
+item: Tippe auf Speichern
+</block>
+
+<block type="code" title="Syntax">
+text: $emoteCount[(guildID)]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $sendMessage[This server has $emoteCount custom emotes!]
+</block>
+
+<block type="callout" kind="note">
+text: In einer Direktnachricht gibt es keinen Server zum Zählen, übergib dort also eine Server-ID. Ein Server, den der Bot nicht sehen kann, oder einer, in dem er kein Mitglied ist, wird als Fehler gemeldet statt als Null.
+</block>
+</dash>
+
+<details>
+syntax: $emoteCount[(guildID)]
+param: guildID|snowflake|Optional|Welcher Server gezählt werden soll; leer lassen für den aktuellen
+</details>

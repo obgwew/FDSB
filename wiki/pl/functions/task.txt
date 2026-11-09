@@ -1,0 +1,43 @@
+<dash>
+name: $task
+desc: Uruchamia skrypt raz za razem według timera, dopóki bot pozostaje online.
+category: Zdarzenie
+
+<block type="text" title="Jak działa to zdarzenie?">
+text: Ustaw pole Prefiks na $task[time], a aplikacja oznaczy plik jako Zdarzenie. Czas to liczba całkowita, po której następuje s, m, h lub d, odpowiednio dla sekund, minut, godzin lub dni, i nie może wynosić zero. Gdy bot się łączy, pierwsze uruchomienie następuje jeden interwał później, a od tego momentu linie powtarzają się w tym tempie, dopóki bot działa.
+text: Uruchomienie nie ma za sobą wiadomości, więc nie ma autora, serwera ani kanału, do których można się cofnąć. Dane takie jak $botID i $botName są dostępne, ale przed wysłaniem czegokolwiek na kanał wskaż go skryptowi przez $useChannel[guildID; channelID].
+</block>
+
+<block type="list" title="Jak używać tego w aplikacji">
+item: Otwórz kartę Komendy
+item: Stuknij +, aby rozpocząć nową komendę
+item: Nadaj jej nazwę w polu Nazwa
+item: Ustaw pole Prefiks na $task[1h]
+item: Aplikacja oznaczy ją jako Zdarzenie
+item: Wklej poniższy kod do edytora
+item: Stuknij Zapisz
+</block>
+
+<block type="code" title="Składnia">
+text: #PREFIX:$task[time]
+</block>
+
+<block type="code" title="Przykład do skopiowania">
+text: #PREFIX:$task[1h]
+text: $useChannel[123456789012345678; 987654321098765432]
+text: $sendMessage[Hourly check-in from $botName.]
+</block>
+
+<block type="callout" kind="note">
+text: Zmiany są przechwytywane same. Bot odczytuje ponownie folder zdarzeń mniej więcej co dziesięć sekund, więc zmieniony czas lub zmienione linie działają bez restartu, a usunięcie pliku po prostu zatrzymuje jego timer.
+</block>
+
+<block type="callout" kind="warning">
+text: Timer dalej wyzwala, nawet gdy nikogo nie ma, więc utrzymuj zadania lekkie i unikaj zbyt częstego publikowania. Limity szybkości Discorda dotyczą wiadomości timera tak samo jak każdej innej wiadomości.
+</block>
+</dash>
+
+<details>
+syntax: $task[time]
+param: time|text|Required|Liczba całkowita i jedna jednostka: s, m, h lub d, na przykład 30s, 5m, 2h lub 1d
+</details>

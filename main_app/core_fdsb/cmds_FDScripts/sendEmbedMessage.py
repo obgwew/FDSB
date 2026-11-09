@@ -5,8 +5,9 @@ import discord
 from FDScript import (
     ExecutionContext, Command,
     FDLogicError, FDRuntimeError, FDEnvironmentError,
-    _send_error, _parse_color, _truncate,
+    _send_error, _truncate, send_embed_message,
 )
+from engine_FDScript.parse_utils import _parse_color
 
 
 def resolve_inline(args: list[str], ctx: ExecutionContext) -> str:
@@ -80,7 +81,10 @@ async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: disc
 
     try:
         ctx.stop_typing()
-        sent = await target_ch.send(content=content or None, embed=embed)
+        sent = await send_embed_message(ctx, target_ch, content=content or None, embed=embed)
+        if sent is None:
+            ctx.log_event("sendEmbedMessage → nothing sent (removeLinks left no content)")
+            return
         ctx.last_bot_message = sent
 
         if _is_yes(return_id):

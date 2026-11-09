@@ -8,7 +8,7 @@ KNOWN_COMMANDS: set[str] = {
     # a
     "addBotReactions", "addButton", "addSelectMenuOption", "addTimestamp", "addUserReactions",
     "and", "author", "authorAvatar", "authorIcon", "authorID",
-    "authorName", "authorServerAvatar", "authorURL",
+    "authorName", "authorServerAvatar", "authorURL", "awaitInput",
     # b
     "ban", "blackListRoles", "blackListServer", "blackListUsers", "boostCount",
     "boostLevel", "botID", "botLeave", "botName", "break",
@@ -18,15 +18,15 @@ KNOWN_COMMANDS: set[str] = {
     "clientTyping", "cloneChannel", "cloneRole", "color", "cooldown",
     "createChannel", "createRole", "cropText", "customID",
     # d
-    "deleteChannels", "deletecommand", "deleteRole", "description", "displayName",
-    "div", "dm", "day",
+    "day", "deleteChannels", "deletecommand", "deleteIn", "deleteRole",
+    "description", "displayName", "div", "dm",
     # e
-    "editButton", "editChannelPerms", "editChannelTopic", "editIn", "editMessage",
-    "editSelectMenu", "editSelectMenuOption", "editSplitOut", "elif", "else",
-    "emojiExists", "emojiName", "endfor", "endfunc", "endif",
-    "endwhile", "ephemeral",
+    "editButton", "editChannelPerms", "editChannelTopic", "editEmbed", "editEmbedIn",
+    "editIn", "editMessage", "editSelectMenu", "editSelectMenuOption", "editSplitOut",
+    "elif", "else", "emojiExists", "emojiName", "emoteCount", "endfor",
+    "endfunc", "endif", "endwhile", "ephemeral",
     # f
-    "findChannel", "findRole", "floor", "footer", "footerIcon",
+    "findChannel", "findRole", "findUser", "floor", "footer", "footerIcon",
     "for", "func",
     # g
     "getBotInvent", "getCreationDateTimestamp", "getGuildVar", "getLeaderboardPosition", "getLeaderboardValue",
@@ -46,11 +46,11 @@ KNOWN_COMMANDS: set[str] = {
     # l
     "lastBotMessageID", "lastUserMessageID", "lineCount", "log",
     # m
-    "math", "membersCount", "mention", "message", "messageID",
+    "math", "membersCount", "mention", "mentioned", "message", "messageID",
     "minute", "mod", "modifyChannel", "modifyRolePerms", "month",
     "moveChannel", "mul",
     # n
-    "newSelectMenu", "numberAbbreviate", "numberSeparator",
+    "newSelectMenu", "not", "numberAbbreviate", "numberSeparator",
     # o
     "onlyAdmin", "onlyBotPerms", "onlyFor", "onlyIf", "onlyIn",
     "onlyNSFW", "onlyUserPerms", "or",
@@ -60,16 +60,17 @@ KNOWN_COMMANDS: set[str] = {
     "randomint", "randomRoleID", "randomRoleMention", "randomstr", "randomUserID",
     "removeAllComponents", "removeButtons", "removeComponent", "removeLinks", "removeSplitOutElement",
     "repeatMessage", "replaceRegex", "replaceText", "reply", "replyIn",
-    "resetGuildVar", "resetUserVar", "return", "returnGetReactions", "returnGuildBansID",
+    "resetGuildVar", "resetUserVar", "return", "returnBotGuildsID", "returnGetReactions", "returnGuildBansID",
     "returnGuildChannelsID", "returnGuildEmojisID", "returnGuildRolesID", "returnGuildUsersID", "roleAssign",
     "round",
     # s
     "second", "sendEmbedMessage", "sendMessage", "serverIcon", "serverLeaderboard",
     "serverOwnerID", "setBotStatus", "setGuildVar", "setUserVar", "setVar",
-    "slowmode", "splitIn", "splitOut", "strictArgs", "sub",
+    "slowmode", "sort", "splitIn", "splitOut", "strictArgs", "sub",
     "sum", "suppressErrors", "switch", "syncChannel", "syncMode",
     # t
-    "thumbnail", "time", "timeout", "title",
+    "textCount", "thumbnail", "time", "timeout", "title", "toLowercase",
+    "toUppercase", "tts",
     # u
     "unban", "untimeout", "uptime", "useChannel", "userBanner",
     "userBannerColor", "userLeaderboard",

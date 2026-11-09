@@ -1,0 +1,43 @@
+<dash>
+name: $awaitedCommandError
+desc: 当 $awaitInput 之后的回复与你设置的筛选器不匹配时运行。
+category: 事件
+
+<block type="text" title="此事件如何工作？">
+text: 这是 $awaitedCommand 的搭档。将前缀字段设为 $awaitedCommandError[name]，并使用相同的等待名称，它只会在以下情况运行：收到回复、存在该名称的 $awaitedCommand 脚本，但回复未通过其筛选器。
+text: 经典用法是是或否问题：正常的等待脚本处理被接受的单词，而这个脚本会礼貌地指出答案未被理解。被拒绝的文本就是脚本所处理的消息，因此 $message 仍保存输入的内容。
+</block>
+
+<block type="list" title="如何在应用中使用">
+item: 打开命令选项卡
+item: 点按 + 创建新命令
+item: 在名称字段中为其命名
+item: 将前缀字段设为 $awaitedCommandError[confirm]
+item: 应用会为你将其标记为事件
+item: 将下方代码粘贴到编辑器中
+item: 点按保存
+</block>
+
+<block type="code" title="语法">
+text: #PREFIX:$awaitedCommandError[name]
+</block>
+
+<block type="code" title="可直接复制的示例">
+text: #PREFIX:$awaitedCommandError[confirm]
+text: $sendMessage[Please answer with yes or no.]
+text: $awaitInput[confirm]
+</block>
+
+<block type="callout" kind="note">
+text: 错误脚本没有自己的筛选器；任何未通过匹配的 $awaitedCommand 筛选器的回复都会唤醒它。如果该名称根本不存在 $awaitedCommand 脚本，这里也不会发生任何事，因此务必同时创建正常脚本。
+</block>
+
+<block type="callout" kind="warning">
+text: 即使回复不匹配，等待也会被该回复消耗。要再次提问，请再次以相同名称运行 $awaitInput，如示例所示。
+</block>
+</dash>
+
+<details>
+syntax: $awaitedCommandError[waitName]
+param: waitName|text|Required|匹配的 $awaitInput 和 $awaitedCommand 行所使用的名称
+</details>

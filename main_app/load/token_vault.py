@@ -49,7 +49,20 @@ class TokenVault:
 
     @classmethod
     async def get(cls, bot_id: str) -> str:
-        value = await asyncio.wait_for(cls._require().get(cls._key(bot_id)), _TIMEOUT)
+        """Token of a bot, or "" when there is none or it cannot be read
+        (e.g. the app data was restored from a backup but the secure-storage
+        key did not survive). A timeout is NOT treated as missing: it is
+        re-raised so a slow storage never makes the app drop a valid token."""
+        try:
+            value = await asyncio.wait_for(cls._require().get(cls._key(bot_id)), _TIMEOUT)
+        except asyncio.TimeoutError:
+            raise
+        except Exception as e:
+            if "Timeout" in str(e):
+                raise
+            print(f"[TokenVault] unreadable token for {bot_id}: {e}")
+            cls._cache.pop(bot_id, None)
+            return ""
         if value:
             cls._cache[bot_id] = value
         return value or ""
@@ -95,6 +108,24 @@ class TokenVault:
                 if isinstance(e, TimeoutError) or "Timeout" in str(e):
                     break
         return loaded
+
+    @classmethod
+    async def bots_without_token(cls, app_data_dir: str) -> list[str]:
+        missing: list[str] = []
+        if not os.path.isdir(app_data_dir):
+            return missing
+        for entry in os.scandir(app_data_dir):
+            if not entry.is_dir():
+                continue
+            if not os.path.isfile(os.path.join(entry.path, "bot_files", "config.json")):
+                continue
+            try:
+                if not await cls.get(entry.name):
+                    missing.append(entry.name)
+            except Exception as e:
+                print(f"[TokenVault] token check failed for {entry.name}: {e}")
+                break
+        return missing
 
     @classmethod
     async def has(cls, bot_id: str) -> bool:

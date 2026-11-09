@@ -1,0 +1,44 @@
+<dash>
+name: $sort
+desc: Bringt eine Liste von Zahlen in Ordnung und gibt alle oder nur die obersten zurück.
+category: Mathematik & Zahlen
+
+<block type="text" title="Wie funktioniert der Befehl?">
+text: Gib $sort eine Reihe von Zahlen und teile ihm dann die Richtung, wie viele zurückgegeben werden sollen und was dazwischen kommt mit. asc ordnet vom kleinsten zum größten und desc macht das Gegenteil, und eine Rückgabemenge von -1 behält die ganze Liste.
+text: Dezimalzahlen und negative Zahlen werden akzeptiert, und die Werte kommen so zurück, wie sie geschrieben wurden, nicht neu geschrieben. Das Ergebnis kann in einen Satz eingefügt oder in einer eigenen Zeile gepostet werden.
+</block>
+
+<block type="list" title="So verwendest du es in der App">
+item: Öffne den Tab Befehle
+item: Tippe auf +, um einen neuen Befehl zu starten
+item: Gib ihm im Feld Name einen Namen
+item: Setze das Feld Präfix auf $sort
+item: Schreibe dein Skript in den Editor
+item: Füge die folgende Zeile überall ein, wo du sie brauchst
+item: Tippe auf Speichern
+</block>
+
+<block type="code" title="Syntax">
+text: $sort[number;number;...;asc/desc;returnAmount;separator]
+</block>
+
+<block type="code" title="Kopierfertiges Beispiel">
+text: $sort[42;7;19;9;66;desc;3;, ]
+</block>
+
+<block type="callout" kind="note">
+text: Eine Rückgabemenge von -1 bedeutet jede Zahl, während jede andere Menge 1 oder mehr sein muss. Wenn es weniger Zahlen als die Menge gibt, bekommst du einfach alle zurück.
+</block>
+
+<block type="callout" kind="warning">
+text: Jeder Wert vor der Richtung muss eine echte Zahl sein. Ein Wort oder ein leeres Feld stoppt den Befehl mit einem Fehler, der den Wert nennt, den er nicht lesen konnte.
+</block>
+</dash>
+
+<details>
+syntax: $sort[number;number;...;asc/desc;returnAmount;separator]
+param: number|number|Erforderlich|Die zu sortierenden Zahlen; gib eine oder mehrere vor der Richtung an
+param: asc/desc|text|Erforderlich|asc vom kleinsten zum größten, desc vom größten zum kleinsten
+param: returnAmount|text|Erforderlich|Wie viele Werte zurückgegeben werden, oder -1 für alle
+param: separator|text|Erforderlich|Was zwischen die Werte kommt, etwa ein Komma, oder ein Name: dot, com, apo, sem, colon
+</details>

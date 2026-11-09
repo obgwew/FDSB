@@ -412,4 +412,41 @@ FRENCH_DICT = {
     'intents_conn_unknown':  (1305, 'Connexion pas encore vérifiée'),
     'intents_ping_test':     (1306, 'Tester la connexion au serveur'),
     'intents_ping_none':     (1307, 'Aucune réponse'),
+
+    # ── Settings section title ────────────────────────────────
+    'editor_section':        (1376, 'Éditeur'),
+
+    # ── Command Folders ───────────────────────────────────────
+    'folder_label':          (1378, 'Dossier'),
+    'folder_root':           (1379, 'Aucun dossier (racine)'),
+    'folder_pick_title':     (1380, 'Choisir un dossier'),
+    'folder_select':         (1381, 'Sélectionner'),
+    'folder_new':            (1382, 'Nouveau dossier'),
+    'folder_new_name':       (1383, 'Nom du dossier'),
+    'folder_create_in':      (1384, 'Le nouveau dossier sera créé dans'),
+    'folder_name_taken':     (1385, 'Un dossier portant ce nom existe déjà ici'),
+    'folder_name_required':  (1386, 'Saisissez un nom de dossier'),
+    'folder_new_sub':        (1387, 'Nouveau sous-dossier'),
+    'folder_new_cmd':        (1388, 'Nouvelle commande ici'),
+    'folder_rename':         (1389, 'Renommer'),
+    'folder_move':           (1390, 'Déplacer vers un autre dossier'),
+    'folder_delete':         (1391, 'Supprimer le dossier'),
+    'folder_delete_body':    (1392, "Seul le dossier est supprimé. Les commandes et dossiers qu'il contient remontent dans le dossier parent."),
+    'folder_items':          (1393, '{n} éléments'),
+    'folder_move_failed':    (1394, 'Impossible de déplacer le dossier ici'),
+    'command_trigger':       (1395, 'Déclencheur de commande'),
+    'folder_new_var':        (1396, 'Nouvelle variable ici'),
+
+    # ── Editor settings ───────────────────────────────────────
+    'editor_stats_label':    (1397, 'Compteur de lignes / caractères'),
+    'editor_stats_desc':     (1398, "Afficher le compteur au-dessus de l'éditeur"),
+    'silent_var_label':      (1399, 'Création silencieuse de variables'),
+    'silent_var_desc':       (1400, "Créer de nouvelles variables sans avertissement et laisser le script s'exécuter"),
+
+    # ── Bot deletion (loading screen) ─────────────────────────
+    'deleting_bot':          (1401, 'Suppression du bot…'),
+    'deleting_bot_files':    (1402, 'Suppression des fichiers du bot…'),
+    'deleting_bot_token':    (1403, 'Suppression du jeton enregistré…'),
+    'deleting_bot_done':     (1404, 'Bot supprimé'),
+    'delete_bot_failed':     (1405, 'Impossible de supprimer le bot : {error}'),
 }

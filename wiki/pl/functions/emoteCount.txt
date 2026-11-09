@@ -1,0 +1,37 @@
+<dash>
+name: $emoteCount
+desc: Mówi ci, ile niestandardowych emoji ma serwer.
+category: Serwer
+
+<block type="text" title="Jak działa ta komenda?">
+text: Zapytaj bez niczego w środku, a bot policzy niestandardowe emoji przesłane na serwer, na którym uruchomiono skrypt. Dodaj ID serwera, a policzy zamiast tego ten serwer, o ile bot jest tam członkiem.
+text: Wraca sama liczba, gotowa do wstawienia w zdanie. Liczy tylko własne niestandardowe emoji serwera, a nie standardowe emoji Unicode wbudowane w Discord.
+</block>
+
+<block type="list" title="Jak używać tego w aplikacji">
+item: Otwórz kartę Komendy
+item: Stuknij +, aby rozpocząć nową komendę
+item: Nadaj jej nazwę w polu Nazwa
+item: Ustaw pole Prefiks na $emoteCount
+item: Wpisz swój skrypt w edytorze
+item: Wklej poniższą linię tam, gdzie jej potrzebujesz
+item: Stuknij Zapisz
+</block>
+
+<block type="code" title="Składnia">
+text: $emoteCount[(guildID)]
+</block>
+
+<block type="code" title="Przykład do skopiowania">
+text: $sendMessage[This server has $emoteCount custom emotes!]
+</block>
+
+<block type="callout" kind="note">
+text: W wiadomości prywatnej nie ma serwera do policzenia, więc podaj tam ID serwera. Serwer, którego bot nie widzi, lub taki, którego nie jest członkiem, jest zgłaszany jako błąd, a nie jako zero.
+</block>
+</dash>
+
+<details>
+syntax: $emoteCount[(guildID)]
+param: guildID|snowflake|Optional|Którego serwera emoji policzyć; zostaw puste dla bieżącego
+</details>

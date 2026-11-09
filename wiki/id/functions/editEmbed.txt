@@ -1,0 +1,44 @@
+<dash>
+name: $editEmbed
+desc: Menulis ulang judul, deskripsi, footer, atau warna sebuah embed yang sudah diposting bot.
+category: Pembuat Embed
+
+<block type="text" title="Bagaimana cara kerja perintah?">
+text: Berikan ID sebuah pesan dan setidaknya satu bagian untuk diubah, dan bot memperbarui embed yang ada pada pesan itu. Bagian yang Anda biarkan kosong tetap persis seperti semula, jadi satu judul baru sudah cukup dan tidak ada yang lain tersentuh.
+text: Pesan dicari di kanal saat ini, atau di kanal yang dituju $useChannel. Hanya pesan yang dikirim bot sendiri yang bisa diedit, dan pesan itu harus sudah memuat embed. Warna menerima nilai heksadesimal seperti #FF5733 atau salah satu warna bernama.
+</block>
+
+<block type="list" title="Cara menggunakannya di aplikasi">
+item: Buka tab Perintah
+item: Ketuk + untuk membuat perintah baru
+item: Beri nama di kolom Nama
+item: Atur kolom Awalan ke !editEmbed
+item: Tempel kode di bawah ke editor
+item: Ketuk Simpan
+</block>
+
+<block type="code" title="Sintaks">
+text: $editEmbed[messageID; (title); (description); (footer); (color)]
+</block>
+
+<block type="code" title="Contoh siap salin">
+text: $editEmbed[$lastBotMessageID; Updated title]
+</block>
+
+<block type="callout" kind="note">
+text: Biarkan celah dengan mengetik hanya titik koma untuk melewati sebuah bagian, misalnya judul dan warna baru tanpa deskripsi atau footer: $editEmbed[123; New title; ; ; #00FF00]. ID pesan bisa berasal dari $lastBotMessageID atau dari nilai tersimpan mana pun.
+</block>
+
+<block type="callout" kind="warning">
+text: Bot hanya bisa mengedit pesannya sendiri, dan ia memerlukan Izin Baca Riwayat Pesan di kanal itu. Pesan tanpa embed, atau pesan yang tidak dikirim bot, dilaporkan sebagai kesalahan alih-alih diubah.
+</block>
+</dash>
+
+<details>
+syntax: $editEmbed[messageID; (title); (description); (footer); (color)]
+param: messageID|snowflake|Wajib|Pesan yang embed-nya harus diedit
+param: title|text|Opsional|Judul baru; biarkan kosong untuk mempertahankan yang lama
+param: description|text|Opsional|Teks isi baru; biarkan kosong untuk mempertahankan yang lama
+param: footer|text|Opsional|Baris footer baru; biarkan kosong untuk mempertahankan yang lama
+param: color|text|Opsional|Nilai heksadesimal seperti #FF5733 atau warna bernama
+</details>

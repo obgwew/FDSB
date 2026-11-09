@@ -12,20 +12,26 @@ _USER_MENTION_RE = re.compile(r"^<@!?(\d+)>$")
 _ROLE_MENTION_RE = re.compile(r"^<@&(\d+)>$")
 
 
+def _looks_like_target(text: str) -> bool:
+    """True if `text` is purely a snowflake ID or a user/role mention (never a human message)."""
+    t = text.strip()
+    return bool(t) and (t.isdigit() or _USER_MENTION_RE.match(t) or _ROLE_MENTION_RE.match(t))
+
+
 def parse_blacklist_args(args: list[str], ctx) -> tuple[list[str], str]:
-    if len(args) == 1:
-        raw_targets = [args[0]]
-        custom_error = ""
+    # Resolve every argument exactly once (nested $commands / variables expand here).
+    resolved = [ctx.resolve(a).strip() for a in args]
+
+    # The LAST argument is a custom error message, unless it is itself just an ID/mention
+    # (so `[id1;id2]` blocks both instead of treating id2 as the message).
+    if len(resolved) > 1 and not _looks_like_target(resolved[-1]):
+        raw_targets, custom_error = resolved[:-1], resolved[-1]
     else:
-        raw_targets = args[:-1]
-        custom_error = ctx.resolve(args[-1]).strip()
+        raw_targets, custom_error = resolved, ""
 
     targets = []
-    for raw in raw_targets:
-        resolved = ctx.resolve(raw).strip()
-        if not resolved:
-            continue
-        for part in resolved.split(","):
+    for item in raw_targets:
+        for part in item.split(","):
             cleaned = part.strip()
             if cleaned:
                 targets.append(cleaned)
@@ -105,16 +111,24 @@ async def enforce_blacklist(
         ctx.log_event(f"{cmd_name} → ✓ Passed")
         return
 
-    ctx.stop_typing()
-    dest = await ctx.get_dest()
+    # From here on the script MUST abort, whatever happens while notifying the user.
+    # (A plain Exception escaping this function would be caught by the dispatcher,
+    #  which reports it and then CONTINUES running the next commands.)
+    try:
+        ctx.stop_typing()
+        dest = await ctx.get_dest()
 
-    if custom_error:
-        sent = await dest.send(custom_error)
-        ctx.last_bot_message = sent
-        ctx.log_event(f"{cmd_name} → Blocked [{matched_info}]. Custom error sent.")
-    else:
-        ctx.log_event(f"{cmd_name} → Blocked [{matched_info}]. Default error sent.")
-        await _send_error(dest, FDLogicError(default_err_text))
+        if custom_error:
+            sent = await dest.send(custom_error)
+            ctx.last_bot_message = sent
+            ctx.log_event(f"{cmd_name} → Blocked [{matched_info}]. Custom error sent.")
+        else:
+            ctx.log_event(f"{cmd_name} → Blocked [{matched_info}]. Default error sent.")
+            await _send_error(dest, FDLogicError(default_err_text))
+    except FDAbortScript:
+        raise
+    except Exception as e:
+        ctx.log_event(f"{cmd_name} → warning: could not send the blocked message: {e}")
 
     ctx.log_event(f"{cmd_name} → Aborting script execution.")
     raise FDAbortScript()

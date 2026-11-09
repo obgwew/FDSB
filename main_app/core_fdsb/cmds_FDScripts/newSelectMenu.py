@@ -8,17 +8,12 @@ from FDScript import (
 
 MAX_SELECT_VALUES = 25
 
-
 def _get_registry(ctx: ExecutionContext) -> dict:
     registry = getattr(ctx, "_select_menus", None)
     if registry is None:
         registry = {}
         setattr(ctx, "_select_menus", registry)
     return registry
-
-
-def resolve_inline(args: list[str], ctx: ExecutionContext) -> str:
-    return ""
 
 
 async def execute(cmd: Command, args: list[str], ctx: ExecutionContext, ch: discord.abc.Messageable) -> None:

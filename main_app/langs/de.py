@@ -412,4 +412,41 @@ GERMAN_DICT = {
     'intents_conn_unknown':  (1305, 'Verbindung noch nicht geprüft'),
     'intents_ping_test':     (1306, 'Serververbindung testen'),
     'intents_ping_none':     (1307, 'Keine Antwort'),
+
+    # ── Settings section title ────────────────────────────────
+    'editor_section':        (1376, 'Editor'),
+
+    # ── Command Folders ───────────────────────────────────────
+    'folder_label':          (1378, 'Ordner'),
+    'folder_root':           (1379, 'Kein Ordner (Stamm)'),
+    'folder_pick_title':     (1380, 'Ordner auswählen'),
+    'folder_select':         (1381, 'Auswählen'),
+    'folder_new':            (1382, 'Neuer Ordner'),
+    'folder_new_name':       (1383, 'Ordnername'),
+    'folder_create_in':      (1384, 'Neuer Ordner wird erstellt in'),
+    'folder_name_taken':     (1385, 'Ein Ordner mit diesem Namen existiert hier bereits'),
+    'folder_name_required':  (1386, 'Ordnernamen eingeben'),
+    'folder_new_sub':        (1387, 'Neuer Unterordner'),
+    'folder_new_cmd':        (1388, 'Neuer Befehl hier'),
+    'folder_rename':         (1389, 'Umbenennen'),
+    'folder_move':           (1390, 'In einen anderen Ordner verschieben'),
+    'folder_delete':         (1391, 'Ordner löschen'),
+    'folder_delete_body':    (1392, 'Nur der Ordner wird gelöscht. Befehle und Ordner darin werden in den übergeordneten Ordner verschoben.'),
+    'folder_items':          (1393, '{n} Elemente'),
+    'folder_move_failed':    (1394, 'Der Ordner kann nicht hierher verschoben werden'),
+    'command_trigger':       (1395, 'Befehlsauslöser'),
+    'folder_new_var':        (1396, 'Neue Variable hier'),
+
+    # ── Editor settings ───────────────────────────────────────
+    'editor_stats_label':    (1397, 'Zeilen-/Zeichenzähler'),
+    'editor_stats_desc':     (1398, 'Zähler über dem Editor anzeigen'),
+    'silent_var_label':      (1399, 'Stille Variablenerstellung'),
+    'silent_var_desc':       (1400, 'Neue Variablen ohne Warnung erstellen und das Skript weiterlaufen lassen'),
+
+    # ── Bot deletion (loading screen) ─────────────────────────
+    'deleting_bot':          (1401, 'Bot wird gelöscht…'),
+    'deleting_bot_files':    (1402, 'Bot-Dateien werden entfernt…'),
+    'deleting_bot_token':    (1403, 'Gespeicherter Token wird entfernt…'),
+    'deleting_bot_done':     (1404, 'Bot gelöscht'),
+    'delete_bot_failed':     (1405, 'Bot konnte nicht gelöscht werden: {error}'),
 }

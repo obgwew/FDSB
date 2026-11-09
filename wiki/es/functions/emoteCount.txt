@@ -1,0 +1,37 @@
+<dash>
+name: $emoteCount
+desc: Te dice cuántos emojis personalizados tiene un servidor.
+category: Servidor
+
+<block type="text" title="¿Cómo funciona el comando?">
+text: Pregunta sin nada dentro y el bot cuenta los emojis personalizados subidos al servidor donde se ejecutó el script. Añade un ID de servidor y cuenta ese servidor en su lugar, siempre que el bot sea miembro allí.
+text: Lo que devuelve es el número pelado, listo para meterlo en una frase. Solo cuenta los emojis personalizados propios del servidor, no los emojis Unicode estándar integrados en Discord.
+</block>
+
+<block type="list" title="Cómo usarlo en la aplicación">
+item: Abre la pestaña de comandos
+item: Toca + para crear un comando nuevo
+item: Ponle un nombre en el campo Nombre
+item: Establece el campo Prefijo en $emoteCount
+item: Escribe tu script en el editor
+item: Pega la línea de abajo donde la necesites
+item: Toca Guardar
+</block>
+
+<block type="code" title="Sintaxis">
+text: $emoteCount[(guildID)]
+</block>
+
+<block type="code" title="Ejemplo listo para copiar">
+text: $sendMessage[This server has $emoteCount custom emotes!]
+</block>
+
+<block type="callout" kind="note">
+text: En un mensaje directo no hay servidor que contar, así que pasa allí un ID de servidor. Un servidor que el bot no puede ver, o del que no es miembro, se informa como error en lugar de como cero.
+</block>
+</dash>
+
+<details>
+syntax: $emoteCount[(guildID)]
+param: guildID|snowflake|Opcional|De qué servidor contar los emojis; déjalo vacío para el actual
+</details>
