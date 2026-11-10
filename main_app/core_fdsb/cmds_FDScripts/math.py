@@ -38,6 +38,15 @@ _CONSTANTS = {
     "inf": _math.inf,
 }
 
+_MAX_EXPONENT = 10_000
+_MAX_INT_BITS = 100_000
+
+
+def _reject_huge_int(value):
+    if isinstance(value, int) and value.bit_length() > _MAX_INT_BITS:
+        raise ValueError("result too large")
+    return value
+
 
 def _eval_node(node: ast.AST) -> float:
     match node:
@@ -50,15 +59,17 @@ def _eval_node(node: ast.AST) -> float:
         case ast.BinOp(left=left, op=op, right=right) if type(op) in _OPERATORS:
             l = _eval_node(left)
             r = _eval_node(right)
-            if isinstance(op, ast.Pow) and abs(l) > 1e6:
+            if isinstance(op, ast.Pow) and (abs(l) > 1e6 or abs(r) > _MAX_EXPONENT):
                 raise ValueError("exponent too large")
-            return _OPERATORS[type(op)](l, r)
+            return _reject_huge_int(_OPERATORS[type(op)](l, r))
 
         case ast.UnaryOp(op=op, operand=operand) if type(op) in _OPERATORS:
             return _OPERATORS[type(op)](_eval_node(operand))
 
         case ast.Call(func=ast.Name(id=name), args=call_args, keywords=[]) if name in _FUNCTIONS:
             evaluated = [_eval_node(a) for a in call_args]
+            if name == "round" and len(evaluated) > 1 and abs(evaluated[1]) > _MAX_EXPONENT:
+                raise ValueError("precision too large")
             return _FUNCTIONS[name](*evaluated)
 
         case _:
