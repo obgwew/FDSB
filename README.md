@@ -1,5 +1,7 @@
 ![FDSB](./main_app/icons/FDSB.png)
 
+
+
 <p>
   <img src="https://img.shields.io/badge/Version-2.5.1-blue?style=for-the-badge" alt="Version" />
   <img src="https://img.shields.io/badge/Source-AGPL--3.0-blue?style=for-the-badge" alt="License" />
@@ -11,6 +13,26 @@
 # FDSB — Free Design Studio Bot
 
 > Build and run Discord bots locally using FDScript, a lightweight, high-level domain-specific language (DSL) designed for this purpose.
+
+<p align="center">
+  <a href="https://github.com/obgwew/FDSB/releases">
+    <img src="https://img.shields.io/badge/Download-APK%20%2F%20EXE-brightgreen?style=for-the-badge&logo=github" alt="Download" />
+  </a>
+</p>
+
+## Screenshots
+
+<p align="center">
+  <img src="./images/1.png" width="180" alt="Screenshot 1" />
+  <img src="./images/2.png" width="180" alt="Screenshot 2" />
+  <img src="./images/3.png" width="180" alt="Screenshot 3" />
+  <img src="./images/4.png" width="180" alt="Screenshot 4" />
+</p>
+<p align="center">
+  <img src="./images/5.png" width="180" alt="Screenshot 5" />
+  <img src="./images/6.png" width="180" alt="Screenshot 6" />
+  <img src="./images/7.png" width="180" alt="Screenshot 7" />
+</p>
 
 ---
 
