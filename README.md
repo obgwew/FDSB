@@ -18,7 +18,7 @@
   </a>
 </p>
 
-| <img src="./images/1.png" width="180" alt="1" /> | <img src="./images/2.png" width="180" alt="2" /> | <img src="./images/3.png" width="180" alt="3" /> | <img src="./images/4.png" width="180" alt="4" /> | <img src="./images/5.png" width="180" alt="5" /> | <img src="./images/6.png" width="180" alt="6" /> | <img src="./images/7.png" width="180" alt="7" /> |
+| <img src="./images/1.png" width="180" alt="1" /> | <img src="./images/2.png" width="180" alt="2" /> | <img src="./images/3.png" width="180" alt="3" /> | <img src="./images/4.png" width="180" alt="4" /> | <img src="./images/5.png" width="180" alt="5" /> | <img src="./images/6.png" width="180" alt="6" /> | <img src="./images/7.png" width="280" alt="7" /> |
 |---|---|---|---|---|---|---|
 
 ---
